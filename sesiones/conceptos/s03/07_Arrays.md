@@ -1030,8 +1030,8 @@ interface Alumno {
 }
 
 const alumnos: Alumno[] = [
-    { nombre: "PROFE", curso: "DWEC" },
-    { nombre: "Ana", curso: "DWEC" },
+    { nombre: "PROFE", curso: "DI" },
+    { nombre: "Ana", curso: "DI" },
     { nombre: "Luis", curso: "DIW" },
 ];
 
@@ -1039,7 +1039,7 @@ const porCurso: Map<string, Alumno[]> = Map.groupBy(
     alumnos,
     (a: Alumno) => a.curso
 );
-// Map { "DWEC" => [Alumno, Alumno], "DIW" => [Alumno] }
+// Map { "DI" => [Alumno, Alumno], "DIW" => [Alumno] }
 
 // WeakMap
 const metadatos: WeakMap<object, { clicks: number }> = new WeakMap();

@@ -390,7 +390,7 @@ interface UsuarioThis {
 
 const usuarioThis: UsuarioThis = {
     nombre: "PROFE",
-    asignaturas: ["DWEC", "DIW"],
+    asignaturas: ["DI", "DIW"],
     mostrarFlecha(): void {
         this.asignaturas.forEach((asig) => {
             console.log(this.nombre, asig); // this = usuarioThis

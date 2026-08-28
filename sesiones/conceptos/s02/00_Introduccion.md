@@ -265,13 +265,13 @@ class Estudiante {
 }
 
 // Herencia moderna - extends
-class EstudianteDWEC extends Estudiante {
+class EstudianteDI extends Estudiante {
   private proyecto: string;
 
   constructor(nombre: string, edad: number, proyecto: string) {
     super(nombre, edad); // Llama al constructor de la clase padre
     this.proyecto = proyecto;
-    console.log(`Estudiante de DWEC con proyecto: ${this.proyecto}`);
+    console.log(`Estudiante de DI con proyecto: ${this.proyecto}`);
   }
 
   // Sobrescritura de método (TS comprueba compatibilidad de firma)
@@ -288,7 +288,7 @@ class EstudianteDWEC extends Estudiante {
 }
 
 // Uso práctico de las clases
-const profe = new EstudianteDWEC("Profe", 35, "React");
+const profe = new EstudianteDI("Profe", 35, "React");
 profe.estudiar("TypeScript");
 profe.programar();
 
@@ -499,10 +499,10 @@ El clásico "Hola Mundo" pero con características modernas:
 ```typescript
 // Hola Mundo con template literals y tipos
 const profesor: string = "Profe";
-const modulo: string = "DWEC";
+const modulo: string = "DI";
 const mensaje: string = `¡Hola! Soy ${profesor} y te doy la bienvenida a ${modulo}`;
 
-console.log(mensaje); // ¡Hola! Soy Profe y te doy la bienvenida a DWEC
+console.log(mensaje); // ¡Hola! Soy Profe y te doy la bienvenida a DI
 
 // Mostrar en una página web
 document.addEventListener("DOMContentLoaded", () => {
@@ -659,7 +659,7 @@ interface ProfesorInfo {
 const profesorInfo: ProfesorInfo = {
   nombre: "Profe",
   apellidos: "FL",
-  modulo: "DWEC",
+  modulo: "DI",
   experiencia: 10,
   especialidades: ["JavaScript", "TypeScript", "React"],
 };
@@ -691,14 +691,14 @@ interface AlumnoInfo {
   curso?: string;
 }
 
-const mostrarInfoAlumno = ({ nombre, edad, curso = "DWEC" }: AlumnoInfo): string => {
+const mostrarInfoAlumno = ({ nombre, edad, curso = "DI" }: AlumnoInfo): string => {
   return `Alumno: ${nombre}, Edad: ${edad}, Curso: ${curso}`;
 };
 
 const alumno1: AlumnoInfo = { nombre: "Ana", edad: 20 };
 const alumno2: AlumnoInfo = { nombre: "Carlos", edad: 21, curso: "DAW" };
 
-console.log(mostrarInfoAlumno(alumno1)); // Curso: DWEC (por defecto)
+console.log(mostrarInfoAlumno(alumno1)); // Curso: DI (por defecto)
 console.log(mostrarInfoAlumno(alumno2)); // Curso: DAW
 ```
 
@@ -807,7 +807,7 @@ function mostrarInfoPersona(persona: Alumno | Profesor): void {
 const alumno: Alumno = {
   nombre: "Ana García",
   edad: 20,
-  curso: "DWEC",
+  curso: "DI",
 };
 
 const profesor: Profesor = {

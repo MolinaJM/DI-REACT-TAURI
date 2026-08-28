@@ -161,7 +161,7 @@ interface Usuario {
 
 const usuario: Usuario = {
   nombre: "Profe",
-  asignaturas: ["DWEC", "DIW"],
+  asignaturas: ["DI", "DIW"],
 
   // Método con función tradicional
   mostrarTradicional() {
@@ -182,7 +182,7 @@ const usuario: Usuario = {
 };
 
 usuario.mostrarFlecha();
-// Imprime: Profe DWEC, Profe DIW
+// Imprime: Profe DI, Profe DIW
 ```
 
 > **Regla práctica:** usa arrow functions para callbacks y métodos dentro de métodos. Usa funciones tradicionales (`function` o método abreviado) cuando necesites que `this` dependa de quién llame a la función.

@@ -73,7 +73,7 @@ const aprobados = alumnos
 const [{ nombre: primero }] = aprobados; // "Profe"
 
 // Spread para no mutar
-const nuevoAlumno: Alumno = { ...alumnos[0], curso: "DWEC" };
+const nuevoAlumno: Alumno = { ...alumnos[0], curso: "DI" };
 
 // Set para valores únicos (los opcionales dan string | undefined)
 const cursos = new Set(alumnos.map((a) => a.curso));
@@ -207,7 +207,7 @@ function renderAlumno(alumno: Alumno): string {
 // Uso: insertar en el DOM
 const app = document.getElementById("app");
 if (app !== null) {
-  const profe: Alumno = { nombre: "Profe", curso: "DWEC", media: 8.5 };
+  const profe: Alumno = { nombre: "Profe", curso: "DI", media: 8.5 };
   app.innerHTML = renderAlumno(profe);
 }
 ```
