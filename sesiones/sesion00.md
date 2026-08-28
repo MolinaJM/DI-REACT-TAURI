@@ -34,13 +34,25 @@ Tauri es un framework de código abierto para crear aplicaciones de escritorio u
 
 ## Ejemplo de miniaplicación
 
-Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio responsivas**, **multiplataforma** con acceso a **base de datos**. Una forma muy ágil de conseguir esto es mediante aplicaciones híbridas. Es decir, interfaces que se comportan como una app nativa pero están construidas con tecnologías web y pueden desplegarse en cualquier plataforma.
+Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio responsivas**, con acceso a **base de datos** y que a la vez sean **multiplataforma**. Una forma muy ágil de conseguir esto es mediante aplicaciones híbridas. Es decir, interfaces que se comportan como una app nativa pero están construidas con tecnologías web y pueden desplegarse en cualquier plataforma.
 
 A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura completa:
 
 ![API REST SpringBoot](../img/00.png)
 
 API REST SpringBoot (acceso a MySQL bajo Docker)
+
+```mermaid
+graph LR
+  Cliente("Cliente: frontend (React + Vite)") -->|"HTTP / JSON"| SpringBoot["API REST Spring Boot"]
+  SpringBoot -->|"SQL / JDBC"| Mysql[("MySQL 8 :3306")]
+  subgraph Docker["Docker"]
+    Mysql
+  end
+  style Docker fill:#2d2d2d,stroke:#2496ed,color:#2496ed
+  style SpringBoot fill:#2d2d2d,stroke:#6db33f,color:#6db33f
+  style Mysql fill:#2d2d2d,stroke:#f29111,color:#f29111
+```
 
 ![Web expuesta por Vite](../img/01.png)
 
