@@ -1,4 +1,4 @@
-# Sesión 10: Estilización Avanzada y Diseño de Interfaces con Tailwind CSS
+# Sesión 10: Usabilidad. Estilización Avanzada y Diseño de Interfaces con Tailwind CSS
 
 Layouts responsive, animaciones y componentes estilizados
 

@@ -6,6 +6,20 @@ Vitest, Testing Library, pruebas unitarias y E2E
 
 ---
 
+## Documentación de la Aplicación
+
+Documentar es esencial para que la aplicación pueda usarse, mantenerse y evolucionar. La documentación se realiza de distintas formas:
+
+- **En la propia aplicación (ayudas contextuales):** textos de ayuda, tooltips, mensajes de validación, placeholders y avisos que guían al usuario directamente en la interfaz, en el contexto donde realiza la acción.
+- **Manuales externos:** documentación más completa y estructurada, que incluye:
+  - **Manual de usuario:** cómo instalar, navegar y usar la aplicación para el usuario final.
+  - **Manual de administración:** gestión de usuarios, configuración, mantenimiento y resolución de incidencias.
+  - **Manual de instalación:** requisitos del sistema, pasos de instalación, despliegue y actualizaciones.
+
+A lo largo de las sesiones se han ido generando estos contenidos (mensajes de ayuda en los formularios, instrucciones en el README, guías de instalación del entorno, etc.). En esta sesión se recuerda su importancia y se documenta el trabajo realizado antes de pasar a las pruebas.
+
+---
+
 ## Pruebas con Vitest
 
 Vitest es un framework de pruebas unitarias para Vite, rapido y compatible con Jest.
