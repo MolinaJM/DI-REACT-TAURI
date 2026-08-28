@@ -24,14 +24,14 @@ A lo largo de las sesiones se han ido generando estos contenidos (mensajes de ay
 
 Vitest es un framework de pruebas unitarias para Vite, rapido y compatible con Jest.
 
-```
+```bash
 # Instalacion
 npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
 ```
 
 ### Configuración (vite.config.ts)
 
-```
+```typescript
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -47,13 +47,13 @@ export default defineConfig({
 
 ### Archivo de setup (src/test/setup.ts)
 
-```
+```typescript
 import '@testing-library/jest-dom';
 ```
 
 ## Pruebas Unitarias de Componentes
 
-```
+```tsx
 // src/components/Contador.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
@@ -112,7 +112,7 @@ describe('Componente Saludo', () => {
 
 ## Pruebas de Hooks y Funciones
 
-```
+```typescript
 // src/hooks/__tests__/useForm.test.ts
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
@@ -180,7 +180,7 @@ describe('Funciones utilitarias', () => {
 
 ## Pruebas de Eventos y Asincronia
 
-```
+```tsx
 // src/components/__tests__/FormularioLogin.test.tsx
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

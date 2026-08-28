@@ -10,14 +10,14 @@
 
 La libreria @react-pdf/renderer permite generar documentos PDF utilizando componentes de React con un enfoque declarativo.
 
-```
+```bash
 # Instalacion
 npm install @react-pdf/renderer
 ```
 
 ## Documento PDF Basico
 
-```
+```tsx
 import { Document, Page, Text, View, StyleSheet, PDFViewer } from '@react-pdf/renderer';
 
 // Estilos para PDF
@@ -114,7 +114,7 @@ const InformePDF = ({ datos }) => (
 
 ## Visualizador y Descarga
 
-```
+```tsx
 import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 
 function ReportesPage() {
@@ -154,7 +154,7 @@ function ReportesPage() {
 
 ## PDF con Tablas y Graficos
 
-```
+```tsx
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const tableStyles = StyleSheet.create({

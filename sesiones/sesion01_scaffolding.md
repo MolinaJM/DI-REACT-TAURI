@@ -52,7 +52,7 @@ mi-app/
 
 Punto de entrada que Vite procesa. Contiene un `<div id="root">` donde React monta la aplicación.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -71,7 +71,7 @@ Punto de entrada que Vite procesa. Contiene un `<div id="root">` donde React mon
 
 Primero en ejecutarse. Renderiza `<App />` dentro del div root.
 
-```
+```tsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
@@ -88,7 +88,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 Componente raiz. Aqui va la interfaz principal de tu aplicación.
 
-```
+```tsx
 function App() {
   return (
     <div>
@@ -104,7 +104,7 @@ export default App
 
 Estilos globales. Si usas Tailwind, aqui van las directivas:
 
-```
+```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -116,7 +116,7 @@ Estilos globales. Si usas Tailwind, aqui van las directivas:
 
 Equivalente al `package.json` pero para Rust. Define las dependencias (crates) y la metadata del proyecto.
 
-```
+```toml
 [package]
 name = "mi-app"
 version = "0.1.0"
@@ -142,7 +142,7 @@ crate-type = ["lib", "cdylib", "staticlib"]  # Tipos de binario que genera
 
 Configuración central de la aplicación Tauri. Define la ventana, el build, los permisos y mas.
 
-```
+```json
 {
   "$schema": "https://raw.githubusercontent.com/nicktomlin/tauri/v2/core/tauri-config-schema/schema.json",
   "productName": "mi-app",
@@ -183,7 +183,7 @@ Configuración central de la aplicación Tauri. Define la ventana, el build, los
 
 Punto de entrada del backend. Configura y lanza la ventana Tauri.
 
-```
+```rust
 // Prevencion de ventana de consola en Windows en produccion
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
@@ -196,7 +196,7 @@ fn main() {
 
 Lógica principal. Aquí se registran los comandos, eventos y el estado de la aplicacion.
 
-```
+```rust
 use tauri::Manager;
 
 // Comando personalizado que el frontend puede llamar
@@ -219,7 +219,7 @@ pub fn run() {
 
 Define los permisos que tiene la aplicación (Tauri v2 usa un sistema de permisos por capas).
 
-```
+```json
 {
   "identifier": "default",
   "description": "Permisos por defecto de la ventana principal",
@@ -257,7 +257,7 @@ Tauri permite que React (TypeScript) llame a funciones Rust de forma sencilla us
 
 ### Llamar a un comando Rust desde TypeScript
 
-```
+```typescript
 import { invoke } from '@tauri-apps/api/core'
 
 // Llama al comando "greet" definido en lib.rs
@@ -267,7 +267,7 @@ console.log(mensaje) // "Hola desde Rust, Estudiante!"
 
 ### Definir un comando en Rust
 
-```
+```rust
 // lib.rs
 #[tauri::command]
 fn greet(name: &str) -> String {

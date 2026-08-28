@@ -26,7 +26,7 @@ Tauri necesita linkar lo que genera Rust con las librerías de Windows para gene
 - Haz clic en **"Instalar"** y espera a que termine
 - **Reinicia el ordenador** después de la instalación
 
-```
+```bash
 # No hay comando para verificar, se confirma con la instalacion visual.
 # Si necesitas desinstalar, ve a "Configuracion > Aplicaciones > Microsoft C++ Build Tools"
 ```
@@ -42,7 +42,7 @@ Rustup es el instalador y gestor de versiones de Rust. Tauri usa Rust como lengu
 - Si falla, pausar antivirus o crear una excepción para rustup-init.exe. Luego volver a ejecutar `rustup default stable`. Esto vuelve a descargar rust y establece esta versión como opción por defecto.
 - Si fuera necesario desinstalar: `rustup self uninstall`
 
-```
+```bash
 # Verificar la instalacion de Rust
 rustc --version
 # Output: rustc 1.xx.0 (xxxxxxx 2025-xx-xx)
@@ -61,7 +61,7 @@ Node.js es necesario para ejecutar npm, Vite y el CLI de Tauri. Se recomienda us
 - Ejecuta `nvm-setup.exe` y sigue el asistente
 - Abre una **nueva terminal** (PowerShell o CMD) y ejecuta:
 
-```
+```bash
 # Instalar Node.js LTS (version recomendada)
 nvm install 22
 
@@ -82,7 +82,7 @@ Los siguientes ejemplos son independientes del Sistema Operativo (Windows, WSL/U
 
 Con todo instalado, crea un proyecto de prueba para confirmar que el entorno funciona correctamente.
 
-```
+```bash
 # Crear un proyecto con Tauri
 <code>npm create tauri-app@latest</code> 
 
@@ -99,11 +99,11 @@ npm run tauri dev
 #Probar a editar el código de App.tsx dentro de la carpeta src
 ```
 
-```
+```bash
 npm create vite@latest mi-primer-tauri -- --template react-ts
 ```
 
-```
+```bash
 cd mi-primer-tauri
 npm install
 npm install -D @tauri-apps/cli @tauri-apps/api
@@ -125,7 +125,7 @@ Durante `tauri init` se te preguntará:
 
 En Linux no se instalan los Build Tools de Visual Studio. Se usan los paquetes del sistema:
 
-```
+```bash
 # Actualizar repositorios
 sudo apt update && sudo apt upgrade -y
 
@@ -152,7 +152,7 @@ sudo apt install -y \
 
 ### 2.2. Rustup (Rust)
 
-```
+```bash
 # Instalar rustup (igual que en Windows, pero desde terminal)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
@@ -168,7 +168,7 @@ cargo --version
 
 ### 2.3. Node.js (con nvm)
 
-```
+```bash
 # Instalar nvm desde el repositorio oficial
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
@@ -191,7 +191,7 @@ npm --version
 
 En WSL, las aplicaciones Tauri **no pueden ejecutarse gráficamente** a menos que uses WSLg (incluido en Windows 11 y Windows 10 con actualizaciones recientes).
 
-```
+```bash
 # WSLg viene preinstalado con WSL2 en Windows 11.
 # Verificar que WSLg esta activo:
 wsl.exe --version
@@ -217,7 +217,7 @@ npx tauri dev
 
 En macOS, Apple proporciona las herramientas de compilación a través de Xcode Command Line Tools:
 
-```
+```bash
 # Instalar Xcode Command Line Tools (abre un dialogo de instalacion)
 xcode-select --install
 
@@ -235,7 +235,7 @@ brew install curl wget openssl
 
 ### 3.2. Rustup (Rust)
 
-```
+```bash
 # Instalar rustup (mismo comando que en Linux)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
@@ -249,7 +249,7 @@ cargo --version
 
 ### 3.3. Node.js (con nvm)
 
-```
+```bash
 # Instalar nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
@@ -270,7 +270,7 @@ npm --version
 
 ### Fedora
 
-```
+```bash
 # Dependencias del sistema
 sudo dnf install -y \
   gcc-c++ \
@@ -290,7 +290,7 @@ sudo dnf install nodejs npm
 
 ### Arch Linux
 
-```
+```bash
 # Dependencias del sistema
 sudo pacman -S --needed \
   base-devel \
@@ -314,7 +314,7 @@ Si necesitas eliminar por completo todo el entorno de desarrollo instalado, sigu
 
 ### 5.1. Eliminar un proyecto Tauri + React
 
-```
+```bash
 # Dentro del directorio del proyecto
 rm -rf node_modules package-lock.json
 
@@ -327,7 +327,7 @@ rm -rf mi-app mi-app-tauri
 
 ### 5.2. Eliminar dependencias Rust del proyecto (src-tauri)
 
-```
+```bash
 # Dentro del proyecto, eliminar la carpeta src-tauri
 rm -rf src-tauri
 
@@ -340,7 +340,7 @@ rm -rf ~/.cargo/registry
 
 ### 5.3. Desinstalar Rust (rustup, rustc, cargo)
 
-```
+```bash
 # Desinstalacion completa de rustup
 rustup self uninstall
 
@@ -357,7 +357,7 @@ rm -rf ~/.cargo
 
 #### Si usaste nvm (recomendado)
 
-```
+```bash
 # Eliminar la versión de Node instalada con nvm
 nvm uninstall --lts
 
@@ -373,7 +373,7 @@ exec bash  # o exec zsh
 
 #### Si instalaste Node.js con el gestor de paquetes del sistema
 
-```
+```bash
 # Debian / Ubuntu / WSL
 sudo apt remove --purge -y nodejs npm
 sudo apt autoremove -y
@@ -388,7 +388,7 @@ sudo pacman -Rns nodejs npm
 
 ### 5.5. Desinstalar dependencias del sistema (Tauri)
 
-```
+```bash
 # Debian / Ubuntu / WSL
 sudo apt remove --purge -y \
   build-essential \

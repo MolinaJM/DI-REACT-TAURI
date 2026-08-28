@@ -8,7 +8,7 @@ Context API, Zustand, React Router y almacenamiento local
 
 ## Context API
 
-```
+```tsx
 // store/AuthContext.tsx
 import { createContext, useContext, useState, ReactNode } from 'react';
 
@@ -57,7 +57,7 @@ export const useAuth = () => useContext(AuthContext);
 
 ## Zustand: Estado Global con Tipado
 
-```
+```typescript
 // store/carritoStore.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -102,7 +102,7 @@ export const useCarritoStore = create<CarritoStore>()(
 
 ## React Router v6
 
-```
+```tsx
 // main.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 

@@ -25,7 +25,7 @@ Estas pautas se entregarán a la **IA** como referencia del proyecto para que la
 
 ## Layouts y Diseño con Tailwind
 
-```
+```tsx
 function DashboardLayout() {
     return (
         <div className="min-h-screen bg-gray-50">
@@ -63,7 +63,7 @@ function DashboardLayout() {
 
 ## Responsive Design
 
-```
+```tsx
 function ResponsiveNav() {
     const [menuAbierto, setMenuAbierto] = useState(false);
 
@@ -105,7 +105,7 @@ function ResponsiveNav() {
 
 ## Animaciones y Transiciones
 
-```
+```tsx
 function AnimacionesEjemplo() {
     const [visible, setVisible] = useState(false);
     const [hover, setHover] = useState(false);
@@ -154,7 +154,7 @@ function AnimacionesEjemplo() {
 
 ## Componentes con Estilos Condicionales
 
-```
+```tsx
 function Badge({ estado }: { estado: "activo" | "inactivo" | "pendiente" }) {
     const colores = {
         activo: "bg-green-100 text-green-800 border-green-300",

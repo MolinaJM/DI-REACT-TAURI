@@ -23,7 +23,7 @@ Tauri permite la comunicacion bidireccional entre el frontend (React) y el backe
 
 ## Comandos Básicos en Rust
 
-```
+```rust
 // src-tauri/src/lib.rs
 use tauri::Manager;
 
@@ -54,7 +54,7 @@ pub fn run() {
 
 ## Llamar Comandos desde React (invoke)
 
-```
+```tsx
 import { invoke } from '@tauri-apps/api/core';
 import { useState } from 'react';
 
@@ -95,7 +95,7 @@ function ComponenteIPC() {
 
 ## Manejo del Sistema de Archivos
 
-```
+```rust
 // src-tauri/src/lib.rs
 use std::fs;
 use tauri::Manager;

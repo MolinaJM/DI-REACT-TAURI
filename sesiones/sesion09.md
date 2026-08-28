@@ -10,7 +10,7 @@ Operaciones CRUD con MySQL y API REST
 
 CRUD son las cuatro operaciones básicas de persistencia: Crear (Create), Leer (Read), Actualizar (Update) y Eliminar (Delete).
 
-```
+```typescript
 // Tipos compartidos
 interface Usuario {
     id?: number;
@@ -25,7 +25,7 @@ const API_URL = "http://localhost:3001/api/usuarios";
 
 ## Operaciones CRUD con fetch
 
-```
+```typescript
 // Obtener todos los usuarios (READ)
 const fetchUsuarios = async () => {
     const response = await fetch(API_URL);
@@ -64,7 +64,7 @@ const deleteUser = async (id: number) => {
 
 ## Componente CRUD Completo
 
-```
+```tsx
 function GestionUsuarios() {
     const [usuarios, setUsuarios] = useState<Usuario[]>([]);
     const [form, setForm] = useState({ nombre: "", email: "", edad: 0 });

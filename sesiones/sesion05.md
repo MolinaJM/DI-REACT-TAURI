@@ -10,7 +10,7 @@ useState, useReducer, formularios controlados y validación
 
 ## Estado con useReducer
 
-```
+```tsx
 import { useReducer } from 'react';
 
 interface ContadorState {
@@ -61,7 +61,7 @@ function Contador() {
 
 ## Formulario Controlado con Tipado
 
-```
+```tsx
 import { useState } from 'react';
 
 interface FormData {

@@ -10,7 +10,7 @@ Componentes funcionales, props, children y hooks básicos
 
 ## Componente Funcional con TypeScript
 
-```
+```tsx
 import { FC } from 'react';
 
 interface SaludoProps {
@@ -34,7 +34,7 @@ const Saludo: FC<SaludoProps> = ({ nombre, edad }) => {
 
 ## Props Children
 
-```
+```tsx
 import { ReactNode } from 'react';
 
 interface CardProps {
@@ -63,7 +63,7 @@ function Card({ titulo, children, className = "" }: CardProps) {
 
 ## useState con TypeScript
 
-```
+```tsx
 import { useState } from 'react';
 
 interface Tarea {
@@ -120,7 +120,7 @@ function ListaTareas() {
 
 ## useEffect con TypeScript
 
-```
+```tsx
 import { useState, useEffect } from 'react';
 
 interface Usuario {

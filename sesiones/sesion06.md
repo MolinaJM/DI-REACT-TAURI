@@ -10,7 +10,7 @@ Componentes reutilizables, props, composicion y slots
 
 ## Componente Boton Personalizado
 
-```
+```tsx
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type Variante = "primary" | "secondary" | "danger" | "ghost";
@@ -57,7 +57,7 @@ function Boton({ children, variante = "primary", tamano = "md",
 
 ## Componente Modal
 
-```
+```tsx
 import { ReactNode, useEffect } from 'react';
 
 interface ModalProps {
@@ -95,7 +95,7 @@ function Modal({ abierto, onCerrar, titulo, children, tamano = "md" }: ModalProp
 
 ## Componente Tabla Genérica
 
-```
+```tsx
 import { ReactNode } from 'react';
 
 interface Columna<T> {

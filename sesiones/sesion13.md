@@ -20,7 +20,7 @@ La plantilla de Tauri genera un instalador **para el sistema operativo en el que
 
 ## Configuración del Bundle (tauri.conf.json)
 
-```
+```json
 // src-tauri/tauri.conf.json
 {
   "$schema": "https://schema.tauri.app/config/2",
@@ -57,7 +57,7 @@ La plantilla de Tauri genera un instalador **para el sistema operativo en el que
 
 ### Instaladores específicos por sistema
 
-```
+```json
 // Windows: MSI (WiX) y NSIS
 "bundle": {
   "windows": {
@@ -73,7 +73,7 @@ La plantilla de Tauri genera un instalador **para el sistema operativo en el que
 }
 ```
 
-```
+```json
 // Linux: DEB, RPM y AppImage
 "bundle": {
   "linux": {
@@ -86,17 +86,17 @@ La plantilla de Tauri genera un instalador **para el sistema operativo en el que
 
 ## Compilar la Aplicación
 
-```
+```bash
 # Compila release + instala dependencias + genera el instalador del SO actual
 npm run tauri build
 ```
 
-```
+```bash
 # Elegir los formatos deseados en Windows
 npm run tauri build -- --bundles msi nsis
 ```
 
-```
+```bash
 # Elegir los formatos deseados en Linux
 npm run tauri build -- --bundles deb appimage
 ```
@@ -107,7 +107,7 @@ Los instaladores se generan en la carpeta `src-tauri/target/release/bundle/`.
 
 Para compilar en Ubuntu/Debian hace falta instalar las librerías de WebKitGTK y utilidades de empaquetado:
 
-```
+```bash
 # Ubuntu / Debian
 sudo apt update
 sudo apt install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
@@ -117,7 +117,7 @@ sudo apt install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patc
 
 La forma más sencilla de generar instaladores para las tres plataformas es usar una acción de lanzamiento: al crear una etiqueta `v*` se ejecutan tantos jobs como sistemas operativos y se publica un Release con los artefactos.
 
-```
+```yaml
 # .github/workflows/release.yml
 name: "release"
 
@@ -172,12 +172,12 @@ jobs:
 
 Tauri incluye un plugin de actualizaciones que descarga e instala nuevas versiones sin que el usuario reinstale manualmente.
 
-```
+```bash
 # 1. Añadir el plugin (Rust)
 cargo add tauri-plugin-updater
 ```
 
-```
+```rust
 # 2. Registrar el plugin en src-tauri/src/lib.rs
 use tauri_plugin_updater::UpdaterExt;
 
@@ -189,7 +189,7 @@ pub fn run() {
 }
 ```
 
-```
+```json
 # 3. Configurar el endpoint del servidor de actualizaciones (tauri.conf.json)
 "plugins": {
   "updater": {
@@ -199,7 +199,7 @@ pub fn run() {
 }
 ```
 
-```
+```typescript
 // 4. Comprobar y aplicar la actualización desde React
 import { check } from '@tauri-apps/plugin-updater';
 import { relaunch } from '@tauri-apps/plugin-process';
@@ -215,7 +215,7 @@ async function comprobarActualizacion() {
 
 Para generar la clave pública de firma se usa la herramienta integrada en la CLI:
 
-```
+```bash
 npm run tauri signer generate -w ~/.tauri/dirt.key
 ```
 
