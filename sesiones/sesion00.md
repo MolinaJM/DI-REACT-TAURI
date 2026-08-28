@@ -16,7 +16,7 @@ Tauri es un framework de código abierto para crear aplicaciones de escritorio u
 
 ### ¿Por qué elegir Tauri sobre Electron?
 
-| Criterio | Tauri | Electron |
+| Criterio | <img src="https://cdn.simpleicons.org/tauri/24C8DB" width="18" height="18" title="Tauri"> Tauri | <img src="https://cdn.simpleicons.org/electron/47848F" width="18" height="18" title="Electron"> Electron |
 | --- | --- | --- |
 | **Backend** | Rust (nativo, rápido, seguro en memoria) | Node.js (JavaScript, single-threaded) |
 | **Tamaño del bundle** | ~2-5 MB (usa el WebView del sistema) | ~80-200 MB (incluye Chromium completo) |
