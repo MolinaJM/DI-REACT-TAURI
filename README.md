@@ -1,4 +1,4 @@
-# <img src="https://cdn.simpleicons.org/react/61DAFB" width="28" height="28" alt="React" title="React"> Desarrollo de Interfaces con React + Tauri <img src="https://cdn.simpleicons.org/tauri/24C8DB" width="28" height="28" alt="Tauri" title="Tauri">
+# Desarrollo de Interfaces con React <img src="https://cdn.simpleicons.org/react/61DAFB" width="28" height="28" alt="React" title="React"> + Tauri <img src="https://cdn.simpleicons.org/tauri/24C8DB" width="28" height="28" alt="Tauri" title="Tauri">
 
 **Segundo curso de Desarrollo de Aplicaciones Multiplataforma**
 
