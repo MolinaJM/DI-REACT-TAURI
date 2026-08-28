@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2023", "DOM"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": false,
+    "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["node"]
+  },
+  "include": [
+    "soluciones/s02/**/*.ts",
+    "soluciones/s03/**/*.ts",
+    "soluciones/s04/**/*.ts",
+    "soluciones/s04/**/*.tsx",
+    "soluciones/s05/**/*.ts",
+    "soluciones/s05/**/*.tsx",
+    "soluciones/s06/**/*.ts",
+    "soluciones/s06/**/*.tsx"
+  ]
+}
