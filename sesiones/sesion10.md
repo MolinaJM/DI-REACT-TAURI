@@ -6,6 +6,23 @@ Layouts responsive, animaciones y componentes estilizados
 
 ---
 
+## Usabilidad y Pautas de Diseño
+
+Antes de escribir una sola línea de Tailwind hay que pensar en el usuario. La **usabilidad** determina lo fácil e intuitivo que resulta usar una interfaz, y las **pautas de diseño** son las reglas que garantizan interfaces claras, consistentes y accesibles.
+
+Algunas pautas fundamentales:
+
+- **Consistencia:** mantener los mismos patrones, colores, tipografías y comportamientos en toda la aplicación.
+- **Jerarquía visual:** destacar la información importante con tamaño, color y espacio.
+- **Feedback:** toda acción del usuario debe tener respuesta visible (hover, transiciones, mensajes, estados de carga).
+- **Accesibilidad:** contraste suficiente, tamaños legibles, soporte de teclado y textos alternativos.
+- **Simplicidad:** evitar sobrecargar las pantallas; menos elementos, menos errores.
+- **Responsive:** adaptar el diseño a distintos tamaños de pantalla.
+
+Estas pautas se entregarán a la **IA** como referencia del proyecto para que las **interprete y aplique** al generar el diseño y el código de las interfaces. Cuanto mejor redactadas estén las pautas, mejor será el resultado.
+
+---
+
 ## Layouts y Diseño con Tailwind
 
 ```

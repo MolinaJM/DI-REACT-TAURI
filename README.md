@@ -76,7 +76,7 @@ flowchart TD
     STYLE["🎨 S10 · Estilización avanzada<br/>(Tailwind · responsive)"]
     PDF["📄 S11 · Informes PDF<br/>(@react-pdf — beben de los datos)"]
     TEST["🧪 S12 · Pruebas<br/>(Vitest · Testing Library · Playwright)"]
-    DIST["📦 Distribución multiplataforma<br/>(Windows · macOS · Linux)"]
+    DIST["📦 S13 · Distribución multiplataforma<br/>(Windows · macOS · Linux)"]
 
     ENV --> TS
     TS --> REACT
@@ -102,26 +102,28 @@ La evaluación de la asignatura se basará en:
 
 ---
 
-## 5. Distribución Temporal y Contenidos (S00–S12)
+## 5. Distribución Temporal y Contenidos (S00–S13)
 
 Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto del tiempo a la realización de **prácticas** y a la resolución de **dudas**.
 
 | # | RA | Sesion | Titulo | Contenido |
 |---|----|--------|--------|-----------|
-| 0 | RA2 | [S00](sesiones/sesion00.md) | Fundamentos de Arquitectura y Configuración del Entorno | nvm, Node.js, NPM, Vite, React, Tailwind CSS, Rust, Tauri (panoramica) |
-| 1 | RA2 | [S01](sesiones/sesion01.md) | Instalación del Entorno de Desarrollo | Windows, Ubuntu/Debian, macOS, Fedora/Arch, desinstalacion |
-| 1-S | RA2 | [S01-S](sesiones/sesion01_scaffolding.md) | Scaffolding de un Proyecto Tauri con React y Rust | Estructura archivos, Cargo.toml, tauri.conf.json, invoke, IPC |
-| 2 | RA2 | [S02](sesiones/sesion02.md) | Introducción a TypeScript (Parte 1) | Tipos primitivos, arrays y tuplas, any/unknown/never/void, aserciones, inferencia, uniones e intersecciones, literal types y narrowing, interfaces, type aliases, funciones, type guards, operadores, control de flujo, ámbito y scope |
-| 3 | RA2 | [S03](sesiones/sesion03.md) | Introducción a TypeScript (Parte 2) | Generics, utility types, keyof/typeof/satisfies, módulos, strict mode, métodos de arrays, Set y Map, objetos en profundidad, asincronía (async/await, Fetch) |
-| 4 | RA2 | [S04](sesiones/sesion04.md) | Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composicion |
-| 5 | RA2 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
-| 6 | RA2 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Table generica, Modal, composicion, slots |
-| 7 | RA2 | [S07](sesiones/sesion07.md) | El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), eventos, std::fs, Fetch CRUD |
-| 8 | RA2 | [S08](sesiones/sesion08.md) | Persistencia de Estado Global y Enrutado | Context API, Zustand, persist, React Router v6, SPA custom |
-| 9 | RA2 | [S09](sesiones/sesion09.md) | Formulario CRUD para bases de datos | ApiService generica, GET/POST/PUT/DELETE, validacion |
-| 10 | 🤖 [S10](sesiones/sesion10.md) | Estilización Avanzada y Diseño de Interfaces con Tailwind CSS | Responsive, grid, hamburger menu, animaciones |
-| 11 | 🤖 [S11](sesiones/sesion11.md) | Creación de Informes en PDF con React | @react-pdf/renderer, Document/Page/Text, PDFViewer |
-| 12 | 🤖 [S12](sesiones/sesion12.md) | Prueba Automatizada | Vitest, Testing Library, Playwright E2E, ejercicios TS |
+| 0 | - | [S00](sesiones/sesion00.md) | Fundamentos de Arquitectura y Configuración del Entorno | nvm, Node.js, NPM, Vite, React, Tailwind CSS, Rust, Tauri (panoramica) |
+| 1 | - | [S01](sesiones/sesion01.md) | Instalación del Entorno de Desarrollo | Windows, Ubuntu/Debian, macOS, Fedora/Arch, desinstalacion |
+| 1-S | - | [S01-S](sesiones/sesion01_scaffolding.md) | Scaffolding de un Proyecto Tauri con React y Rust | Estructura archivos, Cargo.toml, tauri.conf.json, invoke, IPC |
+| 2 | RA1 | [S02](sesiones/sesion02.md) | Introducción a TypeScript (Parte 1) | Tipos primitivos, arrays y tuplas, any/unknown/never/void, aserciones, inferencia, uniones e intersecciones, literal types y narrowing, interfaces, type aliases, funciones, type guards, operadores, control de flujo, ámbito y scope |
+| 3 | RA1 | [S03](sesiones/sesion03.md) | Introducción a TypeScript (Parte 2) | Generics, utility types, keyof/typeof/satisfies, módulos, strict mode, métodos de arrays, Set y Map, objetos en profundidad, asincronía (async/await, Fetch) |
+| 4 | RA1 | [S04](sesiones/sesion04.md) | Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composicion |
+| 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
+| 6 | RA1 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Table generica, Modal, composicion, slots |
+| 7 | RA1 | [S07](sesiones/sesion07.md) | El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), eventos, std::fs, Fetch CRUD |
+| 8 | RA1 | [S08](sesiones/sesion08.md) | Persistencia de Estado Global y Enrutado | Context API, Zustand, persist, React Router v6, SPA custom |
+| 9 | RA1 | [S09](sesiones/sesion09.md) | Formulario CRUD para bases de datos | ApiService generica, GET/POST/PUT/DELETE, validacion |
+| 10 | RA4 | 🤖 [S10](sesiones/sesion10.md) | Estilización Avanzada y Diseño de Interfaces con Tailwind CSS | Responsive, grid, hamburger menu, animaciones |
+| 11 | RA5 | 🤖 [S11](sesiones/sesion11.md) | Creación de Informes en PDF con React | @react-pdf/renderer, Document/Page/Text, PDFViewer |
+| 12 | RA6 y RA8 | 🤖 [S12](sesiones/sesion12.md) | Documentación y Pruebas Automatizada | Vitest, Testing Library, Playwright E2E, ejercicios TS |
+| 13 | RA2 y RA3 | 🤖 [S13](sesiones/sesion13.md) | Distribución Multiplataforma con Tauri | Bundle (tauri.conf.json), instaladores MSI/NSIS, DMG, DEB/RPM/AppImage, GitHub Actions, Updater |
+| 14 | RA2 y RA3 | 🤖 S14 | Proyecto NUI | Diseño e implementación de una interfaz natural de usuario (NUI) |
 
 ---
 
