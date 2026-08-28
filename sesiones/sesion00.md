@@ -96,7 +96,7 @@ graph TD
 
 Node.js es un entorno de ejecución de JavaScript/TypeScript basado en el motor V8 de Chrome. Permite ejecutar JavaScript/TypeScript fuera del navegador, necesario para las herramientas de desarrollo.
 
-```
+```bash
 # Verificar instalacion de Node.js
 node --version
 # Output: v22.x.x
@@ -107,7 +107,7 @@ npm --version
 
 ### Ejemplo: Servidor HTTP básico con Node.js
 
-```
+```javascript
 const http = require('http');
 
 const server = http.createServer((req, res) => {
@@ -213,7 +213,7 @@ nvm ls
 
 Vite proporciona un servidor de desarrollo con recarga instantánea (HMR) y empaquetado optimizado para producción.
 
-```
+```bash
 # Crear proyecto con Vite
 npm create vite@latest mi-app -- --template react-ts
 
@@ -252,7 +252,7 @@ export default defineConfig({
 
 React permite construir interfaces de usuario mediante componentes reutilizables con estado propio.
 
-```
+```tsx
 // App.tsx - Componente básico
 import { useState } from 'react';
 
@@ -276,7 +276,7 @@ export default App;
 
 Tailwind CSS permite diseñar interfaces rapidamente usando clases predefinidas directamente en el JSX.
 
-```
+```tsx
 // Instalacion
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
@@ -308,7 +308,7 @@ function Tarjeta() {
 
 Rust es el lenguaje que impulsa el backend de Tauri. Destaca por su seguridad de memoria sin necesidad de recolector de basura.
 
-```
+```rust
 // Verificar instalacion
 rustc --version
 cargo --version
@@ -341,7 +341,7 @@ src-tauri/
 
 ### Comandos Tauri principales
 
-```
+```bash
 # Ejecutar en modo desarrollo (ventana nativa + HMR)
 npx tauri dev
 
@@ -356,7 +356,7 @@ npx tauri build
 
 `src-tauri/src/lib.rs`:
 
-```
+```rust
 use tauri;
 
 #[tauri::command]
@@ -374,7 +374,7 @@ pub fn run() {
 
 Llamar al comando desde TypeScript:
 
-```
+```typescript
 import { invoke } from '@tauri-apps/api/core'
 
 const mensaje = await invoke('saludar', { nombre: 'Estudiante' })
