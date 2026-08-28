@@ -1,4 +1,4 @@
-Qu# Repositorios del Curso DI-RT
+# Repositorios del Curso DI-RT
 
 Tabla resumen de sesiones, repositorios y tecnologias.
 
@@ -170,6 +170,30 @@ repos/
     Dependencias: vitest, @testing-library/react, @testing-library/jest-dom, @playwright/test
     Requisito: Node.js (+ Playwright browsers: npx playwright install)
 ```
+
+## Leyenda: fichero REPO ↔ concepto original ↔ apuntes actuales
+
+En el material conviven **tres numeraciones distintas** (no guardan relación entre sí):
+
+1. **Fichero `conceptos/` (00–15)**: orden actual del curso, agrupado por carpetas de sesión (s02→s06).
+2. **Capítulo interno (`## N.x`)**: numeración heredada del material original; en s02 y s03 ya se renumeró para que coincida con el nº de fichero (07→7.x, 08→8.x, 09→9.x, 10→10.x, 11→11.x). Algunos ficheros de s04–s06 usan todavía secciones 1..N sin prefijo de capítulo.
+3. **"concepto N" en los comentarios de `REPO-*.ts`**: índice cronológico del material original (Apuntes DWEC), Sesión 2 = conceptos 1–18 y Sesión 3 = conceptos 7–15. Es solo trazabilidad ("de aquí salieron estos ejemplos").
+
+| Fichero REPO-*.ts (`repos/01/src`) | Conceptos originales citados | Teoría hoy en `sesiones/conceptos/` |
+|---|---|---|
+| `REPO-01-tipos-primitivos.ts` | Sesión 2 · conceptos 1, 3 y 8 | `s02/01_SintaxisBasica.md` |
+| `REPO-02-arrays-tuples.ts` | Sesión 2 · concepto 4 | `s03/07_Arrays.md` |
+| `REPO-03-tipos-especiales.ts` | Sesión 2 · conceptos 6 y 7 | `s02/01_SintaxisBasica.md` |
+| `REPO-04-unions-intersections.ts` | Sesión 2 · conceptos 9 y 10 | `s02/05_ControlDeFlujo.md` (§5.4 Narrowing) |
+| `REPO-05-interfaces-types.ts` | Sesión 2 · conceptos 11 y 12 | `s03/08_Objetos.md` |
+| `REPO-06-funciones.ts` | Sesión 2 · concepto 13 | `s02/04_Funciones.md` |
+| `REPO-07-type-guards-conversion.ts` | Sesión 2 · conceptos 14, 15 y 16 | `s02/02_ConversionTipos.md` |
+| `REPO-08-control-flow-scope.ts` | Sesión 2 · conceptos 17 y 18 | `s02/05_ControlDeFlujo.md` |
+| `REPO-12-modulos.ts` | Sesión 3 · concepto 7 | `s03/09_Modulos.md` |
+| `REPO-13-async-await.ts` | Sesión 3 · concepto 15 | `s03/11_Asincronismo_Callbacks_Promesas_AsyncAwait.md` |
+| `REPO-15-arrays-avanzado.ts` | Sesión 3 · conceptos 11, 12, 13 y 14 | `s03/07_Arrays.md` |
+| `REPO-17-que-es-typescript.ts` | Sesión 2 · concepto 1 | `s02/00_Introduccion.md` |
+| `REPO-18-instalacion-configuracion.ts` | Sesión 2 · concepto 2 | `s03/10_NPM.md` |
 
 ## Flujo de dependencias
 

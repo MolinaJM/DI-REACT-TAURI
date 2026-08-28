@@ -1,36 +1,36 @@
 # Asincronismo. CallBacks, Promesas y Async/Await en TypeScript 📝 🖥️
 
-- [Asincronismo. CallBacks, Promesas y Async/Await en TypeScript 📝 🖥️](#asincronismo-callbacks-promesas-y-asyncawait-en-typescript--️)
-  - [1. Sincronismo/Asincronismo en JavaScript](#1-sincronismoasincronismo-en-javascript)
+- [Asincronismo. CallBacks, Promesas y Async/Await en TypeScript 📝 🖥️](#asincronismo-callbacks-promesas-y-asyncawait-en-typescript)
+  - [11.1. Sincronismo/Asincronismo en JavaScript](#111-sincronismoasincronismo-en-javascript)
     - [Operaciones Síncronas:](#operaciones-síncronas)
     - [Operaciones Asíncronas:](#operaciones-asíncronas)
-  - [2. Los Callbacks](#2-los-callbacks)
-    - [2.1 Callback Básico](#21-callback-básico)
-    - [2.2 Callback con Parámetros](#22-callback-con-parámetros)
-    - [2.3. Callbacks en Eventos](#23-callbacks-en-eventos)
-    - [2.4 Callback de Temporizador](#24-callback-de-temporizador)
-    - [2.5 Callback Hell: El Desafío de los Callbacks Anidados](#25-callback-hell-el-desafío-de-los-callbacks-anidados)
-  - [3. Las Promesas](#3-las-promesas)
-    - [3.1 Creación de una Promesa](#31-creación-de-una-promesa)
-    - [3.2 Resolución y Rechazo de Promesas](#32-resolución-y-rechazo-de-promesas)
+  - [11.2. Los Callbacks](#112-los-callbacks)
+    - [11.2.1 Callback Básico](#1121-callback-básico)
+    - [11.2.2 Callback con Parámetros](#1122-callback-con-parámetros)
+    - [11.2.3. Callbacks en Eventos](#1123-callbacks-en-eventos)
+    - [11.2.4 Callback de Temporizador](#1124-callback-de-temporizador)
+    - [11.2.5 Callback Hell: El Desafío de los Callbacks Anidados](#1125-callback-hell-el-desafío-de-los-callbacks-anidados)
+  - [11.3. Las Promesas](#113-las-promesas)
+    - [11.3.1 Creación de una Promesa](#1131-creación-de-una-promesa)
+    - [11.3.2 Resolución y Rechazo de Promesas](#1132-resolución-y-rechazo-de-promesas)
       - [1. Método `then`:](#1-método-then)
       - [2. Método `catch`:](#2-método-catch)
       - [3. Método `finally`:](#3-método-finally)
-    - [3.3 Encadenamiento de Promesas](#33-encadenamiento-de-promesas)
-    - [3.4 Manejo de Errores con Promesas](#34-manejo-de-errores-con-promesas)
-    - [3.5 Promesas en Paralelo](#35-promesas-en-paralelo)
-    - [3.6 Combinadores modernos de Promesas (ES2020+)](#36-combinadores-modernos-de-promesas-es2020)
-    - [3.7 El Event Loop: microtareas vs macrotareas](#37-el-event-loop-microtareas-vs-macrotareas)
-  - [4. Async/Await: Simplificando el Uso de Promesas](#4-asyncawait-simplificando-el-uso-de-promesas)
+    - [11.3.3 Encadenamiento de Promesas](#1133-encadenamiento-de-promesas)
+    - [11.3.4 Manejo de Errores con Promesas](#1134-manejo-de-errores-con-promesas)
+    - [11.3.5 Promesas en Paralelo](#1135-promesas-en-paralelo)
+    - [11.3.6 Combinadores modernos de Promesas (ES2020+)](#1136-combinadores-modernos-de-promesas-es2020)
+    - [11.3.7 El Event Loop: microtareas vs macrotareas](#1137-el-event-loop-microtareas-vs-macrotareas)
+  - [11.4. Async/Await: Simplificando el Uso de Promesas](#114-asyncawait-simplificando-el-uso-de-promesas)
     - [Otros Ejemplos:](#otros-ejemplos)
       - [1. Uso Básico:](#1-uso-básico)
       - [2. Manejo de Errores con Try/Catch:](#2-manejo-de-errores-con-trycatch)
       - [3. Múltiples Operaciones Asíncronas:](#3-múltiples-operaciones-asíncronas)
       - [4. Uso de Async/Await con Fetch:](#4-uso-de-asyncawait-con-fetch)
-  - [5. El tipado de `Promise<T>`: la clave de TypeScript](#5-el-tipado-de-promiset-la-clave-de-typescript)
-  - [6. Bibliografía:](#6-bibliografía)
+  - [11.5. El tipado de `Promise<T>`: la clave de TypeScript](#115-el-tipado-de-promiset-la-clave-de-typescript)
+  - [11.6. Bibliografía:](#116-bibliografía)
 
-## 1. Sincronismo/Asincronismo en JavaScript
+## 11.1. Sincronismo/Asincronismo en JavaScript
 
 En programación, el `sincronismo` y el `asincronismo` se refieren a la forma en que se ejecutan las tareas. En el **_sincronismo_**, las tareas se ejecutan una tras otra, en el orden en que se declaran. En el **_asincronismo_**, las tareas se pueden ejecutar al mismo tiempo, o en cualquier orden.
 
@@ -79,11 +79,11 @@ En este ejemplo, "Inicio" se imprimirá, luego "Fin", y finalmente, después de 
 
 `TypeScript (y JavaScript) proporciona varios mecanismos para gestionar el asincronismo en la versión ES6 y posteriores. Los más importantes serían los CallBacks, las promesas, el Async/Await, los Event Listeners, Timers. Vamos a ver algunos de los que acabo de mencionar.`
 
-## 2. Los Callbacks
+## 11.2. Los Callbacks
 
 Los callbacks en JavaScript son como piezas de un rompecabezas que encajan perfectamente en el mundo asincrónico. Son funciones que se ejecutan después de que se completa una tarea. En lugar de bloquear el flujo de ejecución, los callbacks permiten que tu código continúe haciendo otras cosas mientras espera que una tarea finalice.
 
-### 2.1 Callback Básico
+### 11.2.1 Callback Básico
 
 Lo primero que tenemos que recordar es que las funciones son `objetos` (object) para Javascript — y en TypeScript tienen además un **tipo** (`() => void`, `(x: number) => string`, etc.).
 
@@ -114,7 +114,7 @@ hacerTarea(miCallback);
 
 En este ejemplo, la función `hacerTarea` simula una tarea demorada en el tiempo con un setTimeout y luego llama al `callback` cuando está lista. Esto permite una ejecución no bloqueante.
 
-### 2.2 Callback con Parámetros
+### 11.2.2 Callback con Parámetros
 
 Los callbacks también pueden recibir argumentos. Imagina que necesitas realizar un cálculo asincrónico y luego procesar el resultado:
 
@@ -135,7 +135,7 @@ operacionAsincrona(5, procesarResultado);
 
 Aquí, `operacionAsincrona` toma un valor y un `callback`, realiza una operación y luego pasa el resultado al `callback`. Esto como puedes comprobar es bastante versátil.
 
-### 2.3. Callbacks en Eventos
+### 11.2.3. Callbacks en Eventos
 
 Los callbacks son excelentes para manejar eventos. Supongamos que deseas detectar cuándo un botón se hace clic:
 
@@ -151,7 +151,7 @@ boton?.addEventListener("click", clicCallback);
 
 Al hacer clic en el botón, se llama al `clicCallback`. Esto es útil para interactuar con el usuario de manera asincrónica.
 
-### 2.4 Callback de Temporizador
+### 11.2.4 Callback de Temporizador
 
 Un uso común de los callbacks es con temporizadores como hemos visto antes. Por ejemplo:
 
@@ -165,7 +165,7 @@ setTimeout(miCallback, 3000);
 
 Aquí, `setTimeout` espera tres segundos y luego ejecuta el `callback`. Ideal para crear animaciones y tareas programadas.
 
-### 2.5 Callback Hell: El Desafío de los Callbacks Anidados
+### 11.2.5 Callback Hell: El Desafío de los Callbacks Anidados
 
 Sin embargo, con una programación excesiva de callbacks anidados, puedes entrar en lo que se conoce como "callback hell". Escribir y mantener código así puede ser una pesadilla:
 
@@ -211,7 +211,7 @@ nivelUno(() => {
 
 Si bien es cierto que actualmente los programadores no solemos aplicar este tipo de gestión funcional, lo que está claro es que este código puede volverse difícil de mantener. ¿La solución? Promesas.
 
-## 3. Las Promesas
+## 11.3. Las Promesas
 
 Las Promesas son un patrón de programación que simplifica la lógica de manejo de tareas asincrónicas en JavaScript. Proporcionan una forma más estructurada y legible para trabajar con operaciones que pueden demorar, como solicitudes de red o lectura/escritura de archivos.
 
@@ -219,7 +219,7 @@ Las Promesas son un patrón de programación que simplifica la lógica de manejo
   <img src="https://lenguajejs.com/javascript/asincronia/promesas/promises.png" alt="Promesas" width="400" />
 </p>
 
-### 3.1 Creación de una Promesa
+### 11.3.1 Creación de una Promesa
 
 Para crear una Promesa, utiliza el constructor `Promise`. En TypeScript, `Promise<T>` indica el tipo de valor con el que se resolverá (`T`); el rechazo siempre es `any` o `unknown` según la configuración. Una Promesa tiene dos estados: pendiente **_(pending)_** o resuelta **_(fulfilled)_**. También tiene el estado **_(Reject)_** que es cuando no se puede llevar a cabo una promesa y es por tanto rechazada.
 
@@ -252,7 +252,7 @@ const miPromesa: Promise<string> = new Promise<string>((resolve, reject) => {
 
 Por convenio se utilizan como parámetros los nombres `resolve` y `reject`. Conviene seguir usando dichos nombres a pesar de que podemos colocar lo que deseemos.
 
-### 3.2 Resolución y Rechazo de Promesas
+### 11.3.2 Resolución y Rechazo de Promesas
 
 <p align="center">
   <img src="https://keepcoding.io/wp-content/uploads/2022/10/Captura-de-Pantalla-2022-10-26-a-las-5.12.48-p.m..png" alt="Promesas" width="300" />
@@ -319,7 +319,7 @@ En este ejemplo, el bloque `finally` se ejecutará siempre, independientemente d
 
 Estos métodos permiten estructurar y manejar de manera más efectiva el flujo de ejecución y los errores al trabajar con Promesas en JavaScript.
 
-### 3.3 Encadenamiento de Promesas
+### 11.3.3 Encadenamiento de Promesas
 
 Un beneficio clave de las Promesas es que puedes encadenar múltiples operaciones asincrónicas en secuencia. Esto mejora la legibilidad del código:
 
@@ -338,7 +338,7 @@ realizarTarea1()
 > [!TIP]
 > En cada `then`, el parámetro recibe el tipo de la promesa anterior. El encadenamiento es "escalable" en tipos: si `realizarTarea2` devuelve `Promise<number>`, el `resultado2` es `number` — TS lo comprueba en cada eslabón.
 
-### 3.4 Manejo de Errores con Promesas
+### 11.3.4 Manejo de Errores con Promesas
 
 El manejo de errores es esencial. Como ya he comentado podemos utilizar `catch` al final de una cadena de Promesas para capturar errores en cualquier parte de la secuencia:
 
@@ -351,7 +351,7 @@ realizarTarea1()
   });
 ```
 
-### 3.5 Promesas en Paralelo
+### 11.3.5 Promesas en Paralelo
 
 A menudo, necesitas realizar múltiples operaciones asincrónicas en paralelo y esperar a que todas se completen. Utiliza `Promise.all` para lograrlo:
 
@@ -372,7 +372,7 @@ Promise.all([promesa1, promesa2, promesa3])
 > [!NOTE]
 > `Promise.all([p1, p2, p3])` tipa el resultado como una **tupla** con los tipos en orden (`[string, number, boolean]`). Es decir: el `resultados[0]` es `string`, el `[1]` es `number`, etc. Mucho más seguro que un `any[]`.
 
-### 3.6 Combinadores modernos de Promesas (ES2020+)
+### 11.3.6 Combinadores modernos de Promesas (ES2020+)
 
 **`Promise.allSettled()` (ES2020):** espera a que TODAS las promesas terminen (éxito o fracaso). Nunca falla — siempre devuelve el resultado de cada una:
 
@@ -424,7 +424,7 @@ const resultado = await promise; // "Listo" al cabo de 1s
 > [!NOTE]
 > `Promise.withResolvers<string>()` devuelve `{ promise: Promise<string>; resolve: (v: string) => void; reject: (r: unknown) => void }`: la funcionalidad ES2024 ya está en el `lib` de TS.
 
-### 3.7 El Event Loop: microtareas vs macrotareas
+### 11.3.7 El Event Loop: microtareas vs macrotareas
 
 Entender el orden de ejecución es clave para depurar asincronía:
 
@@ -443,7 +443,7 @@ console.log("4. Síncrono");
 
 > **Regla:** código síncrono → microtareas (Promises, queueMicrotask) → macrotareas (setTimeout, eventos, fetch callback).
 
-## 4. Async/Await: Simplificando el Uso de Promesas
+## 11.4. Async/Await: Simplificando el Uso de Promesas
 
 `async/await` es una característica introducida en ECMAScript 2017 (también conocido como ES8) que simplifica la escritura y gestión del código asíncrono en JavaScript (y en TypeScript no cambia nada: solo añade tipos). Permite escribir código asíncrono de manera más similar a código síncrono, haciendo que sea más legible y fácil de entender.
 
@@ -575,7 +575,7 @@ obtenerDatosDesdeAPI();
 
 En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitud HTTP y manejar los datos resultantes de manera asincrónica.
 
-## 5. El tipado de `Promise<T>`: la clave de TypeScript
+## 11.5. El tipado de `Promise<T>`: la clave de TypeScript
 
 La diferencia práctica entre JS y TS en asincronía es el **flujo de tipos**. Recuerda estas reglas:
 
@@ -600,7 +600,7 @@ async function ejemploTipado(): Promise<string> {
 > [!TIP]
 > **Regla práctica:** si una función hace `await`, debe ser `async` y devolver `Promise<...>`. Nunca pongas `await` a un tipo; `await` siempre actúa sobre una promesa (si `await` un no-promesa, TS lo "envuelve" como `Promise.resolve(valor)`).
 
-## 6. Bibliografía:
+## 11.6. Bibliografía:
 
 1. Flanagan, D. (2011). JavaScript: The Definitive Guide. O'Reilly Media.
 2. Resig, J., Bibeault, B., & Maras, J. (2013). Secrets of the JavaScript Ninja. Manning Publications.

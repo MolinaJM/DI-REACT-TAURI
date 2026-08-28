@@ -1,14 +1,14 @@
 # 07. Estructuras de Datos. Arrays en TypeScript 📝\*\* 🖥️
 
-- [07. Estructuras de Datos. Arrays en TypeScript 📝\*\* 🖥️](#07-estructuras-de-datos-arrays-en-typescript--️)
-  - [8.1 Introducción](#81-introducción)
-  - [8.2 Creación de Arrays](#82-creación-de-arrays)
-    - [8.2.1 Arrays Literales](#821-arrays-literales)
-    - [8.2.2 Constructor `Array`](#822-constructor-array)
-  - [8.3 Acceso y Modificación de Elementos](#83-acceso-y-modificación-de-elementos)
-    - [8.3.1 Índices y Elementos](#831-índices-y-elementos)
-    - [8.3.2 Modificación de Elementos](#832-modificación-de-elementos)
-  - [8.4 Métodos Importantes de Arrays](#84-métodos-importantes-de-arrays)
+- [07. Estructuras de Datos. Arrays en TypeScript 📝\*\* 🖥️](#07-estructuras-de-datos-arrays-en-typescript)
+  - [7.1 Introducción](#71-introducción)
+  - [7.2 Creación de Arrays](#72-creación-de-arrays)
+    - [7.2.1 Arrays Literales](#721-arrays-literales)
+    - [7.2.2 Constructor `Array`](#722-constructor-array)
+  - [7.3 Acceso y Modificación de Elementos](#73-acceso-y-modificación-de-elementos)
+    - [7.3.1 Índices y Elementos](#731-índices-y-elementos)
+    - [7.3.2 Modificación de Elementos](#732-modificación-de-elementos)
+  - [7.4 Métodos Importantes de Arrays](#74-métodos-importantes-de-arrays)
     - [i. `push()` y `pop()`](#i-push-y-pop)
     - [ii. `shift()` y `unshift()`](#ii-shift-y-unshift)
     - [iii. `Slice()`](#iii-slice)
@@ -22,38 +22,38 @@
     - [xi. `at()` (ES2022)](#xi-at-es2022)
     - [xii. `findLast()` y `findLastIndex()` (ES2023)](#xii-findlast-y-findlastindex-es2023)
     - [xiii. Métodos inmutables (ES2023)](#xiii-métodos-inmutables-es2023)
-  - [8.5 Arrays Multidimensionales](#85-arrays-multidimensionales)
+  - [7.5 Arrays Multidimensionales](#75-arrays-multidimensionales)
     - [Ejemplos de Dificultad Media](#ejemplos-de-dificultad-media)
       - [Ejemplo 1: Filtrar Números Pares](#ejemplo-1-filtrar-números-pares)
       - [Ejemplo 2: Suma de Matrices](#ejemplo-2-suma-de-matrices)
     - [Ejemplos de Dificultad Alta](#ejemplos-de-dificultad-alta)
       - [Ejemplo 3: Rotación de Matrices](#ejemplo-3-rotación-de-matrices)
       - [Ejemplo 4: Búsqueda Binaria](#ejemplo-4-búsqueda-binaria)
-  - [8.6 Metodos que modifican o no el Array original](#86-metodos-que-modifican-o-no-el-array-original)
-    - [8.6.1 Modificar el Array Original](#861-modificar-el-array-original)
-    - [8.6.2 Crear una Copia](#862-crear-una-copia)
-  - [8.7 Recorrer Arrays en TypeScript](#87-recorrer-arrays-en-typescript)
-    - [8.7.1 Usando `for...in`](#871-usando-forin)
-    - [8.7.2 Usando `for...of`](#872-usando-forof)
-    - [8.7.3 Diferencias entre `for...in` y `for...of`](#873-diferencias-entre-forin-y-forof)
-    - [8.7.4 Método `forEach`](#874-método-foreach)
-  - [8.8 Clonar un Array](#88-clonar-un-array)
-  - [8.9 Destructuring con Arrays](#89-destructuring-con-arrays)
+  - [7.6 Metodos que modifican o no el Array original](#76-metodos-que-modifican-o-no-el-array-original)
+    - [7.6.1 Modificar el Array Original](#761-modificar-el-array-original)
+    - [7.6.2 Crear una Copia](#762-crear-una-copia)
+  - [7.7 Recorrer Arrays en TypeScript](#77-recorrer-arrays-en-typescript)
+    - [7.7.1 Usando `for...in`](#771-usando-forin)
+    - [7.7.2 Usando `for...of`](#772-usando-forof)
+    - [7.7.3 Diferencias entre `for...in` y `for...of`](#773-diferencias-entre-forin-y-forof)
+    - [7.7.4 Método `forEach`](#774-método-foreach)
+  - [7.8 Clonar un Array](#78-clonar-un-array)
+  - [7.9 Destructuring con Arrays](#79-destructuring-con-arrays)
     - [a. Destructuring Básico](#a-destructuring-básico)
     - [b. Asignación por Defecto](#b-asignación-por-defecto)
     - [c. Destructuring Anidado](#c-destructuring-anidado)
     - [d. Rest Parameters](#d-rest-parameters)
-  - [8.10 Tipado de arrays: tipos y genéricos](#810-tipado-de-arrays-tipos-y-genéricos)
+  - [7.10 Tipado de arrays: tipos y genéricos](#710-tipado-de-arrays-tipos-y-genéricos)
 
 ---
 
-## 8.1 Introducción
+## 7.1 Introducción
 
 Los arrays son una de las estructuras de datos fundamentales en JavaScript. Permiten almacenar y organizar colecciones de elementos de manera ordenada. En este documento, exploraremos en profundidad cómo trabajar con arrays en TypeScript, donde además de los métodos de ES6+ contamos con `T[]`, `Array<T>`, `readonly` y tuplas.
 
-## 8.2 Creación de Arrays
+## 7.2 Creación de Arrays
 
-### 8.2.1 Arrays Literales
+### 7.2.1 Arrays Literales
 
 Puedes crear un array literalmente encerrando elementos entre corchetes `[]` y separándolos por comas. En TypeScript se anota el tipo de los elementos:
 
@@ -61,7 +61,7 @@ Puedes crear un array literalmente encerrando elementos entre corchetes `[]` y s
 const frutas: string[] = ["manzana", "plátano", "naranja"];
 ```
 
-### 8.2.2 Constructor `Array`
+### 7.2.2 Constructor `Array`
 
 También puedes utilizar el constructor `Array` para crear un array vacío o con elementos predeterminados.
 
@@ -73,9 +73,9 @@ const numeros: number[] = new Array<number>(1, 2, 3, 4, 5);
 > [!WARNING]
 > `new Array(5)` (un solo argumento numérico) crea un array con 5 huecos, NO `[5]`. TypeScript lo tipa como `number[]` con largo 5 pero sin valores. Prefiere `Array.from({ length: 5 })` o un literal.
 
-## 8.3 Acceso y Modificación de Elementos
+## 7.3 Acceso y Modificación de Elementos
 
-### 8.3.1 Índices y Elementos
+### 7.3.1 Índices y Elementos
 
 Los elementos en un array se numeran con índices comenzando desde 0. Puedes acceder a un elemento utilizando su índice.
 
@@ -86,7 +86,7 @@ const fruta: string | undefined = frutas[0]; // Acceder a la primera fruta (manz
 > [!NOTE]
 > Con la opción `noUncheckedIndexedAccess` (activa en este curso), `frutas[0]` devuelve `string | undefined`, porque un índice puede estar vacío. Es una protección que en JavaScript puro no existe.
 
-### 8.3.2 Modificación de Elementos
+### 7.3.2 Modificación de Elementos
 
 Puedes modificar elementos en un array asignando un nuevo valor a través de su índice.
 
@@ -94,7 +94,7 @@ Puedes modificar elementos en un array asignando un nuevo valor a través de su 
 frutas[1] = "pera"; // Modificar la segunda fruta (plátano a pera)
 ```
 
-## 8.4 Métodos Importantes de Arrays
+## 7.4 Métodos Importantes de Arrays
 
 Aunque estos métodos son los mismos que en JavaScript, en TypeScript sus **firmas son genéricas**, de modo que el tipo de los elementos se conserva durante la transformación.
 
@@ -344,7 +344,7 @@ const cambiado: number[] = original.with(1, 42); // [3, 42, 2]
 
 > Estos métodos son preferibles a `sort()`, `reverse()` y `splice()` cuando necesitas preservar el array original (patrón funcional / estado inmutable).
 
-## 8.5 Arrays Multidimensionales
+## 7.5 Arrays Multidimensionales
 
 Los arrays multidimensionales son arrays que contienen otros arrays como elementos. Pueden utilizarse para representar matrices y estructuras de datos más complejas. En TypeScript se escriben como `number[][]` (array de array de numbers).
 
@@ -437,11 +437,11 @@ const numerosOrdenados: number[] = [1, 3, 5, 7, 9, 11, 13];
 const indice: number = busquedaBinaria(numerosOrdenados, 7); // 3
 ```
 
-## 8.6 Metodos que modifican o no el Array original
+## 7.6 Metodos que modifican o no el Array original
 
 Aquí están los métodos de arrays que pueden modificar el array original y los que crean una copia:
 
-### 8.6.1 Modificar el Array Original
+### 7.6.1 Modificar el Array Original
 
 1. `push(elemento)`: Agrega un elemento al final del array. Modifica el array original al agregar un nuevo elemento al final.
 
@@ -457,7 +457,7 @@ Aquí están los métodos de arrays que pueden modificar el array original y los
 
 7. `sort([comparador])`: Ordena los elementos de un array, modificando dicho array y aplicando el comparador para establecer el orden.
 
-### 8.6.2 Crear una Copia
+### 7.6.2 Crear una Copia
 
 1. `concat(array1, array2, ...)`: Combina dos o más arrays creando uno nuevo sin modificar los arrays originales. El método `concat` no modifica los arrays originales y crea una nueva copia.
 
@@ -469,11 +469,11 @@ Aquí están los métodos de arrays que pueden modificar el array original y los
 
 5. `toSorted()`, `toReversed()`, `toSpliced()` y `with()` (ES2023): devuelven copias sin tocar el original.
 
-## 8.7 Recorrer Arrays en TypeScript
+## 7.7 Recorrer Arrays en TypeScript
 
 En JavaScript, hay varias formas de recorrer un array. Las dos más comunes son utilizando `for...in` y `for...of`. Cada uno tiene sus propias características y diferencias.
 
-### 8.7.1 Usando `for...in`
+### 7.7.1 Usando `for...in`
 
 El bucle `for...in` se utiliza para iterar sobre las propiedades enumerables de un objeto. Aunque es posible utilizarlo para recorrer arrays, no es la forma más recomendada debido a algunas limitaciones.
 
@@ -493,7 +493,7 @@ for (const indice in frutas) {
 
 > **Recomendación:** para arrays usa siempre `for...of` o `forEach()`. Reserva `for...in` exclusivamente para objetos planos.
 
-### 8.7.2 Usando `for...of`
+### 7.7.2 Usando `for...of`
 
 El bucle `for...of` se introdujo en ECMAScript 6 y es la forma más recomendada de recorrer arrays en JavaScript. Proporciona una forma más limpia y sencilla de acceder a los elementos de un array, y en TypeScript cada elemento queda **tipado automáticamente**.
 
@@ -512,7 +512,7 @@ for (const fruta of frutas) {
 3. Garantiza un orden específico en la iteración.
 4. El tipo del elemento se infiere de `T[]` (aquí `string`).
 
-### 8.7.3 Diferencias entre `for...in` y `for...of`
+### 7.7.3 Diferencias entre `for...in` y `for...of`
 
 - `for...in` itera sobre las propiedades enumerables de un objeto, mientras que `for...of` itera sobre los valores de los elementos de un iterable (como un array).
 - `for...in` se utiliza principalmente para objetos, y puede no comportarse de la manera esperada con arrays debido a las limitaciones mencionadas.
@@ -520,7 +520,7 @@ for (const fruta of frutas) {
 
 En resumen, al recorrer arrays en JavaScript, se recomienda utilizar el bucle `for...of` debido a su simplicidad y claridad, así como a su capacidad para garantizar un orden específico en la iteración.
 
-### 8.7.4 Método `forEach`
+### 7.7.4 Método `forEach`
 
 El método `forEach()` en JavaScript se utiliza para iterar sobre los elementos de un array y ejecutar una función proporcionada una vez por cada elemento. Es una forma de recorrer el array y realizar operaciones en cada elemento sin necesidad de utilizar bucles `for` o `while`.
 
@@ -561,7 +561,7 @@ numeros.forEach(function (numero) {
 console.log(`La suma de los números es: ${suma}`);
 ```
 
-## 8.8 Clonar un Array
+## 7.8 Clonar un Array
 
 Puedes clonar (copiar) un array en JavaScript de varias maneras, las más comunes:
 
@@ -635,7 +635,7 @@ console.log(2 in arrayClonadoConcat); // false
 
 > **Copia superficial:** todas estas formas hacen una copia superficial. Si el array contiene objetos y mutas uno de ellos, la copia "ve" el cambio. Para copias profundas: `structuredClone(arrayOriginal)` (Node 17+/navegadores modernos).
 
-## 8.9 Destructuring con Arrays
+## 7.9 Destructuring con Arrays
 
 El destructuring es una técnica que permite extraer valores de un array y asignarlos a variables en una sola línea de código. Esto simplifica la extracción de datos de arrays y mejora la legibilidad del código.
 
@@ -679,7 +679,7 @@ console.log(b); // Imprimirá 2
 console.log(resto); // Imprimirá [3, 4, 5]
 ```
 
-## 8.10 Tipado de arrays: tipos y genéricos
+## 7.10 Tipado de arrays: tipos y genéricos
 
 Para cerrar el capítulo, estas son las formas de tipar los arrays en TypeScript:
 

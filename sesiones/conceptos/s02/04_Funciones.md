@@ -1,6 +1,6 @@
 # **Capítulo 04. Contenido 📝** 🖥️
 
-- [5. Funciones en TypeScript](#5-funciones-en-typescript)
+- [4. Funciones en TypeScript](#4-funciones-en-typescript)
   - [1. Declaración de funciones](#1-declaraci%C3%B3n-de-funciones)
   - [2. Expresiones de funciones o expresiones funcionales.](#2-expresiones-de-funciones-o-expresiones-funcionales)
   - [3. Funciones de flecha](#3-funciones-de-flecha)
@@ -22,7 +22,7 @@
 
 ---
 
-# 5. Funciones en TypeScript
+# 4. Funciones en TypeScript
 
 Las funciones son bloques de código reutilizables que pueden realizar tareas específicas en JavaScript. En TypeScript además podemos declarar el tipo de los **parámetros** y del **retorno**, de manera que el compilador comprueba cada llamada.
 Las funciones son los principales "bloques de construcción" del programa. Permiten que el código se llame muchas veces sin repetición.

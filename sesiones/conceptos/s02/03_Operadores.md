@@ -1,32 +1,32 @@
 # **Capítulo 03. Contenido 📝** 🖥️
 
-- [4. Operadores Lógicos y de Comparación en TypeScript.](#4-operadores-l%C3%B3gicos-y-de-comparaci%C3%B3n-en-typescript)
-  - [4.1. Operadores de Comparación](#41-operadores-de-comparaci%C3%B3n)
-    - [i. Igualdad (`==`) y Desigualdad (`!=`)](#i-igualdad--y-desigualdad-)
-    - [ii. Igualdad Estricta (`===`) y Desigualdad Estricta (`!==`)](#ii-igualdad-estricta--y-desigualdad-estricta-)
-    - [iii. Mayor que (`>`) y Menor que (`<`)](#iii-mayor-que--y-menor-que-)
-    - [iv. Mayor o Igual que (`>=`) y Menor o Igual que (`<=`)](#iv-mayor-o-igual-que--y-menor-o-igual-que-)
-  - [4.2. Operadores Lógicos](#42-operadores-l%C3%B3gicos)
-    - [i. AND Lógico (`&&`)](#i-and-l%C3%B3gico-)
-    - [ii. OR Lógico (`||`)](#ii-or-l%C3%B3gico-)
-    - [iii. NOT Lógico (`!`)](#iii-not-l%C3%B3gico-)
+- [3. Operadores Lógicos y de Comparación en TypeScript.](#3-operadores-l%C3%B3gicos-y-de-comparaci%C3%B3n-en-typescript)
+  - [3.1. Operadores de Comparación](#31-operadores-de-comparaci%C3%B3n)
+    - [i. Igualdad (`==`) y Desigualdad (`!=`)](#i-igualdad-y-desigualdad)
+    - [ii. Igualdad Estricta (`===`) y Desigualdad Estricta (`!==`)](#ii-igualdad-estricta-y-desigualdad-estricta)
+    - [iii. Mayor que (`>`) y Menor que (`<`)](#iii-mayor-que-y-menor-que)
+    - [iv. Mayor o Igual que (`>=`) y Menor o Igual que (`<=`)](#iv-mayor-o-igual-que-y-menor-o-igual-que)
+  - [3.2. Operadores Lógicos](#32-operadores-l%C3%B3gicos)
+    - [i. AND Lógico (`&&`)](#i-and-l%C3%B3gico)
+    - [ii. OR Lógico (`||`)](#ii-or-l%C3%B3gico)
+    - [iii. NOT Lógico (`!`)](#iii-not-l%C3%B3gico)
     - [iv. Ejemplo Completo](#iv-ejemplo-completo)
-  - [4.3. Operador Ternario (`?`)](#43-operador-ternario-)
-    - [Ejemplo:](#ejemplo)
-  - [4.4. Operador Nullish Coalescing (`??`)](#44-operador-nullish-coalescing-)
-    - [Ejemplo:](#ejemplo-1)
-  - [4.5. Combinación de Operadores (`?`) y (`??`)](#45-combinaci%C3%B3n-de-operadores--y-)
-    - [Ejemplo:](#ejemplo-2)
-  - [4.6. Operadores de Asignación Lógica (ES2021)](#46-operadores-de-asignaci%C3%B3n-l%C3%B3gica-es2021)
-  - [4.7. Tipos resultantes: cómo los ve TypeScript](#47-tipos-resultantes-cómo-los-ve-typescript)
+  - [3.3. Operador Ternario (`?`)](#33-operador-ternario)
+    - [Ejemplo:](#ejemplo-de-operador-ternario)
+  - [3.4. Operador Nullish Coalescing (`??`)](#34-operador-nullish-coalescing)
+    - [Ejemplo:](#ejemplo-de-nullish-coalescing)
+  - [3.5. Combinación de Operadores (`?`) y (`??`)](#35-combinaci%C3%B3n-de-operadores-y)
+    - [Ejemplo:](#ejemplo-combinado-de-y)
+  - [3.6. Operadores de Asignación Lógica (ES2021)](#36-operadores-de-asignaci%C3%B3n-l%C3%B3gica-es2021)
+  - [3.7. Tipos resultantes: cómo los ve TypeScript](#37-tipos-resultantes-cómo-los-ve-typescript)
 
 ---
 
-# 4. Operadores Lógicos y de Comparación en TypeScript.
+# 3. Operadores Lógicos y de Comparación en TypeScript.
 
 Los operadores lógicos y de comparación son fundamentales en JavaScript para realizar evaluaciones y tomar decisiones lógicas en tus programas. ES6 y versiones posteriores han ampliado las capacidades con nuevos operadores. A continuación, se presentan los operadores más comunes, adaptados a TypeScript y con un apartado final sobre los tipos que devuelve/n recibe cada operador.
 
-## 4.1. Operadores de Comparación
+## 3.1. Operadores de Comparación
 
 Los operadores de comparación se utilizan para comparar valores y devuelven un valor booleano (verdadero o falso) según el resultado de la comparación. En TypeScript, `===`, `>`, `<`, `>=`, `<=` exigen que los operandos sean comparables y devuelven `boolean`.
 
@@ -88,7 +88,7 @@ console.log(cantidad1 >= cantidad2); // true
 console.log(cantidad1 <= cantidad2); // true
 ```
 
-## 4.2. Operadores Lógicos
+## 3.2. Operadores Lógicos
 
 Los operadores lógicos se utilizan para realizar operaciones lógicas en valores booleanos.
 
@@ -174,7 +174,7 @@ if (edad >= 18 && !esEstudiante) {
 
 Gracias a las anotaciones `number` y `boolean`, TypeScript valida que todas las comparaciones son correctas y permite *narrowing* en cada rama.
 
-## 4.3. Operador Ternario (`?`)
+## 3.3. Operador Ternario (`?`)
 
 El operador ternario, representado por `condición ? expresión1 : expresión2`, es una forma concisa de realizar una evaluación condicional en JavaScript. Si la condición es verdadera, se ejecuta `expresión1`; de lo contrario, se ejecuta `expresión2`. Es útil para asignar valores basados en una condición.
 
@@ -188,7 +188,7 @@ console.log(`¿Es mayor de edad? ${esMayor}`); // Imprime "¿Es mayor de edad? S
 
 TypeScript infiere que el resultado del ternario es la **unión** de ambos tipos: `string`. Si las ramas devuelven tipos distintos, se deduce la unión.
 
-## 4.4. Operador Nullish Coalescing (`??`)
+## 3.4. Operador Nullish Coalescing (`??`)
 
 El operador nullish coalescing (`??`) se utiliza para proporcionar un valor predeterminado en caso de que una expresión sea `null` o `undefined`. Es útil para manejar valores nulos o indefinidos de manera segura. En TypeScript es muy habitual junto a valores de tipo `T | null | undefined`.
 
@@ -202,7 +202,7 @@ console.log(valorPredeterminado); // Imprime "Valor predeterminado"
 
 Observa cómo el tipo se elimina: `valor` era `string | null`, y `valor ?? "defecto"` es `string`. TypeScript usa el `??` para *narrowing* de nulos.
 
-## 4.5. Combinación de Operadores (`?`) y (`??`)
+## 3.5. Combinación de Operadores (`?`) y (`??`)
 
 Puedes combinar el operador ternario y el operador de nullish coalescing para crear lógica condicional más compleja.
 
@@ -222,7 +222,7 @@ console.log(mensajeEdad); // Imprime "Edad no especificada"
 
 > Estos operadores son herramientas poderosas para realizar evaluaciones condicionales y manejar valores nulos o indefinidos de manera efectiva en JavaScript (y con seguridad de tipos en TypeScript).
 
-## 4.6. Operadores de Asignación Lógica (ES2021)
+## 3.6. Operadores de Asignación Lógica (ES2021)
 
 Combinan los operadores lógicos con la asignación para escribir código más conciso:
 
@@ -259,7 +259,7 @@ nombre2 ??= "Profe";
 console.log(nombre2); // "Profe"
 ```
 
-## 4.7. Tipos resultantes: cómo los ve TypeScript
+## 3.7. Tipos resultantes: cómo los ve TypeScript
 
 | Operador | Operandos típicos | Tipo que devuelve TypeScript |
 |:--------:|:-----------------:|:----------------------------:|

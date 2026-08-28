@@ -1,7 +1,7 @@
-# **Capítulo 00. TypeScript Moderno sobre ES6+/ES2026 📝**💻
+# **Capítulo 00. TypeScript  sobre ES6+/ES2026 📝**💻
 
-- [**Capítulo 00. TypeScript Moderno sobre ES6+/ES2026 📝**💻](#capítulo-00-typescript-moderno-sobre-es6es2026-)
-- [0. Introducción a JavaScript y TypeScript 📖](#0-introducción-a-javascript-y-typescript-)
+- [**Capítulo 00. TypeScript  sobre ES6+/ES2026 📝**💻](#capítulo-00-typescript-sobre-es6es2026)
+- [0. Introducción a JavaScript y TypeScript 📖](#0-introducción-a-javascript-y-typescript)
   - [0.1 Historia y contexto](#01-historia-y-contexto)
     - [Los Primeros Días](#los-primeros-días)
     - [La Guerra de Navegadores](#la-guerra-de-navegadores)
@@ -17,9 +17,9 @@
     - [6. **Asincronía Nativa y Moderna**](#6-asincronía-nativa-y-moderna)
     - [7. **Multiplataforma y Universal**](#7-multiplataforma-y-universal)
   - [0.3 Palabras Reservadas](#03-palabras-reservadas)
-  - [0.4 Primeros Pasos con TypeScript Moderno](#04-primeros-pasos-con-typescript-moderno)
+  - [0.4 Primeros Pasos con TypeScript ](#04-primeros-pasos-con-typescript)
     - [Hola Mundo Moderno](#hola-mundo-moderno)
-    - [Variables y Constantes](#variables-y-constantes)
+    - [Variables y Constantes](#variables-y-constantes-let-y-const)
     - [Arrow Functions](#arrow-functions)
     - [Template Literals](#template-literals)
     - [Destructuring](#destructuring)
@@ -27,7 +27,7 @@
     - [¿Qué es TypeScript?](#qué-es-typescript)
     - [Ventajas de TypeScript](#ventajas-de-typescript)
     - [Instalación y Configuración](#instalación-y-configuración)
-    - [Primer Código con TypeScript](#primer-código-con-typescript)
+    - [Primer Código con TypeScript](#primer-código-más-complejo-con-typescript)
 
 ---
 
@@ -215,7 +215,7 @@ JavaScript es un lenguaje **orientado a objetos**, pero en lugar de basarse en c
 
 Sin embargo, desde **ES6** (ECMAScript 2015), se introdujeron las **clases**, que proporcionan una sintaxis más familiar para la orientación a objetos, aunque internamente JavaScript sigue utilizando prototipos. Esta sintaxis de clases es un "azúcar sintáctico" sobre el modelo basado en prototipos, pero hace el código más legible y fácil de entender para desarrolladores que vienen de otros lenguajes.
 
-**Conceptos clave de POO en JavaScript/TypeScript moderno:**
+**Conceptos clave de POO en JavaScript/TypeScript :**
 
 - **Encapsulación**: Agrupar datos y métodos que operan sobre esos datos (`private`, `#campo`)
 - **Herencia**: Crear nuevas clases basadas en clases existentes (`extends`)
@@ -411,7 +411,7 @@ El enfoque asíncrono de JavaScript permite que el programa continúe ejecutánd
 
 JavaScript es **multiplataforma**. Se ejecuta no solo en navegadores y servidores (con Node.js), sino también en entornos como aplicaciones móviles (con frameworks como **React Native**), aplicaciones de escritorio (con **Electron**), y dispositivos IoT. Esto lo convierte en uno de los lenguajes más versátiles disponibles.
 
-**Ecosistema JavaScript/TypeScript moderno:**
+**Ecosistema JavaScript/TypeScript :**
 
 - **Frontend**: React (TS), Vue, Svelte
 - **Backend**: Node.js, Express, NestJS (TS), Fastify
@@ -488,9 +488,9 @@ await, class, const, enum, export, extends, implements, import, interface, let, 
 
 ---
 
-## 0.4 Primeros Pasos con TypeScript Moderno
+## 0.4 Primeros Pasos con TypeScript 
 
-Vamos a crear nuestros primeros ejemplos utilizando TypeScript moderno sobre la base de JavaScript ES6+. Estos son los conceptos fundamentales que necesitarás para empezar a programar.
+Vamos a crear nuestros primeros ejemplos utilizando TypeScript  sobre la base de JavaScript ES6+. Estos son los conceptos fundamentales que necesitarás para empezar a programar.
 
 ### Hola Mundo Moderno
 
@@ -504,34 +504,20 @@ const mensaje: string = `¡Hola! Soy ${profesor} y te doy la bienvenida a ${modu
 
 console.log(mensaje); // ¡Hola! Soy Profe y te doy la bienvenida a DI
 
-// Mostrar en una página web
-document.addEventListener("DOMContentLoaded", () => {
-  const app = document.getElementById("app");
-  if (app) {
-    app.innerHTML = `
-      <div style="padding: 20px; font-family: Arial, sans-serif;">
-        <h1 style="color: #2c3e50;">${mensaje}</h1>
-        <p style="background: #ecf0f1; padding: 10px; border-radius: 5px;">
-          Este es un ejemplo de TypeScript con template literals.
-        </p>
-      </div>
-    `;
-  }
-});
 ```
 
 ### Variables y Constantes (let y const)
 
-En TypeScript moderno, usamos `let` y `const` en lugar de `var`, y además anotamos los tipos:
+TypeScript es un lenguaje fuertemente tipado. En TypeScript usamos `let` y `const` en lugar de `var`, y además anotamos los tipos:
 
 ```typescript
 // const - Para valores que no cambian
-const NOMBRE_CURSO: string = "Desarrollo Web en Entorno Cliente";
+const NOMBRE_CURSO: string = "Desarrollo de Interfaces - 2 DAM";
 const PROFESOR: string = "Profe";
 
 // let - Para valores que sí pueden cambiar
 let numeroAlumnos: number = 25;
-let aulaActual: string = "Aula Informática 1";
+let aulaActual: string = "Aula A13";
 
 console.log(`Curso: ${NOMBRE_CURSO}`);
 console.log(`Profesor: ${PROFESOR}`);
@@ -551,12 +537,12 @@ console.log(`Actualizado: ${numeroAlumnos} alumnos en ${aulaActual}`);
 
 - **const**: Previene reasignaciones accidentales
 - **let**: Tiene scope de bloque (solo existe dentro del bloque donde se define)
-- **var**: Tiene scope de función y puede causar problemas de hoisting
-- **Tipos**: La anotación `: number` hace que una asignación errónea (`numeroAlumnos = "muchos"`) falle en compilación.
+- **var**: Tiene scope de función y puede causar problemas de *hoisting* (se puede hacer referencia en una línea a una variable que se declara en una línea posterior sin dar excepción. Con let se evita esto.)
+- **Tipos**: La anotación `: number` hace que una asignación errónea (`numeroAlumnos = "muchos"`). A pesar del fallo, las versiones recientes de Node.js incluyen soporte nativo para TypeScript mediante una técnica llamada type stripping (eliminación de tipos). El error se marca pero coge el último valor válido.
 
 ### Arrow Functions
 
-Las funciones flecha son una forma más concisa de escribir funciones, y en TypeScript se tipan:
+Las funciones flecha son una forma más compacta de escribir funciones, y en TypeScript se tipan:
 
 ```typescript
 // Función tradicional tipada
@@ -564,12 +550,12 @@ function saludarTradicional(nombre: string): string {
   return `Hola, ${nombre}`;
 }
 
-// Arrow function básica
+// Arrow function básica (usa const y se asigna a nombre de función)
 const saludarFlecha = (nombre: string): string => {
   return `Hola, ${nombre}`;
 };
 
-// Arrow function más concisa (si solo tiene un parámetro)
+// Arrow function más concisa (si solo tiene un parámetro, nos ahorramos las llaves)
 const saludarConcisa = (nombre: string): string => `Hola, ${nombre}`;
 
 // Arrow function sin parámetros
@@ -583,7 +569,7 @@ console.log(saludarProfesor());
 
 // Arrow functions con múltiples parámetros
 const calcularMedia = (nota1: number, nota2: number, nota3: number): string => {
-  const media: number = (nota1 + nota2 + nota3) / 3;
+  let media: number = (nota1 + nota2 + nota3) / 3;
   return `La media de ${nota1}, ${nota2} y ${nota3} es: ${media.toFixed(2)}`;
 };
 
@@ -636,18 +622,19 @@ console.log(formatearNombre("juan", "pérez")); // ALUMNO: JUAN PÉREZ
 
 ### Destructuring
 
-El destructuring permite extraer valores de arrays y objetos de forma concisa, y en TypeScript mantiene los tipos:
+El destructuring permite extraer valores de arrays y objetos de forma concisa, y en TypeScript mantiene los tipos. Muy útil en React para los Props y Hooks.
 
 ```typescript
 // Destructuring de arrays
-const tecnologias: string[] = ["JavaScript", "TypeScript", "React", "Node.js"];
-const [js, ts, react, node] = tecnologias;
+const tecnologias: string[] = ["JavaScript", "TypeScript", "React", "Node.js", "Tauri"];
+const [js, ts, react, node, tauri] = tecnologias;
 
 console.log(`Frontend: ${js} y ${react}`);
-console.log(`Backend: ${node}`);
+console.log(`Backend: ${node} y ${tauri}`);
 console.log(`Tipado: ${ts}`);
 
 // Destructuring de objetos (el tipo se declara con interface)
+// Un interface es propio de TS: define la estructura y el tipo de datos que debe tener un objeto. Es extremadamente útil y se usa mucho.
 interface ProfesorInfo {
   nombre: string;
   apellidos: string;
@@ -658,12 +645,13 @@ interface ProfesorInfo {
 
 const profesorInfo: ProfesorInfo = {
   nombre: "Profe",
-  apellidos: "FL",
+  apellidos: "MC",
   modulo: "DI",
-  experiencia: 10,
-  especialidades: ["JavaScript", "TypeScript", "React"],
+  experiencia: 20,
+  especialidades: ["Java", "TypeScript", "React", "Unity"],
 };
 
+// He de llamar de la misma forma a las variables que devuelve 
 const { nombre, apellidos, modulo, experiencia } = profesorInfo;
 console.log(`Profesor: ${nombre} ${apellidos}`);
 console.log(`Módulo: ${modulo}`);
@@ -673,7 +661,7 @@ console.log(`Experiencia: ${experiencia} años`);
 interface Configuracion {
   tema: string;
   idioma: string;
-  tamanoFuente?: string; // opcional
+  tamanoFuente?: string; // ? indica opcionalidad en la inicialización
 }
 
 const configuracion: Configuracion = {
@@ -696,14 +684,14 @@ const mostrarInfoAlumno = ({ nombre, edad, curso = "DI" }: AlumnoInfo): string =
 };
 
 const alumno1: AlumnoInfo = { nombre: "Ana", edad: 20 };
-const alumno2: AlumnoInfo = { nombre: "Carlos", edad: 21, curso: "DAW" };
+const alumno2: AlumnoInfo = { nombre: "Carlos", edad: 21, curso: "DAM" };
 
 console.log(mostrarInfoAlumno(alumno1)); // Curso: DI (por defecto)
-console.log(mostrarInfoAlumno(alumno2)); // Curso: DAW
+console.log(mostrarInfoAlumno(alumno2)); // Curso: DAM
 ```
 
 > [!TIP]
-> Con `noUncheckedIndexedAccess` activo en este curso, al hacer `const [a, b] = array` los elementos pueden ser `T | undefined`. Si sabes que el array está completo, puedes notificarlo: `const [a, b] = array as [string, string]`. Lo veremos en el capítulo de arrays.
+> Si tenemos `noUncheckedIndexedAccess` activo en tsconfig.json, al hacer `const [a, b] = array` los elementos pueden ser `T | undefined`. Si sabes que el array está completo, puedes notificarlo: `const [a, b] = array as [string, string]`. Lo veremos en el capítulo de arrays.
 
 ---
 
@@ -718,7 +706,7 @@ TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
 - **Tipado estático**: Define tipos para variables, parámetros y retornos
 - **Interfaces**: Define contratos para objetos
 - **Clases mejoradas**: Con modificadores de acceso y más
-- **Enum → uniones de tipos**: Este curso reemplaza las enumeraciones (`enum`) por uniones de string literals, compatibles con Node 24
+- **Enum → uniones de tipos**: Este curso reemplaza las enumeraciones (`enum`) por uniones de string literals, compatibles con Node 24 (a partir de Node 22 se introdujo de forma nativa el Type Stripping (la capacidad de ejecutar archivos .ts directamente borrando las anotaciones de tipo). Sin embargo, para que Node pueda ejecutar un archivo .ts sin compilar, la sintaxis de TypeScript debe ser 100% removible. Y los enum no dejan hacer eso.)
 - **Genéricos**: Funciones y clases que trabajan con varios tipos
 - **Type narrowing**: Refinar el tipo según el flujo del programa
 
@@ -736,23 +724,22 @@ TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
 Para empezar con TypeScript, necesitas instalarlo:
 
 ```bash
-# Instalar TypeScript en tu proyecto
+# Instala TypeScript en la carpeta actual. Crea node_modules, mete ahí las librerías de TS y las definiciones de tipos.
+# --save-dev es una dependencia de desarrollo (no irá en la versión de producción)
 npm install --save-dev typescript @types/node
 
-# Crear archivo de configuración
+# Crea archivo de configuración tsconfig.json (reglas de compilación)
 npx tsc --init
 ```
 
-Este repositorio ya trae un `tsconfig.json` recomendado (con `strict: true`). Para verificar los tipos de todo el repo:
-
 ```bash
-npm install
-npm run check   # ejecuta npx tsc
+npm install # lee package.json y verifica que node_modules esté actualizado
+npx tsc # ejecuta el compilador de TS en todo el proyecto. Transpila de .ts a .js según indique tsconfig.json
 ```
 
-### Primer Código con TypeScript
+### Primer código más complejo con TypeScript
 
-Veamos ejemplos comparando JavaScript con TypeScript:
+Aquí ya vemos muchos conceptos mezclados y alguno que aún no se ha visto (como las uniones y los genéricos):
 
 ```typescript
 // TypeScript: Variables tipadas
@@ -761,6 +748,7 @@ let edad: number = 35;
 let esProfesor: boolean = true;
 let tecnologias: string[] = ["JavaScript", "TypeScript", "React"];
 
+//interface+inicialización
 interface Info {
   nombre: string;
   edad: number;
@@ -831,23 +819,15 @@ console.log(numeros); // [1, 2, 3]
 console.log(textos); // ["a", "b", "c"]
 ```
 
-### ¿Cómo usar TypeScript con JavaScript?
-
-Puedes usar TypeScript gradualmente:
-
-1. **Empieza con JavaScript puro**: Renombra tus archivos `.js` a `.ts`
-2. **Añade tipos gradualmente**: Comienza con funciones clave
-3. **Usa interfaces para objetos**: Define la estructura de tus datos
-4. **Configura el compilador**: Ajusta `tsconfig.json` según tus necesidades
-5. **Integración con herramientas**: La mayoría de frameworks soportan TypeScript
+### ¿Cómo usar TypeScript?
 
 **Compilar / ejecutar TypeScript en este curso:**
 
 ```bash
-# Comprobar tipos de un repo (desde repos/01-typescript-fundamentos)
+# Comprobar si hay errores de tipos de un repo (desde repos/01-typescript-fundamentos)
 npx tsc
 
-# Ejecutar un ejemplo de la sesión
+# Ejecutar un ejemplo de la sesión (tsx ex TypeScript Execute: ejecuta .ts sin recompilar).
 npx tsx src/REPO-01-tipos-primitivos.ts
 
 # En el navegador, Vite lo transforma en caliente (capítulo 3)
@@ -856,113 +836,7 @@ npx tsx src/REPO-01-tipos-primitivos.ts
 TypeScript se compila a JavaScript estándar, por lo que puede ejecutarse en cualquier navegador o entorno Node.js.
 
 > [!NOTE]
-> **Erasable-only:** en todo este repositorio usamos solo sintaxis TS que Node 24 puede quitar al ejecutar. Eso significa: sin `enum`, sin `namespace` y sin *parameter properties* en constructores. Interfaces, uniones, tipos y genéricos sí están permitidos.
-
-### 📦 En el repositorio (`repos/01-typescript-fundamentos/src/REPO-04-unions-intersections.ts`)
-
-```typescript
-export {};
-
-/**
- * Fichero 04: Union Types, Interseccion, Literales y Type Narrowing
- * -----------------------------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 9 y 10):
- * - Union Types (|)
- * - Interseccion de Tipos (&)
- * - Literal Types
- * - Type Narrowing (typeof, in, discriminated unions)
- */
-
-// ============================================================================
-// UNION TYPES (|)
-// ============================================================================
-
-type Id = string | number;
-let userId: Id = 123;
-userId = "ABC-123";
-
-// Union en parametros
-function imprimirId(id: string | number): void {
-    if (typeof id === "string") {
-        console.log(id.toUpperCase());
-    } else {
-        console.log(id.toFixed(2));
-    }
-}
-
-// Union de literales
-type EstadoPedido = "pendiente" | "enviado" | "entregado" | "cancelado";
-let estado: EstadoPedido = "pendiente";
-
-// ============================================================================
-// INTERSECCION DE TIPOS (&)
-// ============================================================================
-
-interface Persona { nombre: string; edad: number; }
-interface Empleado { empresa: string; salario: number; }
-
-type EmpleadoPersona = Persona & Empleado;
-
-const trabajador: EmpleadoPersona = {
-    nombre: "Luis",
-    edad: 30,
-    empresa: "Tech Corp",
-    salario: 50000
-};
-
-// ============================================================================
-// LITERAL TYPES
-// ============================================================================
-
-let saludo: "hola" = "hola";
-// saludo = "adios";  // Error
-let puerto: 3000 | 3001 | 8080 = 3000;
-
-// ============================================================================
-// TYPE NARROWING
-// ============================================================================
-
-// TYPEOF
-function procesarValor(valor: string | number | boolean) {
-    if (typeof valor === "string") return valor.toUpperCase();
-    if (typeof valor === "number") return valor.toFixed(2);
-    return valor ? "si" : "no";
-}
-
-// IN NARROWING
-interface Casa { jardin: boolean; }
-interface Piso { piso: number; }
-type Vivienda = Casa | Piso;
-
-function describir(v: Vivienda) {
-    if ("jardin" in v) {
-        console.log("Casa con jardin");
-    } else {
-        console.log("Piso");
-    }
-}
-
-// DISCRIMINATED UNIONS
-interface Circulo { tipo: "circulo"; radio: number; }
-interface Rectangulo { tipo: "rectangulo"; ancho: number; alto: number; }
-type Figura = Circulo | Rectangulo;
-
-function calcularArea(fig: Figura): number {
-    switch (fig.tipo) {
-        case "circulo": return Math.PI * fig.radio ** 2;
-        case "rectangulo": return fig.ancho * fig.alto;
-    }
-}
-
-console.log(imprimirId(123));
-console.log(imprimirId("ABC"));
-console.log(procesarValor("hola"));
-console.log(procesarValor(42));
-console.log(calcularArea({ tipo: "circulo", radio: 5 }));
-console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 }));
-```
-
----
+> **Erasable-only:** en todo este repositorio usamos solo sintaxis TS que Node 24 puede quitar al ejecutar. Eso significa: sin `enum`, sin `namespace` y sin *parameter properties* en constructores. Interfaces, uniones, tipos y genéricos sí están permitidos. Node no compila TypeScript; simplemente borra los tipos (type stripping) como si pasara un borrador sobre el texto y luego ejecuta el JavaScript que queda.
 
 ### 📦 En el repositorio (`repos/01-typescript-fundamentos/src/REPO-17-que-es-typescript.ts`)
 

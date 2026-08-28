@@ -1,6 +1,6 @@
-# **Capítulo 01. Contenido 📝**🖥️
+# **Capítulo 01. Sintaxis Básica de TypeScript 📝**🖥️
 
-- [**Capítulo 01. Contenido 📝**🖥️](#capítulo-01-contenido-️)
+- [**Capítulo 01. Sintaxis Básica de TypeScript 📝**🖥️](#capítulo-01-sintaxis-básica-de-typescript)
 - [1. **Sintaxis Básica de TypeScript**](#1-sintaxis-básica-de-typescript)
   - [1.1 Declaración de Variables en TypeScript](#11-declaración-de-variables-en-typescript)
     - [i. `var`](#i-var)

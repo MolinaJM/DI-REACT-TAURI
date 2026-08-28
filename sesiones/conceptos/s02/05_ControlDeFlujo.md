@@ -1,30 +1,30 @@
 # **Capítulo 05. Contenido 📝** 🖥️
 
-- [6. Estructuras de Control de Flujo en TypeScript](#6-estructuras-de-control-de-flujo-en-typescript)
-  - [6.1. Estructuras Condicionales](#61-estructuras-condicionales)
-    - [6.1.1. Declaración `if`](#611-declaraci%C3%B3n-if)
-    - [6.1.2. Declaración `else`](#612-declaraci%C3%B3n-else)
-    - [6.1.3. `else if`](#613-else-if)
-  - [6.2. Bucles](#62-bucles)
-    - [6.2.1. `for` Loop](#621-for-loop)
-    - [6.2.2. `while` Loop](#622-while-loop)
-    - [6.2.3. `do...while` Loop](#623-dowhile-loop)
-    - [6.2.4. `for...of` Loop (ES6)](#624-forof-loop-es6)
-  - [6.3. Estructuras de Control Avanzadas](#63-estructuras-de-control-avanzadas)
-    - [6.3.1. `switch` Statement](#631-switch-statement)
-    - [6.3.2. `break` y `continue`](#632-break-y-continue)
-  - [6.4. Narrowing: el control de flujo tipado](#64-narrowing-el-control-de-flujo-tipado)
-  - [6.5 Ejercicios 😑 📖:](#65-ejercicios--)
+- [5. Estructuras de Control de Flujo en TypeScript](#5-estructuras-de-control-de-flujo-en-typescript)
+  - [5.1. Estructuras Condicionales](#51-estructuras-condicionales)
+    - [5.1.1. Declaración `if`](#511-declaraci%C3%B3n-if)
+    - [5.1.2. Declaración `else`](#512-declaraci%C3%B3n-else)
+    - [5.1.3. `else if`](#513-else-if)
+  - [5.2. Bucles](#52-bucles)
+    - [5.2.1. `for` Loop](#521-for-loop)
+    - [5.2.2. `while` Loop](#522-while-loop)
+    - [5.2.3. `do...while` Loop](#523-dowhile-loop)
+    - [5.2.4. `for...of` Loop (ES6)](#524-forof-loop-es6)
+  - [5.3. Estructuras de Control Avanzadas](#53-estructuras-de-control-avanzadas)
+    - [5.3.1. `switch` Statement](#531-switch-statement)
+    - [5.3.2. `break` y `continue`](#532-break-y-continue)
+  - [5.4. Narrowing: el control de flujo tipado](#54-narrowing-el-control-de-flujo-tipado)
+  - [5.5 Ejercicios 😑 📖:](#55-ejercicios)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# 6. Estructuras de Control de Flujo en TypeScript
+# 5. Estructuras de Control de Flujo en TypeScript
 
 Las estructuras de control de flujo en JavaScript permiten tomar decisiones y repetir acciones según sea necesario en un programa. Estas estructuras son fundamentales para el flujo de ejecución de un programa. En TypeScript, además, las estructuras condicionales y los `switch` **refinan los tipos** de las variables (narrowing), lo que hace el código más seguro.
 
-## 6.1. Estructuras Condicionales
+## 5.1. Estructuras Condicionales
 
-### 6.1.1. Declaración `if`
+### 5.1.1. Declaración `if`
 
 La estructura `if` se utiliza para ejecutar un bloque de código si una condición es verdadera.
 
@@ -36,7 +36,7 @@ if (edad >= 18) {
 }
 ```
 
-### 6.1.2. Declaración `else`
+### 5.1.2. Declaración `else`
 
 El bloque `else` se ejecuta si la condición en `if` es falsa.
 
@@ -50,7 +50,7 @@ if (edad >= 18) {
 }
 ```
 
-### 6.1.3. `else if`
+### 5.1.3. `else if`
 
 `else if` se utiliza para evaluar múltiples condiciones secuencialmente.
 
@@ -75,9 +75,9 @@ if (puntuacion >= 90) {
 > [!TIP]
 > En TypeScript con `strict`, un `if (valor)` comprobando un tipo que incluye `null` o `undefined` provoca *narrowing*: dentro del bloque, el tipo de `valor` queda reducido. Es la base para manejar datos opcionales de forma segura.
 
-## 6.2. Bucles
+## 5.2. Bucles
 
-### 6.2.1. `for` Loop
+### 5.2.1. `for` Loop
 
 El bucle `for` permite ejecutar un bloque de código un número específico de veces.
 
@@ -90,7 +90,7 @@ for (let i: number = 0; i < 5; i++) {
 > [!NOTE]
 > TypeScript **no permite usar un bucle `for` clásico (indexado) para recorrer strings o arrays** sin más: `for (let i = 0; i < texto.length; i++)` funciona, pero recorrer arrays con `for...of` es más seguro porque cada elemento queda tipado automáticamente.
 
-### 6.2.2. `while` Loop
+### 5.2.2. `while` Loop
 
 El bucle `while` se ejecuta mientras una condición sea verdadera.
 
@@ -103,7 +103,7 @@ while (contador < 5) {
 }
 ```
 
-### 6.2.3. `do...while` Loop
+### 5.2.3. `do...while` Loop
 
 `do...while` es similar a `while`, pero garantiza que el bloque se ejecute al menos una vez.
 
@@ -116,7 +116,7 @@ do {
 } while (x > 0);
 ```
 
-### 6.2.4. `for...of` Loop (ES6)
+### 5.2.4. `for...of` Loop (ES6)
 
 El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays:
 
@@ -140,9 +140,9 @@ for (const letra of "Hola") {
 > [!TIP]
 > Con `for...of`, cada `fruta` es automáticamente `string` (inferido del array). Al recorrer un `Map<string, number>` con `for (const [clave, valor] of mapa)`, TypeScript ya sabe que `clave: string` y `valor: number`.
 
-## 6.3. Estructuras de Control Avanzadas
+## 5.3. Estructuras de Control Avanzadas
 
-### 6.3.1. `switch` Statement
+### 5.3.1. `switch` Statement
 
 `switch` se utiliza para evaluar múltiples casos y ejecutar código según el caso que coincida.
 
@@ -164,7 +164,7 @@ switch (diaSemana) {
 > [!NOTE]
 > En `strict` mode, un `switch` sobre un tipo **unión** (p. ej. `type Estado = "ok" | "cargando" | "error"`) estrecha el tipo en cada `case`. Si además usamos el patrón *exhaustive check* con `never`, TypeScript nos avisa si falta un caso (lo veremos en el capítulo de POO).
 
-### 6.3.2. `break` y `continue`
+### 5.3.2. `break` y `continue`
 
 `break` se utiliza para salir de un bucle o `switch`, mientras que `continue` se utiliza para saltar a la siguiente iteración en un bucle.
 
@@ -177,7 +177,7 @@ for (let i: number = 0; i < 5; i++) {
 }
 ```
 
-## 6.4. Narrowing: el control de flujo tipado
+## 5.4. Narrowing: el control de flujo tipado
 
 TypeScript analiza el flujo del programa y **reduce el tipo** de una variable según las condiciones por las que pasa. Esto se llama *type narrowing* y es la forma segura de "filtrar" tipos unión.
 
@@ -210,7 +210,111 @@ Otros guards habituales: `Array.isArray(x)`, `x instanceof Error`, `"prop" in ob
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
 
-## 6.5 Ejercicios 😑 📖:
+### 📦 En el repositorio (`repos/01-typescript-fundamentos/src/REPO-04-unions-intersections.ts`)
+
+```typescript
+export {};
+
+/**
+ * Fichero 04: Union Types, Interseccion, Literales y Type Narrowing
+ * -----------------------------------------------------------------
+ * Ejemplos extraidos de Sesion 2 (conceptos 9 y 10):
+ * - Union Types (|)
+ * - Interseccion de Tipos (&)
+ * - Literal Types
+ * - Type Narrowing (typeof, in, discriminated unions)
+ */
+
+// ============================================================================
+// UNION TYPES (|)
+// ============================================================================
+
+type Id = string | number;
+let userId: Id = 123;
+userId = "ABC-123";
+
+// Union en parametros
+function imprimirId(id: string | number): void {
+    if (typeof id === "string") {
+        console.log(id.toUpperCase());
+    } else {
+        console.log(id.toFixed(2));
+    }
+}
+
+// Union de literales
+type EstadoPedido = "pendiente" | "enviado" | "entregado" | "cancelado";
+let estado: EstadoPedido = "pendiente";
+
+// ============================================================================
+// INTERSECCION DE TIPOS (&)
+// ============================================================================
+
+interface Persona { nombre: string; edad: number; }
+interface Empleado { empresa: string; salario: number; }
+
+type EmpleadoPersona = Persona & Empleado;
+
+const trabajador: EmpleadoPersona = {
+    nombre: "Luis",
+    edad: 30,
+    empresa: "Tech Corp",
+    salario: 50000
+};
+
+// ============================================================================
+// LITERAL TYPES
+// ============================================================================
+
+let saludo: "hola" = "hola";
+// saludo = "adios";  // Error
+let puerto: 3000 | 3001 | 8080 = 3000;
+
+// ============================================================================
+// TYPE NARROWING
+// ============================================================================
+
+// TYPEOF
+function procesarValor(valor: string | number | boolean) {
+    if (typeof valor === "string") return valor.toUpperCase();
+    if (typeof valor === "number") return valor.toFixed(2);
+    return valor ? "si" : "no";
+}
+
+// IN NARROWING
+interface Casa { jardin: boolean; }
+interface Piso { piso: number; }
+type Vivienda = Casa | Piso;
+
+function describir(v: Vivienda) {
+    if ("jardin" in v) {
+        console.log("Casa con jardin");
+    } else {
+        console.log("Piso");
+    }
+}
+
+// DISCRIMINATED UNIONS
+interface Circulo { tipo: "circulo"; radio: number; }
+interface Rectangulo { tipo: "rectangulo"; ancho: number; alto: number; }
+type Figura = Circulo | Rectangulo;
+
+function calcularArea(fig: Figura): number {
+    switch (fig.tipo) {
+        case "circulo": return Math.PI * fig.radio ** 2;
+        case "rectangulo": return fig.ancho * fig.alto;
+    }
+}
+
+console.log(imprimirId(123));
+console.log(imprimirId("ABC"));
+console.log(procesarValor("hola"));
+console.log(procesarValor(42));
+console.log(calcularArea({ tipo: "circulo", radio: 5 }));
+console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 }));
+```
+
+## 5.5 Ejercicios 😑 📖:
 
 **Ejercicio 1:**
 

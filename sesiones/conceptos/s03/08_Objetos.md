@@ -1,62 +1,62 @@
-# **Capítulo 08. Contenido 📝** 🖥️
+# **Capítulo 08. Estructuras de Datos 📝** 🖥️
 
-- [**Capítulo 08. Contenido 📝** 🖥️](#capítulo-08-contenido--️)
-- [11. Estructura de Datos Objeto en TypeScript (ES6)](#11-estructura-de-datos-objeto-en-typescript-es6)
-  - [11.1 Formas de crear Objetos](#111-formas-de-crear-objetos)
-    - [11.1.1 Sintaxis de Objeto Literal](#1111-sintaxis-de-objeto-literal)
-    - [11.1.2 Constructor de Objeto o función constructora.](#1112-constructor-de-objeto-o-función-constructora)
-    - [11.1.3 Usando Clases.](#1113-usando-clases)
-    - [11.1.4 Object.create()](#1114-objectcreate)
-    - [11.1.5 Patrón Singleton](#1115-patrón-singleton)
+- [**Capítulo 08. Estructuras de Datos 📝** 🖥️](#capítulo-08-estructuras-de-datos)
+- [8. Estructura de Datos Objeto en TypeScript (ES6)](#8-estructura-de-datos-objeto-en-typescript-es6)
+  - [8.1 Formas de crear Objetos](#81-formas-de-crear-objetos)
+    - [8.1.1 Sintaxis de Objeto Literal](#811-sintaxis-de-objeto-literal)
+    - [8.1.2 Constructor de Objeto o función constructora.](#812-constructor-de-objeto-o-función-constructora)
+    - [8.1.3 Usando Clases.](#813-usando-clases)
+    - [8.1.4 Object.create()](#814-objectcreate)
+    - [8.1.5 Patrón Singleton](#815-patrón-singleton)
       - [Ejemplo 1: Singleton básico](#ejemplo-1-singleton-básico)
-  - [11.2 Acceso a Propiedades](#112-acceso-a-propiedades)
-  - [11.3 Modificación de Propiedades](#113-modificación-de-propiedades)
-  - [11.4 Eliminación de Propiedades](#114-eliminación-de-propiedades)
-  - [11.5 Métodos Importantes](#115-métodos-importantes)
-    - [11.5.1 Object.keys()](#1151-objectkeys)
-    - [11.5.2 Object.values()](#1152-objectvalues)
-    - [11.5.3 Object.entries()](#1153-objectentries)
-    - [11.5.4 Object.assign()](#1154-objectassign)
-    - [11.5.5 Object.freeze()](#1155-objectfreeze)
-  - [11.6 Iteración en Objetos](#116-iteración-en-objetos)
-  - [11.7 Desestructuración de Objetos.](#117-desestructuración-de-objetos)
+  - [8.2 Acceso a Propiedades](#82-acceso-a-propiedades)
+  - [8.3 Modificación de Propiedades](#83-modificación-de-propiedades)
+  - [8.4 Eliminación de Propiedades](#84-eliminación-de-propiedades)
+  - [8.5 Métodos Importantes](#85-métodos-importantes)
+    - [8.5.1 Object.keys()](#851-objectkeys)
+    - [8.5.2 Object.values()](#852-objectvalues)
+    - [8.5.3 Object.entries()](#853-objectentries)
+    - [8.5.4 Object.assign()](#854-objectassign)
+    - [8.5.5 Object.freeze()](#855-objectfreeze)
+  - [8.6 Iteración en Objetos](#86-iteración-en-objetos)
+  - [8.7 Desestructuración de Objetos.](#87-desestructuración-de-objetos)
     - [Ejemplo 1: Extracción básica de propiedades](#ejemplo-1-extracción-básica-de-propiedades)
     - [Ejemplo 2: Propiedades con alias](#ejemplo-2-propiedades-con-alias)
     - [Ejemplo 3: Extracción de propiedades anidadas](#ejemplo-3-extracción-de-propiedades-anidadas)
-  - [11.8 `Array.from()` en TypeScript](#118-arrayfrom-en-typescript)
-    - [11.8.1 Sintaxis](#1181-sintaxis)
+  - [8.8 `Array.from()` en TypeScript](#88-arrayfrom-en-typescript)
+    - [8.8.1 Sintaxis](#881-sintaxis)
       - [Ejemplo 1:](#ejemplo-1)
       - [Ejemplo 2:](#ejemplo-2)
       - [Ejemplo 3:](#ejemplo-3)
       - [Ejemplo 4:](#ejemplo-4)
       - [Ejemplo 5:](#ejemplo-5)
-  - [11.9 Métodos para trabajar con JSON en TypeScript `JSON.stringify()` y `JSON.parse()`.](#119-métodos-para-trabajar-con-json-en-typescript-jsonstringify-y-jsonparse)
-    - [11.9.1 `JSON.stringify()`](#1191-jsonstringify)
+  - [8.9 Métodos para trabajar con JSON en TypeScript `JSON.stringify()` y `JSON.parse()`.](#89-métodos-para-trabajar-con-json-en-typescript-jsonstringify-y-jsonparse)
+    - [8.9.1 `JSON.stringify()`](#891-jsonstringify)
     - [Ejemplos de `JSON.stringify()`](#ejemplos-de-jsonstringify)
       - [Ejemplo 1: Conversión básica](#ejemplo-1-conversión-básica)
       - [Ejemplo 2: Personalización con `replacer`](#ejemplo-2-personalización-con-replacer)
       - [Ejemplo 3: Formateo con `space`](#ejemplo-3-formateo-con-space)
-    - [11.9.2 `JSON.parse()`](#1192-jsonparse)
+    - [8.9.2 `JSON.parse()`](#892-jsonparse)
     - [Ejemplos de `JSON.parse()`](#ejemplos-de-jsonparse)
       - [Ejemplo 4: Conversión básica](#ejemplo-4-conversión-básica)
       - [Ejemplo 5: Personalización con `reviver`](#ejemplo-5-personalización-con-reviver)
     - [Resumen](#resumen)
-  - [11.10 Clonado profundo moderno y `Object.groupBy()`](#1110-clonado-profundo-moderno-y-objectgroupby)
+  - [8.10 Clonado profundo moderno y `Object.groupBy()`](#810-clonado-profundo-moderno-y-objectgroupby)
     - [`structuredClone()` (ES2022+)](#structuredclone-es2022)
     - [`Object.groupBy()` (ES2024)](#objectgroupby-es2024)
-  - [11.11 Tipos de Objeto en TypeScript](#1111-tipos-de-objeto-en-typescript)
+  - [8.11 Tipos de Objeto en TypeScript](#811-tipos-de-objeto-en-typescript)
 
 ---
 
-# 11. Estructura de Datos Objeto en TypeScript (ES6)
+# 8. Estructura de Datos Objeto en TypeScript (ES6)
 
 Los objetos en JavaScript son una de las estructuras de datos más fundamentales y poderosas. Son colecciones de pares clave-valor y se utilizan para representar datos estructurados. En TypeScript, los objetos se describen con `interface` o `type`, lo que permite pasar de "cualquier forma" (JS dinámico) a formas conocidas de antemano que el compilador valida.
 
-## 11.1 Formas de crear Objetos
+## 8.1 Formas de crear Objetos
 
 Hay varias formas de crear objetos en JavaScript ES6 (ahora con anotaciones de TypeScript):
 
-### 11.1.1 Sintaxis de Objeto Literal
+### 8.1.1 Sintaxis de Objeto Literal
 
 La forma más común de crear un objeto es utilizando la sintaxis de objeto literal:
 
@@ -77,7 +77,7 @@ const persona: Persona = {
 > [!TIP]
 > Incluso sin anotación, TypeScript **infiere** la forma del objeto literal y la valida: `persona.edad = "30"` daría error aunque no se haya escrito `: Persona`.
 
-### 11.1.2 Constructor de Objeto o función constructora.
+### 8.1.2 Constructor de Objeto o función constructora.
 
 También puedes crear objetos utilizando un constructor de objeto. Consiste en crear una función a la que se le pasen como parámetros las propiedades del objeto y dentro de esa función usamos el objeto this. Para crear una instancia simplemente usamos new pasando los parámetros que queramos.
 
@@ -104,7 +104,7 @@ const juan = new (Persona as new (nombre: string, cp: number, profesion: string)
 > [!NOTE]
 > Las funciones constructoras son la forma "antigua" de crear objetos. TypeScript las soporta, pero como verás en el apartado siguiente, en este curso preferimos las clases, que el compilador entiende de forma natural y con mejor soporte de tipos.
 
-### 11.1.3 Usando Clases.
+### 8.1.3 Usando Clases.
 
 Se puede realizar la creación usando el azucar sintáctico que nos provee Javascript a partir de ECMAScript6 con la sintaxis de clases. Sería una copia de la anterior adaptada a clases. Cambiamos un constructor de objeto por un constructor de clase.
 
@@ -127,7 +127,7 @@ class PersonaClase {
 const newPersona = new PersonaClase("Profe", 18000, "Developer");
 ```
 
-### 11.1.4 Object.create()
+### 8.1.4 Object.create()
 
 Otra forma de crear objetos es utilizando `Object.create()`:
 
@@ -146,7 +146,7 @@ persona.profesion = "Desarrollador";
 
 > `Object.create(null)` crea un objeto **sin prototipo**, es decir, sin heredar de `Object.prototype`. Esto significa que no dispondrá de métodos como `toString()`, `hasOwnProperty()` o `valueOf()`. Se usa cuando necesitas un "diccionario puro" sin propiedades heredadas que interfieran. En TypeScript debes "decirle" su forma con `as`, porque un objeto sin prototipo no viene tipado.
 
-### 11.1.5 Patrón Singleton
+### 8.1.5 Patrón Singleton
 
 Tomando los conceptos de las funciones autoinvocables de los clousures de Javascript (que veremos más adelante), podemos crear este patrón de programación `Singleton` en el cual el objeto sólo se instancia una única vez y así te aseguras que no se creen nuevas instancias.
 
@@ -229,7 +229,7 @@ instance1.showMessage(); // ¡Hola desde la instancia Singleton!
 > [!NOTE]
 > `Singleton.instancia` es `Singleton | undefined`. Al declararla con ese tipo, TypeScript valida el patrón: no puedes anexarla mal porque en el constructor `return Singleton.instancia` no sería un `Singleton` válido si quedase sin inicializar.
 
-## 11.2 Acceso a Propiedades
+## 8.2 Acceso a Propiedades
 
 Puedes acceder a las propiedades de un objeto de varias maneras:
 
@@ -250,7 +250,7 @@ console.log(persona["edad"]); // 30
 > [!IMPORTANT]
 > Con la notación de corchetes, TypeScript comprueba que la clave sea del tipo correcto. `persona["edad" as keyof Persona]` no es necesario aquí (literal válido), pero si usaras variables, tendrías que tiparlas como `keyof Persona` para evitar errores.
 
-## 11.3 Modificación de Propiedades
+## 8.3 Modificación de Propiedades
 
 Puedes modificar propiedades de un objeto de la siguiente manera:
 
@@ -259,7 +259,7 @@ persona.edad = 31;
 persona["profesion"] = "Ingeniero";
 ```
 
-## 11.4 Eliminación de Propiedades
+## 8.4 Eliminación de Propiedades
 
 Puedes eliminar propiedades de un objeto usando el operador `delete`:
 
@@ -270,11 +270,11 @@ delete persona.profesion;
 > [!NOTE]
 > Si declaras `profesion` como opcional (`profesion?: string`), el borrado es más natural para TypeScript. Si la propiedad es obligatoria, `delete persona.profesion` produce un error de tipo (la propiedad deja de existir pero su tipo no lo refleja).
 
-## 11.5 Métodos Importantes
+## 8.5 Métodos Importantes
 
 JavaScript proporciona varios métodos incorporados que son útiles para trabajar con objetos. Aquí hay algunos de los más importantes (con su tipado en TypeScript):
 
-### 11.5.1 Object.keys()
+### 8.5.1 Object.keys()
 
 El método `Object.keys(obj)` devuelve un array con las claves (propiedades) de un objeto:
 
@@ -292,7 +292,7 @@ console.log(claves); // ["nombre", "edad", "profesion"]
 > [!TIP]
 > `Object.keys()` devuelve `string[]`, no `(keyof Persona)[]`. Si necesitas iterar con las claves tipadas, declara tú el tipo: `const claves = Object.keys(persona) as Array<keyof Persona>;`.
 
-### 11.5.2 Object.values()
+### 8.5.2 Object.values()
 
 El método `Object.values(obj)` devuelve un array con los valores de un objeto:
 
@@ -301,7 +301,7 @@ const valores = Object.values(persona); // (string | number)[]
 console.log(valores); // ["Juan", 30, "Desarrollador"]
 ```
 
-### 11.5.3 Object.entries()
+### 8.5.3 Object.entries()
 
 El método `Object.entries(obj)` devuelve un array de arrays con pares clave-valor:
 
@@ -314,7 +314,7 @@ console.log(entradas);
 > [!NOTE]
 > Cada par es una tupla `[clave, valor]` con la clave como `string`. Si desestructuras al iterar, ya obtienes tipos: `for (const [clave, valor] of entradas)`, donde `clave: string` y `valor: string | number`.
 
-### 11.5.4 Object.assign()
+### 8.5.4 Object.assign()
 
 El método `Object.assign(target, source)` copia las propiedades de uno o más objetos fuente en un objeto destino:
 
@@ -330,7 +330,7 @@ const destino: { a: number; b: number } = Object.assign({}, { a: 1 }, { b: 2 });
 console.log(destino); // { a: 1, b: 2 }
 ```
 
-### 11.5.5 Object.freeze()
+### 8.5.5 Object.freeze()
 
 El método `Object.freeze(obj)` evita que se puedan agregar, modificar o eliminar propiedades de un objeto:
 
@@ -342,7 +342,7 @@ const objetoCongelado = Object.freeze(persona);
 > [!IMPORTANT]
 > `Object.freeze()` devuelve el tipo `Readonly<Persona>`. Por eso, además de fallar en tiempo de ejecución (en modo estricto lanza error), TypeScript te avisa **en tiempo de compilación** antes de ejecutar nada.
 
-## 11.6 Iteración en Objetos
+## 8.6 Iteración en Objetos
 
 Puedes iterar sobre las propiedades de un objeto utilizando bucles `for...in`:
 
@@ -357,7 +357,7 @@ for (const clave in persona) {
 > [!TIP]
 > En TS, con `noUncheckedIndexedAccess` (activo en este proyecto), `persona[clave]` necesita el cast a `keyof Persona` para que el compilador sepa que `clave` es una propiedad real del objeto y no cualquier `string`.
 
-## 11.7 Desestructuración de Objetos.
+## 8.7 Desestructuración de Objetos.
 
 En JavaScript ES6 y versiones posteriores, puedes extraer elementos de un objeto utilizando la desestructuración. La desestructuración te permite asignar valores de propiedades de un objeto a variables individuales de una manera más concisa. TypeScript asigna automáticamente los tipos de las variables extraídas.
 
@@ -430,11 +430,11 @@ console.log(peso); // Resultado: "1.5 kg"  (tipo string)
 console.log(precio); // Resultado: 950      (tipo number)
 ```
 
-## 11.8 `Array.from()` en TypeScript
+## 8.8 `Array.from()` en TypeScript
 
 `Array.from()` es un método incorporado en JavaScript que se utiliza para crear un nuevo objeto de matriz (array) a partir de una `secuencia iterable`, como un objeto iterable, un objeto similar a un array (con una propiedad `length` y elementos indexados), o una cadena de texto. Este método es útil para convertir otras estructuras de datos en matrices o realizar operaciones en datos iterables.
 
-### 11.8.1 Sintaxis
+### 8.8.1 Sintaxis
 
 La sintaxis básica de `Array.from()` es la siguiente:
 
@@ -534,11 +534,11 @@ console.log(matrizDeObjetos);
 
 Aquí `Array.from()` se utiliza para crear una matriz de objetos con cada elemento del iterable como valor de la propiedad `nombre`.
 
-## 11.9 Métodos para trabajar con JSON en TypeScript `JSON.stringify()` y `JSON.parse()`.
+## 8.9 Métodos para trabajar con JSON en TypeScript `JSON.stringify()` y `JSON.parse()`.
 
 En JavaScript, `JSON.stringify()` y `JSON.parse()` son dos métodos esenciales para trabajar con datos en formato JSON (JavaScript Object Notation). JSON es un formato de intercambio de datos ampliamente utilizado en aplicaciones web para enviar y recibir datos entre el cliente y el servidor.
 
-### 11.9.1 `JSON.stringify()`
+### 8.9.1 `JSON.stringify()`
 
 `JSON.stringify()` es un método que convierte un objeto JavaScript en una cadena de texto en formato JSON. Esta cadena resultante puede ser utilizada para transmitir datos o para guardarlos en un archivo. Puede tomar tres argumentos: el objeto que se va a convertir, un argumento opcional llamado `replacer` (una función que personaliza la conversión), y otro argumento opcional llamado `space` (para dar formato legible al resultado).
 
@@ -618,7 +618,7 @@ console.log(jsonString);
 
 En este caso, usamos el tercer argumento `space` para dar formato legible a la cadena JSON resultante.
 
-### 11.9.2 `JSON.parse()`
+### 8.9.2 `JSON.parse()`
 
 `JSON.parse()` es un método que convierte una cadena de texto en formato JSON en un objeto JavaScript. Puede tomar dos argumentos: la cadena JSON que se va a analizar y un argumento opcional llamado `reviver` (una función que permite realizar transformaciones durante la conversión).
 
@@ -681,7 +681,7 @@ Usamos un `reviver` para convertir la cadena JSON en un objeto JavaScript y tran
 - **Limitación:** `JSON.stringify()` no maneja referencias circulares, `undefined`, `Symbol`, ni funciones. Lanza `TypeError` con objetos circulares.
 - En TypeScript, modela los datos con `interface` y valida la entrada con *type guards* antes de usarlos.
 
-## 11.10 Clonado profundo moderno y `Object.groupBy()`
+## 8.10 Clonado profundo moderno y `Object.groupBy()`
 
 ### `structuredClone()` (ES2022+)
 
@@ -729,7 +729,7 @@ const agrupado = Object.groupBy(productos, (p) => p.categoria);
 
 > Usa `Map.groupBy()` si necesitas claves que no sean strings o mantener orden de inserción.
 
-## 11.11 Tipos de Objeto en TypeScript
+## 8.11 Tipos de Objeto en TypeScript
 
 Tipos útiles para trabajar con objetos y las dudas más frecuentes al migrar de JS:
 

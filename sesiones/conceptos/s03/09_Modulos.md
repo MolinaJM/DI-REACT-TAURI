@@ -1,21 +1,21 @@
 # 09. Importaciones y Exportaciones en TypeScript 📝 🖥️
 
-- [09. Importaciones y Exportaciones en TypeScript 📝 🖥️](#09-importaciones-y-exportaciones-en-typescript--️)
-  - [12.1. Exportar desde un Módulo](#121-exportar-desde-un-módulo)
-  - [12.2. Importar en otro Módulo](#122-importar-en-otro-módulo)
-  - [12.3. Exportar e Importar Funciones](#123-exportar-e-importar-funciones)
-  - [12.4. Exportar e Importar Clases](#124-exportar-e-importar-clases)
-  - [12.5. Módulos con Exportaciones Nombradas y Por Defecto](#125-módulos-con-exportaciones-nombradas-y-por-defecto)
-  - [12.6. Reexportación y Agregación de Módulos](#126-reexportación-y-agregación-de-módulos)
-  - [12.7. Cargar Módulos Dinámicamente](#127-cargar-módulos-dinámicamente)
-  - [12.8. `import.meta` y Top-level await](#128-importmeta-y-top-level-await)
+- [09. Importaciones y Exportaciones en TypeScript 📝 🖥️](#09-importaciones-y-exportaciones-en-typescript)
+  - [9.1. Exportar desde un Módulo](#91-exportar-desde-un-módulo)
+  - [9.2. Importar en otro Módulo](#92-importar-en-otro-módulo)
+  - [9.3. Exportar e Importar Funciones](#93-exportar-e-importar-funciones)
+  - [9.4. Exportar e Importar Clases](#94-exportar-e-importar-clases)
+  - [9.5. Módulos con Exportaciones Nombradas y Por Defecto](#95-módulos-con-exportaciones-nombradas-y-por-defecto)
+  - [9.6. Reexportación y Agregación de Módulos](#96-reexportación-y-agregación-de-módulos)
+  - [9.7. Cargar Módulos Dinámicamente](#97-cargar-módulos-dinámicamente)
+  - [9.8. `import.meta` y Top-level await](#98-importmeta-y-top-level-await)
     - [`import.meta`](#importmeta)
     - [Top-level await (ES2022)](#top-level-await-es2022)
-  - [12.9. Importaciones de Solo Tipos (`import type`)](#129-importaciones-de-solo-tipos-import-type)
+  - [9.9. Importaciones de Solo Tipos (`import type`)](#99-importaciones-de-solo-tipos-import-type)
 
 ---
 
-## 12.1. Exportar desde un Módulo
+## 9.1. Exportar desde un Módulo
 
 Puedes exportar múltiples elementos desde un módulo, incluyendo variables, funciones, clases y **tipos**. Aquí hay un ejemplo con múltiples exportaciones:
 
@@ -32,7 +32,7 @@ export function saludar(): string {
 > [!NOTE]
 > Los módulos ES son lo mismo en TypeScript, con una diferencia clave: al ejecutarlos con Node (que borra los tipos en tiempo de ejecución, *erasable-only*), usan la extensión `.ts`. Por eso aquí importamos `./miModulo.ts` y no `./miModulo.js`.
 
-## 12.2. Importar en otro Módulo
+## 9.2. Importar en otro Módulo
 
 Puedes importar múltiples elementos desde un módulo en otro. Aquí importamos el nombre, la edad y la función `saludar` desde el módulo anterior:
 
@@ -65,7 +65,7 @@ console.log(MiModulo.saludar()); // "Hola, soy Juan y tengo 30 años."
 > [!TIP]
 > Los tipos viajan con las mismas sentencias `import/export`, pero para verlos en el editor el remoto de `miModulo.ts` debe ser resuelto: con `moduleResolution: "bundler"` + `allowImportingTsExtensions` (como en el `tsconfig.json` del curso) TypeScript comprueba que las rutas y los nombres exportados coinciden.
 
-## 12.3. Exportar e Importar Funciones
+## 9.3. Exportar e Importar Funciones
 
 Las funciones también pueden exportarse e importarse de manera avanzada. Aquí se exporta una función con parámetros tipados y se importa con un alias:
 
@@ -84,7 +84,7 @@ console.log(add(5, 3)); // Imprime 8
 > [!IMPORTANT]
 > La firma tipada viaja con la función: si en el archivo que importa llamas `add("5", 3)`, TypeScript te lo advierte antes de ejecutar.
 
-## 12.4. Exportar e Importar Clases
+## 9.4. Exportar e Importar Clases
 
 Las clases son elementos importantes para la programación orientada a objetos en JavaScript. Pueden exportarse e importarse de la siguiente manera:
 
@@ -111,7 +111,7 @@ const persona = new Persona("Ana", 25);
 console.log(persona.saludar()); // Imprime "Hola, soy Ana y tengo 25 años."
 ```
 
-## 12.5. Módulos con Exportaciones Nombradas y Por Defecto
+## 9.5. Módulos con Exportaciones Nombradas y Por Defecto
 
 Un módulo puede exportar elementos tanto nombrados como por defecto. Aquí se exporta una función por defecto junto con exportaciones nombradas:
 
@@ -131,7 +131,7 @@ console.log(funcionPorDefecto()); // Imprime "Exportación por defecto"
 console.log(nombre); // Imprime "Juan"
 ```
 
-## 12.6. Reexportación y Agregación de Módulos
+## 9.6. Reexportación y Agregación de Módulos
 
 Puedes reexportar elementos de otros módulos y agregarlos en un nuevo módulo. Esto facilita la organización de tus importaciones:
 
@@ -153,7 +153,7 @@ console.log(variableA); // Imprime "Valor de A"
 console.log(variableB); // Imprime "Valor de B"
 ```
 
-## 12.7. Cargar Módulos Dinámicamente
+## 9.7. Cargar Módulos Dinámicamente
 
 Puedes cargar módulos dinámicamente utilizando la función `import()`. Esto es útil para cargar módulos de forma asincrónica:
 
@@ -176,7 +176,7 @@ boton?.addEventListener("click", async () => {
 > [!TIP]
 > `import()` tipa el namespace importado: aquí `moduloDinamico` ya "sabe" que tiene `mostrarMensaje(): void`.
 
-## 12.8. `import.meta` y Top-level await
+## 9.8. `import.meta` y Top-level await
 
 ### `import.meta`
 
@@ -204,7 +204,7 @@ export { config };
 
 > Solo funciona en módulos ES (`type="module"` o extensión `.mjs`; en Node, `.ts` bajo ESM). En scripts comunes (`<script>` sin type) no está permitido.
 
-## 12.9. Importaciones de Solo Tipos (`import type`)
+## 9.9. Importaciones de Solo Tipos (`import type`)
 
 En TypeScript puedes distinguir qué se importa como **tipo** y qué como **valor**. Con `verbatimModuleSyntax` (activo en el `tsconfig.json` del curso) TypeScript obliga a escribir `import type` para los tipos:
 
