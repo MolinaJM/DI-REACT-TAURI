@@ -5,7 +5,7 @@
 ![Runner](https://img.shields.io/badge/Runner-tsx-000?logo=node.js&logoColor=white)
 ![Curso](https://img.shields.io/badge/Curso-DI--RT-FF6B35)
 
-Ejemplos y ejercicios de los conceptos fundamentales de TypeScript, desde tipos primitivos hasta generics, async/await y módulos.
+Ejemplos y ejercicios de los conceptos fundamentales de TypeScript, desde tipos primitivos hasta async/await y módulos.
 
 > **Ruta obligatoria** para el curso DI-RT (React + Tauri). Se ha recortado el material optativo (OOP, enums, template literal types, `.d.ts`/namespace, DOM directo y Web APIs) para quedarnos solo con lo estrictamente necesario para React + Tauri.
 
@@ -13,22 +13,19 @@ Ejemplos y ejercicios de los conceptos fundamentales de TypeScript, desde tipos 
 
 ```
 ├── src/
-│   ├── 01-tipos-primitivos.ts       string, number, boolean, null, undefined, any, unknown, symbol, bigint
-│   ├── 02-arrays-tuples.ts          Array<T>, ReadonlyArray, tuples, destructuring
-│   ├── 03-tipos-especiales.ts      any, unknown, void, never, type assertions
-│   ├── 04-unions-intersections.ts   uniones, intersecciones, type narrowing
-│   ├── 05-interfaces-types.ts       interfaces, type aliases, extension, readonly
-│   ├── 06-funciones.ts              parametros, retorno, opcionales, sobrecarga
-│   ├── 07-type-guards-conversion.ts typeof, instanceof, in, narrowing, as
-│   ├── 08-control-flow-scope.ts     let/const, var, blocks, closures
-│   ├── 10-generics.ts               T, K, V, extends (funciones, interfaces y tipos)
-│   ├── 11-utility-types.ts          Partial, Required, Readonly, Pick, Omit, Record, Awaited
-│   ├── 12-modulos.ts                module: export/import, import type, default
-│   ├── 13-async-await.ts            Promise, async/await, AbortController, Fetch
-│   ├── 15-arrays-avanzado.ts        Set, Map, WeakMap, structuredClone, Object.groupBy
-│   ├── 17-que-es-typescript.ts      JS vs TS, ventajas del tipado
-│   ├── 18-instalacion-configuracion.ts  Comandos tsc, tsconfig.json
-│   └── 19-keyof-typeof-satisfies.ts keyof, typeof, satisfies (TS 4.9+)
+│   ├── REPO-01-tipos-primitivos.ts       string, number, boolean, null, undefined, any, unknown, symbol, bigint
+│   ├── REPO-02-arrays-tuples.ts          Array<T>, ReadonlyArray, tuples, destructuring
+│   ├── REPO-03-tipos-especiales.ts      any, unknown, void, never, type assertions
+│   ├── REPO-04-unions-intersections.ts   uniones, intersecciones, type narrowing
+│   ├── REPO-05-interfaces-types.ts       interfaces, type aliases, extension, readonly
+│   ├── REPO-06-funciones.ts              parametros, retorno, opcionales, sobrecarga
+│   ├── REPO-07-type-guards-conversion.ts typeof, instanceof, in, narrowing, as
+│   ├── REPO-08-control-flow-scope.ts     let/const, var, blocks, closures
+│   ├── REPO-12-modulos.ts                module: export/import, import type, default
+│   ├── REPO-13-async-await.ts            Promise, async/await, AbortController, Fetch
+│   ├── REPO-15-arrays-avanzado.ts        Set, Map, WeakMap, structuredClone, Object.groupBy
+│   ├── REPO-17-que-es-typescript.ts      JS vs TS, ventajas del tipado
+│   └── REPO-18-instalacion-configuracion.ts  Comandos tsc, tsconfig.json
 ├── package.json
 └── tsconfig.json
 ```
@@ -37,7 +34,7 @@ Ejemplos y ejercicios de los conceptos fundamentales de TypeScript, desde tipos 
 
 ```bash
 npm install
-npx tsx src/01-tipos-primitivos.ts
+npx tsx src/REPO-01-tipos-primitivos.ts
 ```
 
 Cambiar el numero del fichero para ejecutar otro ejemplo.

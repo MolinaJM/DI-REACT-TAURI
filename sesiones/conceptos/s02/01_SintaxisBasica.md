@@ -188,6 +188,169 @@ function calcularIVA(precio: number, iva: number): number {
 > [!IMPORTANT]
 > En todo este repositorio los ejemplos se escriben en **erasable-only TypeScript**: solo sintaxis que Node 24 puede ejecutar directamente (type stripping) sin paso previo de compilación. Es decir, nada de `enum`, `namespace` ni *parameter properties* en constructores; sí `interface`, `type`, uniones y genéricos.
 
+### 📦 En el repositorio (`repos/01-typescript-fundamentos/src/REPO-03-tipos-especiales.ts`)
+
+```typescript
+export {};
+
+/**
+ * Fichero 03: Tipos Especiales y Aserciones
+ * -------------------------------------------
+ * Ejemplos extraidos de Sesion 2 (conceptos 6 y 7):
+ * - any, unknown, void, never
+ * - Type Assertions (aserciones de tipo)
+ * (Enums: optativo, fuera de la ruta React + Tauri)
+ */
+
+// ============================================================================
+// TIPOS ESPECIALES: any, unknown, never, void
+// ============================================================================
+
+// any: desactiva el chequeo de tipos (EVITAR)
+let cualquierCosa: any = "texto";
+cualquierCosa = 42;
+// ⚠️ ATENCIÓN: el script SE CORTA AQUÍ a propósito.
+// En compilación `any` no avisa (ese era el objetivo), pero en ejecución
+// esto lanza un TypeError (metodoInexistente no existe) y detiene el fichero.
+// Comenta esta línea si quieres ver el resto de ejemplos (unknown, never, aserciones).
+cualquierCosa.metodoInexistente(); // sin error en compilacion
+
+// unknown: tipo seguro para valores desconocidos
+let valorDesconocido: unknown = "Hola";
+// valorDesconocido.toUpperCase();  // Error: Object is of type 'unknown'
+if (typeof valorDesconocido === "string") {
+    console.log(valorDesconocido.toUpperCase()); // seguro
+}
+
+// void: ausencia de valor de retorno
+function logMensaje(mensaje: string): void {
+    console.log(mensaje);
+}
+
+// never: NUNCA ocurre un retorno
+function errorFatal(mensaje: string): never {
+    throw new Error(mensaje);
+}
+
+// never en exhaustiveness checking
+type Forma = "circulo" | "cuadrado";
+function area(forma: Forma): number {
+    switch (forma) {
+        case "circulo": return 3.14;
+        case "cuadrado": return 4;
+        default:
+            const _exhaustivo: never = forma;
+            return _exhaustivo;
+    }
+}
+
+// ============================================================================
+// TYPE ASSERTIONS (Aserciones de Tipo)
+// ============================================================================
+
+// Sintaxis "as" (recomendada)
+// const inputElement = document.getElementById("miInput") as HTMLInputElement;
+// inputElement.value = "nuevo valor";
+
+// Sintaxis <> (no funciona en JSX)
+// const otroInput = <HTMLInputElement>document.getElementById("otroInput");
+
+// NON-NULL ASSERTION (operador !)
+function obtenerNombre(nombre?: string | null): string {
+    return nombre!;
+}
+
+// CONST ASSERTIONS
+let config = { api: "http://localhost", port: 3000 } as const;
+// config.port = 4000;  // Error: readonly
+
+let colores = ["rojo", "verde", "azul"] as const;
+// Tipo: readonly ["rojo", "verde", "azul"]
+```
+
+---
+
+### 📦 En el repositorio (`repos/01-typescript-fundamentos/src/REPO-01-tipos-primitivos.ts`)
+
+```typescript
+export {};
+
+/**
+ * Fichero 01: Tipos Primitivos en TypeScript
+ * -------------------------------------------
+ * Ejemplos extraidos de Sesion 2 (conceptos 1, 3 y 8):
+ * - Que es TypeScript (comparacion JS vs TS)
+ * - Tipos primitivos basicos
+ * - Inferencia de tipos (Type Inference)
+ */
+
+// ============================================================================
+// 1. QUE ES TYPESCRIPT - Problemas que soluciona
+// ============================================================================
+
+// JAVASCRIPT: errores silenciosos en tiempo de ejecucion
+function sumar(a: any, b: any): any {
+    return a + b;
+}
+console.log(sumar(5, "3"));          // "53" (concatenacion, no suma)
+console.log(sumar([], {}));          // "[object Object]" (sin sentido)
+// @ts-expect-error demostrando error de JS: falta el segundo argumento
+console.log(sumar(5));               // NaN (falta el segundo argumento)
+
+// TYPESCRIPT: detecta estos errores al escribir
+function sumarTS(a: number, b: number): number {
+    return a + b;
+}
+// sumarTS(5, "3");  // Error: Argument of type 'string' not assignable to 'number'
+// sumarTS(5);       // Error: Expected 2 arguments, but got 1
+console.log(sumarTS(5, 3));    // 8 - correcto
+
+// ============================================================================
+// 2. TIPOS PRIMITIVOS BASICOS
+// ============================================================================
+
+let nombre: string = "Juan Perez";
+let edad: number = 30;
+let esActivo: boolean = true;
+let indefinido: undefined = undefined;
+let nulo: null = null;
+
+// SYMBOL (ES6+)
+let simbolo: symbol = Symbol("identificador-unico");
+const otroSimbolo: unique symbol = Symbol("solo-unico");
+
+// BIGINT (ES2020+)
+let numeroGrande: bigint = 9007199254740991n;
+let otroBigInt = BigInt(42);
+
+// ============================================================================
+// 3. INFERENCIA DE TIPOS (Type Inference)
+// ============================================================================
+
+// In basica: TypeScript infiere el tipo a partir del valor
+let x = 3;              // inferido: number
+let nombreInferido = "Ana";     // inferido: string
+let arrInferido = [1, 2, 3];    // inferido: number[]
+let esValido = false;            // inferido: boolean
+
+// Inferencia contextual
+const numeros = [1, 2, 3];
+const dobles = numeros.map((n) => n * 2);  // n es number
+
+// Best common type
+let animales = ["perro", "gato", 42];  // (string | number)[]
+
+// Literal types (inferencia exacta)
+const constante = "Hola";    // tipo: "Hola" (literal)
+let variable = "Hola";       // tipo: "string" (se amplia)
+
+// Inferencia en desestructuracion
+function procesar({ nombre, edad }: { nombre: string; edad: number }) {
+    return `${nombre} tiene ${edad} anios`;
+}
+console.log(procesar({ nombre: "Ana", edad: 30 }));
+```
+
 ---
 
 [Volver al índice general](../../index.md)

@@ -41,23 +41,172 @@ export default defineConfig({
         environment: 'jsdom',
         globals: true,
         setupFiles: './src/test/setup.ts',
+        exclude: ['e2e/**', 'node_modules/**'],
     },
 });
 ```
 
-### Archivo de setup (src/test/setup.ts)
+### 📦 Archivo de setup (repos/05-testing/src/test/setup.ts)
 
 ```typescript
 import '@testing-library/jest-dom';
 ```
 
-## Pruebas Unitarias de Componentes
+## 📦 Código bajo prueba (repos/05-testing)
+
+Estos son los componentes, hooks y funciones que se prueban en el repositorio `repos/05-testing`:
+
+### 📦 src/components/Contador.tsx
 
 ```tsx
-// src/components/Contador.test.tsx
+import { useState } from 'react';
+
+export default function Contador() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <span>{count}</span>
+            <button onClick={() => setCount(count + 1)}>+</button>
+            <button onClick={() => setCount(count - 1)}>-</button>
+            <button onClick={() => setCount(0)}>Reset</button>
+        </div>
+    );
+}
+```
+
+### 📦 src/components/Saludo.tsx
+
+```tsx
+interface SaludoProps {
+    nombre: string;
+    edad?: number;
+}
+
+export default function Saludo({ nombre, edad }: SaludoProps) {
+    return (
+        <div>
+            <p>Hola, {nombre}</p>
+            {edad !== undefined && <p>{edad} anios</p>}
+        </div>
+    );
+}
+```
+
+### 📦 src/hooks/useForm.ts
+
+```typescript
+import { useState, ChangeEvent, FormEvent } from 'react';
+
+interface UseFormReturn<T> {
+    values: T;
+    errors: Record<string, string>;
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    handleSubmit: (e: FormEvent, callback: () => void) => void;
+}
+
+export default function useForm<T extends Record<string, string>>(
+    initialValues: T,
+    validator: (values: T) => Record<string, string>
+): UseFormReturn<T> {
+    const [values, setValues] = useState<T>(initialValues);
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setValues((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = (e: FormEvent, callback: () => void) => {
+        e.preventDefault();
+        const validationErrors = validator(values);
+        setErrors(validationErrors);
+        if (Object.keys(validationErrors).length === 0) {
+            callback();
+        }
+    };
+
+    return { values, errors, handleChange, handleSubmit };
+}
+```
+
+### 📦 src/utils/matematicas.ts
+
+```typescript
+export function sumar(a: number, b: number): number {
+    return a + b;
+}
+
+export function filtrarPares(numeros: number[]): number[] {
+    return numeros.filter(n => n % 2 === 0);
+}
+```
+
+### 📦 src/components/FormularioLogin.tsx
+
+```tsx
+import { FormEvent } from 'react';
+import useForm from '../hooks/useForm';
+
+interface FormularioLoginProps {
+    onSubmit?: (values: { usuario: string; password: string }) => void;
+}
+
+export default function FormularioLogin({ onSubmit }: FormularioLoginProps) {
+    const { values, errors, handleChange, handleSubmit } = useForm(
+        { usuario: '', password: '' },
+        (vals) => {
+            const errs: Record<string, string> = {};
+            if (!vals.usuario) errs.usuario = 'El nombre es obligatorio';
+            if (!vals.password) errs.password = 'La contrasenia es obligatoria';
+            return errs;
+        }
+    );
+
+    const onSubmitHandler = (e: FormEvent) => {
+        handleSubmit(e, () => {
+            onSubmit?.({ usuario: values.usuario, password: values.password });
+        });
+    };
+
+    return (
+        <form onSubmit={onSubmitHandler}>
+            <div>
+                <label htmlFor="usuario">Usuario</label>
+                <input
+                    id="usuario"
+                    name="usuario"
+                    value={values.usuario}
+                    onChange={handleChange}
+                />
+                {errors.usuario && <span>{errors.usuario}</span>}
+            </div>
+            <div>
+                <label htmlFor="password">Contrasenia</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={values.password}
+                    onChange={handleChange}
+                />
+                {errors.password && <span>{errors.password}</span>}
+            </div>
+            <button type="submit">Iniciar Sesion</button>
+        </form>
+    );
+}
+```
+
+## Pruebas Unitarias de Componentes
+
+> 📦 **Estos tests están en el repositorio:** `repos/05-testing/src/__tests__/Contador.test.tsx` y `repos/05-testing/src/__tests__/Saludo.test.tsx`
+
+```tsx
+// src/components/__tests__/Contador.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import Contador from './Contador';
+import Contador from '../components/Contador';
 
 describe('Componente Contador', () => {
     it('debe renderizar el valor inicial en 0', () => {
@@ -88,9 +237,10 @@ describe('Componente Contador', () => {
     });
 });
 
-// src/components/__tests__/Saludo.test.tsx
+// src/__tests__/Saludo.test.tsx
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Saludo from '../Saludo';
+import Saludo from '../components/Saludo';
 
 describe('Componente Saludo', () => {
     it('debe mostrar el nombre pasado por props', () => {
@@ -112,16 +262,18 @@ describe('Componente Saludo', () => {
 
 ## Pruebas de Hooks y Funciones
 
+> 📦 **Estos tests están en el repositorio:** `repos/05-testing/src/__tests__/useForm.test.ts` y `repos/05-testing/src/__tests__/matematicas.test.ts`
+
 ```typescript
 // src/hooks/__tests__/useForm.test.ts
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import useForm from '../useForm';
+import useForm from '../hooks/useForm';
 
 describe('Hook useForm', () => {
     const initialValues = { email: '', password: '' };
-    const validator = (values) => {
-        const errors = {};
+    const validator = (values: { email: string; password: string }) => {
+        const errors: Record<string, string> = {};
         if (!values.email.includes('@')) errors.email = 'Email invalido';
         if (values.password.length < 6) errors.password = 'Minimo 6 caracteres';
         return errors;
@@ -152,16 +304,9 @@ describe('Hook useForm', () => {
     });
 });
 
-// Pruebas de funciones utilitarias
+// Pruebas de funciones utilitarias (src/__tests__/matematicas.test.ts)
 import { describe, it, expect } from 'vitest';
-
-function sumar(a: number, b: number): number {
-    return a + b;
-}
-
-function filtrarPares(numeros: number[]): number[] {
-    return numeros.filter(n => n % 2 === 0);
-}
+import { sumar, filtrarPares } from '../utils/matematicas';
 
 describe('Funciones utilitarias', () => {
     it('sumar debe retornar la suma correcta', () => {
@@ -180,12 +325,14 @@ describe('Funciones utilitarias', () => {
 
 ## Pruebas de Eventos y Asincronia
 
+> 📦 **Este test está en el repositorio:** `repos/05-testing/src/__tests__/FormularioLogin.test.tsx`
+
 ```tsx
 // src/components/__tests__/FormularioLogin.test.tsx
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect } from 'vitest';
-import FormularioLogin from '../FormularioLogin';
+import { describe, it, expect, vi } from 'vitest';
+import FormularioLogin from '../components/FormularioLogin';
 
 describe('FormularioLogin', () => {
     it('debe mostrar errores de validacion al enviar vacio', async () => {
@@ -224,12 +371,27 @@ describe('FormularioLogin', () => {
 
 ## E2E con Playwright
 
-```
+```bash
 # Instalacion
 npm install -D @playwright/test
 npx playwright install
+```
 
-// tests/e2e/app.spec.ts
+Configuración (playwright.config.ts):
+
+```typescript
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './e2e',
+  timeout: 30000,
+  use: { headless: true, viewport: { width: 1280, height: 720 } },
+});
+```
+
+Spec E2E en `e2e/navegacion.spec.ts`:
+
+```tsx
 import { test, expect } from '@playwright/test';
 
 test('debe mostrar la pagina principal', async ({ page }) => {
@@ -251,9 +413,6 @@ test('debe agregar un producto al carrito', async ({ page }) => {
 });
 ```
 
-## Pruebas automatizadas con TypeScript
-
-Todos los ejercicios autocorregibles del repositorio ApuntesDWEC, convertidos a TypeScript con tipos estrictos.
 
 ### Tests de Arrays
 

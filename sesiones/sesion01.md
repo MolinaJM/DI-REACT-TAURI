@@ -63,17 +63,17 @@ Node.js es necesario para ejecutar npm, Vite y el CLI de Tauri. Se recomienda us
 
 ```bash
 # Instalar Node.js LTS (version recomendada)
-nvm install 22
+nvm install 24
 
 # Seleccionar esa version
-nvm use 22
+nvm use 24
 
 # Verificar que Node y npm estan disponibles
 node --version
-# Output: v22.x.x
+# Output: v24.x.x
 
 npm --version
-# Output: 10.x.x
+# Output: 11.x.x
 ```
 
 ### 1.4. Crear y lanzar un proyecto de Tauri de prueba
@@ -176,9 +176,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 source ~/.bashrc
 
 # Instalar Node.js LTS
-nvm install 22
-nvm use 22
-nvm alias default 22
+nvm install 24
+nvm use 24
+nvm alias default 24
 
 # Verificar
 node --version
@@ -257,9 +257,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 source ~/.zshrc
 
 # Instalar Node.js LTS
-nvm install 22
-nvm use 22
-nvm alias default 22
+nvm install 24
+nvm use 24
+nvm alias default 24
 
 # Verificar
 node --version

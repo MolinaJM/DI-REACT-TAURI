@@ -36,10 +36,6 @@ mi-app/
     ├── tauri.conf.json         # Configuracion central de Tauri (ventana, permisos, build)
     ├── capabilities/           # Permisos de la aplicacion (Tauri v2)
     │   └── default.json        # Permisos por defecto de la ventana
-    ├── icons/                  # Iconos de la aplicacion (para menu, escritorio, etc.)
-    │   ├── icon.png
-    │   ├── icon.ico
-    │   └── ...
     ├── src/                    # Codigo Rust del backend
     │   ├── main.rs             # Punto de entrada: configura y lanza la ventana
     │   └── lib.rs              # Logica principal: comandos, eventos, estado
@@ -118,15 +114,12 @@ Equivalente al `package.json` pero para Rust. Define las dependencias (crates) y
 
 ```toml
 [package]
-name = "mi-app"
+name = "tauri-ipc-filesystem"
 version = "0.1.0"
-description = "Una app Tauri"
-authors = ["tu"]
 edition = "2021"
 
 [dependencies]
 tauri = { version = "2", features = [] }    # Framework Tauri v2
-tauri-plugin-opener = "2"                   # Plugin para abrir URLs y archivos
 serde = { version = "1", features = ["derive"] }  # Serializacion/deserializacion JSON
 serde_json = "1"                            # Soporte JSON
 
@@ -134,7 +127,7 @@ serde_json = "1"                            # Soporte JSON
 tauri-build = { version = "2", features = [] }
 
 [lib]
-name = "mi_app_lib"
+name = "tauri_ipc_filesystem"
 crate-type = ["lib", "cdylib", "staticlib"]  # Tipos de binario que genera
 ```
 
@@ -145,9 +138,9 @@ Configuración central de la aplicación Tauri. Define la ventana, el build, los
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/nicktomlin/tauri/v2/core/tauri-config-schema/schema.json",
-  "productName": "mi-app",
+  "productName": "tauri-ipc-filesystem",
   "version": "0.1.0",
-  "identifier": "com.mi-app.dev",
+  "identifier": "com.tauri-ipc-filesystem.dev",
   "build": {
     "frontendDist": "../dist",           # Donde Vite deja el build del frontend
     "devUrl": "http://localhost:5173",    # URL del servidor de desarrollo de Vite
@@ -157,7 +150,7 @@ Configuración central de la aplicación Tauri. Define la ventana, el build, los
   "app": {
     "windows": [
       {
-        "title": "Mi App Tauri",
+        "title": "Tauri IPC y Sistema de Archivos",
         "width": 800,
         "height": 600
       }
@@ -188,7 +181,7 @@ Punto de entrada del backend. Configura y lanza la ventana Tauri.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    mi_app_lib::run()
+    tauri_ipc_filesystem::run()
 }
 ```
 
@@ -197,6 +190,7 @@ fn main() {
 Lógica principal. Aquí se registran los comandos, eventos y el estado de la aplicacion.
 
 ```rust
+use std::fs;
 use tauri::Manager;
 
 // Comando personalizado que el frontend puede llamar
@@ -205,11 +199,56 @@ fn greet(name: &str) -> String {
     format!("Hola desde Rust, {}!", name)
 }
 
+#[tauri::command]
+fn saludar(nombre: &str) -> String {
+    format!("Hola, {}! Bienvenido a Tauri.", nombre)
+}
+
+#[tauri::command]
+fn sumar(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[tauri::command]
+fn obtener_info_sistema() -> Result<String, String> {
+    let os = std::env::consts::OS;
+    let arch = std::env::consts::ARCH;
+    Ok(format!("SO: {}, Arquitectura: {}", os, arch))
+}
+
+#[tauri::command]
+fn leer_archivo(ruta: String) -> Result<String, String> {
+    fs::read_to_string(&ruta).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn escribir_archivo(ruta: String, contenido: String) -> Result<(), String> {
+    fs::write(&ruta, &contenido).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn listar_directorio(ruta: String) -> Result<Vec<String>, String> {
+    let entries = fs::read_dir(&ruta).map_err(|e| e.to_string())?;
+    let mut archivos = Vec::new();
+    for entry in entries {
+        let entry = entry.map_err(|e| e.to_string())?;
+        archivos.push(entry.file_name().to_string_lossy().to_string());
+    }
+    Ok(archivos)
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet])  # Registra el comando greet
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            saludar,
+            sumar,
+            obtener_info_sistema,
+            leer_archivo,
+            escribir_archivo,
+            listar_directorio
+        ])  # Registra los comandos del backend
         .run(tauri::generate_context!())
         .expect("error al ejecutar Tauri");
 }
@@ -225,8 +264,7 @@ Define los permisos que tiene la aplicación (Tauri v2 usa un sistema de permiso
   "description": "Permisos por defecto de la ventana principal",
   "windows": ["main"],
   "permissions": [
-    "core:default",
-    "opener:default"
+    "core:default"
   ]
 }
 ```

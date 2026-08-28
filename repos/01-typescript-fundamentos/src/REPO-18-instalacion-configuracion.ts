@@ -45,7 +45,7 @@ export {};
 // tsc
 
 // Compilar solo un fichero:
-// tsc src/01-tipos-primitivos.ts
+// tsc src/REPO-01-tipos-primitivos.ts
 
 // ========================================
 // tsconfig.json BASICO

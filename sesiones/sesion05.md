@@ -10,6 +10,8 @@ useState, useReducer, formularios controlados y validación
 
 ## Estado con useReducer
 
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/state/useReducerEjemplo.tsx` (idéntico; el fichero real añade `export default Contador`)
+
 ```tsx
 import { useReducer } from 'react';
 
@@ -60,6 +62,8 @@ function Contador() {
 ```
 
 ## Formulario Controlado con Tipado
+
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/state/FormularioRegistro.tsx` (idéntico; el fichero real añade `export default FormularioRegistro` y usa "inválido"/"años" con tilde)
 
 ```tsx
 import { useState } from 'react';
@@ -151,6 +155,8 @@ function FormularioRegistro() {
 ```
 
 ## localStorage: persistencia en el navegador
+
+> 📦 **El código de los apartados de esta sección ("Operaciones básicas", "Guardar y recuperar objetos (JSON)", "sessionStorage", "Gestión de estado con localStorage" y "Seguridad") está en el repositorio:** `repos/02-react-componentes/src/state/localStorage.ts` (el fichero unifica todos los ejemplos y exporta las funciones; algunas sentencias están comentadas)
 
 ### Operaciones básicas
 

@@ -25,6 +25,8 @@ Estas pautas se entregarán a la **IA** como referencia del proyecto para que la
 
 ## Layouts y Diseño con Tailwind
 
+> 📦 **Este componente está en el repositorio:** `repos/04-react-avanzado/src/styles/Dashboard.tsx`
+
 ```tsx
 function DashboardLayout() {
     return (
@@ -59,11 +61,17 @@ function DashboardLayout() {
         </div>
     );
 }
+
+export default DashboardLayout;
 ```
 
 ## Responsive Design
 
+> 📦 **Este componente está en el repositorio:** `repos/04-react-avanzado/src/styles/Navbar.tsx`
+
 ```tsx
+import { useState } from 'react';
+
 function ResponsiveNav() {
     const [menuAbierto, setMenuAbierto] = useState(false);
 
@@ -101,14 +109,19 @@ function ResponsiveNav() {
         </nav>
     );
 }
+
+export default ResponsiveNav;
 ```
 
 ## Animaciones y Transiciones
 
+> 📦 **Este componente (y el `Badge` que se usa debajo) está en el repositorio:** `repos/04-react-avanzado/src/styles/Animations.tsx`
+
 ```tsx
+import { useState } from 'react';
+
 function AnimacionesEjemplo() {
     const [visible, setVisible] = useState(false);
-    const [hover, setHover] = useState(false);
 
     return (
         <div className="space-y-8 p-8">
@@ -173,6 +186,8 @@ function Badge({ estado }: { estado: "activo" | "inactivo" | "pendiente" }) {
         </span>
     );
 }
+
+export { AnimacionesEjemplo, Badge };
 
 // Uso
 <Badge estado="activo" />

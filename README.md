@@ -29,9 +29,13 @@ Las interfaces web han evolucionado de un modelo servidor-céntrico hacia aplica
 - **Experiencia fluida y ligera:** integrada con Tauri, la interfaz web se empaqueta en una carcasa nativa de Rust con bajo consumo de recursos.
 - **Distribución sencilla:** el frontend se compila en instaladores nativos por plataforma mientras conserva el desarrollo web estándar.
 
+### ¿Por qué no es necesario conocer todos los mecanismos que usa TypeScript para Web?
+
+Un curso completo de TypeScript orientado a la Web dedicaría más de la mitad de sus horas a enseñar a construir aplicaciones interactivas "a mano" usando solo el navegador nativo. Al usar React, toda esa fontanería (DOM, eventos manuales, binding de formularios) se automatiza. Y al usar Tauri, la otra parte compleja (red, peticiones HTTP, seguridad de peticiones web) pasa a ser una llamada directa y limpia a Rust.
+
 ---
 
-## 2. Justificación de la asignatura de Desarrollo de Interfaces
+## 2. Asignatura de Desarrollo de Interfaces
 
 La asignatura **Desarrollo de Interfaces** (DI) capacita al alumnado para construir aplicaciones multiplataforma completas, cubriendo el ciclo de vida de la interfaz de usuario:
 
@@ -49,14 +53,14 @@ Para construir una aplicación de escritorio moderna y ligera, se entrelazan her
 
 | Tecnología | Descripción |
 |---|---|
-| ![Node.js](https://cdn.simpleicons.org/nodedotjs/339933) **Node.js** | El entorno de ejecución de JavaScript en el lado del servidor, necesario para ejecutar las herramientas de desarrollo. |
-| ![NPM](https://cdn.simpleicons.org/npm/CB3837) **NPM** | El gestor que administra e instala todas las librerías, dependencias y paquetes del proyecto. |
-| ![Vite](https://cdn.simpleicons.org/vite/646CFF) **Vite** | El empaquetador y servidor de desarrollo moderno que ofrece recargas instantáneas. |
-| ![TypeScript](https://cdn.simpleicons.org/typescript/3178C6) **TypeScript** | El lenguaje de programación que añade tipado estático a JavaScript, aportando seguridad y mantenibilidad al código. |
-| ![React](https://cdn.simpleicons.org/react/61DAFB) **React** | La librería encargada de la lógica de la interfaz, el estado de los componentes y la reactividad visual utilizando TypeScript. |
-| ![Tailwind CSS](https://cdn.simpleicons.org/tailwindcss/06B6D4) **Tailwind CSS** | Un framework de CSS utilitario que permite diseñar interfaces rápidas y consistentes aplicando clases directamente en el HTML o JSX. |
-| ![Rust](https://cdn.simpleicons.org/rust/DEA584) **Rust** | El lenguaje que da soporte al backend de Tauri, destacando por su seguridad en memoria y su velocidad. |
-| ![Tauri](https://cdn.simpleicons.org/tauri/24C8DB) **Tauri** | El puente que une todo, exponiendo una API segura en Rust para comunicarse con el sistema operativo. |
+| <img src="https://cdn.simpleicons.org/nodedotjs/339933" width="24" height="24" alt="Node.js" title="Node.js"> **Node.js** | El entorno de ejecución de JavaScript en el lado del servidor, necesario para ejecutar las herramientas de desarrollo. |
+| <img src="https://cdn.simpleicons.org/npm/CB3837" width="24" height="24" alt="NPM" title="NPM"> **NPM** | El gestor que administra e instala todas las librerías, dependencias y paquetes del proyecto. |
+| <img src="https://cdn.simpleicons.org/vite/646CFF" width="24" height="24" alt="Vite" title="Vite"> **Vite** | El empaquetador y servidor de desarrollo moderno que ofrece recargas instantáneas. |
+| <img src="https://cdn.simpleicons.org/typescript/3178C6" width="24" height="24" alt="TypeScript" title="TypeScript"> **TypeScript** | El lenguaje de programación que añade tipado estático a JavaScript, aportando seguridad y mantenibilidad al código. |
+| <img src="https://cdn.simpleicons.org/react/61DAFB" width="24" height="24" alt="React" title="React"> **React** | La librería encargada de la lógica de la interfaz, el estado de los componentes y la reactividad visual utilizando TypeScript. |
+| <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" width="24" height="24" alt="Tailwind CSS" title="Tailwind CSS"> **Tailwind CSS** | Un framework de CSS utilitario que permite diseñar interfaces rápidas y consistentes aplicando clases directamente en el HTML o JSX. |
+| <img src="https://cdn.simpleicons.org/rust/DEA584" width="24" height="24" alt="Rust" title="Rust"> **Rust** | El lenguaje que da soporte al backend de Tauri, destacando por su seguridad en memoria y su velocidad. |
+| <img src="https://cdn.simpleicons.org/tauri/24C8DB" width="24" height="24" alt="Tauri" title="Tauri"> **Tauri** | El puente que une todo, exponiendo una API segura en Rust para comunicarse con el sistema operativo. |
 
 ---
 

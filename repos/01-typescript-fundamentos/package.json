@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "npx tsx src/01-tipos-primitivos.ts"
+    "test": "npx tsx src/REPO-01-tipos-primitivos.ts"
   },
   "devDependencies": {
     "tsx": "^4.23.12",

@@ -16,6 +16,10 @@ export {};
 // any: desactiva el chequeo de tipos (EVITAR)
 let cualquierCosa: any = "texto";
 cualquierCosa = 42;
+// ⚠️ ATENCIÓN: el script SE CORTA AQUÍ a propósito.
+// En compilación `any` no avisa (ese era el objetivo), pero en ejecución
+// esto lanza un TypeError (metodoInexistente no existe) y detiene el fichero.
+// Comenta esta línea si quieres ver el resto de ejemplos (unknown, never, aserciones).
 cualquierCosa.metodoInexistente(); // sin error en compilacion
 
 // unknown: tipo seguro para valores desconocidos

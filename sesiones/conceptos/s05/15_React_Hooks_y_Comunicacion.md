@@ -431,4 +431,163 @@ export function PeliculaForm({ inicial = {}, onGuardar, onCancelar }: PeliculaFo
 
 ---
 
+### 📦 En el repositorio (`repos/02-react-componentes/src/components/ListaUsuarios.tsx`)
+
+```tsx
+/**
+ * ListaUsuarios.tsx - useEffect con TypeScript
+ * Fuente: Sesión 04 - useEffect con TypeScript
+ * Fetch de usuarios desde jsonplaceholder
+ */
+import { useState, useEffect } from 'react';
+
+interface Usuario {
+    id: number;
+    name: string;
+    email: string;
+}
+
+function ListaUsuarios() {
+    const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+    const [cargando, setCargando] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+            try {
+                const res = await fetch("https://jsonplaceholder.typicode.com/users");
+                if (!res.ok) throw new Error("Error en la petición");
+                const data: Usuario[] = await res.json();
+                setUsuarios(data);
+            } catch (err) {
+                setError((err as Error).message);
+            } finally {
+                setCargando(false);
+            }
+        };
+        fetchUsuarios();
+    }, []);
+
+    if (cargando) return <p>Cargando...</p>;
+    if (error) return <p className="text-red-500">Error: {error}</p>;
+
+    return (
+        <ul className="space-y-2">
+            {usuarios.map(u => (
+                <li key={u.id} className="bg-gray-100 p-3 rounded">
+                    <strong>{u.name}</strong> - {u.email}
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+export default ListaUsuarios;
+```
+
+### 📦 En el repositorio (`repos/02-react-componentes/src/components/Modal.tsx`)
+
+```tsx
+/**
+ * Modal.tsx - Componente Modal
+ * Fuente: Sesión 07 - Creación de Componentes Personalizados
+ * Modal con abierto/onCerrar/titulo/children, useEffect para body overflow
+ */
+import { ReactNode, useEffect } from 'react';
+
+interface ModalProps {
+    abierto: boolean;
+    onCerrar: () => void;
+    titulo: string;
+    children: ReactNode;
+    tamano?: "sm" | "md" | "lg";
+}
+
+function Modal({ abierto, onCerrar, titulo, children, tamano: _tamano = "md" }: ModalProps) {
+    useEffect(() => {
+        if (abierto) document.body.style.overflow = "hidden";
+        else document.body.style.overflow = "";
+        return () => { document.body.style.overflow = ""; };
+    }, [abierto]);
+
+    if (!abierto) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="fixed inset-0 bg-black/50" onClick={onCerrar}></div>
+            <div className={`relative bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4 p-6`}>
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-semibold">{titulo}</h2>
+                    <button onClick={onCerrar}
+                        className="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+                </div>
+                {children}
+            </div>
+        </div>
+    );
+}
+
+export default Modal;
+```
+
+### 📦 En el repositorio (`repos/02-react-componentes/src/state/useReducerEjemplo.tsx`)
+
+```tsx
+/**
+ * useReducerEjemplo.tsx - Estado con useReducer
+ * Fuente: Sesión 05 - Estado con useReducer
+ * Contador con INCREMENTAR/DECREMENTAR/RESETEAR
+ */
+import { useReducer } from 'react';
+
+interface ContadorState {
+    valor: number;
+    incrementos: number;
+}
+
+type Accion =
+    | { type: "INCREMENTAR"; payload: number }
+    | { type: "DECREMENTAR" }
+    | { type: "RESETEAR" };
+
+function reducer(state: ContadorState, action: Accion): ContadorState {
+    switch (action.type) {
+        case "INCREMENTAR":
+            return {
+                valor: state.valor + action.payload,
+                incrementos: state.incrementos + 1
+            };
+        case "DECREMENTAR":
+            return { ...state, valor: state.valor - 1 };
+        case "RESETEAR":
+            return { valor: 0, incrementos: 0 };
+        default:
+            return state;
+    }
+}
+
+function Contador() {
+    const [state, dispatch] = useReducer(reducer, { valor: 0, incrementos: 0 });
+
+    return (
+        <div className="text-center space-y-4">
+            <h2 className="text-3xl font-bold">{state.valor}</h2>
+            <p>Incrementos totales: {state.incrementos}</p>
+            <div className="space-x-2">
+                <button onClick={() => dispatch({ type: "INCREMENTAR", payload: 1 })}
+                    className="bg-blue-500 text-white px-4 py-2 rounded">+1</button>
+                <button onClick={() => dispatch({ type: "DECREMENTAR" })}
+                    className="bg-red-500 text-white px-4 py-2 rounded">-1</button>
+                <button onClick={() => dispatch({ type: "RESETEAR" })}
+                    className="bg-gray-500 text-white px-4 py-2 rounded">Reset</button>
+            </div>
+        </div>
+    );
+}
+
+export default Contador;
+```
+
+---
+
 [Volver al índice general](../../index.md)

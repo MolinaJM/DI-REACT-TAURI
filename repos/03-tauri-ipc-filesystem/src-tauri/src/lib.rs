@@ -1,5 +1,4 @@
 use std::fs;
-use tauri::Manager;
 
 #[tauri::command]
 fn greet(name: &str) -> String {

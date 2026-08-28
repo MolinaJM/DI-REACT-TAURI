@@ -857,4 +857,312 @@ Crear un **gestor académico** con las siguientes funcionalidades, primero en va
 
 ---
 
+### 📦 En el repositorio (`repos/02-react-componentes/src/patterns/AdvancedFunctions.ts`)
+
+```typescript
+/**
+ * AdvancedFunctions.ts - Patrones avanzados de funciones
+ * Fuente: Sesión 04 - Patrones avanzados de funciones
+ * IIFE, recursión, closures, composición de funciones
+ */
+
+// --- Declaraciones, expresiones y arrow functions ---
+// Declaración de función (hoisting)
+function sumar(a: number, b: number): number {
+  return a + b;
+}
+
+// Expresión de función
+const multiplicar = function (a: number, b: number): number {
+  return a * b;
+};
+
+// Arrow function
+const dividir = (a: number, b: number): number => a / b;
+
+// Arrow multilínea
+const procesar = (items: number[]): number[] =>
+  items
+    .filter((n) => n > 0)
+    .map((n) => n * 2)
+    .sort((a, b) => a - b);
+
+// --- Parámetros por defecto, rest y spread ---
+// Parámetros por defecto
+function saludar(nombre: string, saludo: string = "Hola"): string {
+  return `${saludo}, ${nombre}`;
+}
+
+// Rest parameters
+function sumarTodos(...numeros: number[]): number {
+  return numeros.reduce((acc, n) => acc + n, 0);
+}
+
+// --- IIFE (Immediately Invoked Function Expression) ---
+// IIFE clásica
+(function () {
+  const privado = "solo aquí";
+  console.log(privado);
+})();
+
+// IIFE con arrow
+(() => {
+  const mensaje: string = "Ejecutada al instante";
+  console.log(mensaje);
+})();
+
+// IIFE con parámetros
+((nombre: string) => {
+  console.log(`Hola, ${nombre}`);
+})("TypeScript");
+
+// --- Recursión tipada ---
+function factorial(n: number): number {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+function fibonacci(n: number, memoria: Map<number, number> = new Map()): number {
+  if (n <= 1) return n;
+  if (memoria.has(n)) return memoria.get(n)!;
+
+  const resultado = fibonacci(n - 1, memoria) + fibonacci(n - 2, memoria);
+  memoria.set(n, resultado);
+  return resultado;
+}
+
+// --- Clausuras (closures) para factories ---
+type Operacion = (x: number) => number;
+
+function crearMultiplicador(factor: number): Operacion {
+  return (x: number) => x * factor;
+}
+
+const duplicar = crearMultiplicador(2);
+const triplicar = crearMultiplicador(3);
+
+// --- Composición de funciones ---
+function compose<T>(...fns: Array<(arg: T) => T>): (arg: T) => T {
+  return (x: T) => fns.reduceRight((acc, fn) => fn(acc), x);
+}
+
+const agregarIVA = (precio: number): number => precio * 1.21;
+const redondear = (precio: number): number => Math.round(precio * 100) / 100;
+const formatear = (precio: number): string => `${precio.toFixed(2)}€`;
+
+const calcularPrecioFinal = compose(redondear, agregarIVA);
+
+export {
+  sumar,
+  multiplicar,
+  dividir,
+  procesar,
+  saludar,
+  sumarTodos,
+  factorial,
+  fibonacci,
+  crearMultiplicador,
+  duplicar,
+  triplicar,
+  compose,
+  agregarIVA,
+  redondear,
+  formatear,
+  calcularPrecioFinal,
+};
+
+export type { Operacion };
+```
+
+### 📦 En el repositorio (`repos/02-react-componentes/src/patterns/CleanCode.ts`)
+
+```typescript
+/**
+ * CleanCode.ts - Principios de Clean Code en TypeScript
+ * Fuente: Sesión 04 - Patrones de Clean Code
+ * Nombres significativos, única responsabilidad, inmutabilidad
+ */
+
+// --- Nombres significativos ---
+// ❌ Malo
+export function proc(d: number[]): number {
+  return d.filter((x) => x > 0).reduce((a, b) => a + b, 0) / d.length;
+}
+
+// ✅ Bueno
+function calcularPromedioPositivos(numeros: number[]): number {
+  const positivos = numeros.filter((n) => n > 0);
+  if (positivos.length === 0) return 0;
+  return positivos.reduce((suma, n) => suma + n, 0) / positivos.length;
+}
+
+// --- Funciones de una sola responsabilidad ---
+// ❌ Malo: hace demasiadas cosas
+export function procesarUsuario(datos: unknown): void {
+  const usuario = datos as { nombre: string; email: string };
+  if (!usuario.nombre || !usuario.email) throw new Error("Datos inválidos");
+  fetch("/api/usuarios", { method: "POST", body: JSON.stringify(usuario) });
+  localStorage.setItem("ultimoUsuario", JSON.stringify(usuario));
+}
+
+// ✅ Bueno: cada función hace una cosa
+export function validarUsuario(datos: unknown): asserts datos is { nombre: string; email: string } {
+  if (typeof datos !== "object" || !datos) throw new Error("Datos inválidos");
+  if (!("nombre" in datos) || !("email" in datos)) throw new Error("Faltan campos");
+}
+
+export async function guardarUsuario(usuario: { nombre: string; email: string }): Promise<Response> {
+  return fetch("/api/usuarios", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(usuario),
+  });
+}
+
+export function persistirLocalmente(usuario: Record<string, unknown>): void {
+  localStorage.setItem("ultimoUsuario", JSON.stringify(usuario));
+}
+
+// --- Inmutabilidad ---
+// ❌ Mutación
+export function agregarTarea(tareas: string[], nueva: string): string[] {
+  tareas.push(nueva);
+  return tareas;
+}
+
+// ✅ Inmutabilidad con spread
+function agregarTareaInmutable(tareas: readonly string[], nueva: string): string[] {
+  return [...tareas, nueva];
+}
+
+// ✅ Inmutabilidad con map/filter/reduce
+function actualizarEstado(
+  tareas: ReadonlyArray<{ id: number; done: boolean }>,
+  id: number
+): ReadonlyArray<{ id: number; done: boolean }> {
+  return tareas.map((t) => (t.id === id ? { ...t, done: true } : t));
+}
+
+// --- Separación de datos, UI y lógica ---
+// 📁 datos.ts
+type Estado = "pendiente" | "completada";
+
+interface Tarea {
+  id: string;
+  texto: string;
+  estado: Estado;
+}
+
+// 📁 logica.ts
+function crearTarea(texto: string): Tarea {
+  return { id: crypto.randomUUID(), texto: texto.trim(), estado: "pendiente" };
+}
+
+function filtrarPorEstado(tareas: Tarea[], estado: Estado): Tarea[] {
+  return tareas.filter((t) => t.estado === estado);
+}
+
+// 📁 ui.ts
+function renderizarTarea(tarea: Tarea): HTMLElement {
+  const div = document.createElement("div");
+  div.textContent = tarea.texto;
+  div.dataset.id = tarea.id;
+  return div;
+}
+
+export {
+  calcularPromedioPositivos,
+  agregarTareaInmutable,
+  actualizarEstado,
+  crearTarea,
+  filtrarPorEstado,
+  renderizarTarea,
+};
+
+export type { Estado, Tarea };
+```
+
+### 📦 En el repositorio (`repos/02-react-componentes/src/state/localStorage.ts`)
+
+```typescript
+/**
+ * localStorage.ts - Persistencia en el navegador
+ * Fuente: Sesión 05 - localStorage
+ * Operaciones básicas, objetos JSON tipados, sessionStorage
+ */
+
+// --- Operaciones básicas ---
+// localStorage.setItem("nombre", "Ana");
+// const nombre = localStorage.getItem("nombre"); // string | null
+// localStorage.removeItem("nombre");
+// localStorage.clear();
+// console.log(localStorage.length);
+
+// --- Guardar y recuperar objetos (JSON) ---
+
+interface UsuarioPersistente {
+  id: string;
+  nombre: string;
+  ultimoAcceso: string;
+}
+
+function guardarUsuario(usuario: UsuarioPersistente): void {
+  localStorage.setItem(`usuario:${usuario.id}`, JSON.stringify(usuario));
+}
+
+function obtenerUsuario(id: string): UsuarioPersistente | null {
+  const raw = localStorage.getItem(`usuario:${id}`);
+  if (!raw) return null;
+  return JSON.parse(raw) as UsuarioPersistente;
+}
+
+// --- sessionStorage ---
+
+function demoSessionStorage(): void {
+  sessionStorage.setItem("temporal", "dato efímero");
+  console.log(sessionStorage.getItem("temporal"));
+}
+
+// --- Gestión de estado con localStorage ---
+
+type FiltroApp = "todas" | "pendientes" | "completadas";
+
+interface TareaPersistente {
+  id: string;
+  texto: string;
+  completada: boolean;
+}
+
+interface EstadoApp {
+  tareas: TareaPersistente[];
+  filtro: FiltroApp;
+}
+
+function cargarEstado(): EstadoApp {
+  const raw = localStorage.getItem("estado-app");
+  if (!raw) return { tareas: [], filtro: "todas" };
+  return JSON.parse(raw) as EstadoApp;
+}
+
+function guardarEstado(estado: EstadoApp): void {
+  localStorage.setItem("estado-app", JSON.stringify(estado));
+}
+
+// --- Seguridad: no almacenar tokens sensibles ---
+// ❌ Inseguro: localStorage.setItem("token", jwtToken);
+// ✅ Seguro: cookie HttpOnly (solo el servidor la lee)
+
+export {
+  guardarUsuario,
+  obtenerUsuario,
+  demoSessionStorage,
+  cargarEstado,
+  guardarEstado,
+};
+
+export type { UsuarioPersistente, EstadoApp, TareaPersistente, FiltroApp };
+```
+
+---
+
 [Volver al índice general](../../index.md)

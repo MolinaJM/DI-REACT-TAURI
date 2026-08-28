@@ -136,9 +136,8 @@ El archivo `package.json` es el corazón de cualquier proyecto Node. Contiene me
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint src/"
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.0.0",
@@ -162,9 +161,6 @@ npm run dev
 
 # Compilar y construir para producción
 npm run build
-
-# Ejecutar linter
-npm run lint
 ```
 
 ### Instalación de dependencias
@@ -195,13 +191,13 @@ Permite instalar y cambiar entre versiones de Node.js.
 
 ```bash
 # Instalar una version especifica
-nvm install 22
+nvm install 24
 
 # Usar una version
-nvm use 22
+nvm use 24
 
 # Version por defecto
-nvm alias default 22
+nvm alias default 24
 
 # Ver versiones instaladas
 nvm ls
@@ -336,7 +332,6 @@ src-tauri/
   src/
     main.rs           # Punto de entrada (Windows, macOS, Linux)
     lib.rs            # Logica principal de Tauri
-  icons/              # Iconos de la aplicacion
 ```
 
 ### Comandos Tauri principales
@@ -349,26 +344,76 @@ npx tauri dev
 npx tauri build
 
 # El binario generado estara en:
-# src-tauri/target/release/mi-app
+# src-tauri/target/release/tauri-ipc-filesystem
 ```
 
 ### Ejemplo: Comando personalizado Rust + invocación TypeScript
 
 `src-tauri/src/lib.rs`:
 
+> 📦 **Este código está en el repositorio:** `repos/03-tauri-ipc-filesystem/src-tauri/src/lib.rs`
+
 ```rust
-use tauri;
+use std::fs;
+use tauri::Manager;
+
+#[tauri::command]
+fn greet(name: &str) -> String {
+    format!("Hola desde Rust, {}!", name)
+}
 
 #[tauri::command]
 fn saludar(nombre: &str) -> String {
-    format!("Hola desde Rust, {}!", nombre)
+    format!("Hola, {}! Bienvenido a Tauri.", nombre)
 }
 
+#[tauri::command]
+fn sumar(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[tauri::command]
+fn obtener_info_sistema() -> Result<String, String> {
+    let os = std::env::consts::OS;
+    let arch = std::env::consts::ARCH;
+    Ok(format!("SO: {}, Arquitectura: {}", os, arch))
+}
+
+#[tauri::command]
+fn leer_archivo(ruta: String) -> Result<String, String> {
+    fs::read_to_string(&ruta).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn escribir_archivo(ruta: String, contenido: String) -> Result<(), String> {
+    fs::write(&ruta, &contenido).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn listar_directorio(ruta: String) -> Result<Vec<String>, String> {
+    let entries = fs::read_dir(&ruta).map_err(|e| e.to_string())?;
+    let mut archivos = Vec::new();
+    for entry in entries {
+        let entry = entry.map_err(|e| e.to_string())?;
+        archivos.push(entry.file_name().to_string_lossy().to_string());
+    }
+    Ok(archivos)
+}
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![saludar])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            saludar,
+            sumar,
+            obtener_info_sistema,
+            leer_archivo,
+            escribir_archivo,
+            listar_directorio
+        ])
         .run(tauri::generate_context!())
-        .expect("Error al ejecutar Tauri");
+        .expect("error al ejecutar Tauri");
 }
 ```
 

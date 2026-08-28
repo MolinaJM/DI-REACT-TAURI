@@ -10,6 +10,8 @@ Componentes funcionales, props, children y hooks básicos
 
 ## Componente Funcional con TypeScript
 
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/components/Saludo.tsx` (el fichero real añade `export default Saludo`; el `// Uso` es didáctico)
+
 ```tsx
 import { FC } from 'react';
 
@@ -33,6 +35,8 @@ const Saludo: FC<SaludoProps> = ({ nombre, edad }) => {
 ```
 
 ## Props Children
+
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/components/Card.tsx` (el fichero real añade `export default Card`; el `// Uso` es didáctico)
 
 ```tsx
 import { ReactNode } from 'react';
@@ -62,6 +66,8 @@ function Card({ titulo, children, className = "" }: CardProps) {
 ```
 
 ## useState con TypeScript
+
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/components/ListaTareas.tsx` (el fichero real añade `export default ListaTareas`)
 
 ```tsx
 import { useState } from 'react';
@@ -120,6 +126,8 @@ function ListaTareas() {
 
 ## useEffect con TypeScript
 
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/components/ListaUsuarios.tsx` (el fichero real añade `export default ListaUsuarios`)
+
 ```tsx
 import { useState, useEffect } from 'react';
 
@@ -166,6 +174,8 @@ function ListaUsuarios() {
 ```
 
 ## Patrones avanzados de funciones
+
+> 📦 **Todo el código de esta sección está en el repositorio:** `repos/02-react-componentes/src/patterns/AdvancedFunctions.ts` (cada apartado es un extracto; el fichero real los une y exporta cada función)
 
 Traducción a TypeScript de los patrones funcionales de JavaScript.
 
@@ -289,6 +299,8 @@ console.log(calcularPrecioFinal(100)); // 121
 ```
 
 ## Principios de Clean Code en TypeScript
+
+> 📦 **Todo el código de esta sección está en el repositorio:** `repos/02-react-componentes/src/patterns/CleanCode.ts` (cada apartado es un extracto; el fichero real los une y exporta cada función)
 
 ### Nombres significativos
 

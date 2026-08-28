@@ -27,28 +27,22 @@ Tabla resumen de sesiones, repositorios y tecnologias.
 repos/
 ├── 01-typescript-fundamentos/    S02 + S03
 │   ├── src/
-│   │   ├── 01-tipos-primitivos.ts
-│   │   ├── 02-arrays-tuples.ts
-│   │   ├── 03-enums-special-types.ts
-│   │   ├── 04-unions-intersections.ts
-│   │   ├── 05-interfaces-types.ts
-│   │   ├── 06-funciones.ts
-│   │   ├── 07-type-guards-conversion.ts
-│   │   ├── 08-control-flow-scope.ts
-│   │   ├── 09-clases-herencia.ts
-│   │   ├── 10-generics.ts
-│   │   ├── 11-template-literal-utility.ts
-│   │   ├── 12-modulos-declaraciones.ts
-│   │   ├── 13-async-await.ts
-│   │   ├── 14-dom-typescript.ts
-│   │   ├── 15-arrays-avanzado.ts
-│   │   ├── 16-web-apis.ts
-│   │   ├── 17-que-es-typescript.ts
-│   │   ├── 18-instalacion-configuracion.ts
-│   │   └── 19-keyof-typeof-satisfies.ts
+│   │   ├── REPO-01-tipos-primitivos.ts
+│   │   ├── REPO-02-arrays-tuples.ts
+│   │   ├── REPO-03-tipos-especiales.ts
+│   │   ├── REPO-04-unions-intersections.ts
+│   │   ├── REPO-05-interfaces-types.ts
+│   │   ├── REPO-06-funciones.ts
+│   │   ├── REPO-07-type-guards-conversion.ts
+│   │   ├── REPO-08-control-flow-scope.ts
+│   │   ├── REPO-12-modulos.ts
+│   │   ├── REPO-13-async-await.ts
+│   │   ├── REPO-15-arrays-avanzado.ts
+│   │   ├── REPO-17-que-es-typescript.ts
+│   │   └── REPO-18-instalacion-configuracion.ts
 │   ├── package.json
 │   └── tsconfig.json
-│   Ejecucion: npx tsx src/01-tipos-primitivos.ts
+│   Ejecucion: npx tsx src/REPO-01-tipos-primitivos.ts
 │   Dependencias: typescript, tsx
 │   Requisito: Node.js
 │
@@ -212,7 +206,7 @@ Versiones de referencia para todo el material (sesiones, apuntes y repos):
 | Tauri | **2.x** | webview + backend Rust (`invoke()`) |
 | Estilo TS | **erasable-only** | Sin `enum`/`namespace`/parameter properties: el mismo código corre en Node 24 y en Vite |
 
-> Nota: `repos/01-typescript-fundamentos` usa `enum`, `namespace` y `parameter properties` con fines didácticos (runner `tsx`). Los apuntes siguen estrictamente *erasable-only* para que los ejemplos corran en Node 24 sin compilar.
+> Nota: los ejemplos de `repos/01-typescript-fundamentos` son *erasable-only* para que corran en Node 24 sin compilar con el runner `tsx`.
 
 Flujo de ejecución por repo: `repos/01` con `npx tsx src/..`, `repos/02`/`04` con `npm run dev`, `repos/03` con `npx tauri dev`, `repos/05` con `npx vitest` / `npx playwright test`, y `apuntes/` con `npm run check` / `npm run test:autocorregibles` (Node 24).
 

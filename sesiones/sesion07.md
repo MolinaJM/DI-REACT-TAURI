@@ -23,9 +23,17 @@ Tauri permite la comunicacion bidireccional entre el frontend (React) y el backe
 
 ## Comandos Básicos en Rust
 
+> 📦 **Este código está en el repositorio:** `repos/03-tauri-ipc-filesystem/src-tauri/src/lib.rs`
+
 ```rust
 // src-tauri/src/lib.rs
+use std::fs;
 use tauri::Manager;
+
+#[tauri::command]
+fn greet(name: &str) -> String {
+    format!("Hola desde Rust, {}!", name)
+}
 
 #[tauri::command]
 fn saludar(nombre: &str) -> String {
@@ -44,15 +52,47 @@ fn obtener_info_sistema() -> Result<String, String> {
     Ok(format!("SO: {}, Arquitectura: {}", os, arch))
 }
 
+#[tauri::command]
+fn leer_archivo(ruta: String) -> Result<String, String> {
+    fs::read_to_string(&ruta).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn escribir_archivo(ruta: String, contenido: String) -> Result<(), String> {
+    fs::write(&ruta, &contenido).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn listar_directorio(ruta: String) -> Result<Vec<String>, String> {
+    let entries = fs::read_dir(&ruta).map_err(|e| e.to_string())?;
+    let mut archivos = Vec::new();
+    for entry in entries {
+        let entry = entry.map_err(|e| e.to_string())?;
+        archivos.push(entry.file_name().to_string_lossy().to_string());
+    }
+    Ok(archivos)
+}
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![saludar, sumar, obtener_info_sistema])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            saludar,
+            sumar,
+            obtener_info_sistema,
+            leer_archivo,
+            escribir_archivo,
+            listar_directorio
+        ])
         .run(tauri::generate_context!())
         .expect("error al ejecutar tauri");
 }
 ```
 
 ## Llamar Comandos desde React (invoke)
+
+> 📦 **Este código está en el repositorio:** `repos/03-tauri-ipc-filesystem/src/components/ComponenteIPC.tsx`
 
 ```tsx
 import { invoke } from '@tauri-apps/api/core';
@@ -91,9 +131,13 @@ function ComponenteIPC() {
         </div>
     );
 }
+
+export default ComponenteIPC;
 ```
 
 ## Manejo del Sistema de Archivos
+
+> 📦 **Estos comandos están en el repositorio:** `repos/03-tauri-ipc-filesystem/src-tauri/src/lib.rs`
 
 ```rust
 // src-tauri/src/lib.rs
@@ -126,6 +170,8 @@ fn listar_directorio(ruta: String) -> Result<Vec<String>, String> {
 
 ### Operaciones CRUD completas
 
+> 📦 **Estas funciones están en el repositorio (dentro del componente):** `repos/03-tauri-ipc-filesystem/src/components/FetchCRUD.tsx` (la función `ejemplo()` es didáctica y no está en el fichero)
+
 ```typescript
 interface Post {
   userId: number;
@@ -144,7 +190,7 @@ async function obtenerPosts(): Promise<Post[]> {
 }
 
 // GET by ID
-async function obtenerPost(id: number): Promise<Post> {
+export async function obtenerPost(id: number): Promise<Post> {
   const res = await fetch(`${BASE_URL}/posts/${id}`);
   if (!res.ok) throw new Error(`Error ${res.status}`);
   return (await res.json()) as Post;
@@ -161,7 +207,7 @@ async function crearPost(datos: Omit<Post, "id">): Promise<Post> {
 }
 
 // PUT (reemplazar completo)
-async function actualizarPost(id: number, datos: Post): Promise<Post> {
+export async function actualizarPost(id: number, datos: Post): Promise<Post> {
   const res = await fetch(`${BASE_URL}/posts/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -189,6 +235,133 @@ async function ejemplo(): Promise<void> {
   console.log("Creado:", nuevo.id);
 }
 ```
+
+### 📦 Componente FetchCRUD completo (repos/03-tauri-ipc-filesystem)
+
+En el repositorio `repos/03-tauri-ipc-filesystem`, estas funciones se integran en un componente React que las utiliza desde la interfaz. Este es `src/components/FetchCRUD.tsx`:
+
+```tsx
+import { useState } from 'react';
+
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+const BASE_URL = "https://jsonplaceholder.typicode.com";
+
+// GET
+async function obtenerPosts(): Promise<Post[]> {
+  const res = await fetch(`${BASE_URL}/posts`);
+  if (!res.ok) throw new Error(`Error ${res.status}`);
+  return (await res.json()) as Post[];
+}
+
+// GET by ID
+export async function obtenerPost(id: number): Promise<Post> {
+  const res = await fetch(`${BASE_URL}/posts/${id}`);
+  if (!res.ok) throw new Error(`Error ${res.status}`);
+  return (await res.json()) as Post;
+}
+
+// POST
+async function crearPost(datos: Omit<Post, "id">): Promise<Post> {
+  const res = await fetch(`${BASE_URL}/posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(datos),
+  });
+  return (await res.json()) as Post;
+}
+
+// PUT (reemplazar completo)
+export async function actualizarPost(id: number, datos: Post): Promise<Post> {
+  const res = await fetch(`${BASE_URL}/posts/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(datos),
+  });
+  return (await res.json()) as Post;
+}
+
+// DELETE
+async function eliminarPost(id: number): Promise<void> {
+  const res = await fetch(`${BASE_URL}/posts/${id}`, { method: "DELETE" });
+  if (!res.ok) throw new Error(`Error ${res.status}`);
+}
+
+function FetchCRUD() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [status, setStatus] = useState("");
+
+  const handleGetPosts = async () => {
+    try {
+      setStatus("Cargando posts...");
+      const data = await obtenerPosts();
+      setPosts(data.slice(0, 5));
+      setStatus(`Obtenidos ${data.length} posts (mostrando 5)`);
+    } catch (error) {
+      setStatus(`Error: ${(error as Error).message}`);
+    }
+  };
+
+  const handleCreatePost = async () => {
+    try {
+      setStatus("Creando post...");
+      const nuevo = await crearPost({
+        userId: 1,
+        title: "Nuevo post desde Tauri",
+        body: "Contenido del post creado con POST",
+      });
+      setStatus(`Post creado con id: ${nuevo.id}`);
+    } catch (error) {
+      setStatus(`Error: ${(error as Error).message}`);
+    }
+  };
+
+  const handleDeletePost = async (id: number) => {
+    try {
+      setStatus(`Eliminando post ${id}...`);
+      await eliminarPost(id);
+      setStatus(`Post ${id} eliminado`);
+    } catch (error) {
+      setStatus(`Error: ${(error as Error).message}`);
+    }
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: '1rem' }}>
+        <button onClick={handleGetPosts} style={{ marginRight: '0.5rem' }}>
+          GET Posts
+        </button>
+        <button onClick={handleCreatePost} style={{ marginRight: '0.5rem' }}>
+          POST Crear Post
+        </button>
+      </div>
+      {status && <p style={{ color: '#569cd6' }}>{status}</p>}
+      {posts.length > 0 && (
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <strong>{post.title}</strong>
+              <button onClick={() => handleDeletePost(post.id)} style={{ marginLeft: '0.5rem' }}>
+                DELETE
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export default FetchCRUD;
+```
+
+> Las funciones `obtenerPosts`, `crearPost` y `eliminarPost` también forman parte del mismo fichero real; `obtenerPost` y `actualizarPost` se exportan para poder reutilizarlas desde fuera.
 
 ### Múltiples peticiones en paralelo y secuencial
 

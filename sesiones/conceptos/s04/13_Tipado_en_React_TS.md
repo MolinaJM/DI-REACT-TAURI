@@ -304,4 +304,176 @@ npm run build      # validar + compilar en Vite
 
 ---
 
+### 📦 En el repositorio (`repos/02-react-componentes/src/components/TablaGenerica.tsx`)
+
+```tsx
+/**
+ * TablaGenerica.tsx - Componente Tabla Genérica
+ * Fuente: Sesión 07 - Creación de Componentes Personalizados
+ * Tabla<T> con Columna<T>, keyExtractor, render personalizado
+ */
+import { ReactNode } from 'react';
+
+interface Columna<T> {
+    key: keyof T | string;
+    titulo: string;
+    render?: (item: T) => ReactNode;
+}
+
+interface TablaProps<T> {
+    datos: T[];
+    columnas: Columna<T>[];
+    keyExtractor: (item: T) => string | number;
+}
+
+function Tabla<T extends Record<string, any>>({
+    datos, columnas, keyExtractor }: TablaProps<T>) {
+    if (datos.length === 0) {
+        return <div className="text-center py-8 text-gray-500">No hay datos disponibles</div>;
+    }
+
+    return (
+        <table className="w-full border-collapse">
+            <thead>
+                <tr className="bg-gray-100">
+                    {columnas.map(col => (
+                        <th key={String(col.key)}
+                            className="px-4 py-3 text-left text-sm font-semibold text-gray-600">
+                            {col.titulo}
+                        </th>
+                    ))}
+                </tr>
+            </thead>
+            <tbody>
+                {datos.map(item => (
+                    <tr key={keyExtractor(item)} className="border-t hover:bg-gray-50 transition">
+                        {columnas.map(col => (
+                            <td key={String(col.key)} className="px-4 py-3 text-sm">
+                                {col.render ? col.render(item) : String(item[col.key as keyof T] ?? "")}
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    );
+}
+
+export default Tabla;
+```
+
+### 📦 En el repositorio (`repos/02-react-componentes/src/components/Boton.tsx`)
+
+```tsx
+/**
+ * Boton.tsx - Componente Botón personalizado
+ * Fuente: Sesión 07 - Creación de Componentes Personalizados
+ * BotonProps extendiendo ButtonHTMLAttributes, variantes, tamaños, loading
+ */
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+
+type Variante = "primary" | "secondary" | "danger" | "ghost";
+type Tamano = "sm" | "md" | "lg";
+
+interface BotonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    children: ReactNode;
+    variante?: Variante;
+    tamano?: Tamano;
+    icono?: ReactNode;
+    cargando?: boolean;
+}
+
+const VARIANTES: Record<Variante, string> = {
+    primary: "bg-blue-600 text-white hover:bg-blue-700",
+    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
+    danger: "bg-red-600 text-white hover:bg-red-700",
+    ghost: "bg-transparent text-gray-600 hover:bg-gray-100",
+};
+
+const TAMANOS: Record<Tamano, string> = {
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg",
+};
+
+function Boton({ children, variante = "primary", tamano = "md",
+    icono, cargando, disabled, className = "", ...props }: BotonProps) {
+    return (
+        <button
+            className={`inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors
+                ${VARIANTES[variante]} ${TAMANOS[tamano]}
+                ${(disabled || cargando) ? "opacity-50 cursor-not-allowed" : ""}
+                ${className}`}
+            disabled={disabled || cargando} {...props}>
+            {cargando ? (
+                <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+            ) : icono}
+            {children}
+        </button>
+    );
+}
+
+export default Boton;
+```
+
+### 📦 En el repositorio (`repos/02-react-componentes/src/hooks/useForm.ts`)
+
+```typescript
+/**
+ * useForm.ts - Hook de formulario con tipado y validación
+ * Fuente: Sesión 05 - Formulario Controlado con Tipado
+ * Extraído del patrón de FormularioRegistro con useState<FormData>
+ */
+import { useState, ChangeEvent, FormEvent } from 'react';
+
+interface UseFormOptions<T> {
+    valoresIniciales: T;
+    validar: (valores: T) => Partial<Record<keyof T, string>>;
+}
+
+interface UseFormReturn<T> {
+    valores: T;
+    errores: Partial<Record<keyof T, string>>;
+    handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+    handleSubmit: (onSubmit: (valores: T) => void) => (e: FormEvent) => void;
+    setValores: React.Dispatch<React.SetStateAction<T>>;
+    esValido: boolean;
+}
+
+export function useForm<T extends Record<string, any>>({
+    valoresIniciales,
+    validar,
+}: UseFormOptions<T>): UseFormReturn<T> {
+    const [valores, setValores] = useState<T>(valoresIniciales);
+    const [errores, setErrores] = useState<Partial<Record<keyof T, string>>>({});
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value, type } = e.target;
+        const checked = (e.target as HTMLInputElement).checked;
+
+        setValores(prev => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value
+        }));
+    };
+
+    const handleSubmit = (onSubmit: (valores: T) => void) => {
+        return (e: FormEvent) => {
+            e.preventDefault();
+            const nuevosErrores = validar(valores);
+            setErrores(nuevosErrores);
+            if (Object.keys(nuevosErrores).length === 0) {
+                onSubmit(valores);
+            }
+        };
+    };
+
+    const esValido = Object.keys(errores).length === 0;
+
+    return { valores, errores, handleChange, handleSubmit, setValores, esValido };
+}
+```
+
+---
+
 [Volver al índice general](../../index.md)

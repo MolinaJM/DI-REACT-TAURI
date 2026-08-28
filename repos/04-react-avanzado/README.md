@@ -22,7 +22,7 @@ Proyecto Vite + React con Context API, Zustand, React Router v6, servicio CRUD g
 │   │   └── RouterSPA.ts            S08 - Router custom con History API
 │   ├── api/
 │   │   ├── ApiService.ts           S09 - Clase generica ApiService<T>
-│   │   ├── crud.ts                 S09 - GET/POST/PUT/DELETE
+│   │   ├── crud.tsx                 S09 - GET/POST/PUT/DELETE
 │   │   └── validacion.ts           S09 - Validacion de formularios
 │   ├── styles/
 │   │   ├── Dashboard.tsx           S10 - Layout responsive (Tailwind)

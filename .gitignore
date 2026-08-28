@@ -4,3 +4,19 @@ dist/
 *.log
 .DS_Store
 *.tsbuildinfo
+
+# Soluciones por sesion (ignoradas: no se publican)
+ejercicios/soluciones/s00/
+ejercicios/soluciones/s01/
+ejercicios/soluciones/s01-s/
+ejercicios/soluciones/s02/
+ejercicios/soluciones/s03/
+ejercicios/soluciones/s04/
+ejercicios/soluciones/s05/
+ejercicios/soluciones/s06/
+ejercicios/soluciones/s07/
+ejercicios/soluciones/s08/
+ejercicios/soluciones/s09/
+ejercicios/soluciones/s10/
+ejercicios/soluciones/s11/
+ejercicios/soluciones/s12/

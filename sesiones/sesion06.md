@@ -10,6 +10,8 @@ Componentes reutilizables, props, composicion y slots
 
 ## Componente Boton Personalizado
 
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/components/Boton.tsx` (idéntico; el fichero real añade `export default Boton`)
+
 ```tsx
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
@@ -57,6 +59,8 @@ function Boton({ children, variante = "primary", tamano = "md",
 
 ## Componente Modal
 
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/components/Modal.tsx` (idéntico; el fichero real añade `export default Modal`)
+
 ```tsx
 import { ReactNode, useEffect } from 'react';
 
@@ -94,6 +98,8 @@ function Modal({ abierto, onCerrar, titulo, children, tamano = "md" }: ModalProp
 ```
 
 ## Componente Tabla Genérica
+
+> 📦 **Este código está en el repositorio:** `repos/02-react-componentes/src/components/TablaGenerica.tsx` (idéntico; el fichero real añade `export default Tabla`)
 
 ```tsx
 import { ReactNode } from 'react';
