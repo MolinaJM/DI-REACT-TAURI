@@ -34,7 +34,7 @@ Tauri es un framework de código abierto para crear aplicaciones de escritorio u
 
 ## Ejemplo de miniaplicación
 
-Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio responsivas**, con acceso a **base de datos**, con **corazón Web**. Es decir, interfaces que se comportan como una app nativa pero están construidas con tecnologías web y pueden desplegarse en cualquier plataforma.
+Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio responsivas**, **multiplataforma* con acceso a **base de datos**. Una forma muy ágil de conseguir esto es mediante aplicaciones híbridas. Es decir, interfaces que se comportan como una app nativa pero están construidas con tecnologías web y pueden desplegarse en cualquier plataforma.
 
 A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura completa:
 
