@@ -6,7 +6,7 @@ Componentes reutilizables, props, composicion y slots
 
 ---
 
-> 📚 **Conceptos y apuntes de la sesión:** [A14 · Componentes, JSX y props](conceptos/s06/14_React_Componentes_JSX_Props.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
+> 📚 **Apuntes de la sesión:** [A14 · Componentes, JSX y props](apuntes/s06/14_React_Componentes_JSX_Props.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
 
 ## Componente Boton Personalizado
 

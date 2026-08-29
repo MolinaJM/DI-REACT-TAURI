@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 13: Programacion Asincrona
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 3 (concepto 15):
  * - Callbacks tipados
  * - Promesas (Promise)
  * - Combinadores: Promise.all, allSettled, race, any

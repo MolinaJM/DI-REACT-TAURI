@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 06: Funciones en TypeScript
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (concepto 13):
  * - Parametros obligatorios, opcionales, por defecto, rest
  * - Arrow functions
  * - Callbacks y closures

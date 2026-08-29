@@ -1,25 +1,25 @@
 # 13. TypeScript aplicado a React: props, eventos y generics 📝 🖥️
 
-- [13. TypeScript aplicado a React: props, eventos y generics 📝 🖥️](#13-typescript-aplicado-a-react-props-eventos-y-generics-️)
-  - [1. El modelo de datos con interfaces](#1-el-modelo-de-datos-con-interfaces)
-  - [2. Tipado de props: una interfaz por componente](#2-tipado-de-props-una-interfaz-por-componente)
-  - [3. Propiedades opcionales (`?`) y obligatorias](#3-propiedades-opcionales--y-obligatorias)
-  - [4. Generics en React: `useState<T>` y `useRef<T>`](#4-generics-en-react-usestatet-y-usereft)
+- [13. TypeScript aplicado a React: props, eventos y generics 📝 🖥️](#13-typescript-aplicado-a-react-props-eventos-y-generics)
+  - [13.1. El modelo de datos con interfaces](#131-el-modelo-de-datos-con-interfaces)
+  - [13.2. Tipado de props: una interfaz por componente](#132-tipado-de-props-una-interfaz-por-componente)
+  - [13.3. Propiedades opcionales (`?`) y obligatorias](#133-propiedades-opcionales--y-obligatorias)
+  - [13.4. Generics en React: `useState<T>` y `useRef<T>`](#134-generics-en-react-usestatet-y-usereft)
     - [4.1 `useState<Pelicula[]>`](#41-usestatepelicula)
-    - [4.2 `useRef<ReturnType<typeof setTimeout>>`](#42-userefreturntypeof-settimeout)
-    - [4.3 Componentes genéricos `<T>`](#43-componentes-genéricos-t)
-  - [5. Utility types](#5-utility-types)
-    - [5.1 `Record<string, string>`: colores por género](#51-recordstring-string-colores-por-género)
-    - [5.2 `Partial`, `Pick` y `Omit`](#52-partial-pick-y-omit)
-  - [6. Type assertions y conversiones](#6-type-assertions-y-conversiones)
-    - [6.1 `as HTMLElement`](#61-as-htmlelement)
-    - [6.2 `parseInt` y `parseFloat`](#62-parseint-y-parsefloat)
-  - [7. Tipado de eventos de React](#7-tipado-de-eventos-de-react)
-    - [7.1 `React.FormEvent`](#71-reactformevent)
-    - [7.2 `React.ChangeEvent`](#72-reactchangeevent)
-    - [7.3 `React.MouseEvent`](#73-reactmouseevent)
-  - [8. `strict` mode: tu red de seguridad](#8-strict-mode-tu-red-de-seguridad)
-  - [9. Bibliografía](#9-bibliografía)
+    - [13.4.2 `useRef<ReturnType<typeof setTimeout>>`](#1342-userefreturntypetypeof-settimeout)
+    - [13.4.3 Componentes genéricos `<T>`](#1343-componentes-genéricos-t)
+  - [13.5. Utility types](#135-utility-types)
+    - [13.5.1 `Record<string, string>`: colores por género](#1351-recordstring-string-colores-por-género)
+    - [13.5.2 `Partial`, `Pick` y `Omit`](#1352-partial-pick-y-omit)
+  - [13.6. Type assertions y conversiones](#136-type-assertions-y-conversiones)
+    - [13.6.1 `as HTMLElement`](#1361-as-htmlelement)
+    - [13.6.2 `parseInt` y `parseFloat`](#1362-parseint-y-parsefloat)
+  - [13.7. Tipado de eventos de React](#137-tipado-de-eventos-de-react)
+    - [13.7.1 `React.FormEvent`](#1371-reactformevent)
+    - [13.7.2 `React.ChangeEvent`](#1372-reactchangeevent)
+    - [13.7.3 `React.MouseEvent`](#1373-reactmouseevent)
+  - [13.8. `strict` mode: tu red de seguridad](#138-strict-mode-tu-red-de-seguridad)
+  - [13.9. Bibliografía](#139-bibliografía)
 
 Esta unidad completa los conocimientos de TypeScript que faltan para llegar a React con seguridad: tipar las **props** de cada componente, usar **genéricos** con los hooks, aprovechar los **utility types** y tipar los **eventos** de React.
 
@@ -28,7 +28,7 @@ Esta unidad completa los conocimientos de TypeScript que faltan para llegar a Re
 
 ---
 
-## 1. El modelo de datos con interfaces
+## 13.1. El modelo de datos con interfaces
 
 En React los datos que fluyen entre componentes se describen con `interface`. Para AppCine definimos la entidad central una sola vez:
 
@@ -48,7 +48,7 @@ export interface Pelicula {
 
 ---
 
-## 2. Tipado de props: una interfaz por componente
+## 13.2. Tipado de props: una interfaz por componente
 
 Cada componente declara su propio contrato de entrada. Es un patrón estándar en React + TypeScript que se escribe con `interface` + `Props`:
 
@@ -82,7 +82,7 @@ Regla práctica del curso:
 
 ---
 
-## 3. Propiedades opcionales (`?`) y obligatorias
+## 13.3. Propiedades opcionales (`?`) y obligatorias
 
 En los formularios tipados, las props opcionales son habituales:
 
@@ -103,11 +103,11 @@ Trucos útiles que vienen de TypeScript:
 
 ---
 
-## 4. Generics en React: `useState<T>` y `useRef<T>`
+## 13.4. Generics en React: `useState<T>` y `useRef<T>`
 
 Los generics que ya viste en arrays y funciones son la base de los hooks tipados.
 
-### 4.1 `useState<Pelicula[]>`
+### 13.4.1 `useState<Pelicula[]>`
 
 ```tsx
 import { useState } from "react";
@@ -124,7 +124,7 @@ export function usePeliculas() {
 > [!NOTE]
 > `useState<Pelicula[]>([])` fija el tipo genérico del estado. Si luego haces `setPeliculas(5)`, TypeScript te lo impide en tiempo de compilación.
 
-### 4.2 `useRef<ReturnType<typeof setTimeout>>`
+### 13.4.2 `useRef<ReturnType<typeof setTimeout>>`
 
 `setTimeout` devuelve un id. Lo mismo ocurre con `clearTimeout`. El tipo compuesto se escribe con `ReturnType<typeof setTimeout>`:
 
@@ -147,7 +147,7 @@ Otro clásico: una referencia a un elemento del DOM.
 const overlayRef = useRef<HTMLDivElement | null>(null);
 ```
 
-### 4.3 Componentes genéricos `<T>`
+### 13.4.3 Componentes genéricos `<T>`
 
 Un componente puede ser genérico cuando sirve para varios tipos de entidad:
 
@@ -163,11 +163,11 @@ export function Fila<T extends { id?: number; titulo: string }>({ item }: Fila<T
 
 ---
 
-## 5. Utility types
+## 13.5. Utility types
 
 TypeScript trae tipos genéricos listos que React usa a diario.
 
-### 5.1 `Record<string, string>`: colores por género
+### 13.5.1 `Record<string, string>`: colores por género
 
 AppCine pinta un badge del color según el género. La tabla de correspondencias se tipa con `Record<string, string>`:
 
@@ -189,7 +189,7 @@ export function colorDeGenero(genero: string): string {
 > [!NOTE]
 > `Record<string, string>` garantiza que la clave sea `string` y el valor también. Si accedes con una clave que no existe devuelve `undefined`; por eso el `?? "#6c757d"` (color neutro por defecto).
 
-### 5.2 `Partial`, `Pick` y `Omit`
+### 13.5.2 `Partial`, `Pick` y `Omit`
 
 | Utility type | ¿Qué hace? | Ejemplo |
 | --- | --- | --- |
@@ -200,9 +200,9 @@ export function colorDeGenero(genero: string): string {
 
 ---
 
-## 6. Type assertions y conversiones
+## 13.6. Type assertions y conversiones
 
-### 6.1 `as HTMLElement`
+### 13.6.1 `as HTMLElement`
 
 Cuando TypeScript no puede deducir el tipo de un valor que tú sí conoces, se usa una *type assertion*:
 
@@ -214,7 +214,7 @@ entrada.value;
 > [!IMPORTANT]
 > Prefiere los genéricos de las APIs del DOM (`querySelector<HTMLInputElement>("#buscar")`) antes que el `as`, porque el genérico también valida el selector en compilación. Usa `as` solo cuando no haya alternativa (o cuando haya que refinarlo en runtime con un *type guard*).
 
-### 6.2 `parseInt` y `parseFloat`
+### 13.6.2 `parseInt` y `parseFloat`
 
 Vienen de **entradas de formulario** (todo texto) y hay que convertirlas antes de guardarlas en una `Pelicula`:
 
@@ -228,11 +228,11 @@ const puntuacion = Number.parseFloat(cadena);
 
 ---
 
-## 7. Tipado de eventos de React
+## 13.7. Tipado de eventos de React
 
 React usa **Synthetic Events**: en TS se tipan con genéricos que indican sobre qué elemento se disparan.
 
-### 7.1 `React.FormEvent`
+### 13.7.1 `React.FormEvent`
 
 En el envío de un formulario:
 
@@ -245,7 +245,7 @@ function guardar(e: FormEvent<HTMLFormElement>) {
 }
 ```
 
-### 7.2 `React.ChangeEvent`
+### 13.7.2 `React.ChangeEvent`
 
 En inputs controlados:
 
@@ -257,7 +257,7 @@ function onTitulo(e: ChangeEvent<HTMLInputElement>) {
 }
 ```
 
-### 7.3 `React.MouseEvent`
+### 13.7.3 `React.MouseEvent`
 
 En botones:
 
@@ -281,7 +281,7 @@ Tabla resumen típica en un CRUD:
 
 ---
 
-## 8. `strict` mode: tu red de seguridad
+## 13.8. `strict` mode: tu red de seguridad
 
 Todo el repo usa `strict: true`. En React esto significa que:
 
@@ -296,7 +296,7 @@ npm run build      # validar + compilar en Vite
 
 ---
 
-## 9. Bibliografía
+## 13.9. Bibliografía
 
 - [TypeScript Handbook: Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 - [React: Types of events](https://react.dev/reference/react-dom/components/common)

@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 15: Arrays Avanzado, Set, Map y Objetos
  * ------------------------------------------------
- * Ejemplos extraidos de Sesion 3 (conceptos 11, 12, 13 y 14):
  * - Arrays: push/pop/splice, map/filter/reduce, at(), toSorted/toReversed
  * - Arrays: sort/reverse, destructuring, busqueda binaria
  * - Set: creacion, operaciones, ES2025 nativas
@@ -243,8 +242,8 @@ interface Alumno {
 }
 
 const alumnos: Alumno[] = [
-    { nombre: "PROFE", curso: "DWEC" },
-    { nombre: "Ana", curso: "DWEC" },
+    { nombre: "PROFE", curso: "DI" },
+    { nombre: "Ana", curso: "DI" },
     { nombre: "Luis", curso: "DIW" },
 ];
 
@@ -252,7 +251,7 @@ const porCurso: Map<string, Alumno[]> = Map.groupBy(
     alumnos,
     (a: Alumno) => a.curso
 );
-// Map { "DWEC" => [Alumno, Alumno], "DIW" => [Alumno] }
+// Map { "DI" => [Alumno, Alumno], "DIW" => [Alumno] }
 
 // WeakMap
 const metadatos: WeakMap<object, { clicks: number }> = new WeakMap();

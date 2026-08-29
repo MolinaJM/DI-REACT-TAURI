@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 01: Tipos Primitivos en TypeScript
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 1, 3 y 8):
  * - Que es TypeScript (comparacion JS vs TS)
  * - Tipos primitivos basicos
  * - Inferencia de tipos (Type Inference)

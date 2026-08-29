@@ -24,7 +24,7 @@ JavaScript ofrece tres formas de declarar variables: `var`, `let` y `const`. Cad
 ### i. `var`
 
 - Declaración global o de función.
-- No respeta el bloque de alcance (`block scope`).
+- No respeta el bloque de alcance (`block scope`). Un bloque es lo que hay entre  {} ya sea un if, un for, etc.. Sobrevive fuera del bloque.
 - Puede ser reasignada y redeclarada.
 - **Evitar en TypeScript moderno:** su ámbito impredecible dificulta el razonamiento de tipos. `tsc` lo permite por compatibilidad, pero los linters lo marcan como desaconsejado.
 
@@ -125,6 +125,17 @@ A partir de ES6 y versiones posteriores, los tipos de datos primitivos en JavaSc
 
    TypeScript además lo avisa en compilación: asignar a un índice de `string` es un error de tipo.
 
+   
+   ```typescript
+   let x: number = 5;
+   let y = x;
+   x=10; //x tiene un nuevo valor
+
+   console.log(x); //10
+   console.log(y); //Sigue siendo 5 (no hace referencia a la posición de memoria de x)
+   ```
+
+
 2. **Almacenamiento por valor**: Los tipos primitivos son almacenados directamente en la memoria (stack), lo que significa que cuando asignas o pasas un valor primitivo, estás trabajando con una copia del valor.
 
    Ejemplo:
@@ -196,7 +207,6 @@ export {};
 /**
  * Fichero 03: Tipos Especiales y Aserciones
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 6 y 7):
  * - any, unknown, void, never
  * - Type Assertions (aserciones de tipo)
  * (Enums: optativo, fuera de la ruta React + Tauri)
@@ -268,6 +278,8 @@ let colores = ["rojo", "verde", "azul"] as const;
 // Tipo: readonly ["rojo", "verde", "azul"]
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-03-tipos-especiales.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
+
 ---
 
 ### 📦 En el repositorio (`repos/01-typescript-fundamentos/src/REPO-01-tipos-primitivos.ts`)
@@ -278,7 +290,6 @@ export {};
 /**
  * Fichero 01: Tipos Primitivos en TypeScript
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 1, 3 y 8):
  * - Que es TypeScript (comparacion JS vs TS)
  * - Tipos primitivos basicos
  * - Inferencia de tipos (Type Inference)
@@ -350,6 +361,8 @@ function procesar({ nombre, edad }: { nombre: string; edad: number }) {
 }
 console.log(procesar({ nombre: "Ana", edad: 30 }));
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-01-tipos-primitivos.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

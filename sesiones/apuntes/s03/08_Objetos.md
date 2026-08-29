@@ -769,7 +769,6 @@ export {};
 /**
  * Fichero 05: Interfaces y Type Aliases
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 11 y 12):
  * - Interfaces (basica, opcionales, readonly, index, extends, merging)
  * - Type Aliases (primitivos, objetos, funciones, tuplas, genericos)
  * - Comparacion Interface vs Type
@@ -881,6 +880,8 @@ const resp: UsuarioResp = {
 };
 console.log(resp);
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-05-interfaces-types.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

@@ -6,7 +6,7 @@ useState, useReducer, formularios controlados y validación
 
 ---
 
-> 📚 **Conceptos y apuntes de la sesión:** [A15 · Hooks, ciclo de vida y comunicación](conceptos/s05/15_React_Hooks_y_Comunicacion.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
+> 📚 **Apuntes de la sesión:** [A15 · Hooks, ciclo de vida y comunicación](apuntes/s05/15_React_Hooks_y_Comunicacion.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
 
 ## Estado con useReducer
 

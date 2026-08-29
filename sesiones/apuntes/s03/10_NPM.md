@@ -318,7 +318,6 @@ export {};
  * Este fichero documenta los comandos de instalacion y
  * configuracion basica de TypeScript.
  *
- * Ejemplos extraidos de Sesion 2 (concepto 2):
  * - Instalacion global
  * - Comandos básicos
  * - tsconfig.json basico
@@ -419,6 +418,8 @@ export {};
 console.log("Fichero de referencia: ejecuta los comandos en la terminal");
 console.log("Ver README.md del repo para mas detalles");
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-18-instalacion-configuracion.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

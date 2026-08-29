@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 02: Arrays y Tuplas en TypeScript
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (concepto 4):
  * - Arrays (ambas sintaxises, multidimensional, union, readonly)
  * - Tuplas (basica, opcional, etiquetas, destructuracion)
  */

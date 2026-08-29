@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 08: Control de Flujo, Scope y This
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 17 y 18):
  * - Condicionales (if/else, switch exhaustivo)
  * - Bucles (for, for...of, while, do...while)
  * - break y continue
@@ -149,7 +148,7 @@ interface UsuarioThis {
 
 const usuarioThis: UsuarioThis = {
     nombre: "PROFE",
-    asignaturas: ["DWEC", "DIW"],
+    asignaturas: ["DI", "DIW"],
     mostrarFlecha(): void {
         this.asignaturas.forEach((asig) => {
             console.log(this.nombre, asig); // this = usuarioThis

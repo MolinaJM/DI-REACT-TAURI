@@ -238,7 +238,6 @@ export {};
 /**
  * Fichero 12: Modulos
  * --------------------
- * Ejemplos extraidos de Sesion 3 (concepto 7):
  * - Modulos: export, import, default, re-export
  * - import type (modulos type-only)
  * (Declaraciones .d.ts / namespace / ambient modules: optativo, fuera de la ruta React + Tauri)
@@ -294,6 +293,8 @@ nombre = null;
 // noImplicitAny
 // function procesar(param) {}  // Error: implicit any
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-12-modulos.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

@@ -6,9 +6,8 @@ export {};
  * Este fichero documenta los comandos de instalacion y
  * configuracion basica de TypeScript.
  *
- * Ejemplos extraidos de Sesion 2 (concepto 2):
  * - Instalacion global
- * - Comandos基本icos
+ * - Comandos básicos
  * - tsconfig.json basico
  *
  * NOTA: Este fichero contiene solo comentarios con referencia
@@ -27,7 +26,7 @@ export {};
 // Version 5.x
 
 // ========================================
-// COMANDOS基本ICOS
+// COMANDOS BÁSICOS
 // ========================================
 
 // Compilar un archivo:

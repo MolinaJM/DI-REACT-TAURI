@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 05: Interfaces y Type Aliases
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 11 y 12):
  * - Interfaces (basica, opcionales, readonly, index, extends, merging)
  * - Type Aliases (primitivos, objetos, funciones, tuplas, genericos)
  * - Comparacion Interface vs Type

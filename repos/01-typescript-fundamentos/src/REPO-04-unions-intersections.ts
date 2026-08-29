@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 04: Union Types, Interseccion, Literales y Type Narrowing
  * -----------------------------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 9 y 10):
  * - Union Types (|)
  * - Interseccion de Tipos (&)
  * - Literal Types

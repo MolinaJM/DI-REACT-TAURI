@@ -13,7 +13,6 @@ export {};
  * - TypeScript detecta errores al escribir (compilacion)
  * - TypeScript compila a JavaScript plano (navegador no lo entiende directamente)
  *
- * Ejemplos extraidos de Sesion 2 (concepto 1):
  * - Problemas de JS sin tipos
  * - Solucion con TS tipado
  */

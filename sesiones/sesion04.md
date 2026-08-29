@@ -6,7 +6,7 @@ Componentes funcionales, props, children y hooks básicos
 
 ---
 
-> 📚 **Conceptos y apuntes de la sesión:** [A12 · Preparación hacia React 19](conceptos/s04/12_Preparacion_React_19.md), [A13 · Tipado en React (props, eventos, generics)](conceptos/s04/13_Tipado_en_React_TS.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
+> 📚 **Apuntes de la sesión:** [A12 · Preparación hacia React 19](apuntes/s04/12_Preparacion_React_19.md), [A13 · Tipado en React (props, eventos, generics)](apuntes/s04/13_Tipado_en_React_TS.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
 
 ## Componente Funcional con TypeScript
 

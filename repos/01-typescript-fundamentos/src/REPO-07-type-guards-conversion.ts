@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 07: Type Guards Avanzados, Conversion de Tipos y Operadores
  * -------------------------------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 14, 15 y 16):
  * - Custom Type Guards (funciones predictoras)
  * - Assertion functions
  * - Conversion explícita de tipos

@@ -1,16 +1,16 @@
 # 14. React: componentes, JSX y props 📝 🖥️
 
-- [14. React: componentes, JSX y props 📝 🖥️](#14-react-componentes-jsx-y-props-️)
-  - [1. Componentes funcionales y composición](#1-componentes-funcionales-y-composición)
-  - [2. JSX y renderizado: qué se puede expresar y qué no](#2-jsx-y-renderizado-qué-se-puede-expresar-y-qué-no)
-  - [3. Props: comunicación padre → hijo](#3-props-comunicación-padre--hijo)
-  - [4. Renderizado de listas con `key`: `PeliculaTable`](#4-renderizado-de-listas-con-key-peliculatable)
-  - [5. Renderizado condicional: loading, vacío, ternarios y `&&`](#5-renderizado-condicional-loading-vacío-ternarios-y-)
-  - [6. `useState` y formularios controlados: `Buscador` y `PeliculaForm`](#6-usestate-y-formularios-controlados-buscador-y-películaform)
-    - [6.1 `Buscador` con input controlado](#61-buscador-con-input-controlado)
-    - [6.2 `PeliculaForm` controlado](#62-películaform-controlado)
-  - [7. Composición de la pantalla principal](#7-composición-de-la-pantalla-principal)
-  - [8. Prácticas](#8-prácticas)
+- [14. React: componentes, JSX y props 📝 🖥️](#14-react-componentes-jsx-y-props)
+  - [14.1. Componentes funcionales y composición](#141-componentes-funcionales-y-composición)
+  - [14.2. JSX y renderizado: qué se puede expresar y qué no](#142-jsx-y-renderizado-qué-se-puede-expresar-y-qué-no)
+  - [14.3. Props: comunicación padre → hijo](#143-props-comunicación-padre--hijo)
+  - [14.4. Renderizado de listas con `key`: `PeliculaTable`](#144-renderizado-de-listas-con-key-peliculatable)
+  - [14.5. Renderizado condicional: loading, vacío, ternarios y `&&`](#145-renderizado-condicional-loading-vacío-ternarios-y)
+  - [14.6. `useState` y formularios controlados: `Buscador` y `PeliculaForm`](#146-usestate-y-formularios-controlados-buscador-y-peliculaform)
+    - [14.6.1 `Buscador` con input controlado](#1461-buscador-con-input-controlado)
+    - [14.6.2 `PeliculaForm` controlado](#1462-peliculaform-controlado)
+  - [14.7. Composición de la pantalla principal](#147-composición-de-la-pantalla-principal)
+  - [14.8. Prácticas](#148-prácticas)
 
 Objetivo: crear la UI de AppCine a partir de componentes reutilizables, con JSX, props, listas con `key` y formularios controlados con `useState`. **No hay manipulación manual del DOM**: React se encarga de pintar a partir de los datos.
 
@@ -19,7 +19,7 @@ Objetivo: crear la UI de AppCine a partir de componentes reutilizables, con JSX,
 
 ---
 
-## 1. Componentes funcionales y composición
+## 14.1. Componentes funcionales y composición
 
 Un componente es una **función que recibe props y devuelve JSX**. Se reutiliza componiendo unos dentro de otros:
 
@@ -40,7 +40,7 @@ export function App() {
 
 ---
 
-## 2. JSX y renderizado: qué se puede expresar y qué no
+## 14.2. JSX y renderizado: qué se puede expresar y qué no
 
 JSX es azúcar sintáctico para `createElement`. Dentro de `{...}` se puede poner **expresiones**, no sentencias.
 
@@ -64,7 +64,7 @@ Reglas prácticas de JSX:
 
 ---
 
-## 3. Props: comunicación padre → hijo
+## 14.3. Props: comunicación padre → hijo
 
 Los datos bajan del padre al hijo mediante **props**. En el padre:
 
@@ -96,7 +96,7 @@ export function PeliculaRow({ pelicula, indice }: PeliculaRowProps) {
 
 ---
 
-## 4. Renderizado de listas con `key`: `PeliculaTable`
+## 14.4. Renderizado de listas con `key`: `PeliculaTable`
 
 Las listas se pintan con `map` y cada elemento lleva una **`key`** única, basada en el id de los datos:
 
@@ -136,7 +136,7 @@ export function PeliculaTable({ peliculas }: PeliculaTableProps) {
 
 ---
 
-## 5. Renderizado condicional: loading, vacío, ternarios y `&&`
+## 14.5. Renderizado condicional: loading, vacío, ternarios y `&&`
 
 Cuatro patrones imprescindibles:
 
@@ -163,11 +163,11 @@ Cuatro patrones imprescindibles:
 
 ---
 
-## 6. `useState` y formularios controlados: `Buscador` y `PeliculaForm`
+## 14.6. `useState` y formularios controlados: `Buscador` y `PeliculaForm`
 
 Un **formulario controlado** guarda el valor del input en el estado: el input muestra siempre `value` del estado y cada tecla llama al `set`.
 
-### 6.1 `Buscador` con input controlado
+### 14.6.1 `Buscador` con input controlado
 
 ```tsx
 import { useState } from "react";
@@ -194,7 +194,7 @@ export function Buscador({ onBuscar }: BuscadorProps) {
 }
 ```
 
-### 6.2 `PeliculaForm` controlado
+### 14.6.2 `PeliculaForm` controlado
 
 Un formulario con varios campos, uno por cada propiedad de la película:
 
@@ -270,7 +270,7 @@ export function PeliculaForm({ inicial = {}, onGuardar }: PeliculaFormProps) {
 
 ---
 
-## 7. Composición de la pantalla principal
+## 14.7. Composición de la pantalla principal
 
 Con estas piezas se compone la pantalla de AppCine:
 
@@ -290,7 +290,7 @@ Con estas piezas se compone la pantalla de AppCine:
 
 ---
 
-## 8. Prácticas
+## 14.8. Prácticas
 
 - **P1.** `PeliculaTable` que recibe `Pelicula[]` y pinta la tabla con `key={p.id}`.
 - **P2.** `Buscador` con input controlado que avisa al padre con `onBuscar(texto)`.

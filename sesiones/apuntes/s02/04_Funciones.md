@@ -342,7 +342,6 @@ export {};
 /**
  * Fichero 06: Funciones en TypeScript
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (concepto 13):
  * - Parametros obligatorios, opcionales, por defecto, rest
  * - Arrow functions
  * - Callbacks y closures
@@ -414,6 +413,8 @@ console.log(configurarURL("http://localhost", 3000));
 console.log(crearUsuario("Luis"));
 console.log(ejecutarOperacion(5, 3, (a, b) => a + b));
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-06-funciones.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

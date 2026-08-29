@@ -625,7 +625,6 @@ export {};
 /**
  * Fichero 13: Programacion Asincrona
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 3 (concepto 15):
  * - Callbacks tipados
  * - Promesas (Promise)
  * - Combinadores: Promise.all, allSettled, race, any
@@ -743,6 +742,8 @@ function fetchConTimeout(url: string, ms: number = 5000): Promise<Response> {
 // Ejemplo de uso
 ejemplo().then((msg) => console.log(msg));
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-13-async-await.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

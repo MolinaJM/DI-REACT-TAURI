@@ -234,7 +234,6 @@ export {};
 /**
  * Fichero 07: Type Guards Avanzados, Conversion de Tipos y Operadores
  * -------------------------------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 14, 15 y 16):
  * - Custom Type Guards (funciones predictoras)
  * - Assertion functions
  * - Conversion explícita de tipos
@@ -406,6 +405,8 @@ console.log(`Puede votar? ${puedeVotar}`);
 console.log(describirAnimal({ tipo: "pez", profundidadMaxima: 10 }));
 console.log(describirAnimal({ tipo: "ave", envergadura: 50 }));
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-07-type-guards-conversion.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

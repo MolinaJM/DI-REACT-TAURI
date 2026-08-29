@@ -3,7 +3,6 @@ export {};
 /**
  * Fichero 03: Tipos Especiales y Aserciones
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 6 y 7):
  * - any, unknown, void, never
  * - Type Assertions (aserciones de tipo)
  * (Enums: optativo, fuera de la ruta React + Tauri)

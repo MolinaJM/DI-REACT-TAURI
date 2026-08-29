@@ -1,19 +1,19 @@
 # 15. React: hooks, ciclo de vida y comunicación entre componentes 📝 🖥️
 
-- [15. React: hooks, ciclo de vida y comunicación entre componentes 📝 🖥️](#15-react-hooks-ciclo-de-vida-y-comunicación-entre-componentes-️)
-  - [1. `useState`: el estado local](#1-usestate-el-estado-local)
-  - [2. `useEffect`: carga de datos y suscripciones](#2-useeffect-carga-de-datos-y-suscripciones)
-    - [2.1 Carga inicial de datos](#21-carga-inicial-de-datos)
-    - [2.2 Suscripción a eventos y cleanup](#22-suscripción-a-eventos-y-cleanup)
-  - [3. `useCallback` y dependencias](#3-usecallback-y-dependencias)
-  - [4. `useRef`: timers y referencias al DOM](#4-useref-timers-y-referencias-al-dom)
-  - [5. Lifting state up: App como fuente de la verdad](#5-lifting-state-up-app-como-fuente-de-la-verdad)
-  - [6. Eventos por props: `onEdit`, `onDelete`, `onSave`, `onClose`, `onSearch`](#6-eventos-por-props-onedit-ondelete-onsave-onclose-onsearch)
-  - [7. Peticiones asíncronas con `fetch` + `async/await`](#7-peticiones-asíncronas-con-fetch--asyncawait)
-  - [8. Patrón modal: overlay + panel](#8-patrón-modal-overlay--panel)
-  - [9. Debounce en la búsqueda](#9-debounce-en-la-búsqueda)
-  - [10. Formulario: modo crear vs modo editar](#10-formulario-modo-crear-vs-modo-editar)
-  - [11. Prácticas](#11-prácticas)
+- [15. React: hooks, ciclo de vida y comunicación entre componentes 📝 🖥️](#15-react-hooks-ciclo-de-vida-y-comunicación-entre-componentes)
+  - [15.1. `useState`: el estado local](#151-usestate-el-estado-local)
+  - [15.2. `useEffect`: carga de datos y suscripciones](#152-useeffect-carga-de-datos-y-suscripciones)
+    - [15.2.1 Carga inicial de datos](#1521-carga-inicial-de-datos)
+    - [15.2.2 Suscripción a eventos y cleanup](#1522-suscripción-a-eventos-y-cleanup)
+  - [15.3. `useCallback` y dependencias](#153-usecallback-y-dependencias)
+  - [15.4. `useRef`: timers y referencias al DOM](#154-useref-timers-y-referencias-al-dom)
+  - [15.5. Lifting state up: App como fuente de la verdad](#155-lifting-state-up-app-como-fuente-de-la-verdad)
+  - [15.6. Eventos por props: `onEdit`, `onDelete`, `onSave`, `onClose`, `onSearch`](#156-eventos-por-props-onedit-ondelete-onsave-onclose-onsearch)
+  - [15.7. Peticiones asíncronas con `fetch` + `async/await`](#157-peticiones-asíncronas-con-fetch--asyncawait)
+  - [15.8. Patrón modal: overlay + panel](#158-patrón-modal-overlay--panel)
+  - [15.9. Debounce en la búsqueda](#159-debounce-en-la-búsqueda)
+  - [15.10. Formulario: modo crear vs modo editar](#1510-formulario-modo-crear-vs-modo-editar)
+  - [15.11. Prácticas](#1511-prácticas)
 
 Objetivo: gestionar datos asíncronos, coordinar componentes y montar el CRUD completo de AppCine con hooks y props.
 
@@ -22,7 +22,7 @@ Objetivo: gestionar datos asíncronos, coordinar componentes y montar el CRUD co
 
 ---
 
-## 1. `useState`: el estado local
+## 15.1. `useState`: el estado local
 
 El estado recuerda valores **entre renders**. Cambiar el estado con su `set` provoca un re-render automático:
 
@@ -38,11 +38,11 @@ const [editando, setEditando] = useState<Pelicula | null>(null); // null = crear
 
 ---
 
-## 2. `useEffect`: carga de datos y suscripciones
+## 15.2. `useEffect`: carga de datos y suscripciones
 
 El efecto permite ejecutar código "después del render". Su segundo argumento (`dependencias`) decide cuándo se vuelve a ejecutar.
 
-### 2.1 Carga inicial de datos
+### 15.2.1 Carga inicial de datos
 
 ```tsx
 useEffect(() => {
@@ -70,7 +70,7 @@ useEffect(() => {
 > [!NOTE]
 > `[]` (array vacío) hace que el efecto se ejecute una sola vez. El `cleanup` evita actualizar el estado de un componente ya desmontado (petición tardía).
 
-### 2.2 Suscripción a eventos y cleanup
+### 15.2.2 Suscripción a eventos y cleanup
 
 Cerrar el modal con la tecla **Escape** es una suscripción que necesita limpieza:
 
@@ -90,7 +90,7 @@ useEffect(() => {
 
 ---
 
-## 3. `useCallback` y dependencias
+## 15.3. `useCallback` y dependencias
 
 `useCallback` memoriza una función y solo la recrea si cambian sus dependencias. Evita re-renders innecesarios en componentes hijos:
 
@@ -117,7 +117,7 @@ useEffect(() => {
 
 ---
 
-## 4. `useRef`: timers y referencias al DOM
+## 15.4. `useRef`: timers y referencias al DOM
 
 `useRef` guarda un valor mutable que **no provoca re-renders** y persiste toda la vida del componente. Dos usos fundamentales en AppCine:
 
@@ -155,7 +155,7 @@ function clicFuera(e: MouseEvent) {
 
 ---
 
-## 5. Lifting state up: App como fuente de la verdad
+## 15.5. Lifting state up: App como fuente de la verdad
 
 Cuando varios componentes necesitan el mismo dato, el estado **sube** al componente común más cercano (`App`). Los hijos reciben el dato por props y avisan con callbacks:
 
@@ -218,7 +218,7 @@ export function App() {
 
 ---
 
-## 6. Eventos por props: `onEdit`, `onDelete`, `onSave`, `onClose`, `onSearch`
+## 15.6. Eventos por props: `onEdit`, `onDelete`, `onSave`, `onClose`, `onSearch`
 
 La comunicación hijo → padre se hace con **funciones pasadas como props**. Cada acción del CRUD tiene su prop:
 
@@ -253,7 +253,7 @@ function borrar(e: MouseEvent<HTMLButtonElement>) {
 
 ---
 
-## 7. Peticiones asíncronas con `fetch` + `async/await`
+## 15.7. Peticiones asíncronas con `fetch` + `async/await`
 
 Fuera de Tauri (sin puente Rust) o para probar contra una API web, AppCine usa `fetch` con los estados de carga, acierto y error (los 5 estados vistos en la unidad 11):
 
@@ -298,7 +298,7 @@ if (error) return <p className="error">{error}</p>;
 
 ---
 
-## 8. Patrón modal: overlay + panel
+## 15.8. Patrón modal: overlay + panel
 
 El modal es un patrón fijo: **overlay** (fondo oscurecido) + **panel** (ventana). Se cierra con ESC o clic fuera.
 
@@ -334,7 +334,7 @@ El cierre con ESC (unidad 15.2.2) ya funciona desde `App`. El `ref` al overlay p
 
 ---
 
-## 9. Debounce en la búsqueda
+## 15.9. Debounce en la búsqueda
 
 El debounce evita lanzar una petición por cada tecla: espera 300 ms desde la última pulsación.
 
@@ -365,7 +365,7 @@ function buscar(texto: string) {
 
 ---
 
-## 10. Formulario: modo crear vs modo editar
+## 15.10. Formulario: modo crear vs modo editar
 
 El mismo formulario sirve para **crear** y **editar** según si `editando` es `null` o no. Dos señales:
 
@@ -421,7 +421,7 @@ export function PeliculaForm({ inicial = {}, onGuardar, onCancelar }: PeliculaFo
 
 ---
 
-## 11. Prácticas
+## 15.11. Prácticas
 
 - **P1.** Cargar películas desde la API en `useEffect` y mostrar spinner + estado vacío.
 - **P2.** CRUD completo (crear, editar, borrar) llamando a la API desde `App`.

@@ -218,7 +218,6 @@ export {};
 /**
  * Fichero 04: Union Types, Interseccion, Literales y Type Narrowing
  * -----------------------------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 9 y 10):
  * - Union Types (|)
  * - Interseccion de Tipos (&)
  * - Literal Types
@@ -314,6 +313,8 @@ console.log(calcularArea({ tipo: "circulo", radio: 5 }));
 console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 }));
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-04-unions-intersections.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
+
 ## 5.5 Ejercicios 😑 📖:
 
 **Ejercicio 1:**
@@ -348,7 +349,6 @@ export {};
 /**
  * Fichero 08: Control de Flujo, Scope y This
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (conceptos 17 y 18):
  * - Condicionales (if/else, switch exhaustivo)
  * - Bucles (for, for...of, while, do...while)
  * - break y continue
@@ -532,6 +532,8 @@ ejemploLet();
 console.log(actividad("Lunes"));
 usuarioThis.mostrarFlecha();
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-08-control-flow-scope.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 

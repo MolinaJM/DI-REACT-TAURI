@@ -720,7 +720,6 @@ export {};
 /**
  * Fichero 02: Arrays y Tuplas en TypeScript
  * -------------------------------------------
- * Ejemplos extraidos de Sesion 2 (concepto 4):
  * - Arrays (ambas sintaxises, multidimensional, union, readonly)
  * - Tuplas (basica, opcional, etiquetas, destructuracion)
  */
@@ -780,6 +779,8 @@ let arr: number[] = [1, 2, 3];        // cualquier longitud
 let tup: [number, number] = [1, 2];   // exactamente 2 elementos
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-02-arrays-tuples.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
+
 ---
 
 ### 📦 En el repositorio (`repos/01-typescript-fundamentos/src/REPO-15-arrays-avanzado.ts`)
@@ -790,7 +791,6 @@ export {};
 /**
  * Fichero 15: Arrays Avanzado, Set, Map y Objetos
  * ------------------------------------------------
- * Ejemplos extraidos de Sesion 3 (conceptos 11, 12, 13 y 14):
  * - Arrays: push/pop/splice, map/filter/reduce, at(), toSorted/toReversed
  * - Arrays: sort/reverse, destructuring, busqueda binaria
  * - Set: creacion, operaciones, ES2025 nativas
@@ -1203,6 +1203,8 @@ const agrupado: Record<string, ProductoGroupBy[]> = Object.groupBy(
 console.log(mostrarInfo({ nombre: "Carlos", edad: 35 }));
 console.log(agrupado);
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** ejecuta `npx tsx src/REPO-15-arrays-avanzado.ts` dentro de `repos/01-typescript-fundamentos/` y experimenta modificando valores.
 
 ---
 
