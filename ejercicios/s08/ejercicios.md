@@ -1,6 +1,6 @@
 # S08 · Estado Global y Enrutado
 
-Ejercicios para `repos/03-contador-tauri` (Context/Zustand). Soluciones en `soluciones/s08/`.
+Ejercicios para `repos/04-react-avanzado` (Context/Zustand). Soluciones en `soluciones/s08/`.
 
 ## 1. Zustand con TypeScript
 Crea una store Zustand para un carrito: `items: ProductoCarrito[]`, `anadir(producto)`, `quitar(id)`, `total()` (calculado con `reduce`). Usa `ProductoCarrito` como en la sesión 5.

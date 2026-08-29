@@ -443,7 +443,7 @@ La asignatura construye el conocimiento desde los cimientos: primero se aprende 
 
 | Repositorio | Sesiones | Tecnologías |
 | --- | --- | --- |
-| `01-typescript-fundamentos` | S02 + S03 | TypeScript puro (16 ficheros .ts) |
+| `01-typescript-fundamentos` | S02 + S03 | TypeScript puro (13 ficheros .ts) |
 | `02-react-componentes` | S04 + S05 + S06 | React, Vite, componentes, hooks, formularios |
 | `03-tauri-ipc-filesystem` | S07 | Tauri v2, Rust, IPC, Fetch CRUD |
 | `04-react-avanzado` | S08 + S09 + S10 + S11 | Zustand, React Router, Tailwind CSS, @react-pdf/renderer |

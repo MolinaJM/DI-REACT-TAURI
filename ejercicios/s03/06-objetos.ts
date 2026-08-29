@@ -50,3 +50,27 @@ export function marcarEntregado(pedidos: Pedido[], id: number): Pedido[] {
 export function bioPlana(u: Usuario): string {
   return "";
 }
+// 7) S3·9.2 Destructuring avanzado: alias, anidado y valores por defecto.
+//    Dado un objeto de usuario, extrae `nombre` (renombrado a `nombre_identidad`),
+//    `perfil.ciudad` (anidado) y `perfil.bio` con valor por defecto "Sin bio".
+export function resumenDestructurado(u: Usuario): string {
+  return ""; // TODO: { nombre: nombre_identidad, perfil: { ciudad, bio = "Sin bio" } }
+}
+
+// 8) S3·9.4 Object.groupBy: agrupa productos por categoría
+export interface Producto {
+  id: number;
+  nombre: string;
+  categoria: "tecnologia" | "ropa" | "hogar";
+}
+export function agruparPorCategoria(productos: Producto[]): Partial<Record<Producto["categoria"], Producto[]>> {
+  return {}; // TODO: Object.groupBy(productos, p => p.categoria)
+}
+
+// 9) S3·9.5 Object.freeze: congela un objeto y comprueba que es readonly en runtime
+export function congelar(config: { tema: string; ventanas: number }): Readonly<{ tema: string; ventanas: number }> {
+  return config; // TODO: Object.freeze(config)
+}
+export function esCongelado(config: object): boolean {
+  return false; // TODO: Object.isFrozen(config)
+}

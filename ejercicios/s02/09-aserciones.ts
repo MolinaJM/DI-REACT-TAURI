@@ -42,3 +42,13 @@ export type Contraste = (typeof CONTRASTES)[number];
 export function pintar(color: Contraste): string {
   return ""; // TODO: `paint-${color}` (pintar("amarillo") no debe compilar)
 }
+// 6) S2·6.4 Diferencia entre `as` y `<tipo>`: la sintaxis `<tipo>valor` (angle-bracket)
+//    NO funciona en ficheros .tsx ni cuando choca con los genéricos de JSX.
+//    `as` es la única que siempre compila en React.
+export function conComo(valor: unknown): string {
+  return (valor as string); // TODO: `as`
+}
+export function conAngular(valor: unknown): string {
+  // TODO: cambia la línea por `<string>valor` en un .ts normal (falla en .tsx)
+  return String(valor);
+}

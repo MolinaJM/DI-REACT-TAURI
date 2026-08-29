@@ -1,4 +1,6 @@
 use std::fs;
+use std::time::Duration;
+use tauri::Emitter;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -20,6 +22,16 @@ fn obtener_info_sistema() -> Result<String, String> {
     let os = std::env::consts::OS;
     let arch = std::env::consts::ARCH;
     Ok(format!("SO: {}, Arquitectura: {}", os, arch))
+}
+
+// Simula una tarea larga y emite su progreso como evento Tauri hacia el frontend
+#[tauri::command]
+fn tarea_larga(app: tauri::AppHandle) -> Result<(), String> {
+    for i in 1..=5 {
+        std::thread::sleep(Duration::from_millis(300));
+        let _ = app.emit("progreso", i * 20);
+    }
+    Ok(())
 }
 
 #[tauri::command]
@@ -51,6 +63,7 @@ pub fn run() {
             saludar,
             sumar,
             obtener_info_sistema,
+            tarea_larga,
             leer_archivo,
             escribir_archivo,
             listar_directorio

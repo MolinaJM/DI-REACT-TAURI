@@ -15,7 +15,7 @@ Tabla resumen de sesiones, repositorios y tecnologias.
 | S05 | Gestion de Estado Basico y Tipado de Formularios | `02-react-componentes` | useReducer, formularios controlados, validacion tipada, localStorage, sessionStorage, patrones funcionales de estado |
 | S06 | Creacion de Componentes Personalizados | `02-react-componentes` | ButtonHTMLAttributes, generic Table\<T\>, Modal, composicion, slots, patrones de factory y DOM |
 | S07 | El Puente de Comunicacion (Tauri IPC) y Sistema de Archivos | `03-tauri-ipc-filesystem` | #[tauri::command], invoke(), eventos Tauri, std::fs, leer/escribir archivos, listar directorios, Fetch CRUD |
-| S08 | Persistencia de Estado Global y Enrutado | `04-react-avanzado` | Context API, Zustand, persist middleware, React Router v6, Layout/Outlet, SPA router custom, structuredClone |
+| S08 | Persistencia de Estado Global y Enrutado | `04-react-avanzado` | Context API, Zustand, persist middleware, React Router v7, Layout/Outlet, SPA router custom, structuredClone |
 | S09 | Formulario CRUD para bases de datos | `04-react-avanzado` | ApiService\<T\> generica, GET/POST/PUT/DELETE, validacion de formularios, Omit\<T\>, Patch |
 | S10 | Estilizacion Avanzada y Diseno de Interfaces | `04-react-avanzado` | Tailwind CSS, responsive design, grid, hamburger menu, animaciones, transiciones, conditional styling |
 | S11 | Creacion de Informes en PDF con React | `04-react-avanzado` | @react-pdf/renderer, Document/Page/Text/View, StyleSheet, PDFViewer, PDFDownloadLink, tablas |
@@ -72,13 +72,14 @@ repos/
 │   ├── tsconfig.json
 │   └── vite.config.ts
 │   Ejecucion: npm run dev
-│   Dependencias: react, react-dom, vite, typescript
+│   Dependencias: react, react-dom, tailwindcss, vite, typescript
 │   Requisito: Node.js
 │
 ├── 03-tauri-ipc-filesystem/      S07
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── ComponenteIPC.tsx     invoke saludar/sumar
+│   │   │   ├── EventosTauri.tsx      listen/emit de eventos
 │   │   │   └── FetchCRUD.tsx         GET/POST/PUT/DELETE
 │   │   ├── App.tsx
 │   │   └── main.tsx
@@ -86,6 +87,7 @@ repos/
 │   │   ├── src/
 │   │   │   ├── main.rs
 │   │   │   └── lib.rs               greet, saludar, sumar, info_sistema,
+│   │   │                            tarea_larga (emit "progreso"),
 │   │   │                            leer_archivo, escribir_archivo,
 │   │   │                            listar_directorio
 │   │   ├── Cargo.toml
@@ -112,7 +114,7 @@ repos/
 │   │   │   └── RouterSPA.ts          S08
 │   │   ├── api/
 │   │   │   ├── ApiService.ts         S09
-│   │   │   ├── crud.ts               S09
+│   │   │   ├── crud.tsx              S09
 │   │   │   └── validacion.ts         S09
 │   │   ├── styles/
 │   │   │   ├── Dashboard.tsx         S10
@@ -251,7 +253,7 @@ Versiones de referencia para todo el material (sesiones, apuntes y repos):
 
 > Nota: los ejemplos de `repos/01-typescript-fundamentos` son *erasable-only* para que corran en Node 24 sin compilar con el runner `tsx`.
 
-Flujo de ejecución por repo: `repos/01` con `npx tsx src/..`, `repos/02`/`04` con `npm run dev`, `repos/03` con `npx tauri dev`, `repos/05` con `npx vitest` / `npx playwright test`, y `apuntes/` con `npm run check` / `npm run test:autocorregibles` (Node 24).
+Flujo de ejecución por repo: `repos/01` con `npx tsx src/..`, `repos/02`/`04` con `npm run dev`, `repos/03` con `npx tauri dev`, `repos/05` con `npx vitest` / `npx playwright test`, y `ejercicios/` con `npm run typecheck` (valida `soluciones/s02…s06`) + `npm run run:s02` / `npm run run:s03` (Node 24). Catálogo de ejercicios: [`sesiones/ejerciciosTS.md`](sesiones/ejerciciosTS.md).
 
 ## Proyecto final: AppCine
 

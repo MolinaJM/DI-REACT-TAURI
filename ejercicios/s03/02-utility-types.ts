@@ -41,3 +41,16 @@ export type ConfigCompleta = unknown; // TODO: Required<ConfigParcial>
 export function ping(c: ConfigCompleta): string {
   return `${c.host}:${c.puerto}`;
 }
+// 6) Parameters y ReturnType: deriva tipos de una función existente
+export function construirMensaje(nombre: string, anios: number): string {
+  return `${nombre} tiene ${anios}`;
+}
+export type ArgsMensaje = unknown; // TODO: Parameters<typeof construirMensaje>
+export type TipoRetorno = unknown; // TODO: ReturnType<typeof construirMensaje>
+
+// 7) NonNullable: elimina null | undefined de un tipo unión
+export type EntradaTalVez = string | number | null | undefined;
+export type EntradaSegura = unknown; // TODO: NonNullable<EntradaTalVez>
+export function mostrar(e: EntradaSegura): string {
+  return String(e);
+}

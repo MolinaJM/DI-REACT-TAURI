@@ -1,6 +1,6 @@
 # S07 · El Puente de Comunicación Tauri (IPC)
 
-Realiza estos ejercicios en `repos/03-contador-tauri` (o el repo Tauri de trabajo). Soluciones en `soluciones/s07/`.
+Realiza estos ejercicios en `repos/03-tauri-ipc-filesystem` (o el repo Tauri de trabajo). Soluciones en `soluciones/s07/`.
 
 ## 1. Comando en Rust
 Crea en `src-tauri/src/lib.rs` un comando `#[tauri::command]` que reciba una ruta de texto y devuelva el **contenido** de ese fichero usando `std::fs::read_to_string`. Devuelve `Result<String, String>` para controlar el error. Regístralo en `generate_handler!`.

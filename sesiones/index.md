@@ -17,7 +17,7 @@ React + Tauri — Segundo de Desarrollo de Aplicaciones Multiplataforma
 - **SESION 9** - [Formulario CRUD para Bases de Datos](sesion09.md): Conexión a MySQL mediante API REST.
 - **SESION 10** - [Estilización Avanzada con Tailwind CSS](sesion10.md): Diseño de interfaces con utilidades CSS.
 - **SESION 11** - [Creación de Informes en PDF con React](sesion11.md): Generación de PDFs con @react-pdf/renderer.
-- **SESION 12** - [Prueba Automatizada con Jest/Testing Library](sesion12.md): Estrategias de testing para componentes React.
+- **SESION 12** - [Prueba Automatizada con Vitest/Testing Library](sesion12.md): Estrategias de testing para componentes React.
 - **SESION 13** - [Distribución Multiplataforma con Tauri](sesion13.md): Instaladores nativos, bundle, GitHub Actions y actualizaciones.
 
 ## Material complementario

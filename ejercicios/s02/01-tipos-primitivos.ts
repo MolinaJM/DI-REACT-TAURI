@@ -28,3 +28,7 @@ export const numeroGrande = 0; // TODO: 9007199254740991n
 // 5) Tuplas y arrays
 export const coordenada: number[] = [10, 20, "No"]; // TODO: tupla [number, number]
 export const nombres: (number | string)[] = ["Ana", 1]; // TODO: solo strings
+// 6) unique symbol: cada Symbol("...") es único, pero `unique symbol` es literal.
+//    ¿Puedes asignar un `symbol` genérico a un `unique symbol`? (pista: no, solo const + valor literal)
+export const ID_SECRETO: unique symbol = Symbol("secreto"); // TODO: prueba a asignarle `Symbol("otro")`
+export const simboloComun: symbol = Symbol("comun");

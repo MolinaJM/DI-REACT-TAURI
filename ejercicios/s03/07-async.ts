@@ -54,3 +54,23 @@ export async function primeraQueResuelve(promesas: Promise<string>[]): Promise<s
 export async function cargarConTimeout(ms: number, timeoutMs: number): Promise<string> {
   return ""; // TODO: AbortController + setTimeout(abort) + DOMException("AbortError")
 }
+// 10) S3·10.2 `obtenerUsuario(id)` con fetch contra una API pública y respuesta tipada
+export interface UsuarioAPI {
+  id: number;
+  name: string;
+  email: string;
+}
+export async function obtenerUsuario(id: number): Promise<UsuarioAPI> {
+  return { id: 0, name: "", email: "" }; // TODO: fetch(`https://jsonplaceholder.typicode.com/users/${id}`) + await res.json()
+}
+
+// 11) S3·10.4 Recrea el orden del Event Loop: sincrónico → microtareas → macrotareas.
+//    No cambies las dos primeras líneas. El resultado debe ser ["sincrono", "micro", "macro"].
+export async function ordenEventLoop(): Promise<string[]> {
+  const orden: string[] = [];
+  orden.push("sincrono");
+  Promise.resolve().then(() => orden.push("micro")); // microtarea (ya encolada)
+  // TODO: encola una macrotarea: setTimeout(() => orden.push("macro"), 0)
+  // TODO: await de la macrotarea; después `return orden`
+  return orden;
+}

@@ -29,7 +29,7 @@ npm install            # una vez
 npx tsx soluciones/s02/01-tipos-primitivos.ts
 npm run run:s02        # ejecuta todas las soluciones de S02
 npm run run:s03        # ejecuta todas las soluciones de S03
-npm run typecheck      # valida tipos de todos los ejercicios y soluciones
+npm run typecheck      # valida los tipos de las soluciones (soluciones/s02…s06)
 ```
 
 Los enunciados `.ts` se completan en el propio fichero y después se comparan con `soluciones/sXX/`.

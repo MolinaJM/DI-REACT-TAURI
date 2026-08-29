@@ -1,5 +1,6 @@
 import ComponenteIPC from './components/ComponenteIPC'
 import FetchCRUD from './components/FetchCRUD'
+import EventosTauri from './components/EventosTauri'
 
 function App() {
   return (
@@ -8,6 +9,11 @@ function App() {
       <section>
         <h2>Comunicacion IPC (React &lt;--&gt; Rust)</h2>
         <ComponenteIPC />
+      </section>
+      <hr style={{ margin: '2rem 0' }} />
+      <section>
+        <h2>Eventos Tauri (Rust --&gt; React via listen)</h2>
+        <EventosTauri />
       </section>
       <hr style={{ margin: '2rem 0' }} />
       <section>
