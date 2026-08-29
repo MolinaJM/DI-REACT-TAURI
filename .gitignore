@@ -43,7 +43,6 @@ PLANIF.md
 # ===========================================================================
 #  >>> SESIÓN 01 <<  (REVELADA)
 # ===========================================================================
-!sesiones/ejerciciosTS.md
 !sesiones/sesion01.md
 !ejercicios/s01/
 !ejercicios/soluciones/s01/
@@ -59,6 +58,7 @@ PLANIF.md
 # ===========================================================================
 #  >>> SESIÓN 02 <<  quita el `#` para revelar el material de TS
 # ===========================================================================
+# !sesiones/ejerciciosTS.md
 # !sesiones/sesion02.md
 # !sesiones/apuntes/s02/
 # !ejercicios/s02/
