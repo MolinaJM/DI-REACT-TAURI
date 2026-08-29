@@ -5,21 +5,144 @@ dist/
 .DS_Store
 *.tsbuildinfo
 
-# Soluciones por sesion (ignoradas: no se publican)
-ejercicios/soluciones/s00/
-ejercicios/soluciones/s01/
-ejercicios/soluciones/s01-s/
-ejercicios/soluciones/s02/
-ejercicios/soluciones/s03/
-ejercicios/soluciones/s04/
-ejercicios/soluciones/s05/
-ejercicios/soluciones/s06/
-ejercicios/soluciones/s07/
-ejercicios/soluciones/s08/
-ejercicios/soluciones/s09/
-ejercicios/soluciones/s10/
-ejercicios/soluciones/s11/
-ejercicios/soluciones/s12/
-
 session-ses_fbab.md
+
+# Planificaciones temporales (no se publican)
 PLANIF.md
+PLANIV2.md
+PLANIFV3.md
+PLANIFV4.md
+PLANIFV5.md
+PLANIFV6.md
+PLANIFV7.md
+
+# ===========================================================================
+#  MATERIAL DEL CURSO · POR SESIÓN
+# ---------------------------------------------------------------------------
+#  Mecánica:
+#   - Todo el material por sesión (guías sesionNN.md, apuntes, ejercicios y
+#     soluciones) está OCULTO por defecto en el índice de git.
+#   - Las sesiones 00, 01 y 01-s están REVELADAS: aparecen como untracked.
+#   - Para cada sesión siguiente, quita el `#` inicial de las líneas de su
+#     bloque (>>> SESIÓN NN <<) cuando vayas a impartirla: su material (guía,
+#     apuntes, ejercicios y soluciones) pasará a verse como untracked.
+#   - Importante: una vez que hagas `git add` de un fichero, ese fichero
+#     queda versionado y ya no depende de estas líneas (podrías volver a
+#     comentar su bloque sin que desaparezca del repo).
+# ---------------------------------------------------------------------------
+
+# --- BLOQUE BASE: material OCULTO por defecto (no tocar) ---
+/sesiones/sesion*.md
+/sesiones/apuntes/s[0-9][0-9]/
+/ejercicios/s[0-9][0-9]/
+/ejercicios/s01-s/
+/ejercicios/soluciones/s[0-9][0-9]/
+/ejercicios/soluciones/s01-s/
+
+# ===========================================================================
+#  >>> SESIÓN 00 <<  (REVELADA)
+# ===========================================================================
+!sesiones/sesion00.md
+!ejercicios/s00/
+!ejercicios/soluciones/s00/
+
+# ===========================================================================
+#  >>> SESIÓN 01 <<  (REVELADA)
+# ===========================================================================
+!sesiones/sesion01.md
+!ejercicios/s01/
+!ejercicios/soluciones/s01/
+
+# ===========================================================================
+#  >>> SESIÓN 01-S <<  (REVELADA · scaffolding)
+# ===========================================================================
+!sesiones/sesion01_scaffolding.md
+!ejercicios/s01-s/
+!ejercicios/soluciones/s01-s/
+
+# ===========================================================================
+#  >>> SESIÓN 02 <<  quita el `#` para revelar el material de TS
+# ===========================================================================
+# !sesiones/sesion02.md
+# !sesiones/apuntes/s02/
+# !ejercicios/s02/
+# !ejercicios/soluciones/s02/
+
+# ===========================================================================
+#  >>> SESIÓN 03 <<
+# ===========================================================================
+# !sesiones/sesion03.md
+# !sesiones/apuntes/s03/
+# !ejercicios/s03/
+# !ejercicios/soluciones/s03/
+
+# ===========================================================================
+#  >>> SESIÓN 04 <<
+# ===========================================================================
+# !sesiones/sesion04.md
+# !sesiones/apuntes/s04/
+# !ejercicios/s04/
+# !ejercicios/soluciones/s04/
+
+# ===========================================================================
+#  >>> SESIÓN 05 <<
+# ===========================================================================
+# !sesiones/sesion05.md
+# !sesiones/apuntes/s05/
+# !ejercicios/s05/
+# !ejercicios/soluciones/s05/
+
+# ===========================================================================
+#  >>> SESIÓN 06 <<
+# ===========================================================================
+# !sesiones/sesion06.md
+# !sesiones/apuntes/s06/
+# !ejercicios/s06/
+# !ejercicios/soluciones/s06/
+
+# ===========================================================================
+#  >>> SESIÓN 07 <<
+# ===========================================================================
+# !sesiones/sesion07.md
+# !ejercicios/s07/
+# !ejercicios/soluciones/s07/
+
+# ===========================================================================
+#  >>> SESIÓN 08 <<
+# ===========================================================================
+# !sesiones/sesion08.md
+# !ejercicios/s08/
+# !ejercicios/soluciones/s08/
+
+# ===========================================================================
+#  >>> SESIÓN 09 <<
+# ===========================================================================
+# !sesiones/sesion09.md
+# !ejercicios/s09/
+# !ejercicios/soluciones/s09/
+
+# ===========================================================================
+#  >>> SESIÓN 10 <<
+# ===========================================================================
+# !sesiones/sesion10.md
+# !ejercicios/s10/
+# !ejercicios/soluciones/s10/
+
+# ===========================================================================
+#  >>> SESIÓN 11 <<
+# ===========================================================================
+# !sesiones/sesion11.md
+# !ejercicios/s11/
+# !ejercicios/soluciones/s11/
+
+# ===========================================================================
+#  >>> SESIÓN 12 <<
+# ===========================================================================
+# !sesiones/sesion12.md
+# !ejercicios/s12/
+# !ejercicios/soluciones/s12/
+
+# ===========================================================================
+#  >>> SESIÓN 13 <<  (solo guía: no hay apuntes/ejercicios propios)
+# ===========================================================================
+# !sesiones/sesion13.md
