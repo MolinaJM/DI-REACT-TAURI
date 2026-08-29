@@ -1,0 +1,14 @@
+{
+  "name": "typescript-fundamentos",
+  "version": "1.0.0",
+  "description": "Ejemplos de TypeScript desde cero - Fundamentos",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "npx tsx src/REPO-01-tipos-primitivos.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.12",
+    "typescript": "^5.7.0"
+  }
+}
