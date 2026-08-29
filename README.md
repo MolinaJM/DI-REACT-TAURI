@@ -135,7 +135,5 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 
 Contenido creado por **José María Molina** para la asignatura **Desarrollo de Interfaces**. 
 
-La teoría TypeScript del curso (Sesiones 2 y 3), han sido adaptados a partir del material de JavaScript *"Apuntes DI"* perteneciente a **Isaías Fernández Lozano (Profe)** y se distribuye bajo **Creative Commons CC BY 4.0** 
+La teoría TypeScript del curso (Sesiones 2 y 3), han sido adaptados a partir del material de JavaScript *"Apuntes DWEC"* perteneciente a **Isaías Fernández Lozano (Profe)** distribuido bajo **Creative Commons CC BY 4.0** 
 
-# DI-REACT-TAURI
-Repositorio creado por **José María Molina** para el curso DI de 2º DAM# DI-REACT-TAURI
