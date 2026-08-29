@@ -168,5 +168,5 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 
 Contenido creado por **José María Molina** para la asignatura **Desarrollo de Interfaces**. 
 
-La teoría TypeScript del curso (Sesiones 2 y 3), han sido adaptados a partir del material de JavaScript *"Apuntes DWEC"* perteneciente a **Isaías Fernández Lozano (Profe)** distribuido bajo **Creative Commons CC BY 4.0** 
+La teoría TypeScript del curso (Sesiones 2 y 3), han sido adaptados a partir del material de JavaScript *"Apuntes DWEC"* perteneciente a **Isaías Fernández Lozano (Isaias FL)** distribuido bajo **Creative Commons CC BY 4.0** 
 
