@@ -11,17 +11,6 @@ PLANIF.md
 # ===========================================================================
 #  MATERIAL DEL CURSO · POR SESIÓN
 # ---------------------------------------------------------------------------
-#  Mecánica:
-#   - Todo el material por sesión (guías sesionNN.md, apuntes, ejercicios y
-#     soluciones) está OCULTO por defecto en el índice de git.
-#   - Las sesiones 00, 01 y 01-s están REVELADAS: aparecen como untracked.
-#   - Para cada sesión siguiente, quita el `#` inicial de las líneas de su
-#     bloque (>>> SESIÓN NN <<) cuando vayas a impartirla: su material (guía,
-#     apuntes, ejercicios y soluciones) pasará a verse como untracked.
-#   - Importante: una vez que hagas `git add` de un fichero, ese fichero
-#     queda versionado y ya no depende de estas líneas (podrías volver a
-#     comentar su bloque sin que desaparezca del repo).
-# ---------------------------------------------------------------------------
 
 # --- BLOQUE BASE: material OCULTO por defecto (no tocar) ---
 /repos/*
@@ -57,7 +46,7 @@ PLANIF.md
 !ejercicios/soluciones/s01-s/
 
 # ===========================================================================
-#  >>> SESIÓN 02 <<  quita el `#` para revelar el material de TS
+#  >>> SESIÓN 02 <<  JMM - quitamos el `#` para revelar el material de TS
 # ===========================================================================
 # !sesiones/ejerciciosTS.md
 # !sesiones/sesion02.md
