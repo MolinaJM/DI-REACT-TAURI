@@ -6,6 +6,9 @@ Vitest, Testing Library, pruebas unitarias y E2E
 
 ---
 
+> 💻 **Código:** [`repos/05-testing`](../repos/05-testing/) (+ [`repos/04`](../repos/04-react-avanzado/)) · ✏️ **Práctica:** [ejercicios/s12](../ejercicios/)
+
+
 ## Documentación de la Aplicación
 
 Documentar es esencial para que la aplicación pueda usarse, mantenerse y evolucionar. La documentación se realiza de distintas formas:
@@ -657,4 +660,17 @@ console.log("✅ Todos los tests de estado han pasado");
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Escribo pruebas unitarias de funciones puras con Vitest.
+- [ ] Pruebo un componente con Testing Library (render, eventos, expect).
+- [ ] Lanzo una prueba E2E con Playwright contra la app real.
+- [ ] Interpreté la cobertura y sé qué casos prueban.
+
+> **Reto de la sesión:** Suite Vitest + una prueba E2E de Playwright que navegue por el CRUD completo.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

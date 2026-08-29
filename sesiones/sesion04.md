@@ -6,7 +6,9 @@ Componentes funcionales, props, children y hooks básicos
 
 ---
 
-> 📚 **Apuntes de la sesión:** [A12 · Preparación hacia React 19](apuntes/s04/12_Preparacion_React_19.md), [A13 · Tipado en React (props, eventos, generics)](apuntes/s04/13_Tipado_en_React_TS.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
+> 📚 **Apuntes:** [s04 · A12 y A13](apuntes/s04/) · 💻 **Código:** [`repos/02-react-componentes`](../repos/02-react-componentes/) · ✏️ **Práctica:** [ejercicios/s04](../ejercicios/)
+
+
 
 ## Componente Funcional con TypeScript
 
@@ -403,4 +405,17 @@ function renderizarTarea(tarea: Tarea): HTMLElement {
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Creo un componente funcional y lo compongo dentro de otro.
+- [ ] Tipas props con una interfaz (obligatorias y `?` opcionales).
+- [ ] Renderizo listas con `key` y comprendo por qué es necesaria.
+- [ ] Distingo qué expresiones se pueden poner en JSX y cuáles no.
+
+> **Reto de la sesión:** Crea un componente `PeliculaCard` con props tipadas y renderiza una lista de 5 películas con `key`.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

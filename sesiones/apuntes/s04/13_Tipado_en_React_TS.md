@@ -1,5 +1,7 @@
 # 13. TypeScript aplicado a React: props, eventos y generics 📝 🖥️
 
+> 🧭 **Sesiones donde se aplica:** Se usa en las sesiones S04 · S05 · S06 (tipado de props, eventos y formularios).
+
 - [13. TypeScript aplicado a React: props, eventos y generics 📝 🖥️](#13-typescript-aplicado-a-react-props-eventos-y-generics)
   - [13.1. El modelo de datos con interfaces](#131-el-modelo-de-datos-con-interfaces)
   - [13.2. Tipado de props: una interfaz por componente](#132-tipado-de-props-una-interfaz-por-componente)
@@ -306,6 +308,7 @@ npm run build      # validar + compilar en Vite
 
 ### 📦 En el repositorio (`repos/02-react-componentes/src/components/TablaGenerica.tsx`)
 
+
 ```tsx
 /**
  * TablaGenerica.tsx - Componente Tabla Genérica
@@ -362,7 +365,11 @@ function Tabla<T extends Record<string, any>>({
 export default Tabla;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/components/Boton.tsx`)
+
 
 ```tsx
 /**
@@ -416,7 +423,11 @@ function Boton({ children, variante = "primary", tamano = "md",
 export default Boton;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/hooks/useForm.ts`)
+
 
 ```typescript
 /**
@@ -473,6 +484,9 @@ export function useForm<T extends Record<string, any>>({
     return { valores, errores, handleChange, handleSubmit, setValores, esValido };
 }
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
 
 ---
 

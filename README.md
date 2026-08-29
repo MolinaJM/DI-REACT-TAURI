@@ -6,10 +6,43 @@
 
 ## Índice / Navegación
 
-- [Sesiones del curso](sesiones/index.md) — guion S00–S12 con teoría por sesión
+- [Sesiones del curso](sesiones/index.md) — guion S00–S13 con teoría por sesión
 - [Repositorios de código y plan de sesiones](REPOS.md) — repos `01`–`05`, sesiones y proyecto final
 - [Ejercicios por sesión con soluciones](ejercicios/) — batería de ejercicios S00–S12
 - Proyecto final: AppCine
+
+## 0. Arranque rápido (instalación y comandos)
+
+```bash
+# 1) Usa la versión de Node del proyecto
+nvm use                      # hay un .nvmrc en la raíz
+
+# 2) Instala dependencias una vez por carpeta
+npm install                  # en ejercicios/  (enunciados + soluciones locales)
+npm install                  # en cada repos/XX/ que vayas a usar (01..05)
+
+# 3) Lanza el código del repositorio correspondiente a la sesión
+npx tsx src/REPO-01-tipos-primitivos.ts   # repos/01  (TypeScript puro, S02-S03)
+npm run build                             # repos/01  solo comprueba tipos
+npm run dev                               # repos/02, repos/04 (React + Vite)
+npm run tauri dev                         # repos/03  (app de escritorio Tauri)
+npm test                                  # repos/05  (Vitest, S12)
+
+# 4) Ejercicios
+npm run typecheck             # en ejercicios/: valida tipos de enunciados y soluciones
+npm run run:s02               # ejecuta todas las soluciones de S02
+```
+
+| Repo de código | Sesiones | Cómo lanzarlo |
+|---|---|---|
+| `repos/01-typescript-fundamentos` | S02–S03 | `npx tsx src/REPO-XX.ts` |
+| `repos/02-react-componentes` | S04–S06 | `npm run dev` |
+| `repos/03-tauri-ipc-filesystem` | S07 · S13 | `npm run tauri dev` |
+| `repos/04-react-avanzado` | S08–S11 | `npm run dev` |
+| `repos/05-testing` | S12 | `npm test` · `npx playwright test` |
+
+---
+
 
 ---
 

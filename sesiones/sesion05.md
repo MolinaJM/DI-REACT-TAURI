@@ -6,7 +6,9 @@ useState, useReducer, formularios controlados y validación
 
 ---
 
-> 📚 **Apuntes de la sesión:** [A15 · Hooks, ciclo de vida y comunicación](apuntes/s05/15_React_Hooks_y_Comunicacion.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
+> 📚 **Apuntes:** [s05 · A15 (Hooks)](apuntes/s05/) · 💻 **Código:** [`repos/02-react-componentes`](../repos/02-react-componentes/) · ✏️ **Práctica:** [ejercicios/s05](../ejercicios/)
+
+
 
 ## Estado con useReducer
 
@@ -372,4 +374,17 @@ console.log("✅ Todos los tests de estado pasaron");
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Gestiono estado con `useState` (including objetos y arrays).
+- [ ] Uso `useReducer` para un estado que cambia por acciones.
+- [ ] Hago un formulario controlado con validación básica.
+- [ ] Subo el estado al padre mediante callbacks (lifting state up).
+
+> **Reto de la sesión:** Formulario controlado de registro con validación de email y contraseña, más un `useReducer` para el estado de carga. Sube los datos al padre.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

@@ -1,5 +1,7 @@
 # 14. React: componentes, JSX y props 📝 🖥️
 
+> 🧭 **Sesiones donde se aplica:** Complementa las sesiones S04 (componentes y props) y S06 (componentes personalizados); la sesión principal donde se aplica es S06.
+
 - [14. React: componentes, JSX y props 📝 🖥️](#14-react-componentes-jsx-y-props)
   - [14.1. Componentes funcionales y composición](#141-componentes-funcionales-y-composición)
   - [14.2. JSX y renderizado: qué se puede expresar y qué no](#142-jsx-y-renderizado-qué-se-puede-expresar-y-qué-no)
@@ -301,6 +303,7 @@ Con estas piezas se compone la pantalla de AppCine:
 
 ### 📦 En el repositorio (`repos/02-react-componentes/src/components/Saludo.tsx`)
 
+
 ```tsx
 /**
  * Saludo.tsx - Componente funcional con FC<Props>
@@ -326,7 +329,11 @@ const Saludo: FC<SaludoProps> = ({ nombre, edad }) => {
 export default Saludo;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/components/Card.tsx`)
+
 
 ```tsx
 /**
@@ -353,7 +360,11 @@ function Card({ titulo, children, className = "" }: CardProps) {
 export default Card;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/components/ListaTareas.tsx`)
+
 
 ```tsx
 /**
@@ -417,7 +428,11 @@ function ListaTareas() {
 export default ListaTareas;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/state/FormularioRegistro.tsx`)
+
 
 ```tsx
 /**
@@ -515,7 +530,11 @@ function FormularioRegistro() {
 export default FormularioRegistro;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/App.tsx`)
+
 
 ```tsx
 /**
@@ -638,6 +657,9 @@ function App() {
 
 export default App;
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
 
 ---
 

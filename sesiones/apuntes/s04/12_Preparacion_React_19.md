@@ -859,6 +859,7 @@ Crear un **gestor académico** con las siguientes funcionalidades, primero en va
 
 ### 📦 En el repositorio (`repos/02-react-componentes/src/patterns/AdvancedFunctions.ts`)
 
+
 ```typescript
 /**
  * AdvancedFunctions.ts - Patrones avanzados de funciones
@@ -974,7 +975,11 @@ export {
 export type { Operacion };
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/patterns/CleanCode.ts`)
+
 
 ```typescript
 /**
@@ -1082,7 +1087,11 @@ export {
 export type { Estado, Tarea };
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/state/localStorage.ts`)
+
 
 ```typescript
 /**
@@ -1162,6 +1171,9 @@ export {
 
 export type { UsuarioPersistente, EstadoApp, TareaPersistente, FiltroApp };
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
 
 ---
 

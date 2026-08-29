@@ -6,6 +6,9 @@ Comandos Tauri, invoke, eventos y manejo de archivos
 
 ---
 
+> 💻 **Código:** [`repos/03-tauri-ipc-filesystem`](../repos/03-tauri-ipc-filesystem/) · ✏️ **Práctica:** [ejercicios/s07](../ejercicios/)
+
+
 ## Arquitectura de Comunicación Tauri
 
 Tauri permite la comunicacion bidireccional entre el frontend (React) y el backend (Rust) mediante IPC (Inter-Process Communication).
@@ -434,4 +437,17 @@ async function ejemploTimeout(): Promise<void> {
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Expongo un comando Rust con `#[tauri::command]` y lo llamo con `invoke`.
+- [ ] Diferencio comando (`invoke`) de evento (escuchar/emitir).
+- [ ] Leo y escribo un fichero con la API de sistema de archivos de Tauri.
+- [ ] Gestiono errores del lado Rust y los muestro en la UI.
+
+> **Reto de la sesión:** Comando Rust `leer_archivo` + evento `progreso`; en React lanzas `invoke` y muestras el contenido y el progreso en la UI.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

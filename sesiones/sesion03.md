@@ -6,6 +6,9 @@ Generics, utilidades de tipos, módulos, asincronía y tipos de datos
 
 ---
 
+> 📚 **Apuntes:** [s03 · A7–A11](apuntes/s03/) · 💻 **Código:** [`repos/01-typescript-fundamentos`](../repos/01-typescript-fundamentos/) · ✏️ **Práctica:** [ejercicios/s03](../ejercicios/)
+
+
 > Todo el temario de esta sesión está en los apuntes de [`apuntes/s03/`](apuntes/s03/). Esta página solo enlaza dichos apuntes en el orden recomendado.
 
 ## 📚 Índice de Apuntes
@@ -27,4 +30,17 @@ Haz clic en cada apunte para ver el código TypeScript detallado con explicacion
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Combino uniones de tipos (`A | B`) y entiendo los literales.
+- [ ] Aplico narrowing y funciones `never`/exhaustivas en ramas del switch.
+- [ ] Uso `as const` y *utility types* (`Omit`, `Pick`, `Partial`).
+- [ ] Tipas una promesa async/await y manejo el error con `try/catch`.
+
+> **Reto de la sesión:** Escribe un reducer tipado con unión de acciones y un `switch` exhaustivo que devuelva `never` en el caso por defecto.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

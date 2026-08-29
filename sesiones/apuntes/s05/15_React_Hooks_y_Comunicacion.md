@@ -1,5 +1,7 @@
 # 15. React: hooks, ciclo de vida y comunicación entre componentes 📝 🖥️
 
+> 🧭 **Sesiones donde se aplica:** Se usa en las sesiones S05 (estado, efecto y lifting state up) y S06 (eventos, modal y debounce).
+
 - [15. React: hooks, ciclo de vida y comunicación entre componentes 📝 🖥️](#15-react-hooks-ciclo-de-vida-y-comunicación-entre-componentes)
   - [15.1. `useState`: el estado local](#151-usestate-el-estado-local)
   - [15.2. `useEffect`: carga de datos y suscripciones](#152-useeffect-carga-de-datos-y-suscripciones)
@@ -433,6 +435,7 @@ export function PeliculaForm({ inicial = {}, onGuardar, onCancelar }: PeliculaFo
 
 ### 📦 En el repositorio (`repos/02-react-componentes/src/components/ListaUsuarios.tsx`)
 
+
 ```tsx
 /**
  * ListaUsuarios.tsx - useEffect con TypeScript
@@ -485,7 +488,11 @@ function ListaUsuarios() {
 export default ListaUsuarios;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/components/Modal.tsx`)
+
 
 ```tsx
 /**
@@ -530,7 +537,11 @@ function Modal({ abierto, onCerrar, titulo, children, tamano: _tamano = "md" }: 
 export default Modal;
 ```
 
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
+
 ### 📦 En el repositorio (`repos/02-react-componentes/src/state/useReducerEjemplo.tsx`)
+
 
 ```tsx
 /**
@@ -587,6 +598,9 @@ function Contador() {
 
 export default Contador;
 ```
+
+> ▶ **Cómo probarlo en el repositorio:** dentro de `repos/02-react-componentes/` ejecuta `npm run dev` y abre la app de Vite para ver este ejemplo (se usa en `src/App.tsx`).
+
 
 ---
 

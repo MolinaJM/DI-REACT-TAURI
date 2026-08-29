@@ -6,6 +6,9 @@ Context API, Zustand, React Router y almacenamiento local
 
 ---
 
+> 💻 **Código:** [`repos/04-react-avanzado`](../repos/04-react-avanzado/) (+ [`repos/02-react-componentes`](../repos/02-react-componentes/)) · ✏️ **Práctica:** [ejercicios/s08](../ejercicios/)
+
+
 ## Context API
 
 ```tsx
@@ -870,4 +873,17 @@ export default FormularioRegistro;
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Comparto estado entre componentes con Context + `useContext`.
+- [ ] Sustituyo/añado Zustand para un store global sencillo.
+- [ ] Configuro rutas con React Router (incluyendo ruta con parámetro).
+- [ ] Persisto estado local con localStorage y lo refresco al cargar.
+
+> **Reto de la sesión:** Store global con Zustand (tema claro/oscuro), ruta protegida con React Router y persistencia en localStorage.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

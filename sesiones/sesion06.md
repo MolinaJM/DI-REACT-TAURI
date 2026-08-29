@@ -6,7 +6,9 @@ Componentes reutilizables, props, composicion y slots
 
 ---
 
-> 📚 **Apuntes de la sesión:** [A14 · Componentes, JSX y props](apuntes/s06/14_React_Componentes_JSX_Props.md). Código ejecutable: [`repos/02-react-componentes`](../repos/02-react-componentes/).
+> 📚 **Apuntes:** [s06 · A14 (Componentes)](apuntes/s06/) · 💻 **Código:** [`repos/02-react-componentes`](../repos/02-react-componentes/) · ✏️ **Práctica:** [ejercicios/s06](../ejercicios/)
+
+
 
 ## Componente Boton Personalizado
 
@@ -311,4 +313,17 @@ document.body.append(boton);
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Manejo eventos (`onClick`, `onChange`) tipando el evento correcto.
+- [ ] Capturo valores de inputs y hago debounce de una búsqueda.
+- [ ] Levanto un modal condicional con estado.
+- [ ] Extraigo un hook personalizado y lo reutilizo en dos componentes.
+
+> **Reto de la sesión:** Modal de confirmación reutilizable con debounce en la búsqueda y un hook personalizado `useDebounce`.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

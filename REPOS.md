@@ -194,6 +194,26 @@ En el material conviven **dos numeraciones distintas** (no guardan relación ent
 | `REPO-17-que-es-typescript.ts` | `s02/00_Introduccion.md` |
 | `REPO-18-instalacion-configuracion.ts` | `s03/10_NPM.md` |
 
+## Matriz: sesión ⇄ apuntes ⇄ repositorio ⇄ ejercicios
+
+Vista rápida de qué material corresponde a cada sesión:
+
+| Sesión | Apuntes (teoría) | Repositorio (código) | Ejercicios |
+|---:|---|---|---|
+| S02 | [`apuntes/s02`](sesiones/apuntes/s02/) (A0–A6) | [`repos/01-typescript-fundamentos`](repos/01-typescript-fundamentos/) | [`ejercicios/s02`](ejercicios/s02/) |
+| S03 | [`apuntes/s03`](sesiones/apuntes/s03/) (A7–A11) | [`repos/01-typescript-fundamentos`](repos/01-typescript-fundamentos/) | [`ejercicios/s03`](ejercicios/s03/) |
+| S04 | [`apuntes/s04`](sesiones/apuntes/s04/) (A12 · A13) | [`repos/02-react-componentes`](repos/02-react-componentes/) | [`ejercicios/s04`](ejercicios/s04/) |
+| S05 | [`apuntes/s05`](sesiones/apuntes/s05/) (A15) | [`repos/02-react-componentes`](repos/02-react-componentes/) | [`ejercicios/s05`](ejercicios/s05/) |
+| S06 | [`apuntes/s06`](sesiones/apuntes/s06/) (A14) | [`repos/02-react-componentes`](repos/02-react-componentes/) | [`ejercicios/s06`](ejercicios/s06/) |
+| S07 | — | [`repos/03-tauri-ipc-filesystem`](repos/03-tauri-ipc-filesystem/) | [`ejercicios/s07`](ejercicios/s07/) |
+| S08 | — | [`repos/04-react-avanzado`](repos/04-react-avanzado/) + [`repos/02`](repos/02-react-componentes/) | [`ejercicios/s08`](ejercicios/s08/) |
+| S09 | — | [`repos/04-react-avanzado`](repos/04-react-avanzado/) | [`ejercicios/s09`](ejercicios/s09/) |
+| S10 | — | [`repos/04-react-avanzado`](repos/04-react-avanzado/) | [`ejercicios/s10`](ejercicios/s10/) |
+| S11 | — | [`repos/04-react-avanzado`](repos/04-react-avanzado/) | [`ejercicios/s11`](ejercicios/s11/) |
+| S12 | — | [`repos/05-testing`](repos/05-testing/) + [`repos/04`](repos/04-react-avanzado/) | [`ejercicios/s12`](ejercicios/s12/) |
+| S13 | — | [`repos/03-tauri-ipc-filesystem`](repos/03-tauri-ipc-filesystem/) | [Proyecto final AppCine](REPOS.md#proyecto-final-appcine) |
+
+
 ## Flujo de dependencias
 
 ```

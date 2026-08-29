@@ -6,6 +6,9 @@ Layouts responsive, animaciones y componentes estilizados
 
 ---
 
+> 💻 **Código:** [`repos/04-react-avanzado`](../repos/04-react-avanzado/) · ✏️ **Práctica:** [ejercicios/s10](../ejercicios/)
+
+
 ## Usabilidad y Pautas de Diseño
 
 Antes de escribir una sola línea de Tailwind hay que pensar en el usuario. La **usabilidad** determina lo fácil e intuitivo que resulta usar una interfaz, y las **pautas de diseño** son las reglas que garantizan interfaces claras, consistentes y accesibles.
@@ -197,4 +200,17 @@ export { AnimacionesEjemplo, Badge };
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Maqueto un layout responsive con Tailwind (flex/grid y breakpoints).
+- [ ] Aplico animaciones/transiciones de forma accesible.
+- [ ] Aplico al menos 3 pautas de usabilidad a un formulario.
+- [ ] Reviso el contraste y el foco para accesibilidad.
+
+> **Reto de la sesión:** Página responsive de 3 secciones con Tailwind, transiciones suaves y contraste AA. Valídala con el teclado.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

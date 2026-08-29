@@ -6,6 +6,9 @@ Instaladores nativos, configuración de bundle, GitHub Actions y actualizaciones
 
 ---
 
+> 💻 **Código:** [`repos/03-tauri-ipc-filesystem`](../repos/03-tauri-ipc-filesystem/) · 🎬 **Proyecto final:** [AppCine](../REPOS.md#proyecto-final-appcine)
+
+
 ## Introducción a la Distribución Multiplataforma
 
 Tauri compila la aplicación en un binario nativo pequeño que se empaqueta en instaladores específicos para cada sistema operativo:
@@ -245,4 +248,17 @@ Paso a paso para completar la sesión:
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Configuro el bundle en `tauri.conf.json` para distintos formatos.
+- [ ] Compilo un instalador del SO actual y lo ejecuto.
+- [ ] Defino un flujo de GitHub Actions que genera instaladores.
+- [ ] Configuro actualizaciones y entiendo el modelo de firmas.
+
+> **Reto de la sesión:** Genera el instalador MSI/NSIS (o .deb/AppImage) y añade un workflow de GitHub Actions que lo publique como artefacto.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md) [S13](sesion13.md)

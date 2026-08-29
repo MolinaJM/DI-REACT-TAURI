@@ -35,3 +35,22 @@ export async function conReintentos(fn: () => Promise<string>, intentos: number 
 export async function procesarSeguro(): Promise<{ ok: boolean; datos?: string[]; error?: string }> {
   return { ok: false };
 }
+
+// 7) `resultadosParciales`: con Promise.allSettled no rompe aunque alguna falle
+export interface TareaSegura {
+  id: number;
+  estado: "ok" | "error";
+}
+export async function resultadosParciales(promesas: Promise<string | number>[]): Promise<TareaSegura[]> {
+  return []; // TODO: Promise.allSettled y mapear `status`
+}
+
+// 8) `primeraQueResuelve`: la primera promesa que se cumpla (Promise.any)
+export async function primeraQueResuelve(promesas: Promise<string>[]): Promise<string> {
+  return "pendiente"; // TODO: Promise.any
+}
+
+// 9) `cargarConTimeout`: cancela con AbortController si tarda demasiado
+export async function cargarConTimeout(ms: number, timeoutMs: number): Promise<string> {
+  return ""; // TODO: AbortController + setTimeout(abort) + DOMException("AbortError")
+}

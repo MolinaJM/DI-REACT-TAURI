@@ -1,13 +1,15 @@
 # Ejercicios del curso DI-RT
 
-Batería de ejercicios **por sesión** con sus soluciones. Cada carpeta `sXX/` contiene los enunciados (y, cuando son TypeScript puro, los ficheros `.ts/.tsx` que debes completar). Las soluciones completas viven en [`soluciones/`](soluciones/), una carpeta por sesión.
+Batería de ejercicios **por sesión** con sus soluciones.
+
+> ⚠️ **Soluciones locales (no publicadas):** la carpeta [`soluciones/`](soluciones/) está en `.gitignore`, así que **no aparece en GitHub/clones**. Si no tienes el entorno de clase, las soluciones se entregan con el material del profesor o se consultan en local. Cada carpeta `sXX/` contiene los enunciados (y, cuando son TypeScript puro, los ficheros `.ts/.tsx` que debes completar). Las soluciones completas viven en [`soluciones/`](soluciones/), una carpeta por sesión.
 
 ```
 ejercicios/
 ├── s00/   Fundamentos, arquitectura y entorno      (teoría)
 ├── s01/   Instalación del entorno                  (teoría/comandos)
 ├── s01-s/ Scaffolding Tauri                        (teoría/Rust)
-├── s02/   TypeScript I  (8 ficheros .ts)
+├── s02/   TypeScript I  (11 ficheros .ts)
 ├── s03/   TypeScript II (7 ejercicios, incl. módulos)
 ├── s04/   Componentes y funciones  (closures, clean code, JSX)
 ├── s05/   Estado y formularios      (reducer, validación, localStorage)

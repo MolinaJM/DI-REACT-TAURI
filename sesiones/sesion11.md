@@ -6,6 +6,9 @@
 
 ---
 
+> 💻 **Código:** [`repos/04-react-avanzado`](../repos/04-react-avanzado/) · ✏️ **Práctica:** [ejercicios/s11](../ejercicios/)
+
+
 ## Introduccion a @react-pdf/renderer
 
 La libreria @react-pdf/renderer permite generar documentos PDF utilizando componentes de React con un enfoque declarativo.
@@ -246,4 +249,17 @@ export default InformeTablas;
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Genero un documento PDF con `@react-pdf/renderer`.
+- [ ] Pinto una tabla con datos reales de la app.
+- [ ] Permito la descarga/guardado del PDF desde el frontend.
+- [ ] Estructuro el informe por secciones reutilizables.
+
+> **Reto de la sesión:** Informe PDF con tabla de pedidos, cabecera y pie, descargable desde el botón de la app.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

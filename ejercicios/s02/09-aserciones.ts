@@ -1,0 +1,44 @@
+// ============================================================
+// S02 · Ejercicio 9 · Type assertions (as, as const, !, typeof arr[number])
+// ============================================================
+// Completa. Solución: soluciones/s02/09-aserciones.ts
+// Catálogo: sesiones/ejerciciosTS.md · Sesión 2 · Bloque 6
+
+export interface Pelicula {
+  id: number;
+  titulo: string;
+}
+
+// 1) `as`: estrecha un valor `unknown` procedente de una API / JSON
+const bruto: unknown = '{"id": 1, "titulo": "Dune"}';
+export const pelicula: Pelicula = JSON.parse(bruto as string) as Pelicula; // TODO: `as string` y `as Pelicula`
+
+// 2) `!` non-null assertion: afirmamos que el puerto siempre existe
+export interface Servidor {
+  puerto?: number | null;
+}
+export function puertoDe(servidor: Servidor): number {
+  return servidor.puerto; // TODO: usa `!`
+}
+
+// 3) `as const`: valores a tipos literales inmutables
+export const RUTAS = ["/inicio", "/catalogo"]; // TODO: añade `as const`
+export const CONFIG = {
+  servicio: "api",
+  version: 3,
+}; // TODO: añade `as const`
+
+// 4) Caso React: estrechar la forma mínima de un evento tipado como `unknown`
+export function valorDeEvento(evento: { target: { value?: string } }): string {
+  return evento.target.value ?? "";
+}
+export function temaSeleccionado(evento: unknown): string {
+  return valorDeEvento(evento as { target: { value?: string } }); // TODO: `as` sobre la forma mínima
+}
+
+// 5) `typeof arr[number]`: el tipo de un elemento de un array `as const`
+export const CONTRASTES = ["claro", "oscuro"] as const;
+export type Contraste = (typeof CONTRASTES)[number];
+export function pintar(color: Contraste): string {
+  return ""; // TODO: `paint-${color}` (pintar("amarillo") no debe compilar)
+}

@@ -6,6 +6,9 @@ Operaciones CRUD con MySQL y API REST
 
 ---
 
+> 💻 **Código:** [`repos/04-react-avanzado`](../repos/04-react-avanzado/) · ✏️ **Práctica:** [ejercicios/s09](../ejercicios/)
+
+
 ## Estructura del CRUD
 
 CRUD son las cuatro operaciones básicas de persistencia: Crear (Create), Leer (Read), Actualizar (Update) y Eliminar (Delete).
@@ -553,4 +556,17 @@ export { validarProducto, manejarSubmit };
 
 ---
 
+
+## 🧪 Autoevaluación
+
+Marca lo que ya eres capaz de hacer por ti mismo/a:
+
+- [ ] Diseño una API REST mínima conectada a MySQL (express o similar).
+- [ ] Implemento las 4 operaciones CRUD y las pruebo con los verbos HTTP.
+- [ ] Consumo la API desde React con estado de carga y error.
+- [ ] Defino el modelo de datos y la conexión a la base de datos.
+
+> **Reto de la sesión:** CRUD completo de una entidad (crear, listar, editar, borrar) con estado de carga/error y la tabla creada en MySQL.
+
+> 📌 La práctica completa está en [`../ejercicios/`](../ejercicios/) (soluciones en el entorno de clase).
 [Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)
