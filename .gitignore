@@ -32,6 +32,7 @@ PLANIFV7.md
 # ---------------------------------------------------------------------------
 
 # --- BLOQUE BASE: material OCULTO por defecto (no tocar) ---
+/repos/*
 /sesiones/sesion*.md
 /sesiones/apuntes/s[0-9][0-9]/
 /ejercicios/s[0-9][0-9]/
@@ -67,6 +68,7 @@ PLANIFV7.md
 # !sesiones/apuntes/s02/
 # !ejercicios/s02/
 # !ejercicios/soluciones/s02/
+# !repos/01-typescript-fundamentos/
 
 # ===========================================================================
 #  >>> SESIÓN 03 <<
@@ -75,6 +77,7 @@ PLANIFV7.md
 # !sesiones/apuntes/s03/
 # !ejercicios/s03/
 # !ejercicios/soluciones/s03/
+# !repos/01-typescript-fundamentos/
 
 # ===========================================================================
 #  >>> SESIÓN 04 <<
@@ -83,6 +86,7 @@ PLANIFV7.md
 # !sesiones/apuntes/s04/
 # !ejercicios/s04/
 # !ejercicios/soluciones/s04/
+# !repos/02-react-componentes/
 
 # ===========================================================================
 #  >>> SESIÓN 05 <<
@@ -91,6 +95,7 @@ PLANIFV7.md
 # !sesiones/apuntes/s05/
 # !ejercicios/s05/
 # !ejercicios/soluciones/s05/
+# !repos/02-react-componentes/
 
 # ===========================================================================
 #  >>> SESIÓN 06 <<
@@ -99,6 +104,7 @@ PLANIFV7.md
 # !sesiones/apuntes/s06/
 # !ejercicios/s06/
 # !ejercicios/soluciones/s06/
+# !repos/02-react-componentes/
 
 # ===========================================================================
 #  >>> SESIÓN 07 <<
@@ -106,6 +112,7 @@ PLANIFV7.md
 # !sesiones/sesion07.md
 # !ejercicios/s07/
 # !ejercicios/soluciones/s07/
+# !repos/03-tauri-ipc-filesystem/
 
 # ===========================================================================
 #  >>> SESIÓN 08 <<
@@ -113,6 +120,8 @@ PLANIFV7.md
 # !sesiones/sesion08.md
 # !ejercicios/s08/
 # !ejercicios/soluciones/s08/
+# !repos/04-react-avanzado/
+# !repos/02-react-componentes/
 
 # ===========================================================================
 #  >>> SESIÓN 09 <<
@@ -120,6 +129,7 @@ PLANIFV7.md
 # !sesiones/sesion09.md
 # !ejercicios/s09/
 # !ejercicios/soluciones/s09/
+# !repos/04-react-avanzado/
 
 # ===========================================================================
 #  >>> SESIÓN 10 <<
@@ -127,6 +137,7 @@ PLANIFV7.md
 # !sesiones/sesion10.md
 # !ejercicios/s10/
 # !ejercicios/soluciones/s10/
+# !repos/04-react-avanzado/
 
 # ===========================================================================
 #  >>> SESIÓN 11 <<
@@ -134,6 +145,7 @@ PLANIFV7.md
 # !sesiones/sesion11.md
 # !ejercicios/s11/
 # !ejercicios/soluciones/s11/
+# !repos/04-react-avanzado/
 
 # ===========================================================================
 #  >>> SESIÓN 12 <<
@@ -141,8 +153,11 @@ PLANIFV7.md
 # !sesiones/sesion12.md
 # !ejercicios/s12/
 # !ejercicios/soluciones/s12/
+# !repos/05-testing/
+# !repos/04-react-avanzado/
 
 # ===========================================================================
 #  >>> SESIÓN 13 <<  (solo guía: no hay apuntes/ejercicios propios)
 # ===========================================================================
 # !sesiones/sesion13.md
+# !repos/03-tauri-ipc-filesystem/
