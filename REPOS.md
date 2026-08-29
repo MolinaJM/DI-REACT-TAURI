@@ -176,7 +176,7 @@ repos/
 En el material conviven **dos numeraciones distintas** (no guardan relación entre sí):
 
 1. **Fichero `apuntes/` (00–15)**: orden actual del curso, agrupado por carpetas de sesión (s02→s06).
-2. **Capítulo interno (`## N.x`)**: numeración alineada con el nº de fichero (07→7.x, 08→8.x, 09→9.x, 10→10.x, 11→11.x, 12→12.x, 13→13.x, 14→14.x, 15→15.x). El `14` está en s06 y el `15` en s05, respetando el orden del material original. Ya no quedan ficheros con secciones `1..N` sin prefijo.
+2. **Capítulo interno (`## N.x`)**
 
 | Fichero REPO-*.ts (`repos/01/src`) | Teoría hoy en `sesiones/apuntes/` |
 |---|---|

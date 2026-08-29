@@ -127,7 +127,7 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 | 11 | RA5 | 🤖 [S11](sesiones/sesion11.md) | Creación de Informes en PDF con React | @react-pdf/renderer, Document/Page/Text, PDFViewer |
 | 12 | RA6 y RA8 | 🤖 [S12](sesiones/sesion12.md) | Documentación.Pruebas Automatizadas | Vitest, Testing Library, Playwright E2E, ejercicios TS |
 | 13 | RA7 | 🤖 [S13](sesiones/sesion13.md) | Distribución Multiplataforma con Tauri | Bundle (tauri.conf.json), instaladores MSI/NSIS, DMG, DEB/RPM/AppImage, GitHub Actions, Updater |
-| 14 | RA2 y RA3 | 🤖 S14 | Proyecto NUI | Ampliación de miniproyecto. Diseño e implementación de una interfaz natural de usuario (NUI) |
+| 14 | RA2 y RA3 | 🤖 S14 ~ | Proyecto NUI | Ampliación de miniproyecto. Diseño e implementación de una interfaz natural de usuario (NUI) |
 
 ---
 
