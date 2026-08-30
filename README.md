@@ -152,7 +152,7 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 | 3 | RA1 | [S03](sesiones/sesion03.md) | Introducción a TypeScript (Parte 2) | Arrays, objetos, módulos (import/export), npm/Vite, asincronismo (callbacks, promesas, async/await, Fetch) |
 | 4 | RA1 | [S04](sesiones/sesion04.md) | Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composicion |
 | 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
-| 6 | RA1 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Tabla genérica, Modal, composición, patrones de DOM |
+| 6 | RA3 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Tabla genérica, Modal, composición, patrones de DOM |
 | 7 | RA1 | [S07](sesiones/sesion07.md) | El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), std::fs, Fetch CRUD |
 | 8 | RA1 | [S08](sesiones/sesion08.md) | Persistencia de Estado Global y Enrutado | Context API, Zustand, persist, React Router v7, SPA custom |
 | 9 | RA1 | [S09](sesiones/sesion09.md) | Formulario CRUD para bases de datos | ApiService generica, GET/POST/PUT/DELETE, validacion |
@@ -160,7 +160,7 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 | 11 | RA5 | 🤖 [S11](sesiones/sesion11.md) | Creación de Informes en PDF con React | @react-pdf/renderer, Document/Page/Text, PDFViewer |
 | 12 | RA6 y RA8 | 🤖 [S12](sesiones/sesion12.md) | Documentación.Pruebas Automatizadas | Vitest, Testing Library, Playwright E2E, ejercicios TS |
 | 13 | RA7 | 🤖 [S13](sesiones/sesion13.md) | Distribución Multiplataforma con Tauri | Bundle (tauri.conf.json), instaladores MSI/NSIS, DMG, DEB/RPM/AppImage, GitHub Actions, Updater |
-| 14 | RA2 y RA3 | 🤖 S14 ~ | Proyecto NUI | Ampliación de miniproyecto. Diseño e implementación de una interfaz natural de usuario (NUI) |
+| 14 | RA2 | 🤖 S14 ~ | Proyecto NUI | Ampliación de miniproyecto. Diseño e implementación de una interfaz natural de usuario (NUI) |
 
 ---
 
