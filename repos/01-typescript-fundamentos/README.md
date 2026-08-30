@@ -7,8 +7,6 @@
 
 Ejemplos y ejercicios de los conceptos fundamentales de TypeScript, desde tipos primitivos hasta async/await y módulos.
 
-> **Ruta obligatoria** para el curso DI-RT (React + Tauri). Se ha recortado el material optativo (OOP, enums, template literal types, `.d.ts`/namespace, DOM directo y Web APIs) para quedarnos solo con lo estrictamente necesario para React + Tauri.
-
 ## Estructura
 
 ```

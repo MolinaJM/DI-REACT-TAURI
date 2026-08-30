@@ -9,7 +9,7 @@ ejercicios/
 ├── s00/   Fundamentos, arquitectura y entorno      (teoría)
 ├── s01/   Instalación del entorno                  (teoría/comandos)
 ├── s01-s/ Scaffolding Tauri                        (teoría/Rust)
-├── s02/   TypeScript I  (11 ficheros .ts)
+├── s02/   TypeScript I  (12 ficheros .ts, incl. reto final)
 ├── s03/   TypeScript II (7 ejercicios, incl. módulos)
 ├── s04/   Componentes y funciones  (closures, clean code, JSX)
 ├── s05/   Estado y formularios      (reducer, validación, localStorage)
