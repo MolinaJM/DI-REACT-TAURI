@@ -150,7 +150,7 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 | 1-S | - | [S01-S](sesiones/sesion01_scaffolding.md) | Scaffolding de un Proyecto Tauri con React y Rust | Estructura archivos, Cargo.toml, tauri.conf.json, invoke, IPC |
 | 2 | RA1 | [S02](sesiones/sesion02.md) | Introducción a TypeScript (Parte 1) | Introducción a JS/TS, sintaxis básica, conversión de tipos, operadores, funciones, control de flujo, ámbito y scope |
 | 3 | RA1 | [S03](sesiones/sesion03.md) | Introducción a TypeScript (Parte 2) | Arrays, objetos, módulos (import/export), npm/Vite, asincronismo (callbacks, promesas, async/await, Fetch) |
-| 4 | RA1 | [S04](sesiones/sesion04.md) | Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composicion |
+| 4 | RA1 | [S04](sesiones/sesion04.md) | REACT. Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composicion |
 | 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
 | 6 | RA3 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Tabla genérica, Modal, composición, patrones de DOM |
 | 7 | RA1 | [S07](sesiones/sesion07.md) | El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), std::fs, Fetch CRUD |

@@ -22,7 +22,7 @@ React + Tauri — Segundo de Desarrollo de Aplicaciones Multiplataforma
 
 ## Material complementario
 
-- **Apuntes por sesión (teoría en profundidad)**: [S2 · TypeScript I](apuntes/s02/) · [S3 · TypeScript II](apuntes/s03/) · [S4 · React](apuntes/s04/) · [S5 · React](apuntes/s05/) · [S6 · React](apuntes/s06/)
+- **Apuntes por sesión (teoría en profundidad)**: [S2 · TypeScript I](apuntes/s02/) · [S3 · TypeScript II](apuntes/s03/) · [S4 · React](apuntes/s04/) · [S5 · React](apuntes/s05/) · [S6 · React](apuntes/s06/) · *¿Nuevo en React? Empieza por [00 · Qué es React](apuntes/s04/00_Que_es_React.md)*
 - **Ejercicios de TypeScript S2–S3 (catálogo con soluciones)**: [ejerciciosTS.md](ejerciciosTS.md) · código en [ejercicios/](../ejercicios/)
 - **Proyecto final AppCine**: [temario-appcine.md](temario-appcine.md)
 - **Repositorios de código ejecutable**: [REPOS.md](../REPOS.md)
