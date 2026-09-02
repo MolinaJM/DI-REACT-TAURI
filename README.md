@@ -2,49 +2,17 @@
 
 **Segundo curso de Desarrollo de Aplicaciones Multiplataforma**
 
+>Este material no busca ser una guía exhaustiva de TypeScript y React, sino un recorrido directo por lo estrictamente necesario para dominar Tauri.
+
 ---
 
 ## Índice / Navegación
 
-- [Sesiones del curso](sesiones/index.md) — guion S00–S13 con teoría por sesión
-- [Repositorios de código y plan de sesiones](REPOS.md) — repos `01`–`05`, sesiones y proyecto final
+- [Distribución Temporal y Contenidos (S00–S13)](#5-distribución-temporal-y-contenidos-s00s13) — guion de sesiones con teoría por sesión
+- [Instalación y configuración del entorno](sesiones/sesion00.md) — S0 · Node.js, nvm, NPM, Vite, React, Tailwind, Rust y Tauri
+- [Repositorios de código y plan de sesiones](REPOS.md) — repos `01`–`05`, cómo lanzar cada repo y proyecto final
 - [Ejercicios por sesión con soluciones](ejercicios/) — batería de ejercicios S00–S12
 - Proyecto final: AppCine
-
-## 0. Arranque rápido (instalación y comandos)
-
-```bash
-# 1) Usa la versión de Node del proyecto
-nvm use                      # hay un .nvmrc en la raíz
-
-# 2) Instala dependencias una vez por carpeta
-npm install                  # en ejercicios/  (enunciados + soluciones locales)
-npm install                  # en cada repos/XX/ que vayas a usar (01..05)
-
-# 3) Lanza el código del repositorio correspondiente a la sesión
-npx tsx src/REPO-01-tipos-primitivos.ts   # repos/01  (TypeScript puro, S02-S03)
-npm run build                             # repos/01  solo comprueba tipos
-npm run dev                               # repos/02, repos/04 (React + Vite)
-npm run tauri dev                         # repos/03  (app de escritorio Tauri)
-npm test                                  # repos/05  (Vitest, S12)
-
-# 4) Ejercicios
-npm run typecheck             # en ejercicios/: valida tipos de enunciados y soluciones
-npm run run:s02               # ejecuta todas las soluciones de S02
-```
-
-| Repo de código | Sesiones | Cómo lanzarlo |
-|---|---|---|
-| `repos/01-typescript-fundamentos` | S02–S03 | `npx tsx src/REPO-XX.ts` |
-| `repos/02-react-componentes` | S04–S06 | `npm run dev` |
-| `repos/03-tauri-ipc-filesystem` | S07 · S13 | `npm run tauri dev` |
-| `repos/04-react-avanzado` | S08–S11 | `npm run dev` |
-| `repos/05-testing` | S12 | `npm test` · `npx playwright test` |
-
----
-
-
----
 
 ## 1. Contexto Teórico y Evolución de las Interfaces Web
 
@@ -143,23 +111,45 @@ La evaluación de la asignatura se basará en:
 
 Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto del tiempo a la realización de **prácticas** y a la resolución de **dudas**.
 
+#### INSTALACIÓN (S0–S1)
+
 | # | RA | Sesion | Titulo | Contenido |
 |---|----|--------|--------|-----------|
 | 0 | - | [S00](sesiones/sesion00.md) | Fundamentos de Arquitectura y Configuración del Entorno | nvm, Node.js, NPM, Vite, React, Tailwind CSS, Rust, Tauri (panoramica) |
 | 1 | - | [S01](sesiones/sesion01.md) | Instalación del Entorno de Desarrollo | Windows, Ubuntu/Debian, macOS, Fedora/Arch, desinstalacion |
 | 1-S | - | [S01-S](sesiones/sesion01_scaffolding.md) | Scaffolding de un Proyecto Tauri con React y Rust | Estructura archivos, Cargo.toml, tauri.conf.json, invoke, IPC |
+
+#### TYPESCRIPT (S2–S3)
+
+| # | RA | Sesion | Titulo | Contenido |
+|---|----|--------|--------|-----------|
 | 2 | RA1 | [S02](sesiones/sesion02.md) | Introducción a TypeScript (Parte 1) | Introducción a JS/TS, sintaxis básica, conversión de tipos, operadores, funciones, control de flujo, ámbito y scope |
 | 3 | RA1 | [S03](sesiones/sesion03.md) | Introducción a TypeScript (Parte 2) | Arrays, objetos, módulos (import/export), npm/Vite, asincronismo (callbacks, promesas, async/await, Fetch) |
+
+#### REACT (S4–S6)
+
+| # | RA | Sesion | Titulo | Contenido |
+|---|----|--------|--------|-----------|
 | 4 | RA1 | [S04](sesiones/sesion04.md) | REACT. Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composicion |
 | 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
 | 6 | RA3 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Tabla genérica, Modal, composición, patrones de DOM |
-| 7 | RA1 | [S07](sesiones/sesion07.md) | El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), std::fs, Fetch CRUD |
+
+#### TAURI (S7–S13)
+
+| # | RA | Sesion | Titulo | Contenido |
+|---|----|--------|--------|-----------|
+| 7 | RA1 | [S07](sesiones/sesion07.md) | TAURI: El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), std::fs, Fetch CRUD |
 | 8 | RA1 | [S08](sesiones/sesion08.md) | Persistencia de Estado Global y Enrutado | Context API, Zustand, persist, React Router v7, SPA custom |
 | 9 | RA1 | [S09](sesiones/sesion09.md) | Formulario CRUD para bases de datos | ApiService generica, GET/POST/PUT/DELETE, validacion |
 | 10 | RA4 | 🤖 [S10](sesiones/sesion10.md) | Estilización Avanzada y Diseño de Interfaces con Tailwind CSS | Responsive, grid, hamburger menu, animaciones |
 | 11 | RA5 | 🤖 [S11](sesiones/sesion11.md) | Creación de Informes en PDF con React | @react-pdf/renderer, Document/Page/Text, PDFViewer |
 | 12 | RA6 y RA8 | 🤖 [S12](sesiones/sesion12.md) | Documentación.Pruebas Automatizadas | Vitest, Testing Library, Playwright E2E, ejercicios TS |
 | 13 | RA7 | 🤖 [S13](sesiones/sesion13.md) | Distribución Multiplataforma con Tauri | Bundle (tauri.conf.json), instaladores MSI/NSIS, DMG, DEB/RPM/AppImage, GitHub Actions, Updater |
+
+#### Ampliación Proyecto (S14)
+
+| # | RA | Sesion | Titulo | Contenido |
+|---|----|--------|--------|-----------|
 | 14 | RA2 | 🤖 S14 ~ | Proyecto NUI | Ampliación de miniproyecto. Diseño e implementación de una interfaz natural de usuario (NUI) |
 
 ---

@@ -38,22 +38,3 @@ console.log(multiplicar(4, 2));  // 8
 // Re-exportar
 // export { sumar, restar } from "./matematica";
 // export * from "./matematica";
-
-// ============================================================================
-// STRICT MODE Y CONFIGURACION (referencia)
-// ============================================================================
-
-// strict: true activa:
-// - strictNullChecks: no permite null/undefined donde no se espera
-// - noImplicitAny: exige tipar parametros
-// - strictFunctionTypes: funciones covariantes/contravariantes
-// - noImplicitThis: this debe estar tipado
-// (strictPropertyInitialization se aplica a clases, fuera de la ruta)
-
-// strictNullChecks
-let nombre: string | null = "Juan";
-nombre = null;
-// nombre.length;  // Error: Object is possibly 'null'
-
-// noImplicitAny
-// function procesar(param) {}  // Error: implicit any

@@ -2,7 +2,7 @@
 
 Node.js, NPM, Vite, React, Tailwind CSS, Rust y Tauri
 
-[← Volver al Índice](index.md)
+[← Volver al Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13)
 
 ---
 
@@ -41,6 +41,17 @@ A continuación se muestra una miniaplicación de ejemplo que sigue esta arquite
 ![API REST SpringBoot](../img/00.png)
 
 API REST SpringBoot (acceso a MySQL bajo Docker)
+
+```mermaid
+graph LR
+  React["React + TypeScript (frontend)"] -->|"invoke('comando', args)"| Tauri["Tauri Core (JS → Rust bridge)"]
+  Tauri -->|"llamada a la función"| Rust["Comando Rust (#[tauri::command])"]
+  Rust -->|"retorno tipado"| Tauri
+  Tauri -->|"Promise resuelta <T>"| React
+  style Tauri fill:#2d2d2d,stroke:#24c8db,color:#24c8db
+  style Rust fill:#2d2d2d,stroke:#dea584,color:#dea584
+  style React fill:#2d2d2d,stroke:#61dafb,color:#61dafb
+```
 
 ```mermaid
 graph LR
@@ -440,4 +451,4 @@ console.log(mensaje) // "Hola desde Rust, Estudiante!"
 
 ---
 
-[Índice](index.md) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)
+[Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)

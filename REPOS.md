@@ -12,11 +12,11 @@ Tabla resumen de sesiones, repositorios y tecnologias.
 | S02 | Introduccion a TypeScript (Parte 1) | `01-typescript-fundamentos` | Tipos primitivos, arrays, tuples, enums, interfaces, type aliases, funciones, type guards, operadores, control flow, scope |
 | S03 | Introduccion a TypeScript (Parte 2) | `01-typescript-fundamentos` | Clases, herencia, abstractas, generics, modulos, declaraciones .d.ts, async/await, Promises, Fetch, DOM tipado, Set, Map, Web APIs |
 | S04 | Anatomia de Componentes y Funciones con TypeScript | `02-react-componentes` | Functional components, FC\<Props\>, props children, useState, useEffect, Clean Code, IIFE, closures, composicion |
-| S05 | Gestion de Estado Basico y Tipado de Formularios | `02-react-componentes` | useReducer, formularios controlados, validacion tipada, localStorage, sessionStorage, patrones funcionales de estado |
+| S05 | Gestion de Estado Basico y Tipado de Formularios | `02-react-componentes` | useReducer, formularios controlados, validacion tipada, localStorage, patrones funcionales de estado |
 | S06 | Creacion de Componentes Personalizados | `02-react-componentes` | ButtonHTMLAttributes, generic Table\<T\>, Modal, composicion, slots, patrones de factory y DOM |
 | S07 | El Puente de Comunicacion (Tauri IPC) y Sistema de Archivos | `03-tauri-ipc-filesystem` | #[tauri::command], invoke(), eventos Tauri, std::fs, leer/escribir archivos, listar directorios, Fetch CRUD |
 | S08 | Persistencia de Estado Global y Enrutado | `04-react-avanzado` | Context API, Zustand, persist middleware, React Router v7, Layout/Outlet, SPA router custom, structuredClone |
-| S09 | Formulario CRUD para bases de datos | `04-react-avanzado` | ApiService\<T\> generica, GET/POST/PUT/DELETE, validacion de formularios, Omit\<T\>, Patch |
+| S09 | Formulario CRUD para bases de datos | `04-react-avanzado` | ApiService\<T\> generica sobre invoke, comandos listar/obtener/crear/actualizar/borrar, validacion de formularios, Omit\<T\>, Partial |
 | S10 | Estilizacion Avanzada y Diseno de Interfaces | `04-react-avanzado` | Tailwind CSS, responsive design, grid, hamburger menu, animaciones, transiciones, conditional styling |
 | S11 | Creacion de Informes en PDF con React | `04-react-avanzado` | @react-pdf/renderer, Document/Page/Text/View, StyleSheet, PDFViewer, PDFDownloadLink, tablas |
 | S12 | Prueba automatizada | `05-testing` | Vitest, Testing Library, renderHook, act, waitFor, vi.fn, Playwright E2E, ejercicios autoevaluables TS |
@@ -110,8 +110,7 @@ repos/
 │   │   ├── store/
 │   │   │   └── carritoStore.ts       S08
 │   │   ├── routing/
-│   │   │   ├── AppRouter.tsx         S08
-│   │   │   └── RouterSPA.ts          S08
+│   │   │   └── AppRouter.tsx         S08
 │   │   ├── api/
 │   │   │   ├── ApiService.ts         S09
 │   │   │   ├── crud.tsx              S09
