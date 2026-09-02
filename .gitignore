@@ -5,6 +5,9 @@ dist/
 .DS_Store
 *.tsbuildinfo
 
+# Documento interno de planificación/estudio (solo del profesor, no se comparte)
+CRONO.md
+
 # Planificaciones temporales (no se publican)
 PLANIF.md
 
@@ -42,9 +45,11 @@ PLANIF.md
 # ===========================================================================
 #  >>> SESIÓN 01-S <<  (REVELADA · scaffolding)
 # ===========================================================================
-!sesiones/sesion01_scaffolding.md
+!sesiones/apuntes/scaffolding.md
 !ejercicios/s01-s/
 !ejercicios/soluciones/s01-s/
+!repos/03-tauri-ejemplo-minimo/
+# !repos/02-react-ejemplo-minimo/   (comentado: se revela con el flujo de S04)
 
 # ===========================================================================
 #  >>> SESIÓN 02 <<  JMM - quitamos el `#` para revelar el material de TS

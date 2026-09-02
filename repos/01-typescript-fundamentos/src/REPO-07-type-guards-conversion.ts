@@ -10,6 +10,10 @@ export {};
  * - Truthy/Falsy
  * - Nullish coalescing (??)
  * - Operadores logicos y asignacion
+ *
+ * (Basico para Tauri: `x is T`, `as`, tipos con `??`, `JSON.parse` tipado.
+ *  Las assertion functions (`asserts`) y la coercion/truthy a fondo son
+ *  optativos: no son necesarios para `invoke<T>`.)
  */
 
 // ============================================================================

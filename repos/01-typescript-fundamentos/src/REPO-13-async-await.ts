@@ -9,6 +9,10 @@ export {};
  * - Event Loop: microtareas vs macrotareas
  * - Fetch API con tipos
  * - AbortController para cancelar peticiones
+ *
+ * (Basico para Tauri: callbacks, `new Promise`, `async/await`, `try/catch`
+ *  y `Promise.all`. El Event Loop a fondo, `allSettled`/`race`/`any` y
+ *  `AbortController` son optativos: no se usan con `invoke`.)
  */
 
 // ============================================================================

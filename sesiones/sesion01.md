@@ -117,7 +117,7 @@ Al ejecutar `npx tauri dev`, Tauri compilará el backend en Rust (puede tardar l
 
 Durante `tauri init` se te preguntará:
 
-> Para entender en detalle la estructura completa de un proyecto Tauri con React y Rust, consulta la guía de [Scaffolding de un proyecto Tauri](sesion01_scaffolding.md).
+> Para entender en detalle la estructura completa de un proyecto Tauri con React y Rust, consulta la guía de [Scaffolding de un proyecto Tauri](apuntes/scaffolding.md).
 
 ## 2. Instalación del Entorno en Linux (Ubuntu / Debian)
 
@@ -445,7 +445,7 @@ La asignatura construye el conocimiento desde los cimientos: primero se aprende 
 | --- | --- | --- |
 | `01-typescript-fundamentos` | S02 + S03 | TypeScript puro (13 ficheros .ts) |
 | `02-react-componentes` | S04 + S05 + S06 | React, Vite, componentes, hooks, formularios |
-| `03-tauri-ipc-filesystem` | S07 | Tauri v2, Rust, IPC, Fetch CRUD |
+| `03-tauri-ipc-filesystem` | S07 | Tauri v2, Rust, IPC, CRUD con invoke |
 | `04-react-avanzado` | S08 + S09 + S10 + S11 | Zustand, React Router, Tailwind CSS, @react-pdf/renderer |
 | `05-testing` | S12 | Vitest, Testing Library, Playwright E2E |
 
@@ -468,4 +468,4 @@ Para seguir la asignatura se usan varios comandos en terminal. Aqui se explican 
 
 ---
 
-[Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)
+[Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md) [S13](sesion13.md)

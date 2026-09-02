@@ -2,7 +2,9 @@
 
 Estructura completa de archivos y carpetas, y qué hace cada uno
 
-[← Volver al Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13)
+> 🧭 **Sesión donde se aplica:** S01-S (arranque de un proyecto Tauri). Es complementario a la instalación del entorno.
+
+[← Volver al Índice](../../README.md#5-distribución-temporal-y-contenidos-s00s13)
 
 ---
 
@@ -348,4 +350,4 @@ pub fn run() {
 
 ---
 
-[Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md)
+[Volver al índice general](../../README.md#5-distribución-temporal-y-contenidos-s00s13)

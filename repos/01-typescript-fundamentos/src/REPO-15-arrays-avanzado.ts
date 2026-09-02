@@ -9,6 +9,10 @@ export {};
  * - Map: creacion, iteracion, Map.groupBy, WeakMap
  * - Objetos: Object.keys/values/entries, freeze, hasOwn
  * - Objetos: destructuring avanzado, JSON tipado, structuredClone, Object.groupBy
+ *
+ * (Las APIs ES2023+ —toSorted/toReversed/findLast, las operaciones nativas de
+ *  Set y Map, `structuredClone`, `Object.groupBy`— y la busqueda binaria son
+ *  optativos: APLICAN a un TS generalista, fuera de la ruta React + Tauri.)
  */
 
 // ============================================================================
