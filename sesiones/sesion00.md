@@ -42,6 +42,8 @@ A continuación se muestra una miniaplicación de ejemplo que sigue esta arquite
 
 API REST SpringBoot (acceso a MySQL bajo Docker)
 
+**Ejemplificación (resumen visual):**
+
 ```mermaid
 graph LR
   React["React + TypeScript (frontend)"] -->|"invoke('comando', args)"| Tauri["Tauri Core (JS → Rust bridge)"]
@@ -52,6 +54,43 @@ graph LR
   style Rust fill:#2d2d2d,stroke:#dea584,color:#dea584
   style React fill:#2d2d2d,stroke:#61dafb,color:#61dafb
 ```
+
+**Detalle (ida y vuelta — qué ocurre en cada paso):**
+
+```mermaid
+flowchart LR
+  React["React + TypeScript<br/>(frontend)"]
+  Invoke["invoke('comando', args)"]
+
+  subgraph Puente["Tauri Core (JS ↔ Rust)"]
+    Deser["Deserializa el JSON<br/>y valida tipado"]
+    Comando["Comando Rust<br/>(#[tauri::command])"]
+    Serde["Serde · serializa<br/>resultado → JSON"]
+    Tipa["Deserializa y tipa<br/>como Promise&lt;T&gt;"]
+  end
+
+  React -- "① envía args<br/>(objeto → JSON)" --> Invoke
+  Invoke --> Deser
+  Deser --> Comando
+  Comando --> Serde
+  Serde --> Tipa
+  Tipa -- "⑥ React recibe<br/>el dato tipado" --> React
+
+  style Puente fill:#2d2d2d,stroke:#24c8db,color:#24c8db
+  style Comando fill:#2d2d2d,stroke:#dea584,color:#dea584
+  style React fill:#2d2d2d,stroke:#61dafb,color:#61dafb
+```
+
+> 💡 **Qué ocurre en cada momento (el ciclo completo — ida y vuelta):**
+>
+> 1. **React envía un JSON.** Al llamar `invoke("saludar", { nombre: "Ana" })`, el objeto de argumentos (`{ nombre: "Ana" }`) se **serializa a JSON** (JavaScript ya lo maneja como objetos; el puente lo convierte al formato que va a Rust).
+> 2. **Invoke lo deserializa.** El *bridge* de Tauri (Tauri Core) **deserializa ese JSON** a los tipos esperados por el comando Rust y valida que coincidan (nombre → `String`).
+> 3. **Tauri procesa.** Invoca la función Rust correspondiente (`#[tauri::command]`) y devuelve el resultado.
+> 4. **Rust lo serializa.** El resultado del comando (p. ej. `"Hola, Ana!"`) se **serializa a JSON** mediante `serde` (`Serializar`/`Deserialize`), que es quien pasa de un tipo Rust a JSON y viceversa.
+> 5. **Invoke lo deserializa (de vuelta).** El bridge **deserializa el JSON** del retorno y lo tipa como el genérico `invoke<T>` que pediste (aquí `Promise<string>`).
+> 6. **React recibe el dato tipado.** Tu `await invoke<T>` resuelve con el valor ya tipado y lo usas en la UI.
+>
+> **Regla mnemotécnica:** *React serializa* (objeto→JSON), *Tauri/invoke deserializa* (JSON→Rust), *Rust procesa*, *Rust serializa* (resultado→JSON), *invoke deserializa* (JSON→T), *React consume*. **`serde` es el que hace el trabajo de serialización** en el lado Rust; la API `invoke` de Tauri hace el puente en el lado JS.
 
 ```mermaid
 graph LR
