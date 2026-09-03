@@ -38,6 +38,8 @@ Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio resp
 
 A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura completa:
 
+### 1) Arquitectura de escritorio (Tauri)
+
 **Ejemplificación (resumen visual):**
 
 ```mermaid
@@ -87,6 +89,10 @@ flowchart LR
 > 6. **React recibe el dato tipado.** Tu `await invoke<T>` resuelve con el valor ya tipado y lo usas en la UI.
 >
 > **Regla mnemotécnica:** *React serializa* (objeto→JSON), *Tauri/invoke deserializa* (JSON→Rust), *Rust procesa*, *Rust serializa* (resultado→JSON), *invoke deserializa* (JSON→T), *React consume*. **`serde`** es quien hace la serialización en el lado Rust; la API **`invoke`** de Tauri hace el puente en el lado JS.
+
+---
+
+### 2) Arquitectura web (Spring Boot + MySQL en Docker)
 
 ```mermaid
 graph LR
