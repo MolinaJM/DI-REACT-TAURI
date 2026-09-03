@@ -91,10 +91,10 @@ flowchart LR
 ```mermaid
 graph LR
   Cliente("Cliente: frontend (React + Vite)") -->|"HTTP / JSON"| SpringBoot["API REST Spring Boot"]
-  SpringBoot -->|"SQL / JDBC"| Mysql[("MySQL 8 :3306")]
   subgraph Docker["Docker"]
-    Mysql
+    Mysql[("MySQL 8 :3306")]
   end
+  SpringBoot -->|"SQL / JDBC"| Mysql
   style Docker fill:#2d2d2d,stroke:#2496ed,color:#2496ed
   style SpringBoot fill:#2d2d2d,stroke:#6db33f,color:#6db33f
   style Mysql fill:#2d2d2d,stroke:#f29111,color:#f29111
