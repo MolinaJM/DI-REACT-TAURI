@@ -157,18 +157,6 @@ function iniciar(config: Config): Config {
     };
 }
 
-// Operadores de asignacion logica (ES2021)
-let nombreAsig: string = "";
-nombreAsig ||= "Anonimo";                         // "" es falsy -> "Anonimo"
-console.log(nombreAsig);
-
-let usuarioAsig: unknown = { id: 1 };
-usuarioAsig &&= usuarioAsig;                          // solo si es truthy
-
-let puntuacion: number | null = null;
-puntuacion ??= 100;                           // solo si null/undefined
-console.log(puntuacion);                      // 100
-
 // Operador ternario
 const edad: number = 20;
 const puedeVotar: string = edad >= 18 ? "Si" : "No";

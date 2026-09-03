@@ -39,14 +39,6 @@ let esActivo: boolean = true;
 let indefinido: undefined = undefined;
 let nulo: null = null;
 
-// SYMBOL (ES6+)
-let simbolo: symbol = Symbol("identificador-unico");
-const otroSimbolo: unique symbol = Symbol("solo-unico");
-
-// BIGINT (ES2020+)
-let numeroGrande: bigint = 9007199254740991n;
-let otroBigInt = BigInt(42);
-
 // ============================================================================
 // 3. INFERENCIA DE TIPOS (Type Inference)
 // ============================================================================

@@ -3,15 +3,15 @@ export {};
 /**
  * Fichero 15: Arrays Avanzado, Set, Map y Objetos
  * ------------------------------------------------
- * - Arrays: push/pop/splice, map/filter/reduce, at(), toSorted/toReversed
+ * - Arrays: push/pop, map/filter/reduce, toSorted/toReversed
  * - Arrays: sort/reverse, destructuring, busqueda binaria
  * - Set: creacion, operaciones, ES2025 nativas
- * - Map: creacion, iteracion, Map.groupBy, WeakMap
+ * - Map: creacion, iteracion
  * - Objetos: Object.keys/values/entries, freeze, hasOwn
  * - Objetos: destructuring avanzado, JSON tipado, structuredClone, Object.groupBy
  *
- * (Las APIs ES2023+ —toSorted/toReversed/findLast, las operaciones nativas de
- *  Set y Map, `structuredClone`, `Object.groupBy`— y la busqueda binaria son
+ * (Las APIs ES2023+ —toSorted/toReversed, las operaciones nativas de Set y
+ *  Map, `structuredClone`, `Object.groupBy`— y la busqueda binaria son
  *  optativos: APLICAN a un TS generalista, fuera de la ruta React + Tauri.)
  */
 
@@ -24,14 +24,6 @@ const numeros: number[] = [1, 2, 3];
 // Anadir/eliminar al final
 numeros.push(4);     // [1, 2, 3, 4]
 const ultimo = numeros.pop();   // 4
-
-// Anadir/eliminar al inicio
-numeros.unshift(0);  // [0, 1, 2, 3]
-const primeroShift = numeros.shift(); // 0
-
-// splice: eliminar/insertar en cualquier posicion
-numeros.splice(1, 1);       // elimina 1 elemento en indice 1
-numeros.splice(1, 0, 99);   // inserta 99 en indice 1
 
 // ============================================================================
 // ARRAYS: METODOS DE ITERACION (inmutables)
@@ -55,22 +47,9 @@ nums.forEach((n) => console.log(n));
 const mayor3: number | undefined = nums.find((n) => n > 3);
 const idx: number = nums.findIndex((n) => n > 3);
 
-// findLast / findLastIndex (ES2023)
-const ultimoMayor3: number | undefined = nums.findLast((n) => n > 3);
-
 // some / every
 const hayPares: boolean = nums.some((n) => n % 2 === 0);
 const todosPositivos: boolean = nums.every((n) => n > 0);
-
-// ============================================================================
-// AT() (ES2022) - indices negativos
-// ============================================================================
-
-const frutas: string[] = ["manzana", "platano", "naranja"];
-
-console.log(frutas.at(0));   // "manzana"
-console.log(frutas.at(-1));  // "naranja" (ultimo)
-console.log(frutas.at(-2));  // "platano"
 
 // ============================================================================
 // METODOS INMUTABLES ES2023
@@ -238,31 +217,6 @@ for (const [k, v] of config.entries()) console.log(k, v);
 
 // forEach
 config.forEach((valor, clave) => console.log(clave, valor));
-
-// Map.groupBy() (ES2024)
-interface Alumno {
-    nombre: string;
-    curso: string;
-}
-
-const alumnos: Alumno[] = [
-    { nombre: "PROFE", curso: "DI" },
-    { nombre: "Ana", curso: "DI" },
-    { nombre: "Luis", curso: "DIW" },
-];
-
-const porCurso: Map<string, Alumno[]> = Map.groupBy(
-    alumnos,
-    (a: Alumno) => a.curso
-);
-// Map { "DI" => [Alumno, Alumno], "DIW" => [Alumno] }
-
-// WeakMap
-const metadatos: WeakMap<object, { clicks: number }> = new WeakMap();
-
-const boton = { id: "btn-1" };
-metadatos.set(boton, { clicks: 0 });
-// Si boton pierde todas las referencias, el GC limpia el WeakMap
 
 // Casos de uso reales
 // Cache de datos

@@ -1,15 +1,12 @@
 export {};
 
 /**
- * Fichero 08: Control de Flujo, Scope y This
+ * Fichero 08: Control de Flujo y Scope
  * -------------------------------------------
  * - Condicionales (if/else, switch exhaustivo)
- * - Bucles (for, for...of, while, do...while)
- * - break y continue
- * - var vs let/const
+ * - Bucles (for...of)
  * - Hoisting y Temporal Dead Zone
  * - Clausuras (Closures)
- * - La palabra clave this
  */
 
 // ============================================================================
@@ -49,10 +46,6 @@ function actividad(dia: DiaSemana): string {
 
 const frutas: string[] = ["manzana", "pera", "uva"];
 
-// for clasico
-for (let i = 0; i < frutas.length; i++) {
-    console.log(frutas[i]);
-}
 
 // for...of (iterables)
 for (const fruta of frutas) {
@@ -64,37 +57,12 @@ for (const letra of "TypeScript") {
     console.log(letra);
 }
 
-// while
-let contador: number = 0;
-while (contador < 3) {
-    console.log(contador);
-    contador++;
-}
 
-// do...while
-let x: number = 5;
-do {
-    console.log(x);
-    x--;
-} while (x > 0);
-
-// break y continue
-for (let i: number = 0; i < 5; i++) {
-    if (i === 2) continue; // salta iteracion
-    if (i === 4) break;    // sale del bucle
-    console.log(i);        // 0, 1, 3
-}
 
 // ============================================================================
 // AMBITO (SCOPE) Y HOISTING
 // ============================================================================
 
-// var: ambito de funcion, hoisting con undefined
-function ejemploVar(): void {
-    // @ts-expect-error demostracion: var hoisting (variable usada antes de asignar)
-    console.log("var hoisting:", typeof xVar); // undefined (hoisting)
-    var xVar: number = 5;
-}
 
 // let/const: ambito de bloque, Temporal Dead Zone (TDZ)
 function ejemploLet(): void {
@@ -134,54 +102,7 @@ console.log(c.incrementar()); // 12
 console.log(c.decrementar()); // 11
 console.log(c.valor());       // 11
 
-// ============================================================================
-// LA PALABRA CLAVE 'THIS'
-// ============================================================================
-
-// this en metodos tradicionales vs arrow functions
-interface UsuarioThis {
-    nombre: string;
-    asignaturas: string[];
-    mostrarFlecha: () => void;
-    mostrarTradicional: () => void;
-}
-
-const usuarioThis: UsuarioThis = {
-    nombre: "PROFE",
-    asignaturas: ["DI", "DIW"],
-    mostrarFlecha(): void {
-        this.asignaturas.forEach((asig) => {
-            console.log(this.nombre, asig); // this = usuarioThis
-        });
-    },
-    mostrarTradicional(): void {
-        this.asignaturas.forEach(function (asig) {
-            // this = undefined (strict mode) o window
-            // @ts-expect-error demostracion: this pierde contexto en function callback
-            console.log(this?.nombre, asig);
-        });
-    },
-};
-
-// Perdida de this y soluciones (sin clases: metodos de objeto)
-const saludador = {
-    nombre: "Ana",
-    saludar(): void {
-        console.log(`Hola, soy ${this.nombre}`);
-    },
-};
-
-// Se pierde el this
-setTimeout(saludador.saludar, 100); // "Hola, soy undefined"
-
-// Arrow wrapper
-setTimeout(() => saludador.saludar(), 100); // "Hola, soy Ana"
-
-// bind
-setTimeout(saludador.saludar.bind(saludador), 100); // "Hola, soy Ana"
 
 // Ejecutar ejemplos
-ejemploVar();
 ejemploLet();
 console.log(actividad("Lunes"));
-usuarioThis.mostrarFlecha();

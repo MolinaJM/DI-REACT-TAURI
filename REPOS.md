@@ -215,7 +215,7 @@ En el material conviven **dos numeraciones distintas** (no guardan relación ent
 | `REPO-02-arrays-tuples.ts` | `s03/07_Arrays.md` |
 | `REPO-03-tipos-especiales.ts` | `s02/01_SintaxisBasica.md` |
 | `REPO-04-unions-intersections.ts` | `s02/05_ControlDeFlujo.md` (§5.4 Narrowing) |
-| `REPO-05-interfaces-types.ts` | `s03/08_Objetos.md` |
+| `REPO-05-interfaces-types.ts` | `s03/08_Estructuras_de_Datos.md` |
 | `REPO-06-funciones.ts` | `s02/04_Funciones.md` |
 | `REPO-07-type-guards-conversion.ts` | `s02/02_ConversionTipos.md` |
 | `REPO-08-control-flow-scope.ts` | `s02/05_ControlDeFlujo.md` |
