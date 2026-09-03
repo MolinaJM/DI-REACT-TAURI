@@ -1,0 +1,8 @@
+[net]
+retry = 3
+
+[source.crates-io]
+replace-with = "tuna-sparse"
+
+[source.tuna-sparse]
+registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"

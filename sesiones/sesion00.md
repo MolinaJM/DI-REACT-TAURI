@@ -38,10 +38,6 @@ Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio resp
 
 A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura completa:
 
-![API REST SpringBoot](../img/00.png)
-
-API REST SpringBoot (acceso a MySQL bajo Docker)
-
 **Ejemplificación (resumen visual):**
 
 ```mermaid
@@ -90,7 +86,7 @@ flowchart LR
 > 5. **Invoke lo deserializa (de vuelta).** El bridge **deserializa el JSON** del retorno y lo tipa como el genérico `invoke<T>` que pediste (aquí `Promise<string>`).
 > 6. **React recibe el dato tipado.** Tu `await invoke<T>` resuelve con el valor ya tipado y lo usas en la UI.
 >
-> **Regla mnemotécnica:** *React serializa* (objeto→JSON), *Tauri/invoke deserializa* (JSON→Rust), *Rust procesa*, *Rust serializa* (resultado→JSON), *invoke deserializa* (JSON→T), *React consume*. **`serde` es el que hace el trabajo de serialización** en el lado Rust; la API `invoke` de Tauri hace el puente en el lado JS.
+> **Regla mnemotécnica:** *React serializa* (objeto→JSON), *Tauri/invoke deserializa* (JSON→Rust), *Rust procesa*, *Rust serializa* (resultado→JSON), *invoke deserializa* (JSON→T), *React consume*. **`serde`** es quien hace la serialización en el lado Rust; la API **`invoke`** de Tauri hace el puente en el lado JS.
 
 ```mermaid
 graph LR
@@ -103,6 +99,10 @@ graph LR
   style SpringBoot fill:#2d2d2d,stroke:#6db33f,color:#6db33f
   style Mysql fill:#2d2d2d,stroke:#f29111,color:#f29111
 ```
+
+![API REST SpringBoot](../img/00.png)
+
+**Figura.** API REST SpringBoot (acceso a MySQL bajo Docker)
 
 ![Web expuesta por Vite](../img/01.png)
 
