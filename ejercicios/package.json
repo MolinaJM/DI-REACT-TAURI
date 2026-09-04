@@ -1,0 +1,25 @@
+{
+  "name": "di-rt-ejercicios",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Batería de ejercicios por sesión del curso DI-RT, con soluciones.",
+  "scripts": {
+    "typecheck": "tsc",
+    "run:s02": "tsx soluciones/s02/01-tipos-primitivos.ts && tsx soluciones/s02/02-arrays-tuplas.ts && tsx soluciones/s02/03-tipos-especiales.ts && tsx soluciones/s02/04-unions-narrowing.ts && tsx soluciones/s02/05-interfaces-types.ts && tsx soluciones/s02/06-funciones.ts && tsx soluciones/s02/07-type-guards.ts && tsx soluciones/s02/08-scope-closures.ts && tsx soluciones/s02/09-aserciones.ts && tsx soluciones/s02/10-conversion-operadores.ts && tsx soluciones/s02/11-control-de-flujo.ts && tsx soluciones/s02/12-reto-s02.ts",
+    "run:s03": "tsx soluciones/s03/01-generics.ts && tsx soluciones/s03/02-utility-types.ts && tsx soluciones/s03/03-keyof-typeof-satisfies.ts && tsx soluciones/s03/04-modulos/main.ts && tsx soluciones/s03/05-arrays-set-map.ts && tsx soluciones/s03/06-objetos.ts && tsx soluciones/s03/07-async.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "CC-BY-4.0"
+}

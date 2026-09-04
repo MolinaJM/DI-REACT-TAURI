@@ -1,0 +1,151 @@
+node_modules/
+**/target/
+dist/
+gen/
+*.log
+.DS_Store
+*.tsbuildinfo
+
+
+# ===========================================================================
+#  MATERIAL DEL CURSO · POR SESIÓN
+# ---------------------------------------------------------------------------
+
+# --- BLOQUE BASE: material OCULTO por defecto (no tocar) ---
+/repos/*
+/private/*
+/sesiones/sesion*.md
+/sesiones/apuntes/s[0-9][0-9]/
+/ejercicios/s[0-9][0-9]/
+/ejercicios/s01-s/
+/ejercicios/soluciones/s[0-9][0-9]/
+/ejercicios/soluciones/s01-s/
+/sesiones/ejerciciosTS.md
+/sesiones/temario-appcine.md
+
+# ===========================================================================
+#  >>> SESIÓN 00 <<  (REVELADA)
+# ===========================================================================
+!sesiones/sesion00.md
+!ejercicios/s00/
+!ejercicios/soluciones/s00/
+
+# ===========================================================================
+#  >>> SESIÓN 01 <<  (REVELADA)
+# ===========================================================================
+!sesiones/sesion01.md
+!ejercicios/s01/
+!ejercicios/soluciones/s01/
+!repos/01-typescript-fundamentos/
+
+# ===========================================================================
+#  >>> SESIÓN 01-S <<  (REVELADA · scaffolding)
+# ===========================================================================
+!sesiones/apuntes/scaffolding.md
+!ejercicios/s01-s/
+!ejercicios/soluciones/s01-s/
+!repos/03-tauri-ejemplo-minimo/
+# !repos/02-react-ejemplo-minimo/   (comentado: se revela con el flujo de S04)
+
+# ===========================================================================
+#  >>> SESIÓN 02 <<  JMM - quitamos el `#` para revelar el material de TS
+# ===========================================================================
+# !sesiones/ejerciciosTS.md
+# !sesiones/sesion02.md
+# !sesiones/apuntes/s02/
+# !ejercicios/s02/
+# !ejercicios/soluciones/s02/
+# !repos/01-typescript-fundamentos/
+
+# ===========================================================================
+#  >>> SESIÓN 03 <<
+# ===========================================================================
+# !sesiones/sesion03.md
+# !sesiones/apuntes/s03/
+# !ejercicios/s03/
+# !ejercicios/soluciones/s03/
+# !repos/01-typescript-fundamentos/
+
+# ===========================================================================
+#  >>> SESIÓN 04 <<
+# ===========================================================================
+# !sesiones/sesion04.md
+# !sesiones/apuntes/s04/
+# !ejercicios/s04/
+# !ejercicios/soluciones/s04/
+# !repos/02-react-componentes/
+
+# ===========================================================================
+#  >>> SESIÓN 05 <<
+# ===========================================================================
+# !sesiones/sesion05.md
+# !sesiones/apuntes/s05/
+# !ejercicios/s05/
+# !ejercicios/soluciones/s05/
+# !repos/02-react-componentes/
+
+# ===========================================================================
+#  >>> SESIÓN 06 <<
+# ===========================================================================
+# !sesiones/sesion06.md
+# !sesiones/apuntes/s06/
+# !ejercicios/s06/
+# !ejercicios/soluciones/s06/
+# !repos/02-react-componentes/
+
+# ===========================================================================
+#  >>> SESIÓN 07 <<
+# ===========================================================================
+# !sesiones/sesion07.md
+# !ejercicios/s07/
+# !ejercicios/soluciones/s07/
+# !repos/03-tauri-ejemplo-minimo/
+# !repos/03-tauri-ipc-filesystem/
+
+# ===========================================================================
+#  >>> SESIÓN 08 <<
+# ===========================================================================
+# !sesiones/sesion08.md
+# !ejercicios/s08/
+# !ejercicios/soluciones/s08/
+# !repos/04-react-avanzado/
+# !repos/02-react-componentes/
+
+# ===========================================================================
+#  >>> SESIÓN 09 <<
+# ===========================================================================
+# !sesiones/sesion09.md
+# !ejercicios/s09/
+# !ejercicios/soluciones/s09/
+# !repos/04-react-avanzado/
+
+# ===========================================================================
+#  >>> SESIÓN 10 <<
+# ===========================================================================
+# !sesiones/sesion10.md
+# !ejercicios/s10/
+# !ejercicios/soluciones/s10/
+# !repos/04-react-avanzado/
+
+# ===========================================================================
+#  >>> SESIÓN 11 <<
+# ===========================================================================
+# !sesiones/sesion11.md
+# !ejercicios/s11/
+# !ejercicios/soluciones/s11/
+# !repos/04-react-avanzado/
+
+# ===========================================================================
+#  >>> SESIÓN 12 <<
+# ===========================================================================
+# !sesiones/sesion12.md
+# !ejercicios/s12/
+# !ejercicios/soluciones/s12/
+# !repos/05-testing/
+# !repos/04-react-avanzado/
+
+# ===========================================================================
+#  >>> SESIÓN 13 <<  (solo guía: no hay apuntes/ejercicios propios)
+# ===========================================================================
+# !sesiones/sesion13.md
+# !repos/03-tauri-ipc-filesystem/
