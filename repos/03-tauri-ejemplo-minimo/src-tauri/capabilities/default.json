@@ -1,8 +1,0 @@
-{
-  "identifier": "default",
-  "description": "Permisos por defecto de la ventana principal",
-  "windows": ["main"],
-  "permissions": [
-    "core:default"
-  ]
-}

@@ -44,7 +44,7 @@ gen/
 !sesiones/apuntes/scaffolding.md
 !ejercicios/s01-s/
 !ejercicios/soluciones/s01-s/
-!repos/03-tauri-ejemplo-minimo/
+# !repos/03-tauri-ejemplo-minimo/
 # !repos/02-react-ejemplo-minimo/   (comentado: se revela con el flujo de S04)
 
 # ===========================================================================
