@@ -6,11 +6,6 @@ gen/
 .DS_Store
 *.tsbuildinfo
 
-# Documento interno de planificación/estudio (solo del profesor, no se comparte)
-CRONO.md
-
-# Planificaciones temporales (no se publican)
-PLANIF.md
 
 # ===========================================================================
 #  MATERIAL DEL CURSO · POR SESIÓN
@@ -18,7 +13,7 @@ PLANIF.md
 
 # --- BLOQUE BASE: material OCULTO por defecto (no tocar) ---
 /repos/*
-/sessions/*
+/private/*
 /sesiones/sesion*.md
 /sesiones/apuntes/s[0-9][0-9]/
 /ejercicios/s[0-9][0-9]/
@@ -104,6 +99,7 @@ PLANIF.md
 # !sesiones/sesion07.md
 # !ejercicios/s07/
 # !ejercicios/soluciones/s07/
+# !repos/03-tauri-ejemplo-minimo/
 # !repos/03-tauri-ipc-filesystem/
 
 # ===========================================================================

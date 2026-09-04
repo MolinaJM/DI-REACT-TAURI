@@ -427,18 +427,49 @@ function Tarjeta() {
 
 Rust es el lenguaje que impulsa el backend de Tauri. Destaca por su seguridad de memoria sin necesidad de recolector de basura.
 
-```rust
-// Verificar instalacion
-rustc --version
-cargo --version
+### Verificar instalación
 
-// Hola mundo en Rust
+```bash
+rustc --version
+# rustc 1.XX.X (xxxx 2026-XX-XX)
+
+cargo --version
+# cargo 1.XX.X (xxxx 2026-XX-XX)
+```
+
+> [!NOTE]
+> Si no tienes Rust instalado, visita [rustup.rs](https://rustup.rs) y sigue las instrucciones.
+
+### Ejemplo: Hola mundo
+
+```bash
+# Crear proyecto con Cargo
+cargo new hola-rust
+cd hola-rust
+```
+
+Abre `src/main.rs` y sustituye su contenido por:
+
+```rust
 fn main() {
     println!("Hola desde Rust!");
 
     let mensaje = "Tauri usa Rust";
     println!("Mensaje: {}", mensaje);
 }
+```
+
+```bash
+# Ejecutar
+cargo run
+```
+
+```
+   Compiling hola-rust v0.1.0
+    Finished dev [unoptimized + debuginfo] target(s)
+     Running `target/debug/hola-rust`
+Hola desde Rust!
+Mensaje: Tauri usa Rust
 ```
 
 ## Tauri: El Puente
