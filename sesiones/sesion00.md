@@ -36,7 +36,7 @@ Tauri es un framework de código abierto para crear aplicaciones de escritorio u
 
 Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio responsivas**, con acceso a **base de datos** y que a la vez sean **multiplataforma**. Una forma muy ágil de conseguir esto es mediante aplicaciones híbridas. Es decir, interfaces que se comportan como una app nativa pero están construidas con tecnologías web y pueden desplegarse en cualquier plataforma.
 
-A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura completa:
+A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura completa:> **Arquitectura:** Backend (SpringBoot + MySQL en Docker) → API REST → Frontend (React + Vite) → Empaquetado como app de escritorio (Tauri). La misma base de código sirve para la versión web y la versión de escritorio.
 
 ### 1) Arquitectura de escritorio (Tauri)
 
@@ -122,7 +122,7 @@ App de Escritorio
 
 App de Escritorio con ventana emergente de inserción
 
-> **Arquitectura:** Backend (SpringBoot + MySQL en Docker) → API REST → Frontend (React + Vite) → Empaquetado como app de escritorio (Tauri). La misma base de código sirve para la versión web y la versión de escritorio.
+> **Arquitectura:** Lanzamos desde WSL docker, el backend y finalmente el frontend (instrucciones en README.md)
 
 ## Mapa de Relaciones del Ecosistema
 
@@ -159,6 +159,9 @@ graph TD
   style Tauri fill:#2d2d2d,stroke:#ffc131,color:#ffc131
   style Rust fill:#2d2d2d,stroke:#f74c00,color:#f74c00
 ```
+
+> [!NOTE]
+> Los siguientes apartados (Node.js, npm, TypeScript, Vite, React) son una **visión general** del ecosistema que usaremos. No es necesario instalar ni configurar nada todavía — toda la instalación y configuración paso a paso se hará en la **Sesión 01**.
 
 ## Node.js: Entorno de Ejecución
 
@@ -292,6 +295,58 @@ mi-app/
     App.tsx
     App.css
 ```
+
+### Configuración de TypeScript (tsconfig.json)
+
+TypeScript se configura mediante `tsconfig.json`. Este es el que usaremos en **todos** los ejercicios, repos y proyectos del curso:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2024", "ESNext", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true
+  }
+}
+```
+
+> [!IMPORTANT]
+> **`strict: true`** — Activa un conjunto de verificaciones de tipos que ayudan a detectar errores en tiempo de compilación:
+>
+> | Flag | Qué hace |
+> |---|---|
+> | `strictNullChecks` | `null` y `undefined` son tipos propios; no se asignan implícitamente a otros tipos |
+> | `noImplicitAny` | Prohíbe variables/parámetros con tipo `any` implícito (obliga a escribir el tipo) |
+> | `strictFunctionTypes` | Comprobación estricta de tipos en funciones (contravarianza en parámetros) |
+> | `strictBindCallApply` | Comprobación estricta de tipos en `.bind()`, `.call()`, `.apply()` |
+> | `strictPropertyInitialization` | Las propiedades de clase deben inicializarse en el constructor |
+> | `noImplicitThis` | Prohíbe `this` implícito sin tipo (obliga a anotarlo) |
+> | `alwaysStrict` | Añade `"use strict"` en cada fichero |
+>
+> **`noUncheckedIndexedAccess: true`** — Al acceder a un array u objeto por índice, el resultado incluye `| undefined`:
+>
+> ```typescript
+> const nums = [10, 20, 30];
+> const x = nums[0]; // number | undefined (¡no solo number!)
+> ```
+>
+> Esto obliga a comprobar siempre que el índice existe antes de usar el valor, evitando errores silenciosos.
+>
+> **`verbatimModuleSyntax: true`** — Obliga a usar `import type` para importar tipos (no valores). Esto hace evidente qué se importa solo para el chequeo de tipos y qué se importa para ejecutar código:
+>
+> ```typescript
+> import type { Persona } from "./modelos"; // Solo existe en compilación
+> import { crear } from "./modelos";        // Existe en ejecución
+> ```
 
 ### Configuración de Vite (vite.config.ts)
 
