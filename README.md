@@ -18,14 +18,15 @@
 
 Las interfaces web han evolucionado de un modelo servidor-céntrico hacia aplicaciones dinámicas ejecutadas en el cliente:
 
-- **1.1 Modelo tradicional (Server-Side Rendering):** cada acción del usuario (un clic, el envío de un formulario) requería una petición HTTP completa; el servidor reconstruía el documento HTML desde cero y lo devolvía, provocando recargas totales de la página e interrumpiendo la experiencia.
+- **1.1 Modelo tradicional (Server-Side Rendering):** cada acción del usuario (un clic, el envío de un formulario) requería una petición HTTP completa; el servidor reconstruía el documento HTML desde cero y lo devolvía, provocando recargas totales de la página e interrumpiendo la experiencia. Ej: Provincia-->Localidad en las antiguas Webs con acceso a datos.
 - **1.2 El DOM real:** el árbol de objetos con el que el navegador representa la página. Aunque los motores JavaScript son muy rápidos, modificarlo directamente es costoso y lento por los procesos de *reflow* y *repaint*.
+![Texto alternativo](https://miro.medium.com/v2/resize:fit:420/format:webp/1*0UQkQTYmQnEmC9msapaKnw.png)
 - **1.3 La revolución de React y el Virtual DOM:** React mantiene una copia ligera del DOM en memoria, compara el nuevo árbol con el anterior mediante un algoritmo de diferencias y aplica únicamente los cambios mínimos necesarios sobre el DOM real, garantizando fluidez y rendimiento óptimos.
 
 ### ¿Por qué la tecnología web es tan útil para crear aplicaciones de escritorio?
 
 - **Multiplataforma:** el mismo código HTML/CSS/JS se ejecuta en Windows, macOS y Linux sin reescribir la interfaz para cada sistema operativo.
-- **Ecosistema maduro:** acceso a miles de librerías (React, Tailwind CSS, routers, herramientas de testing) que aceleran el desarrollo de la interfaz.
+- **Ecosistema maduro:** acceso a miles de librerías (React, Tailwind CSS, routers, herramientas de testing) que aceleran el desarrollo de la interfaz. Además, la responsividad está asegurada.
 - **Desarrollo rápido:** recarga en caliente (HMR) y depuración en el navegador agilizan el ciclo de diseño, implementación y prueba.
 - **Experiencia fluida y ligera:** integrada con Tauri, la interfaz web se empaqueta en una carcasa nativa de Rust con bajo consumo de recursos.
 - **Distribución sencilla:** el frontend se compila en instaladores nativos por plataforma mientras conserva el desarrollo web estándar.
@@ -58,7 +59,7 @@ Para construir una aplicación de escritorio moderna y ligera, se entrelazan her
 | <img src="https://cdn.simpleicons.org/npm/CB3837" width="24" height="24" alt="NPM" title="NPM"> **NPM** | El gestor que administra e instala todas las librerías, dependencias y paquetes del proyecto. |
 | <img src="https://cdn.simpleicons.org/vite/646CFF" width="24" height="24" alt="Vite" title="Vite"> **Vite** | El empaquetador y servidor de desarrollo moderno que ofrece recargas instantáneas. |
 | <img src="https://cdn.simpleicons.org/typescript/3178C6" width="24" height="24" alt="TypeScript" title="TypeScript"> **TypeScript** | El lenguaje de programación que añade tipado estático a JavaScript, aportando seguridad y mantenibilidad al código. |
-| <img src="https://cdn.simpleicons.org/react/61DAFB" width="24" height="24" alt="React" title="React"> **React** | La librería encargada de la lógica de la interfaz, el estado de los componentes y la reactividad visual utilizando TypeScript. |
+| <img src="https://cdn.simpleicons.org/react/61DAFB" width="24" height="24" alt="React" title="React"> **React** | La librería encargada de la lógica de la interfaz, el estado de los componentes y la reactividad visual utilizando TypeScript. React NO ES UN LENGUAJE! |
 | <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" width="24" height="24" alt="Tailwind CSS" title="Tailwind CSS"> **Tailwind CSS** | Un framework de CSS utilitario que permite diseñar interfaces rápidas y consistentes aplicando clases directamente en el HTML o JSX. |
 | <img src="https://cdn.simpleicons.org/rust/DEA584" width="24" height="24" alt="Rust" title="Rust"> **Rust** | El lenguaje que da soporte al backend de Tauri, destacando por su seguridad en memoria y su velocidad. |
 | <img src="https://cdn.simpleicons.org/tauri/24C8DB" width="24" height="24" alt="Tauri" title="Tauri"> **Tauri** | El puente que une todo, exponiendo una API segura en Rust para comunicarse con el sistema operativo. |
@@ -67,7 +68,7 @@ Para construir una aplicación de escritorio moderna y ligera, se entrelazan her
 
 ## 4. Hoja de Ruta del Curso
 
-**De TypeScript a una aplicación de escritorio multiplataforma.** El curso encadena cuatro bloques (fundamentos → UI → app de escritorio → producto final): primero se aprende TypeScript, con ello se construyen componentes React, sobre esos componentes se monta una app de escritorio con Tauri, y el resultado se cierra con informes PDF que consumen los datos, pruebas y distribución multiplataforma.
+**De TypeScript a una aplicación de escritorio multiplataforma.** El curso encadena cuatro bloques (fundamentos → UI → app de escritorio → producto final): primero se aprende TypeScript, con ello se construyen componentes React, sobre esos componentes se monta una app de escritorio multiplataforma con Tauri, y el resultado se cierra con la creación de informes PDF que consumen los datos. Esa App se prueba, documenta y distribuye.
 
 ```mermaid
 flowchart TD
@@ -104,6 +105,7 @@ La evaluación de la asignatura se basará en:
 - **Examen de TypeScript:** prueba escrita y/o práctica sobre los contenidos de las sesiones 2 y 3.
 - **Examen de React:** prueba escrita y/o práctica sobre componentes y gestión de estado (sesiones 4 a 6).
 - **Miniproyecto de Tauri:** desarrollo de una aplicación de escritorio completa integrando todo lo aprendido durante el curso.
+- **Ampliación de proyecto de Tauri**
 
 ---
 
@@ -115,8 +117,8 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 
 | # | RA | Sesion | Titulo | Contenido |
 |---|----|--------|--------|-----------|
-| 0 | - | [S00](sesiones/sesion00.md) | Fundamentos de Arquitectura y Configuración del Entorno | nvm, Node.js, NPM, Vite, React, Tailwind CSS, Rust, Tauri (panoramica) |
-| 1 | - | [S01](sesiones/sesion01.md) | Instalación del Entorno de Desarrollo | Windows, Ubuntu/Debian, macOS, Fedora/Arch, desinstalacion |
+| 0 | - | [S00](sesiones/sesion00.md) | Fundamentos de Arquitectura y Configuración del Entorno | nvm, Node.js, NPM, Vite, React, Tailwind CSS, Rust, Tauri (panorámica) |
+| 1 | - | [S01](sesiones/sesion01.md) | Instalación del Entorno de Desarrollo | Windows, Ubuntu/Debian, macOS, Fedora/Arch, desinstalación |
 
 #### TYPESCRIPT (S2–S3)
 
@@ -129,7 +131,7 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 
 | # | RA | Sesion | Titulo | Contenido |
 |---|----|--------|--------|-----------|
-| 4 | RA1 | [S04](sesiones/sesion04.md) | Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composicion |
+| 4 | RA1 | [S04](sesiones/sesion04.md) | Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composición |
 | 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
 | 6 | RA3 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Tabla genérica, Modal, composición |
 

@@ -54,12 +54,14 @@ function area(forma: Forma): number {
 // TYPE ASSERTIONS (Aserciones de Tipo)
 // ============================================================================
 
-// Sintaxis "as" (recomendada)
-// const inputElement = document.getElementById("miInput") as HTMLInputElement;
-// inputElement.value = "nuevo valor";
+// Sintaxis "as" (recomendada). Sin DOM: los datos vienen de JSON.parse o del
+// resultado de `invoke` (Tauri), no de peticiones manuales al HTML.
+const json = '{"id": 1, "nombre": "Ana"}';
+const recuperado = JSON.parse(json) as { id: number; nombre: string };
+console.log(recuperado.nombre); // "Ana"
 
-// Sintaxis <> (no funciona en JSX)
-// const otroInput = <HTMLInputElement>document.getElementById("otroInput");
+// Sintaxis <> (no funciona en JSX). Equivalente al `as` anterior:
+const recuperado2 = <{ id: number; nombre: string }>JSON.parse(json);
 
 // NON-NULL ASSERTION (operador !)
 function obtenerNombre(nombre?: string | null): string {

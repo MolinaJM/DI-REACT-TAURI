@@ -23,7 +23,8 @@ Ejemplos y ejercicios de los conceptos fundamentales de TypeScript, desde tipos 
 │   ├── REPO-13-async-await.ts            Promise, async/await, AbortController, Fetch (optativos)
 │   ├── REPO-15-arrays-avanzado.ts        Set, Map, structuredClone, Object.groupBy (optativos)
 │   ├── REPO-17-que-es-typescript.ts      JS vs TS, ventajas del tipado
-│   └── REPO-18-instalacion-configuracion.ts  Comandos tsc, tsconfig.json
+│   ├── REPO-18-instalacion-configuracion.ts  Comandos tsc, tsconfig.json
+│   └── REPO-19-generics-utility-types.ts Generics + Utility Types (base React/Tauri)
 ├── package.json
 └── tsconfig.json
 ```

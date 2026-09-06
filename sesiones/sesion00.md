@@ -10,7 +10,7 @@ Node.js, NPM, Vite, React, Tailwind CSS, Rust y Tauri
 
 ### ¿Qué es Tauri?
 
-Tauri es un framework de código abierto para crear aplicaciones de escritorio usando tecnologías web en el frontend (HTML, CSS, JavaScript/TypeScript) y un backend nativo escrito en Rust. A diferencia de Electron, que incluye un navegador completo (Chromium) en cada aplicación, Tauri se apoya en el **WebView nativo** del sistema operativo (Edge WebView2 en Windows, WebKit en macOS/Linux), lo que lo hace extremadamente ligero.
+Tauri es un *framework*(estructura o plantilla de trabajo que impone reglas de arquitectura) de código abierto para crear aplicaciones de escritorio usando tecnologías web en el frontend (HTML, CSS, JavaScript/TypeScript) y un backend nativo escrito en Rust. A diferencia de Electron, que incluye un navegador completo (Chromium) en cada aplicación, Tauri se apoya en el **WebView nativo** del sistema operativo (Edge WebView2 en Windows, WebKit en macOS/Linux), lo que lo hace extremadamente ligero.
 
 > **Arquitectura Tauri:** Frontend (React/Vue/Svelte) se ejecuta en el WebView del SO → se comunica con el backend Rust a través de un canal IPC seguro → el backend accede al sistema de archivos, base de datos, etc. de forma controlada.
 
@@ -30,7 +30,7 @@ Tauri es un framework de código abierto para crear aplicaciones de escritorio u
 
 > **En resumen:** Tauri es más ligero, más rápido y más seguro que Electron. La diferencia principal es que Tauri usa el WebView nativo del sistema operativo mientras que Electron incluye Chromium completo, lo que explica la gran diferencia en tamaño y memoria.
 
-> **Nota:** Electron sigue siendo una opción válida para aplicaciones que necesitan el máximo control sobre el rendering. Pero para la mayoría de aplicaciones de escritorio, Tauri ofrece mejor rendimiento con menos recursos.
+> **Nota:** Electron sigue siendo una opción válida para aplicaciones que necesitan el máximo control sobre el rendering (apps que necesitan controlar como pintar hasta el último píxel, y al llevar un navegador integrado, esto es más sencillo). Pero para la mayoría de aplicaciones de escritorio, Tauri ofrece mejor rendimiento con menos recursos.
 
 ## Ejemplo de miniaplicación
 
@@ -224,7 +224,7 @@ El archivo `package.json` es el corazón de cualquier proyecto Node. Contiene me
 
 ### Scripts personalizados
 
-Los scripts se ejecutan con `npm run <nombre>`. npm expone binarios locales en `PATH` durante la ejecución.
+Los scripts se ejecutan con `npm run <nombre>`
 
 ```bash
 # Ejecutar servidor de desarrollo
