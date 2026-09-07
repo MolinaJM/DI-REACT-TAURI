@@ -263,7 +263,7 @@ Flujo de ejecución: los bloques `REPO-*` de S02/S03 copiados a `ejercicios/tmp/
 
 ## Proyecto final: AppCine
 
-**AppCine** (apuntes en [`temario-appcine.md`](sesiones/temario-appcine.md)) es el **proyecto integrador de cierre del curso** (≈ 40 h): una app de escritorio **Tauri + React + TypeScript** con **CRUD completo** contra una **API REST Spring Boot** y **MySQL en Docker**.
+**AppCine** (`temario-appcine.md`, pendiente de redactar para el cierre del curso) es el **proyecto integrador de cierre del curso** (≈ 40 h): una app de escritorio **Tauri + React + TypeScript** con **CRUD completo** contra una **API REST Spring Boot** y **MySQL en Docker**.
 
 - Constructor del frontend: componentes, props, `useState`/`useEffect`/`useCallback`/`useRef`, formularios controlados, modal y búsqueda con debounce (S04–S06, `repos/02`).
 - CRUD inicial con `fetch` (S09) migrado a **comandos Rust** (`invoke("listar_peliculas")`, etc.) con `reqwest` (S07, `repos/03`).

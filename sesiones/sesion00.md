@@ -185,33 +185,6 @@ Node.js incluye npm (Node Package Manager), el gestor de paquetes más grande de
 
 > 🌐 La **guía operativa completa** (crear un proyecto, `npm init`, instalar paquetes, scripts, `nvm`, y cómo configurar el canónico de `tsconfig.json`) está en el apunte **10 · Node.js, npm y Vite en TypeScript** → [`apuntes/s03/10_NPM.md`](apuntes/s03/10_NPM.md).
 
-### Ejemplo: ejemplo básico con Node.js
-
-Creamos un fichero `saludo.ts`:
-
-```typescript
-console.log('Hola desde TypeScript!');
-```
-
-Y lo lanzamos con Node (o con `npx tsx` si queremos módulos ES):
-
-```bash
-# 1. Inicializar el proyecto (crea package.json)
-npm init -y
-
-# 2. Instalar TypeScript y tipos de React solo en desarrollo (-D)
-npm install -D typescript @types/react @types/react-dom tsx
-
-# 3. Crear tsconfig.json
-npx tsc --init
-
-# 4. Lanzar el programa TypeScript. NO se utiliza node saludo.ts porque fallaría con el tipado.
-npx tsx saludo.ts
-
-#esto funcionaría si en package.json me creo un script llamado lanza que llame a node saludo.ts
-npm run lanzar
-```
-
 ## Vite: Empaquetador Moderno
 
 Vite proporciona un servidor de desarrollo con recarga instantánea (HMR) y empaquetado optimizado para producción.

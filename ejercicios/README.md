@@ -7,7 +7,7 @@ Batería de ejercicios **por sesión** con sus soluciones.
 ```
 ejercicios/
 ├── s02/   TypeScript I  (12 ficheros .ts, incl. reto final)
-├── s03/   TypeScript II (7 ejercicios, incl. módulos)
+├── s03/   TypeScript II (8 ejercicios, incl. módulos)
 ├── s04/   Componentes y funciones  (closures, clean code, JSX)
 ├── s05/   Estado y formularios      (reducer, validación, localStorage)
 ├── s06/   Componentes personalizados (Boton, Modal, Tabla genérica)

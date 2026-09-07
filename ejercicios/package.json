@@ -7,7 +7,7 @@
   "scripts": {
     "typecheck": "tsc",
     "run:s02": "tsx soluciones/s02/01-tipos-primitivos.ts && tsx soluciones/s02/03-tipos-especiales.ts && tsx soluciones/s02/04-unions-narrowing.ts && tsx soluciones/s02/05-interfaces-types.ts && tsx soluciones/s02/06-funciones.ts && tsx soluciones/s02/07-type-guards.ts && tsx soluciones/s02/08-scope-closures.ts && tsx soluciones/s02/09-aserciones.ts && tsx soluciones/s02/10-conversion-operadores.ts && tsx soluciones/s02/11-control-de-flujo.ts && tsx soluciones/s02/12-reto-s02.ts",
-    "run:s03": "tsx soluciones/s03/01-arrays-tuplas.ts && tsx soluciones/s03/02-generics.ts && tsx soluciones/s03/03-utility-types.ts && tsx soluciones/s03/04-keyof-typeof-satisfies.ts && tsx soluciones/s03/05-modulos/main.ts && tsx soluciones/s03/06-arrays-set-map.ts && tsx soluciones/s03/07-objetos.ts && tsx soluciones/s03/08-async.ts"
+    "run:s03": "tsx soluciones/s03/01-arrays-tuplas.ts && tsx soluciones/s03/02-generics.ts && tsx soluciones/s03/03-utility-types.ts && tsx soluciones/s03/04-keyof-typeof-satisfies.ts && tsx soluciones/s03/05-modulos/main.ts && tsx soluciones/s03/06-arrays-set-map.ts && tsx soluciones/s03/07-objetos.ts && tsx soluciones/s03/08-async.ts && tsx soluciones/s03/09-desestructuracion-spread-optional.ts"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
