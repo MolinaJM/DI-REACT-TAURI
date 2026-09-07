@@ -34,9 +34,7 @@ Tauri es un *framework*(estructura o plantilla de trabajo que impone reglas de a
 
 ## Ejemplo de miniaplicación
 
-Uno de los objetivos de la asignatura es crear **aplicaciones de escritorio responsivas**, con acceso a **base de datos** y que a la vez sean **multiplataforma**. Una forma muy ágil de conseguir esto es mediante aplicaciones híbridas. Es decir, interfaces que se comportan como una app nativa pero están construidas con tecnologías web y pueden desplegarse en cualquier plataforma.
-
-A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura completa:> **Arquitectura:** Backend (SpringBoot + MySQL en Docker) → API REST → Frontend (React + Vite) → Empaquetado como app de escritorio (Tauri). La misma base de código sirve para la versión web y la versión de escritorio.
+Una forma muy efectiva de ir adquiriendo los conocimientos es mediante la creación de una miniaplicación libre de acceso a base de datos. Pero antes, hay que entender el flujo de datos en React/Tauri:
 
 ### 1) Arquitectura de escritorio (Tauri)
 
@@ -94,6 +92,9 @@ flowchart LR
 
 ### 2) Arquitectura web (Spring Boot + MySQL en Docker)
 
+A continuación se muestra una miniaplicación de ejemplo que sigue esta arquitectura:> **Arquitectura:** Backend (SpringBoot + MySQL en Docker) → API REST → Frontend (React + Vite) → Empaquetado como app de escritorio (Tauri). La misma base de código sirve para la versión web y la versión de escritorio.
+
+
 ```mermaid
 graph LR
   Cliente("Cliente: frontend (React + Vite)") -->|"HTTP / JSON"| SpringBoot["API REST Spring Boot"]
@@ -122,7 +123,7 @@ App de Escritorio
 
 App de Escritorio con ventana emergente de inserción
 
-> **Arquitectura:** Lanzamos desde WSL docker, el backend y finalmente el frontend (instrucciones en README.md)
+> **Profe:** Lanzamos desde WSL docker, el backend y finalmente el frontend tanto en WSL como en Windows(instrucciones en README.md)
 
 ## Mapa de Relaciones del Ecosistema
 
@@ -161,7 +162,7 @@ graph TD
 ```
 
 > [!NOTE]
-> Los siguientes apartados (Node.js, npm, TypeScript, Vite, React) son una **visión general** del ecosistema que usaremos. No es necesario instalar ni configurar nada todavía — toda la instalación y configuración paso a paso se hará en la **Sesión 01**.
+> Los siguientes apartados (Node.js, npm, TypeScript, Vite, React) son una **visión general** del ecosistema que usaremos. No es necesario instalar ni configurar nada todavía: la instalación del entorno se hará en la **Sesión 01** (según tu SO) y la guía operativa (nvm, npm, `tsconfig.json`, Vite) en el apunte **10 · Node.js, npm y Vite en TypeScript**.
 
 ## Node.js: Entorno de Ejecución
 
@@ -169,112 +170,47 @@ Node.js es un entorno de ejecución de JavaScript/TypeScript basado en el motor 
 
 ```bash
 # Verificar instalacion de Node.js
-node --version
-# Output: v22.x.x
-
-npm --version
-# Output: 10.x.x
-```
-
-### Ejemplo: Servidor HTTP básico con Node.js
-
-```javascript
-const http = require('http');
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hola desde Node.js!');
-});
-
-server.listen(3000, () => {
-    console.log('Servidor corriendo en http://localhost:3000');
-});
+node --version   # Output: v24.x.x
+npm --version    # Output: 11.x.x
 ```
 
 ## NPM y Gestión de Paquetes
 
 Node.js incluye npm (Node Package Manager), el gestor de paquetes más grande del ecosistema JavaScript/TypeScript. Permite instalar, actualizar y gestionar dependencias de forma declarativa.
 
-### package.json
+- `package.json` es el corazón de cualquier proyecto Node: contiene metadatos, scripts y dependencias.
+- Las dependencias de ejecución van en `dependencies` y las herramientas de desarrollo en `devDependencies`.
+- Los scripts se ejecutan con `npm run <nombre>` (p. ej. `dev`, `build`).
+- **nvm** permite instalar y cambiar entre versiones de Node; este curso usa **Node 24** (que ejecuta TypeScript directamente borrando los tipos, sin transpilar).
 
-El archivo `package.json` es el corazón de cualquier proyecto Node. Contiene metadatos, scripts y dependencias.
+> 🌐 La **guía operativa completa** (crear un proyecto, `npm init`, instalar paquetes, scripts, `nvm`, y cómo configurar el canónico de `tsconfig.json`) está en el apunte **10 · Node.js, npm y Vite en TypeScript** → [`apuntes/s03/10_NPM.md`](apuntes/s03/10_NPM.md).
 
-```json
-{
-  "name": "mi-proyecto",
-  "version": "1.0.0",
-  "description": "Proyecto de ejemplo",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.7.0",
-    "vite": "^6.0.0",
-    "@vitejs/plugin-react": "^4.3.0"
-  }
-}
+### Ejemplo: ejemplo básico con Node.js
+
+Creamos un fichero `saludo.ts`:
+
+```typescript
+console.log('Hola desde TypeScript!');
 ```
 
-### Scripts personalizados
-
-Los scripts se ejecutan con `npm run <nombre>`
+Y lo lanzamos con Node (o con `npx tsx` si queremos módulos ES):
 
 ```bash
-# Ejecutar servidor de desarrollo
-npm run dev
-
-# Compilar y construir para producción
-npm run build
-```
-
-### Instalación de dependencias
-
-```bash
-# Inicializar un proyecto
+# 1. Inicializar el proyecto (crea package.json)
 npm init -y
 
-# Instalar todas las dependencias del package.json
-npm install
+# 2. Instalar TypeScript y tipos de React solo en desarrollo (-D)
+npm install -D typescript @types/react @types/react-dom tsx
 
-# Instalar una dependencia de producción
-npm install react react-dom
+# 3. Crear tsconfig.json
+npx tsc --init
 
-# Instalar una dependencia de desarrollo
-npm install -D typescript @types/react @types/react-dom
+# 4. Lanzar el programa TypeScript. NO se utiliza node saludo.ts porque fallaría con el tipado.
+npx tsx saludo.ts
 
-# Instalar Tauri CLI
-npm install -D @tauri-apps/cli
-
-# Instalar una version especifica
-npm install react@19.0.0
+#esto funcionaría si en package.json me creo un script llamado lanza que llame a node saludo.ts
+npm run lanzar
 ```
-
-### nvm (Node Version Manager)
-
-Permite instalar y cambiar entre versiones de Node.js.
-
-```bash
-# Instalar una version especifica
-nvm install 24
-
-# Usar una version
-nvm use 24
-
-# Version por defecto
-nvm alias default 24
-
-# Ver versiones instaladas
-nvm ls
-```
-
-> El archivo `.nvmrc` en la raíz del proyecto especifica la versión requerida. npm ejecuta automáticamente `nvm use` si esta configurado.
 
 ## Vite: Empaquetador Moderno
 
@@ -283,70 +219,9 @@ Vite proporciona un servidor de desarrollo con recarga instantánea (HMR) y empa
 ```bash
 # Crear proyecto con Vite
 npm create vite@latest mi-app -- --template react-ts
-
-# Estructura generada
-mi-app/
-  index.html
-  package.json
-  tsconfig.json
-  vite.config.ts
-  src/
-    main.tsx
-    App.tsx
-    App.css
 ```
 
-### Configuración de TypeScript (tsconfig.json)
-
-TypeScript se configura mediante `tsconfig.json`. Este es el que usaremos en **todos** los ejercicios, repos y proyectos del curso:
-
-```json
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2024", "ESNext", "DOM"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "verbatimModuleSyntax": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "noEmit": true
-  }
-}
-```
-
-> [!IMPORTANT]
-> **`strict: true`** — Activa un conjunto de verificaciones de tipos que ayudan a detectar errores en tiempo de compilación:
->
-> | Flag | Qué hace |
-> |---|---|
-> | `strictNullChecks` | `null` y `undefined` son tipos propios; no se asignan implícitamente a otros tipos |
-> | `noImplicitAny` | Prohíbe variables/parámetros con tipo `any` implícito (obliga a escribir el tipo) |
-> | `strictFunctionTypes` | Comprobación estricta de tipos en funciones (contravarianza en parámetros) |
-> | `strictBindCallApply` | Comprobación estricta de tipos en `.bind()`, `.call()`, `.apply()` |
-> | `strictPropertyInitialization` | Las propiedades de clase deben inicializarse en el constructor |
-> | `noImplicitThis` | Prohíbe `this` implícito sin tipo (obliga a anotarlo) |
-> | `alwaysStrict` | Añade `"use strict"` en cada fichero |
->
-> **`noUncheckedIndexedAccess: true`** — Al acceder a un array u objeto por índice, el resultado incluye `| undefined`:
->
-> ```typescript
-> const nums = [10, 20, 30];
-> const x = nums[0]; // number | undefined (¡no solo number!)
-> ```
->
-> Esto obliga a comprobar siempre que el índice existe antes de usar el valor, evitando errores silenciosos.
->
-> **`verbatimModuleSyntax: true`** — Obliga a usar `import type` para importar tipos (no valores). Esto hace evidente qué se importa solo para el chequeo de tipos y qué se importa para ejecutar código:
->
-> ```typescript
-> import type { Persona } from "./modelos"; // Solo existe en compilación
-> import { crear } from "./modelos";        // Existe en ejecución
-> ```
+> 🌐 Paso a paso en el capítulo de Vite de **10 · Node.js, npm y Vite** → [`apuntes/s03/10_NPM.md`](apuntes/s03/10_NPM.md) (`npm create`, estructura, `dev`, `build`).
 
 ### Configuración de Vite (vite.config.ts)
 

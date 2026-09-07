@@ -12,12 +12,7 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noImplicitOverride": true,
-    "exactOptionalPropertyTypes": false,
-    "useDefineForClassFields": true,
-    "forceConsistentCasingInFileNames": true,
     "allowImportingTsExtensions": true,
-    "jsxImportSource": "react",
     "types": ["node"]
   },
   "include": [

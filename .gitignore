@@ -27,23 +27,16 @@ gen/
 #  >>> SESIÓN 00 <<  (REVELADA)
 # ===========================================================================
 !sesiones/sesion00.md
-!ejercicios/s00/
-!ejercicios/soluciones/s00/
 
 # ===========================================================================
 #  >>> SESIÓN 01 <<  (REVELADA)
 # ===========================================================================
 !sesiones/sesion01.md
-!ejercicios/s01/
-!ejercicios/soluciones/s01/
-!repos/01-typescript-fundamentos/
 
 # ===========================================================================
 #  >>> SESIÓN 01-S <<  (REVELADA · scaffolding)
 # ===========================================================================
 !sesiones/apuntes/scaffolding.md
-!ejercicios/s01-s/
-!ejercicios/soluciones/s01-s/
 # !repos/03-tauri-ejemplo-minimo/
 # !repos/02-react-ejemplo-minimo/   (comentado: se revela con el flujo de S04)
 
@@ -55,7 +48,6 @@ gen/
 # !sesiones/apuntes/s02/
 # !ejercicios/s02/
 # !ejercicios/soluciones/s02/
-# !repos/01-typescript-fundamentos/
 
 # ===========================================================================
 #  >>> SESIÓN 03 <<
@@ -64,7 +56,6 @@ gen/
 # !sesiones/apuntes/s03/
 # !ejercicios/s03/
 # !ejercicios/soluciones/s03/
-# !repos/01-typescript-fundamentos/
 
 # ===========================================================================
 #  >>> SESIÓN 04 <<

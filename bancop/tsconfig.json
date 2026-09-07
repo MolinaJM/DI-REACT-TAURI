@@ -4,13 +4,14 @@
     "lib": ["ES2024", "ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "jsx": "react-jsx",
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "verbatimModuleSyntax": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "isolatedModules": true,
-    "noEmit": true
-  },
-  "include": ["src"]
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  }
 }

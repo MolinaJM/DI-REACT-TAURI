@@ -9,8 +9,8 @@ Tabla resumen de sesiones, repositorios y tecnologias.
 | S00 | Fundamentos de Arquitectura y Configuracion del Entorno | — | nvm, Node.js, npm, Vite, React, Tailwind CSS, Rust, Tauri (panoramica) |
 | S01 | Instalacion del Entorno de Desarrollo | — | Microsoft C++ Build Tools, Rustup, nvm-windows/nvm, WSLg, Xcode CLT, Homebrew |
 | S01-S | Scaffolding de un Proyecto Tauri con React y Rust | — | Estructura de archivos Tauri, Cargo.toml, tauri.conf.json, invoke, IPC |
-| S02 | Introduccion a TypeScript (Parte 1) | `01-typescript-fundamentos` | Tipos primitivos, arrays, tuples, enums, interfaces, type aliases, funciones, type guards, operadores, control flow, scope |
-| S03 | Introduccion a TypeScript (Parte 2) | `01-typescript-fundamentos` | Clases, herencia, abstractas, generics, modulos, declaraciones .d.ts, async/await, Promises, Fetch, DOM tipado, Set, Map, Web APIs |
+| S02 | Introduccion a TypeScript (Parte 1) | — (ejemplos en apuntes) | Tipos primitivos, arrays, tuples, enums, interfaces, type aliases, funciones, type guards, operadores, control flow, scope |
+| S03 | Introduccion a TypeScript (Parte 2) | — (ejemplos en apuntes) | Clases, herencia, abstractas, generics, modulos, declaraciones .d.ts, async/await, Promises, Fetch, DOM tipado, Set, Map, Web APIs |
 | S04 | Anatomia de Componentes y Funciones con TypeScript | `02-react-componentes` | Functional components, FC\<Props\>, props children, useState, useEffect, composicion |
 | S05 | Gestion de Estado Basico y Tipado de Formularios | `02-react-componentes` | useReducer, formularios controlados, validacion tipada |
 | S06 | Creacion de Componentes Personalizados | `02-react-componentes` | ButtonHTMLAttributes, generic Table\<T\>, Modal, composicion, slots |
@@ -25,27 +25,6 @@ Tabla resumen de sesiones, repositorios y tecnologias.
 
 ```
 repos/
-├── 01-typescript-fundamentos/    S02 + S03
-│   ├── src/
-│   │   ├── REPO-01-tipos-primitivos.ts
-│   │   ├── REPO-02-arrays-tuples.ts
-│   │   ├── REPO-03-tipos-especiales.ts
-│   │   ├── REPO-04-unions-intersections.ts
-│   │   ├── REPO-05-interfaces-types.ts
-│   │   ├── REPO-06-funciones.ts
-│   │   ├── REPO-07-type-guards-conversion.ts
-│   │   ├── REPO-08-control-flow-scope.ts
-│   │   ├── REPO-12-modulos.ts
-│   │   ├── REPO-13-async-await.ts
-│   │   ├── REPO-15-arrays-avanzado.ts
-│   │   ├── REPO-17-que-es-typescript.ts
-│   │   └── REPO-18-instalacion-configuracion.ts
-│   ├── package.json
-│   └── tsconfig.json
-│   Ejecucion: npx tsx src/REPO-01-tipos-primitivos.ts
-│   Dependencias: typescript, tsx
-│   Requisito: Node.js
-│
 ├── 02-react-componentes/         S04 + S05 + S06
 │   ├── src/
 │   │   ├── components/
@@ -202,19 +181,16 @@ repos/
     Requisito: Node.js (+ Playwright browsers: npx playwright install)
 ```
 
-## Leyenda: fichero REPO ↔ apunte actual
+## Leyenda: ejemplo completo (REPO-*) ↔ apunte
 
-En el material conviven **dos numeraciones distintas** (no guardan relación entre sí):
+Los ejemplos interactivos de TypeScript ya no viven en un repositorio aparte: cada **`REPO-*.ts`** está incrustado como bloque **"📦 Ejemplo completo"** al final del apunte de su capítulo. Para ejecutarlos, copia el bloque en `ejercicios/tmp/REPO-XX.ts` y lanza `npx tsx tmp/REPO-XX.ts` desde `ejercicios/`.
 
-1. **Fichero `apuntes/` (00–15)**: orden actual del curso, agrupado por carpetas de sesión (s02→s06).
-2. **Capítulo interno (`## N.x`)**
-
-| Fichero REPO-*.ts (`repos/01/src`) | Teoría hoy en `sesiones/apuntes/` |
+| Bloque `REPO-*.ts` (en los apuntes) | Sección "📦 Ejemplo completo" en |
 |---|---|
 | `REPO-01-tipos-primitivos.ts` | `s02/01_SintaxisBasica.md` |
 | `REPO-02-arrays-tuples.ts` | `s03/07_Arrays.md` |
 | `REPO-03-tipos-especiales.ts` | `s02/01_SintaxisBasica.md` |
-| `REPO-04-unions-intersections.ts` | `s02/05_ControlDeFlujo.md` (§5.4 Narrowing) |
+| `REPO-04-unions-intersections.ts` | `s02/05_ControlDeFlujo.md` |
 | `REPO-05-interfaces-types.ts` | `s03/08_Estructuras_de_Datos.md` |
 | `REPO-06-funciones.ts` | `s02/04_Funciones.md` |
 | `REPO-07-type-guards-conversion.ts` | `s02/02_ConversionTipos.md` |
@@ -224,6 +200,7 @@ En el material conviven **dos numeraciones distintas** (no guardan relación ent
 | `REPO-15-arrays-avanzado.ts` | `s03/07_Arrays.md` |
 | `REPO-17-que-es-typescript.ts` | `s02/00_Introduccion.md` |
 | `REPO-18-instalacion-configuracion.ts` | `s03/10_NPM.md` |
+| `REPO-19-generics-utility-types.ts` | `s02/04_Funciones.md` |
 
 ## Matriz: sesión ⇄ apuntes ⇄ repositorio ⇄ ejercicios
 
@@ -231,8 +208,8 @@ Vista rápida de qué material corresponde a cada sesión:
 
 | Sesión | Apuntes (teoría) | Repositorio (código) | Ejercicios |
 |---:|---|---|---|
-| S02 | [`apuntes/s02`](sesiones/apuntes/s02/) (A0–A6) | [`repos/01-typescript-fundamentos`](repos/01-typescript-fundamentos/) | [`ejercicios/s02`](ejercicios/s02/) |
-| S03 | [`apuntes/s03`](sesiones/apuntes/s03/) (A7–A11) | [`repos/01-typescript-fundamentos`](repos/01-typescript-fundamentos/) | [`ejercicios/s03`](ejercicios/s03/) |
+| S02 | [`apuntes/s02`](sesiones/apuntes/s02/) (A0–A6) | — (bloques en apuntes) | [`ejercicios/s02`](ejercicios/s02/) |
+| S03 | [`apuntes/s03`](sesiones/apuntes/s03/) (A7–A11) | — (bloques en apuntes) | [`ejercicios/s03`](ejercicios/s03/) |
 | S04 | [`apuntes/s04`](sesiones/apuntes/s04/) (A12 · A13) | [`repos/02-react-componentes`](repos/02-react-componentes/) | [`ejercicios/s04`](ejercicios/s04/) |
 | S05 | [`apuntes/s05`](sesiones/apuntes/s05/) (A15) | [`repos/02-react-componentes`](repos/02-react-componentes/) | [`ejercicios/s05`](ejercicios/s05/) |
 | S06 | [`apuntes/s06`](sesiones/apuntes/s06/) (A14) | [`repos/02-react-componentes`](repos/02-react-componentes/) | [`ejercicios/s06`](ejercicios/s06/) |
@@ -250,9 +227,6 @@ Vista rápida de qué material corresponde a cada sesión:
 ```
 S00  ──  Panoramica (sin codigo)
 S01  ──  Instalacion del entorno (sin repos)
- │
- ├──  01-typescript-fundamentos    S02, S03
- │     Solo necesita Node.js
  │
  ├──  02-react-componentes         S04, S05, S06
  │     Solo necesita Node.js
@@ -283,9 +257,9 @@ Versiones de referencia para todo el material (sesiones, apuntes y repos):
 | Tauri | **2.x** | webview + backend Rust (`invoke()`) |
 | Estilo TS | **erasable-only** | Sin `enum`/`namespace`/parameter properties: el mismo código corre en Node 24 y en Vite |
 
-> Nota: los ejemplos de `repos/01-typescript-fundamentos` son *erasable-only* para que corran en Node 24 sin compilar con el runner `tsx`.
+> Nota: los ejemplos `REPO-*.ts` de S02/S03 (bloques "📦 Ejemplo completo" en los apuntes) son *erasable-only* para que corran en Node 24 sin compilar con el runner `tsx`. S02/S03 no tienen repositorio propio: se ejecutan copiando el bloque en `ejercicios/tmp/`.
 
-Flujo de ejecución por repo: `repos/01` con `npx tsx src/..`, `repos/02`/`04` con `npm run dev`, `repos/03` con `npx tauri dev`, `repos/05` con `npx vitest` / `npx playwright test`, y `ejercicios/` con `npm run typecheck` (valida `soluciones/s02…s06`) + `npm run run:s02` / `npm run run:s03` (Node 24). Catálogo de ejercicios: [`sesiones/ejerciciosTS.md`](sesiones/ejerciciosTS.md).
+Flujo de ejecución: los bloques `REPO-*` de S02/S03 copiados a `ejercicios/tmp/` con `npx tsx tmp/REPO-XX.ts` (desde `ejercicios/`); `repos/02`/`04` con `npm run dev`, `repos/03` con `npx tauri dev`, `repos/05` con `npx vitest` / `npx playwright test`, y `ejercicios/` con `npm run typecheck` (valida `soluciones/s02…s06`) + `npm run run:s02` / `npm run run:s03` (Node 24). Catálogo de ejercicios: [`sesiones/ejerciciosTS.md`](sesiones/ejerciciosTS.md).
 
 ## Proyecto final: AppCine
 

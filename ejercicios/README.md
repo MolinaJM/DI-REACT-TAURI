@@ -6,9 +6,6 @@ Batería de ejercicios **por sesión** con sus soluciones.
 
 ```
 ejercicios/
-├── s00/   Fundamentos, arquitectura y entorno      (teoría)
-├── s01/   Instalación del entorno                  (teoría/comandos)
-├── s01-s/ Scaffolding Tauri                        (teoría/Rust)
 ├── s02/   TypeScript I  (12 ficheros .ts, incl. reto final)
 ├── s03/   TypeScript II (7 ejercicios, incl. módulos)
 ├── s04/   Componentes y funciones  (closures, clean code, JSX)

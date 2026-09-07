@@ -1,0 +1,19 @@
+{
+  "name": "bancop",
+  "version": "1.0.0",
+  "description": "Banco de pruebas: probar trozos de código TypeScript/TSX sueltos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "typescript": "^7.0.2"
+  }
+}

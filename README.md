@@ -25,7 +25,7 @@ Las interfaces web han evolucionado de un modelo servidor-céntrico hacia aplica
 
 ### ¿Por qué la tecnología web es tan útil para crear aplicaciones de escritorio?
 
-- **Multiplataforma:** el mismo código HTML/CSS/JS se ejecuta en Windows, macOS y Linux sin reescribir la interfaz para cada sistema operativo.
+- **Multiplataforma:** el mismo código HTML/CSS/JS se ejecuta en Windows, macOS y Linux sin reescribir la interfaz para cada sistema operativo. Este tipo de Apps se llaman **híbridas**.
 - **Ecosistema maduro:** acceso a miles de librerías (React, Tailwind CSS, routers, herramientas de testing) que aceleran el desarrollo de la interfaz. Además, la responsividad está asegurada.
 - **Desarrollo rápido:** recarga en caliente (HMR) y depuración en el navegador agilizan el ciclo de diseño, implementación y prueba.
 - **Experiencia fluida y ligera:** integrada con Tauri, la interfaz web se empaqueta en una carcasa nativa de Rust con bajo consumo de recursos.
