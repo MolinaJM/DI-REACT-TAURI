@@ -84,30 +84,35 @@ Con todo instalado, crea un proyecto de prueba para confirmar que el entorno fun
 
 ```bash
 # Crear un proyecto con Tauri
-<code>npm create tauri-app@latest</code> 
-
+npm create tauri-app@latest
 # Nos pregunta: nombre, identificador, lenguaje, gestor de paquetes y framework 
 
 cd nombreproyecto
 # Instalar dependencias del proyecto (lee package.json)
-npm install
-# Lanzar (la primera vez tarda porque Cargo se descarga y compila paquetes necesarios)
-npm run tauri dev
 
+npm install
+# Lanzar (la primera vez tarda porque Cargo se descarga y compila paquetes necesarios
+
+npm run tauri dev
 #Lanza en puerto http://localhost:1420
 
 #Probar a editar el código de App.tsx dentro de la carpeta src
 ```
 
 ```bash
-npm create vite@latest mi-primer-tauri -- --template react-ts
+#Por el contrario, si lo que queremos es crear una Web con REACT+VITE, pondríamos:
+npm create vite@latest react_solo -- --template react-ts
+#Lanza en puerto http://localhost:5173
+
+#Probar a editar el código de App.tsx dentro de la carpeta src
 ```
 
 ```bash
-cd mi-primer-tauri
+#Y si ya tenemos un proyecto React y queremos aplicar Tauri hacemos esto
+cd react_solo
 npm install
 npm install -D @tauri-apps/cli @tauri-apps/api
-npx tauri init
+npx tauri init --force --dev-url "http://localhost:5173"
 npx tauri dev
 ```
 
@@ -115,7 +120,7 @@ Al ejecutar `npx tauri dev`, Tauri compilará el backend en Rust (puede tardar l
 
 ### 1.5. Preguntas de tauri init
 
-Durante `tauri init` se te preguntará:
+Durante `tauri init` se  preguntará el nombre de la app, el título de la ventana, la ruta de los archivos de build (../dist), la URL del servidor de desarrollo (http://localhost:5173), el comando para arrancar en dev (npm run dev) y el comando para empaquetar la web (npm run build).
 
 > Para entender en detalle la estructura completa de un proyecto Tauri con React y Rust, consulta la guía de [Scaffolding de un proyecto Tauri](apuntes/scaffolding.md).
 
@@ -435,22 +440,6 @@ sudo pacman -Rns \
 
 > Si planeas retomar el desarrollo más adelante, considera solo eliminar los `node_modules` y ejecutar `cargo clean` en lugar de desinstalar todo. Así conservas las herramientas base y solo pierdes el cache compilado, que se regenera con `npm install` y `npx tauri build`.
 
-## Repositorios de Ejercicios
-
-Para acompañar la asignatura, se han creado una serie de repositorios con ejemplos y ejercicios prácticos. Cada repositorio esta asociado a una o varias sesiones y contiene todo el codigo necesario para seguir el curso paso a paso.
-
-La asignatura construye el conocimiento desde los cimientos: primero se aprende **TypeScript** como base para programar componentes de **React**, y finalmente se introducen en **Tauri** para aprovechar la potencia de **Rust** como backend nativo.
-
-> En **S02/S03** los ejemplos de TypeScript no viven en un repositorio aparte: cada apunte termina con su bloque "📦 Ejemplo completo", que se ejecuta copiándolo a `ejercicios/tmp/<nombre>.ts` y lanzando `npx tsx tmp/<nombre>.ts` desde `ejercicios/`.
-
-| Repositorio | Sesiones | Tecnologías |
-| --- | --- | --- |
-| `02-react-componentes` | S04 + S05 + S06 | React, Vite, componentes, hooks, formularios |
-| `03-tauri-ipc-filesystem` | S07 | Tauri v2, Rust, IPC, CRUD con invoke |
-| `04-react-avanzado` | S08 + S09 + S10 + S11 | Zustand, React Router, Tailwind CSS, @react-pdf/renderer |
-| `05-testing` | S12 | Vitest, Testing Library, Playwright E2E |
-
-> **Cada repositorio es independiente** y se puede clonar y ejecutar por separado. Solo el repositorio `03-tauri-ipc-filesystem` requiere el entorno completo de Tauri (Rust + Build Tools). Los demás solo necesitan Node.js.
 
 ## Anexo: Terminologia de comandos
 
