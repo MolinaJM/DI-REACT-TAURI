@@ -441,7 +441,7 @@ Para acompañar la asignatura, se han creado una serie de repositorios con ejemp
 
 La asignatura construye el conocimiento desde los cimientos: primero se aprende **TypeScript** como base para programar componentes de **React**, y finalmente se introducen en **Tauri** para aprovechar la potencia de **Rust** como backend nativo.
 
-> En **S02/S03** los ejemplos de TypeScript no viven en un repositorio aparte: cada apunte termina con su bloque "📦 Ejemplo completo" (`REPO-*`), que se ejecuta copiándolo a `ejercicios/tmp/REPO-XX.ts` y lanzando `npx tsx tmp/REPO-XX.ts` desde `ejercicios/`.
+> En **S02/S03** los ejemplos de TypeScript no viven en un repositorio aparte: cada apunte termina con su bloque "📦 Ejemplo completo", que se ejecuta copiándolo a `ejercicios/tmp/<nombre>.ts` y lanzando `npx tsx tmp/<nombre>.ts` desde `ejercicios/`.
 
 | Repositorio | Sesiones | Tecnologías |
 | --- | --- | --- |

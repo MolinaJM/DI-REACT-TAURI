@@ -6,9 +6,26 @@
 
 ---
 
+## IDEA
+
+```mermaid
+flowchart LR
+    classDef inicial fill:#d1fae5,stroke:#10b981,stroke-width:2px,color:#000;
+    classDef final fill:#dbeafe,stroke:#3b82f6,stroke-width:2px,color:#000;
+    classDef intermedio fill:#ede9fe,stroke:#8b5cf6,stroke-width:2px,color:#000;
+    A["👤 TÚ<br/>(alumno)"]:::inicial -->|"aprende TS (muy útil)"| B["FRONTEND<br/>React"]:::intermedio
+    B -->|"aplica"| C["USABILIDAD"]:::intermedio
+    B -->|"integra con"| D["TAURI<br/>Rust · IPC · Multiplataforma"]:::intermedio
+    C -->|"guía el diseño"| D
+    D -->|"produce"| E["APP Escritorio Multiplataforma<br/>(CREAR, ENTENDER y DEFENDER)"]:::final
+    E -->|"complementa con"| G["📋 Documentación<br/>📦 Distribución<br/>🧪 Pruebas<br/>📄 Informes PDF"]:::final
+```
+
+---
+
 ## Índice / Navegación
 
-- [Distribución Temporal y Contenidos (S00–S13)](#5-distribución-temporal-y-contenidos-s00s13) — guion de sesiones con teoría por sesión
+- [Distribución Temporal y Contenidos (S00–S13)](#5-distribución-temporal-y-contenidos-s00s13) — guion de sesiones con teoría por sesión.
 - [Instalación y configuración del entorno](sesiones/sesion00.md) — S0 · Node.js, nvm, NPM, Vite, React, Tailwind, Rust y Tauri
 - [Repositorios de código y plan de sesiones](REPOS.md) — repos `01`–`05`, cómo lanzar cada repo y proyecto final
 - [Ejercicios por sesión con soluciones](ejercicios/) — batería de ejercicios S00–S12
@@ -159,5 +176,4 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 
 Contenido creado por **José María Molina** para la asignatura **Desarrollo de Interfaces**. 
 
-Parte de la teoría TypeScript y React del curso (Sesiones 2 y 3), han sido adaptados a partir del material de JavaScript *"Apuntes DWEC"* perteneciente a **Isaías Fernández Lozano (Isaias FL)** distribuido bajo **Creative Commons CC BY 4.0** 
-
+Parte de la teoría TypeScript y React del curso (Sesiones 2 y 3), han sido adaptados a partir del material de JavaScript *"Apuntes DWEC"* perteneciente a **Isaías Fernández Lozano (Isaias FL)** distribuido bajo **Creative Commons CC BY 4.0**
