@@ -22,6 +22,7 @@ gen/
 /ejercicios/soluciones/s01-s/
 /sesiones/ejerciciosTS.md
 /sesiones/temario-appcine.md
+/ejercicios/soluciones/s02/12-reto-s02.ts
 
 # ===========================================================================
 #  >>> SESIÓN 00 <<  (REVELADA)
@@ -34,7 +35,7 @@ gen/
 !sesiones/sesion01.md
 
 # ===========================================================================
-#  >>> SESIÓN 01-S <<  (REVELADA · scaffolding)
+#  >>> SESIÓN 01-S <<  (scaffolding)
 # ===========================================================================
 !sesiones/apuntes/scaffolding.md
 # !repos/03-tauri-ejemplo-minimo/

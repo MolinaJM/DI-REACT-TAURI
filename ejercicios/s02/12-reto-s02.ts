@@ -1,5 +1,84 @@
 // ============================================================
-// S02 · RETO FINAL · La máquina expendedora de PROFE
+// 🏁 S02 · RETO FINAL · La máquina expendedora (ENUNCIADO)
+// ============================================================
+// Léelo entero ANTES de escribir la primera línea de código.
+// ------------------------------------------------------------
+// El objetivo de este reto es construir una pequeña máquina expendedora
+// integrando en un único programa TODO lo visto en la sesión S02: uniones
+// de literales, narrowing, type guards con predicados de tipo, parámetros
+// por defecto, ternarios y el operador de coalescencia nula, bucles,
+// un switch exhaustivo con el tipo never, aserciones, ámbito y closures.
+//
+// Cada función llega con su declaración (firma y tipos) ya escrita y el
+// cuerpo vacío o con un return de relleno. Tu trabajo es completar SOLO
+// los cuerpos: no cambies nombres, firmas ni tipos, ni añadas export de
+// más. Resuélvelo apartado por apartado y en orden:
+//
+//   1) panelEstado(estado) → texto
+//      Devuelve el nombre del estado en mayúsculas y en español. Es un
+//      caso de libro del switch exhaustivo: un case por cada estado de la
+//      máquina y una rama por defecto escrita de forma que, si mañana
+//      alguien añade un estado nuevo, el compilador te avise de que falta
+//      tratarlo (no un return más: la rama que no puede ejecutarse).
+//
+//   2) esMoneda(valor) → sí / no
+//      Determina si el número recibido es una moneda válida (1, 2, 5 o 10
+//      céntimos). Debe escribirse como predicado de tipo para que quien lo
+//      llame obtenga, cuando responda que sí, un valor ya afinado del tipo
+//      Moneda en lugar de un simple booleano.
+//
+//   3) calcularTotal(precios, descuentoCéntimos) → total
+//      Suma todos los precios de la lista recorriéndola con un bucle que
+//      recorre los elementos (no los índices). El descuento es opcional
+//      (por defecto 0) y va en céntimos. Resta el descuento y, si el
+//      resultado quedara negativo, devuelve 0. Elige entre total y 0 con
+//      un ternario.
+//
+//   4) precioDe(productos, nombre) → precio
+//      Define la interfaz Producto (nombre, precio y stock). Busca un
+//      producto por su nombre y devuelve su precio; si no existe, devuelve
+//      0, resolviendo el "no encontrado" con el operador de coalescencia
+//      nula en lugar de un condicional.
+//
+//   5) formatoPrecio(céntimos) → texto
+//      Convierte una cantidad en céntimos en texto legible con formato de
+//      precio ("125" → "1,25 €"): parte entera, coma, dos decimales
+//      siempre (rellena con un cero a la izquierda si hace falta) y el
+//      símbolo de euro. Hazlo con las conversiones y utilidades de
+//      números y cadenas de la sesión (redondeo, resto de la división,
+//      paso a cadena, relleno). No uses formateadores automáticos ni
+//      objetos de fecha.
+//
+//   6) darCambio(céntimos) → lista de monedas
+//      Descompone una cantidad en la menor cantidad posible de monedas de
+//      10, 5, 2 y 1 céntimo, probando siempre primero la mayor. Recorre
+//      con un bucle la lista fija de monedas (declarada como constante de
+//      solo lectura) y, por cada moneda, calcula cuántas veces cabe
+//      (división entera), las añade al resultado y deja el resto
+//      (módulo) para la siguiente moneda.
+//
+//   7) crearMaquina(productos) → máquina
+//      Devuelve un objeto que guarda el catálogo y un contador de ventas
+//      como datos privados de un closure (nadie de fuera debe poder leerlos
+//      directamente), con estos métodos:
+//        - vender(nombre, pagado?): busca el producto; si no existe,
+//          falta stock o no llega el dinero, devuelve null. Si la venta es
+//          válida, descontar una unidad de stock, suma una venta al
+//          contador privado y devuelve el cambio correcto calculado con el
+//          apartado 6.
+//        - reabastecer(nombre, cantidad): suma esa cantidad al stock solo
+//          si el producto existe.
+//        - totalVentas(): devuelve el contador privado.
+//        - inventario(): devuelve un texto con todos los productos y su
+//          stock en el formato "nombre: cantidad · nombre2: cantidad2"
+//          (constrúyelo uniendo el catálogo).
+//
+// Al terminar, comprueba el resultado ejecutando el reto y, si te atascas,
+// compara TU versión con la solución de referencia (soluciones/s02/12-reto-s02.ts)
+// solo como autocomprobación: lo importante es que lo acabes explicando tú.
+//
+// ============================================================
+// ▶ RESUMEN EXPRÉS (recuerda la regla del reto)
 // ============================================================
 // Programa pequeño que integra TODO lo visto en S02:
 //   - uniones de literales y narrowing
