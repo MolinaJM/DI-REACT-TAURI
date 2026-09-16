@@ -73,7 +73,7 @@ En TypeScript, **un tipo de dato primitivo** es un tipo de dato que representa u
 A partir de ES6 y versiones posteriores, los tipos de datos primitivos en JavaScript son, y en TypeScript se escriben en minúscula (no confundir con los constructores `String`, `Number`, `Boolean` que usan mayúscula) En TypeScript no se suelen utilizar los objetos tipo, solo para casos muy rebuscados.:
 
 1. **`undefined`**: Representa la ausencia de valor. Una variable que ha sido declarada pero no inicializada tiene el valor `undefined`. En TS: `let x: undefined;`
-2. **`null`**: Representa intencionalmente "ningún valor" o "valor vacío". Es considerado un tipo primitivo aunque su tipo es un objeto (`typeof null` es `'object'` debido a un error histórico en el lenguaje). En TS: `let v: null = null;`
+2. **`null`**: Representa intencionalmente "ningún valor" o "valor vacío". Es considerado un tipo primitivo aunque su tipo es un objeto (`typeof null` es `'object'` debido a un error histórico en el lenguaje). Mencionar que typeof(var) devuelve el valor. En TS se utiliza así: `let v: null = null;`
 3. **`boolean`**: Representa un valor lógico que puede ser `true` o `false`. En TS: `let activo: boolean = true;`
 4. **`number`**: Representa números enteros y de punto flotante. TypeScript no distingue entre enteros y números de punto flotante. En TS: `let precio: number = 12.5; negative: number = -3;`.
 6. **`string`**: Representa una cadena de caracteres. Las cadenas son inmutables. En TS: `let nombre: string = "Ana";`
@@ -85,12 +85,12 @@ A partir de ES6 y versiones posteriores, los tipos de datos primitivos en JavaSc
 
 Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber, en cada punto del código, cuál es el real. Lo verás mucho al manejar valores opcionales, como `const respuesta: string | null = obtenerRespuesta();`
 
-> [!TIP] ¿Y los `enum`? Aquí no.
-> Te preguntarás si en lugar de una unión de literales (`type Estado = "pendiente" | "hecha"`) deberías usar `enum`, como se hace en otros lenguajes. En este curso **no**: los `enum` generan código en runtime y rompen el estilo *erasable-only* (que el mismo código corra con `node archivo.ts` o `tsx`), y ni React ni Tauri los necesitan. Una unión de strings te da el mismo autocompletado, narrowing y seguridad, con exhaustiveness en `switch`  y sin emisión de JS. Regla práctica: "tipo fijo de pocos valores" = **unión de literales**, no `enum`. Ejemplo: type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'; 
+> [!TIP] ¿Y los `enum`que sí existen en otros lenguajes como por ejemplo en C#? Aquí no.
+> Te preguntarás si en lugar de una unión de literales (`type Estado = "pendiente" | "hecha"`) deberías usar `enum`, como se hace en otros lenguajes. En este curso **no**: los `enum` generan código en runtime y rompen el estilo *erasable-only* (que el mismo código corra con `node archivo.ts` o `tsx`), y ni React ni Tauri los necesitan. Una unión de strings da el mismo resultado. Regla práctica: "tipo fijo de pocos valores" = **unión de literales**, no `enum`. Ejemplo: type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'; 
 
 ### Intersección de tipos (`&`)
 
-La **intersección (`&`)** combina tipos exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto:
+La **intersección (`&`)** combina tipos exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
 
 ```typescript
 interface Persona { 
@@ -112,13 +112,13 @@ const profe: Persona & Empleado = {
 
 ### Tipos de datos no primitivos (objetos):
 
-Los **tipos de datos no primitivos** son aquellos que **almacenan referencias** a objetos en lugar de valores directos. Esto significa que cuando asignas o pasas un objeto, lo que se copia es una referencia al objeto, no el objeto en sí. Los tipos no primitivos son mutables, lo que significa que puedes cambiar sus propiedades o el contenido de las colecciones sin cambiar la referencia al objeto.
+Los **tipos de datos no primitivos** son aquellos que **almacenan referencias** a objetos en lugar de valores directos. Esto significa que cuando asignas o pasas un objeto, lo que se copia es una referencia al objeto, no el objeto en sí (los famosos punteros). Los tipos no primitivos son mutables, lo que significa que puedes cambiar sus propiedades o el contenido de las colecciones sin cambiar la referencia al objeto.
 
 Algunos ejemplos de tipos no primitivos son:
 
 - **Objetos**: Representan colecciones de pares clave-valor. En TS se modelan con `interface` o `type`.
 - **Arrays**: Son objetos especializados para almacenar listas de elementos. En TS: `number[]`.
-- **Funciones**: Son objetos de primera clase en JavaScript. En TS se tipan como `(args) => retorno`.
+- **Funciones**: Son objetos de primera clase (*first class citizen*). En TS se tipan como `(args) => retorno`.
 - **Colecciones**: `Set`, `Map`, `Date`, etc.
 
 ### Interfaces y Type Aliases

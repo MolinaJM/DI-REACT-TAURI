@@ -62,11 +62,11 @@ if (puntuacion >= 90) {
 }
 ```
 
-**_Recordemos:**_
+**Recordemos:**
 
-`El número 0, un string vacío "", null, undefined, y NaN se convierte en false. Por esto son llamados valores "falso".`
+`El número 0, un string vacío "", null, undefined, y NaN se convierte en false. Por esto son llamados valores "falsy".`
 
-`El resto de los valores se convierten en true, entonces los llamaremos valores "verdadero".`
+`El resto de los valores se convierten en true, entonces los llamaremos valores "truthy".`
 
 > [!TIP]
 > En TypeScript con `strict`, un `if (valor)` comprobando un tipo que incluye `null` o `undefined` provoca *narrowing*: dentro del bloque, el tipo de `valor` queda reducido. Es la base para manejar datos opcionales de forma segura.
