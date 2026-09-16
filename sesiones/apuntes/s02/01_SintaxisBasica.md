@@ -355,6 +355,8 @@ let colores = ["rojo", "verde", "azul"] as const;
 // Tipo: readonly ["rojo", "verde", "azul"]
 ```
 
+> **¿Por qué el *exhaustiveness check* con `never` funciona?** Mientras los `case` cubren todos los literales de la unión, el `default` es **inalcanzable**: por *narrowing*, TypeScript sabe que `forma` ya quedó agotada en las ramas y el único tipo que puede "caer" ahí es `never`. Y `never` es asignable a `never`, así que `const _exhaustivo: never = forma;` es correcto y compila. El momento en que se enciende la alarma: añades un literal nuevo a la unión (p. ej. `"triangulo"`) sin añadir su `case`. Entonces al `default` ya no llega `never`, sino `"triangulo"` (un tipo **no vacío**), y asignar un `"triangulo"` a una variable `never` es inválido → **error de compilación**. Es decir: TS no te deja simplemente "olvidar" un caso; te obliga a añadirlo o el código no compila. El patrón en cada componente/sesión: los estados de una petición o evento (`"ok" | "cargando" | "error"`) con su `switch` exhaustivo = la semilla de `useReducer` de React.
+
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `01_SintaxisBasica.ts` y ejecuta `npx tsx 01_SintaxisBasica.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
 
 ### 📦 Ejemplo completo: 

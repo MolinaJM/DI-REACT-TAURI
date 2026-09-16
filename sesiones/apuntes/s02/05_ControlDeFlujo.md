@@ -155,7 +155,16 @@ let u:Usuario={nombre:"Profe"};
 console.log(procesar(u)); 
 ```
 
-Otros guards habituales: `Array.isArray(x)`, `x instanceof Error`, `"prop" in objeto`, o *type guards* definidos por el usuario (ver capítulos de Fetch API y localStorage).
+| Herramienta | Cuándo usarla | Ejemplo |
+|-------------|---------------|---------|
+| `typeof` | Tipos primitivos de JS (`string`, `number`, `boolean`, `undefined`, `function`) | `typeof x === "string"` |
+| `in` | Interfaces/objetos con propiedades distintas | `"ladrar" in animal` |
+| `Array.isArray(x)` | Arrays (porque `typeof []` es `"object"`) | `Array.isArray(lista)` |
+| `instanceof` | Instancias de `Error`/clases | `x instanceof Error` |
+
+Otros guards habituales: *type guards* definidos por el usuario, p. ej. un predicado `datos is { nombre: string }` (lo verás en el capítulo de Fetch API y en `sesion04` al validar datos que llegan de Tauri).
+
+> ✏️ **Práctica:** [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts` con `in`) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·11 y S2·15](../../../sesiones/ejerciciosTS.md).
 
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.

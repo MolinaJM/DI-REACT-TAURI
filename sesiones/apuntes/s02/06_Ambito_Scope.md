@@ -7,8 +7,7 @@
     - [6.1.3 Ámbito de Bloque](#613-ámbito-de-bloque)
     - [6.1.4 Ámbito de Cierre (Closures)](#614-ámbito-de-cierre-closures)
   - [6.2. Ejemplos Prácticos](#62-ejemplos-prácticos)
-    - [Ejemplo 1: Closure contador (ámbito léxico en acción)](#ejemplo-1-closure-contador-ámbito-léxico-en-acción)
-    - [Ejemplo 2: TDZ (Temporal Dead Zone)](#ejemplo-2-tdz-temporal-dead-zone)
+    - [Ejemplo 1: Closure contador (ámbito léxico en acción)](#ejemplo-1-closure-contador-ámbito-léxico-en-acción)    - 
 - 🧪 **Ejercicios:** [Ámbito (Scope) y closures](../../ejerciciosTS.md#16-ámbito-scope-y-closures)
 
 ---
@@ -92,7 +91,7 @@ closureExample(); // Imprime "Externa"
 ```
 
 > [!NOTE]
-> Hay que tener en cuenta que el tipo devuelto por la función ha de ser igual tipo de dato receptor.
+> Hay que tener en cuenta que el tipo devuelto por la función ha de ser igual tipo de dato recept
 
 ## 6.2. Ejemplos Prácticos
 
