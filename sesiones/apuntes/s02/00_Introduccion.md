@@ -84,7 +84,7 @@ obtenerDatosDesdeAPI();
 
 ```
 
-> 💡 **¿Cómo haríamos para...?** el mismo patrón de promesas en un proyecto Tauri? El `fetch` a una URL web se sustituirá por `invoke("comando", { id: userId })`, donde el backend es código Rust en lugar de un servidor HTTP. El control de flujo (`async`/`await`, `try/catch`, `Promise`) es idéntico; solo cambia qué función llamamos.
+> 💡 **¿Cómo haríamos para...?** el mismo patrón de promesas en un proyecto 100% Tauri? El `fetch` a una URL web se sustituirá por `invoke("comando", { id: userId })`, donde el backend es código Rust en lugar de un servidor HTTP. El control de flujo (`async`/`await`, `try/catch`, `Promise`) es idéntico; solo cambia qué función llamamos. De todas formas, lo normal será seguir usando fetch de TS y dejar para Tauri puro solamente lo indispensable.
 
 #### 3. **Programación Funcional Avanzada**
 

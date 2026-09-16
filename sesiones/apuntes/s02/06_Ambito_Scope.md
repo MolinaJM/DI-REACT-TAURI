@@ -38,8 +38,6 @@ exampleFunction(); // Imprime "Soy global"
 console.log(globalVar); // También se puede acceder aquí
 ```
 
-> [!WARNING]
-> En módulos ES, un archivo con `import`/`export` ya NO crea variables globales: cada módulo tiene su propio ámbito. Las variables "globales" de verdad quedarían en `globalThis`. Para evitar sorpresas, este curso recomienda no depender del ámbito global: cada archivo exporta lo que otros necesiten.
 
 ### 6.1.2 Ámbito de Función
 
@@ -94,7 +92,7 @@ closureExample(); // Imprime "Externa"
 ```
 
 > [!NOTE]
-> TypeScript infiere el tipo del closure: `outerFunction` devuelve una función `() => void`. Si el closure devuelve un valor, el tipo de retorno se deduce igualmente.
+> Hay que tener en cuenta que el tipo devuelto por la función ha de ser igual tipo de dato receptor.
 
 ## 6.2. Ejemplos Prácticos
 
