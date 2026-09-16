@@ -174,6 +174,8 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 
 ## 6. Atribución
 
-Contenido creado por **José María Molina** para la asignatura **Desarrollo de Interfaces**. 
+Contenido creado para la asignatura **Desarrollo de Interfaces**. 
 
-Parte de la teoría TypeScript y React del curso (Sesiones 2 y 3), han sido adaptados a partir del material de JavaScript *"Apuntes DWEC"* perteneciente a **Isaías Fernández Lozano (Isaias FL)** distribuido bajo **Creative Commons CC BY 4.0**
+Repositorio creado y mantenido por **José María Molina**: Profesor de Informática en el IES Hermenegildo Lanz (Granada). 
+
+Parte de la teoría TypeScript y React del curso  han sido adaptados a partir del material de JavaScript *"Apuntes DWEC"* perteneciente a **Isaías Fernández Lozano (Isaias FL)** distribuido bajo **Creative Commons CC BY 4.0**
