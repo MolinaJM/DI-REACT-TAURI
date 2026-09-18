@@ -111,7 +111,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    strictPort: true, // Si el 5173 está ocupado, darános lanzará un or en vez de saltar al 5174
+    strictPort: true, // Si el 5173 está ocupado, nos lanzará un error en vez de saltar al 5174 (el siguiente libre)
   }
 })
 
