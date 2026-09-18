@@ -17,7 +17,7 @@ Tauri necesita linkar lo que genera Rust con las librerías de Windows para gene
 - Descarga el instalador desde `https://visualstudio.microsoft.com/visual-cpp-build-tools/`
 - Ejecuta `vs_BuildTools.exe`
 - En el instalador selecciona la caja **"Desarrollo para el Escritorio con C++"**
-- A la derecha busca y marca:
+- A la derecha busca y marca como mínimo:
             
 `MSVC - VS 2022 C++ x64/x86 build tools`
 `Windows 10/11 SDK` (la versión más reciente)
@@ -102,7 +102,21 @@ npm run tauri dev
 ```bash
 #Por el contrario, si lo que queremos es crear una Web con REACT+VITE, pondríamos:
 npm create vite@latest react_solo -- --template react-ts
-#Lanza en puerto http://localhost:5173
+#Lanza en puerto http://localhost:5173 por defecto.
+
+^C para cortar el servidor
+
+#Editamos vite.config.ts para que siempre use el mismo puerto y no salte al siguiente:
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    strictPort: true, // Si el 5173 está ocupado, darános lanzará un or en vez de saltar al 5174
+  }
+})
+
+#Volvemos a lanzar el servidor:
+npm run dev
 
 #Probar a editar el código de App.tsx dentro de la carpeta src
 ```
@@ -112,11 +126,29 @@ npm create vite@latest react_solo -- --template react-ts
 cd react_solo
 npm install
 npm install -D @tauri-apps/cli @tauri-apps/api
-npx tauri init --force --dev-url "http://localhost:5173"
+npx tauri init --force --dev-url "http://localhost:5173" 
+# si forzamos a vite a usar el 5173, --dev-url es innecesario. Útil si necesitamos cambiar el origen del puerto
 npx tauri dev
+
+#En algunos casos, en Windows (Windows Defender) Node/Vite y Tauri/Rust entran en conflicto. 
+# Esto ocurre porque Tauri crea .dll en tiempo de compilación y entonces, Vite y WindowsDefender lo bloquea. 
+#En esos casos hay que añadir la linea ignored a Vite. 
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    strictPort: true,
+    watch: {
+      // Ignora la carpeta de compilación de Rust para evitar colisiones de archivos bloqueados
+      ignored: ['**/src-tauri/**'],
+    },
+  },
+})
 ```
 
 Al ejecutar `npx tauri dev`, Tauri compilará el backend en Rust (puede tardar la primera vez) y abrirá una ventana nativa con el frontend de React dentro.
+
+Si aún así, node sigue dando problemas podemos matar la tarea y volver a empezar:  taskkill /F /IM node.exe
 
 ### 1.5. Preguntas de tauri init
 

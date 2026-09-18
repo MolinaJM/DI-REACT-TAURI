@@ -1,0 +1,260 @@
+# LEEME_CURSOS_SIG.txt
+# Instrucciones para relanzar la creación de CRONO y calendarios
+# para cursos posteriores del módulo DI-RT
+
+
+========================================================================
+1.  QUÉ SE GENERA
+========================================================================
+
+Al ejecutar estas instrucciones se obtienen (o actualizan) dos ficheros:
+
+  · private/CRONO.md          → cronología detallada semana a semana
+                                con teoría, ejercicios, parones y exámenes.
+  · private/CRONO_meses.html  → calendario visual mes a mes (HTML con
+                                tablas de anchos iguales, colores por
+                                grupo, badges y leyenda).
+
+Ambos son de uso interno del docente (están en .gitignore).
+
+Además existe:
+
+  · private/generate_crono.py → script Python que genera CRONO_meses.html
+                                a partir de los datos embebidos en el propio
+                                script. NO lee CRONO.md: los datos están
+                                hardcodeados en la lista SESIONES para máxima
+                                fiabilidad y control total.
+
+
+========================================================================
+2.  GENERAR CON EL SCRIPT (MÉTODO RECOMENDADO)
+========================================================================
+
+PARA GENERAR EL HTML:
+
+    cd private/
+    python3 generate_crono.py
+
+Esto produce private/CRONO_meses.html automáticamente.
+
+PARA ACTUALIZAR EL CURSO SIGUIENTE:
+
+    1. Abre private/generate_crono.py
+    2. Cambia las variables al inicio:
+       - AÑO_INICIO = 2027
+       - AÑO_FIN = 2028
+       - NOMBRE_CURSO = "DI-RT"
+    3. Actualiza la lista SESIONES con las nuevas fechas y contenido.
+       Cada entrada tiene este formato:
+       ("DD-MM-AAAA", "A"/"B", "SXX", "TIPO", "teoría", "enviar", "corregir", ["badges"])
+       
+       TIPO: "T1" (teoría+ejercicios), "T2" (corrección+teoría+ejercicios),
+             "EXAMEN", "FESTIVO", "VACACIONES", "COLCHON"
+    4. Ejecuta: python3 generate_crono.py
+    5. Verifica el HTML resultante en el navegador.
+
+NOTA: El script NO lee CRONO.md. Los datos están embebidos en el script
+para garantizar que la generación sea predecible y no dependa de parsers
+frágiles de markdown. Si cambias las sesiones, actualiza ambas fuentes
+(CRONO.md y generate_crono.py) para que coincidan.
+
+
+========================================================================
+3.  GENERAR CON IA (MÉTODO ALTERNATIVO)
+========================================================================
+
+Antes de pedir a la IA que regenere los ficheros (o de actualizar el script), actualiza estos
+parámetros en tu mensaje de prompt (o en el script generate_crono.py):
+
+  A.  Año del curso
+      Ej: 2027-2028 → el calendario cambiará completamente.
+
+  B.  Días y horario de cada grupo
+      - Grupo A: qué días de la semana (ej: mié/vie) y turno
+        (mañana/tarde).
+      - Grupo B: qué días de la semana (ej: lun/mar) y turno.
+      - Duración de cada sesión (actual: 3 h).
+
+  C.  Fecha de inicio de cada grupo
+      - Ej: A empieza el Viernes 18-09-2026, B el Lunes 21-09-2026.
+      - El primer día de clase debe incluir S00 + S01 + S01-S
+        (Fundamentos, Instalación y Scaffolding) para ambos grupos.
+
+  D.  Regla de repetición cruzada
+      Actual (curso 2026-27):
+        B Lun  = A Vie  (semana anterior)
+        B Mar  = A Mié  (semana anterior)
+        A Mié  = B Mar  (semana anterior)
+        A Vie  = B Lun  (semana anterior)
+      Excepción inicio: B empieza una semana después → B repite la
+      semana 1 de A en su primera semana.
+      Excepción post-navidad: B reanuda antes que A → B va una semana
+      "adelantado" y A repite a B.
+      *Adapta estas reglas si cambian los días.*
+
+  E.  Festivos del centro (ciudad)
+      Lista de festivos locales con fecha y qué grupo afecta.
+      Ej: 12 Oct (Lun) → B pierde clase.
+      Fin de semana no lectivo: no afecta.
+      Vacaciones Navidad: rango de fechas (ej: 23/12 → 06/01).
+
+  F.  Parones de consolidación
+      Lista de semanas (S4, S5, S7, S8, S9, S11, S13, S17, ...)
+      donde se para la teoría nueva para consolidar.
+
+  G.  Semanas de examen
+      - Examen TS: qué semana (ej: S6).
+      - Examen React: qué semana (ej: S10).
+      Duración: 3 h. Día anterior = repaso guiado.
+
+  H.  Estructura de sesiones (S00 a S18+)
+      Cada sesión tiene un número, nombre y contenido breve.
+      Ver la sección "0.1 Calendario por fecha" del CRONO actual
+      para ver el formato gantt.
+
+  I.  Ficheros de teoría y ejercicios
+      Las rutas relativas a la raíz del proyecto:
+        sesiones/apuntes/s0X/     → apuntes .md
+        ejercicios/s0X/            → ejercicios .ts / .tsx
+        sesiones/sesionXX.md      → índice de sesión
+      *Si cambian las rutas o los nombres, actualiza las referencias.*
+
+
+========================================================================
+3.  CÓMO LANZAR LA GENERACIÓN (prompt para la IA)
+========================================================================
+
+Copia y pega el siguiente bloque en la conversación con la IA,
+o actualiza directamente private/generate_crono.py:
+
+------------------------------------------------------------------------
+QUIERO QUE REGENERES LOS FICHEROS CRONO.md Y CRONO_meses.html para el
+curso [AÑO_INICIO]-[AÑO_FIN] del módulo DI-RT.
+
+PARÁMETROS:
+
+  Año curso:        [2027-2028]
+  Grupo A días:     [mié / vie]
+  Grupo A turno:    [mañana]
+  Grupo B días:     [lun / mar]
+  Grupo B turno:    [tarde]
+  Duración sesión:  [3 h]
+
+  Inicio Grupo A:   [Viernes 19-09-2027]
+  Inicio Grupo B:   [Lunes 22-09-2027]
+
+  Primer día (ambos): S00 + S01 + S01-S
+    (Fundamentos + Instalación + Scaffolding)
+
+  Regla repetición:
+    [B Lun = A Vie (sem. ant.)]
+    [B Mar = A Mié (sem. ant.)]
+    [A Mié = B Mar (sem. ant.)]
+    [A Vie = B Lun (sem. ant.)]
+    Excepción inicio: B repite sem. 1 de A.
+    Excepción post-navidad: B reanuda [Lun XX/01], A [Mié XX/01].
+
+  Festivos centro [CIUDAD]:
+    - [DD Mes] [Día] → [impacto]
+    - [DD Mes] [Día] → [impacto]
+    - Vacaciones Navidad: [DD/MM → DD/MM]
+
+  Parones:          [S4, S5, S7, S8, S9, S11, S13, S17]
+  Examen TS:        [Semana S6]
+  Examen React:     [Semana S10]
+
+  Sesiones:
+    S00: Fundamentos
+    S01: Instalación
+    S01-S: Scaffolding
+    S02-S03: TypeScript (00 a 11)
+    S04-S06: React
+    S07-S09: Tauri / IPC / CRUD
+    S10: Tailwind / Usabilidad
+    S11: PDF (opcional)
+    S12: Testing
+    S13: Distribución
+    S18+: Colchón / Proyecto AppCine
+
+INSTRUCCIONES DE GENERACIÓN:
+
+  1. CRONO.md:
+     - Sección 0.x: claves de uso, horarios, reglas de repetición,
+       festivos, estructura de sesión.
+     - Sección 0.1: bloque Mermaid gantt con fechas reales del
+       calendario [AÑO_INICIO]-[AÑO_FIN].
+     - Sección 0.2: resumen semanal (tabla con Grupo A / Grupo B / Tema).
+     - Sección 0.3: comprobación de carga conceptual (tabla con
+       apuntes, bloques, ejercicios, prioridad).
+     - Sección 1: cronología detallada semana a semana con
+       teoría → práctica → reto, badges de color para E1/E2,
+       parones y exámenes marcados.
+
+  2. CRONO_meses.html:
+     - HTML completo (no Markdown con HTML insertado).
+     - Tablas con table-layout: fixed y anchos iguales (14.2857%).
+     - Cada mes en un <div class="month-section"> con cabecera.
+     - Badges de colores: grupo A (azul), grupo B (naranja),
+       examen (rojo), parón (verde), festivo (púrpura),
+       vacaciones (ámbar).
+     - Leyenda de iconos al inicio.
+     - Notas al final (festivos, vacaciones, inicio, reanudación).
+     - Estilos optimizados para impresión (@media print).
+     - Celdas vacías con clase "empty" y fondo sutil.
+
+   3. Reglas generales:
+      - NUNCA hacer commit.
+      - Formato de fecha: DD-MM-AAAA.
+      - Verificar que el calendario es correcto (días de la semana
+        coinciden con las fechas reales).
+      - La regla de repetición cruzada debe aplicarse consistentemente.
+      - Los festivos deben eliminar clases donde corresponda.
+      - Los parones deben marcarse en ambas cronologías.
+
+  3b. ACTUALIZAR SCRIPT (alternativa a generar HTML manualmente):
+      Si prefieres usar el script Python en lugar de generar el HTML
+      manualmente, actualiza private/generate_crono.py con las nuevas
+      fechas y contenido en la lista SESIONES, y ejecuta:
+          python3 generate_crono.py
+      El script genera CRONO_meses.html automáticamente.
+      Asegúrate de que los datos del script coincidan con CRONO.md.
+
+========================================================================
+4.  VERIFICACIÓN POST-GENERACIÓN
+========================================================================
+
+Después de que la IA genere los ficheros, revisa manualmente:
+
+  □ Que las fechas del gantt Mermaid coinciden con las tablas HTML.
+  □ Que el primer día de cada grupo incluye S00+S01+S01-S.
+  □ Que la regla de repetición cruzada se cumple semana a semana.
+  □ Que los festivos eliminan clases correctamente.
+  □ Que los parones aparecen marcados con 🔻.
+  □ Que los exámenes están en la semana indicada.
+  □ Que las tablas HTML tienen anchos iguales (inspeccionar en navegador).
+  □ Que no hay fechas duplicadas ni huecos sin justificar.
+
+========================================================================
+5.  MANTENIMIENTO ANUAL
+========================================================================
+
+Cada septiembre:
+
+  MÉTODO RECOMENDADO (script):
+    1. Actualiza private/generate_crono.py:
+       - AÑO_INICIO, AÑO_FIN
+       - Lista SESIONES (fechas, teoría, ejercicios, correcciones)
+    2. Ejecuta: python3 generate_crono.py
+    3. Verifica el HTML en el navegador.
+
+  MÉTODO ALTERNATIVO (IA):
+    1. Actualiza los parámetros de la sección 2 (año, días, festivos,
+       fechas de inicio).
+    2. Lanza el prompt de la sección 3.
+    3. Verifica con la checklist de la sección 4.
+    4. Archiva el CRONO del curso anterior (ej: CRONO_2026_2027.md)
+       por si hace falta consultar algo del curso pasado.
+
+========================================================================
+FIN DEL LEEME
+========================================================================
