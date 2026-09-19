@@ -2,30 +2,109 @@
 
 - [**Capítulo 00. TypeScript  sobre ES6+/ES2026 📝**💻](#capítulo-00-typescript-sobre-es6es2026)
 - [0. Introducción a JavaScript y TypeScript 📖](#0-introducción-a-javascript-y-typescript)
-  - [0.2 Características Modernas](#02-características-modernas)
+  - [0.1 ¿Qué es TypeScript?](#01-qué-es-typescript)
+  - [0.2 Ventajas de TypeScript](#02-ventajas-de-typescript)
+  - [0.3 Instalación y Configuración](#03-instalación-y-configuración)
+  - [0.4 Características Modernas](#04-características-modernas)
     - [1. **Lenguaje Multi-paradigma Moderno**](#1-lenguaje-multi-paradigma-moderno)
     - [3. **Programación Funcional Avanzada**](#3-programación-funcional-avanzada)
     - [4. **Tipado Estático con TypeScript**](#4-tipado-estático-con-typescript)
     - [6. **Asincronía Nativa y Moderna**](#6-asincronía-nativa-y-moderna)
-  - [0.4 Primeros Pasos con TypeScript ](#04-primeros-pasos-con-typescript)
+  - [0.5 Primeros Pasos con TypeScript ](#05-primeros-pasos-con-typescript)
     - [Hola Mundo Moderno](#hola-mundo-moderno)
     - [Arrow Functions](#arrow-functions)
     - [Template Literals](#template-literals)
     - [Destructuring](#destructuring)
-  - [0.5 Introducción a TypeScript](#05-introducción-a-typescript)
-    - [¿Qué es TypeScript?](#qué-es-typescript)
-    - [Ventajas de TypeScript](#ventajas-de-typescript)
-    - [Instalación y Configuración](#instalación-y-configuración)
-    - [Primer Código con TypeScript](#primer-código-más-complejo-con-typescript)
+  - [0.6 Ejemplo completo-resumen](#06-ejemplo-completo-resumen)
 - 🧪 **Ejercicios:** [¿Qué es TypeScript?](../../ejerciciosTS.md#1-que-es-typescript) · [Instalación y Configuración](../../ejerciciosTS.md#2-instalacion-y-configuracion-basica)
 
 ---
 
 # 0. Introducción a JavaScript y TypeScript 📖
 
-> Este capítulo describe las capacidades modernas de **JavaScript**, y a partir de la sección 0.5 entra de lleno en **TypeScript**. Recuerda: TypeScript **es** JavaScript con tipos. Todo lo que aprendes de JS se mantiene; los tipos se añaden encima.
+## 0.1 ¿Qué es TypeScript?
 
-## 0.2 Características Modernas
+TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
+
+- **Tipado estático**: Define tipos para variables, parámetros y retornos
+- **Interfaces**: Define contratos para objetos
+- **Clases mejoradas**: Con modificadores de acceso y más
+- **Enum → uniones de tipos**: Este curso reemplaza las enumeraciones (`enum`) por uniones de string literals, compatibles con Node 24 (a partir de Node 22 se introdujo de forma nativa el Type Stripping (la capacidad de ejecutar archivos .ts directamente borrando las anotaciones de tipo). Sin embargo, para que Node pueda ejecutar un archivo .ts sin compilar, la sintaxis de TypeScript debe ser 100% removible. Y los enum no dejan hacer eso.)
+- **Genéricos**: Funciones y clases que trabajan con varios tipos
+- **Type narrowing**: Refinar el tipo según el flujo del programa
+
+TypeScript fue desarrollado por Microsoft y se ha convertido en el estándar para desarrollo JavaScript a gran escala. Todo código JavaScript válido es TypeScript válido, pero TypeScript extiende JS con un sistema de tipos que permite detectar errores en tiempo de compilación.
+
+> 💡 **Recuerda:** TypeScript **es** JavaScript con tipos. Todo lo que aprendes de JS se mantiene; los tipos se añaden encima.
+
+## 0.2 Ventajas de TypeScript
+
+1. **Detección temprana de errores**: Los errores se detectan en tiempo de compilación
+2. **Mejor autocompletado**: Los IDEs ofrecen mejor soporte
+3. **Documentación viva**: Los tipos sirven como documentación
+4. **Refactorización más segura**: Los cambios se propagan correctamente
+5. **Mejor colaboración**: El código es más explícito y claro
+6. **Ecosistema**: React (oficial) parte de TypeScript
+
+Ahora que sabes qué es TypeScript y por qué usarlo, veamos cómo instalarlo y configurarlo.
+
+## 0.3 Instalación y Configuración
+
+Para empezar con TypeScript en **bash** (WSL, Linux o macOS), ejecuta estas 4 órdenes en orden (unas dependen de otras):
+
+```bash
+#Creamos una carpeta en tu home (Windows/Linux) y entramos. Entramos en el terminal o usamos el terminal de VSCode. 
+
+# 1. Inicializar el proyecto (crea package.json)
+npm init -y
+
+# 2. Instalar TypeScript y tipos de React solo en desarrollo (-D). Crea node_modules con TS y sus tipos.
+npm install -D typescript @types/react @types/react-dom
+
+# 3. Crea el archivo de configuración tsconfig.json (reglas de compilación de TypeScript)
+npx tsc --init
+
+# 4. Instala o verifica las dependencias leyendo package.json
+npm install
+
+```
+
+> [!NOTE]
+> En **PowerShell/CMD de Windows** estos comandos bash no funcionan tal cual (el `#` de comentario da error): sigue la instalación de tu SO en [**sesion01**](../../sesion01.md) o usa WSL/Git Bash. Y recuerda: los `npm install` anteriores **crean automáticamente el `package.json`** si no existe (registrando TS en `devDependencies`); el `npx tsc --init` **no** lo toca, crea `tsconfig.json`. La instalación canónica del curso (con `npm init`, `nvm`, scripts y `tsconfig` completo) está en el apunte [**10 · Node.js, npm y Vite en TypeScript**](../s03/10_NPM.md).
+
+### Hola Mundo
+
+Abrimos una carpeta con VSCode. Creamos un fichero (por ejemplo, en vscode poniendo code saludo.ts ) y lo guardamos:
+
+```typescript
+console.log("Hola Mundo");
+```
+
+### ¿Cómo usar TypeScript?
+
+**Compilar / ejecutar TypeScript en este curso:**
+
+```bash
+# 5. Compila todos los .ts a .js según tsconfig.json (transpila todo el proyecto
+npx tsc
+
+# 6. Ejecutar un ejemplo copiado de los apuntes (tsx ex TypeScript Execute: ejecuta .ts sin recompilar).
+# Copia el bloque "Ejemplo completo" a bancop/<nombre-del-apunte>.ts (p. ej. 00_Introduccion.ts) y ejecuta desde bancop/:
+npx tsx saludo.ts
+
+# En el navegador, cuando lancemos Vite, los cambios se reflejan en caliente (HMR)
+```
+
+TypeScript se compila a JavaScript estándar, por lo que puede ejecutarse en cualquier navegador o entorno Node.js.
+
+> 🧪 **Banco de pruebas (`bancop/`):** además del Playground oficial, la raíz del curso incluye la carpeta [`bancop/`](../../../bancop/) para **probar cualquier trozo de código suelto** sin crear un proyecto. Copia o escribe tu `.ts`/`.tsx` allí y ejecútalo con `npx tsx fichero.ts` desde `bancop/`. Su `tsconfig.json` ya trae el entorno estricto del curso (`strict`, `noUncheckedIndexedAccess`, `lib: ES2024 + DOM`, `jsx: react-jsx`) y su `package.json` declara `"type": "module"`, por lo que cada fichero se trata como un módulo ES.
+
+> [!NOTE]
+> **Erasable-only:** en todo este repositorio usamos solo sintaxis TS que Node 24 puede quitar al ejecutar. Eso significa: sin `enum`, sin `namespace` y sin *parameter properties* en constructores. Interfaces, uniones, tipos y genéricos sí están permitidos. Node no compila TypeScript; simplemente borra los tipos (type stripping) como si pasara un borrador sobre el texto y luego ejecuta el JavaScript que queda.
+
+---
+
+## 0.4 Características Modernas
 
 JavaScript en 2026 es un lenguaje moderno, potente y versátil. Así es JavaScript hoy en día:
 
@@ -34,7 +113,7 @@ JavaScript en 2026 es un lenguaje moderno, potente y versátil. Así es JavaScri
 JavaScript ha evolucionado para soportar múltiples paradigmas de programación:
 
 - **Programación Funcional**: Con arrow functions, inmutabilidad y funciones puras 
-- ~~**Programación Orientada a Objetos**: Con clases ES6 (y clases tipadas en TS), herencia y encapsulación~~
+- ~~**Programación Orientada a Objetos**: Con clases ES6 (y clases tipadas en TS), herencia y encapsulación~~ (no vamos a ver nada de esto)
 - **Programación Asíncrona**: Con async/await, promises y streams
 - **Programación Reactiva**: Con observables y patrones modernos
 
@@ -302,15 +381,6 @@ graph TD
 
 
 
-
-
-
- 
-
-
-
-
-
 **Ventajas de la asincronía moderna:**
 
 - **Mejor rendimiento**: No bloquea la interfaz de usuario
@@ -323,7 +393,7 @@ El enfoque asíncrono de JavaScript permite que el programa continúe ejecutánd
 > [!NOTE]
 > En TypeScript, una función `async` siempre devuelve `Promise<T>`. El tipo `T` se infiere del `return`. Además, en lugar de `any` para los datos de la API, usaremos *type guards* y validación.
 
-## 0.4 Primeros Pasos con TypeScript
+## 0.5 Primeros Pasos con TypeScript
 
 Además de React, TypeScript sirve para construir backends robustos y tipados en Node.js o NestJS, aplicaciones móviles con React Native o Expo, programas de escritorio multiplataforma mediante Electron, apps web con frameworks como Angular o Vue, y funciones en la nube (serverless); en todos estos entornos aporta autocompletado avanzado, prevención de errores en tiempo de compilación y mayor facilidad para mantener y escalar código en proyectos grandes.
 
@@ -582,85 +652,7 @@ console.log(textos); // ["a", "b", "c"]
 
 ---
 
-## 0.5 Introducción a TypeScript
-
-TypeScript es un superconjunto de JavaScript que añade tipado estático opcional. Fue desarrollado por Microsoft y se ha convertido en el estándar para desarrollo JavaScript a gran escala.
-
-### ¿Qué es TypeScript?
-
-TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
-
-- **Tipado estático**: Define tipos para variables, parámetros y retornos
-- **Interfaces**: Define contratos para objetos
-- **Clases mejoradas**: Con modificadores de acceso y más
-- **Enum → uniones de tipos**: Este curso reemplaza las enumeraciones (`enum`) por uniones de string literals, compatibles con Node 24 (a partir de Node 22 se introdujo de forma nativa el Type Stripping (la capacidad de ejecutar archivos .ts directamente borrando las anotaciones de tipo). Sin embargo, para que Node pueda ejecutar un archivo .ts sin compilar, la sintaxis de TypeScript debe ser 100% removible. Y los enum no dejan hacer eso.)
-- **Genéricos**: Funciones y clases que trabajan con varios tipos
-- **Type narrowing**: Refinar el tipo según el flujo del programa
-
-### Ventajas de TypeScript
-
-1. **Detección temprana de errores**: Los errores se detectan en tiempo de compilación
-2. **Mejor autocompletado**: Los IDEs ofrecen mejor soporte
-3. **Documentación viva**: Los tipos sirven como documentación
-4. **Refactorización más segura**: Los cambios se propagan correctamente
-5. **Mejor colaboración**: El código es más explícito y claro
-6. **Ecosistema**: React (oficial) parte de TypeScript
-
-### Instalación y Configuración
-
-Para empezar con TypeScript en **bash** (WSL, Linux o macOS), ejecuta estas 4 órdenes en orden (unas dependen de otras):
-
-```bash
-#Creamos una carpeta en tu home (Windows/Linux) y entramos. Entramos en el terminal o usamos el terminal de VSCode. 
-
-# 1. Inicializar el proyecto (crea package.json)
-npm init -y
-
-# 2. Instalar TypeScript y tipos de React solo en desarrollo (-D). Crea node_modules con TS y sus tipos.
-npm install -D typescript @types/react @types/react-dom tsx
-
-# 3. Crea el archivo de configuración tsconfig.json (reglas de compilación de TypeScript)
-npx tsc --init
-
-# 4. Instala o verifica las dependencias leyendo package.json
-npm install
-
-```
-
-> [!NOTE]
-> En **PowerShell/CMD de Windows** estos comandos bash no funcionan tal cual (el `#` de comentario da error): sigue la instalación de tu SO en [**sesion01**](../../sesion01.md) o usa WSL/Git Bash. Y recuerda: los `npm install` anteriores **crean automáticamente el `package.json`** si no existe (registrando TS en `devDependencies`); el `npx tsc --init` **no** lo toca, crea `tsconfig.json`. La instalación canónica del curso (con `npm init`, `nvm`, scripts y `tsconfig` completo) está en el apunte [**10 · Node.js, npm y Vite en TypeScript**](../s03/10_NPM.md).
-
-### Hola Mundo
-
-Abrimos una carpeta con VSCode. Creamos un fichero (por ejemplo, en vscode poniendo code saludo.ts ) y lo guardamos:
-
-```typescript
-console.log("Hola Mundo");
-```
-
-### ¿Cómo usar TypeScript?
-
-**Compilar / ejecutar TypeScript en este curso:**
-
-```bash
-# 5. Compila todos los .ts a .js según tsconfig.json (transpila todo el proyecto
-npx tsc
-
-# 6. Ejecutar un ejemplo copiado de los apuntes (tsx ex TypeScript Execute: ejecuta .ts sin recompilar).
-# Copia el bloque "Ejemplo completo" a bancop/<nombre-del-apunte>.ts (p. ej. 00_Introduccion.ts) y ejecuta desde bancop/:
-npx tsx saludo.ts
-
-# En el navegador, cuando lancemos Vite, los cambios se reflejan en caliente (HMR)
-```
-
-TypeScript se compila a JavaScript estándar, por lo que puede ejecutarse en cualquier navegador o entorno Node.js.
-
-> 🧪 **Banco de pruebas (`bancop/`):** además del Playground oficial, la raíz del curso incluye la carpeta [`bancop/`](../../../bancop/) para **probar cualquier trozo de código suelto** sin crear un proyecto. Copia o escribe tu `.ts`/`.tsx` allí y ejecútalo con `npx tsx fichero.ts` desde `bancop/`. Su `tsconfig.json` ya trae el entorno estricto del curso (`strict`, `noUncheckedIndexedAccess`, `lib: ES2024 + DOM`, `jsx: react-jsx`) y su `package.json` declara `"type": "module"`, por lo que cada fichero se trata como un módulo ES.
-
-> [!NOTE]
-> **Erasable-only:** en todo este repositorio usamos solo sintaxis TS que Node 24 puede quitar al ejecutar. Eso significa: sin `enum`, sin `namespace` y sin *parameter properties* en constructores. Interfaces, uniones, tipos y genéricos sí están permitidos. Node no compila TypeScript; simplemente borra los tipos (type stripping) como si pasara un borrador sobre el texto y luego ejecuta el JavaScript que queda.
-
-### 📦 Ejemplo completo-resumen 
+## 0.6 Ejemplo completo-resumen 
 
 ```typescript
 export {};
