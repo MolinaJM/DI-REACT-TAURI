@@ -17,7 +17,7 @@
     - [Ventajas de TypeScript](#ventajas-de-typescript)
     - [Instalación y Configuración](#instalación-y-configuración)
     - [Primer Código con TypeScript](#primer-código-más-complejo-con-typescript)
-- 🧪 **Ejercicios:** [¿Qué es TypeScript?](../../ejerciciosTS.md#1-qué-es-typescript) · [Instalación y Configuración](../../ejerciciosTS.md#2-instalación-y-configuración-básica)
+- 🧪 **Ejercicios:** [¿Qué es TypeScript?](../../ejerciciosTS.md#1-que-es-typescript) · [Instalación y Configuración](../../ejerciciosTS.md#2-instalacion-y-configuracion-basica)
 
 ---
 

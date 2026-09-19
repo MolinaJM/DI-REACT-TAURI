@@ -5,16 +5,19 @@
   - [1.1 Declaración de Variables en TypeScript](#11-declaración-de-variables-en-typescript)
     - [i. `let`](#i-let)
     - [ii. `const`](#ii-const)
-  - [1.2 Tipos de datos en TypeScript.💎](#12-tipos-de-datos-en-typescript)
+  - [1.2 Tipos de datos en TypeScript.💎 (Sesión 2)](#12-tipos-de-datos-en-typescript-sesión-2)
     - [Tipos de datos primitivos en TypeScript](#tipos-de-datos-primitivos-en-typescript)
+    - [Anotaciones de tipo: el valor añadido de TypeScript](#anotaciones-de-tipo-el-valor-añadido-de-typescript)
+    - [Inferencia de tipos (Type Inference)](#inferencia-de-tipos-type-inference)
+    - [Tipos especiales: `any`, `unknown`, `never` y `void`](#tipos-especiales-any-unknown-never-y-void)
+  - [1.3 Tipos avanzados (Sesión 3)](#13-tipos-avanzados-sesión-3)
     - [Unión de tipos](#unión-de-tipos)
     - [Intersección de tipos (`&`)](#intersección-de-tipos-)
     - [Tipos de datos no primitivos (objetos):](#tipos-de-datos-no-primitivos-objetos)
     - [Interfaces y Type Aliases](#interfaces-y-type-aliases)
-    - [Anotaciones de tipo: el valor añadido de TypeScript](#anotaciones-de-tipo-el-valor-añadido-de-typescript)
-    - [Inferencia de tipos (Type Inference)](#inferencia-de-tipos-type-inference)
-    - [Tipos especiales: `any`, `unknown`, `never` y `void`](#tipos-especiales-any-unknown-never-y-void)
-- 🧪 **Ejercicios:** [Tipos Primitivos](../../ejerciciosTS.md#3-tipos-primitivos) · [Type Inference](../../ejerciciosTS.md#4-type-inference) · [Tipos Especiales](../../ejerciciosTS.md#5-tipos-especiales-any-unknown-never-void) · [Union Types](../../ejerciciosTS.md#6-union-types-e-intersección-de-tipos) · [Interfaces](../../ejerciciosTS.md#7-interfaces) · [Type Aliases](../../ejerciciosTS.md#8-type-aliases)
+    - [Aserciones de tipo (type assertions)](#aserciones-de-tipo-type-assertions)
+- 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../ejerciciosTS.md#3-tipos-especiales)
+- 🧪 **Ejercicios (Sesión 3):** [Union Types](../../ejerciciosTS.md#13-union-types) · [Interfaces](../../ejerciciosTS.md#4-interfaces) · [Type Aliases](../../ejerciciosTS.md#5-type-aliases)
 
 # 1. **Sintaxis Básica de TypeScript**
 
@@ -64,9 +67,7 @@ En resumen:
   let  |       Sí        |     No     |    Sí     |   
 | const |       Sí        |     No     |    No     |  
 
-## 1.2 Tipos de datos en TypeScript.💎
-
-En TypeScript, **un tipo de dato primitivo** es un tipo de dato que representa un valor atómico e inmutable. Esto significa que no puede ser alterado ni dividido en subcomponentes. Los tipos primitivos se caracterizan por ser valores directos, no objetos.
+## 1.2 Tipos de datos en TypeScript.💎 (Sesión 2)
 
 ### Tipos de datos primitivos en TypeScript
 
@@ -81,82 +82,11 @@ A partir de ES6 y versiones posteriores, los tipos de datos primitivos en JavaSc
 > [!TIP]
 > En TypeScript **no se debe usar** `String`, `Number`, `Boolean`... con la primera letra mayúscula como anotación: se refieren a los objetos envoltorio (`wrapper objects`) y su uso como tipo está desaconsejado por el linter oficial. Las anotaciones correctas son minúsculas: `string`, `number`, `boolean`, `bigint`, `symbol`, `null`, `undefined`.
 
-### Unión de tipos
-
-Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber, en cada punto del código, cuál es el real. Lo verás mucho al manejar valores opcionales, como `const respuesta: string | null = obtenerRespuesta();`
-
-> [!TIP] ¿Y los `enum`que sí existen en otros lenguajes como por ejemplo en C#? Aquí no.
-> Te preguntarás si en lugar de una unión de literales (`type Estado = "pendiente" | "hecha"`) deberías usar `enum`, como se hace en otros lenguajes. En este curso **no**: los `enum` generan código en runtime y rompen el estilo *erasable-only* (que el mismo código corra con `node archivo.ts` o `tsx`), y ni React ni Tauri los necesitan. Una unión de strings da el mismo resultado. Regla práctica: "tipo fijo de pocos valores" = **unión de literales**, no `enum`. Ejemplo: type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'; 
-
-### Intersección de tipos (`&`)
-
-La **intersección (`&`)** combina tipos exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
-
-```typescript
-interface Persona { 
-  nombre: string; 
-}
-
-interface Empleado { 
-  cargo: string; 
-}
-
-const profe: Persona & Empleado = {
-  nombre: "Ana",
-  cargo: "Profesora",
-};
-```
-
-> [!TIP]
-> Regla de memoria: **`|` es "o" (unión → al menos uno)**, **`&` es "y" (intersección → todos)**. 
-
-### Tipos de datos no primitivos (objetos):
-
-Los **tipos de datos no primitivos** son aquellos que **almacenan referencias** a objetos en lugar de valores directos. Esto significa que cuando asignas o pasas un objeto, lo que se copia es una referencia al objeto, no el objeto en sí (los famosos punteros). Los tipos no primitivos son mutables, lo que significa que puedes cambiar sus propiedades o el contenido de las colecciones sin cambiar la referencia al objeto.
-
-Algunos ejemplos de tipos no primitivos son:
-
-- **Objetos**: Representan colecciones de pares clave-valor. En TS se modelan con `interface` o `type`.
-- **Arrays**: Son objetos especializados para almacenar listas de elementos. En TS: `number[]`.
-- **Funciones**: Son objetos de primera clase (*first class citizen*). En TS se tipan como `(args) => retorno`.
-- **Colecciones**: `Set`, `Map`, `Date`, etc.
-
-### Interfaces y Type Aliases
-
-Los objetos se modelan con `interface` o `type`:
-
-- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). Se puede **extender** con `extends` (equivalente a la herencia de otros lenguajes):
-
-```typescript
-interface Cancion {
-  readonly id: number;            // no se puede modificar despues de crear
-  titulo: string;
-  artista: string;
-  duracion?: number;              // opcional (puede faltar)
-  reproducir(): void;             // metodo obligatorio
-}
-
-interface Podcast extends Cancion {
-  episodio: number;
-  descripcion: string;
-}
-```
-
-- **`type`** sirve para lo mismo en objetos, pero además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
-
-```typescript
-type ID = string | number;                              // union
-type Coordenadas = { x: number; y: number };            // objeto
-type Callback = (err: Error | null, data?: unknown) => void; // firma de funcion
-```
-
-> [!TIP]
-> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); usa `type` para uniones, tuplas y alias. Ni `interface` ni `type` generan código en runtime (sintaxis *erasable-only*), así que puedes usarlos sin restricción.
-
 
 ### Anotaciones de tipo: el valor añadido de TypeScript
 
 Como este repositorio está adaptado a TypeScript, todos los ejemplos anteriores usan anotaciones explícitas. Es importante matizar dos estilos:
+
 
 ### Inferencia de tipos (Type Inference)
 
@@ -168,6 +98,7 @@ function calcularIVA(precio: number, iva: number): number {
   return precio * iva;
 }
 ```
+
 
 ### Tipos especiales: `any`, `unknown`, `never` y `void`
 
@@ -215,6 +146,86 @@ function area(forma: Forma): number {
 
 > [!IMPORTANT]
 > En todo este repositorio los ejemplos se escriben en **erasable-only TypeScript**: solo sintaxis que Node 24 puede ejecutar directamente (type stripping) sin paso previo de compilación. Es decir, nada de `enum;` sí `interface`, `type`, uniones y genéricos.
+
+
+## 1.3 Tipos avanzados (Sesión 3)
+
+### Unión de tipos
+
+Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber, en cada punto del código, cuál es el real. Lo verás mucho al manejar valores opcionales, como `const respuesta: string | null = obtenerRespuesta();`
+
+> [!TIP] ¿Y los `enum`que sí existen en otros lenguajes como por ejemplo en C#? Aquí no.
+> Te preguntarás si en lugar de una unión de literales (`type Estado = "pendiente" | "hecha"`) deberías usar `enum`, como se hace en otros lenguajes. En este curso **no**: los `enum` generan código en runtime y rompen el estilo *erasable-only* (que el mismo código corra con `node archivo.ts` o `tsx`), y ni React ni Tauri los necesitan. Una unión de strings da el mismo resultado. Regla práctica: "tipo fijo de pocos valores" = **unión de literales**, no `enum`. Ejemplo: type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'; 
+
+
+### Intersección de tipos (`&`)
+
+La **intersección (`&`)** combina tipos exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
+
+```typescript
+interface Persona { 
+  nombre: string; 
+}
+
+interface Empleado { 
+  cargo: string; 
+}
+
+const profe: Persona & Empleado = {
+  nombre: "Ana",
+  cargo: "Profesora",
+};
+```
+
+> [!TIP]
+> Regla de memoria: **`|` es "o" (unión → al menos uno)**, **`&` es "y" (intersección → todos)**. 
+
+
+### Tipos de datos no primitivos (objetos):
+
+Los **tipos de datos no primitivos** son aquellos que **almacenan referencias** a objetos en lugar de valores directos. Esto significa que cuando asignas o pasas un objeto, lo que se copia es una referencia al objeto, no el objeto en sí (los famosos punteros). Los tipos no primitivos son mutables, lo que significa que puedes cambiar sus propiedades o el contenido de las colecciones sin cambiar la referencia al objeto.
+
+Algunos ejemplos de tipos no primitivos son:
+
+- **Objetos**: Representan colecciones de pares clave-valor. En TS se modelan con `interface` o `type`.
+- **Arrays**: Son objetos especializados para almacenar listas de elementos. En TS: `number[]`.
+- **Funciones**: Son objetos de primera clase (*first class citizen*). En TS se tipan como `(args) => retorno`.
+- **Colecciones**: `Set`, `Map`, `Date`, etc.
+
+
+### Interfaces y Type Aliases
+
+Los objetos se modelan con `interface` o `type`:
+
+- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). Se puede **extender** con `extends` (equivalente a la herencia de otros lenguajes):
+
+```typescript
+interface Cancion {
+  readonly id: number;            // no se puede modificar despues de crear
+  titulo: string;
+  artista: string;
+  duracion?: number;              // opcional (puede faltar)
+  reproducir(): void;             // metodo obligatorio
+}
+
+interface Podcast extends Cancion {
+  episodio: number;
+  descripcion: string;
+}
+```
+
+- **`type`** sirve para lo mismo en objetos, pero además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
+
+```typescript
+type ID = string | number;                              // union
+type Coordenadas = { x: number; y: number };            // objeto
+type Callback = (err: Error | null, data?: unknown) => void; // firma de funcion
+```
+
+> [!TIP]
+> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); usa `type` para uniones, tuplas y alias. Ni `interface` ni `type` generan código en runtime (sintaxis *erasable-only*), así que puedes usarlos sin restricción.
+
+
 
 ### Aserciones de tipo (type assertions)
 
@@ -270,6 +281,7 @@ const RUTAS = ["/inicio", "/catalogo"] as const;
 
 > [!NOTE]
 > Practica estas aserciones en el ejercicio [`s02/09-aserciones.ts`](../../../ejercicios/s02/09-aserciones.ts) (`as`, `as const`, `!`, `typeof arr[number]`).
+
 
 ---
 ### 📦 Ejemplo completo-resumen 

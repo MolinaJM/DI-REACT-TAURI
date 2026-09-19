@@ -10,7 +10,7 @@
   - [6. Funciones como expresiones (y tipos de función)](#6-funciones-como-expresiones-y-tipos-de-funci%C3%B3n)
   - [7. Cierres (closures)](#7-cierres-closures)
   - [8. Tipos de función, callbacks y genéricos](#8-tipos-de-funci%C3%B3n-callbacks-y-gen%C3%A9ricos)
-- 🧪 **Ejercicios:** [Funciones en Profundidad](../../ejerciciosTS.md#13-funciones-en-profundidad) · [Generics](../../ejerciciosTS.md#7-generics-genéricos)
+- 🧪 **Ejercicios:** [Funciones en Profundidad](../../ejerciciosTS.md#10-funciones) · [Generics](../../ejerciciosTS.md#11-genericos)
 
 ---
 
@@ -440,7 +440,7 @@ console.log(limpio);
 ```
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-> ✏️ **Práctica:** [`s02/06-funciones.ts`](../../../ejercicios/s02/06-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/09-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/09-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/02-generics.ts`](../../../ejercicios/s03/02-generics.ts) (genéricos) · [`s03/03-utility-types.ts`](../../../ejercicios/s03/03-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·13, S3·7–S3·8 y S3·12](../../../sesiones/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/06-funciones.ts`](../../../ejercicios/s02/06-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/09-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/09-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/02-generics.ts`](../../../ejercicios/s03/02-generics.ts) (genéricos) · [`s03/03-utility-types.ts`](../../../ejercicios/s03/03-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25–S3·23 y S3·182](../../../sesiones/ejerciciosTS.md).
 
 ---
 

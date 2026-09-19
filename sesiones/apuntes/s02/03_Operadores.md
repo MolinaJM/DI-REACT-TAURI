@@ -15,7 +15,7 @@
   - [3.4. Operador Nullish Coalescing (`??`)](#34-operador-nullish-coalescing)
     - [Ejemplo:](#ejemplo-de-nullish-coalescing)
   - [3.5. Tipos resultantes: cómo los ve TypeScript](#35-tipos-resultantes-cómo-los-ve-typescript)
-- 🧪 **Ejercicios:** [Operadores](../../ejerciciosTS.md#12-operadores)
+- 🧪 **Ejercicios:** [Operadores](../../ejerciciosTS.md#8-operadores)
 
 ---
 
@@ -187,7 +187,7 @@ Observa cómo el tipo se elimina: `valor` era `string | null`, y `valor ?? "defe
 > [!IMPORTANT]
 > La mejor forma de "ver" estos tipos es pasar el ratón por encima del nombre de la variable en tu editor (VS Code usa `tsc` internamente) o usar `let x: typeof expresion`. Los operadores en TypeScript no solo evalúan valores: también **refinan tipos** y permiten *narrowing* en condiciones.
 
-> ✏️ **Práctica:** [`s02/10-conversion-operadores.ts`](../../../ejercicios/s02/10-conversion-operadores.ts) (`===`, ternario, `??` vs `||`, `&&`) · [catálogo S2·12](../../../sesiones/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/10-conversion-operadores.ts`](../../../ejercicios/s02/10-conversion-operadores.ts) (`===`, ternario, `??` vs `||`, `&&`) · [catálogo S2·8](../../../sesiones/ejerciciosTS.md).
 
 ---
 
