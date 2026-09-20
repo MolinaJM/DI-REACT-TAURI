@@ -45,11 +45,11 @@ gen/
 # ===========================================================================
 #  >>> SESIÓN 02 <<  JMM - quitamos el `#` para revelar el material de TS
 # ===========================================================================
-!sesiones/ejerciciosTS.md
-!sesiones/sesion02.md
-!sesiones/apuntes/s02/
-!ejercicios/s02/
-!ejercicios/soluciones/s02/
+#!sesiones/ejerciciosTS.md
+#!sesiones/sesion02.md
+#!sesiones/apuntes/s02/
+#!ejercicios/s02/
+#!ejercicios/soluciones/s02/
 
 # ===========================================================================
 #  >>> SESIÓN 03 <<
