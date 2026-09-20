@@ -115,11 +115,15 @@ graph LR
 
 Web expuesta por Vite
 
-![App de Escritorio](../img/02.png)
+![Web expuesta por Vite](../img/02.png)
+
+Web expuesta por Vite / Cards
+
+![App de Escritorio](../img/03.png)
 
 App de Escritorio
 
-![App de Escritorio con ventana emergente](../img/03.png)
+![App de Escritorio con ventana emergente](../img/04.png)
 
 App de Escritorio con ventana emergente de inserción
 
