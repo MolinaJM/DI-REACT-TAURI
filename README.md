@@ -85,7 +85,7 @@ Para construir una aplicación de escritorio moderna y ligera, se entrelazan her
 
 ## 4. Hoja de Ruta del Curso
 
-**De TypeScript a una aplicación de escritorio multiplataforma.** El curso encadena cuatro bloques (fundamentos → UI → app de escritorio → producto final): primero se aprende TypeScript, con ello se construyen componentes React, sobre esos componentes se monta una app de escritorio multiplataforma con Tauri, y el resultado se cierra con la creación de informes PDF que consumen los datos. Esa App se prueba, documenta y distribuye.
+**De TypeScript a una aplicación de escritorio multiplataforma.** El curso encadena cuatro bloques (fundamentos → UI → app de escritorio → producto final): primero se aprende TypeScript, con ello se construyen componentes React, sobre esos componentes se monta una app  de escritorio multiplataforma (acceso a BBDD con CRUD) mediante Tauri, y el resultado se cierra con la creación de informes PDF que consumen los datos. Esa App se prueba, documenta y distribuye.
 
 ```mermaid
 flowchart TD
