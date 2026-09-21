@@ -92,7 +92,7 @@ flowchart TD
     ENV["🗂️ S00–S01 · Entorno y scaffolding<br/>(Node · Vite · React · Rust · Tauri)"]
     TS["✅ S02–S03 · Aprender TypeScript<br/>(tipos · generics · uniones · módulos · async)"]
     REACT["⚛️ S04–S05 · Componentes React<br/>(FC · props · estado · formularios)"]
-    CUSTOM["🧩 S06 · Componentes personalizados<br/>(Boton · Modal · Tabla genérica)"]
+    CUSTOM["🧩 S06 · Componentes personalizados<br/>(Botones · Modales · Tabla genérica · etc)"]
     TAURI["🪟 S07 / S01-S · App de escritorio Tauri<br/>(IPC React ↔ Rust · sistema de archivos)"]
     GLOBAL["🗃️ S08 · Estado global y enrutado<br/>(Context · Zustand · React Router)"]
     CRUD["🗄️ S09 · Datos con CRUD via invoke<br/>(comandos Rust · validación tipada)"]
