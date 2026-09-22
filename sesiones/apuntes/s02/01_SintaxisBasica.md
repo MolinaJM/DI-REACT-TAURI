@@ -213,10 +213,9 @@ const RUTAS = ["/inicio", "/catalogo"] as const;
 
 ### Unión de tipos
 
-Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber, en cada punto del código, cuál es el real. Lo verás mucho al manejar valores opcionales, como `const respuesta: string | null = obtenerRespuesta();`
+Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber, en cada punto del código, cuál es el real. Lo verás mucho al manejar valores opcionales, como `const respuesta: string | null = obtenerRespuesta();`o a la hora de declarar distintos valores con type `type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'`
 
-> [!TIP] ¿Y los `enum`que sí existen en otros lenguajes como por ejemplo en C#? Aquí no.
-> Te preguntarás si en lugar de una unión de literales (`type Estado = "pendiente" | "hecha"`) deberías usar `enum`, como se hace en otros lenguajes. En este curso **no**: los `enum` generan código en runtime y rompen el estilo *erasable-only* (que el mismo código corra con `node archivo.ts` o `tsx`), y ni React ni Tauri los necesitan. Una unión de strings da el mismo resultado. Regla práctica: "tipo fijo de pocos valores" = **unión de literales**, no `enum`. Ejemplo: type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'; 
+> [!TIP] Como ya se ha comentado antes, no se pueden usar los enums. ; 
 
 
 ### Intersección de tipos (`&`)
@@ -277,16 +276,17 @@ interface Podcast extends Cancion {
 }
 ```
 
-- **`type`** sirve para lo mismo en objetos, pero además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
+- **`type`** (o type aliases) sirve para lo mismo en objetos, para llamar a un conjunto de datos con un nombre (un alias). Pero además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
 
 ```typescript
 type ID = string | number;                              // union
 type Coordenadas = { x: number; y: number };            // objeto
-type Callback = (err: Error | null, data?: unknown) => void; // firma de funcion
+type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
+//por si la quieres llamar desde más de un sitio
 ```
 
 > [!TIP]
-> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de Declaration Merging (fusión de declaraciones). to significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticas en una sola interfaz combinada. 
+> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de *Declaration Merging* (fusión de declaraciones). to significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticas en una sola interfaz combinada. 
 
 ``` typescript
 //En un archivo o paquete (ej. api/user.ts)
