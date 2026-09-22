@@ -15,7 +15,7 @@
     - [De objeto a string y viceversa (JSON)](#de-objeto-a-string-y-viceversa-json)
   - [Valores truthy y falsy](#valores-truthy-y-falsy)
   - [Conversión con tipos en TypeScript](#conversi%C3%B3n-con-tipos-en-typescript)
-- 🧪 **Ejercicios:** [Conversión de tipos](../../ejerciciosTS.md#7-conversion-de-tipos) · [Type Guards](../../ejerciciosTS.md#9-type-guards)
+- 🧪 **Ejercicios:** [Conversión de tipos](../../ejerciciosTS.md#7-conversion-de-tipos)
 
 ---
 
@@ -396,7 +396,7 @@ console.log(describirAnimal({ tipo: "pez", profundidadMaxima: 10 }));
 console.log(describirAnimal({ tipo: "ave", envergadura: 50 }));
 ```
 
-> ✏️ **Práctica:** [`s02/10-conversion-operadores.ts`](../../../ejercicios/s02/10-conversion-operadores.ts) (JSON, `??`) · [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts`) · [catálogo S2·7 y S2·9](../../../sesiones/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/10-conversion-operadores.ts`](../../../ejercicios/s02/10-conversion-operadores.ts) (JSON, `??`) · [catálogo S2·7](../../../sesiones/ejerciciosTS.md).
 
 ---
 

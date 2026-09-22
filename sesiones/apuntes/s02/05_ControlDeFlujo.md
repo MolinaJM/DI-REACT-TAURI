@@ -162,9 +162,87 @@ console.log(procesar(u));
 | `Array.isArray(x)` | Arrays (porque `typeof []` es `"object"`) | `Array.isArray(lista)` |
 | `instanceof` | Instancias de `Error`/clases | `x instanceof Error` |
 
-Otros guards habituales: *type guards* definidos por el usuario, p. ej. un predicado `datos is { nombre: string }` (lo verás en el capítulo de Fetch API y en `sesion04` al validar datos que llegan de Tauri).
+### Type guards con predicados (`is`)
 
-> ✏️ **Práctica:** [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts` con `in`) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·9 y S2·14](../../../sesiones/ejerciciosTS.md).
+Las herramientas anteriores (`typeof`, `in`, `instanceof`) son narrowing integrado en el lenguaje. Pero a veces necesitas comprobar algo más específico: "¿este objeto cumple la forma de `Usuario`?". Para eso se usan **type guards con predicados**: funciones que devuelven `boolean` pero cuyo tipo de retorno se anota como `valor is Tipo`. Esto le dice a TypeScript: "cuando esta función devuelve `true`, dentro del `if` el valor es de ese tipo".
+
+```typescript
+interface Usuario {
+  nombre: string;
+  email: string;
+}
+
+interface Admin {
+  nombre: string;
+  rol: "superadmin" | "moderador";
+}
+
+// Type guard: devuelve true si el objeto tiene la forma de Usuario
+function esUsuario(v: unknown): v is Usuario {
+  return typeof v === "object" && v !== null
+    && "nombre" in v && "email" in v;
+}
+
+// Type guard: devuelve true si el objeto tiene la forma de Admin
+function esAdmin(v: unknown): v is Admin {
+  return typeof v === "object" && v !== null
+    && "nombre" in v && "rol" in v;
+}
+
+function saludar(persona: unknown): string {
+  if (esUsuario(persona)) {
+    // aquí persona es Usuario
+    return `Hola ${persona.nombre}, email: ${persona.email}`;
+  }
+  if (esAdmin(persona)) {
+    // aquí persona es Admin
+    return `Hola ${persona.nombre}, rol: ${persona.rol}`;
+  }
+  return "Desconocido";
+}
+
+console.log(saludar({ nombre: "Ana", email: "ana@test.com" }));
+console.log(saludar({ nombre: "Carlos", rol: "moderador" }));
+console.log(saludar("no soy un objeto"));
+```
+
+> [!TIP]
+> El predicado `v is T` se escribe en el **retorno de la función**, no en los parámetros. TypeScript usa esa información para hacer narrowing automáticamente en el `if`. Es como decirle al compilador: "yo me hago cargo de la comprobación, confía en mí".
+
+### Type guards con `asserts`
+
+A veces no quieres devolver un booleano, sino **afirmar** que un valor es de cierto tipo y lanzar un error si no lo es. Para eso se usa `asserts valor is Tipo` como tipo de retorno. La función no devuelve nada (`void`), pero a cambio le dice a TypeScript que, si no se lanza excepción, el valor es del tipo afirmado.
+
+```typescript
+interface Config {
+  url: string;
+  timeout: number;
+}
+
+// Afirmación: si no lanza error, config es Config
+function validarConfig(config: unknown): asserts config is Config {
+  if (typeof config !== "object" || config === null) {
+    throw new TypeError("La configuración debe ser un objeto");
+  }
+  const c = config as Record<string, unknown>;
+  if (typeof c.url !== "string") {
+    throw new TypeError("La configuración debe tener 'url' como string");
+  }
+  if (typeof c.timeout !== "number") {
+    throw new TypeError("La configuración debe tener 'timeout' como number");
+  }
+}
+
+const datos = { url: "https://api.ejemplo.com", timeout: 5000 };
+validarConfig(datos);
+// aquí TypeScript sabe que datos es Config sin necesidad de aserciones
+console.log(datos.url); // sin error
+```
+
+> [!IMPORTANT]
+> Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
+
+> ✏️ **Práctica:** [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts`) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·9 y S2·14](../../../sesiones/ejerciciosTS.md).
 
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
