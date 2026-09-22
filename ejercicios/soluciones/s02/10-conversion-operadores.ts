@@ -4,39 +4,39 @@
 import assert from "node:assert/strict";
 
 // 1) `===`
-export function sonIguales(a: unknown, b: unknown): boolean {
+function sonIguales(a: unknown, b: unknown): boolean {
   return a === b;
 }
 
 // 2) Ternario
-export function clasificar(nota: number): "aprobado" | "suspenso" {
+function clasificar(nota: number): "aprobado" | "suspenso" {
   return nota >= 5 ? "aprobado" : "suspenso";
 }
 
 // 3) `??` respeta el 0
-export function conDefecto(valor: number | null | undefined, porDefecto: number): number {
+function conDefecto(valor: number | null | undefined, porDefecto: number): number {
   return valor ?? porDefecto;
 }
 
 // 4) Short-circuit `&&`
 let veces = 0;
-export const operacion = (): number => {
+const operacion = (): number => {
   veces += 1;
   return 7;
 };
-export function correrSi(condicion: boolean): number | false {
+function correrSi(condicion: boolean): number | false {
   return condicion && operacion();
 }
 
 // 5) JSON
-export interface Pedido {
+interface Pedido {
   id: number;
   total: number;
 }
-export function serializar(pedido: Pedido): string {
+function serializar(pedido: Pedido): string {
   return JSON.stringify(pedido);
 }
-export function deserializar(guardado: string): Pedido {
+function deserializar(guardado: string): Pedido {
   return JSON.parse(guardado) as Pedido;
 }
 

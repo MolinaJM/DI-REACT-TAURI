@@ -5,13 +5,13 @@
 // Catálogo: sesiones/ejerciciosTS.md · Sesión 2 · Bloque 14
 
 // 1) if / else if / else que clasifica una nota
-export function clasificarNota(nota: number): string {
+function clasificarNota(nota: number): string {
   return ""; // TODO: >=9 Sobresaliente · >=7 Notable · >=5 Aprobado · resto Suspenso
 }
 
 // 2) switch exhaustivo con `never` (patrón reducer de React)
-export type EstadoFormulario = "pendiente" | "cargando" | "listo" | "error";
-export function etiquetaEstado(estado: EstadoFormulario): string {
+type EstadoFormulario = "pendiente" | "cargando" | "listo" | "error";
+function etiquetaEstado(estado: EstadoFormulario): string {
   switch (estado) {
     case "pendiente": return "⏳";
     case "cargando": return "🔄";
@@ -22,14 +22,14 @@ export function etiquetaEstado(estado: EstadoFormulario): string {
 }
 
 // 3) Bucles: for...of
-export function contarLetras(palabras: string[]): number {
+function contarLetras(palabras: string[]): number {
   let total = 0;
   // TODO: recorre con `for...of` sumando la longitud
   return total;
 }
 
 // 4) Generar secuencia hacia atrás (for...of sobre un rango)
-export function cuentaAtras(hasta: number): number[] {
+function cuentaAtras(hasta: number): number[] {
   const numeros: number[] = [];
   // TODO: rellena `numeros` con `hasta`…1 usando `for...of`
   return numeros;

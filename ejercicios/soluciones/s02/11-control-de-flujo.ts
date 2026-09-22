@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 
 // 1) if / else if / else
-export function clasificarNota(nota: number): string {
+function clasificarNota(nota: number): string {
   if (nota >= 9) return "Sobresaliente";
   if (nota >= 7) return "Notable";
   if (nota >= 5) return "Aprobado";
@@ -12,8 +12,8 @@ export function clasificarNota(nota: number): string {
 }
 
 // 2) switch exhaustivo con `never`
-export type EstadoFormulario = "pendiente" | "cargando" | "listo" | "error";
-export function etiquetaEstado(estado: EstadoFormulario): string {
+type EstadoFormulario = "pendiente" | "cargando" | "listo" | "error";
+function etiquetaEstado(estado: EstadoFormulario): string {
   switch (estado) {
     case "pendiente": return "⏳";
     case "cargando": return "🔄";
@@ -27,14 +27,14 @@ export function etiquetaEstado(estado: EstadoFormulario): string {
 }
 
 // 3) Bucles
-export function contarLetras(palabras: string[]): number {
+function contarLetras(palabras: string[]): number {
   let total = 0;
   for (const palabra of palabras) total += palabra.length;
   return total;
 }
 
 // 4) Generar secuencia hacia atrás (for...of sobre un rango)
-export function cuentaAtras(hasta: number): number[] {
+function cuentaAtras(hasta: number): number[] {
   const numeros: number[] = [];
   for (const n of Array.from({ length: hasta }, (_, i) => hasta - i)) {
     numeros.push(n);

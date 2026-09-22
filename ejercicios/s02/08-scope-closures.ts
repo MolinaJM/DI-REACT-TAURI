@@ -19,7 +19,7 @@ function mostrar() {
 
 // 2) Closure: `crearContador` devuelve un objeto con incrementar(),
 //    decrementar() y valor(). Cada llamada a crearContador genera su propio estado.
-export function crearContador(valorInicial: number): {
+function crearContador(valorInicial: number): {
   incrementar: () => void;
   decrementar: () => void;
   valor: () => number;
@@ -29,7 +29,7 @@ export function crearContador(valorInicial: number): {
 
 // 3) Closure con parámetro capturado: `hacerSaludos(nombres)` devuelve
 //    un array de funciones que saludan al nombre i-ésimo (cuidado con let).
-export function hacerSaludos(nombres: string[]): Array<() => string> {
+function hacerSaludos(nombres: string[]): Array<() => string> {
   const resultados: Array<() => string> = [];
   for (let i = 0; i < nombres.length; i++) {
     const nombre = nombres[i];
@@ -42,7 +42,7 @@ export function hacerSaludos(nombres: string[]): Array<() => string> {
 
 // 4) Memoización con closure: `memoizar(fn)` devuelve una versión que
 //    guarda resultados para argumentos repetidos (objeto plain, clave = String(arg)).
-export function memoizar<T>(fn: (arg: number) => T): (arg: number) => T {
+function memoizar<T>(fn: (arg: number) => T): (arg: number) => T {
   const cache: { [key: number]: T } = {};
   return (arg) => {
     if (arg in cache) {

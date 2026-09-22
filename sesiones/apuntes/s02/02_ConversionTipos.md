@@ -217,7 +217,6 @@ function esNumero(valor: unknown): void {
 Type guards avanzados, conversión explícita, JSON tipado y operadores (??, truthy/falsy).
 
 ```typescript
-export {};
 
 /**
  * Type Guards Avanzados, Conversion de Tipos y Operadores

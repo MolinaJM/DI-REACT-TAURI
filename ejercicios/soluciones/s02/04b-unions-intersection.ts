@@ -4,24 +4,24 @@
 import assert from "node:assert/strict";
 
 // 1) Union type
-export type Id = string | number;
+type Id = string | number;
 
-export function obtenerLongitud(id: string | number): string {
+function obtenerLongitud(id: string | number): string {
   return String(id).length;
 }
 
 // 2) Intersección de tipos
-export interface Persona {
+interface Persona {
   nombre: string;
   edad: number;
 }
 
-export interface Empleado {
+interface Empleado {
   departamento: string;
   salario: number;
 }
 
-export const personaEmpleado: Persona & Empleado = {
+const personaEmpleado: Persona & Empleado = {
   nombre: "Ana",
   edad: 30,
   departamento: "Ingeniería",
@@ -29,7 +29,7 @@ export const personaEmpleado: Persona & Empleado = {
 };
 
 // 3) Union type: primer elemento
-export function primerElemento(valor: string | string[]): string {
+function primerElemento(valor: string | string[]): string {
   if (Array.isArray(valor)) return valor[0];
   return valor;
 }

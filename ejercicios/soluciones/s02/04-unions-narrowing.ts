@@ -3,42 +3,42 @@
 // ============================================================
 import assert from "node:assert/strict";
 
-export type Id = string | number;
-export type EstadoPedido = "pendiente" | "enviado" | "entregado";
+type Id = string | number;
+type EstadoPedido = "pendiente" | "enviado" | "entregado";
 
 // 1) Narrowing con typeof
-export function imprimirId(id: string | number): string {
+function imprimirId(id: string | number): string {
   if (typeof id === "string") return "ID: " + id.toUpperCase();
   return "Nº " + id.toFixed(2);
 }
 
 // 2) Narrowing con `in`
-export interface Casa {
+interface Casa {
   jardin: boolean;
 }
-export interface Piso {
+interface Piso {
   planta: number;
 }
-export type Vivienda = Casa | Piso;
+type Vivienda = Casa | Piso;
 
-export function describir(v: Vivienda): string {
+function describir(v: Vivienda): string {
   if ("jardin" in v) return "Casa con jardin";
   return `Piso en planta ${v.planta}`;
 }
 
 // 3) Discriminated union
-export interface Circulo {
+interface Circulo {
   tipo: "circulo";
   radio: number;
 }
-export interface Rectangulo {
+interface Rectangulo {
   tipo: "rectangulo";
   ancho: number;
   alto: number;
 }
-export type Figura = Circulo | Rectangulo;
+type Figura = Circulo | Rectangulo;
 
-export function calcularArea(fig: Figura): number {
+function calcularArea(fig: Figura): number {
   switch (fig.tipo) {
     case "circulo":
       return Math.PI * fig.radio ** 2;
@@ -48,12 +48,12 @@ export function calcularArea(fig: Figura): number {
 }
 
 // 4) Nullish coalescing
-export function nombreOVisitante(nombre?: string): string {
+function nombreOVisitante(nombre?: string): string {
   return nombre ?? "Invitado";
 }
 
 // 5) Narrowing con typeof sobre unknown
-export function procesar(valor: unknown): string {
+function procesar(valor: unknown): string {
   if (typeof valor === "string") return valor.toUpperCase();
   if (typeof valor === "number") return String(valor * 2);
   return "desconocido";

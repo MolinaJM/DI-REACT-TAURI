@@ -20,8 +20,8 @@ const booleano = Boolean(numero); // true
 const cadena = Number("42"); // 42
 
 // 4) Tuplas y arrays
-export const coordenada: [number, number] = [10, 20];
-export const nombres: string[] = ["Ana", "Luis"];
+const coordenada: [number, number] = [10, 20];
+const nombres: string[] = ["Ana", "Luis"];
 
 // ---- Comprobaciones ----
 assert.equal(nombre, "Ana");

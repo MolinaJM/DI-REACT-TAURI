@@ -3,38 +3,38 @@
 // ============================================================
 import assert from "node:assert/strict";
 
-export interface Pez {
+interface Pez {
   tipo: "pez";
   profundidadMaxima: number;
 }
-export interface Ave {
+interface Ave {
   tipo: "ave";
   envergadura: number;
 }
-export type Animal = Pez | Ave;
+type Animal = Pez | Ave;
 
 // 1) Predicado de tipo
-export function esPez(animal: Animal): animal is Pez {
+function esPez(animal: Animal): animal is Pez {
   return animal.tipo === "pez";
 }
 
 // 2) Uso del guard (tras `esPez`, TS estrecha a Pez)
-export function describirAnimal(animal: Animal): string {
+function describirAnimal(animal: Animal): string {
   if (esPez(animal)) return `Pez que nada hasta ${animal.profundidadMaxima}m`;
   return `Ave con envergadura de ${animal.envergadura}cm`;
 }
 
 // 3) Filtrado con type predicate
-export interface UsuarioActivo {
+interface UsuarioActivo {
   activo: true;
   ultimoAcceso: Date;
 }
-export interface UsuarioInactivo {
+interface UsuarioInactivo {
   activo: false;
 }
-export type UsuarioEstado = UsuarioActivo | UsuarioInactivo;
+type UsuarioEstado = UsuarioActivo | UsuarioInactivo;
 
-export function filtrarActivos(usuarios: UsuarioEstado[]): UsuarioActivo[] {
+function filtrarActivos(usuarios: UsuarioEstado[]): UsuarioActivo[] {
   const activos: UsuarioActivo[] = [];
   for (const u of usuarios) {
     if (u.activo === true) {
@@ -46,13 +46,13 @@ export function filtrarActivos(usuarios: UsuarioEstado[]): UsuarioActivo[] {
 }
 
 // 4) Assertion function
-export function afirmarString(valor: unknown): asserts valor is string {
+function afirmarString(valor: unknown): asserts valor is string {
   if (typeof valor !== "string") {
     throw new Error("Se esperaba un string");
   }
 }
 
-export function procesarMensaje(mensaje: unknown): string {
+function procesarMensaje(mensaje: unknown): string {
   afirmarString(mensaje); // desde aquí `mensaje` es string
   return mensaje.toUpperCase();
 }

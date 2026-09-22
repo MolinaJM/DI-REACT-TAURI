@@ -4,51 +4,51 @@
 // Completa. Solución: soluciones/s02/09-aserciones.ts
 // Catálogo: sesiones/ejerciciosTS.md · Sesión 2 · Bloque 10
 
-export interface Pelicula {
+interface Pelicula {
   id: number;
   titulo: string;
 }
 
 // 1) `as`: estrecha un valor `unknown` procedente de una API / JSON
 const bruto: unknown = { id: 1, titulo: "Dune" };
-export const pelicula: Pelicula = bruto as Pelicula; // TODO: `as Pelicula`
+const pelicula: Pelicula = bruto as Pelicula; // TODO: `as Pelicula`
 
 // 2) `!` non-null assertion: afirmamos que el puerto siempre existe
-export interface Servidor {
+interface Servidor {
   puerto?: number | null;
 }
-export function puertoDe(servidor: Servidor): number {
+function puertoDe(servidor: Servidor): number {
   return servidor.puerto; // TODO: usa `!`
 }
 
 // 3) `as const`: valores a tipos literales inmutables
-export const RUTAS = ["/inicio", "/catalogo"]; // TODO: añade `as const`
-export const CONFIG = {
+const RUTAS = ["/inicio", "/catalogo"]; // TODO: añade `as const`
+const CONFIG = {
   servicio: "api",
   version: 3,
 }; // TODO: añade `as const`
 
 // 4) Caso React: estrechar la forma mínima de un evento tipado como `unknown`
-export function valorDeEvento(evento: { target: { value?: string } }): string {
+function valorDeEvento(evento: { target: { value?: string } }): string {
   return evento.target.value ?? "";
 }
-export function temaSeleccionado(evento: unknown): string {
+function temaSeleccionado(evento: unknown): string {
   return valorDeEvento(evento as { target: { value?: string } }); // TODO: `as` sobre la forma mínima
 }
 
 // 5) `typeof arr[number]`: el tipo de un elemento de un array `as const`
-export const CONTRASTES = ["claro", "oscuro"] as const;
-export type Contraste = (typeof CONTRASTES)[number];
-export function pintar(color: Contraste): string {
+const CONTRASTES = ["claro", "oscuro"] as const;
+type Contraste = (typeof CONTRASTES)[number];
+function pintar(color: Contraste): string {
   return ""; // TODO: `paint-${color}` (pintar("amarillo") no debe compilar)
 }
 // 6) S2·10.6 Diferencia entre `as` y `<tipo>`: la sintaxis `<tipo>valor` (angle-bracket)
 //    NO funciona en ficheros .tsx ni cuando choca con los genéricos de JSX.
 //    `as` es la única que siempre compila en React.
-export function conComo(valor: unknown): string {
+function conComo(valor: unknown): string {
   return (valor as string); // TODO: `as`
 }
-export function conAngular(valor: unknown): string {
+function conAngular(valor: unknown): string {
   // TODO: cambia la línea por `<string>valor` en un .ts normal (falla en .tsx)
   return String(valor);
 }

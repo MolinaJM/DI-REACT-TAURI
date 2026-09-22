@@ -73,7 +73,7 @@ En resumen:
 
 A partir de ES6 y versiones posteriores, los tipos de datos primitivos en JavaScript son, y en TypeScript se escriben en minúscula (no confundir con los constructores `String`, `Number`, `Boolean` que usan mayúscula) En TypeScript no se suelen utilizar los objetos tipo, solo para casos muy rebuscados.:
 
-1. **`undefined`**: Representa la ausencia de valor. Una variable que ha sido declarada pero no inicializada tiene el valor `undefined`. En TS: `let x: undefined;`
+1. **`undefined`**: Representa la ausencia de valor. Una variable que ha sido declarada pero no inicializada tiene el valor `undefined`. En TS: `let x: undefined;` . Si ponemos let a; console.log(typeof a); dará `undefined`.
 2. **`null`**: Representa intencionalmente "ningún valor" o "valor vacío". Es considerado un tipo primitivo aunque su tipo es un objeto (`typeof null` es `'object'` debido a un error histórico en el lenguaje). Mencionar que typeof(var) devuelve el valor. En TS se utiliza así: `let v: null = null;`
 3. **`boolean`**: Representa un valor lógico que puede ser `true` o `false`. En TS: `let activo: boolean = true;`
 4. **`number`**: Representa números enteros y de punto flotante. TypeScript no distingue entre enteros y números de punto flotante. En TS: `let precio: number = 12.5; negative: number = -3;`.
@@ -286,7 +286,40 @@ type Callback = (err: Error | null, data?: unknown) => void; // firma de funcion
 ```
 
 > [!TIP]
-> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); usa `type` para uniones, tuplas y alias. Ni `interface` ni `type` generan código en runtime (sintaxis *erasable-only*), así que puedes usarlos sin restricción.
+> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de Declaration Merging (fusión de declaraciones). to significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticas en una sola interfaz combinada. 
+
+``` typescript
+//En un archivo o paquete (ej. api/user.ts)
+interface User {
+  id: string;
+  name: string;
+}
+
+//En otro archivo o más abajo (ej. types/global.ts)
+interface User {
+  role: 'admin' | 'user';
+}
+
+//TypeScript las fusiona internamente
+// Resultado interno de TypeScript:
+interface User {
+  id: string;
+  name: string;
+  role: 'admin' | 'user';
+}
+
+```
+ 
+> [!TIP]
+> Usa `interface` para entidades y props de React; usa `type` para uniones, tuplas y alias. Ni `interface` ni `type` generan código en runtime (sintaxis *erasable-only*), así que puedes usarlos sin restricción.
+
+> [!NOTE]
+> **Características raras o innecesarias en React y Tauri:**
+> - **Index signatures** (claves dinámicas como `[key: string]: string`) — en React y Tauri los datos suelen tener estructura conocida. Si necesitas un diccionario genérico, usa `Record<K, V>` en su lugar.
+> - **`Readonly<T>`** — rara vez se usa de forma explícita. En la práctica, `as const` cubre la mayoría de casos (constantes inmutables).
+> - **Declaration Merging** — es interesante pero no es algo que hagas a propósito: ocurre automáticamente cuando defines dos interfaces con el mismo nombre. No es un patrón de diseño, sino un comportamiento del compilador.
+> - **`Pick<T, K>` y `Omit<T, K>`** — se mencionan en los utility types pero en la práctica se usan poco en React. Suele ser más claro definir la interfaz completa y destructurar lo que necesitas.
+> - **Propiedades de solo lectura (`readonly`)** — se usan de vez en cuando para datos que no deben mutar (IDs, claves), pero no es un patrón frecuente.
 
 
 ---
@@ -295,7 +328,6 @@ type Callback = (err: Error | null, data?: unknown) => void; // firma de funcion
 Tipos especiales (any, unknown, void, never).
 
 ```typescript
-export {};
 
 /**
  * Fichero 03: Tipos Especiales
@@ -357,7 +389,6 @@ function area(forma: Forma): number {
 Qué es TS vs JS, tipos primitivos básicos e inferencia de tipos.
 
 ```typescript
-export {};
 
 /**
  * Tipos Primitivos en TypeScript

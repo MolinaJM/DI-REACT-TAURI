@@ -175,7 +175,6 @@ Otros guards habituales: *type guards* definidos por el usuario, p. ej. un predi
 Union types, intersección, literal types y type narrowing.
 
 ```typescript
-export {};
 
 /**
  * Fichero 04: Union Types, Interseccion, Literales y Type Narrowing
@@ -284,7 +283,6 @@ console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 }));
 Control de flujo (switch exhaustivo, bucles), hoisting, TDZ y closures.
 
 ```typescript
-export {};
 
 /**
  * Fichero 08: Control de Flujo y Scope

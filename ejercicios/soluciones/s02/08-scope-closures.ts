@@ -18,7 +18,7 @@ function mostrar() {
 }
 
 // 2) Closure: cada llamada crea un estado independiente
-export function crearContador(valorInicial: number): {
+function crearContador(valorInicial: number): {
   incrementar: () => void;
   decrementar: () => void;
   valor: () => number;
@@ -36,7 +36,7 @@ export function crearContador(valorInicial: number): {
 }
 
 // 3) Con `let` cada iteración captura su propio índice
-export function hacerSaludos(nombres: string[]): Array<() => string> {
+function hacerSaludos(nombres: string[]): Array<() => string> {
   const resultados: Array<() => string> = [];
   for (let i = 0; i < nombres.length; i++) {
     const nombre = nombres[i];
@@ -47,7 +47,7 @@ export function hacerSaludos(nombres: string[]): Array<() => string> {
 }
 
 // 4) Memoización con closure
-export function memoizar<T>(fn: (arg: number) => T): (arg: number) => T {
+function memoizar<T>(fn: (arg: number) => T): (arg: number) => T {
   const cache: Record<number, T> = {};
   return (arg) => {
     if (arg in cache) {

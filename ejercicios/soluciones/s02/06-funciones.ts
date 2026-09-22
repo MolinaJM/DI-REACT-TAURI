@@ -4,16 +4,16 @@
 import assert from "node:assert/strict";
 
 // 1) Parámetros obligatorios
-export function saludar(nombre: string, edad: number): string {
+function saludar(nombre: string, edad: number): string {
   return `Hola, soy ${nombre} y tengo ${edad} anios`;
 }
 
 // 2) Opcional + por defecto
-export function configurarURL(base: string, puerto?: number): string {
+function configurarURL(base: string, puerto?: number): string {
   return puerto ? `${base}:${puerto}` : base;
 }
 
-export function crearUsuario(
+function crearUsuario(
   nombre: string,
   activo: boolean = true
 ): { nombre: string; activo: boolean } {
@@ -21,7 +21,7 @@ export function crearUsuario(
 }
 
 // 3) Rest parameters
-export function sumarTodo(...numeros: number[]): number {
+function sumarTodo(...numeros: number[]): number {
   let total = 0;
   for (const n of numeros) {
     total += n;
@@ -30,7 +30,7 @@ export function sumarTodo(...numeros: number[]): number {
 }
 
 // 4) Callback tipado
-export function ejecutarOperacion(
+function ejecutarOperacion(
   a: number,
   b: number,
   operacion: (x: number, y: number) => number
@@ -39,14 +39,14 @@ export function ejecutarOperacion(
 }
 
 // 5) Closure
-export function crearMultiplicador(factor: number): (valor: number) => number {
+function crearMultiplicador(factor: number): (valor: number) => number {
   return (valor) => valor * factor;
 }
 
 // 6) Overloads
-export function procesarEntrada(x: string): string[];
-export function procesarEntrada(x: number): number[];
-export function procesarEntrada(x: string | number): string[] | number[] {
+function procesarEntrada(x: string): string[];
+function procesarEntrada(x: number): number[];
+function procesarEntrada(x: string | number): string[] | number[] {
   if (typeof x === "string") return x.split("");
   return Array.from({ length: x }, (_, i) => i + 1);
 }

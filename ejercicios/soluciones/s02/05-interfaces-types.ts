@@ -4,32 +4,32 @@
 import assert from "node:assert/strict";
 
 // 1) Interfaz básica
-export interface Usuario {
+interface Usuario {
   id: number;
   nombre: string;
   email: string;
 }
 
 // 2) Propiedad opcional
-export interface Configuracion {
+interface Configuracion {
   url: string;
   puerto?: number;
 }
 
 // 3) Extensión
-export interface Admin extends Usuario {
+interface Admin extends Usuario {
   rol: "admin" | "editor";
 }
 
 // 4) Type aliases
-export type Punto2D = { x: number; y: number };
-export type Callback = (error: Error | null) => void;
+type Punto2D = { x: number; y: number };
+type Callback = (error: Error | null) => void;
 
 // 5) Alias de primitivo
-export type Email = string;
+type Email = string;
 
 // 6) Objeto tipado
-export const profe: Usuario = { id: 1, nombre: "Profe", email: "profe@ieshlanz.es" };
+const profe: Usuario = { id: 1, nombre: "Profe", email: "profe@ieshlanz.es" };
 
 // ---- Comprobaciones ----
 const admin: Admin = { ...profe, rol: "admin" };

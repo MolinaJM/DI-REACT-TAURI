@@ -214,7 +214,6 @@ const s: string | undefined = console.log(primero(["a", "b"])); //"a"
 Funciones tipadas: parámetros, arrow functions, callbacks y overloads.
 
 ```typescript
-export {};
 
 /**
  * Fichero 06: Funciones en TypeScript
@@ -300,7 +299,6 @@ console.log(ejecutarOperacion(5, 3, (a, b) => a + b));
 Generics (identidad, filtros, constraints, factorías) y utility types (Partial, Pick, Omit, Record, ReturnType…).
 
 ```typescript
-export {};
 
 /**
  * Fichero 19: Generics y Utility Types

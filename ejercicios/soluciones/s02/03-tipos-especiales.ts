@@ -4,15 +4,15 @@
 import assert from "node:assert/strict";
 
 // 2) Equivalente seguro a `any`: usar unknown y estrechar antes de usar.
-export const cualquierCosa: unknown = "texto";
+const cualquierCosa: unknown = "texto";
 
 // 3) void: la función no devuelve nada
-export function logMensaje(mensaje: string): void {
+function logMensaje(mensaje: string): void {
   console.log("[log]", mensaje);
 }
 
 // 4) never: siempre lanza
-export function errorFatal(mensaje: string): never {
+function errorFatal(mensaje: string): never {
   throw new Error(mensaje);
 }
 
