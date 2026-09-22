@@ -92,7 +92,7 @@ npx tsx saludo.ts
 npx tsc
 
 # 7. Ejecuta el js generado
-ode saludo.js
+node saludo.js
 
 ```
 
