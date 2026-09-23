@@ -4,6 +4,7 @@ dist/
 gen/
 *.log
 .DS_Store
+.opencode/
 *.tsbuildinfo
 *.cmd
 
