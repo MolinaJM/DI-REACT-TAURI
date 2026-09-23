@@ -279,6 +279,14 @@ interface Podcast extends Cancion {
 - **`type`** (o type aliases) sirve para lo mismo en objetos, para llamar a un conjunto de datos con un nombre (un alias). Pero además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
 
 ```typescript
+type Cancion = {
+  readonly id: number;            // no se puede modificar despues de crear
+  titulo: string;
+  artista: string;
+  duracion?: number;              // opcional (puede faltar)
+  reproducir(): void;             // metodo obligatorio
+}
+
 type ID = string | number;                              // union
 type Coordenadas = { x: number; y: number };            // objeto
 type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
