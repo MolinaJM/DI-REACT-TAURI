@@ -16,7 +16,7 @@
     - [Template Literals](#template-literals)
     - [Destructuring](#destructuring)
   - [0.6 Ejemplo completo-resumen](#06-ejemplo-completo-resumen)
-- 🧪 **Ejercicios:** [¿Qué es TypeScript?](../../EjerciciosPropuestos/ejerciciosTS.md#1-que-es-typescript) · [Instalación y Configuración](../../EjerciciosPropuestos/ejerciciosTS.md#2-instalacion-y-configuracion-basica)
+- 🧪 **Ejercicios:** [¿Qué es TypeScript?](../../EjerciciosPropuestos/ejerciciosTS.md#1-tipos-primitivos) · [Instalación y Configuración](../../EjerciciosPropuestos/ejerciciosTS.md#2-type-inference)
 
 ---
 

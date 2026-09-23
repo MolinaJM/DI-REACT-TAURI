@@ -16,7 +16,7 @@
     - [Tipos de datos no primitivos (objetos):](#tipos-de-datos-no-primitivos-objetos)
     - [Interfaces y Type Aliases](#interfaces-y-type-aliases)
 - 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../EjerciciosPropuestos/ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../EjerciciosPropuestos/ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../EjerciciosPropuestos/ejerciciosTS.md#3-tipos-especiales)
-- 🧪 **Ejercicios (Sesión 3):** [Union Types](../../EjerciciosPropuestos/ejerciciosTS.md#13-union-types) · [Interfaces](../../EjerciciosPropuestos/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../EjerciciosPropuestos/ejerciciosTS.md#5-type-aliases)
+- 🧪 **Ejercicios (Sesión 3):** [Union Types](../../EjerciciosPropuestos/ejerciciosTS.md#6-union-types) · [Interfaces](../../EjerciciosPropuestos/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../EjerciciosPropuestos/ejerciciosTS.md#5-type-aliases)
 
 # 1. **Sintaxis Básica de TypeScript**
 
@@ -229,9 +229,17 @@ type Cancion = {
 }
 
 type ID = string | number;                              // union
+let a:ID;
 type Coordenadas = { x: number; y: number };            // objeto
 type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
-//por si la quieres llamar desde más de un sitio
+//por si la quieres llamar desde más de un sitio, como por ejemplo en un type/interface
+type Cancion2 = {
+  readonly id: number;            // no se puede modificar despues de crear
+  titulo: string;
+  artista: string;
+  duracion?: number;              // opcional (puede faltar)
+  r: reproducir;             // metodo obligatorio
+}
 ```
 
 > [!TIP]

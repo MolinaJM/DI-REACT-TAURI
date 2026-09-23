@@ -16,7 +16,7 @@
   - [Valores truthy y falsy](#valores-truthy-y-falsy)
   - [Conversión con tipos en TypeScript](#conversi%C3%B3n-con-tipos-en-typescript)
     - [Aserciones de tipo (type assertions)](#aserciones-de-tipo-type-assertions)
-- 🧪 **Ejercicios:** [Conversión de tipos](../../EjerciciosPropuestos/ejerciciosTS.md#7-conversion-de-tipos)
+- 🧪 **Ejercicios:** [Conversión de tipos](../../EjerciciosPropuestos/ejerciciosTS.md#7-conversión-de-tipos)
 
 ---
 
@@ -214,6 +214,8 @@ function esNumero(valor: unknown): void {
 
 ### Aserciones de tipo (type assertions)
 
+> 💡 **No es necesario realizar los ejercicios de Type Assertions de este bloque.** En React es raro usar aserciones y, cuando se usan, siempre de la misma forma (`as` con `JSON.parse` o `invoke`). Sobre todo usaremos `as`. Se trabajará en profundidad más adelante con casos reales.
+
 Una **aserción de tipo** le dice a TypeScript: "yo controlo...confía en mí, que yo sé que este valor es de este tipo". TypeScript **no hace ninguna comprobación en runtime**; solo cambia lo que el compilador cree. Por eso se usan con moderación: si te equivocas, el código compila pero falla en ejecución.
 
 Las cuatro variantes que usarás en el curso:
@@ -264,9 +266,6 @@ const RUTAS = ["/inicio", "/catalogo"] as const;
 
 > [!TIP]
 > `as` y `as const` son *erasable-only*: no generan código en runtime. `!` tampoco genera código, pero **sí puede causar errores en ejecución** si tu suposición es falsa (el valor sí es `null`). Solución? Siempre usar narrowing (`if (valor !== null)`) sobre `!`.
-
-
-> ⚠️ **ESTE CONCEPTO SE TRABAJARÁ MÁS ADELANTE:** La práctica profunda de aserciones (`as`, `as const`, `!`) con `invoke` de Tauri, refs de React y constantes tipadas se desarrolla en las sesiones de React y Tauri (S04-S06). Aquí se presenta la sintaxis básica; los casos de uso reales se verán en los apuntes de React.
 
 ---
 ### 📦 Ejemplo completo: `type-guards-conversion.ts`

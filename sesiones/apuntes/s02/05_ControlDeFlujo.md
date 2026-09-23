@@ -10,7 +10,7 @@
   - [5.3. Estructuras de Control Avanzadas](#53-estructuras-de-control-avanzadas)
     - [5.3.1. `switch` Statement](#531-switch-statement)
   - [5.4. Narrowing: el control de flujo tipado](#54-narrowing-el-control-de-flujo-tipado)
-- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../EjerciciosPropuestos/ejerciciosTS.md#12-control-de-flujo) · [Literal Types y Narrowing](../../EjerciciosPropuestos/ejerciciosTS.md#14-literal-types-narrowing)
+- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../EjerciciosPropuestos/ejerciciosTS.md#12-control-de-flujo) · [Literal Types y Narrowing](../../EjerciciosPropuestos/ejerciciosTS.md#13-literal-types-narrowing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

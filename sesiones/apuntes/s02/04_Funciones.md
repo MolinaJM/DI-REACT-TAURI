@@ -10,7 +10,7 @@
   - [6. Funciones como expresiones (y tipos de función)](#6-funciones-como-expresiones-y-tipos-de-funci%C3%B3n)
   - [7. Cierres (closures)](#7-cierres-closures)
   - [8. Tipos de función, callbacks y genéricos](#8-tipos-de-funci%C3%B3n-callbacks-y-gen%C3%A9ricos)
-- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#11-genericos)
+- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#11-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#15-generics-genéricos)
 
 ---
 

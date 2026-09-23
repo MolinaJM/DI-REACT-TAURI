@@ -8,7 +8,7 @@
     - [6.1.4 Ámbito de Cierre (Closures)](#614-ámbito-de-cierre-closures)
   - [6.2. Ejemplos Prácticos](#62-ejemplos-prácticos)
     - [Ejemplo 1: Closure contador (ámbito léxico en acción)](#ejemplo-1-closure-contador-ámbito-léxico-en-acción)    - 
-- 🧪 **Ejercicios:** [Ámbito (Scope) y closures](../../EjerciciosPropuestos/ejerciciosTS.md#15-ambito-scope)
+- 🧪 **Ejercicios:** [Ámbito (Scope) y closures](../../EjerciciosPropuestos/ejerciciosTS.md#14-ambito-scope)
 
 ---
 
@@ -127,7 +127,7 @@ console.log(c.valor());       // 11
 
 > ✏️ **Práctica:** [`s02/08-scope-closures.ts`](../../../ejercicios/s02/08-scope-closures.ts) (closures = la lógica interna de los hooks) · [catálogo S2·15](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
-> 🏁 **Reto final de S2:** con todo lo de la sesión, completa [`s02/12-reto-s02.ts`](../../../ejercicios/s02/12-reto-s02.ts) (solución: [`soluciones/s02/12-reto-s02.ts`](../../../ejercicios/soluciones/s02/12-reto-s02.ts)) · [catálogo](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#17-reto-final-s2).
+> 🏁 **Reto final de S2:** con todo lo de la sesión, completa [`s02/12-reto-s02.ts`](../../../ejercicios/s02/12-reto-s02.ts) (solución: [`soluciones/s02/12-reto-s02.ts`](../../../ejercicios/soluciones/s02/12-reto-s02.ts)) · [catálogo](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#reto-final-s2).
 
 ---
 

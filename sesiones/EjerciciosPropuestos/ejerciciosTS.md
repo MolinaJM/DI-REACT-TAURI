@@ -30,23 +30,21 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 | 2 · Type Inference | `s02/01` · `s02/03` | **P2** | El editor deduce tipos (inferencia contextual en `map`, hooks). |
 | 3 · Tipos Especiales | `s02/03` | **P2** | `unknown`/`never` esenciales; se aplican de lleno con los guards (P1). |
 | 4 · Interfaces · **5 · Type Aliases** | `s02/05` | **P1** | `interface Props` = contrato de cada componente; modelas entidades. |
-| 6 · Type Assertions | `s02/09` | **P3** | `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards. |
+| 6 · Union Types e Intersección | `s02/04b` | **P1** | Props multiforma y estado discriminado: el pan de cada día de un componente. |
 | 7 · Conversión de tipos · **8 · Operadores** | `s02/10` | **P3** | JSON en persistencia y `??` para defaults; ternario/short-circuit a diario. |
-| 9 · Type Guards Avanzados | `s02/07` | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
-| 10 · Funciones en Profundidad | `s02/06` | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
-| 12 · Estructuras de control de flujo · **13 · Union Types** | `s02/04` · `s02/11` | **P1** | `switch`+`never` = patrón `useReducer`; discriminated unions en estados de petición/evento. |
-| 14 · Literal Types y Narrowing | `s02/04` | **P1** | `typeof`/`in` narrowing y discriminated unions. |
-| 15 · Ámbito (Scope) y closures | `s02/08` | **P4** | Explica los hooks por dentro; pocos closures complejos en componentes. |
-| 17 · 🏁 Reto final de S2 | `s02/12` | **P4** | Integración/repaso de S2; sin concepto nuevo. |
+| 9 · Type Assertions | `s02/09` | **P3** | `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards. |
+| 10 · Type Guards Avanzados | `s02/07` | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
+| 11 · Funciones en Profundidad | `s02/06` | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
+| 12 · Estructuras de control de flujo | `s02/11` | **P2** | `switch`+`never` = patrón `useReducer`; llega en React II. |
+| 13 · Literal Types y Narrowing | `s02/04` | **P1** | `typeof`/`in` narrowing y discriminated unions. |
+| 14 · Ámbito (Scope) y closures | `s02/08` | **P4** | Explica los hooks por dentro; pocos closures complejos en componentes. |
+| 15 · 🏁 Reto final de S2 | `s02/12` | **P4** | Integración/repaso de S2; sin concepto nuevo. |
 
 ### Sesión 3
 
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
-| 11 · Generics | `s03/02` | **P1** | `useState<T>`, `invoke<T>` y componentes `<T>` (tabla genérica). |
-| 12 · Estructuras de control de flujo · **13 · Union Types** | *(S2)* | **P1** | `switch`+`never` = patrón `useReducer`; discriminated unions en estados de petición/evento. |
-| 14 · Literal Types y Narrowing | *(S2)* | **P1** | `typeof`/`in` narrowing y discriminated unions. |
-| 15 · Ámbito (Scope) y closures | *(S2)* | **P4** | Explica los hooks por dentro; pocos closures complejos en componentes. |
+| 15 · Generics | `s03/02` | **P1** | `useState<T>`, `invoke<T>` y componentes `<T>` (tabla genérica). |
 | 16 · Módulos en TypeScript | `s03/05/` | **P4** | Se aprende con los repos; `import type` al tipar `invoke`. |
 | 17 · Strict Mode y Configuración | — | *(teoría)* | Config de `tsconfig`; no hay ejercicio. |
 | 18 · Arrays y Tuplas | `s03/01` | **P2** | La tupla `[valor, setter]` de `useState` y las listas básicas. |
@@ -59,28 +57,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 | 25 · Programación asíncrona | `s03/08` | **P1** | `Promise.all` + `try/catch` = patrón `invoke` y del `useEffect` de carga. |
 | 26 · Desestructuración/spread/optional chaining | `s03/09` | **P1** | El puente: destructuring de props, spread de `setState`, `?.`/`??` — lo primero de cada componente. |
 
----
+
+
+
+
+
 
 ## Sesión 2: Introducción a TypeScript (Parte 1)
 
-<a id="1-que-es-typescript"></a>
 
-###  ¿Qué es TypeScript?
 
-> 📖 **Teoría:** [`sesion00.md`](sesion00.md)  y  [`sesion01.md`](sesion01.md) (fundamentos, ecosistema, React+Vite). La configuración de `tsconfig.json` ya está lista en [`ejercicios/tsconfig.json`](../ejercicios/tsconfig.json) (strict, erasable-only). Los ejemplos ejecutables de la teoría están incrustados en los apuntes como bloques "📦 Ejemplo completo"; para correrlos, cópialos a `bancop/<nombre>.ts` y ejecuta `npx tsx <nombre>.ts`.
-1. Verifica en tu terminal que `node`, `npm`, `rustc` y `cargo` están instalados ejecutando `--version` en cada uno. Anota las versiones.
-2. Crea un proyecto web mínimo con Vite: `npm create vite@latest mi-prueba -- --template react-ts`. 
-3. Abre `src/App.tsx` y modifica código html para comprobar el efecto en Vite.
-3. Navega a la carpeta del proyecto generado y abre `package.json`. Identifica qué dependencias van en `dependencies` y cuáles en `devDependencies`. ¿Por qué `typescript` y `vite` están en `devDependencies` y no en `dependencies`?
-4. ¿Qué diferencia clave de arquitectura hay entre Tauri y Electron en cuanto al backend? (Respuesta basada en la tabla de la sesión 00).
-
-<a id="2-instalacion-y-configuracion-basica"></a>
-
-### Instalación y Configuración Básica
-
-> 📖 **Teoría:** [`sesion01.md`](sesion01.md) (instalación por SO, creación de proyecto Tauri, terminología de comandos). La configuración de `tsconfig.json` ya está lista en [`ejercicios/tsconfig.json`](../ejercicios/tsconfig.json) (strict, erasable-only). Los ejemplos ejecutables de la teoría están incrustados en los apuntes como bloques "📦 Ejemplo completo"; para correrlos, cópialos a `ejercicios/tmp/<nombre>.ts` y ejecuta `npx tsx tmp/<nombre>.ts`.
-1. Crea un proyecto Tauri de prueba: ejecuta `npm create tauri-app@latest mi-tauri-test` (elige React + TypeScript + npm). Ejecuta `npm install` y luego `npm run tauri dev`. Comprueba que se abre una ventana nativa con el frontend de React.
-2. . Abre `src/App.tsx` y modifica código html para comprobar el efecto en Vite+Tauri.
+## Sesión 2: Introducción a TypeScript (Parte 1)
 
 <a id="1-tipos-primitivos"></a>
 
@@ -96,6 +83,12 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 5. Estás construyendo un formulario de registro. Crea `nombre` y `apellido` (ambos `string`) y combínalos con una template literal en `nombreCompleto`.
 6. Estás trabajando con un sistema que procesa números y necesita saber cuántos dígitos tiene cada uno. Escribe `longitudTexto(numero: number): number` que devuelva cuántos dígitos tiene el número (pista: conviértelo a `string` primero y usa `.length`).
 
+
+
+
+
+
+
 <a id="2-type-inference"></a>
 
 ### 2. Type Inference
@@ -108,7 +101,13 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás definiendo constantes y variables en un componente. Declara una `const` vs `let` con el mismo valor literal. Compara los tipos inferidos.
 4. Estás renderizando una lista de elementos y usas `map` para transformarlos. Usa inferencia contextual con `map` — ¿cómo sabe TypeScript el tipo del parámetro?
 
-<a id="3-tipos-especiales"></a>
+
+
+
+
+
+
+<a id="3-tipos-especiales-any-unknown-never-void"></a>
 
 ### 3. Tipos Especiales: any, unknown, never, void
 
@@ -121,6 +120,12 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 4. Estás construyendo un sistema de logging. Escribe `logMensaje(texto: string): void` que imprima el mensaje con `console.log`.
 5. Estás implementando un manejador de errores que nunca devuelve control. Escribe `lanzarError(mensaje: string): never` que lance `new Error(mensaje)`.
 
+
+
+
+
+
+
 <a id="4-interfaces"></a>
 
 ### 4. Interfaces
@@ -130,10 +135,16 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🎯 Prioridad **P1** — `interface Props` es el contrato de cada componente.
 1. Estás modelando un catálogo de música. Define una interface `Cancion` con `titulo`, `artista`, `duracion` (opcional) y `reproducir()` (método).
 2. Estás ampliando el catálogo de música para incluir podcasts. Extiende `Cancion` con `Podcast` que añada `episodio` y `descripcion`.
-3. Estás diseñando un sistema de configuración que permite definir la misma entidad desde múltiples módulos. Crea dos interfaces con el mismo nombre y observa el declaration merging.
+3. Estás diseñando un sistema de configuración que permite definir la misma entidad desde múltiples módulos. Crea dos interfaces con el mismo nombre y observa el declaration merging (solo funciona con `interface`, no con `type`).
 4. Estás construyendo un diccionario o glosario donde las claves son palabras y los valores son definiciones. Añade una index signature a una interface `Diccionario` con clave `string` y valor `string`.
 5. Estás creando un catálogo de productos para una tienda online. Crea una interface `Producto` con `id` y `precio` (obligatorios) y `descuento` (opcional). Declara una variable `laptop` que la cumpla.
 6. Estás configurando un servidor y quieres que ciertos valores no se modifiquen después de la inicialización. Crea una interface `ConfiguracionServidor` con `puerto` y `host` marcadas como `readonly` para que no se puedan modificar tras crear el objeto.
+
+
+
+
+
+
 
 <a id="5-type-aliases"></a>
 
@@ -145,23 +156,32 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 1. Estás trabajando con un sistema de coordenadas para un mapa. Define un type alias `Coordenadas` como `{ x: number; y: number }`. Crea una función que lo acepte.
 2. Estás diseñando el resultado de una operación que puede tener éxito o fracasar, y necesitas que funcione con cualquier tipo de dato. Crea un type `Resultado<T>` genérico con `exito: boolean`, `datos: T`.
 3. Estás definiendo el contrato de un callback que se usará en múltiples partes de la app. Define un type para un callback `(err: Error | null, data?: unknown) => void`.
-4. Estás eligiendo entre `type` e `interface` para modelar las entidades de tu app. Compara: ¿cuándo usarías `type` vs `interface`? Piensa en al menos 2 diferencias (extensión, uniones, declaration merging).
+4. Estás eligiendo entre `type` e `interface` para modelar las entidades de tu app. Compara: ¿cuándo usarías `type` vs `interface`? Piensa en al menos 2 diferencias (extensión, uniones, declaration merging — solo `interface` lo soporta, para `type` se usa `&`).
 
-<a id="6-type-assertions"></a>
 
-### 6. Type Assertions
 
-> 🧪 **Ejercicio:** [`s02/09-aserciones.ts`](../ejercicios/s02/09-aserciones.ts).
-> ✅ **Solución:** [`soluciones/s02/09-aserciones.ts`](../ejercicios/soluciones/s02/09-aserciones.ts).
-> 🎯 Prioridad **P3** — `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards.
-1. Estás recibiendo datos de una fuente externa y necesitas convertirlos a un tipo tipado. Usa `as` para estrechar un valor `unknown` (una variable que viene de fuera) y conviértelo a la interface `Pelicula`. ¿Qué ganancia de tipo aporta `as`? ¿Qué riesgo tiene?
-2. Estás trabajando con una propiedad opcional que sabes que existe en runtime pero TypeScript no puede comprobarlo. Prueba el non-null assertion `!` en una propiedad opcional de un objeto.
-3. Estás definiendo constantes que no deben mutar nunca. Crea un objeto y un array `as const` e intenta modificar una propiedad. ¿Qué error obtienes?
-4. Estás manejando un evento en React y necesitas acceder a propiedades específicas de un tipo que TypeScript no puede inferir. En React: estrecha la forma mínima de un evento tipado como `unknown` con `as`.
-5. Estás definiendo tipos derivados de constantes y necesitas extraer las claves de un array. Deriva el tipo de un elemento de un array con `typeof arr[number]` a partir de un `as const`.
-6. Estás escribiendo código en un archivo JSX y necesitas elegir la sintaxis correcta de aserción. Diferencia entre `as` y `<tipo>`. ¿Cuándo no funciona la segunda sintaxis?
 
-<a id="7-conversion-de-tipos"></a>
+
+
+
+<a id="6-union-types-e-intersección-de-tipos"></a>
+
+### 6. Union Types e Intersección de Tipos
+
+> 🧪 **Ejercicio:** [`s02/04b-unions-intersection.ts`](../ejercicios/s02/04b-unions-intersection.ts).
+> ✅ **Solución:** [`soluciones/s02/04b-unions-intersection.ts`](../ejercicios/soluciones/s02/04b-unions-intersection.ts).
+> 🎯 Prioridad **P1** — props multiforma y estado discriminado: el pan de cada día de un componente.
+1. Estás diseñando un sistema de identificación que acepta tanto IDs numéricos como alfanuméricos. Define un tipo `ID` que sea `string | number`. Crea una función que acepte `ID` y devuelva su longitud como string.
+2. Estás modelando un sistema de recursos humanos donde una persona puede ser también empleada. Crea dos interfaces `Persona` y `Empleado`. Combínalas con intersección `&` y crea un objeto que cumpla ambas.
+3. Estás procesando datos que pueden llegar como un solo valor o como una lista. Haz una función que acepte `string | string[]` y devuelva el primer elemento.
+
+
+
+
+
+
+
+<a id="7-conversión-de-tipos"></a>
 
 ### 7. Conversión de tipos
 
@@ -174,6 +194,12 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 4. Estás construyendo un formulario donde algunos campos pueden venir vacíos y necesitas valores por defecto. Escribe una función que use el operador `??` para proporcionar valores por defecto.
 5. Estás trabajando con valores que pueden ser `0`, `false` o `""` y necesitas que el operador no los considere falsy. Diferencia entre `||` y `??` con un ejemplo donde `0` sea un valor válido.
 
+
+
+
+
+
+
 <a id="8-operadores"></a>
 
 ### 8. Operadores
@@ -185,9 +211,35 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 2. Estás construyendo una lógica condicional compacta para mostrar un mensaje u otro según el estado de un usuario. Usa el operador ternario para asignar un valor según una condición.
 3. Estás implementando una función que debe evitar ejecutar una operación costosa si una condición no se cumple. Escribe una función que use short-circuit evaluation para evitar una llamada si una condición es falsa.
 
-<a id="9-type-guards"></a>
 
-### 9. Type Guards Avanzados
+
+
+
+
+
+<a id="9-type-assertions"></a>
+
+### 9. Type Assertions
+
+> 🧪 **Ejercicio:** [`s02/09-aserciones.ts`](../ejercicios/s02/09-aserciones.ts).
+> ✅ **Solución:** [`soluciones/s02/09-aserciones.ts`](../ejercicios/soluciones/s02/09-aserciones.ts).
+> 🎯 Prioridad **P3** — `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards.
+1. Estás recibiendo datos de una fuente externa y necesitas convertirlos a un tipo tipado. Usa `as` para estrechar un valor `unknown` (una variable que viene de fuera) y conviértelo a la interface `Pelicula`. ¿Qué ganancia de tipo aporta `as`? ¿Qué riesgo tiene?
+2. Estás trabajando con una propiedad opcional que sabes que existe en runtime pero TypeScript no puede comprobarlo. Prueba el non-null assertion `!` en una propiedad opcional de un objeto.
+3. Estás definiendo constantes que no deben mutar nunca. Crea un objeto y un array `as const` e intenta modificar una propiedad. ¿Qué error obtienes?
+4. Estás manejando un evento en React y necesitas acceder a propiedades específicas de un tipo que TypeScript no puede inferir. En React: estrecha la forma mínima de un evento tipado como `unknown` con `as`.
+5. Estás definiendo tipos derivados de constantes y necesitas extraer las claves de un array. Deriva el tipo de un elemento de un array con `typeof arr[number]` a partir de un `as const`.
+6. Estás escribiendo código en un archivo JSX y necesitas elegir la sintaxis correcta de aserción. Diferencia entre `as` y `<tipo>`. ¿Cuándo no funciona la segunda sintaxis?
+
+
+
+
+
+
+
+<a id="10-type-guards-avanzados"></a>
+
+### 10. Type Guards Avanzados
 
 > 🧪 **Ejercicio:** [`s02/07-type-guards.ts`](../ejercicios/s02/07-type-guards.ts).
 > ✅ **Solución:** [`soluciones/s02/07-type-guards.ts`](../ejercicios/soluciones/s02/07-type-guards.ts).
@@ -196,9 +248,15 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 2. Estás filtrando una lista de elementos que pueden ser de diferentes tipos y solo quieres los de un tipo concreto. Usa un type predicate en un bucle `for...of` para obtener solo los elementos de un tipo concreto de una unión.
 3. Estás escribiendo una función que debe garantizar que un valor cumple un tipo antes de continuar la ejecución. Implementa una assertion function `asegurarNumero(valor: unknown): asserts valor is number`.
 
-<a id="10-funciones"></a>
 
-### 10. Funciones en Profundidad
+
+
+
+
+
+<a id="11-funciones-en-profundidad"></a>
+
+### 11. Funciones en Profundidad
 
 > 🧪 **Ejercicio:** [`s02/06-funciones.ts`](../ejercicios/s02/06-funciones.ts).
 > ✅ **Solución:** [`soluciones/s02/06-funciones.ts`](../ejercicios/soluciones/s02/06-funciones.ts).
@@ -211,7 +269,13 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 6. Estás pasando una función como argumento a otro componente o como prop. Asigna una función a una variable (expresión funcional) y úsala. Prueba también una función flecha que no use el parámetro explícito devuelto por el tipo.
 7. Estás modelando operaciones matemáticas como datos que puedes almacenar y recorrer. Declara un tipo `Operacion = (a: number, b: number) => number` y crea funciones `sumar`, `restar` y `multiplicar` que la cumplan. Guarda las tres en un array y recórrelas.
 
-<a id="12-control-de-flujo"></a>
+
+
+
+
+
+
+<a id="12-estructuras-de-control-de-flujo"></a>
 
 ### 12. Estructuras de control de flujo
 
@@ -223,20 +287,15 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás procesando una lista de nombres y necesitas calcular el total de caracteres. Recorre un array de strings con `for...of` y suma sus longitudes.
 4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `hasta…1` en un array usando `for...of` sobre un rango (`Array.from`).
 
-<a id="13-union-types"></a>
 
-### 13. Union Types e Intersección de Tipos
 
-> 🧪 **Ejercicio:** [`s02/04b-unions-intersection.ts`](../ejercicios/s02/04b-unions-intersection.ts).
-> ✅ **Solución:** [`soluciones/s02/04b-unions-intersection.ts`](../ejercicios/soluciones/s02/04b-unions-intersection.ts).
-> 🎯 Prioridad **P1** — props multiforma y estado discriminado: el pan de cada día de un componente.
-1. Estás diseñando un sistema de identificación que acepta tanto IDs numéricos como alfanuméricos. Define un tipo `ID` que sea `string | number`. Crea una función que acepte `ID` y devuelva su longitud como string.
-2. Estás modelando un sistema de recursos humanos donde una persona puede ser también empleada. Crea dos interfaces `Persona` y `Empleado`. Combínalas con intersección `&` y crea un objeto que cumpla ambas.
-3. Estás procesando datos que pueden llegar como un solo valor o como una lista. Haz una función que acepte `string | string[]` y devuelva el primer elemento.
 
-<a id="14-literal-types-narrowing"></a>
 
-### 14. Literal Types y Type Narrowing
+
+
+<a id="13-literal-types-y-type-narrowing"></a>
+
+### 13. Literal Types y Type Narrowing
 
 > 🧪 **Ejercicio:** [`s02/04-unions-narrowing.ts`](../ejercicios/s02/04-unions-narrowing.ts).
 > ✅ **Solución:** [`soluciones/s02/04-unions-narrowing.ts`](../ejercicios/soluciones/s02/04-unions-narrowing.ts).
@@ -250,9 +309,15 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 7. Estás procesando una entrada que puede ser un texto o un número y necesitas transformarla según su tipo. Escribe `procesarEntrada(entrada: string | number)`: si es `string` devuelve el texto en mayúsculas; si es `number`, el doble del número.
 8. Estás recibiendo datos de una API externa y necesitas validar su tipo antes de procesarlos. Escribe `procesar(valor: unknown)`: si es `string`, devuelve su longitud en mayúsculas; si es `number`, su doble como string; si no, `"desconocido"`.
 
-<a id="15-ambito-scope"></a>
 
-### 15. Ámbito (Scope) y closures
+
+
+
+
+
+<a id="14-ámbito-scope-y-closures"></a>
+
+### 14. Ámbito (Scope) y closures
 
 > 🧪 **Ejercicio:** [`s02/08-scope-closures.ts`](../ejercicios/s02/08-scope-closures.ts).
 > ✅ **Solución:** [`soluciones/s02/08-scope-closures.ts`](../ejercicios/soluciones/s02/08-scope-closures.ts).
@@ -262,7 +327,8 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás generando mensajes personalizados para una lista de nombres. Crea `hacerSaludos(nombres)` que devuelva un array de funciones que saluden al nombre i-ésimo.
 4. Estás optimizando el rendimiento de una función costosa guardando sus resultados. Crea `memoizar(fn)` que guarde resultados en un objeto plain (`Record<number, T>`) para argumentos repetidos.
 
-<a id="17-reto-final-s2"></a>
+
+<a id="reto-final-s2"></a>
 
 ### 🏁 Reto final de S2
 > 🧪 **Ejercicio:** [`s02/12-reto-s02.ts`](../ejercicios/s02/12-reto-s02.ts) · ✅ **Solución:** [`soluciones/s02/12-reto-s02.ts`](../ejercicios/soluciones/s02/12-reto-s02.ts).
@@ -270,13 +336,15 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🎯 Prioridad **P4** — integración/repaso de S2; sin concepto nuevo para React/Tauri.
 
 
+
 ---
 
 ## Sesión 3: Introducción a TypeScript (Parte 2)
 
-<a id="11-genericos"></a>
+<a id="15-generics-genéricos"></a>
 
-### 11. Generics (Genéricos)
+### 15. Generics (Genéricos)
+
 
 > 🧪 **Ejercicio:** [`s03/02-generics.ts`](../ejercicios/s03/02-generics.ts).
 > ✅ **Solución:** [`soluciones/s03/02-generics.ts`](../ejercicios/soluciones/s03/02-generics.ts).
@@ -288,9 +356,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 5. Estás implementando una estructura de datos de tipo cola que funcione con cualquier tipo de elemento. Implementa una cola genérica `crearCola<T>()` con `encolar`, `desencolar` y `estaVacia` — como objeto devuelto por una factoría (sin clases).
 6. Estás accediendo a propiedades de un objeto de forma dinámica y necesitas que el tipo de la clave sea verificado. Escribe una función genérica que reciba un objeto y una clave, y devuelva el valor correspondiente usando `as` para el acceso.
 
-<a id="16-modulos-typescript"></a>
+
+
+
+
+
+
+
+<a id="16-módulos-en-typescript"></a>
 
 ### 16. Módulos en TypeScript
+
 
 > 🧪 **Ejercicio:** [`s03/05-modulos/`](../ejercicios/s03/05-modulos/).
 > ✅ **Solución:** [`soluciones/s03/05-modulos/`](../ejercicios/soluciones/s03/05-modulos/).
@@ -300,9 +376,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás construyendo una librería con múltiples módulos y necesitas re-exportar funcionalidades desde un punto central. Crea un módulo con un `export default class` y otro con re-exportaciones.
 4. Estás importando módulos en tu app y necesitas elegir entre exportación nominal y por defecto. ¿Qué diferencia hay entre `export { x }` y `export default x`?
 
-<a id="17-strict-mode-configuracion"></a>
+
+
+
+
+
+
+
+<a id="17-strict-mode-y-configuración"></a>
 
 ### 17. Strict Mode y Configuración
+
 
 > ⚙️ Configuración ya activa en [`ejercicios/tsconfig.json`](../ejercicios/tsconfig.json) (`strict: true`, `noUncheckedIndexedAccess`, etc.). **No hay ejercicio dedicado:** es teoría de configuración; el apunte de referencia es [`apuntes/s03/10_NPM.md`](apuntes/s03/10_NPM.md).
 1. Estás configurando un nuevo proyecto y quieres activar el modo estricto de TypeScript. Activa `strict: true` en un `tsconfig.json` y comprueba qué flags se activan.
@@ -310,9 +394,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás trabajando con un código heredado donde sabes que una propiedad se inicializa antes de usarse pero TypeScript no lo puede comprobar. Usa `!` (definite assignment assertion) para solucionar el error anterior.
 4. Estás escribiendo una función y olvidaste tipar un parámetro. ¿Qué hace `noImplicitAny`? Escribe una función sin tipo en el parámetro y observa el error.
 
-<a id="18-arrays-tuplas"></a>
+
+
+
+
+
+
+
+<a id="18-arrays-y-tuplas"></a>
 
 ### 18. Arrays y Tuplas
+
 
 > 🧪 **Ejercicio:** [`s03/01-arrays-tuplas.ts`](../ejercicios/s03/01-arrays-tuplas.ts).
 > ✅ **Solución:** [`soluciones/s03/01-arrays-tuplas.ts`](../ejercicios/soluciones/s03/01-arrays-tuplas.ts).
@@ -328,9 +420,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 9. Estás trabajando con puntos cartesianos y quieres que no se modifiquen por accidente. Crea una tupla `readonly [number, number]` para un punto cartesiano e intenta modificarla por asignación directa. ¿Qué ocurre?
 10. Estás procesando datos de un usuario almacenados en una tupla y necesitas separar cada campo. Dada `const usuario: [number, string, boolean] = [1, "Ana", true]`, desestructúrala en variables individuales tipadas explícitamente.
 
-<a id="19-arrays-metodos"></a>
+
+
+
+
+
+
+
+<a id="19-arrays-métodos-fundamentales"></a>
 
 ### 19. Arrays: métodos fundamentales
+
 
 > 🧪 **Ejercicio:** [`s03/06-arrays-set-map.ts`](../ejercicios/s03/06-arrays-set-map.ts).
 > ✅ **Solución:** [`soluciones/s03/06-arrays-set-map.ts`](../ejercicios/soluciones/s03/06-arrays-set-map.ts).
@@ -343,9 +443,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 6. Estás implementando una pila de tareas y necesitas modificar el array en su lugar. Usa los métodos que **mutan** el array en su lugar: `push` y `pop` sobre una pila, y `sort` con un comparador numérico `(a, b) => a - b`. Comprueba que `sort` modifica el array original.
 7. Estás trabajando con listas de datos y necesitas crear copias que puedas modificar sin afectar la original. Crea una copia de un array con `slice()` y con el spread `[...arr]`, y modifica la copia sin afectar al original (contrasta con `sort` que sí muta).
 
-<a id="20-set-valores-unicos"></a>
+
+
+
+
+
+
+
+<a id="20-set-conjunto-de-valores-únicos"></a>
 
 ### 20. Set: conjunto de valores únicos
+
 
 > 🧪 **Ejercicio:** [`s03/06-arrays-set-map.ts`](../ejercicios/s03/06-arrays-set-map.ts).
 > ✅ **Solución:** [`soluciones/s03/06-arrays-set-map.ts`](../ejercicios/soluciones/s03/06-arrays-set-map.ts).
@@ -355,9 +463,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás trabajando con dos conjuntos de datos y necesitas calcular operaciones entre ellos. Dados dos conjuntos `A` y `B`, calcula: unión, intersección y diferencia.
 4. Estás usando una versión moderna de TypeScript con ES2025 y quieres aprovechar los métodos nativos de Set. Prueba los métodos nativos ES2025: `union`, `intersection`, `difference`, `isSubsetOf`.
 
-<a id="21-map-diccionario"></a>
+
+
+
+
+
+
+
+<a id="21-map-diccionario-clave-valor"></a>
 
 ### 21. Map: diccionario clave-valor
+
 
 > 🧪 **Ejercicio:** [`s03/06-arrays-set-map.ts`](../ejercicios/s03/06-arrays-set-map.ts).
 > ✅ **Solución:** [`soluciones/s03/06-arrays-set-map.ts`](../ejercicios/soluciones/s03/06-arrays-set-map.ts).
@@ -365,9 +481,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 1. Estás almacenando datos de personas con sus edades y necesitas acceder a ellos por nombre. Crea un `Map<string, number>` con nombres de personas y sus edades. Itera sobre él.
 2. Estás implementando un sistema de caché para evitar llamadas repetidas a una API. Implementa una caché simple con `Map<string, { data: unknown; timestamp: number }>`.
 
-<a id="22-objetos-profundidad"></a>
+
+
+
+
+
+
+
+<a id="22-objetos-en-profundidad"></a>
 
 ### 22. Objetos en profundidad
+
 
 > 🧪 **Ejercicio:** [`s03/07-objetos.ts`](../ejercicios/s03/07-objetos.ts).
 > ✅ **Solución:** [`soluciones/s03/07-objetos.ts`](../ejercicios/soluciones/s03/07-objetos.ts).
@@ -378,9 +502,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 4. Estás agrupando productos por categoría para mostrarlos en secciones. Usa `Object.groupBy` para agrupar productos por categoría y observa el tipo de retorno.
 5. Estás protegiendo un objeto de modificaciones accidentales. Usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
 
+
+
+
+
+
+
+
 <a id="23-utility-types"></a>
 
 ### 23. Utility Types
+
 
 > 🧪 **Ejercicio:** [`s03/03-utility-types.ts`](../ejercicios/s03/03-utility-types.ts).
 > ✅ **Solución:** [`soluciones/s03/03-utility-types.ts`](../ejercicios/soluciones/s03/03-utility-types.ts).
@@ -393,9 +525,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás trabajando con una función existente y necesitas derivar tipos a partir de su firma. Usa `Parameters` y `ReturnType` con una función existente.
 4. Estás limpiando un tipo unión que contiene `null` o `undefined` y solo quieres las partes válidas. Usa `NonNullable` para eliminar `null | undefined` de un tipo unión.
 
-<a id="24-keyof-typeof-satisfies"></a>
+
+
+
+
+
+
+
+<a id="24-keyof-typeof-y-satisfies"></a>
 
 ### 24. keyof, typeof y satisfies
+
 
 > ⚡ **Opcional** (profundización de TS). En la ruta React + Tauri es raro tener que usarlo a diario; pero `keyof` asoma en funcionalidades tipadas (claves de formularios, `Object.keys as Array<keyof T>`) y `satisfies` en configuraciones. Prioriza el 4 y 5 antes que este.
 > 🧪 **Ejercicio:** [`s03/04-keyof-typeof-satisfies.ts`](../ejercicios/s03/04-keyof-typeof-satisfies.ts).
@@ -406,9 +546,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás definiendo un array de colores como constante y necesitas extraer el tipo de un elemento específico. Usa `as const` en un array de colores y obtén el tipo de un elemento con `typeof arr[number]`.
 4. Estás verificando que un objeto cumple con un tipo esperado pero quieres que TypeScript mantenga el tipo más específico posible. Usa `satisfies` para verificar que un objeto cumple un tipo pero manteniendo el tipo inferido.
 
-<a id="25-programacion-asincrona"></a>
+
+
+
+
+
+
+
+<a id="25-programación-asíncrona-promesas-y-asyncawait"></a>
 
 ### 25. Programación asíncrona (promesas y async/await)
+
 
 > 🧪 **Ejercicio:** [`s03/08-async.ts`](../ejercicios/s03/08-async.ts)
 > ✅ **Solución:** [`soluciones/s03/08-async.ts`](../ejercicios/soluciones/s03/08-async.ts)
@@ -421,9 +569,17 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 6. Estás transformando una lista de números aplicando una operación personalizada sin usar `map`. Escribe `mapearConCallback(numeros: number[], callback: (n: number) => number): number[]` que devuelva un array nuevo aplicando el `callback` a cada elemento (sin usar `map`).
 7. Estás simulando una operación asíncrona con un callback. Usa `setTimeout` para simular una operación asíncrona: `simularEspera(ms, callback)` que llame al `callback` tras `ms` milisegundos. Ordena los `console.log` para comprobar que el callback se ejecuta después.
 
-<a id="26-desestructuracion-spread"></a>
+
+
+
+
+
+
+
+<a id="26-desestructuración-spreadrest-y-optional-chaining-puente-a-react"></a>
 
 ### 26. Desestructuración, spread/rest y optional chaining (puente a React)
+
 
 > 🔑 **Puente a React.** Es lo primero que usarás en **cada** componente: destructuring de `props` en la firma de la función, `const [valor, setValor] = useState(...)`, `setState({ ...prev, ... })` y `?.`/`??` para navegar datos anidados (API, store). **Prioridad máxima antes de S04.**
 > 🧪 **Ejercicio:** [`s03/09-desestructuracion-spread-optional.ts`](../ejercicios/s03/09-desestructuracion-spread-optional.ts).
@@ -438,3 +594,9 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 7. Estás navegando por datos anidados que pueden no existir y necesitas un valor por defecto. Usa **optional chaining** `?.` + `??`: `direccionEnvio(carrito)` navega `carrito.cliente.envio.direccion` (todo opcional) con default `"Sin dirección"`.
 8. Estás definiendo las props de un botón que tiene valores por defecto para la etiqueta y el estado. Desestructura en el parámetro con **valores por defecto**: `Boton({ etiqueta = "Enviar", deshabilitado = false })`.
 9. Estás implementando un update funcional como el de React que evita clausuras obsoletas. Implementa el **update funcional**: `acumularConUpdater()` con un setter que reciba `(prev) => prev + …` y encadena tres actualizaciones (`+1`, `+2`, `+3`) — es el `setCuenta((c) => c + 1)` de React, que evita clausuras obsoletas.
+
+
+
+
+
+
