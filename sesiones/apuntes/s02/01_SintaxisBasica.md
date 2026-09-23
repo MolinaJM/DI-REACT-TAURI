@@ -243,7 +243,7 @@ type Cancion2 = {
 ```
 
 > [!TIP]
-> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de *Declaration Merging* (fusión de declaraciones). to significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticas en una sola interfaz combinada. 
+> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de *Declaration Merging* (fusión de declaraciones). Esto significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticamente en una sola interfaz combinada. Esto solo funciona con `interface`, no con `type` (para `type` se usa `&`). 
 
 ``` typescript
 //En un archivo o paquete (ej. api/user.ts)
