@@ -2,7 +2,7 @@
 // S02 · Ejercicio 9 · Type assertions (as, as const, !, typeof arr[number])
 // ============================================================
 // Completa. Solución: soluciones/s02/09-aserciones.ts
-// Catálogo: sesiones/ejerciciosTS.md · Sesión 2 · Bloque 10
+// Catálogo: sesiones/EjerciciosPropuestos/ejerciciosTS.md · Sesión 2 · Bloque 10
 
 interface Pelicula {
   id: number;

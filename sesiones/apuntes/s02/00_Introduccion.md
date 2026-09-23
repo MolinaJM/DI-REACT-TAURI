@@ -16,7 +16,7 @@
     - [Template Literals](#template-literals)
     - [Destructuring](#destructuring)
   - [0.6 Ejemplo completo-resumen](#06-ejemplo-completo-resumen)
-- 🧪 **Ejercicios:** [¿Qué es TypeScript?](../../ejerciciosTS.md#1-que-es-typescript) · [Instalación y Configuración](../../ejerciciosTS.md#2-instalacion-y-configuracion-basica)
+- 🧪 **Ejercicios:** [¿Qué es TypeScript?](../../EjerciciosPropuestos/ejerciciosTS.md#1-que-es-typescript) · [Instalación y Configuración](../../EjerciciosPropuestos/ejerciciosTS.md#2-instalacion-y-configuracion-basica)
 
 ---
 
@@ -33,10 +33,10 @@ TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
 - **Enum → uniones de tipos**: Enum es algo de TS que no reconoce JS. Este curso reemplaza las enumeraciones (`enum`) por uniones de string literals, compatibles con Node 24. A partir de Node 22 se introdujo de forma nativa el Type Stripping (la capacidad de ejecutar archivos .ts directamente borrando las anotaciones de tipo). Sin embargo, para que Node pueda ejecutar un archivo .ts sin compilar con tsx, la sintaxis de TypeScript debe ser 100% removible. Y los enum no dejan hacer eso.)
 - **Genéricos**: Funciones y clases que trabajan con varios tipos
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `Genéricos` → 04_Funciones.md §8, ejerciciosTS.md §11
+// - `Genéricos` → 04_Funciones.md §8, EjerciciosPropuestos/ejerciciosTS.md §11
 - **Type narrowing**: Refinar el tipo según el flujo del programa
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `Type narrowing` → 05_ControlDeFlujo.md §5.4, ejerciciosTS.md §14
+// - `Type narrowing` → 05_ControlDeFlujo.md §5.4, EjerciciosPropuestos/ejerciciosTS.md §14
 
 
 > 💡 **Recuerda:** TypeScript **es** JavaScript con tipos. Todo lo que aprendes de JS se mantiene; los tipos se añaden encima.
@@ -123,7 +123,7 @@ JavaScript ha evolucionado para soportar múltiples paradigmas de programación:
 // ESTE CÓDIGO PRESENTA CONCEPTOS QUE SE DESARROLLARÁN MÁS ADELANTE:
 // - `interface` → 01_SintaxisBasica.md §1.3
 // - `filter` / `map` → 04_Funciones.md §3.1 (funciones de orden superior)
-// - `number[]` → ejerciciosTS.md §18 (Arrays y Tuplas)
+// - `number[]` → EjerciciosPropuestos/ejerciciosTS.md §18 (Arrays y Tuplas)
 // - `for...of` → 05_ControlDeFlujo.md §5.2.4
 interface Item {
   nombre: string,
@@ -147,10 +147,10 @@ for ( const i of procesarDatos(lista) ){
 // Ejemplo de programación funcional moderna y tipada. Obtención datos API StarWars
 // ESTE CÓDIGO PRESENTA CONCEPTOS QUE SE DESARROLLARÁN MÁS ADELANTE:
 // - `interface` → 01_SintaxisBasica.md §1.3
-// - `async` / `await` / `Promise` → ejerciciosTS.md §25 (Programación asíncrona)
-// - `fetch` → ejerciciosTS.md §25
-// - `try/catch` → ejerciciosTS.md §25
-// - `as` (type assertion) → 01_SintaxisBasica.md §1.3
+// - `async` / `await` / `Promise` → EjerciciosPropuestos/ejerciciosTS.md §25 (Programación asíncrona)
+// - `fetch` → EjerciciosPropuestos/ejerciciosTS.md §25
+// - `try/catch` → EjerciciosPropuestos/ejerciciosTS.md §25
+// - `as` (type assertion) → 02_ConversionTipos.md (Conversión con tipos en TypeScript)
 interface DatosPost {
   name: string;
 }
@@ -185,8 +185,8 @@ JavaScript ES6+ ofrece características poderosas para programación funcional:
 ```typescript
 // Array methods funcionales con tipos (para tratamiento de datos en React)
 // ESTE CÓDIGO PRESENTA CONCEPTOS QUE SE DESARROLLARÁN MÁS ADELANTE:
-// - `filter` / `map` / `reduce` → 04_Funciones.md §3.1, ejerciciosTS.md §19
-// - `number[]` → ejerciciosTS.md §18 (Arrays y Tuplas)
+// - `filter` / `map` / `reduce` → 04_Funciones.md §3.1, EjerciciosPropuestos/ejerciciosTS.md §19
+// - `number[]` → EjerciciosPropuestos/ejerciciosTS.md §18 (Arrays y Tuplas)
 const numeros: number[] = [1, 2, 3, 4, 5];
 const resultado: number = numeros
   .filter((n) => n % 2 === 0) // [2,4]
@@ -287,15 +287,15 @@ JavaScript es conocido por su enfoque **asíncrono** y su capacidad para manejar
 // ESTE CÓDIGO PRESENTA CONCEPTOS QUE SE DESARROLLARÁN MÁS ADELANTE:
 // - `interface` → 01_SintaxisBasica.md §1.3
 // - `unknown` → 01_SintaxisBasica.md §1.2
-// - `as` (type assertion) → 01_SintaxisBasica.md §1.3
-// - `Record<K,V>` → ejerciciosTS.md §23 (Utility Types)
-// - `Partial<T>` → ejerciciosTS.md §23 (Utility Types)
+// - `as` (type assertion) → 02_ConversionTipos.md (Conversión con tipos en TypeScript)
+// - `Record<K,V>` → EjerciciosPropuestos/ejerciciosTS.md §23 (Utility Types)
+// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §23 (Utility Types)
 // - `Array.isArray()` → 05_ControlDeFlujo.md §5.4 (narrowing)
-// - `valor is T` (type guard predicate) → 02_ConversionTipos.md, ejerciciosTS.md §9
-// - `async` / `await` / `Promise` → ejerciciosTS.md §25
-// - `fetch` / `Response` → ejerciciosTS.md §25
-// - `try/catch` con `unknown` → ejerciciosTS.md §25
-// - `Promise.all` / `.then()` → ejerciciosTS.md §25
+// - `valor is T` (type guard predicate) → 02_ConversionTipos.md, EjerciciosPropuestos/ejerciciosTS.md §9
+// - `async` / `await` / `Promise` → EjerciciosPropuestos/ejerciciosTS.md §25
+// - `fetch` / `Response` → EjerciciosPropuestos/ejerciciosTS.md §25
+// - `try/catch` con `unknown` → EjerciciosPropuestos/ejerciciosTS.md §25
+// - `Promise.all` / `.then()` → EjerciciosPropuestos/ejerciciosTS.md §25
 interface PersonajeSW {
   name: string;
   height: string;
@@ -626,7 +626,7 @@ Aquí ya vemos muchos conceptos mezclados y alguno que aún no se ha visto (como
 ```typescript
 // TypeScript: Variables tipadas
 // ESTE CÓDIGO PRESENTA CONCEPTOS QUE SE DESARROLLARÁN MÁS ADELANTE:
-// - `string[]` (arrays) → ejerciciosTS.md §18 (Arrays y Tuplas)
+// - `string[]` (arrays) → EjerciciosPropuestos/ejerciciosTS.md §18 (Arrays y Tuplas)
 let nombre: string = "Profe";
 let edad: number = 35;
 let esProfesor: boolean = true;
@@ -650,7 +650,7 @@ function saludar(nombre: string): string {
 }
 
 function calcularMedia(notas: number[]): number {
-  //️ `reduce()` se desarrollará más adelante → 04_Funciones.md §5, ejerciciosTS.md §19
+  //️ `reduce()` se desarrollará más adelante → 04_Funciones.md §5, EjerciciosPropuestos/ejerciciosTS.md §19
   const suma = notas.reduce((acc, nota) => acc + nota, 0);
   return suma / notas.length;
 }
@@ -700,7 +700,7 @@ mostrarInfoPersona(profesor);
 
 // TypeScript: Genéricos
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `<T>` genéricos → 04_Funciones.md §8, ejerciciosTS.md §11
+// - `<T>` genéricos → 04_Funciones.md §8, EjerciciosPropuestos/ejerciciosTS.md §11
 function crearArray<T>(items: T[]): T[] {
   return new Array<T>().concat(items);
 }

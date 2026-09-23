@@ -30,6 +30,7 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 | 2 · Type Inference | `s02/01` · `s02/03` | **P2** | El editor deduce tipos (inferencia contextual en `map`, hooks). |
 | 3 · Tipos Especiales | `s02/03` | **P2** | `unknown`/`never` esenciales; se aplican de lleno con los guards (P1). |
 | 4 · Interfaces · **5 · Type Aliases** | `s02/05` | **P1** | `interface Props` = contrato de cada componente; modelas entidades. |
+| 6 · Type Assertions | `s02/09` | **P3** | `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards. |
 | 7 · Conversión de tipos · **8 · Operadores** | `s02/10` | **P3** | JSON en persistencia y `??` para defaults; ternario/short-circuit a diario. |
 | 9 · Type Guards Avanzados | `s02/07` | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
 | 10 · Funciones en Profundidad | `s02/06` | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
@@ -43,6 +44,9 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
 | 11 · Generics | `s03/02` | **P1** | `useState<T>`, `invoke<T>` y componentes `<T>` (tabla genérica). |
+| 12 · Estructuras de control de flujo · **13 · Union Types** | *(S2)* | **P1** | `switch`+`never` = patrón `useReducer`; discriminated unions en estados de petición/evento. |
+| 14 · Literal Types y Narrowing | *(S2)* | **P1** | `typeof`/`in` narrowing y discriminated unions. |
+| 15 · Ámbito (Scope) y closures | *(S2)* | **P4** | Explica los hooks por dentro; pocos closures complejos en componentes. |
 | 16 · Módulos en TypeScript | `s03/05/` | **P4** | Se aprende con los repos; `import type` al tipar `invoke`. |
 | 17 · Strict Mode y Configuración | — | *(teoría)* | Config de `tsconfig`; no hay ejercicio. |
 | 18 · Arrays y Tuplas | `s03/01` | **P2** | La tupla `[valor, setter]` de `useState` y las listas básicas. |
@@ -61,7 +65,7 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 
 <a id="1-que-es-typescript"></a>
 
-### 1. ¿Qué es TypeScript?
+###  ¿Qué es TypeScript?
 
 > 📖 **Teoría:** [`sesion00.md`](sesion00.md)  y  [`sesion01.md`](sesion01.md) (fundamentos, ecosistema, React+Vite). La configuración de `tsconfig.json` ya está lista en [`ejercicios/tsconfig.json`](../ejercicios/tsconfig.json) (strict, erasable-only). Los ejemplos ejecutables de la teoría están incrustados en los apuntes como bloques "📦 Ejemplo completo"; para correrlos, cópialos a `bancop/<nombre>.ts` y ejecuta `npx tsx <nombre>.ts`.
 1. Verifica en tu terminal que `node`, `npm`, `rustc` y `cargo` están instalados ejecutando `--version` en cada uno. Anota las versiones.
@@ -72,7 +76,7 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 
 <a id="2-instalacion-y-configuracion-basica"></a>
 
-### 2. Instalación y Configuración Básica
+### Instalación y Configuración Básica
 
 > 📖 **Teoría:** [`sesion01.md`](sesion01.md) (instalación por SO, creación de proyecto Tauri, terminología de comandos). La configuración de `tsconfig.json` ya está lista en [`ejercicios/tsconfig.json`](../ejercicios/tsconfig.json) (strict, erasable-only). Los ejemplos ejecutables de la teoría están incrustados en los apuntes como bloques "📦 Ejemplo completo"; para correrlos, cópialos a `ejercicios/tmp/<nombre>.ts` y ejecuta `npx tsx tmp/<nombre>.ts`.
 1. Crea un proyecto Tauri de prueba: ejecuta `npm create tauri-app@latest mi-tauri-test` (elige React + TypeScript + npm). Ejecuta `npm install` y luego `npm run tauri dev`. Comprueba que se abre una ventana nativa con el frontend de React.
@@ -142,6 +146,20 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 2. Estás diseñando el resultado de una operación que puede tener éxito o fracasar, y necesitas que funcione con cualquier tipo de dato. Crea un type `Resultado<T>` genérico con `exito: boolean`, `datos: T`.
 3. Estás definiendo el contrato de un callback que se usará en múltiples partes de la app. Define un type para un callback `(err: Error | null, data?: unknown) => void`.
 4. Estás eligiendo entre `type` e `interface` para modelar las entidades de tu app. Compara: ¿cuándo usarías `type` vs `interface`? Piensa en al menos 2 diferencias (extensión, uniones, declaration merging).
+
+<a id="6-type-assertions"></a>
+
+### 6. Type Assertions
+
+> 🧪 **Ejercicio:** [`s02/09-aserciones.ts`](../ejercicios/s02/09-aserciones.ts).
+> ✅ **Solución:** [`soluciones/s02/09-aserciones.ts`](../ejercicios/soluciones/s02/09-aserciones.ts).
+> 🎯 Prioridad **P3** — `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards.
+1. Estás recibiendo datos de una fuente externa y necesitas convertirlos a un tipo tipado. Usa `as` para estrechar un valor `unknown` (una variable que viene de fuera) y conviértelo a la interface `Pelicula`. ¿Qué ganancia de tipo aporta `as`? ¿Qué riesgo tiene?
+2. Estás trabajando con una propiedad opcional que sabes que existe en runtime pero TypeScript no puede comprobarlo. Prueba el non-null assertion `!` en una propiedad opcional de un objeto.
+3. Estás definiendo constantes que no deben mutar nunca. Crea un objeto y un array `as const` e intenta modificar una propiedad. ¿Qué error obtienes?
+4. Estás manejando un evento en React y necesitas acceder a propiedades específicas de un tipo que TypeScript no puede inferir. En React: estrecha la forma mínima de un evento tipado como `unknown` con `as`.
+5. Estás definiendo tipos derivados de constantes y necesitas extraer las claves de un array. Deriva el tipo de un elemento de un array con `typeof arr[number]` a partir de un `as const`.
+6. Estás escribiendo código en un archivo JSX y necesitas elegir la sintaxis correcta de aserción. Diferencia entre `as` y `<tipo>`. ¿Cuándo no funciona la segunda sintaxis?
 
 <a id="7-conversion-de-tipos"></a>
 
@@ -420,17 +438,3 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 7. Estás navegando por datos anidados que pueden no existir y necesitas un valor por defecto. Usa **optional chaining** `?.` + `??`: `direccionEnvio(carrito)` navega `carrito.cliente.envio.direccion` (todo opcional) con default `"Sin dirección"`.
 8. Estás definiendo las props de un botón que tiene valores por defecto para la etiqueta y el estado. Desestructura en el parámetro con **valores por defecto**: `Boton({ etiqueta = "Enviar", deshabilitado = false })`.
 9. Estás implementando un update funcional como el de React que evita clausuras obsoletas. Implementa el **update funcional**: `acumularConUpdater()` con un setter que reciba `(prev) => prev + …` y encadena tres actualizaciones (`+1`, `+2`, `+3`) — es el `setCuenta((c) => c + 1)` de React, que evita clausuras obsoletas.
-
-<a id="6-type-assertions"></a>
-
-### 6. Type Assertions
-
-> 🧪 **Ejercicio:** [`s02/09-aserciones.ts`](../ejercicios/s02/09-aserciones.ts).
-> ✅ **Solución:** [`soluciones/s02/09-aserciones.ts`](../ejercicios/soluciones/s02/09-aserciones.ts).
-> 🎯 Prioridad **P3** — `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards.
-1. Estás recibiendo datos de una fuente externa y necesitas convertirlos a un tipo tipado. Usa `as` para estrechar un valor `unknown` (una variable que viene de fuera) y conviértelo a la interface `Pelicula`. ¿Qué ganancia de tipo aporta `as`? ¿Qué riesgo tiene?
-2. Estás trabajando con una propiedad opcional que sabes que existe en runtime pero TypeScript no puede comprobarlo. Prueba el non-null assertion `!` en una propiedad opcional de un objeto.
-3. Estás definiendo constantes que no deben mutar nunca. Crea un objeto y un array `as const` e intenta modificar una propiedad. ¿Qué error obtienes?
-4. Estás manejando un evento en React y necesitas acceder a propiedades específicas de un tipo que TypeScript no puede inferir. En React: estrecha la forma mínima de un evento tipado como `unknown` con `as`.
-5. Estás definiendo tipos derivados de constantes y necesitas extraer las claves de un array. Deriva el tipo de un elemento de un array con `typeof arr[number]` a partir de un `as const`.
-6. Estás escribiendo código en un archivo JSX y necesitas elegir la sintaxis correcta de aserción. Diferencia entre `as` y `<tipo>`. ¿Cuándo no funciona la segunda sintaxis?

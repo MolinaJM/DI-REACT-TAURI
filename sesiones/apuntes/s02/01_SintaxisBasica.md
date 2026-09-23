@@ -10,14 +10,13 @@
     - [Anotaciones de tipo: el valor añadido de TypeScript](#anotaciones-de-tipo-el-valor-añadido-de-typescript)
     - [Inferencia de tipos (Type Inference)](#inferencia-de-tipos-type-inference)
     - [Tipos especiales: `any`, `unknown`, `never` y `void`](#tipos-especiales-any-unknown-never-y-void)
-    - [Aserciones de tipo (type assertions)](#aserciones-de-tipo-type-assertions)
   - [1.3 Tipos avanzados (Sesión 3)](#13-tipos-avanzados-sesión-3)
     - [Unión de tipos](#unión-de-tipos)
     - [Intersección de tipos (`&`)](#intersección-de-tipos-)
     - [Tipos de datos no primitivos (objetos):](#tipos-de-datos-no-primitivos-objetos)
     - [Interfaces y Type Aliases](#interfaces-y-type-aliases)
-- 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../ejerciciosTS.md#3-tipos-especiales)
-- 🧪 **Ejercicios (Sesión 3):** [Union Types](../../ejerciciosTS.md#13-union-types) · [Interfaces](../../ejerciciosTS.md#4-interfaces) · [Type Aliases](../../ejerciciosTS.md#5-type-aliases)
+- 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../EjerciciosPropuestos/ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../EjerciciosPropuestos/ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../EjerciciosPropuestos/ejerciciosTS.md#3-tipos-especiales)
+- 🧪 **Ejercicios (Sesión 3):** [Union Types](../../EjerciciosPropuestos/ejerciciosTS.md#13-union-types) · [Interfaces](../../EjerciciosPropuestos/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../EjerciciosPropuestos/ejerciciosTS.md#5-type-aliases)
 
 # 1. **Sintaxis Básica de TypeScript**
 
@@ -150,64 +149,6 @@ function area(forma: Forma): number {
 
 > [!IMPORTANT]
 > En todo este repositorio los ejemplos se escriben en **erasable-only TypeScript**: solo sintaxis que Node 24 puede ejecutar directamente (type stripping) sin paso previo de compilación. Es decir, nada de `enum;` sí `interface`, `type`, uniones y genéricos.
-
-
-### Aserciones de tipo (type assertions)
-
-Una **aserción de tipo** le dice a TypeScript: "yo controlo...confía en mí, que yo sé que este valor es de este tipo". TypeScript **no hace ninguna comprobación en runtime**; solo cambia lo que el compilador cree. Por eso se usan con moderación: si te equivocas, el código compila pero falla en ejecución.
-
-Las cuatro variantes que usarás en el curso:
-
-**1. `as` (recomendada)** — la sintaxis preferida porque funciona en cualquier fichero, incluido `.tsx` (React).
-
-```typescript
-// JSON.parse devuelve unknown; le decimos a TS que es un objeto con esa forma
-const json = '{"id": 1, "titulo": "Dune"}';
-const datos = JSON.parse(json) as { id: number; titulo: string };
-console.log(datos.titulo); // "Dune"
-```
-
-**2. `<tipo>valor` (sintaxis angular, por tanto NO LA VAMOS A USAR)** — equivalente a `as`, pero **no funciona en ficheros `.tsx`** ni cuando choca con genéricos de JSX. Por eso `as` es la única que siempre compila en React.
-
-```typescript
-// En un fichero .ts normal funciona:
-const valor = <string>"hola";
-
-// En un fichero .tsx falla (JSX confunde los < >):
-// const valor = <string>"hola";  // Error: JSX no esperado
-// Solución en .tsx: usar `as` siempre.
-```
-
-**3. `!` (non-null assertion)** — le dice a TS "este valor no es `null` ni `undefined` aunque el tipo lo diga". En runtime **no hace nada**: no elimina el `null`, solo le quita la advertencia al compilador. Hay que usarlo con moderación solo si está muy justificado.
-
-```typescript
-interface Servidor {
-  puerto?: number | null;
-}
-
-function obtenerPuerto(servidor: Servidor): number {
-  return servidor.puerto!; // le digo a TS: "sé que puerto existe"
-}
-```
-
-**4. `as const` (literal inmutable)** — convierte un objeto o array en un tipo completamente inmutable, es decir, en un **literal de solo lectura**. Ideal para configuraciones, rutas o listas que no van a cambiar.
-
-```typescript
-const CONFIG = { servicio: "api", version: 3 } as const;
-// Tipo: { readonly servicio: "api"; readonly version: 3 }
-// CONFIG.version = 4;  
-// Error: readonly: Cannot assign to 'version' because it is a read-only property.
-
-const RUTAS = ["/inicio", "/catalogo"] as const;
-// Tipo: readonly ["/inicio", "/catalogo"]
-```
-
-> [!TIP]
-> `as` y `as const` son *erasable-only*: no generan código en runtime. `!` tampoco genera código, pero **sí puede causar errores en ejecución** si tu suposición es falsa (el valor sí es `null`). Solución? Siempre usar narrowing (`if (valor !== null)`) sobre `!`.
-
-
-> ⚠️ **ESTE CONCEPTO SE TRABAJARÁ MÁS ADELANTE:** La práctica profunda de aserciones (`as`, `as const`, `!`) con `invoke` de Tauri, refs de React y constantes tipadas se desarrolla en las sesiones de React y Tauri (S04-S06). Aquí se presenta la sintaxis básica; los casos de uso reales se verán en los apuntes de React.
-
 
 ## 1.3 Tipos avanzados (Sesión 3)
 

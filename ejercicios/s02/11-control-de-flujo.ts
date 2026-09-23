@@ -2,7 +2,7 @@
 // S02 · Ejercicio 11 · Control de flujo (if, switch exhaustivo, bucles)
 // ============================================================
 // Completa. Solución: soluciones/s02/11-control-de-flujo.ts
-// Catálogo: sesiones/ejerciciosTS.md · Sesión 2 · Bloque 14
+// Catálogo: sesiones/EjerciciosPropuestos/ejerciciosTS.md · Sesión 2 · Bloque 14
 
 // 1) if / else if / else que clasifica una nota
 function clasificarNota(nota: number): string {

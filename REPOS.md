@@ -259,7 +259,7 @@ Versiones de referencia para todo el material (sesiones, apuntes y repos):
 
 > Nota: los ejemplos `REPO-*.ts` de S02/S03 (bloques "📦 Ejemplo completo" en los apuntes) son *erasable-only* para que corran en Node 24 sin compilar con el runner `tsx`. S02/S03 no tienen repositorio propio: se ejecutan copiando el bloque en `ejercicios/tmp/`.
 
-Flujo de ejecución: los bloques `REPO-*` de S02/S03 copiados a `ejercicios/tmp/` con `npx tsx tmp/REPO-XX.ts` (desde `ejercicios/`); `repos/02`/`04` con `npm run dev`, `repos/03` con `npx tauri dev`, `repos/05` con `npx vitest` / `npx playwright test`, y `ejercicios/` con `npm run typecheck` (valida `soluciones/s02…s06`) + `npm run run:s02` / `npm run run:s03` (Node 24). Catálogo de ejercicios: [`sesiones/ejerciciosTS.md`](sesiones/ejerciciosTS.md).
+Flujo de ejecución: los bloques `REPO-*` de S02/S03 copiados a `ejercicios/tmp/` con `npx tsx tmp/REPO-XX.ts` (desde `ejercicios/`); `repos/02`/`04` con `npm run dev`, `repos/03` con `npx tauri dev`, `repos/05` con `npx vitest` / `npx playwright test`, y `ejercicios/` con `npm run typecheck` (valida `soluciones/s02…s06`) + `npm run run:s02` / `npm run run:s03` (Node 24). Catálogo de ejercicios: [`sesiones/EjerciciosPropuestos/ejerciciosTS.md`](sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ## Proyecto final: AppCine
 

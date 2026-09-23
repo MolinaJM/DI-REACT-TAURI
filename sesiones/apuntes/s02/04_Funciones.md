@@ -10,7 +10,7 @@
   - [6. Funciones como expresiones (y tipos de función)](#6-funciones-como-expresiones-y-tipos-de-funci%C3%B3n)
   - [7. Cierres (closures)](#7-cierres-closures)
   - [8. Tipos de función, callbacks y genéricos](#8-tipos-de-funci%C3%B3n-callbacks-y-gen%C3%A9ricos)
-- 🧪 **Ejercicios:** [Funciones en Profundidad](../../ejerciciosTS.md#10-funciones) · [Generics](../../ejerciciosTS.md#11-genericos)
+- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#11-genericos)
 
 ---
 
@@ -191,7 +191,7 @@ const multiplicar: Operacion = (a, b) => a * b;
 // Callback con tipos. Es una función a la que se le pasa otra para que haga algo a posteri con los datos.
 //El desarrollo del ejemplo sería muy largo. Se verá más adelante.
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `forEach()` → ejerciciosTS.md §19 (Arrays: métodos fundamentales)
+// - `forEach()` → EjerciciosPropuestos/ejerciciosTS.md §19 (Arrays: métodos fundamentales)
 function procesar(numeros: number[], callback: (n: number) => void): void {
   numeros.forEach(callback);
 }
@@ -272,7 +272,7 @@ console.log(duplicar2(5));  // 10
 // FUNCTION OVERLOADS
 // ============================================================================
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - Function overloads → ejerciciosTS.md §10 (Funciones) P5
+// - Function overloads → EjerciciosPropuestos/ejerciciosTS.md §10 (Funciones) P5
 
 function procesarEntrada(x: string): string[];
 function procesarEntrada(x: number): number[];
@@ -398,13 +398,13 @@ console.log(cola.estaVacia());  // false
 // UTILITY TYPES: tipos derivados sin escribirlos a mano
 // ============================================================================
 // ⚠️ ESTOS CONCEPTOS SE DESARROLLARÁN MÁS ADELANTE:
-// - `Partial<T>` → ejerciciosTS.md §23 (Utility Types)
-// - `Pick<T, K>` → ejerciciosTS.md §23
-// - `Omit<T, K>` → ejerciciosTS.md §23
-// - `Record<K, V>` → ejerciciosTS.md §23
-// - `Parameters<T>` → ejerciciosTS.md §23
-// - `ReturnType<T>` → ejerciciosTS.md §23
-// - `NonNullable<T>` → ejerciciosTS.md §23
+// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §23 (Utility Types)
+// - `Pick<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §23
+// - `Omit<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §23
+// - `Record<K, V>` → EjerciciosPropuestos/ejerciciosTS.md §23
+// - `Parameters<T>` → EjerciciosPropuestos/ejerciciosTS.md §23
+// - `ReturnType<T>` → EjerciciosPropuestos/ejerciciosTS.md §23
+// - `NonNullable<T>` → EjerciciosPropuestos/ejerciciosTS.md §23
 
 interface Producto {
     id: number;
@@ -459,7 +459,7 @@ console.log(limpio);
 ```
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-> ✏️ **Práctica:** [`s02/06-funciones.ts`](../../../ejercicios/s02/06-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/09-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/09-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/02-generics.ts`](../../../ejercicios/s03/02-generics.ts) (genéricos) · [`s03/03-utility-types.ts`](../../../ejercicios/s03/03-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25, S3·23 y S3·18](../../../sesiones/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/06-funciones.ts`](../../../ejercicios/s02/06-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/09-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/09-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/02-generics.ts`](../../../ejercicios/s03/02-generics.ts) (genéricos) · [`s03/03-utility-types.ts`](../../../ejercicios/s03/03-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25, S3·23 y S3·18](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ---
 

@@ -15,7 +15,8 @@
     - [De objeto a string y viceversa (JSON)](#de-objeto-a-string-y-viceversa-json)
   - [Valores truthy y falsy](#valores-truthy-y-falsy)
   - [Conversión con tipos en TypeScript](#conversi%C3%B3n-con-tipos-en-typescript)
-- 🧪 **Ejercicios:** [Conversión de tipos](../../ejerciciosTS.md#7-conversion-de-tipos)
+    - [Aserciones de tipo (type assertions)](#aserciones-de-tipo-type-assertions)
+- 🧪 **Ejercicios:** [Conversión de tipos](../../EjerciciosPropuestos/ejerciciosTS.md#7-conversion-de-tipos)
 
 ---
 
@@ -211,6 +212,62 @@ function esNumero(valor: unknown): void {
 }
 ```
 
+### Aserciones de tipo (type assertions)
+
+Una **aserción de tipo** le dice a TypeScript: "yo controlo...confía en mí, que yo sé que este valor es de este tipo". TypeScript **no hace ninguna comprobación en runtime**; solo cambia lo que el compilador cree. Por eso se usan con moderación: si te equivocas, el código compila pero falla en ejecución.
+
+Las cuatro variantes que usarás en el curso:
+
+**1. `as` (recomendada)** — la sintaxis preferida porque funciona en cualquier fichero, incluido `.tsx` (React).
+
+```typescript
+// JSON.parse devuelve unknown; le decimos a TS que es un objeto con esa forma
+const json = '{"id": 1, "titulo": "Dune"}';
+const datos = JSON.parse(json) as { id: number; titulo: string };
+console.log(datos.titulo); // "Dune"
+```
+
+**2. `<tipo>valor` (sintaxis angular, por tanto NO LA VAMOS A USAR)** — equivalente a `as`, pero **no funciona en ficheros `.tsx`** ni cuando choca con genéricos de JSX. Por eso `as` es la única que siempre compila en React.
+
+```typescript
+// En un fichero .ts normal funciona:
+const valor = <string>"hola";
+
+// En un fichero .tsx falla (JSX confunde los < >):
+// const valor = <string>"hola";  // Error: JSX no esperado
+// Solución en .tsx: usar `as` siempre.
+```
+
+**3. `!` (non-null assertion)** — le dice a TS "este valor no es `null` ni `undefined` aunque el tipo lo diga". En runtime **no hace nada**: no elimina el `null`, solo le quita la advertencia al compilador. Hay que usarlo con moderación solo si está muy justificado.
+
+```typescript
+interface Servidor {
+  puerto?: number | null;
+}
+
+function obtenerPuerto(servidor: Servidor): number {
+  return servidor.puerto!; // le digo a TS: "sé que puerto existe"
+}
+```
+
+**4. `as const` (literal inmutable)** — convierte un objeto o array en un tipo completamente inmutable, es decir, en un **literal de solo lectura**. Ideal para configuraciones, rutas o listas que no van a cambiar.
+
+```typescript
+const CONFIG = { servicio: "api", version: 3 } as const;
+// Tipo: { readonly servicio: "api"; readonly version: 3 }
+// CONFIG.version = 4;  
+// Error: readonly: Cannot assign to 'version' because it is a read-only property.
+
+const RUTAS = ["/inicio", "/catalogo"] as const;
+// Tipo: readonly ["/inicio", "/catalogo"]
+```
+
+> [!TIP]
+> `as` y `as const` son *erasable-only*: no generan código en runtime. `!` tampoco genera código, pero **sí puede causar errores en ejecución** si tu suposición es falsa (el valor sí es `null`). Solución? Siempre usar narrowing (`if (valor !== null)`) sobre `!`.
+
+
+> ⚠️ **ESTE CONCEPTO SE TRABAJARÁ MÁS ADELANTE:** La práctica profunda de aserciones (`as`, `as const`, `!`) con `invoke` de Tauri, refs de React y constantes tipadas se desarrolla en las sesiones de React y Tauri (S04-S06). Aquí se presenta la sintaxis básica; los casos de uso reales se verán en los apuntes de React.
+
 ---
 ### 📦 Ejemplo completo: `type-guards-conversion.ts`
 
@@ -240,7 +297,7 @@ Type guards avanzados, conversión explícita, JSON tipado y operadores (??, tru
 
 // Custom Type Guards (funciones predictoras)
 // ⚠️ ESTOS CONCEPTOS SE DESARROLLARÁN MÁS ADELANTE:
-// - `x is T` (type predicate) → ejerciciosTS.md §9 (Type Guards Avanzados)
+// - `x is T` (type predicate) → EjerciciosPropuestos/ejerciciosTS.md §9 (Type Guards Avanzados)
 // - `interface` → 01_SintaxisBasica.md §1.3
 interface Pez { tipo: "pez"; profundidadMaxima: number; }
 interface Ave { tipo: "ave"; envergadura: number; }
@@ -259,7 +316,7 @@ function describirAnimal(animal: Animal): string {
 
 // Type predicate con filtros
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `u is T` en filter → ejerciciosTS.md §9 (Type Guards Avanzados)
+// - `u is T` en filter → EjerciciosPropuestos/ejerciciosTS.md §9 (Type Guards Avanzados)
 interface UsuarioActivo { activo: true; ultimoAcceso: Date; }
 interface UsuarioInactivo { activo: false; }
 type UsuarioEstado = UsuarioActivo | UsuarioInactivo;
@@ -270,7 +327,7 @@ function filtrarActivos(usuarios: UsuarioEstado[]): UsuarioActivo[] {
 
 // Assertion functions
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `asserts valor is T` → ejerciciosTS.md §9 (Type Guards Avanzados)
+// - `asserts valor is T` → EjerciciosPropuestos/ejerciciosTS.md §9 (Type Guards Avanzados)
 function afirmarString(valor: unknown): asserts valor is string {
     if (typeof valor !== "string") {
         throw new Error("Se esperaba un string");
@@ -396,7 +453,7 @@ console.log(describirAnimal({ tipo: "pez", profundidadMaxima: 10 }));
 console.log(describirAnimal({ tipo: "ave", envergadura: 50 }));
 ```
 
-> ✏️ **Práctica:** [`s02/10-conversion-operadores.ts`](../../../ejercicios/s02/10-conversion-operadores.ts) (JSON, `??`) · [catálogo S2·7](../../../sesiones/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/10-conversion-operadores.ts`](../../../ejercicios/s02/10-conversion-operadores.ts) (JSON, `??`) · [catálogo S2·7](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ---
 

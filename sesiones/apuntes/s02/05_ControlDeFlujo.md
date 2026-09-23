@@ -10,7 +10,7 @@
   - [5.3. Estructuras de Control Avanzadas](#53-estructuras-de-control-avanzadas)
     - [5.3.1. `switch` Statement](#531-switch-statement)
   - [5.4. Narrowing: el control de flujo tipado](#54-narrowing-el-control-de-flujo-tipado)
-- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../ejerciciosTS.md#12-control-de-flujo) · [Literal Types y Narrowing](../../ejerciciosTS.md#14-literal-types-narrowing)
+- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../EjerciciosPropuestos/ejerciciosTS.md#12-control-de-flujo) · [Literal Types y Narrowing](../../EjerciciosPropuestos/ejerciciosTS.md#14-literal-types-narrowing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -242,7 +242,7 @@ console.log(datos.url); // sin error
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
 
-> ✏️ **Práctica:** [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts`) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·9 y S2·14](../../../sesiones/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts`) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·9 y S2·14](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
@@ -263,7 +263,7 @@ Union types, intersección, literal types y type narrowing.
  * - Type Narrowing (typeof, in, discriminated unions)
  */
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `switch` exhaustivo con `never` → ejerciciosTS.md §12 (Control de flujo)
+// - `switch` exhaustivo con `never` → EjerciciosPropuestos/ejerciciosTS.md §12 (Control de flujo)
 
 // ============================================================================
 // UNION TYPES (|)
@@ -475,7 +475,7 @@ console.log(actividad("Lunes"));
 ```
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `05_ControlDeFlujo.ts` y ejecuta `npx tsx 05_ControlDeFlujo.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-> ✏️ **Práctica:** [`s02/11-control-de-flujo.ts`](../../../ejercicios/s02/11-control-de-flujo.ts) (switch exhaustivo `never` = patrón reducer de React) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·12 y S2·14](../../../sesiones/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/11-control-de-flujo.ts`](../../../ejercicios/s02/11-control-de-flujo.ts) (switch exhaustivo `never` = patrón reducer de React) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·12 y S2·14](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ---
 

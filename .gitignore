@@ -4,7 +4,6 @@ dist/
 gen/
 *.log
 .DS_Store
-.opencode/
 *.tsbuildinfo
 *.cmd
 
@@ -22,7 +21,7 @@ gen/
 /ejercicios/s01-s/
 /ejercicios/soluciones/s[0-9][0-9]/
 /ejercicios/soluciones/s01-s/
-/sesiones/ejerciciosTS.md
+/sesiones/EjerciciosPropuestos/ejerciciosTS.md
 /sesiones/temario-appcine.md
 /ejercicios/soluciones/s02/12-reto-s02.ts
 
@@ -46,7 +45,7 @@ gen/
 # ===========================================================================
 #  >>> SESIÓN 02 <<  JMM - quitamos el `#` para revelar el material de TS
 # ===========================================================================
-!sesiones/ejerciciosTS.md
+!sesiones/EjerciciosPropuestos/ejerciciosTS.md
 !sesiones/sesion02.md
 !sesiones/apuntes/s02/
 !ejercicios/s02/
