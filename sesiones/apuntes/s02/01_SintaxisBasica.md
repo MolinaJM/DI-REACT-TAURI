@@ -15,7 +15,7 @@
     - [Unión de tipos](#unión-de-tipos)
     - [Intersección de tipos (`&`)](#intersección-de-tipos-)
     - [Tipos de datos no primitivos (objetos):](#tipos-de-datos-no-primitivos-objetos)
-  - [Interfaces y Type Aliases](#interfaces-y-type-aliases)
+    - [Interfaces y Type Aliases](#interfaces-y-type-aliases)
 - 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../ejerciciosTS.md#3-tipos-especiales)
 - 🧪 **Ejercicios (Sesión 3):** [Union Types](../../ejerciciosTS.md#13-union-types) · [Interfaces](../../ejerciciosTS.md#4-interfaces) · [Type Aliases](../../ejerciciosTS.md#5-type-aliases)
 
