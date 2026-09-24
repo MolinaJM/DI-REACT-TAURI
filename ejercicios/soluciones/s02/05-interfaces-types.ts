@@ -32,7 +32,7 @@ type Email = string;
 const profe: Usuario = { id: 1, nombre: "Profe", email: "profe@ieshlanz.es" };
 
 // ---- Comprobaciones ----
-const admin: Admin = { ...profe, rol: "admin" };
+const admin: Admin = { id: 1, nombre: "Profe", email: "profe@ieshlanz.es", rol: "admin" };
 const punto: Punto2D = { x: 1, y: 2 };
 const emailOk: Email = "a@b.com";
 const conf: Configuracion = { url: "http://localhost" };

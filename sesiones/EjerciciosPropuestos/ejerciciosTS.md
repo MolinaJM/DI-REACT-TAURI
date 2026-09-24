@@ -133,12 +133,12 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🧪 **Ejercicio:** [`s02/05-interfaces-types.ts`](../ejercicios/s02/05-interfaces-types.ts).
 > ✅ **Solución:** [`soluciones/s02/05-interfaces-types.ts`](../ejercicios/soluciones/s02/05-interfaces-types.ts).
 > 🎯 Prioridad **P1** — `interface Props` es el contrato de cada componente.
-1. Estás modelando un catálogo de música. Define una interface `Cancion` con `titulo`, `artista`, `duracion` (opcional) y `reproducir()` (método).
-2. Estás ampliando el catálogo de música para incluir podcasts. Extiende `Cancion` con `Podcast` que añada `episodio` y `descripcion`.
+1. Estás diseñando una base de datos de personajes de ciencia ficción. Define una interface `Personaje` con `nombre`, `planeta` y `nave` (opcional), y un método `presentarse()` que devuelva `void`.
+2. Estás ampliando la base de datos para incluir personajes que son también pilotos. Extiende `Personaje` con `Piloto` que añada `velocidadMax` y `mision`.
 3. Estás diseñando un sistema de configuración que permite definir la misma entidad desde múltiples módulos. Crea dos interfaces con el mismo nombre y observa el declaration merging (solo funciona con `interface`, no con `type`).
-4. Estás construyendo un diccionario o glosario donde las claves son palabras y los valores son definiciones. Añade una index signature a una interface `Diccionario` con clave `string` y valor `string`.
-5. Estás creando un catálogo de productos para una tienda online. Crea una interface `Producto` con `id` y `precio` (obligatorios) y `descuento` (opcional). Declara una variable `laptop` que la cumpla.
-6. Estás configurando un servidor y quieres que ciertos valores no se modifiquen después de la inicialización. Crea una interface `ConfiguracionServidor` con `puerto` y `host` marcadas como `readonly` para que no se puedan modificar tras crear el objeto.
+4. Estás diseñando un sistema de rangos para una academia espacial. Crea una interface `Rango` con `nombre` y `nivel`, y otra interface `RangoOficial` que extienda `Rango` añadiendo una propiedad `autoridad` de tipo `number`.
+5. Estás creando un catálogo de naves para una tienda online. Crea una interface `Nave` con `id` y `precio` (obligatorios) y `descuento` (opcional). Declara una variable `corbeta` que la cumpla.
+6. Estás configurando una estación espacial y quieres que ciertos valores no se modifiquen después de la inicialización. Crea una interface `ConfiguracionEstacion` con `modulo` y `gravedad` marcadas como `readonly` para que no se puedan modificar tras crear el objeto.
 
 
 
@@ -154,7 +154,7 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > ✅ **Solución:** [`soluciones/s02/05-interfaces-types.ts`](../ejercicios/soluciones/s02/05-interfaces-types.ts).
 > 🎯 Prioridad **P1** — modelar entidades y tipos de datos de la app.
 1. Estás trabajando con un sistema de coordenadas para un mapa. Define un type alias `Coordenadas` como `{ x: number; y: number }`. Crea una función que lo acepte.
-2. Estás diseñando el resultado de una operación que puede tener éxito o fracasar, y necesitas que funcione con cualquier tipo de dato. Crea un type `Resultado<T>` genérico con `exito: boolean`, `datos: T`.
+2. Estás definiendo la estructura de una tarjeta de producto para una tienda. Crea un type alias `TarjetaProducto` como `{ titulo: string; precio: number; descripcion?: string }`. Crea una función que lo acepte y lo resuma en un texto.
 3. Estás definiendo el contrato de un callback que se usará en múltiples partes de la app. Define un type para un callback `(err: Error | null, data?: unknown) => void`.
 4. Estás eligiendo entre `type` e `interface` para modelar las entidades de tu app. Compara: ¿cuándo usarías `type` vs `interface`? Piensa en al menos 2 diferencias (extensión, uniones, declaration merging — solo `interface` lo soporta, para `type` se usa `&`).
 
@@ -171,9 +171,9 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🧪 **Ejercicio:** [`s02/04b-unions-intersection.ts`](../ejercicios/s02/04b-unions-intersection.ts).
 > ✅ **Solución:** [`soluciones/s02/04b-unions-intersection.ts`](../ejercicios/soluciones/s02/04b-unions-intersection.ts).
 > 🎯 Prioridad **P1** — props multiforma y estado discriminado: el pan de cada día de un componente.
-1. Estás diseñando un sistema de identificación que acepta tanto IDs numéricos como alfanuméricos. Define un tipo `ID` que sea `string | number`. Crea una función que acepte `ID` y devuelva su longitud como string.
+1. Estás diseñando un sistema de identificación que acepta tanto IDs numéricos como alfanuméricos. Define un tipo `ID` que sea `string | number`. Crea una función `mostrarId(id: ID): string` que devuelva el ID formateado con una template literal (`` `ID: ${id}` ``). Pruébala con un número y con un texto.
 2. Estás modelando un sistema de recursos humanos donde una persona puede ser también empleada. Crea dos interfaces `Persona` y `Empleado`. Combínalas con intersección `&` y crea un objeto que cumpla ambas.
-3. Estás procesando datos que pueden llegar como un solo valor o como una lista. Haz una función que acepte `string | string[]` y devuelva el primer elemento.
+3. Estás modelando el estado de envío de un pedido. Define un type alias `EstadoPedido = "pendiente" | "enviado" | "entregado"`. Declara una variable `estado` de ese tipo, asígnale cada uno de los tres valores e imprime el estado. Intenta asignar un valor no válido (p. ej. `"cancelado"`) y observa el error de TypeScript.
 
 
 
@@ -223,13 +223,13 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 
 > 🧪 **Ejercicio:** [`s02/09-aserciones.ts`](../ejercicios/s02/09-aserciones.ts).
 > ✅ **Solución:** [`soluciones/s02/09-aserciones.ts`](../ejercicios/soluciones/s02/09-aserciones.ts).
-> 🎯 Prioridad **P3** — `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards.
+> 🎯 Prioridad **P3** — `as`/`as const` básicos; el uso con `invoke`, refs y eventos React se verá cuando se de React.
 1. Estás recibiendo datos de una fuente externa y necesitas convertirlos a un tipo tipado. Usa `as` para estrechar un valor `unknown` (una variable que viene de fuera) y conviértelo a la interface `Pelicula`. ¿Qué ganancia de tipo aporta `as`? ¿Qué riesgo tiene?
 2. Estás trabajando con una propiedad opcional que sabes que existe en runtime pero TypeScript no puede comprobarlo. Prueba el non-null assertion `!` en una propiedad opcional de un objeto.
 3. Estás definiendo constantes que no deben mutar nunca. Crea un objeto y un array `as const` e intenta modificar una propiedad. ¿Qué error obtienes?
-4. Estás manejando un evento en React y necesitas acceder a propiedades específicas de un tipo que TypeScript no puede inferir. En React: estrecha la forma mínima de un evento tipado como `unknown` con `as`.
-5. Estás definiendo tipos derivados de constantes y necesitas extraer las claves de un array. Deriva el tipo de un elemento de un array con `typeof arr[number]` a partir de un `as const`.
-6. Estás escribiendo código en un archivo JSX y necesitas elegir la sintaxis correcta de aserción. Diferencia entre `as` y `<tipo>`. ¿Cuándo no funciona la segunda sintaxis?
+4. Estás trabajando con el DOM y necesitas acceder a un elemento que sabes que existe pero TypeScript no puede inferirlo. Usa `as HTMLElement` para estrechar un valor de tipo `Element` a `HTMLElement` y acceder a propiedades como `.textContent`.
+5. Estás definiendo un array de colores que no debe mutar. Crea un array `as const` e intenta añadir un elemento con `.push()`. ¿Qué error obtienes?
+6. Estás escribiendo código TypeScript puro (sin JSX) y necesitas elegir la sintaxis correcta de aserción. Diferencia entre `as` y `<tipo>`. ¿Por qué `as` es preferible en código TS?
 
 
 

@@ -154,7 +154,39 @@ function area(forma: Forma): number {
 
 ### Unión de tipos
 
-Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber, en cada punto del código, cuál es el real. Lo verás mucho al manejar valores opcionales, como `const respuesta: string | null = obtenerRespuesta();`o a la hora de declarar distintos valores con type `type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'`
+Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber cuál es el tipo real que se está manejando. Se usa para:
+
+- Restringir valores a tipos literales (**enums ligeros**): `type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'`
+- Manejar parámetros que aceptan nulos (**nullable**): `const miFuncion = (a: string | null): number => ...`
+- **Definir retornos que pueden ser nulos** en la firma de una función: `const obtenerRespuesta = (a: string): string | null => ...`
+- **Declarar variables que reciben el resultado de un retorno anulable**: `const respuesta: string | null = obtenerRespuesta("ejemplo");`
+- **Definir uniones discriminadas** (tipos compuestos avanzados): `type Resultado = { ok: true; data: string } | { ok: false; error: string }`
+
+La más usada en React+Tauri es la unión discriminada
+```typescript
+type RespuestaExito = {
+  status: 'success'; //Discrminante
+  data: string[];
+};
+
+type RespuestaError = {
+  status: 'error';//Discriminante
+  error: string;
+};
+
+type RespuestaAPI = RespuestaExito | RespuestaError;
+
+function procesarRespuesta(respuesta: RespuestaAPI) {
+  // Gracias al discriminante 'status', TypeScript sabe exactamente qué propiedades existen:
+  if (respuesta.status === 'success') {
+    console.log(respuesta.data);  // Válido
+    // console.log(respuesta.error); Error en compilación: 'error' no existe en RespuestaExito
+  } else {
+    console.log(respuesta.error); // Válido
+  }
+}
+
+```
 
 > [!TIP] Como ya se ha comentado antes, no se pueden usar los enums. ; 
 
@@ -164,7 +196,7 @@ Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)
 La **intersección (`&`)** combina tipos exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
 
 ```typescript
-// ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
+// ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
 // - `interface` → 01_SintaxisBasica.md §1.3 (Interfaces y Type Aliases)
 interface Persona { 
   nombre: string; 
@@ -178,6 +210,12 @@ const profe: Persona & Empleado = {
   nombre: "Ana",
   cargo: "Profesora",
 };
+
+const profe: Persona & Empleado = { nombre: "Ana", cargo: "Profesora"};
+const profe2: Persona | Empleado = {nombre: "Ana"};
+const profe3: Persona | Empleado = {cargo: "Profesora"};
+
+console.log(profe.nombre + " " + profe2.nombre + " " + profe3.cargo);
 ```
 
 > [!TIP]
@@ -228,18 +266,44 @@ type Cancion = {
   reproducir(): void;             // metodo obligatorio
 }
 
-type ID = string | number;                              // union
+// Ejemplo de datos para Cancion (propiedades directas)
+const datosCancion1: Cancion = {
+  id: 1,
+  titulo: "Heroes",
+  artista: "David Bowie",
+  duracion: 370,
+  reproducir() {
+    console.log(`Reproduciendo ${this.titulo}...`);
+  }
+};
+
+
+type ID = string | number; // union
 let a:ID;
-type Coordenadas = { x: number; y: number };            // objeto
+
+//Otra organización similar aunque no igual para Canción
+type datosCancion = { titulo: string, artista: string };            // objeto
 type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
 //por si la quieres llamar desde más de un sitio, como por ejemplo en un type/interface
+
 type Cancion2 = {
   readonly id: number;            // no se puede modificar despues de crear
-  titulo: string;
-  artista: string;
+  a: datosCancion;
   duracion?: number;              // opcional (puede faltar)
   r: reproducir;             // metodo obligatorio
 }
+
+// Ejemplo de datos para Cancion2 (propiedades anidadas y tipo de función reutilizable)
+const datosCancion2: Cancion2 = {
+  id: 2,
+  a: {
+    titulo: "Starman",
+    artista: "David Bowie"
+  },
+  duracion: 256,
+  r: () => console.log("Sonando canción...")
+};
+
 ```
 
 > [!TIP]
@@ -272,10 +336,10 @@ interface User {
 
 > [!NOTE]
 > **Características raras o innecesarias en React y Tauri:**
-> - **Index signatures** (claves dinámicas como `[key: string]: string`) — en React y Tauri los datos suelen tener estructura conocida. Si necesitas un diccionario genérico, usa `Record<K, V>` en su lugar.
-> - **`Readonly<T>`** — rara vez se usa de forma explícita. En la práctica, `as const` cubre la mayoría de casos (constantes inmutables).
+> - **Index signatures** (claves dinámicas como `[key: string]: string`) — en React y Tauri los datos suelen tener estructura conocida. Si necesitas un diccionario genérico, usa `Record<K, V>` en su lugar. Este concepto se verá más adelante.
+> - **` Readonly<T>`** — rara vez se usa de forma explícita. En la práctica, `as const` cubre la mayoría de casos (constantes inmutables).
 > - **Declaration Merging** — es interesante pero no es algo que hagas a propósito: ocurre automáticamente cuando defines dos interfaces con el mismo nombre. No es un patrón de diseño, sino un comportamiento del compilador.
-> - **`Pick<T, K>` y `Omit<T, K>`** — se mencionan en los utility types pero en la práctica se usan poco en React. Suele ser más claro definir la interfaz completa y destructurar lo que necesitas.
+> - **`Pick<T, K>` y `Omit<T, K>`** — en la práctica se usan poco en React. Suele ser más claro definir la interfaz completa y destructurar lo que necesitas.
 > - **Propiedades de solo lectura (`readonly`)** — se usan de vez en cuando para datos que no deben mutar (IDs, claves), pero no es un patrón frecuente.
 
 

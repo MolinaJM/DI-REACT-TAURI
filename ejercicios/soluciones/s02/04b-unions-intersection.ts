@@ -1,13 +1,13 @@
 // ============================================================
-// S02 · Ejercicio 4b · SOLUCIÓN — Union types e intersección
+// S02 · Ejercicio 4b · SOLUCIÓN — Union types, literales e intersección
 // ============================================================
 import assert from "node:assert/strict";
 
 // 1) Union type
 type Id = string | number;
 
-function obtenerLongitud(id: string | number): string {
-  return String(id).length;
+function mostrarId(id: string | number): string {
+  return `ID: ${id}`;
 }
 
 // 2) Intersección de tipos
@@ -28,17 +28,24 @@ const personaEmpleado: Persona & Empleado = {
   salario: 50000,
 };
 
-// 3) Union type: primer elemento
-function primerElemento(valor: string | string[]): string {
-  if (Array.isArray(valor)) return valor[0];
-  return valor;
+// 3) Union de literales
+type EstadoPedido = "pendiente" | "enviado" | "entregado";
+
+function mostrarEstados(): void {
+  let estado: EstadoPedido = "pendiente";
+  console.log(estado);
+  estado = "enviado";
+  console.log(estado);
+  estado = "entregado";
+  console.log(estado);
+  // estado = "cancelado";  // Error: no está en el tipo
 }
 
+mostrarEstados();
+
 // ---- Comprobaciones ----
-assert.equal(obtenerLongitud("abc"), 3);
-assert.equal(obtenerLongitud(123), 3);
+assert.equal(mostrarId("abc"), "ID: abc");
+assert.equal(mostrarId(123), "ID: 123");
 assert.equal(personaEmpleado.nombre, "Ana");
 assert.equal(personaEmpleado.departamento, "Ingeniería");
-assert.equal(primerElemento(["a", "b", "c"]), "a");
-assert.equal(primerElemento("hola"), "hola");
 console.log("S02 · Ejercicio 4b · ¡OK!");
