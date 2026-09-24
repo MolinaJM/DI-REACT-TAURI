@@ -154,13 +154,14 @@ function area(forma: Forma): number {
 
 ### Unión de tipos
 
-Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: se escribe el tipo como `string | null`, que se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber cuál es el tipo real que se está manejando. Se usa para:
+Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: por ejemplo `string | null` se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber cuál es el tipo real que se está manejando. Se usa para:
 
-- Restringir valores a tipos literales (**enums ligeros**): `type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'`
+
 - Manejar parámetros que aceptan nulos (**nullable**): `const miFuncion = (a: string | null): number => ...`
 - **Definir retornos que pueden ser nulos** en la firma de una función: `const obtenerRespuesta = (a: string): string | null => ...`
 - **Declarar variables que reciben el resultado de un retorno anulable**: `const respuesta: string | null = obtenerRespuesta("ejemplo");`
-- **Definir uniones discriminadas** (tipos compuestos avanzados): `type Resultado = { ok: true; data: string } | { ok: false; error: string }`
+- Restringir valores a tipos literales (**enums ligeros**): `type EstadoCarga = 'idle' | 'loading' | 'success' | 'error'`
+- **Definir uniones discriminadas** como evolución de los enums ligeros: `type Resultado = { status: 'idle'; data: string } | .. | { status: 'error'; error: string }`
 
 La más usada en React+Tauri es la unión discriminada
 ```typescript
@@ -193,7 +194,7 @@ function procesarRespuesta(respuesta: RespuestaAPI) {
 
 ### Intersección de tipos (`&`)
 
-La **intersección (`&`)** combina tipos exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
+La **intersección (`&`)** combina tipos (interfaces y types) exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
 
 ```typescript
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
@@ -238,7 +239,27 @@ Algunos ejemplos de tipos no primitivos son:
 
 Los objetos se modelan con `interface` o `type`:
 
-- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). Se puede **extender** con `extends` (equivalente a la herencia de otros lenguajes):
+- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). Un index signature (o signatura de índice) es una sintaxis de TypeScript que te permite definir el tipo de los valores en un objeto cuando no sabes de antemano el nombre exacto de las propiedades (claves), pero sí sabes el tipo de la clave y el tipo del valor (ej: puntuación de jugadores). De todas formas, en React+Tauri prácticamente nunca se usará porque se suele usar Record<string, T> (concepto que se verá más adelante). 
+
+```typescript
+//Definición del tipo usando index signature
+type Scores = {
+  [playerName: string]: number;
+};
+
+// Objeto que cumple con el tipo
+const userScores: Scores = {
+  "Alicia": 100,
+  "Paco": 85,
+  "Mateo": 92
+};
+
+// Puedes añadir cualquier clave nueva siempre que el valor sea un número
+userScores["Lara"] = 78;//Válido
+userScores["Eva"] = "cien"; // Error!!! de TypeScript: "cien" no es number
+```
+
+También se puede **extender** con `extends` (equivalente a la herencia de otros lenguajes):
 
 ```typescript
 interface Cancion {
@@ -255,9 +276,22 @@ interface Podcast extends Cancion {
 }
 ```
 
-- **`type`** (o type aliases) sirve para lo mismo en objetos, para llamar a un conjunto de datos con un nombre (un alias). Pero además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
+- **`type`** (o type aliases) también sirve para llamar a un conjunto de datos con un nombre (un alias). NO se puede extender, aunque sí permite usar &. Además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
 
 ```typescript
+
+//Union
+type ID = string | number; 
+let a:ID;
+
+//Tupla (usada cuando hay dos o tres datos clave-valor). Si hay más, lo suyo sería usar un array de objetos.
+const success: ApiResponse = [200, "OK"]
+
+//Alias
+type Kilometros = number;
+const distancia: Kilometros = 42;
+
+//Objetos
 type Cancion = {
   readonly id: number;            // no se puede modificar despues de crear
   titulo: string;
@@ -278,11 +312,8 @@ const datosCancion1: Cancion = {
 };
 
 
-type ID = string | number; // union
-let a:ID;
-
 //Otra organización similar aunque no igual para Canción
-type datosCancion = { titulo: string, artista: string };            // objeto
+type datosCancion = { titulo: string, artista: string }; // tupla
 type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
 //por si la quieres llamar desde más de un sitio, como por ejemplo en un type/interface
 
@@ -307,7 +338,7 @@ const datosCancion2: Cancion2 = {
 ```
 
 > [!TIP]
-> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de *Declaration Merging* (fusión de declaraciones). Esto significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticamente en una sola interfaz combinada. Esto solo funciona con `interface`, no con `type` (para `type` se usa `&`). 
+> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de *Declaration Merging* (fusión de declaraciones). Esto significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticamente en una sola interfaz combinada. Esto solo funciona con `interface`, no con `type` (para `type` se usa `&`). Ejemplo: 
 
 ``` typescript
 //En un archivo o paquete (ej. api/user.ts)
@@ -336,10 +367,7 @@ interface User {
 
 > [!NOTE]
 > **Características raras o innecesarias en React y Tauri:**
-> - **Index signatures** (claves dinámicas como `[key: string]: string`) — en React y Tauri los datos suelen tener estructura conocida. Si necesitas un diccionario genérico, usa `Record<K, V>` en su lugar. Este concepto se verá más adelante.
-> - **` Readonly<T>`** — rara vez se usa de forma explícita. En la práctica, `as const` cubre la mayoría de casos (constantes inmutables).
-> - **Declaration Merging** — es interesante pero no es algo que hagas a propósito: ocurre automáticamente cuando defines dos interfaces con el mismo nombre. No es un patrón de diseño, sino un comportamiento del compilador.
-> - **`Pick<T, K>` y `Omit<T, K>`** — en la práctica se usan poco en React. Suele ser más claro definir la interfaz completa y destructurar lo que necesitas.
+> - Declaration Merging** — es interesante pero no es algo que hagas a propósito: ocurre automáticamente cuando defines dos interfaces con el mismo nombre. No es un patrón de diseño, sino un comportamiento del compilador.> -
 > - **Propiedades de solo lectura (`readonly`)** — se usan de vez en cuando para datos que no deben mutar (IDs, claves), pero no es un patrón frecuente.
 
 
@@ -354,7 +382,7 @@ Tipos especiales (any, unknown, void, never).
  * Fichero 03: Tipos Especiales
  * -------------------------------------------
  * - any, unknown, void, never
- * (Enums: optativo, fuera de la ruta React + Tauri)
+ * 
  */
 
 // ============================================================================
