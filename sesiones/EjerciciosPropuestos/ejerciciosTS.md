@@ -114,11 +114,11 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🧪 **Ejercicio:** [`s02/03-tipos-especiales.ts`](../ejercicios/s02/03-tipos-especiales.ts).
 > ✅ **Solución:** [`soluciones/s02/03-tipos-especiales.ts`](../ejercicios/soluciones/s02/03-tipos-especiales.ts).
 > 🎯 Prioridad **P2** — `unknown`/`never` son esenciales; se aplican de lleno con los guards (P1).
-1. Estás trabajando con datos de origen desconocido y necesitas flexibilidad total. Declara una variable `any` y asígnale distintos tipos. Llama a un método inexistente — ¿qué ocurre en compilación y en runtime?
+1. Estás trabajando con datos de origen desconocido y necesitas flexibilidad total. Declara una variable `any` y asígnale distintos tipos. Llama a un método inexistente — ¿qué ocurre en compilación y en runtime (en ejecución)?
 2. Estás recibiendo datos de una API externa y quieres seguridad sin sacrificar flexibilidad. Repite el paso anterior con `unknown`. ¿Qué necesitas hacer para poder llamar a un método sobre `unknown`?
 3. Estás diseñando el comportamiento de dos funciones: una que realiza una acción sin devolver nada y otra que nunca termina porque siempre lanza un error. Escribe una función que devuelva `void` y otra que devuelva `never` (que lance un error).
 4. Estás construyendo un sistema de logging. Escribe `logMensaje(texto: string): void` que imprima el mensaje con `console.log`.
-5. Estás implementando un manejador de errores que nunca devuelve control. Escribe `lanzarError(mensaje: string): never` que lance `new Error(mensaje)`.
+5. Estás implementando un manejador de errores que nunca devuelve control. Escribe `lanzarError(mensaje: string): never` que lance `new Error(mensaje)`. Aún no se han visto a fondo las funciones, pero hay ejemplos que se pueden usar como base.
 
 
 
