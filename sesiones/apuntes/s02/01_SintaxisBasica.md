@@ -11,12 +11,12 @@
     - [Inferencia de tipos (Type Inference)](#inferencia-de-tipos-type-inference)
     - [Tipos especiales: `any`, `unknown`, `never` y `void`](#tipos-especiales-any-unknown-never-y-void)
   - [1.3 Tipos avanzados (Sesión 3)](#13-tipos-avanzados-sesión-3)
-    - [Unión de tipos](#unión-de-tipos)
-    - [Intersección de tipos (`&`)](#intersección-de-tipos-)
     - [Tipos de datos no primitivos (objetos):](#tipos-de-datos-no-primitivos-objetos)
     - [Interfaces y Type Aliases](#interfaces-y-type-aliases)
+    - [Unión de tipos](#unión-de-tipos)
+    - [Intersección de tipos (`&`)](#intersección-de-tipos-)
 - 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../EjerciciosPropuestos/ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../EjerciciosPropuestos/ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../EjerciciosPropuestos/ejerciciosTS.md#3-tipos-especiales)
-- 🧪 **Ejercicios (Sesión 3):** [Union Types](../../EjerciciosPropuestos/ejerciciosTS.md#6-union-types) · [Interfaces](../../EjerciciosPropuestos/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../EjerciciosPropuestos/ejerciciosTS.md#5-type-aliases)
+- 🧪 **Ejercicios (Sesión 3):** [Interfaces](../../EjerciciosPropuestos/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../EjerciciosPropuestos/ejerciciosTS.md#5-type-aliases) · [Union Types](../../EjerciciosPropuestos/ejerciciosTS.md#6-union-types)
 
 # 1. **Sintaxis Básica de TypeScript**
 
@@ -152,7 +152,158 @@ function area(forma: Forma): number {
 
 ## 1.3 Tipos avanzados (Sesión 3)
 
+### Tipos de datos no primitivos (objetos):
+
+Los **tipos de datos no primitivos** son aquellos que **almacenan referencias** a objetos en lugar de valores directos. Esto significa que cuando asignas o pasas un objeto, lo que se copia es una referencia al objeto, no el objeto en sí (los famosos punteros). Los tipos no primitivos son mutables, lo que significa que puedes cambiar sus propiedades o el contenido de las colecciones sin cambiar la referencia al objeto.
+
+Algunos ejemplos de tipos no primitivos son:
+
+- **Objetos**: Representan colecciones de pares clave-valor. En TS se modelan con `interface` o `type`.
+- **Arrays**: Son objetos especializados para almacenar listas de elementos. En TS: `number[]`.
+- **Funciones**: Son objetos de primera clase (*first class citizen*). En TS se tipan como `(args) => retorno`.
+- **Colecciones**: `Set`, `Map`, `Date`, etc.
+
+
+### Interfaces y Type Aliases
+
+Los objetos se modelan con `interface` o `type`:
+
+- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). Un index signature (o signatura de índice) es una sintaxis de TypeScript que te permite definir el tipo de los valores en un objeto cuando no sabes de antemano el nombre exacto de las propiedades (claves), pero sí sabes el tipo de la clave y el tipo del valor (ej: puntuación de jugadores). De todas formas, en React+Tauri prácticamente nunca se usará porque se suele usar Record<string, T> (concepto que se verá más adelante). Index signature también se puede usar con type.
+
+```typescript
+//Definición del tipo usando index signature
+interface Scores {
+  [playerName: string]: number;
+};
+
+// Objeto que cumple con el tipo
+const userScores: Scores = {
+  "Alicia": 100,
+  "Paco": 85,
+  "Mateo": 92
+};
+
+// Puedes añadir cualquier clave nueva siempre que el valor sea un número
+userScores["Lara"] = 78;//Válido
+userScores["Eva"] = "cien"; // Error!!! de TypeScript: "cien" no es number
+```
+
+También se puede **extender** con `extends` (equivalente a la herencia de otros lenguajes):
+
+```typescript
+interface Cancion {
+  readonly id: number;            // no se puede modificar despues de crear
+  titulo: string;
+  artista: string;
+  duracion?: number;              // opcional (puede faltar)
+  reproducir(): void;             // metodo obligatorio
+}
+
+interface Podcast extends Cancion {
+  episodio: number;
+  descripcion: string;
+}
+```
+
+- **`type`** (o type aliases) también sirve para llamar a un conjunto de datos con un nombre (un alias). NO se puede extender, aunque sí permite usar &. Además permite **uniones**, **tuplas**, **alias** y **firmas de funciones**:
+
+```typescript
+
+//Union
+type ID = string | number; 
+let a:ID;
+
+//Tupla (usada cuando hay dos o tres datos clave-valor). Si hay más, lo suyo sería usar un array de objetos.
+const success: ApiResponse = [200, "OK"]
+
+//Alias
+type Kilometros = number;
+const distancia: Kilometros = 42;
+
+//Objetos
+type Cancion = {
+  readonly id: number;            // no se puede modificar despues de crear
+  titulo: string;
+  artista: string;
+  duracion?: number;              // opcional (puede faltar)
+  reproducir(): void;             // metodo obligatorio
+}
+
+// Ejemplo de datos para Cancion (propiedades directas)
+const datosCancion1: Cancion = {
+  id: 1,
+  titulo: "Heroes",
+  artista: "David Bowie",
+  duracion: 370,
+  reproducir() {
+    console.log(`Reproduciendo ${this.titulo}...`);
+  }
+};
+
+
+//Otra organización similar aunque no igual para Canción
+type datosCancion = { titulo: string, artista: string }; // objeto
+type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
+//por si la quieres llamar desde más de un sitio, como por ejemplo en un type/interface
+
+type Cancion2 = {
+  readonly id: number;            // no se puede modificar despues de crear
+  a: datosCancion;
+  duracion?: number;              // opcional (puede faltar)
+  r: reproducir;             // metodo obligatorio
+}
+
+// Ejemplo de datos para Cancion2 (propiedades anidadas y tipo de función reutilizable)
+const datosCancion2: Cancion2 = {
+  id: 2,
+  a: {
+    titulo: "Starman",
+    artista: "David Bowie"
+  },
+  duracion: 256,
+  r: () => console.log("Sonando canción...")
+};
+
+```
+
+> [!TIP]
+> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de *Declaration Merging* (fusión de declaraciones). Esto significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticamente en una sola interfaz combinada. Esto solo funciona con `interface`, no con `type` (para `type` se usa `&`). Ejemplo: 
+
+``` typescript
+//En un archivo o paquete (ej. api/user.ts)
+interface User {
+  id: string;
+  name: string;
+}
+
+//En otro archivo o más abajo (ej. types/global.ts)
+interface User {
+  role: 'admin' | 'user';
+}
+
+//TypeScript las fusiona internamente
+// Resultado interno de TypeScript:
+interface User {
+  id: string;
+  name: string;
+  role: 'admin' | 'user';
+}
+
+```
+ 
+> [!TIP]
+> Usa `interface` para entidades y props de React; usa `type` para uniones, tuplas y alias. Ni `interface` ni `type` generan código en runtime (sintaxis *erasable-only*), así que puedes usarlos sin restricción.
+
+> [!NOTE]
+> **Características raras o innecesarias en React y Tauri:**
+> - **Declaration Merging** — es interesante pero no es algo que hagas a propósito: ocurre automáticamente cuando defines dos interfaces con el mismo nombre. No es un patrón de diseño, sino un comportamiento del compilador.> -
+> - **Propiedades de solo lectura (`readonly`)** — se usan de vez en cuando para datos que no deben mutar (IDs, claves), pero no es un patrón frecuente.
+
+
 ### Unión de tipos
+
+
+Hasta ahora sabemos que  una variable ha de tener un tipo. 
 
 Una variable puede admitir **más de un tipo** usando el operador **unión (`|`)**: por ejemplo `string | null` se lee "string o null". TypeScript estrecha **(narrowing)** el tipo según el flujo para saber cuál es el tipo real que se está manejando. Se usa para:
 
@@ -221,154 +372,6 @@ console.log(profe.nombre + " " + profe2.nombre + " " + profe3.cargo);
 
 > [!TIP]
 > Regla de memoria: **`|` es "o" (unión → al menos uno)**, **`&` es "y" (intersección → todos)**. 
-
-
-### Tipos de datos no primitivos (objetos):
-
-Los **tipos de datos no primitivos** son aquellos que **almacenan referencias** a objetos en lugar de valores directos. Esto significa que cuando asignas o pasas un objeto, lo que se copia es una referencia al objeto, no el objeto en sí (los famosos punteros). Los tipos no primitivos son mutables, lo que significa que puedes cambiar sus propiedades o el contenido de las colecciones sin cambiar la referencia al objeto.
-
-Algunos ejemplos de tipos no primitivos son:
-
-- **Objetos**: Representan colecciones de pares clave-valor. En TS se modelan con `interface` o `type`.
-- **Arrays**: Son objetos especializados para almacenar listas de elementos. En TS: `number[]`.
-- **Funciones**: Son objetos de primera clase (*first class citizen*). En TS se tipan como `(args) => retorno`.
-- **Colecciones**: `Set`, `Map`, `Date`, etc.
-
-
-### Interfaces y Type Aliases
-
-Los objetos se modelan con `interface` o `type`:
-
-- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). Un index signature (o signatura de índice) es una sintaxis de TypeScript que te permite definir el tipo de los valores en un objeto cuando no sabes de antemano el nombre exacto de las propiedades (claves), pero sí sabes el tipo de la clave y el tipo del valor (ej: puntuación de jugadores). De todas formas, en React+Tauri prácticamente nunca se usará porque se suele usar Record<string, T> (concepto que se verá más adelante). 
-
-```typescript
-//Definición del tipo usando index signature
-type Scores = {
-  [playerName: string]: number;
-};
-
-// Objeto que cumple con el tipo
-const userScores: Scores = {
-  "Alicia": 100,
-  "Paco": 85,
-  "Mateo": 92
-};
-
-// Puedes añadir cualquier clave nueva siempre que el valor sea un número
-userScores["Lara"] = 78;//Válido
-userScores["Eva"] = "cien"; // Error!!! de TypeScript: "cien" no es number
-```
-
-También se puede **extender** con `extends` (equivalente a la herencia de otros lenguajes):
-
-```typescript
-interface Cancion {
-  readonly id: number;            // no se puede modificar despues de crear
-  titulo: string;
-  artista: string;
-  duracion?: number;              // opcional (puede faltar)
-  reproducir(): void;             // metodo obligatorio
-}
-
-interface Podcast extends Cancion {
-  episodio: number;
-  descripcion: string;
-}
-```
-
-- **`type`** (o type aliases) también sirve para llamar a un conjunto de datos con un nombre (un alias). NO se puede extender, aunque sí permite usar &. Además permite **uniones**, **tuplas** y **alias** de estructuras más complejas:
-
-```typescript
-
-//Union
-type ID = string | number; 
-let a:ID;
-
-//Tupla (usada cuando hay dos o tres datos clave-valor). Si hay más, lo suyo sería usar un array de objetos.
-const success: ApiResponse = [200, "OK"]
-
-//Alias
-type Kilometros = number;
-const distancia: Kilometros = 42;
-
-//Objetos
-type Cancion = {
-  readonly id: number;            // no se puede modificar despues de crear
-  titulo: string;
-  artista: string;
-  duracion?: number;              // opcional (puede faltar)
-  reproducir(): void;             // metodo obligatorio
-}
-
-// Ejemplo de datos para Cancion (propiedades directas)
-const datosCancion1: Cancion = {
-  id: 1,
-  titulo: "Heroes",
-  artista: "David Bowie",
-  duracion: 370,
-  reproducir() {
-    console.log(`Reproduciendo ${this.titulo}...`);
-  }
-};
-
-
-//Otra organización similar aunque no igual para Canción
-type datosCancion = { titulo: string, artista: string }; // tupla
-type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
-//por si la quieres llamar desde más de un sitio, como por ejemplo en un type/interface
-
-type Cancion2 = {
-  readonly id: number;            // no se puede modificar despues de crear
-  a: datosCancion;
-  duracion?: number;              // opcional (puede faltar)
-  r: reproducir;             // metodo obligatorio
-}
-
-// Ejemplo de datos para Cancion2 (propiedades anidadas y tipo de función reutilizable)
-const datosCancion2: Cancion2 = {
-  id: 2,
-  a: {
-    titulo: "Starman",
-    artista: "David Bowie"
-  },
-  duracion: 256,
-  r: () => console.log("Sonando canción...")
-};
-
-```
-
-> [!TIP]
-> Regla práctica del curso: en React modela las entidades con `interface` (se autocompletan y tienen `extends`); se refiere al concepto de *Declaration Merging* (fusión de declaraciones). Esto significa que si defines dos o más interfaces con exactamente el mismo nombre en diferentes partes de tu código (o incluso en diferentes archivos), TypeScript las junta automáticamente en una sola interfaz combinada. Esto solo funciona con `interface`, no con `type` (para `type` se usa `&`). Ejemplo: 
-
-``` typescript
-//En un archivo o paquete (ej. api/user.ts)
-interface User {
-  id: string;
-  name: string;
-}
-
-//En otro archivo o más abajo (ej. types/global.ts)
-interface User {
-  role: 'admin' | 'user';
-}
-
-//TypeScript las fusiona internamente
-// Resultado interno de TypeScript:
-interface User {
-  id: string;
-  name: string;
-  role: 'admin' | 'user';
-}
-
-```
- 
-> [!TIP]
-> Usa `interface` para entidades y props de React; usa `type` para uniones, tuplas y alias. Ni `interface` ni `type` generan código en runtime (sintaxis *erasable-only*), así que puedes usarlos sin restricción.
-
-> [!NOTE]
-> **Características raras o innecesarias en React y Tauri:**
-> - Declaration Merging** — es interesante pero no es algo que hagas a propósito: ocurre automáticamente cuando defines dos interfaces con el mismo nombre. No es un patrón de diseño, sino un comportamiento del compilador.> -
-> - **Propiedades de solo lectura (`readonly`)** — se usan de vez en cuando para datos que no deben mutar (IDs, claves), pero no es un patrón frecuente.
 
 
 ---

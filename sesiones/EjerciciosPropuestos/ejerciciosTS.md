@@ -155,8 +155,10 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🎯 Prioridad **P1** — modelar entidades y tipos de datos de la app.
 1. Estás trabajando con un sistema de coordenadas para un mapa. Define un type alias `Coordenadas` como `{ x: number; y: number }`. Crea una función que lo acepte.
 2. Estás definiendo la estructura de una tarjeta de producto para una tienda. Crea un type alias `TarjetaProducto` como `{ titulo: string; precio: number; descripcion?: string }`. Crea una función que lo acepte y lo resuma en un texto.
-3. Estás definiendo el contrato de un callback que se usará en múltiples partes de la app. Define un type para un callback `(err: Error | null, data?: unknown) => void`.
-4. Estás eligiendo entre `type` e `interface` para modelar las entidades de tu app. Compara: ¿cuándo usarías `type` vs `interface`? Piensa en al menos 2 diferencias (extensión, uniones, declaration merging — solo `interface` lo soporta, para `type` se usa `&`).
+3. Estás diseñando la ficha técnica de una cerveza artesana. Crea un type alias `Cerveza` con `id` (readonly), `nombre`, `tipo` (opcional), `precio` y un método `describir(): string` que devuelva un texto con los datos.
+4. Estás definiendo los tipos de cerveza que se sirven en el bar. Crea un type alias `TipoCerveza` como unión de literales `"IPA" | "Lager" | "Stout" | "Trigo" | "Rubia"`. Declara una variable `cervezaDelDia` de ese tipo e intenta asignar un valor no válido para ver el error.
+5. Estás modelando un ticket de bar. Crea un type alias `Ticket` como tupla `[numero: number, cervezas: string[], total: number]`. Crea un ticket con número, lista de cervezas consumidas y total a pagar.
+6. Estás construyendo el sistema de reseñas del bar. Define un type alias `Resena` como función `(cerveza: Cerveza) => string`. Luego crea un type alias `Bar` con propiedades `nombre`, `menu` (array de `Cerveza`) y `resenar` (de tipo `Resena`). Crea un objeto `bar` que cumpla el tipo y llama a `resenar` con una cerveza del menú.
 
 
 
