@@ -71,6 +71,15 @@ const decimal: number = parseFloat(texto);
 
 ## Conversión a Boolean
 
+Aunque existe el objeto Boolean, no se suele utilizar para convertir a booleano, en vez de eso se suele usar la conversión implícita.
+
+
+```typescript
+const esValido1: boolean = Boolean("texto"); // true
+const esValido2: boolean = Boolean(0);       // false
+const esValido3: boolean = Boolean(null);    // false
+```
+
 ### Conversión implícita en condiciones
 
 ```typescript
@@ -214,7 +223,7 @@ function esNumero(valor: unknown): void {
 
 ### Aserciones de tipo (type assertions)
 
-> 💡 **No es necesario realizar los ejercicios de Type Assertions de este bloque.** En React es raro usar aserciones y, cuando se usan, siempre de la misma forma (`as` con `JSON.parse` o `invoke`). Sobre todo usaremos `as`. Se trabajará en profundidad más adelante con casos reales.
+> 💡 <span style="color: red; font-weight: bold;">No es necesario realizar los ejercicios de Type Assertions de este bloque.</span> En React es raro usar aserciones y, cuando se usan, siempre de la misma forma (`as` con `JSON.parse` o `invoke`). Sobre todo usaremos `as`. Se trabajará en profundidad más adelante con casos reales.
 
 Una **aserción de tipo** le dice a TypeScript: "yo controlo...confía en mí, que yo sé que este valor es de este tipo". TypeScript **no hace ninguna comprobación en runtime**; solo cambia lo que el compilador cree. Por eso se usan con moderación: si te equivocas, el código compila pero falla en ejecución.
 

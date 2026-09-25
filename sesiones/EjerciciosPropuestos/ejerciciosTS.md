@@ -219,9 +219,9 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 
 
 
-<a id="9-type-assertions"></a>
+<a id="9-type-assertions"></a> 
 
-### 9. Type Assertions
+### 9. Type Assertions <span style="color: red; font-weight: bold;">ESTA RELACIÓN DE EJERCICIOS NO SE HACE</span>
 
 > 🧪 **Ejercicio:** [`s02/09-aserciones.ts`](../ejercicios/s02/09-aserciones.ts).
 > ✅ **Solución:** [`soluciones/s02/09-aserciones.ts`](../ejercicios/soluciones/s02/09-aserciones.ts).

@@ -124,7 +124,7 @@ console.log(esEstudiante || trabaja); // true
 
 ```typescript
 console.log("Hola" || "no llega"); // "Hola" (primer truthy)
-console.log(0 || 42);              // 42
+console.log(0 || 42);              // 42 (primer thuthy)
 console.log(null || "defecto");    // "defecto" (patrón clásico de valor por defecto)
 ```
 

@@ -236,6 +236,7 @@ const datosCancion1: Cancion = {
   artista: "David Bowie",
   duracion: 370,
   reproducir() {
+    // `this` se refiere al propio objeto (datosCancion1). Es la forma de acceder a las propiedades del objeto desde dentro de sus propios métodos.
     console.log(`Reproduciendo ${this.titulo}...`);
   }
 };
