@@ -102,40 +102,6 @@ if (respuesta) {
   console.log(respuesta.length); // aquí respuesta es string (no null). Sabe que al ser un valor truthy descarta que sea null...
 }
 ```
-El modo strict te prohíbe usar variables que puedan ser null/undefined. Cuando pones if (variable), TypeScript entiende que ya comprobaste la existencia del valor y "limpia" la posibilidad de que sea null, dejándote usar sus propiedades sin protestar.
-
-```typescript
-const obtenerUsuario = (): { nombre: string } | null => {
-  return { nombre: "Profe" }; // Devolvemos un objeto con la estructura { nombre: string }
-};
-
-// La variable 'usuario' anotada inline: puede ser un objeto O ser null
-const usuario: { nombre: string } | null = obtenerUsuario();
-
-// ============================================================================
-// CASO 1: Modo "strict" DESACTIVADO (strictNullChecks: false)
-// ============================================================================
-console.log(usuario.nombre); 
-// TypeScript: NO da ningún error de compilación. Si 'usuario' fuera null, la app SE ROMPERÍA en runtime.
-
-// ============================================================================
-// CASO 2: Modo "strict" ACTIVADO (strictNullChecks: true)
-// ============================================================================
-// --- Intento A: Sin comprobación ---
-console.log(usuario.nombre); // Error de compilación: Object is possibly 'null'.
-// --- Intento B: Con comprobación de condición (Narrowing / Estrechamiento) ---
-if (usuario) {
-  // ANTES del if:  usuario es ({ nombre: string } | null)
-  // DENTRO del if: TypeScript descarta 'null' porque es falsy.
-  //                El tipo se estrecha automáticamente a solo ({ nombre: string }).
-  
-  console.log(usuario.nombre); // ✅ TypeScript lo permite sin errores.
-} else {
-  // DENTRO del else: TypeScript sabe que 'usuario' es (null).
-  console.log("No se encontró ningún usuario");
-}
-```
-
 ## Conversión a Array
 
 ### Usando el operador de propagación (Spread Operator)
@@ -164,12 +130,12 @@ const json: string = JSON.stringify(usuario);
 console.log(json); // '{"nombre":"Profe","edad":35}'
 
 // String JSON → Objeto
-const recuperado: Usuario = JSON.parse(json) as Usuario;
+const recuperado: Usuario = JSON.parse(json) as Usuario; //Estamos usando una ASERCIÓN
 console.log(recuperado.nombre); // "Profe"
 ```
 
 > [!IMPORTANT]
-> En TypeScript, `JSON.parse()` devuelve **`any`**, lo que rompe la seguridad de tipos si se asigna directamente. En este capítulo usamos `as Usuario` para simplicidad, pero la práctica recomendada (y que veremos en los capítulos de localStorage y Fetch API) es tratar el resultado como `unknown` y validarlo con *type guards*.
+> En TypeScript, `JSON.parse()` devuelve **`any`**, lo que rompe la seguridad de tipos si se asigna directamente. En este capítulo usamos `as Usuario`(aserción) para simplicidad, pero la práctica recomendada (y que veremos en los capítulos de localStorage y Fetch API) es tratar el resultado como `unknown` y validarlo con *type guards*.
 
 > `Object(numero)` como en `Object(42)` crea un **objeto envoltorio** (`Number { 42 }`), no un objeto literal. Esto tiene usos muy específicos y no se recomienda como "conversión a objeto" de uso general. En TypeScript, el resultado se tipa como `Number` (el tipo objeto), no como `number`.
 
@@ -309,11 +275,10 @@ const decimal: number = parseFloat("42.5"); // 42.5
 const valor: number = 0;
 const booleano: boolean = Boolean(valor); // false
 
-// Trucos rapidos (type coercion controlada)
-const xConv: number = +"42";          // string -> number: 42
-// @ts-expect-error demostracion: !! sobre string no vacio siempre es true
-const yConv: boolean = !!"Hola";      // string -> boolean: true
-const zConv: string = `${true}`;      // boolean -> string: "true"
+// Trucos rápidos
+const xConv: number = +"42";          // string -> number: 42 . Equivalente a usar Number("42)
+const yConv: boolean = !!"Hola";      // string -> boolean: true. Equiv. a usar Boolean("Hola")
+const zConv: string = `${true}`;      // boolean -> string: "true". Equiv. a usar String(true)
 
 // ============================================================================
 // CONVERSION ENTRE OBJETOS Y JSON
