@@ -370,6 +370,34 @@ const profe3: Persona | Empleado = {cargo: "Profesora"};
 console.log(profe.nombre + " " + profe2.nombre + " " + profe3.cargo);
 ```
 
+
+
+```typescript
+
+//JMM: Ejemplo análogo con TYPE 
+//JMM: Notar que usa un alias para unir con & los dos tipos anteriores
+
+type Persona = { 
+  nombre: string; 
+}
+
+type Empleado = { 
+  cargo: string; 
+}
+
+type EmpleadoAmpliado = Persona & Empleado;
+
+const profe: EmpleadoAmpliado = {
+  nombre: "Ana",
+  cargo: "Profesora",
+};
+
+const profe1: Persona & Empleado = { nombre: "Ana", cargo: "Profesora"};
+const profe2: Persona | Empleado = {nombre: "Ana"};
+const profe3: Persona | Empleado = {cargo: "Profesora"};
+
+console.log(profe.nombre + " " + profe2.nombre + " " + profe3.cargo);
+```
 > [!TIP]
 > Regla de memoria: **`|` es "o" (unión → al menos uno)**, **`&` es "y" (intersección → todos)**. 
 
