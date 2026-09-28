@@ -20,6 +20,7 @@
 
 ---
 
+<a id="2-conversiones-de-tipos-en-typescript"></a>
 # 2. Conversiones de Tipos en TypeScript
 
 En JavaScript ES6, existen varias formas de convertir entre diferentes tipos de datos. Estas conversiones son útiles para realizar operaciones específicas o garantizar que los tipos sean los adecuados para una función o cálculo. A continuación, se presentan las conversiones más comunes, adaptadas a TypeScript.
@@ -27,8 +28,10 @@ En JavaScript ES6, existen varias formas de convertir entre diferentes tipos de 
 > [!NOTE]
 > En JavaScript las conversiones son **dinámicas** (el motor decide el tipo en tiempo de ejecución). TypeScript no inventa conversiones nuevas: añade **comprobaciones estáticas**, de modo que muchas conversiones "peligrosas" se detectan antes de ejecutar. Además, `tsc` exige ser explícito cuando una conversión no es segura a nivel de tipos.
 
+<a id="21-conversión-a-string"></a>
 ## 2.1 Conversión a String
 
+<a id="1-usando-string"></a>
 ### 1. Usando `String()`
 
 ```typescript
@@ -38,6 +41,7 @@ const texto: string = String(numero);
 
 `String()` devuelve siempre `string`, por lo que la asignación es segura. TypeScript conoce la firma: `String(value?: any): string`. Es decir, es un valor opcional que puede ser de cualquier tipo, y siempre devuelve un string.
 
+<a id="2-usando-template-literals-template-strings"></a>
 ### 2. Usando Template Literals (Template Strings)
 
 ```typescript
@@ -47,8 +51,10 @@ const texto: string = `${numero}`;
 
 Los template literals convierten cualquier valor interpolado a `string` dentro de la cadena.
 
+<a id="22-conversión-a-number"></a>
 ## 2.2 Conversión a Number
 
+<a id="1-usando-number"></a>
 ### 1. Usando `Number()`
 
 ```typescript
@@ -58,6 +64,7 @@ const numero: number = Number(texto);
 
 Cuidado: `Number()` puede devolver `NaN` (de tipo `number` en tiempo de ejecución). TypeScript no lo detecta automáticamente; conviene validar el resultado. Eso se hace con Number.isNaN(x)
 
+<a id="2-usando-parseint-o-parsefloat-para-conversiones-más-específicas"></a>
 ### 2. Usando `parseInt()` o `parseFloat()` para conversiones más específicas
 
 ```typescript
@@ -69,6 +76,7 @@ const decimal: number = parseFloat(texto);
 > [!TIP]
 > En TypeScript, `parseInt` sin la base (radix) es válido, pero los linters oficiales podrían marcarlo (TS/JS).  Lo mejor en TS moderno es pasar explícitamente la base: `parseInt(texto, 10)`.
 
+<a id="conversión-a-boolean"></a>
 ## Conversión a Boolean
 
 Aunque existe el objeto Boolean, no se suele utilizar para convertir a booleano, en vez de eso se suele usar la conversión implícita.
@@ -80,6 +88,7 @@ const esValido2: boolean = Boolean(0);       // false
 const esValido3: boolean = Boolean(null);    // false
 ```
 
+<a id="conversión-implícita-en-condiciones"></a>
 ### Conversión implícita en condiciones
 
 ```typescript
@@ -105,8 +114,10 @@ if (respuesta) {
   //Sabe que al ser un valor truthy descarta que sea null...
 }
 ```
+<a id="conversión-a-array"></a>
 ## Conversión a Array
 
+<a id="usando-el-operador-de-propagación-spread-operator"></a>
 ### Usando el operador de propagación o despliegue (Spread Operator)
 
 ```typescript
@@ -114,8 +125,10 @@ const cadena: string = "Hola";
 const arreglo: string[] = [...cadena]; // Despliega el string en un array ["H", "o", "l", "a"]
 ```
 
+<a id="conversión-a-objeto"></a>
 ## Conversión a Objeto
 
+<a id="de-objeto-a-string-y-viceversa-json"></a>
 ### De objeto a string y viceversa (JSON)
 
 Para serializar y deserializar objetos, usa `JSON.stringify()` y `JSON.parse()`:
@@ -141,6 +154,7 @@ console.log(recuperado.nombre); // "Profe". Funciona, pero luego veremos que ten
 > En TypeScript, `JSON.parse()` devuelve **`any`**, lo que rompe la seguridad de tipos si se asigna directamente. En este capítulo usamos `as Usuario`(aserción) para simplicidad, pero la práctica recomendada (y que veremos en los capítulos de localStorage y Fetch API) es tratar el resultado como `unknown` y validarlo con *type guards*.
 
 
+<a id="valores-truthy-y-falsy"></a>
 ## Valores truthy y falsy
 
 En contextos booleanos (condiciones de `if`, `while`, etc.), JavaScript evalúa los valores como `true` o `false`:
@@ -168,6 +182,7 @@ if ("0") console.log("¡Sí se ejecuta!");     // "0" es truthy (es un string no
 > [!TIP]
 >Es preferible no usar expresiones implícitas como if (texto) o if (valor) para evaluar cadenas o números en reglas de negocio (lógica humana detrás del código), sino hacer la comprobación de forma explícita escribiendo if (texto.length > 0) para verificar que un texto no esté vacío o if (valor !== 0) para confirmar que un número es distinto de cero. Esto se debe a que las condiciones explícitas comunican claramente la intención del código y permiten que TypeScript aplique el ajuste de tipos (narrowing) con mayor precisión, evitando errores sutiles cuando los valores válidos son 0 o cadenas vacías "".
 
+<a id="conversión-con-tipos-en-typescript"></a>
 ## Conversión con tipos en TypeScript
 
 En TypeScript conviene distinguir tres situaciones distintas que en JS se ven "iguales":
@@ -187,8 +202,13 @@ function esNumero(valor: unknown): void {
     console.log(valor.toFixed(2)); // aquí valor es number, seguro
   }
 }
+const dato2: unknown = 4;
+esNumero(dato2)
+const dato3: unknown = "5";
+esNumero(dato3)
 ```
 
+<a id="aserciones-de-tipo-type-assertions"></a>
 ### Aserciones de tipo (type assertions)
 
 > 💡 <span style="color: red; font-weight: bold;">No es necesario realizar los ejercicios de Type Assertions de este bloque.</span> En React es raro usar aserciones y, cuando se usan, siempre de la misma forma (`as` con `JSON.parse` o `invoke`). Sobre todo usaremos `as`. Se trabajará en profundidad más adelante con casos reales.

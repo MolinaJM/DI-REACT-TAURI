@@ -14,12 +14,15 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+<a id="5-estructuras-de-control-de-flujo-en-typescript"></a>
 # 5. Estructuras de Control de Flujo en TypeScript
 
 Las estructuras de control de flujo en JavaScript permiten tomar decisiones y repetir acciones según sea necesario en un programa. Estas estructuras son fundamentales para el flujo de ejecución de un programa. En TypeScript, además, las estructuras condicionales y los `switch` **refinan los tipos** de las variables (narrowing), lo que hace el código más seguro.
 
+<a id="51-estructuras-condicionales"></a>
 ## 5.1. Estructuras Condicionales
 
+<a id="511-declaración-if"></a>
 ### 5.1.1. Declaración `if`
 
 La estructura `if` se utiliza para ejecutar un bloque de código si una condición es verdadera.
@@ -32,6 +35,7 @@ if (edad >= 18) {
 }
 ```
 
+<a id="512-declaración-else"></a>
 ### 5.1.2. Declaración `else`
 
 El bloque `else` se ejecuta si la condición en `if` es falsa.
@@ -46,6 +50,7 @@ if (edad >= 18) {
 }
 ```
 
+<a id="513-else-if"></a>
 ### 5.1.3. `else if`
 
 `else if` se utiliza para evaluar múltiples condiciones secuencialmente.
@@ -71,8 +76,10 @@ if (puntuacion >= 90) {
 > [!TIP]
 > En TypeScript con `strict`, un `if (valor)` comprobando un tipo que incluye `null` o `undefined` provoca *narrowing*: dentro del bloque, el tipo de `valor` queda reducido. Es la base para manejar datos opcionales de forma segura.
 
+<a id="52-bucles"></a>
 ## 5.2. Bucles
 
+<a id="524-forof-loop-es6"></a>
 ### 5.2.4. `for...of` Loop (ES6)
 
 El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays:
@@ -97,8 +104,10 @@ for (const letra of "Hola") {
 > [!TIP]
 > Con `for...of`, cada `fruta` es automáticamente `string` (inferido del array). Al recorrer un `Map<string, number>` con `for (const [clave, valor] of mapa)`, TypeScript ya sabe que `clave: string` y `valor: number`.
 
+<a id="53-estructuras-de-control-avanzadas"></a>
 ## 5.3. Estructuras de Control Avanzadas
 
+<a id="531-switch-statement"></a>
 ### 5.3.1. `switch` Statement
 
 `switch` se utiliza para evaluar múltiples casos y ejecutar código según el caso que coincida.
@@ -121,6 +130,7 @@ switch (diaSemana) {
 > [!NOTE]
 > En `strict` mode, un `switch` sobre un tipo **unión** (p. ej. `type Estado = "ok" | "cargando" | "error"`) estrecha el tipo en cada `case`. Si además usamos el patrón *exhaustive check* con `never`, TypeScript nos avisa si falta un caso. Ya lo viste en el bloque "Ejemplo completo-resumen" al final de [`01_SintaxisBasica.md`](01_SintaxisBasica.md) (sección *never en exhaustiveness checking*), con una variable `_exhaustivo: never` en el `default`.
 
+<a id="54-narrowing-el-control-de-flujo-tipado"></a>
 ## 5.4. Narrowing: el control de flujo tipado
 
 TypeScript analiza el flujo del programa y **reduce el tipo** de una variable según las condiciones por las que pasa. Esto se llama *type narrowing* y es la forma segura de "filtrar" tipos unión.

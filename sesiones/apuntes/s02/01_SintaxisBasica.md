@@ -1,3 +1,4 @@
+<a id="capítulo-01-sintaxis-básica-de-typescript"></a>
 # **Capítulo 01. Sintaxis Básica de TypeScript 📝**🖥️
 
 - [**Capítulo 01. Sintaxis Básica de TypeScript 📝**🖥️](#capítulo-01-sintaxis-básica-de-typescript)
@@ -18,14 +19,17 @@
 - 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../EjerciciosPropuestos/ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../EjerciciosPropuestos/ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../EjerciciosPropuestos/ejerciciosTS.md#3-tipos-especiales)
 - 🧪 **Ejercicios (Sesión 3):** [Interfaces](../../EjerciciosPropuestos/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../EjerciciosPropuestos/ejerciciosTS.md#5-type-aliases) · [Union Types](../../EjerciciosPropuestos/ejerciciosTS.md#6-union-types)
 
+<a id="1-sintaxis-básica-de-typescript"></a>
 # 1. **Sintaxis Básica de TypeScript**
 
 TypeScript es un superconjunto tipado de JavaScript. Toda la sintaxis de JavaScript es válida, pero TypeScript añade **anotaciones de tipo** (`tipo:`) que el compilador `tsc` valida en tiempo de compilación y que luego se eliminan (en la mayoría de los casos, salvo por ejemplo con los enums) al ejecutar. JS no sabe lo que es un enum, por lo que la ejecución fallaría. Esto es lo que se llama "Erasable Syntax". Este capítulo parte del contenido original de JavaScript y lo enriquece con tipos.
 
+<a id="11-declaración-de-variables-en-typescript"></a>
 ## 1.1 Declaración de Variables en TypeScript
 
 JavaScript ofrece varias formas de declarar variables, siendo `let` y `const` las más usadas en JavaScript moderno y en TypeScript. Cada una de ellas tiene características específicas, y en TypeScript además se les puede añadir una anotación de tipo.
 
+<a id="i-let"></a>
 ### i. `let`
 
 - Declaración con alcance de bloque (`block scope`).
@@ -45,6 +49,7 @@ let edad: number = 25;
 // edad = "treinta"; // Error TS: Type 'string' is not assignable to type 'number'
 ```
 
+<a id="ii-const"></a>
 ### ii. `const`
 
 - Declaración con alcance de bloque (`block scope`).
@@ -66,8 +71,10 @@ En resumen:
   let  |       Sí        |     No     |    Sí     |   
 | const |       Sí        |     No     |    No     |  
 
+<a id="12-tipos-de-datos-en-typescript-sesión-2"></a>
 ## 1.2 Tipos de datos en TypeScript.💎 (Sesión 2)
 
+<a id="tipos-de-datos-primitivos-en-typescript"></a>
 ### Tipos de datos primitivos en TypeScript
 
 A partir de ES6 y versiones posteriores, los tipos de datos primitivos en JavaScript son, y en TypeScript se escriben en minúscula (no confundir con los constructores `String`, `Number`, `Boolean` que usan mayúscula) En TypeScript no se suelen utilizar los objetos tipo, solo para casos muy rebuscados.:
@@ -82,11 +89,13 @@ A partir de ES6 y versiones posteriores, los tipos de datos primitivos en JavaSc
 > En TypeScript **no se debe usar** `String`, `Number`, `Boolean`... con la primera letra mayúscula como anotación: se refieren a los objetos envoltorio (`wrapper objects`) y su uso como tipo está desaconsejado por el linter oficial. Las anotaciones correctas son minúsculas: `string`, `number`, `boolean`, `bigint`, `symbol`, `null`, `undefined`.
 
 
+<a id="anotaciones-de-tipo-el-valor-añadido-de-typescript"></a>
 ### Anotaciones de tipo: el valor añadido de TypeScript
 
 Como este repositorio está adaptado a TypeScript, todos los ejemplos anteriores usan anotaciones explícitas. Es importante matizar dos estilos:
 
 
+<a id="inferencia-de-tipos-type-inference"></a>
 ### Inferencia de tipos (Type Inference)
 
 - **Inferencia**: `let precio = 12.5;` TypeScript deduce solo `number`. Se recomienda dejar que infiera en variables locales.
@@ -99,6 +108,7 @@ function calcularIVA(precio: number, iva: number): number {
 ```
 
 
+<a id="tipos-especiales-any-unknown-never-y-void"></a>
 ### Tipos especiales: `any`, `unknown`, `never` y `void`
 
 Estos cuatro tipos cubren casos "frontera" del sistema de tipos. Tres de ellos se explican aquí; `void` (ausencia de retorno) se detalla en el capítulo de [funciones](../s02/04_Funciones.md#1-declaración-de-funciones).
@@ -150,8 +160,10 @@ function area(forma: Forma): number {
 > [!IMPORTANT]
 > En todo este repositorio los ejemplos se escriben en **erasable-only TypeScript**: solo sintaxis que Node 24 puede ejecutar directamente (type stripping) sin paso previo de compilación. Es decir, nada de `enum;` sí `interface`, `type`, uniones y genéricos.
 
+<a id="13-tipos-avanzados-sesión-3"></a>
 ## 1.3 Tipos avanzados (Sesión 3)
 
+<a id="tipos-de-datos-no-primitivos-objetos"></a>
 ### Tipos de datos no primitivos (objetos):
 
 Los **tipos de datos no primitivos** son aquellos que **almacenan referencias** a objetos en lugar de valores directos. Esto significa que cuando asignas o pasas un objeto, lo que se copia es una referencia al objeto, no el objeto en sí (los famosos punteros). Los tipos no primitivos son mutables, lo que significa que puedes cambiar sus propiedades o el contenido de las colecciones sin cambiar la referencia al objeto.
@@ -164,6 +176,7 @@ Algunos ejemplos de tipos no primitivos son:
 - **Colecciones**: `Set`, `Map`, `Date`, etc.
 
 
+<a id="interfaces-y-type-aliases"></a>
 ### Interfaces y Type Aliases
 
 Los objetos se modelan con `interface` o `type`:
@@ -310,6 +323,7 @@ interface User {
 > - **Propiedades de solo lectura (`readonly`)** — se usan de vez en cuando para datos que no deben mutar (IDs, claves), pero no es un patrón frecuente.
 
 
+<a id="unión-de-tipos"></a>
 ### Unión de tipos
 
 
@@ -353,6 +367,7 @@ function procesarRespuesta(respuesta: RespuestaAPI) {
 > [!TIP] Como ya se ha comentado antes, no se pueden usar los enums. ; 
 
 
+<a id="intersección-de-tipos-"></a>
 ### Intersección de tipos (`&`)
 
 La **intersección (`&`)** combina tipos (interfaces y types) exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):

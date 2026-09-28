@@ -1,3 +1,4 @@
+<a id="capítulo-00-typescript-sobre-es6es2026"></a>
 # **Capítulo 00. TypeScript  sobre ES6+/ES2026 📝**💻
 
 - [**Capítulo 00. TypeScript  sobre ES6+/ES2026 📝**💻](#capítulo-00-typescript-sobre-es6es2026)
@@ -20,8 +21,10 @@
 
 ---
 
+<a id="0-introducción-a-javascript-y-typescript"></a>
 # 0. Introducción a JavaScript y TypeScript 📖
 
+<a id="01-qué-es-typescript"></a>
 ## 0.1 ¿Qué es TypeScript?
 
 TypeScript fue desarrollado por Microsoft y se ha convertido en el estándar para desarrollo JavaScript a gran escala.  Todo código JavaScript válido es TypeScript válido, pero TypeScript extiende JS con un sistema de tipos que permite detectar errores en tiempo de compilación.
@@ -41,6 +44,7 @@ TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
 
 > 💡 **Recuerda:** TypeScript **es** JavaScript con tipos. Todo lo que aprendes de JS se mantiene; los tipos se añaden encima.
 
+<a id="02-ventajas-de-typescript"></a>
 ## 0.2 Ventajas de TypeScript
 
 1. **Detección temprana de errores**: Los errores se detectan en tiempo de compilación
@@ -51,6 +55,7 @@ TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
 6. **Ecosistema**: React soporta TypeScript de forma oficial y nativa en todas sus herramientas y documentación.
 Ahora que sabes qué es TypeScript y por qué usarlo, veamos cómo instalarlo y configurarlo.
 
+<a id="03-instalación-y-configuración"></a>
 ## 0.3 Instalación y Configuración
 
 Para empezar con TypeScript en **bash** (WSL, Linux o macOS), ejecuta estas 4 órdenes en orden (unas dependen de otras):
@@ -105,10 +110,12 @@ TypeScript se compila a JavaScript estándar, por lo que puede ejecutarse en cua
 
 ---
 
+<a id="04-características-modernas"></a>
 ## 0.4 Características Modernas
 
 JavaScript en 2026 es un lenguaje moderno, potente y versátil. Así es JavaScript hoy en día:
 
+<a id="1-lenguaje-multi-paradigma-moderno"></a>
 #### 1. **Lenguaje Multi-paradigma Moderno**
 
 JavaScript ha evolucionado para soportar múltiples paradigmas de programación:
@@ -178,6 +185,7 @@ console.log("Seguro que yo me jeecuto antes..");
 
 > 💡 **¿Cómo haríamos para...?** el mismo patrón de promesas en un proyecto 100% Tauri? El `fetch` a una URL web se sustituirá por `invoke("comando", { id: userId })`, donde el backend es código Rust en lugar de un servidor HTTP. El control de flujo (`async`/`await`, `try/catch`, `Promise`) es idéntico; solo cambia qué función llamamos. De todas formas, lo normal será seguir usando fetch de TS y dejar para Tauri puro solamente lo indispensable.
 
+<a id="3-programación-funcional-avanzada"></a>
 #### 3. **Programación Funcional Avanzada**
 
 JavaScript ES6+ ofrece características poderosas para programación funcional:
@@ -230,6 +238,7 @@ const multiplicar = crearOperacion("*");
 console.log(multiplicar(4, 2)); // Resul: 8
 ```
 
+<a id="4-tipado-estático-con-typescript"></a>
 #### 4. **Tipado Estático con TypeScript**
 
 JavaScript mantiene su tipado dinámico (con inferencia de tipos), pero este curso, y la mayoría de la industria moderna, apuesta por **TypeScript** para el tipado estático:
@@ -259,6 +268,7 @@ let usuario: Usuario = {
 > [!IMPORTANT]
 > En este curso **prohibimos `any`** en los ejemplos. Por qué? El uso de any INVALIDA las ventajas de TS. Cuando un valor llega del exterior y no conocemos su tipo (p. ej. `JSON.parse`), lo tratamos como `unknown` y lo validamos mediante narrowing (typeof/instanceof/type guards). Veremos el patrón en los capítulos de localStorage y Fetch API.
 
+<a id="6-asincronía-nativa-y-moderna"></a>
 #### 6. **Asincronía Nativa y Moderna**
 
 JavaScript es conocido por su enfoque **asíncrono** y su capacidad para manejar operaciones basadas en eventos, como las interacciones del usuario o las solicitudes HTTP. Este enfoque es especialmente importante en entornos como los **navegadores** y **Node.js**, donde ciertas operaciones, como la **carga de datos desde un servidor, pueden tardar un tiempo en completarse**.
@@ -433,12 +443,14 @@ El enfoque asíncrono de JavaScript permite que el programa continúe ejecutánd
 > [!NOTE]
 > En TypeScript, una función `async` siempre devuelve `Promise<T>`. El tipo `T` se infiere del `return`. Además, en lugar de `any` para los datos de la API, usaremos *type guards* y validación.
 
+<a id="05-primeros-pasos-con-typescript"></a>
 ## 0.5 Primeros Pasos con TypeScript
 
 **TS solo sirve para React??** Además de React, TypeScript sirve para construir backends robustos y tipados en Node.js o NestJS, aplicaciones móviles con React Native o Expo, programas de escritorio multiplataforma mediante Electron, apps web con frameworks como Angular o Vue, y funciones en la nube (serverless), etc...
 
 Vamos a crear nuestros primeros ejemplos utilizando TypeScript  sobre la base de JavaScript ES6+ (ECMA 2015). Estos son los conceptos fundamentales que necesitarás para empezar a programar. Podemos probar gran parte del código en el Playground oficial de TS en [https://www.typescriptlang.org/play/](https://www.typescriptlang.org/play/) o en el BANCO DE PRUEBAS de este proyecto.
 
+<a id="hola-mundo-moderno"></a>
 ### Hola Mundo Moderno
 
 El clásico "Hola Mundo" pero con características modernas:
@@ -453,6 +465,7 @@ console.log(mensaje); // ¡Hola! Soy Profe y te doy la bienvenida a DI
 
 ```
 
+<a id="arrow-functions"></a>
 ### Arrow Functions
 
 Las funciones flecha son una forma más compacta de escribir funciones, y en TypeScript se tipan:
@@ -489,6 +502,7 @@ const calcularMedia = (nota1: number, nota2: number, nota3: number): string => {
 console.log(calcularMedia(7.5, 8.0, 6.5));
 ```
 
+<a id="template-literals"></a>
 ### Template Literals
 
 Los template literals permiten crear cadenas de texto con variables y expresiones:
@@ -533,6 +547,7 @@ const formatearNombre = (nombre: string, apellidos: string): string => {
 console.log(formatearNombre("juan", "pérez")); // ALUMNO: JUAN PÉREZ
 ```
 
+<a id="destructuring"></a>
 ### Destructuring
 
 El destructuring permite extraer valores de arrays y objetos de forma concisa, y en TypeScript mantiene los tipos. Muy útil en React para los Props y Hooks.
@@ -715,6 +730,7 @@ console.log(textos); // ["a", "b", "c"]
 
 ---
 
+<a id="06-ejemplo-completo-resumen"></a>
 ## 0.6 Ejemplo completo-resumen 
 
 ```typescript

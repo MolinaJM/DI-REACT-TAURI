@@ -18,6 +18,7 @@
 
 ---
 
+<a id="4-funciones-en-typescript"></a>
 # 4. Funciones en TypeScript
 
 Las funciones son bloques de código reutilizables que pueden realizar tareas específicas en JavaScript. En TypeScript además podemos declarar el tipo de los **parámetros** y del **retorno**, de manera que el compilador comprueba cada llamada.
@@ -25,6 +26,7 @@ Las funciones son los principales "bloques de construcción" del programa. Permi
 
 > ECMAScript 6 (también conocido como ES6 o ES2015) introdujo nuevas características que hacen que trabajar con funciones sea más poderoso y flexible. TypeScript añade encima las **anotaciones de tipo** y los **genéricos**.
 
+<a id="1-declaración-de-funciones"></a>
 ## 1. Declaración de funciones
 
 En JavaScript, puedes declarar una función de la siguiente manera. En TypeScript tipamos parámetros y retorno:
@@ -41,6 +43,7 @@ saludar(); // Imprime: ¡Hola, mundo!, Bienvenido Profe
 > [!NOTE]
 > `void` indica que la función no devuelve ningún valor. Si una función devuelve algo, anotamos ese tipo: `function sumar(a: number, b: number): number { return a + b; }`.
 
+<a id="2-expresiones-de-funciones-o-expresiones-funcionales"></a>
 ## 2. Expresiones de funciones o expresiones funcionales.
 
 Las expresiones de funciones son funciones definidas dentro de una expresión, y pueden asignarse a variables. Por ejemplo:
@@ -56,6 +59,7 @@ console.log(resultado); // Imprime: 8
 
 TypeScript infiere el tipo de `suma` (la firma `(a: number, b: number) => number`) a partir de la asignación.
 
+<a id="3-funciones-de-flecha"></a>
 ## 3. Funciones de flecha
 
 Las funciones de flecha (arrow o lambda) son una forma más concisa de escribir funciones anónimas. Se definen utilizando la sintaxis `() => {}`. Ejemplo:
@@ -76,6 +80,7 @@ const duplicar = (numero: number): number => numero * 2;
 console.log(duplicar(9)); // Imprime: 18
 ```
 
+<a id="31-funciones-de-flecha-como-argumentos"></a>
 ### 3.1. Funciones de Flecha como Argumentos
 
 Las funciones de flecha son útiles para funciones de orden superior, como `map`, `filter` y `reduce` que veremos más adelante. 
@@ -91,6 +96,7 @@ console.log(cuadrados); // [1, 4, 9, 16, 25]
 > [!TIP]
 > Con `map`, `filter` y `reduce`, TypeScript suele **inferir** el tipo del parámetro a partir del array. El código anterior se puede simplificar a `numeros.map((numero) => numero ** 2)` y aun así sigue siendo `number[]`.
 
+<a id="4-valores-predeterminados-de-parámetros"></a>
 ## 4. Valores predeterminados de parámetros
 
 ES6 permite asignar valores predeterminados a los parámetros de una función. Esto es útil cuando un parámetro es opcional:
@@ -104,6 +110,7 @@ saludar(); // Imprime: ¡Hola, Usuario!
 saludar("Lara"); // Imprime: ¡Hola, Lara!
 ```
 
+<a id="5-rest-parameters-y-operador-spread"></a>
 ## 5. Rest parameters y operador spread
 
 Los rest parameters y el operador spread (`...`) permiten trabajar con un número variable de argumentos en una función. En TypeScript, un rest parameter es un array tipado, le dice a TypeScript: "Empaqueta todos los argumentos que me pasen sueltos y mételos dentro de un Array llamado 'lo que sea'".:
@@ -137,6 +144,7 @@ console.log(sumar(...otro));
 > [!TIP]
 >  El rest parameter también puede ser una tupla para tipos mixtos: `function crearUsuario(...datos: [nombre: string, edad: number])`.
 
+<a id="6-funciones-como-expresiones-y-tipos-de-función"></a>
 ## 6. Funciones como expresiones (y tipos de función)
 
 Las funciones pueden asignarse a variables y pasarse como argumentos a otras funciones. Esto es **fundamental para conceptos como callbacks y promesas**. En TypeScript podemos tipar la función que se recibe:
@@ -155,6 +163,7 @@ ejecutarFuncion(funcionSaludo); // Imprime: ¡Hola, Don Tancredo!
 
 El tipo del parámetro `funcion` es `(nombre: string) => void`: "una función que recibe un `string` y no devuelve nada". Si `funcionSaludo` no encajara con esa firma, `tsc` daría error.
 
+<a id="7-cierres-closures"></a>
 ## 7. Cierres o clausuras (closures)
 
 
@@ -181,6 +190,7 @@ console.log(incrementar()); // Imprime: 2
 
 > [!NOTE]
 >En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados.
+<a id="8-tipos-de-función-callbacks-y-genéricos"></a>
 ## 8. Tipos de función, callbacks y genéricos
 
 Para terminar el capítulo, hay más tipos de funciones que veremos en siguientes capítulos:
@@ -201,6 +211,7 @@ function procesar(numeros: number[], callback: (n: number) => void): void {
 }
 ```
 
+<a id="81-qué-son-los-genéricos"></a>
 ### 8.1 ¿Qué son los genéricos?
 
 Los **genéricos** (`<T>`) permiten escribir funciones y estructuras que funcionan con **cualquier tipo** sin perder la seguridad de tipos. En lugar de fijar un tipo concreto (como `number` o `string`), usamos un **parámetro de tipo** (`T`) que se "despega" en la llamada.
@@ -237,6 +248,7 @@ const b = primero([true, false]);     // T = boolean, tipo de b: boolean | undef
 - Componentes reutilizables — `<Tabla<Producto> datos={productos} />`.
 - `Array.map<T, U>`, `Array.filter<T>`, `Promise<T>`, etc.
 
+<a id="82-restringir-genéricos-con-extends"></a>
 ### 8.2 Restringir genéricos con `extends`
 
 Puedes limitar los tipos que un genérico acepta usando `extends`:
@@ -256,6 +268,7 @@ obtenerPropiedad({ id: "abc" }, "id"); // ✅ "abc"
 // obtenerPropiedad({ x: 1 }, "x");    // ❌ Error: { x: number } no cumple la restricción
 ```
 
+<a id="83-cola-genérica-factoría"></a>
 ### 8.3 Cola genérica (factoría)
 
 Los genéricos también funcionan con estructuras de datos:
@@ -287,6 +300,7 @@ colaNombres.encolar("Carlos");
 colaNombres.desencolar(); // string | undefined
 ```
 
+<a id="84-conexión-con-react-y-tauri"></a>
 ### 8.4 Conexión con React y Tauri
 
 Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:

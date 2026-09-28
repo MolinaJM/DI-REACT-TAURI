@@ -19,14 +19,17 @@
 
 ---
 
+<a id="3-operadores-lógicos-y-de-comparación-en-typescript"></a>
 # 3. Operadores Lógicos y de Comparación en TypeScript.
 
 Los operadores lógicos y de comparación son fundamentales en JavaScript para realizar evaluaciones y tomar decisiones lógicas en tus programas. ES6 y versiones posteriores han ampliado las capacidades con nuevos operadores. A continuación, se presentan los operadores más comunes, adaptados a TypeScript y con un apartado final sobre los tipos que devuelve/n recibe cada operador.
 
+<a id="31-operadores-de-comparación"></a>
 ## 3.1. Operadores de Comparación
 
 Los operadores de comparación se utilizan para comparar valores y devuelven un valor booleano (verdadero o falso) según el resultado de la comparación. En TypeScript, `===`, `>`, `<`, `>=`, `<=` exigen que los operandos sean comparables y devuelven `boolean`.
 
+<a id="i-igualdad-y-desigualdad"></a>
 ### i. Igualdad (`==`) y Desigualdad (`!=`)
 
 - `==` compara si dos valores son iguales.
@@ -43,6 +46,7 @@ console.log(numero1 != numero2); // true
 > [!WARNING]
 > `==` y `!=` aplican **coerción de tipos** automática (`"5" == 5` es `true`). TypeScript y los linters desaconsejan su uso: en un proyecto con `strict` es mucho más seguro usar siempre `===` y `!==`.
 
+<a id="ii-igualdad-estricta-y-desigualdad-estricta"></a>
 ### ii. Igualdad Estricta (`===`) y Desigualdad Estricta (`!==`)
 
 - `===` compara si dos valores son iguales y tienen el mismo tipo de datos.
@@ -59,6 +63,7 @@ console.log(texto1 !== numero3); // true
 > [!NOTE]
 > `texto1 === numero3` con tipos `string` y `number`: TypeScript avisa con un error de tipos porque comparar `string` con `number` casi nunca es intencionado. Es una ayuda que no existe en JavaScript puro, donde la comparación simplemente devuelve `false`.
 
+<a id="iii-mayor-que-y-menor-que"></a>
 ### iii. Mayor que (`>`) y Menor que (`<`)
 
 - `>` compara si un valor es mayor que otro.
@@ -72,6 +77,7 @@ console.log(edad1 > edad2); // false
 console.log(edad1 < edad2); // true
 ```
 
+<a id="iv-mayor-o-igual-que-y-menor-o-igual-que"></a>
 ### iv. Mayor o Igual que (`>=`) y Menor o Igual que (`<=`)
 
 - `>=` compara si un valor es mayor o igual que otro.
@@ -85,10 +91,12 @@ console.log(cantidad1 >= cantidad2); // true
 console.log(cantidad1 <= cantidad2); // true
 ```
 
+<a id="32-operadores-lógicos"></a>
 ## 3.2. Operadores Lógicos
 
 Los operadores lógicos se utilizan para realizar operaciones lógicas en valores booleanos.
 
+<a id="i-and-lógico"></a>
 ### i. AND Lógico (`&&`)
 
 El operador `&&` devuelve `true` si ambos operandos son `true`.
@@ -109,6 +117,7 @@ console.log("Hola" && 42);           // 42 (ambos truthy, devuelve el último)
 ```
 
 
+<a id="ii-or-lógico"></a>
 ### ii. OR Lógico (`||`)
 
 El operador `||` devuelve `true` si al menos uno de los operandos es `true`.
@@ -131,6 +140,7 @@ console.log(null || "defecto");    // "defecto" (patrón clásico de valor por d
 > [!WARNING]
 > El patrón `valor || "defecto"` tiene una trampa: si `valor` es `""` o `0` (falsy pero no nulos), se reemplaza igualmente. En TypeScript moderno se prefiere `??` cuando solo queremos reemplazar `null`/`undefined`.
 
+<a id="iii-not-lógico"></a>
 ### iii. NOT Lógico (`!`)
 
 El operador `!` invierte el valor booleano de su operando.
@@ -144,10 +154,12 @@ console.log(!esDiaLaboral); // false
 > [!NOTE]
 > No confundir este operador con la **aserción de no-nulo** de TypeScript (`valor!`), que en runtime no hace nada y solo le dice al compilador "esto no es null/undefined". Se usa con moderación (ver capítulo de DOM).
 
+<a id="33-operador-ternario"></a>
 ## 3.3. Operador Ternario (`?`)
 
 El operador ternario, representado por `condición ? expresión1 : expresión2`, es una forma concisa de realizar una evaluación condicional en JavaScript. Si la condición es verdadera, se ejecuta `expresión1`; de lo contrario, se ejecuta `expresión2`. Es útil para asignar valores basados en una condición.
 
+<a id="ejemplo-de-operador-ternario"></a>
 ### Ejemplo de operador ternario
 
 ```typescript
@@ -157,10 +169,12 @@ console.log(`¿Es mayor de edad? ${esMayor}`); // Imprime "¿Es mayor de edad? S
 ```
 
 
+<a id="34-operador-nullish-coalescing"></a>
 ## 3.4. Operador Nullish Coalescing (`??`)
 
 El operador nullish coalescing (`??`) se utiliza para proporcionar un valor predeterminado en caso de que una expresión sea `null` o `undefined`. Es útil para manejar valores nulos o indefinidos de manera segura. En TypeScript es muy habitual junto a valores de tipo `T | null | undefined`.
 
+<a id="ejemplo-de-nullish-coalescing"></a>
 ### Ejemplo de nullish coalescing
 
 ```typescript
@@ -171,6 +185,7 @@ console.log(valorPredeterminado); // Imprime "Valor predeterminado"
 
 Observa cómo el tipo se elimina: `valor` era `string | null`, y `valor ?? "defecto"` es `string`. TypeScript usa el `??` para *narrowing* de nulos.
 
+<a id="35-tipos-resultantes-cómo-los-ve-typescript"></a>
 ## 3.5. Tipos resultantes: cómo los ve TypeScript
 
 | Operador | Operandos típicos | Tipo que devuelve TypeScript |

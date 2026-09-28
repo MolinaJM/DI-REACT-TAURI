@@ -12,6 +12,7 @@
 
 ---
 
+<a id="6-ámbito-scope-en-typescript"></a>
 # 6. Ámbito (Scope) en TypeScript
 
 En JavaScript, el ámbito (scope) se refiere a las reglas que determinan dónde pueden ser accedidas las variables y funciones dentro de un programa. Comprender el ámbito y el uso de `this` es fundamental para escribir código JavaScript efectivo.
@@ -19,10 +20,12 @@ En JavaScript, el ámbito (scope) se refiere a las reglas que determinan dónde 
 // - `this` → no se cubre en este bloque (se verá en sesiones avanzadas)
 Este manual explora los conceptos de ámbito y `this` en ECMAScript 6 y versiones posteriores, y muestra cómo TypeScript los tipa y protege.
 
+<a id="61-ámbito-scope"></a>
 ## 6.1. Ámbito (Scope)
 
 El ámbito en JavaScript determina dónde una variable o función es accesible en un programa. ECMAScript 6 introduce nuevos tipos de ámbito, como el ámbito de bloque.
 
+<a id="611-ámbito-global"></a>
 ### 6.1.1 Ámbito Global
 
 Las variables declaradas fuera de cualquier función tienen un ámbito global y pueden ser accedidas desde cualquier lugar del código.
@@ -41,6 +44,7 @@ console.log(globalVar); // También se puede acceder aquí
 ```
 
 
+<a id="612-ámbito-de-función"></a>
 ### 6.1.2 Ámbito de Función
 
 Las variables declaradas dentro de una función tienen un ámbito local y solo pueden ser accedidas desde dentro de esa función.
@@ -57,6 +61,7 @@ exampleFunction(); // Imprime "Soy local"
 // console.log(localVar); // Error: localVar no está definida fuera de la función
 ```
 
+<a id="613-ámbito-de-bloque"></a>
 ### 6.1.3 Ámbito de Bloque
 
 ECMAScript 6 introduce el ámbito de bloque, que se aplica a variables declaradas con `let` y `const`. Estas variables solo son accesibles dentro del bloque en el que se declaran.
@@ -72,6 +77,7 @@ if (true) {
 // console.log(blockVar); // Error: blockVar no está definida fuera del bloque
 ```
 
+<a id="614-ámbito-de-cierre-closures"></a>
 ### 6.1.4 Ámbito de Cierre (Closures)
 
 Los closures ocurren cuando una función se declara dentro de otra función y tiene acceso a las variables de su función contenedora, incluso después de que la función contenedora haya terminado de ejecutarse.
@@ -96,8 +102,10 @@ closureExample(); // Imprime "Externa"
 > [!NOTE]
 > Hay que tener en cuenta que el tipo devuelto por la función ha de ser igual tipo de dato recept
 
+<a id="62-ejemplos-prácticos"></a>
 ## 6.2. Ejemplos Prácticos
 
+<a id="ejemplo-1-closure-contador-ámbito-léxico-en-acción"></a>
 #### Ejemplo 1: Closure contador 
 
 ```typescript
