@@ -168,7 +168,8 @@ Algunos ejemplos de tipos no primitivos son:
 
 Los objetos se modelan con `interface` o `type`:
 
-- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). Un index signature (o signatura de índice) es una sintaxis de TypeScript que te permite definir el tipo de los valores en un objeto cuando no sabes de antemano el nombre exacto de las propiedades (claves), pero sí sabes el tipo de la clave y el tipo del valor (ej: puntuación de jugadores). De todas formas, en React+Tauri prácticamente nunca se usará porque se suele usar Record<string, T> (concepto que se verá más adelante). Index signature también se puede usar con type.
+- **`interface`** describe la *forma* de un objeto: propiedades y métodos. Admite propiedades **opcionales** (`?`), de **solo lectura** (`readonly`) e **index signatures** (claves dinámicas). 
+  - Un index signature (o signatura de índice) es una sintaxis de TypeScript que te permite definir el tipo de los valores en un objeto cuando no sabes de antemano el nombre exacto de las propiedades (claves), pero sí sabes el tipo de la clave y el tipo del valor (ej: puntuación de jugadores). De todas formas, en React+Tauri prácticamente nunca se usará porque se suele usar Record<string, T> (concepto que se verá más adelante). Index signature también se puede usar con type.
 
 ```typescript
 //Definición del tipo usando index signature
