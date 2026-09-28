@@ -99,7 +99,7 @@ Y esto por qué es útil? Pues porque **recalcula el tipo sin poner en riesgo la
 
 ```typescript
 const respuesta: string | null = obtenerRespuesta();
-
+//Aquí, en tiempo de compilación (codificación) el tipo puede ser o string o null.
 if (respuesta) {
   console.log(typeof respuesta); // aquí respuesta es string (no null). 
   //Sabe que al ser un valor truthy descarta que sea null...
@@ -107,11 +107,11 @@ if (respuesta) {
 ```
 ## Conversión a Array
 
-### Usando el operador de propagación (Spread Operator)
+### Usando el operador de propagación o despliegue (Spread Operator)
 
 ```typescript
 const cadena: string = "Hola";
-const arreglo: string[] = [...cadena]; // ["H", "o", "l", "a"]
+const arreglo: string[] = [...cadena]; // Despliega el string en un array ["H", "o", "l", "a"]
 ```
 
 ## Conversión a Objeto
@@ -134,13 +134,12 @@ console.log(json); // '{"nombre":"Profe","edad":35}'
 
 // String JSON → Objeto
 const recuperado: Usuario = JSON.parse(json) as Usuario; //Estamos usando una ASERCIÓN
-console.log(recuperado.nombre); // "Profe"
+console.log(recuperado.nombre); // "Profe". Funciona, pero luego veremos que tendríamos que VALIDAR esto.
 ```
 
 > [!IMPORTANT]
 > En TypeScript, `JSON.parse()` devuelve **`any`**, lo que rompe la seguridad de tipos si se asigna directamente. En este capítulo usamos `as Usuario`(aserción) para simplicidad, pero la práctica recomendada (y que veremos en los capítulos de localStorage y Fetch API) es tratar el resultado como `unknown` y validarlo con *type guards*.
 
-> `Object(numero)` como en `Object(42)` crea un **objeto envoltorio** (`Number { 42 }`), no un objeto literal. Esto tiene usos muy específicos y no se recomienda como "conversión a objeto" de uso general. En TypeScript, el resultado se tipa como `Number` (el tipo objeto), no como `number`.
 
 ## Valores truthy y falsy
 
@@ -149,7 +148,7 @@ En contextos booleanos (condiciones de `if`, `while`, etc.), JavaScript evalúa 
 **Falsy** (se evalúan como `false`):
 
 ```typescript
-false, 0, -0, 0n, "", null, undefined, NaN
+false, 0, -0, 0n (BigInt), "", null, undefined, NaN
 ```
 
 **Truthy** (se evalúan como `true`): todos los demás, incluyendo:
@@ -167,7 +166,7 @@ if ("0") console.log("¡Sí se ejecuta!");     // "0" es truthy (es un string no
 ```
 
 > [!TIP]
-> Al programar con el modo strict en TypeScript, es preferible no usar expresiones implícitas como if (texto) o if (valor) para evaluar cadenas o números en reglas de negocio (lógica humana detrás del código), sino hacer la comprobación de forma explícita escribiendo if (texto.length > 0) para verificar que un texto no esté vacío o if (valor !== 0) para confirmar que un número es distinto de cero. Esto se debe a que las condiciones explícitas comunican claramente la intención del código y permiten que TypeScript aplique el ajuste de tipos (narrowing) con mayor precisión, evitando errores sutiles cuando los valores válidos son 0 o cadenas vacías "".
+>Es preferible no usar expresiones implícitas como if (texto) o if (valor) para evaluar cadenas o números en reglas de negocio (lógica humana detrás del código), sino hacer la comprobación de forma explícita escribiendo if (texto.length > 0) para verificar que un texto no esté vacío o if (valor !== 0) para confirmar que un número es distinto de cero. Esto se debe a que las condiciones explícitas comunican claramente la intención del código y permiten que TypeScript aplique el ajuste de tipos (narrowing) con mayor precisión, evitando errores sutiles cuando los valores válidos son 0 o cadenas vacías "".
 
 ## Conversión con tipos en TypeScript
 
@@ -180,7 +179,7 @@ En TypeScript conviene distinguir tres situaciones distintas que en JS se ven "i
 ```typescript
 // Aserción de tipos (no es conversión de runtime)
 const dato: unknown = JSON.parse('{"a":1}');
-const objeto = dato as { a: number }; // confiamos, peligroso sin validar
+const objeto = dato as { a: number }; // confiamos, peligroso sin validar. Se debería usar type guards (typeof)
 
 // Narrowing (seguro)
 function esNumero(valor: unknown): void {
