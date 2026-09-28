@@ -220,7 +220,7 @@ let a:ID;
 // Si los datos son heterogéneos o hay más campos, es preferible usar un objeto ({ code: 200, message: "OK" }).
 // Puede haber tuplas de 2,3,4 o 100 elementos.
 // 1. Definición del type como una tupla etiquetada (código HTTP, mensaje)
-type ApiResponse = [status: number, message: string];
+type ApiResponse = [status: number, message: string]; //se pone "clave" por legibilidad y documentación, pero no por utilidad
 const successResponse: ApiResponse = [200, "OK"];
 //console.log(successResponse.status) Esto da error!!
 console.log(successResponse[0]) //Esto no
