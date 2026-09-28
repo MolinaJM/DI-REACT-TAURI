@@ -187,16 +187,29 @@ if ("0") console.log("¡Sí se ejecuta!");     // "0" es truthy (es un string no
 
 En TypeScript conviene distinguir tres situaciones distintas que en JS se ven "iguales":
 
-1. **Conversión de runtime** (`Number`, `String`, `Boolean`, `parseInt`, spread...): cambia el valor; el tipo resultante se sobreescribe.
-2. **Aserción de tipos** (`as`): le dices a TypeScript "confía en mí, esto es de este tipo". NO cambia nada en runtime. Se usa con cuidado.
-3. **Narrowing** (typeof, instanceof, `===`): TypeScript deduce el tipo por el flujo del programa. Es la vía segura y preferida.
+1. **Conversión de runtime** (`Number`, `String`, `Boolean`, `parseInt`, spread...): cambia el valor; el tipo resultante se sobreescribe. INSEGURO!
+2. **Aserción de tipos** (`as`): le dices a TypeScript "confía en mí, esto es de este tipo". NO cambia nada en runtime. Se usa con cuidado. POTENCIALMENTE INSEGURO
+3. **Narrowing** (typeof, instanceof, `===`): TypeScript deduce el tipo por el flujo del programa. Es la vía segura y preferida. SEGURO
 
 ```typescript
+// Narrowing (seguro) mediante typeguard
+function esNumero(valor: unknown): void {
+  if (typeof valor === "number") { 
+    console.log(valor.toFixed(2)); // aquí valor es number, seguro
+  }
+}
+const dato3: unknown = 3;
+esNumero(dato3)
+const dato4: unknown = "4";
+esNumero(dato4)
+
+
+//Aserción con unknown
 const dato: unknown = JSON.parse('{"a":1}');
 const objeto = dato as { a: number }; // confiamos, peligroso sin validar. Se debería usar type guards (typeof)
 console.log(objeto.a);
 
-// Narrowing (seguro). 
+// Narrowing (seguro) + TYPEGUARDS (Este concepto se verá más adelante) 
 const dato2: unknown = JSON.parse('{"a":1}');
 function esObjeto(valor: unknown): void {
   if ( typeof valor === "object" && valor !== null && "a" in valor &&  //Hacemos un type guard opr tipo, valor no nulo y propiedad dentro de objeto
@@ -204,20 +217,7 @@ function esObjeto(valor: unknown): void {
   ) {console.log(valor.a); // Aquí TypeScript infiere correctamente que es un número
   }
 }
-
 esObjeto(dato2);
-
-// Narrowing (seguro)
-function esNumero(valor: unknown): void {
-  if (typeof valor === "number") {
-    console.log(valor.toFixed(2)); // aquí valor es number, seguro
-  }
-}
-const dato3: unknown = 4;
-esNumero(dato3)
-const dato4: unknown = "5";
-esNumero(dato4)
-  
 ```
 
 <a id="aserciones-de-tipo-type-assertions"></a>
