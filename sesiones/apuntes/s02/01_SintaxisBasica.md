@@ -213,8 +213,16 @@ interface Podcast extends Cancion {
 type ID = string | number; 
 let a:ID;
 
-//Tupla (usada cuando hay dos o tres datos clave-valor). Si hay más, lo suyo sería usar un array de objetos.
-const success: ApiResponse = [200, "OK"]
+
+// Tupla: lista FIJA ORDENADA donde cada posición tiene un tipo específico (pos 0: number, pos 1: string).
+// El significado del dato lo da la posición, no una clave (como ocurre en los objetos) 
+// Si los datos son heterogéneos o hay más campos, es preferible usar un objeto ({ code: 200, message: "OK" }).
+// Puede haber tuplas de 2,3,4 o 100 elementos.
+// 1. Definición del type como una tupla etiquetada (código HTTP, mensaje)
+type ApiResponse = [status: number, message: string];
+const successResponse: ApiResponse = [200, "OK"];
+//console.log(successResponse.status) Esto da error!!
+console.log(successResponse[0]) //Esto no
 
 //Alias
 type Kilometros = number;
@@ -242,7 +250,7 @@ const datosCancion1: Cancion = {
 };
 
 
-//Otra organización similar aunque no igual para Canción
+//Otra organización similar a Canción (aunque no igual) 
 type datosCancion = { titulo: string, artista: string }; // objeto
 type reproducir = () => void; // firma de funcion. Indica la forma que tiene una función, 
 //por si la quieres llamar desde más de un sitio, como por ejemplo en un type/interface
