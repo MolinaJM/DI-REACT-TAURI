@@ -33,10 +33,10 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 | 6 · Union Types e Intersección | `s02/04b` | **P1** | Props multiforma y estado discriminado: el pan de cada día de un componente. |
 | 7 · Conversión de tipos · **8 · Operadores** | `s02/10` | **P3** | JSON en persistencia y `??` para defaults; ternario/short-circuit a diario. |
 | 9 · Type Assertions | `s02/09` | **P3** | `as`/`as const` con `invoke`, refs y constantes; lo crítico ya lo cubren los guards. |
-| 10 · Type Guards Avanzados | `s02/07` | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
-| 11 · Funciones en Profundidad | `s02/06` | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
-| 12 · Estructuras de control de flujo | `s02/11` | **P2** | `switch`+`never` = patrón `useReducer`; llega en React II. |
-| 13 · Literal Types y Narrowing | `s02/04` | **P1** | `typeof`/`in` narrowing y discriminated unions. |
+| 10 · Funciones en Profundidad | `s02/06` | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
+| 11 · Estructuras de control de flujo | `s02/11` | **P2** | `switch`+`never` = patrón `useReducer`; llega en React II. |
+| 12 · Literal Types y Narrowing | `s02/04` | **P1** | `typeof`/`in` narrowing y discriminated unions. |
+| 13 · Type Guards Avanzados | `s02/07` | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
 | 14 · Ámbito (Scope) y closures | `s02/08` | **P4** | Explica los hooks por dentro; pocos closures complejos en componentes. |
 | 15 · 🏁 Reto final de S2 | `s02/12` | **P4** | Integración/repaso de S2; sin concepto nuevo. |
 
@@ -239,26 +239,9 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 
 
 
-<a id="10-type-guards-avanzados"></a>
+<a id="10-funciones-en-profundidad"></a>
 
-### 10. Type Guards Avanzados
-
-> 🧪 **Ejercicio:** [`s02/07-type-guards.ts`](../ejercicios/s02/07-type-guards.ts).
-> ✅ **Solución:** [`soluciones/s02/07-type-guards.ts`](../ejercicios/soluciones/s02/07-type-guards.ts).
-> 🎯 Prioridad **P1** — validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`).
-1. Estás implementando un sistema de roles y necesitas verificar si un usuario tiene permisos de administrador. Crea un custom type guard `esAdmin(usuario)` que compruebe si un usuario tiene rol `"admin"`.
-2. Estás filtrando una lista de elementos que pueden ser de diferentes tipos y solo quieres los de un tipo concreto. Usa un type predicate en un bucle `for...of` para obtener solo los elementos de un tipo concreto de una unión.
-3. Estás escribiendo una función que debe garantizar que un valor cumple un tipo antes de continuar la ejecución. Implementa una assertion function `asegurarNumero(valor: unknown): asserts valor is number`.
-
-
-
-
-
-
-
-<a id="11-funciones-en-profundidad"></a>
-
-### 11. Funciones en Profundidad
+### 10. Funciones en Profundidad
 
 > 🧪 **Ejercicio:** [`s02/06-funciones.ts`](../ejercicios/s02/06-funciones.ts).
 > ✅ **Solución:** [`soluciones/s02/06-funciones.ts`](../ejercicios/soluciones/s02/06-funciones.ts).
@@ -277,9 +260,9 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 
 
 
-<a id="12-estructuras-de-control-de-flujo"></a>
+<a id="11-estructuras-de-control-de-flujo"></a>
 
-### 12. Estructuras de control de flujo
+### 11. Estructuras de control de flujo
 
 > 🧪 **Ejercicio:** [`s02/11-control-de-flujo.ts`](../ejercicios/s02/11-control-de-flujo.ts) (switch exhaustivo con `never` = patrón reducer de React).
 > ✅ **Solución:** [`soluciones/s02/11-control-de-flujo.ts`](../ejercicios/soluciones/s02/11-control-de-flujo.ts) (switch exhaustivo con `never` = patrón reducer de React).
@@ -295,9 +278,9 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 
 
 
-<a id="13-literal-types-y-type-narrowing"></a>
+<a id="12-literal-types-y-type-narrowing"></a>
 
-### 13. Literal Types y Type Narrowing
+### 12. Literal Types y Type Narrowing
 
 > 🧪 **Ejercicio:** [`s02/04-unions-narrowing.ts`](../ejercicios/s02/04-unions-narrowing.ts).
 > ✅ **Solución:** [`soluciones/s02/04-unions-narrowing.ts`](../ejercicios/soluciones/s02/04-unions-narrowing.ts).
@@ -310,6 +293,23 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 6. Estás definiendo roles de usuario a partir de un objeto constante y necesitas derivar un tipo que solo admita los valores válidos. Dado `const roles = { admin: "ADMINISTRADOR", user: "USUARIO_ESTANDAR" } as const`, deriva un tipo a partir de los valores de `roles` que solo admita `"ADMINISTRADOR" | "USUARIO_ESTANDAR"`.
 7. Estás procesando una entrada que puede ser un texto o un número y necesitas transformarla según su tipo. Escribe `procesarEntrada(entrada: string | number)`: si es `string` devuelve el texto en mayúsculas; si es `number`, el doble del número.
 8. Estás recibiendo datos de una API externa y necesitas validar su tipo antes de procesarlos. Escribe `procesar(valor: unknown)`: si es `string`, devuelve su longitud en mayúsculas; si es `number`, su doble como string; si no, `"desconocido"`.
+
+
+
+
+
+
+
+<a id="13-type-guards-avanzados"></a>
+
+### 13. Type Guards Avanzados
+
+> 🧪 **Ejercicio:** [`s02/07-type-guards.ts`](../ejercicios/s02/07-type-guards.ts).
+> ✅ **Solución:** [`soluciones/s02/07-type-guards.ts`](../ejercicios/soluciones/s02/07-type-guards.ts).
+> 🎯 Prioridad **P1** — validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`).
+1. Estás implementando un sistema de roles y necesitas verificar si un usuario tiene permisos de administrador. Crea un custom type guard `esAdmin(usuario)` que compruebe si un usuario tiene rol `"admin"`.
+2. Estás filtrando una lista de elementos que pueden ser de diferentes tipos y solo quieres los de un tipo concreto. Usa un type predicate en un bucle `for...of` para obtener solo los elementos de un tipo concreto de una unión.
+3. Estás escribiendo una función que debe garantizar que un valor cumple un tipo antes de continuar la ejecución. Implementa una assertion function `asegurarNumero(valor: unknown): asserts valor is number`.
 
 
 

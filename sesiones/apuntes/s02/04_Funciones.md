@@ -10,6 +10,10 @@
   - [6. Funciones como expresiones (y tipos de función)](#6-funciones-como-expresiones-y-tipos-de-funci%C3%B3n)
   - [7. Cierres (closures)](#7-cierres-closures)
   - [8. Tipos de función, callbacks y genéricos](#8-tipos-de-funci%C3%B3n-callbacks-y-gen%C3%A9ricos)
+    - [8.1 ¿Qué son los genéricos?](#81-qu%C3%A9-son-los-gen%C3%A9ricos)
+    - [8.2 Restringir genéricos con `extends`](#82-restringir-gen%C3%A9ricos-con-extends)
+    - [8.3 Cola genérica (factoría)](#83-cola-gen%C3%A9rica-factor%C3%ADa)
+    - [8.4 Conexión con React y Tauri](#84-conexi%C3%B3n-con-react-y-tauri)
 - 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#11-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#15-generics-genéricos)
 
 ---
@@ -195,18 +199,117 @@ const multiplicar: Operacion = (a, b) => a * b;
 function procesar(numeros: number[], callback: (n: number) => void): void {
   numeros.forEach(callback);
 }
+```
 
-// Genérico: el tipo se decide en la llamada
+### 8.1 ¿Qué son los genéricos?
+
+Los **genéricos** (`<T>`) permiten escribir funciones y estructuras que funcionan con **cualquier tipo** sin perder la seguridad de tipos. En lugar de fijar un tipo concreto (como `number` o `string`), usamos un **parámetro de tipo** (`T`) que se "despega" en la llamada.
+
+**Analogía:** Piensa en un molde de galletas. El molde es la función genérica: funciona con cualquier masa (tipo), pero cada galleta mantiene su forma (tipo). Sin genéricos, tendrías que escribir un molde distinto para cada tipo de masa.
+
+**Ejemplo básico:**
+
+```typescript
+// Sin genéricos: tendrías que escribir una función por cada tipo
+function primeroNumero(lista: number[]): number | undefined {
+  return lista[0];
+}
+
+function primeroString(lista: string[]): string | undefined {
+  return lista[0];
+}
+
+// Con genéricos: una sola función para cualquier tipo
 function primero<T>(lista: T[]): T | undefined {
   return lista[0];
 }
 
-const n: number | undefined = console.log(primero([10, 20, 30]));//10
-const s: string | undefined = console.log(primero(["a", "b"])); //"a"
+// TypeScript infiere el tipo automáticamente:
+const n = primero([10, 20, 30]);      // T = number, tipo de n: number | undefined
+const s = primero(["a", "b"]);        // T = string, tipo de s: string | undefined
+const b = primero([true, false]);     // T = boolean, tipo de b: boolean | undefined
 ```
 
-> [!IMPORTANT]
-> Los **genéricos** (`<T>`) son la herramienta de TypeScript para escribir funciones que funcionan con muchos tipos sin perder la seguridad. Verás el patrón `identidad<T>`, `map<T, U>` y en capítulos posteriores.
+**¿Por qué son importantes?** Los genéricos son la base de:
+
+- `useState<T>` en React — el tipo del estado se deduce del valor inicial.
+- `invoke<T>` en Tauri — el tipo de retorno del comando Rust.
+- Componentes reutilizables — `<Tabla<Producto> datos={productos} />`.
+- `Array.map<T, U>`, `Array.filter<T>`, `Promise<T>`, etc.
+
+### 8.2 Restringir genéricos con `extends`
+
+Puedes limitar los tipos que un genérico acepta usando `extends`:
+
+```typescript
+// Solo acepta tipos con propiedad .length (strings, arrays) o propiedad id
+function obtenerPropiedad<T extends { length: number } | { id: string }>(
+  obj: T,
+  clave: keyof T
+): T[keyof T] {
+  return obj[clave];
+}
+
+obtenerPropiedad("hola", "length");    // ✅ 5
+obtenerPropiedad([1, 2, 3], "length"); // ✅ 3
+obtenerPropiedad({ id: "abc" }, "id"); // ✅ "abc"
+// obtenerPropiedad({ x: 1 }, "x");    // ❌ Error: { x: number } no cumple la restricción
+```
+
+### 8.3 Cola genérica (factoría)
+
+Los genéricos también funcionan con estructuras de datos:
+
+```typescript
+function crearCola<T>(): {
+  encolar: (item: T) => void
+  desencolar: () => T | undefined
+  estaVacia: () => boolean
+} {
+  const datos: T[] = [];
+
+  return {
+    encolar(item: T) { datos.push(item); },
+    desencolar(): T | undefined { return datos.shift(); },
+    estaVacia(): boolean { return datos.length === 0; }
+  };
+}
+
+// Cada cola mantiene su tipo:
+const colaNumeros = crearCola<number>();
+colaNumeros.encolar(1);
+colaNumeros.encolar(2);
+colaNumeros.desencolar(); // number | undefined
+
+const colaNombres = crearCola<string>();
+colaNombres.encolar("Ana");
+colaNombres.encolar("Carlos");
+colaNombres.desencolar(); // string | undefined
+```
+
+### 8.4 Conexión con React y Tauri
+
+Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:
+
+```typescript
+// React: useState<T> — el tipo se deduce del valor inicial
+// const [count, setCount] = useState(0);  // T = number
+// const [name, setName] = useState("");  // T = string
+
+// Tauri: invoke<T> — el tipo es el retorno del comando Rust
+// interface Post { id: number; titulo: string; }
+// const post = await invoke<Post>("obtener_post", { id: 1 });
+// post.titulo // TypeScript sabe que es string
+
+// Componentes genéricos en React
+// function Tabla<T>(props: { datos: T[]; columnas: Columna<T>[] }) { ... }
+// <Tabla<Producto> datos={productos} columnas={columnas} />
+```
+
+> [!NOTE]
+> En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados. Los genéricos son la razón por la que `useState<T>` mantiene el tipo correcto.
+
+> 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones-en-profundidad) · 🔑 [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#15-generics-genéricos) · [Utility Types](../../EjerciciosPropuestos/ejerciciosTS.md#23-utility-types)
 
 ---
 ### 📦 Ejemplo completo: `funciones.ts`

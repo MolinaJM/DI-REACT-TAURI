@@ -93,13 +93,16 @@ if (valor) {
 
 En TypeScript, la condición de un `if` acepta cualquier valor (son los truthy/falsy). Se verá más adelante, pero un valor truthy o falsy es cualquier dato (un número, un texto o un objeto) que, sin ser un booleano puro (true o false), el lenguaje interpreta como verdadero o falso cuando se evalúa en una condición.
 
-Pero si el bloque va a usar el valor de la variable, TypeScript realiza **narrowing** (estrechamiento de tipo): el mecanismo mediante el cual TypeScript analiza la condición y reduce las posibilidades de un tipo compuesto a un tipo más específico dentro de ese bloque. Es decir, dentro del `if (valor)` sabe que `valor` no es `0` ni `NaN`, etc (porque ha entrado al ser truthy). 
+Pero si el bloque va a usar el valor de la variable, TypeScript realiza **narrowing** (*estrechamiento/deducción* de tipo): el mecanismo mediante el cual TypeScript analiza la condición y reduce las posibilidades de un tipo compuesto a un tipo más específico dentro de ese bloque. Es decir, dentro del `if (valor)` sabe que `valor` no es `0` ni `NaN` ni `null`, etc (porque ha entrado al ser truthy).
+
+Y esto por qué es útil? Pues porque **recalcula el tipo sin poner en riesgo la seguridad de la ejecución del código** (reduce las posibilidades de que el código pete).
 
 ```typescript
 const respuesta: string | null = obtenerRespuesta();
 
 if (respuesta) {
-  console.log(respuesta.length); // aquí respuesta es string (no null). Sabe que al ser un valor truthy descarta que sea null...
+  console.log(typeof respuesta); // aquí respuesta es string (no null). 
+  //Sabe que al ser un valor truthy descarta que sea null...
 }
 ```
 ## Conversión a Array

@@ -242,7 +242,7 @@ console.log(datos.url); // sin error
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
 
-> ✏️ **Práctica:** [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts`) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·9 y S2·14](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/07-type-guards.ts`](../../../ejercicios/s02/07-type-guards.ts) (guards `is`/`asserts`) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·9 y S2·13](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
@@ -475,7 +475,7 @@ console.log(actividad("Lunes"));
 ```
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `05_ControlDeFlujo.ts` y ejecuta `npx tsx 05_ControlDeFlujo.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-> ✏️ **Práctica:** [`s02/11-control-de-flujo.ts`](../../../ejercicios/s02/11-control-de-flujo.ts) (switch exhaustivo `never` = patrón reducer de React) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·12 y S2·14](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/11-control-de-flujo.ts`](../../../ejercicios/s02/11-control-de-flujo.ts) (switch exhaustivo `never` = patrón reducer de React) · [`s02/04-unions-narrowing.ts`](../../../ejercicios/s02/04-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·11 y S2·13](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ---
 
