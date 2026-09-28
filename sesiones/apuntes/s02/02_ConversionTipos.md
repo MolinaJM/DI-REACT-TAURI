@@ -192,9 +192,20 @@ En TypeScript conviene distinguir tres situaciones distintas que en JS se ven "i
 3. **Narrowing** (typeof, instanceof, `===`): TypeScript deduce el tipo por el flujo del programa. Es la vía segura y preferida.
 
 ```typescript
-// Aserción de tipos (no es conversión de runtime)
 const dato: unknown = JSON.parse('{"a":1}');
 const objeto = dato as { a: number }; // confiamos, peligroso sin validar. Se debería usar type guards (typeof)
+console.log(objeto.a);
+
+// Narrowing (seguro). 
+const dato2: unknown = JSON.parse('{"a":1}');
+function esObjeto(valor: unknown): void {
+  if ( typeof valor === "object" && valor !== null && "a" in valor &&  //Hacemos un type guard opr tipo, valor no nulo y propiedad dentro de objeto
+    typeof (valor as Record<string, unknown>).a === "number" //Hacemos un type casting. Usa string porque la propiedad (clave) es texto ("a") 
+  ) {console.log(valor.a); // Aquí TypeScript infiere correctamente que es un número
+  }
+}
+
+esObjeto(dato2);
 
 // Narrowing (seguro)
 function esNumero(valor: unknown): void {
@@ -202,10 +213,11 @@ function esNumero(valor: unknown): void {
     console.log(valor.toFixed(2)); // aquí valor es number, seguro
   }
 }
-const dato2: unknown = 4;
-esNumero(dato2)
-const dato3: unknown = "5";
+const dato3: unknown = 4;
 esNumero(dato3)
+const dato4: unknown = "5";
+esNumero(dato4)
+  
 ```
 
 <a id="aserciones-de-tipo-type-assertions"></a>
