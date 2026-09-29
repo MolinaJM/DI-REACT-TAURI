@@ -89,8 +89,14 @@ Las funciones de flecha son útiles para funciones de orden superior, como `map`
 //Aún no hemos visto arrays, pero sigue una forma muy convencional tipo[]=[....]
 const numeros: number[] = [1, 2, 3, 4, 5];
 
-const cuadrados: number[] = numeros.map((numero: number): number => numero ** 2);
+const cuadrados: number[] = numeros.map((numero: number): number => numero ** 2);/ ** eleva al cuadrado 
 console.log(cuadrados); // [1, 4, 9, 16, 25]
+
+//Otra forma usando una firma de función
+type ff=(numero: number) => number;
+const mifuncion:ff = (numero) => numero*2;
+const cuadrados2: number[] = numeros.map(mifuncion);
+console.log(cuadrados2); // [1, 4, 9, 16, 25]
 ```
 
 > [!TIP]
@@ -116,19 +122,19 @@ saludar("Lara"); // Imprime: ¡Hola, Lara!
 Los rest parameters y el operador spread (`...`) permiten trabajar con un número variable de argumentos en una función. En TypeScript, un rest parameter es un array tipado, le dice a TypeScript: "Empaqueta todos los argumentos que me pasen sueltos y mételos dentro de un Array llamado 'lo que sea'".:
 
 ```typescript
-//Rest parameter ni spread. Utilizado cuando creo los datos al vuelo
+//CON rest parameter y spread. Utilizado cuando creo los datos al vuelo
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `reduce()` → 04_Funciones.md §5 (se explica más adelante en el mismo archivo)
+// - `reduce()` --> 07_Arrays.md
 function sumar(...numeros: number[]): number {
-  return numeros.reduce((total, numero) => total + numero, 0);
+  return numeros.reduce((total, numero) => total + numero, 0); //REDUCE a un único valor
 }
 
 const resultado: number = sumar(1, 2, 3, 4, 5);
 console.log(resultado); // Imprime: 15
 
-//Sin rest parameter ni spread. Utilizado cuando ya tengo los datos previamente creados
+//SIN rest parameter ni spread. Utilizado cuando ya tengo los datos previamente creados
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `reduce()` → 04_Funciones.md §5 (se explica más adelante en el mismo archivo)
+// - `reduce()` --> 07_Arrays.md
 function sumar2(numeros: number[]): number {
   return numeros.reduce((total, numero) => total + numero, 0);
 }
@@ -170,23 +176,9 @@ El tipo del parámetro `funcion` es `(nombre: string) => void`: "una función qu
 
 
 
-Los cierres o `Closures` son comportamientos de funciones que tienen acceso a variables de su ámbito externo incluso después de que ese ámbito haya terminado su ejecución. Esto permite mantener datos privados en una función. Se llama "closure" porque "guarda" la variable para ser accedida desde fuera.
+Los cierres o `Closures` son comportamientos de funciones que tienen acceso a variables de su ámbito externo incluso después de que ese ámbito haya terminado su ejecución. Esto permite mantener datos privados en una función. Se llama "closure" porque "guarda" la variable para ser accedida desde fuera. 
 
-Otra explicación, un closure ocurre en JS/TS cuando una función interna accede a variables que están definidas en el ámbito (scope) de su función padre, incluso después de que la función externa se haya ejecutado.
-
-```typescript
-function contador(): () => number {
-  let count: number = 0;
-  return function (): number { //Esta función "guarda/closure" la variable count
-    count++;
-    return count;
-  };
-}
-
-const incrementar: () => number = contador();
-console.log(incrementar()); // Imprime: 1
-console.log(incrementar()); // Imprime: 2
-```
+Este concepto se comenta aquí porque es un tipo de función, pero dado que también tiene que ver con el SCOPE, se verá en el apartado de AMBITO/SCOPE.
 
 > [!NOTE]
 >En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados.
@@ -196,18 +188,21 @@ console.log(incrementar()); // Imprime: 2
 Para terminar el capítulo, hay más tipos de funciones que veremos en siguientes capítulos:
 
 ```typescript
-// Tipo de función reutilizable
+// Tipo de función reutilizable (la "firma" que ya conocemos).
 type Operacion = (a: number, b: number) => number;
 
+// Reutilizamos
 const sumar: Operacion = (a, b) => a + b;
 const multiplicar: Operacion = (a, b) => a * b;
 
-// Callback con tipos. Es una función a la que se le pasa otra para que haga algo a posteri con los datos.
+// Callback con tipos (MUY IMPORANTE). 
+//Es una función a la que se le pasa otra para que haga algo a posteri con los datos.
 //El desarrollo del ejemplo sería muy largo. Se verá más adelante.
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `forEach()` → EjerciciosPropuestos/ejerciciosTS.md §17 (Arrays: métodos fundamentales)
+// - `forEach()` --> (Arrays: métodos fundamentales)
 function procesar(numeros: number[], callback: (n: number) => void): void {
   numeros.forEach(callback);
+  ...
 }
 ```
 
@@ -221,11 +216,10 @@ Los **genéricos** (`<T>`) permiten escribir funciones y estructuras que funcion
 **Ejemplo básico:**
 
 ```typescript
-// Sin genéricos: tendrías que escribir una función por cada tipo
+// Sin genéricos: tendrías que escribir una función por cada tipo (number y string)
 function primeroNumero(lista: number[]): number | undefined {
   return lista[0];
 }
-
 function primeroString(lista: string[]): string | undefined {
   return lista[0];
 }
@@ -248,57 +242,11 @@ const b = primero([true, false]);     // T = boolean, tipo de b: boolean | undef
 - Componentes reutilizables — `<Tabla<Producto> datos={productos} />`.
 - `Array.map<T, U>`, `Array.filter<T>`, `Promise<T>`, etc.
 
-<a id="82-restringir-genéricos-con-extends"></a>
-### 8.2 Restringir genéricos con `extends`
 
-Puedes limitar los tipos que un genérico acepta usando `extends`:
 
-```typescript
-// Solo acepta tipos con propiedad .length (strings, arrays) o propiedad id
-function obtenerPropiedad<T extends { length: number } | { id: string }>(
-  obj: T,
-  clave: keyof T
-): T[keyof T] {
-  return obj[clave];
-}
 
-obtenerPropiedad("hola", "length");    // ✅ 5
-obtenerPropiedad([1, 2, 3], "length"); // ✅ 3
-obtenerPropiedad({ id: "abc" }, "id"); // ✅ "abc"
-// obtenerPropiedad({ x: 1 }, "x");    // ❌ Error: { x: number } no cumple la restricción
-```
 
-<a id="83-cola-genérica-factoría"></a>
-### 8.3 Cola genérica (factoría)
 
-Los genéricos también funcionan con estructuras de datos:
-
-```typescript
-function crearCola<T>(): {
-  encolar: (item: T) => void
-  desencolar: () => T | undefined
-  estaVacia: () => boolean
-} {
-  const datos: T[] = [];
-
-  return {
-    encolar(item: T) { datos.push(item); },
-    desencolar(): T | undefined { return datos.shift(); },
-    estaVacia(): boolean { return datos.length === 0; }
-  };
-}
-
-// Cada cola mantiene su tipo:
-const colaNumeros = crearCola<number>();
-colaNumeros.encolar(1);
-colaNumeros.encolar(2);
-colaNumeros.desencolar(); // number | undefined
-
-const colaNombres = crearCola<string>();
-colaNombres.encolar("Ana");
-colaNombres.encolar("Carlos");
-colaNombres.desencolar(); // string | undefined
-```
 
 <a id="84-conexión-con-react-y-tauri"></a>
 ### 8.4 Conexión con React y Tauri
