@@ -14,7 +14,7 @@
     - [8.2 Restringir genéricos con `extends`](#82-restringir-gen%C3%A9ricos-con-extends)
     - [8.3 Cola genérica (factoría)](#83-cola-gen%C3%A9rica-factor%C3%ADa)
     - [8.4 Conexión con React y Tauri](#84-conexi%C3%B3n-con-react-y-tauri)
-- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#11-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#15-generics-genéricos)
+- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#11-generics-genéricos)
 
 ---
 
@@ -205,7 +205,7 @@ const multiplicar: Operacion = (a, b) => a * b;
 // Callback con tipos. Es una función a la que se le pasa otra para que haga algo a posteri con los datos.
 //El desarrollo del ejemplo sería muy largo. Se verá más adelante.
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `forEach()` → EjerciciosPropuestos/ejerciciosTS.md §19 (Arrays: métodos fundamentales)
+// - `forEach()` → EjerciciosPropuestos/ejerciciosTS.md §17 (Arrays: métodos fundamentales)
 function procesar(numeros: number[], callback: (n: number) => void): void {
   numeros.forEach(callback);
 }
@@ -323,7 +323,7 @@ Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:
 > [!NOTE]
 > En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados. Los genéricos son la razón por la que `useState<T>` mantiene el tipo correcto.
 
-> 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones-en-profundidad) · 🔑 [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#15-generics-genéricos) · [Utility Types](../../EjerciciosPropuestos/ejerciciosTS.md#23-utility-types)
+> 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones-en-profundidad) · 🔑 [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#11-generics-genéricos) · [Utility Types](../../EjerciciosPropuestos/ejerciciosTS.md#21-utility-types)
 
 ---
 ### 📦 Ejemplo completo: `funciones.ts`
@@ -515,13 +515,13 @@ console.log(cola.estaVacia());  // false
 // UTILITY TYPES: tipos derivados sin escribirlos a mano
 // ============================================================================
 // ⚠️ ESTOS CONCEPTOS SE DESARROLLARÁN MÁS ADELANTE:
-// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §23 (Utility Types)
-// - `Pick<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §23
-// - `Omit<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §23
-// - `Record<K, V>` → EjerciciosPropuestos/ejerciciosTS.md §23
-// - `Parameters<T>` → EjerciciosPropuestos/ejerciciosTS.md §23
-// - `ReturnType<T>` → EjerciciosPropuestos/ejerciciosTS.md §23
-// - `NonNullable<T>` → EjerciciosPropuestos/ejerciciosTS.md §23
+// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §21 (Utility Types)
+// - `Pick<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §21
+// - `Omit<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §21
+// - `Record<K, V>` → EjerciciosPropuestos/ejerciciosTS.md §21
+// - `Parameters<T>` → EjerciciosPropuestos/ejerciciosTS.md §21
+// - `ReturnType<T>` → EjerciciosPropuestos/ejerciciosTS.md §21
+// - `NonNullable<T>` → EjerciciosPropuestos/ejerciciosTS.md §21
 
 interface Producto {
     id: number;
