@@ -163,7 +163,7 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 3. Estás diseñando la ficha técnica de una cerveza artesana. Crea un type alias `Cerveza` con `id` (readonly), `nombre`, `tipo` (opcional), `precio` y un método `describir(): string` que devuelva un texto con los datos.
 4. Estás definiendo los tipos de cerveza que se sirven en el bar. Crea un type alias `TipoCerveza` como unión de literales `"IPA" | "Lager" | "Stout" | "Trigo" | "Rubia"`. Declara una variable `cervezaDelDia` de ese tipo e intenta asignar un valor no válido para ver el error.
 5. Estás modelando un ticket de bar. Crea un type alias `Ticket` como tupla `[numero: number, cervezas: string[], total: number]`. Crea un ticket con número, lista de cervezas consumidas y total a pagar.
-6. Estás construyendo el sistema de reseñas del bar. Define un type alias `Resena` como función `(cerveza: Cerveza) => string`. Luego crea un type alias `Bar` con propiedades `nombre`, `menu` (array de `Cerveza`) y `resenar` (de tipo `Resena`). Crea un objeto `bar` que cumpla el tipo y llama a `resenar` con una cerveza del menú.
+6. Estás construyendo el sistema de reseñas del bar. Define un type alias `Resena` como firma de función `(cerveza: Cerveza) => string`. Luego crea un type alias `Bar` con propiedades `nombre`, `menu` (array de `Cerveza`) y `resenar` (de tipo `Resena`). Crea un objeto `bar` que cumpla el tipo y llama a `resenar` con una cerveza del menú. Ten en cuenta que la firma de función te permite crear distintos comportamientos y pasárselos al constructor del Bar.
 
 
 
@@ -180,7 +180,7 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🎯 Prioridad **P1** — props multiforma y estado discriminado: el pan de cada día de un componente.
 1. Estás diseñando un sistema de identificación que acepta tanto IDs numéricos como alfanuméricos. Define un tipo `ID` que sea `string | number`. Crea una función `mostrarId(id: ID): string` que devuelva el ID formateado con una template literal (`` `ID: ${id}` ``). Pruébala con un número y con un texto.
 2. Estás modelando un sistema de recursos humanos donde una persona puede ser también empleada. Crea dos interfaces `Persona` y `Empleado`. Combínalas con intersección `&` y crea un objeto que cumpla ambas.
-3. Estás modelando el estado de envío de un pedido. Define un type alias `EstadoPedido = "pendiente" | "enviado" | "entregado"`. Declara una variable `estado` de ese tipo, asígnale cada uno de los tres valores e imprime el estado. Intenta asignar un valor no válido (p. ej. `"cancelado"`) y observa el error de TypeScript.
+3. Estás modelando el estado de envío de un pedido. Define un type alias `EstadoPedido = "pendiente" | "enviado" | "entregado"`. Declara una variable `estado` de ese tipo, asígnale cada uno de los tres valores e imprime el estado. Intenta asignar un valor no válido (p. ej. `"cancelado"`) y observa el error de TypeScript (pero no el de JS en runtime).
 
 
 
