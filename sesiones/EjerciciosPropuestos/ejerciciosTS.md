@@ -133,8 +133,13 @@ Resumen sobre los **26 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 6 ·
 > 🧪 **Ejercicio:** [`s02/05-interfaces-types.ts`](../ejercicios/s02/05-interfaces-types.ts).
 > ✅ **Solución:** [`soluciones/s02/05-interfaces-types.ts`](../ejercicios/soluciones/s02/05-interfaces-types.ts).
 > 🎯 Prioridad **P1** — `interface Props` es el contrato de cada componente.
-1. Estás diseñando una base de datos de personajes de ciencia ficción. Define una interface `Personaje` con `nombre`, `planeta` y `nave` (opcional), y un método `presentarse()` que devuelva `void`.
-2. Estás ampliando la base de datos para incluir personajes que son también pilotos. Extiende `Personaje` con `Piloto` que añada `velocidadMax` y `mision`.
+
+  
+
+> ✅ ACLARACIÓN IMPORTANTE!! — `Toda la creación de objetos implica también la declaración del constructor y de instancias`. Esto también se aplica a los ejercicios de type.
+
+1. Estás diseñando una base de datos de personajes de ciencia ficción. Define una interface `Personaje` con `nombre`, `planeta` y `nave` (opcional), y un método `presentarse()` que devuelva `void`. Crea un "constructor" de Personaje y crea varios personajes.
+2. Estás ampliando la base de datos para incluir personajes que son también pilotos. Extiende `Personaje` con `Piloto` que añada `velocidadMax` y `mision`. Pruébalo (constructor e instancias del objeto.)
 3. Estás diseñando un sistema de configuración que permite definir la misma entidad desde múltiples módulos. Crea dos interfaces con el mismo nombre y observa el declaration merging (solo funciona con `interface`, no con `type`).
 4. Estás diseñando un sistema de rangos para una academia espacial. Crea una interface `Rango` con `nombre` y `nivel`, y otra interface `RangoOficial` que extienda `Rango` añadiendo una propiedad `autoridad` de tipo `number`.
 5. Estás creando un catálogo de naves para una tienda online. Crea una interface `Nave` con `id` y `precio` (obligatorios) y `descuento` (opcional). Declara una variable `corbeta` que la cumpla.
