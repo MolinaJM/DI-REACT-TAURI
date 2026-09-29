@@ -117,7 +117,7 @@ Los rest parameters y el operador spread (`...`) permiten trabajar con un númer
 
 ```typescript
 //Rest parameter ni spread. Utilizado cuando creo los datos al vuelo
-// ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
+// ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
 // - `reduce()` → 04_Funciones.md §5 (se explica más adelante en el mismo archivo)
 function sumar(...numeros: number[]): number {
   return numeros.reduce((total, numero) => total + numero, 0);
@@ -127,7 +127,7 @@ const resultado: number = sumar(1, 2, 3, 4, 5);
 console.log(resultado); // Imprime: 15
 
 //Sin rest parameter ni spread. Utilizado cuando ya tengo los datos previamente creados
-// ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
+// ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
 // - `reduce()` → 04_Funciones.md §5 (se explica más adelante en el mismo archivo)
 function sumar2(numeros: number[]): number {
   return numeros.reduce((total, numero) => total + numero, 0);
@@ -204,7 +204,7 @@ const multiplicar: Operacion = (a, b) => a * b;
 
 // Callback con tipos. Es una función a la que se le pasa otra para que haga algo a posteri con los datos.
 //El desarrollo del ejemplo sería muy largo. Se verá más adelante.
-// ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
+// ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
 // - `forEach()` → EjerciciosPropuestos/ejerciciosTS.md §17 (Arrays: métodos fundamentales)
 function procesar(numeros: number[], callback: (n: number) => void): void {
   numeros.forEach(callback);
