@@ -138,7 +138,7 @@ console.log(null || "defecto");    // "defecto" (patrón clásico de valor por d
 ```
 
 > [!WARNING]
-> El patrón `valor || "defecto"` tiene una trampa: si `valor` es `""` o `0` (falsy pero no nulos), se reemplaza igualmente. En TypeScript moderno se prefiere `??` cuando solo queremos reemplazar `null`/`undefined`.
+> El patrón `valor || "defecto"` tiene una trampa: si `valor` es `""` o `0` (falsy pero no nulos), se reemplaza igualmente. En TypeScript moderno se prefiere `??` cuando solo queremos reemplazar `null`/`undefined` (nullish coalescing).
 
 <a id="iii-not-lógico"></a>
 ### iii. NOT Lógico (`!`)
@@ -194,7 +194,7 @@ Observa cómo el tipo se elimina: `valor` era `string | null`, y `valor ?? "defe
 | `&&` | `boolean` | `boolean` |
 | `&&` con valores no booleanos | `A \| Falsy`, `B` | `false \| typeof A \| typeof B` (unión) |
 | `\|\|` | `boolean` | `boolean` |
-| `\|\|` / `\|\|=` con valores no booleanos | `A`, `Falsy \| B` | `typeof A \| typeof B` (unión) |
+| `\|\|`  con valores no booleanos | `A`, `Falsy \| B` | `typeof A \| typeof B` (unión) |
 | `??` | `T \| null \| undefined`, `T` | `T` (elimina `null`/`undefined`) |
 | `!` | `boolean` | `boolean` |
 | Ternario | `cond`, `A`, `B` | `typeof A \| typeof B` |

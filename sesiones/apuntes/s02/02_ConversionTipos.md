@@ -69,8 +69,10 @@ Cuidado: `Number()` puede devolver `NaN` (de tipo `number` en tiempo de ejecuci�
 
 ```typescript
 const texto: string = "42.5";
-const entero: number = parseInt(texto, 10);
-const decimal: number = parseFloat(texto);
+const entero: number = parseInt(texto, 10);//El 10 es el sistema decimal
+console.log(entero);//42
+const decimal2: number = parseFloat(texto);
+console.log(decimal2); //42.5
 ```
 
 > [!TIP]
@@ -108,7 +110,7 @@ Y esto por qué es útil? Pues porque **recalcula el tipo sin poner en riesgo la
 
 ```typescript
 const respuesta: string | null = obtenerRespuesta();
-//Aquí, en tiempo de compilación (codificación) el tipo puede ser o string o null.
+//En esta línea, antes del if, en tiempo de compilación (codificación) el tipo puede ser o string o null.
 if (respuesta) {
   console.log(typeof respuesta); // aquí respuesta es string (no null). 
   //Sabe que al ser un valor truthy descarta que sea null...
@@ -141,11 +143,11 @@ interface Usuario {
 
 const usuario: Usuario = { nombre: "Profe", edad: 35 };
 
-// Objeto → String JSON
+// Objeto --> String JSON
 const json: string = JSON.stringify(usuario);
 console.log(json); // '{"nombre":"Profe","edad":35}'
 
-// String JSON → Objeto
+// String JSON --> Objeto
 const recuperado: Usuario = JSON.parse(json) as Usuario; //Estamos usando una ASERCIÓN
 console.log(recuperado.nombre); // "Profe". Funciona, pero luego veremos que tendríamos que VALIDAR esto.
 ```
@@ -165,7 +167,7 @@ En contextos booleanos (condiciones de `if`, `while`, etc.), JavaScript evalúa 
 false, 0, -0, 0n (BigInt), "", null, undefined, NaN
 ```
 
-**Truthy** (se evalúan como `true`): todos los demás, incluyendo:
+**Truthy** (se evalúan como `true`): todos lo que no sea la lista de arriba, incluyendo:
 
 ```typescript
 true, 1, -1, "0", "false", [], {}, function () {}, Infinity
@@ -182,6 +184,13 @@ if ("0") console.log("¡Sí se ejecuta!");     // "0" es truthy (es un string no
 > [!TIP]
 >Es preferible no usar expresiones implícitas como if (texto) o if (valor) para evaluar cadenas o números en reglas de negocio (lógica humana detrás del código), sino hacer la comprobación de forma explícita escribiendo if (texto.length > 0) para verificar que un texto no esté vacío o if (valor !== 0) para confirmar que un número es distinto de cero. Esto se debe a que las condiciones explícitas comunican claramente la intención del código y permiten que TypeScript aplique el ajuste de tipos (narrowing) con mayor precisión, evitando errores sutiles cuando los valores válidos son 0 o cadenas vacías "".
 
+### Trucos rápidos
+```typescript
+const xConv: number = +"42";          // string -> number: 42 . Equivalente a usar Number("42)
+const yConv: boolean = !!"Hola";      // string -> boolean: true. Equiv. a usar Boolean("Hola")
+const zConv: string = `${true}`;      // boolean -> string: "true". Equiv. a usar String(true)
+```
+
 <a id="conversión-con-tipos-en-typescript"></a>
 ## Conversión con tipos en TypeScript
 
@@ -195,13 +204,13 @@ En TypeScript conviene distinguir tres situaciones distintas que en JS se ven "i
 // Narrowing (seguro) mediante typeguard
 function esNumero(valor: unknown): void {
   if (typeof valor === "number") { 
-    console.log(valor.toFixed(2)); // aquí valor es number, seguro
+    console.log(valor.toFixed(2)); //Esta operación es segura. Aquí valor es number, redondea a 2 dígitos decimales. 
   }
 }
 const dato3: unknown = 3;
-esNumero(dato3)
+esNumero(dato3);
 const dato4: unknown = "4";
-esNumero(dato4)
+esNumero(dato4); //Esto NO saca el dato! Es totalmente seguro!
 
 
 //Aserción con unknown
