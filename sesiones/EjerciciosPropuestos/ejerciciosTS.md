@@ -174,7 +174,7 @@ Resumen sobre los **22 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > ✅ **Solución:** [`soluciones/s02/04-unions-intersection.ts`](../../ejercicios/soluciones/s02/04-unions-intersection.ts).
 > 🎯 Prioridad **P1** — props multiforma y estado discriminado: el pan de cada día de un componente.
 1. Estás diseñando un sistema de identificación que acepta tanto IDs numéricos como alfanuméricos. Define un tipo `ID` que sea `string | number`. Crea una función `mostrarId(id: ID): string` que devuelva el ID formateado con una template literal (`` `ID: ${id}` ``). Pruébala con un número y con un texto.
-2. Estás modelando un sistema de recursos humanos donde una persona puede ser también empleada. Crea dos interfaces `Persona` y `Empleado`. Combínalas con intersección `&` y crea un objeto que cumpla ambas.
+2. Estás modelando un sistema de recursos humanos donde una persona puede ser también empleada. Crea dos type `Persona` y `Empleado`. Combínalas con intersección `&` y crea un objeto que cumpla ambas (NOTA: se podría haber hecho también con interface ).
 3. Estás modelando el estado de envío de un pedido. Define un type alias `EstadoPedido = "pendiente" | "enviado" | "entregado"`. Declara una variable `estado` de ese tipo, asígnale cada uno de los tres valores e imprime el estado. Intenta asignar un valor no válido (p. ej. `"cancelado"`) y observa el error de TypeScript (pero no el de JS en runtime).
 
 

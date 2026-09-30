@@ -10,8 +10,10 @@
   - [6. Funciones como expresiones (y tipos de función)](#6-funciones-como-expresiones-y-tipos-de-funci%C3%B3n)
   - [7. Cierres (closures)](#7-cierres-closures)
   - [8. Tipos de función, callbacks y genéricos](#8-tipos-de-funci%C3%B3n-callbacks-y-gen%C3%A9ricos)
-    - [8.1 ¿Qué son los genéricos?](#81-qu%C3%A9-son-los-gen%C3%A9ricos)
-    - [8.2 Conexión con React y Tauri](#82-conexi%C3%B3n-con-react-y-tauri)
+      - [8.1 ¿Qué son los genéricos?](#81-qu%C3%A9-son-los-gen%C3%A9ricos)
+      - [8.2 Conexión con React y Tauri](#82-conexi%C3%B3n-con-react-y-tauri)
+      - [8.3 keyof, typeof y satisfies](#83-keyof-typeof-y-satisfies)
+      - [8.4 Mapped types: `[K in keyof T]`](#84-mapped-types-k-in-keyof-t)
 - 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#10-generics-genéricos)
 
 ---
@@ -277,15 +279,34 @@ Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:
 
 Tres operadores de tipos que aparecen en formularios tipados y configuraciones:
 
-- **`keyof`**: obtiene como tipo **la unión de las claves** de un objeto. Al iterar con `Object.keys` (véase §8.6) garantiza al compilador que la clave es una propiedad real:
+- **`keyof`**: obtiene como tipo **la unión de las claves** de un objeto. Sirve para verificar en compilación que una clave es una propiedad real, en vez de escribir un `as` que se lo cree TypeScript:
 
 ```typescript
-interface Usuario { id: number; nombre: string; email: string }
-type ClavesDeUsuario = keyof Usuario; // "id" | "nombre" | "email"
-function mostrarCampo<T, K extends keyof T>(obj: T, clave: K): T[K] {
-  return obj[clave];
+// Las props de un componente no son más que un objeto: "keyof" da sus nombres exactos
+interface PeliculaProps {
+  titulo: string
+  anio: number
+  puntuacion: number
 }
+
+type ClaveDeProp = keyof PeliculaProps   // "titulo" | "anio" | "puntuacion"
+
+// K extends keyof T obliga a que la clave exista; T[K] conserva el tipo del valor
+function valorDeProp<T, K extends keyof T>(props: T, prop: K): T[K] {
+  return props[prop];
+}
+
+const props: PeliculaProps = { titulo: "Alien", anio: 1979, puntuacion: 9 }
+valorDeProp(props, "titulo");     // string
+valorDeProp(props, "puntuacion"); // number
+// valorDeProp(props, "director"); → error de compilación: no existe en PeliculaProps
 ```
+
+> 🔜 **Dónde se usa esto.** Esta misma línea `K extends keyof T` es la que sostiene los dos patrones que verás en React:
+> - La **tabla genérica** `TablaGenerica<T>`, donde cada columna declara a qué campo apunta: `interface Columna<T> { key: keyof T | string; … }` (`sesion06.md`, S04 · `repos/02-react-componentes/src/components/TablaGenerica.tsx`).
+> - El **hook de formulario** `useForm<T>`, cuyo mapa de errores es `Partial<Record<keyof T, string>>`: una clave por cada campo del formulario, todas opcionales (S04 · `repos/02-react-componentes/src/hooks/useForm.ts`, y los utility types en `s04/13_Tipado_en_React_TS.md` §13.5.2).
+>
+> En ambos casos la clave no se escribe a mano, la **hereda** de `keyof T`. Por eso `keyof` no es un Keyword de adorno: es lo que impide que una columna apunte a un campo inexistente o que un error de validación se registre bajo una clave que no existe en el formulario.
 
 - **`typeof`** (sobre variables, no confundir con el *narrowing* de valores): deduce el tipo de una constante u objeto existente:
 
@@ -307,6 +328,102 @@ paleta.primario[0];  // string (no la unión de todos los valores)
 
 
 ---
+<a id="84-mapped-types-k-in-keyof-t"></a>
+### 8.4 Mapped types: `[K in keyof T]`
+
+`keyof` te da las claves de un tipo; un **mapped type** te deja usarlas para construir otro tipo. La sintaxis `[K in keyof T]` significa: *"para cada clave `K` de `T`, declara una propiedad con este tipo"*. El tipo resultante tiene **exactamente las mismas claves**, solo que con los valores transformados.
+
+Es la pieza que hay detrás de `Partial`, `Required`, `Pick` y `Omit`, y de los mapas de errores de los formularios tipados.
+
+<a id="caso-1-tauri-el-dato-puede-no-venir"></a>
+#### Caso 1 · Tauri: el dato puede no venir
+
+En Tauri el dato lo produce un comando Rust, y **el compilador no puede saber** si vendrá o no. Si declaras `invoke<Pelicula | null>`, todas las propiedades quedan obligatoriamente `| null` y te curarás en cada uso:
+
+```typescript
+import { invoke } from "@tauri-apps/api/core";
+
+// La misma interface que usaremos en S04 con React (s04/13, §13.1)
+interface Pelicula {
+  id?: number           // en "crear" todavía no existe
+  titulo: string
+  genero: string
+  anio: number
+  director: string
+  puntuacion: number    // 0-10
+}
+
+// Dentro de un useEffect de React (o de cualquier función async):
+async function cargar(id: number) {
+  const p = await invoke<Pelicula | null>("obtener_pelicula", { id });
+  p.titulo;   // error: 'p' puede ser null. TypeScript te obliga a comprobarlo
+}
+```
+
+Para no repetir la comprobación en cada propiedad, se declara un mapped type que quita el `null` de golpe:
+
+```typescript
+// Aplica NonNullable a TODAS las propiedades de una vez.
+// OJO: sin `-?` a propósito. NonNullable quita el null, pero deja la
+// opcionalidad como estaba (`id?` sigue siendo `id?`); si añadieras `-?`
+// estarías exigiendo `id` y Pelicula dejaría de ser asignable a este tipo.
+type RespuestaLimpia<T> = {
+  [K in keyof T]: NonNullable<T[K]>
+};
+
+const POR_DEFECTO: RespuestaLimpia<Pelicula> = {
+  id: 0, titulo: "(sin datos)", genero: "", anio: 0, director: "", puntuacion: 0,
+};
+
+// `??` es lo que de verdad convierte null en un valor; el mapped type
+// solo DOCUMENTA el resultado, no lo produce
+async function cargarConDefecto(id: number) {
+  const pelicula: RespuestaLimpia<Pelicula> =
+    (await invoke<Pelicula | null>("obtener_pelicula", { id })) ?? POR_DEFECTO;
+
+  pelicula.titulo;   // string, sin "!" ni ifs
+  return pelicula;
+}
+```
+
+> ⚠️ **El error clásico:** un mapped type **no convierte nada en runtime**. Si solo anotas `const x: RespuestaLimpia<Pelicula> = valorCrudo` y el valor era `null`, el type checker te cree pero en memoria sigue `null`. El orden correcto es **primero resolver con `??`, después tipar**; al revés, TypeScript te está mintiendo.
+
+<a id="caso-2-react-el-mapa-de-errores-de-un-formulario"></a>
+#### Caso 2 · React: el mapa de errores de un formulario
+
+Este es el caso que verás en S04, en el hook `useForm<T>`. Cada campo del formulario es una clave, y el error de ese campo es su valor:
+
+```typescript
+// reutiliza la interface Pelicula del Caso 1
+type Errores<T> = Partial<Record<keyof T, string>>;
+// Partial<Record<keyof T, string>> ≡ { [K in keyof T]?: string }
+
+const errores: Errores<Pelicula> = { titulo: "El título es obligatorio" };
+errores.titulo;   // string | undefined  -> se puede pintar en el <input>
+errores.anio;     // undefined           -> este campo no tiene error
+errores.país;     // error de compilación: Pelicula no tiene campo "país"
+```
+
+Fíjate en lo que aporta `keyof` aquí: cada error de la validación tiene que estar bajo una **clave real del formulario**. Si el backend devuelve `{"titulo": "...", "campo_inventado": "..."}`, TypeScript ya marca el error en la línea de la validación, sin need de comprobarlo en runtime.
+
+Y como el mapa se indexa con `keyof T`, un `<form>` genérico puede recorrer sus campos con `Object.keys` (s03/08 §8.5.1) y, si el objeto viene tipado, el compilador sabe que cada `key` es una clave válida.
+
+<a id="variantes-frecuentes"></a>
+#### Variantes frecuentes
+
+| Sintaxis | Equivale a | Qué hace |
+|---|---|---|
+| `[K in keyof T]?: T[K]` | `Partial<T>` | todas opcionales |
+| `[K in keyof T]-?: T[K]` | `Required<T>` | todas obligatorias |
+| `{ [K in K2]: T[K2] }` con `K2 extends keyof T` | `Pick<T, K2>` | solo un subconjunto |
+| `[K in keyof T as \`form_${string & K}\`]` | — | **renombra** las claves (lo que hace `Omit` por dentro) |
+
+El último es el más potente: `as` permite cambiar el nombre de la clave. `Omit<T, K>` está implementado exactamente así, descartando las claves de `K` y renombrando el resto a sí mismos.
+
+> 📌 **Resumen del tripwire:** `keyof` (S02, aquí) → mapped types (S02, aquí) → `Partial<Record<keyof T, string>>` y `Columna<T>` (S04, React) → `invoke<T>` (Tauri). Es la misma idea en cuatro sitios: **las claves no se escriben a mano, se derivan del tipo**.
+
+---
+
 ### 📦 Ejemplo completo: `funciones.ts`
 
 Funciones tipadas: parámetros, arrow functions, callbacks y overloads.
@@ -449,6 +566,8 @@ console.log(esLargo("prueba", 10));    // true (string tiene length)
 console.log(esLargo([1, 2, 3], 2));    // false (array tiene length)
 
 // Acceso indexado seguro: K queda restringido a las claves reales de T
+// `keyof T` devuelve la unión de las claves del objeto; `K extends keyof T` obliga
+// a que la clave indicada exista, y `T[K]` da el tipo exacto de ese valor.
 function obtenerValor<T, K extends keyof T>(obj: T, key: K): T[K] {
     return obj[key];
 }
