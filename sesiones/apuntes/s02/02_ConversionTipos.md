@@ -16,7 +16,7 @@
   - [Valores truthy y falsy](#valores-truthy-y-falsy)
   - [Conversión con tipos en TypeScript](#conversi%C3%B3n-con-tipos-en-typescript)
     - [Aserciones de tipo (type assertions)](#aserciones-de-tipo-type-assertions)
-- 🧪 **Ejercicios:** [Conversión de tipos](../../EjerciciosPropuestos/ejerciciosTS.md#7-conversión-de-tipos) · [Type Assertions](../../EjerciciosPropuestos/ejerciciosTS.md#9-type-assertions)
+- 🧪 **Ejercicios:** [Conversión de tipos](../../EjerciciosPropuestos/ejerciciosTS.md#7-conversión-de-tipos) · [Operadores](../../EjerciciosPropuestos/ejerciciosTS.md#8-operadores)
 
 ---
 
@@ -342,7 +342,7 @@ const recuperado: Usuario = JSON.parse(json) as Usuario;
 console.log(recuperado.nombre); // "PROFE"
 ```
 
-> ✏️ **Práctica:** [`s02/10-conversion-operadores.ts`](../../../ejercicios/s02/10-conversion-operadores.ts) (JSON, `??`) · [catálogo S2·7](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/08-conversion-operadores.ts`](../../../ejercicios/s02/08-conversion-operadores.ts) (JSON, `??`) · [catálogo S2·7](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ---
 

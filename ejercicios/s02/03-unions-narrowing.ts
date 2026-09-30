@@ -1,7 +1,7 @@
 // ============================================================
 // S02 · Ejercicio 4 · Union types, literal types y narrowing
 // ============================================================
-// Completa. Solución: soluciones/s02/04-unions-narrowing.ts
+// Completa. Solución: soluciones/s02/03-unions-narrowing.ts
 
 type Id = unknown; // TODO: string | number
 type EstadoPedido = unknown; // TODO: "pendiente" | "enviado" | "entregado"

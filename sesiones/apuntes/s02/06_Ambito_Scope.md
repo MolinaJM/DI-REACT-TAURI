@@ -135,7 +135,7 @@ console.log(c.valor());       // 11
 
 > 📖 **Material de consulta:** los closures son la lógica interna de los hooks, así que se imparten junto a *Arrays* sin bloque de ejercicios propio.
 
-> 🏁 **Reto final de S2:** con todo lo de la sesión, completa [`s02/12-reto-s02.ts`](../../../ejercicios/s02/12-reto-s02.ts) (solución: [`soluciones/s02/12-reto-s02.ts`](../../../ejercicios/soluciones/s02/12-reto-s02.ts)) · [catálogo](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#15-reto-final-s2).
+> 🏁 **Reto final de S2:** con todo lo de la sesión, completa [`s02/10-reto-s02.ts`](../../../ejercicios/s02/10-reto-s02.ts) (solución: [`soluciones/s02/10-reto-s02.ts`](../../../ejercicios/soluciones/s02/10-reto-s02.ts)) · [catálogo](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#14-reto-final-s2).
 
 ---
 

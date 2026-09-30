@@ -1,7 +1,7 @@
 // ============================================================
 // S02 · Ejercicio 4b · Union types, literales e intersección
 // ============================================================
-// Completa. Solución: soluciones/s02/04b-unions-intersection.ts
+// Completa. Solución: soluciones/s02/04-unions-intersection.ts
 
 // 1) Union type: define `ID` como `string | number`
 type Id = unknown; // TODO: string | number

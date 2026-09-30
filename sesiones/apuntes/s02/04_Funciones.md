@@ -11,10 +11,8 @@
   - [7. Cierres (closures)](#7-cierres-closures)
   - [8. Tipos de función, callbacks y genéricos](#8-tipos-de-funci%C3%B3n-callbacks-y-gen%C3%A9ricos)
     - [8.1 ¿Qué son los genéricos?](#81-qu%C3%A9-son-los-gen%C3%A9ricos)
-    - [8.2 Restringir genéricos con `extends`](#82-restringir-gen%C3%A9ricos-con-extends)
-    - [8.3 Cola genérica (factoría)](#83-cola-gen%C3%A9rica-factor%C3%ADa)
-    - [8.4 Conexión con React y Tauri](#84-conexi%C3%B3n-con-react-y-tauri)
-- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#11-generics-genéricos)
+    - [8.2 Conexión con React y Tauri](#82-conexi%C3%B3n-con-react-y-tauri)
+- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#10-generics-genéricos)
 
 ---
 
@@ -248,8 +246,8 @@ const b = primero([true, false]);     // T = boolean, tipo de b: boolean | undef
 
 
 
-<a id="84-conexión-con-react-y-tauri"></a>
-### 8.4 Conexión con React y Tauri
+<a id="82-conexión-con-react-y-tauri"></a>
+### 8.2 Conexión con React y Tauri
 
 Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:
 
@@ -271,7 +269,42 @@ Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:
 > [!NOTE]
 > En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados. Los genéricos son la razón por la que `useState<T>` mantiene el tipo correcto.
 
-> 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#10-funciones-en-profundidad) · 🔑 [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#11-generics-genéricos) · [Utility Types](../../EjerciciosPropuestos/ejerciciosTS.md#21-utility-types)
+> 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad) · 🔑 [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#10-generics-genéricos) · [Utility Types](../../EjerciciosPropuestos/ejerciciosTS.md#20-utility-types)
+
+---
+<a id="83-keyof-typeof-y-satisfies"></a>
+### 8.3 keyof, typeof y satisfies
+
+Tres operadores de tipos que aparecen en formularios tipados y configuraciones:
+
+- **`keyof`**: obtiene como tipo **la unión de las claves** de un objeto. Al iterar con `Object.keys` (véase §8.6) garantiza al compilador que la clave es una propiedad real:
+
+```typescript
+interface Usuario { id: number; nombre: string; email: string }
+type ClavesDeUsuario = keyof Usuario; // "id" | "nombre" | "email"
+function mostrarCampo<T, K extends keyof T>(obj: T, clave: K): T[K] {
+  return obj[clave];
+}
+```
+
+- **`typeof`** (sobre variables, no confundir con el *narrowing* de valores): deduce el tipo de una constante u objeto existente:
+
+```typescript
+const configDefecto = { url: "http://localhost", port: 5173, timeout: 5000 };
+type Config = typeof configDefecto; // { url: string; port: number; timeout: number }
+```
+
+- **`satisfies`**: comprueba que un objeto **cumple** un tipo sin perder la inferencia exacta (a diferencia de anotar con `:`):
+
+```typescript
+type Colores = Record<string, [string, string]>;
+const paleta = {
+  primario: ["#3b82f6", "#1d4ed8"],
+  error: ["#ef4444", "#b91c1c"],
+} satisfies Colores; // cumple Colores y además el editor sabe cada valor exacto
+paleta.primario[0];  // string (no la unión de todos los valores)
+```
+
 
 ---
 ### 📦 Ejemplo completo: `funciones.ts`
@@ -337,7 +370,7 @@ console.log(duplicar2(5));  // 10
 // FUNCTION OVERLOADS
 // ============================================================================
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - Function overloads → EjerciciosPropuestos/ejerciciosTS.md §10 (Funciones) P5
+// - Function overloads → EjerciciosPropuestos/ejerciciosTS.md §9 (Funciones) P5
 
 function procesarEntrada(x: string): string[];
 function procesarEntrada(x: number): number[];
@@ -463,13 +496,13 @@ console.log(cola.estaVacia());  // false
 // UTILITY TYPES: tipos derivados sin escribirlos a mano
 // ============================================================================
 // ⚠️ ESTOS CONCEPTOS SE DESARROLLARÁN MÁS ADELANTE:
-// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §21 (Utility Types)
-// - `Pick<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §21
-// - `Omit<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §21
-// - `Record<K, V>` → EjerciciosPropuestos/ejerciciosTS.md §21
-// - `Parameters<T>` → EjerciciosPropuestos/ejerciciosTS.md §21
-// - `ReturnType<T>` → EjerciciosPropuestos/ejerciciosTS.md §21
-// - `NonNullable<T>` → EjerciciosPropuestos/ejerciciosTS.md §21
+// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §20 (Utility Types)
+// - `Pick<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §20
+// - `Omit<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §20
+// - `Record<K, V>` → EjerciciosPropuestos/ejerciciosTS.md §20
+// - `Parameters<T>` → EjerciciosPropuestos/ejerciciosTS.md §20
+// - `ReturnType<T>` → EjerciciosPropuestos/ejerciciosTS.md §20
+// - `NonNullable<T>` → EjerciciosPropuestos/ejerciciosTS.md §20
 
 interface Producto {
     id: number;
@@ -524,7 +557,7 @@ console.log(limpio);
 ```
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-> ✏️ **Práctica:** [`s02/06-funciones.ts`](../../../ejercicios/s02/06-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/09-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/09-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/02-generics.ts`](../../../ejercicios/s03/02-generics.ts) (genéricos) · [`s03/03-utility-types.ts`](../../../ejercicios/s03/03-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25, S3·23 y S3·18](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/06-funciones.ts`](../../../ejercicios/s02/06-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/07-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/07-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/02-generics.ts`](../../../ejercicios/s03/02-generics.ts) (genéricos) · [`s03/03-utility-types.ts`](../../../ejercicios/s03/03-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25, S3·23 y S3·18](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ---
 

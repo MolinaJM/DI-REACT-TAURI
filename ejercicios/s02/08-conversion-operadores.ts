@@ -1,7 +1,7 @@
 // ============================================================
 // S02 · Ejercicio 10 · Conversión de tipos y operadores
 // ============================================================
-// Completa. Solución: soluciones/s02/10-conversion-operadores.ts
+// Completa. Solución: soluciones/s02/08-conversion-operadores.ts
 // Catálogo: sesiones/EjerciciosPropuestos/ejerciciosTS.md · Sesión 2 · Bloques 9 y 12
 
 // 1) `==` frente a `===`: comparación estricta
