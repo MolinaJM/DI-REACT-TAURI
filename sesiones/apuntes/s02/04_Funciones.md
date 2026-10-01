@@ -8,13 +8,15 @@
   - [4. Valores predeterminados de parámetros](#4-valores-predeterminados-de-par%C3%A1metros)
   - [5. Rest parameters y operador spread](#5-rest-parameters-y-operador-spread)
   - [6. Funciones como expresiones (y tipos de función)](#6-funciones-como-expresiones-y-tipos-de-funci%C3%B3n)
-  - [7. Cierres (closures)](#7-cierres-closures)
-  - [8. Tipos de función, callbacks y genéricos](#8-tipos-de-funci%C3%B3n-callbacks-y-gen%C3%A9ricos)
-      - [8.1 ¿Qué son los genéricos?](#81-qu%C3%A9-son-los-gen%C3%A9ricos)
-      - [8.2 Conexión con React y Tauri](#82-conexi%C3%B3n-con-react-y-tauri)
-      - [8.3 keyof, typeof y satisfies](#83-keyof-typeof-y-satisfies)
-      - [8.4 Mapped types: `[K in keyof T]`](#84-mapped-types-k-in-keyof-t)
-- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad) · [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#10-generics-genéricos)
+  - [7. Otros tipos de función: callbacks](#7-otros-tipos-de-funci%C3%B3n-callbacks)
+  - [8. Ámbito (Scope) en TypeScript](#8-%C3%A1mbito-scope-en-typescript)
+    - [8.1. Ámbito (Scope)](#81-%C3%A1mbito-scope)
+      - [8.1.1 Ámbito Global](#811-%C3%A1mbito-global)
+      - [8.1.2 Ámbito de Función](#812-%C3%A1mbito-de-funci%C3%B3n)
+      - [8.1.3 Ámbito de Bloque](#813-%C3%A1mbito-de-bloque)
+      - [8.1.4 Ámbito de Cierre (Closures)](#814-%C3%A1mbito-de-cierre-closures)
+    - [8.2. Ejemplos Prácticos](#82-ejemplos-pr%C3%A1cticos)
+- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad)
 
 ---
 
@@ -89,18 +91,23 @@ Las funciones de flecha son útiles para funciones de orden superior, como `map`
 //Aún no hemos visto arrays, pero sigue una forma muy convencional tipo[]=[....]
 const numeros: number[] = [1, 2, 3, 4, 5];
 
-const cuadrados: number[] = numeros.map((numero: number): number => numero ** 2);/ ** eleva al cuadrado 
+const cuadrados: number[] = numeros.map((numero: number): number => numero ** 2);// ** eleva al cuadrado 
 console.log(cuadrados); // [1, 4, 9, 16, 25]
 
-//Otra forma usando una firma de función
+//Otra forma usando una firma de función: permite reutilización de firma
 type ff=(numero: number) => number;
-const mifuncion:ff = (numero) => numero*2;
+
+const mifuncion:ff = (numero) => numero**2;
 const cuadrados2: number[] = numeros.map(mifuncion);
 console.log(cuadrados2); // [1, 4, 9, 16, 25]
+
+const mifuncioncubo:ff = (numero) => numero**3;
+const cubos: number[] = numeros.map(mifuncioncubo);
+console.log(cubos); // [1, 4, 9, 16, 25]
 ```
 
 > [!TIP]
-> Con `map`, `filter` y `reduce`, TypeScript suele **inferir** el tipo del parámetro a partir del array. El código anterior se puede simplificar a `numeros.map((numero) => numero ** 2)` y aun así sigue siendo `number[]`.
+> Con `map`, `filter` y `reduce`, TypeScript suele **inferir** el tipo del parámetro a partir del array. El código anterior (línea 2)  se puede simplificar a `numeros.map((numero) => numero ** 2)` y aun así sigue siendo `number[]`.
 
 <a id="4-valores-predeterminados-de-parámetros"></a>
 ## 4. Valores predeterminados de parámetros
@@ -124,17 +131,18 @@ Los rest parameters y el operador spread (`...`) permiten trabajar con un númer
 ```typescript
 //CON rest parameter y spread. Utilizado cuando creo los datos al vuelo
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `reduce()` --> 07_Arrays.md
+// - `reduce()` --> 06_Arrays.md
 function sumar(...numeros: number[]): number {
   return numeros.reduce((total, numero) => total + numero, 0); //REDUCE a un único valor
 }
 
+//Aquí el DETALLE, es que no le paso un ARRAY!!!
 const resultado: number = sumar(1, 2, 3, 4, 5);
 console.log(resultado); // Imprime: 15
 
 //SIN rest parameter ni spread. Utilizado cuando ya tengo los datos previamente creados
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `reduce()` --> 07_Arrays.md
+// - `reduce()` --> 06_Arrays.md
 function sumar2(numeros: number[]): number {
   return numeros.reduce((total, numero) => total + numero, 0);
 }
@@ -156,6 +164,7 @@ console.log(sumar(...otro));
 Las funciones pueden asignarse a variables y pasarse como argumentos a otras funciones. Esto es **fundamental para conceptos como callbacks y promesas**. En TypeScript podemos tipar la función que se recibe:
 
 ```typescript
+// --- OPCIÓN 1: Tipado 'inline' (directo en la firma) ---
 const funcionSaludo = (nombre: string): void => {
   console.log(`¡Hola, ${nombre}!`);
 };
@@ -163,29 +172,26 @@ const funcionSaludo = (nombre: string): void => {
 const ejecutarFuncion = (f: (nombre: string) => void): void => {
   f("Don Tancredo");//f se puede llamar como queramos, se instancia en ese momento
 }
+ejecutarFuncion(funcionSaludo); // Imprime: ¡Hola, Don Tancredo!
+
+// --- OPCIÓN 2: Usando un tipo explícito (alias de firma) ---
+type firmafuncion=(nombre: string) => void; //Firma
+const funcionSaluda:firmafuncion=(nombre) => { //Se instancia en una función
+    console.log(`¡Hola, ${nombre}!`);
+};
+const ejecutarFuncion2 = (f: firmafuncion): void => {
+  f("Doña Tancreda");//f se puede llamar como queramos, se instancia en ese momento
+}
 
 ejecutarFuncion(funcionSaludo); // Imprime: ¡Hola, Don Tancredo!
+ejecutarFuncion2(funcionSaluda); // Imprime: ¡Hola, Doña Tancreda!
 ```
 
 El tipo del parámetro `funcion` es `(nombre: string) => void`: "una función que recibe un `string` y no devuelve nada". Si `funcionSaludo` no encajara con esa firma, `tsc` daría error.
 
-<a id="7-cierres-closures"></a>
-## 7. Cierres o clausuras (closures)
+## 7. Otros tipos de función: callbacks
 
-
-
-
-
-Los cierres o `Closures` son comportamientos de funciones que tienen acceso a variables de su ámbito externo incluso después de que ese ámbito haya terminado su ejecución. Esto permite mantener datos privados en una función. Se llama "closure" porque "guarda" la variable para ser accedida desde fuera. 
-
-Este concepto se comenta aquí porque es un tipo de función, pero dado que también tiene que ver con el SCOPE, se verá en el apartado de AMBITO/SCOPE.
-
-> [!NOTE]
->En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados.
-<a id="8-tipos-de-función-callbacks-y-genéricos"></a>
-## 8. Tipos de función, callbacks y genéricos
-
-Para terminar el capítulo, hay más tipos de funciones que veremos en siguientes capítulos:
+Para terminar el capítulo, hay más tipos de funciones que veremos en siguientes capítulos (como las firmas de funciones) o como los callbacks.:
 
 ```typescript
 // Tipo de función reutilizable (la "firma" que ya conocemos).
@@ -195,234 +201,16 @@ type Operacion = (a: number, b: number) => number;
 const sumar: Operacion = (a, b) => a + b;
 const multiplicar: Operacion = (a, b) => a * b;
 
-// Callback con tipos (MUY IMPORANTE). 
-//Es una función a la que se le pasa otra para que haga algo a posteri con los datos.
-//El desarrollo del ejemplo sería muy largo. Se verá más adelante.
-// ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `forEach()` --> (Arrays: métodos fundamentales)
+// Callback con tipos (MUY IMPORTANTE).
+// Es una función a la que se le pasa otra para que haga algo posterior con los datos.
 function procesar(numeros: number[], callback: (n: number) => void): void {
   numeros.forEach(callback);
-  ...
-}
-```
-
-<a id="81-qué-son-los-genéricos"></a>
-### 8.1 ¿Qué son los genéricos?
-
-Los **genéricos** (`<T>`) permiten escribir funciones y estructuras que funcionan con **cualquier tipo** sin perder la seguridad de tipos. En lugar de fijar un tipo concreto (como `number` o `string`), usamos un **parámetro de tipo** (`T`) que se "despega" en la llamada.
-
-**Analogía:** Piensa en un molde de galletas. El molde es la función genérica: funciona con cualquier masa (tipo), pero cada galleta mantiene su forma (tipo). Sin genéricos, tendrías que escribir un molde distinto para cada tipo de masa.
-
-**Ejemplo básico:**
-
-```typescript
-// Sin genéricos: tendrías que escribir una función por cada tipo (number y string)
-function primeroNumero(lista: number[]): number | undefined {
-  return lista[0];
-}
-function primeroString(lista: string[]): string | undefined {
-  return lista[0];
 }
 
-// Con genéricos: una sola función para cualquier tipo
-function primero<T>(lista: T[]): T | undefined {
-  return lista[0];
-}
-
-// TypeScript infiere el tipo automáticamente:
-const n = primero([10, 20, 30]);      // T = number, tipo de n: number | undefined
-const s = primero(["a", "b"]);        // T = string, tipo de s: string | undefined
-const b = primero([true, false]);     // T = boolean, tipo de b: boolean | undefined
+procesar([1, 2, 3], n => console.log("procesado:", n));
 ```
 
-**¿Por qué son importantes?** Los genéricos son la base de:
-
-- `useState<T>` en React — el tipo del estado se deduce del valor inicial.
-- `invoke<T>` en Tauri — el tipo de retorno del comando Rust.
-- Componentes reutilizables — `<Tabla<Producto> datos={productos} />`.
-- `Array.map<T, U>`, `Array.filter<T>`, `Promise<T>`, etc.
-
-
-
-
-
-
-
-<a id="82-conexión-con-react-y-tauri"></a>
-### 8.2 Conexión con React y Tauri
-
-Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:
-
-```typescript
-// React: useState<T> — el tipo se deduce del valor inicial
-// const [count, setCount] = useState(0);  // T = number
-// const [name, setName] = useState("");  // T = string
-
-// Tauri: invoke<T> — el tipo es el retorno del comando Rust
-// interface Post { id: number; titulo: string; }
-// const post = await invoke<Post>("obtener_post", { id: 1 });
-// post.titulo // TypeScript sabe que es string
-
-// Componentes genéricos en React
-// function Tabla<T>(props: { datos: T[]; columnas: Columna<T>[] }) { ... }
-// <Tabla<Producto> datos={productos} columnas={columnas} />
-```
-
-> [!NOTE]
-> En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados. Los genéricos son la razón por la que `useState<T>` mantiene el tipo correcto.
-
-> 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad) · 🔑 [Generics](../../EjerciciosPropuestos/ejerciciosTS.md#10-generics-genéricos) · [Utility Types](../../EjerciciosPropuestos/ejerciciosTS.md#20-utility-types)
-
----
-<a id="83-keyof-typeof-y-satisfies"></a>
-### 8.3 keyof, typeof y satisfies
-
-Tres operadores de tipos que aparecen en formularios tipados y configuraciones:
-
-- **`keyof`**: obtiene como tipo **la unión de las claves** de un objeto. Sirve para verificar en compilación que una clave es una propiedad real, en vez de escribir un `as` que se lo cree TypeScript:
-
-```typescript
-// Las props de un componente no son más que un objeto: "keyof" da sus nombres exactos
-interface PeliculaProps {
-  titulo: string
-  anio: number
-  puntuacion: number
-}
-
-type ClaveDeProp = keyof PeliculaProps   // "titulo" | "anio" | "puntuacion"
-
-// K extends keyof T obliga a que la clave exista; T[K] conserva el tipo del valor
-function valorDeProp<T, K extends keyof T>(props: T, prop: K): T[K] {
-  return props[prop];
-}
-
-const props: PeliculaProps = { titulo: "Alien", anio: 1979, puntuacion: 9 }
-valorDeProp(props, "titulo");     // string
-valorDeProp(props, "puntuacion"); // number
-// valorDeProp(props, "director"); → error de compilación: no existe en PeliculaProps
-```
-
-> 🔜 **Dónde se usa esto.** Esta misma línea `K extends keyof T` es la que sostiene los dos patrones que verás en React:
-> - La **tabla genérica** `TablaGenerica<T>`, donde cada columna declara a qué campo apunta: `interface Columna<T> { key: keyof T | string; … }` (`sesion06.md`, S04 · `repos/02-react-componentes/src/components/TablaGenerica.tsx`).
-> - El **hook de formulario** `useForm<T>`, cuyo mapa de errores es `Partial<Record<keyof T, string>>`: una clave por cada campo del formulario, todas opcionales (S04 · `repos/02-react-componentes/src/hooks/useForm.ts`, y los utility types en `s04/13_Tipado_en_React_TS.md` §13.5.2).
->
-> En ambos casos la clave no se escribe a mano, la **hereda** de `keyof T`. Por eso `keyof` no es un Keyword de adorno: es lo que impide que una columna apunte a un campo inexistente o que un error de validación se registre bajo una clave que no existe en el formulario.
-
-- **`typeof`** (sobre variables, no confundir con el *narrowing* de valores): deduce el tipo de una constante u objeto existente:
-
-```typescript
-const configDefecto = { url: "http://localhost", port: 5173, timeout: 5000 };
-type Config = typeof configDefecto; // { url: string; port: number; timeout: number }
-```
-
-- **`satisfies`**: comprueba que un objeto **cumple** un tipo sin perder la inferencia exacta (a diferencia de anotar con `:`):
-
-```typescript
-type Colores = Record<string, [string, string]>;
-const paleta = {
-  primario: ["#3b82f6", "#1d4ed8"],
-  error: ["#ef4444", "#b91c1c"],
-} satisfies Colores; // cumple Colores y además el editor sabe cada valor exacto
-paleta.primario[0];  // string (no la unión de todos los valores)
-```
-
-
----
-<a id="84-mapped-types-k-in-keyof-t"></a>
-### 8.4 Mapped types: `[K in keyof T]`
-
-`keyof` te da las claves de un tipo; un **mapped type** te deja usarlas para construir otro tipo. La sintaxis `[K in keyof T]` significa: *"para cada clave `K` de `T`, declara una propiedad con este tipo"*. El tipo resultante tiene **exactamente las mismas claves**, solo que con los valores transformados.
-
-Es la pieza que hay detrás de `Partial`, `Required`, `Pick` y `Omit`, y de los mapas de errores de los formularios tipados.
-
-<a id="caso-1-tauri-el-dato-puede-no-venir"></a>
-#### Caso 1 · Tauri: el dato puede no venir
-
-En Tauri el dato lo produce un comando Rust, y **el compilador no puede saber** si vendrá o no. Si declaras `invoke<Pelicula | null>`, todas las propiedades quedan obligatoriamente `| null` y te curarás en cada uso:
-
-```typescript
-import { invoke } from "@tauri-apps/api/core";
-
-// La misma interface que usaremos en S04 con React (s04/13, §13.1)
-interface Pelicula {
-  id?: number           // en "crear" todavía no existe
-  titulo: string
-  genero: string
-  anio: number
-  director: string
-  puntuacion: number    // 0-10
-}
-
-// Dentro de un useEffect de React (o de cualquier función async):
-async function cargar(id: number) {
-  const p = await invoke<Pelicula | null>("obtener_pelicula", { id });
-  p.titulo;   // error: 'p' puede ser null. TypeScript te obliga a comprobarlo
-}
-```
-
-Para no repetir la comprobación en cada propiedad, se declara un mapped type que quita el `null` de golpe:
-
-```typescript
-// Aplica NonNullable a TODAS las propiedades de una vez.
-// OJO: sin `-?` a propósito. NonNullable quita el null, pero deja la
-// opcionalidad como estaba (`id?` sigue siendo `id?`); si añadieras `-?`
-// estarías exigiendo `id` y Pelicula dejaría de ser asignable a este tipo.
-type RespuestaLimpia<T> = {
-  [K in keyof T]: NonNullable<T[K]>
-};
-
-const POR_DEFECTO: RespuestaLimpia<Pelicula> = {
-  id: 0, titulo: "(sin datos)", genero: "", anio: 0, director: "", puntuacion: 0,
-};
-
-// `??` es lo que de verdad convierte null en un valor; el mapped type
-// solo DOCUMENTA el resultado, no lo produce
-async function cargarConDefecto(id: number) {
-  const pelicula: RespuestaLimpia<Pelicula> =
-    (await invoke<Pelicula | null>("obtener_pelicula", { id })) ?? POR_DEFECTO;
-
-  pelicula.titulo;   // string, sin "!" ni ifs
-  return pelicula;
-}
-```
-
-> ⚠️ **El error clásico:** un mapped type **no convierte nada en runtime**. Si solo anotas `const x: RespuestaLimpia<Pelicula> = valorCrudo` y el valor era `null`, el type checker te cree pero en memoria sigue `null`. El orden correcto es **primero resolver con `??`, después tipar**; al revés, TypeScript te está mintiendo.
-
-<a id="caso-2-react-el-mapa-de-errores-de-un-formulario"></a>
-#### Caso 2 · React: el mapa de errores de un formulario
-
-Este es el caso que verás en S04, en el hook `useForm<T>`. Cada campo del formulario es una clave, y el error de ese campo es su valor:
-
-```typescript
-// reutiliza la interface Pelicula del Caso 1
-type Errores<T> = Partial<Record<keyof T, string>>;
-// Partial<Record<keyof T, string>> ≡ { [K in keyof T]?: string }
-
-const errores: Errores<Pelicula> = { titulo: "El título es obligatorio" };
-errores.titulo;   // string | undefined  -> se puede pintar en el <input>
-errores.anio;     // undefined           -> este campo no tiene error
-errores.país;     // error de compilación: Pelicula no tiene campo "país"
-```
-
-Fíjate en lo que aporta `keyof` aquí: cada error de la validación tiene que estar bajo una **clave real del formulario**. Si el backend devuelve `{"titulo": "...", "campo_inventado": "..."}`, TypeScript ya marca el error en la línea de la validación, sin need de comprobarlo en runtime.
-
-Y como el mapa se indexa con `keyof T`, un `<form>` genérico puede recorrer sus campos con `Object.keys` (s03/08 §8.5.1) y, si el objeto viene tipado, el compilador sabe que cada `key` es una clave válida.
-
-<a id="variantes-frecuentes"></a>
-#### Variantes frecuentes
-
-| Sintaxis | Equivale a | Qué hace |
-|---|---|---|
-| `[K in keyof T]?: T[K]` | `Partial<T>` | todas opcionales |
-| `[K in keyof T]-?: T[K]` | `Required<T>` | todas obligatorias |
-| `{ [K in K2]: T[K2] }` con `K2 extends keyof T` | `Pick<T, K2>` | solo un subconjunto |
-| `[K in keyof T as \`form_${string & K}\`]` | — | **renombra** las claves (lo que hace `Omit` por dentro) |
-
-El último es el más potente: `as` permite cambiar el nombre de la clave. `Omit<T, K>` está implementado exactamente así, descartando las claves de `K` y renombrando el resto a sí mismos.
-
-> 📌 **Resumen del tripwire:** `keyof` (S02, aquí) → mapped types (S02, aquí) → `Partial<Record<keyof T, string>>` y `Columna<T>` (S04, React) → `invoke<T>` (Tauri). Es la misma idea en cuatro sitios: **las claves no se escriben a mano, se derivan del tipo**.
-
----
+> 🔜 **Dónde se desarrolla esto.** Un callback no es un invento de este capítulo: es el mismo mecanismo que verás en `forEach`/`map`/`filter` (*Arrays*, s03/06), en los `.then()` de las promesas (`s03/10_Asincronismo…` §10.3) y en los `useEffect` de React. Aquí solo se presenta la **forma de escribirlo**: una función que recibe a otra como parámetro y la tipa.
 
 ### 📦 Ejemplo completo: `funciones.ts`
 
@@ -486,8 +274,8 @@ console.log(duplicar2(5));  // 10
 // ============================================================================
 // FUNCTION OVERLOADS
 // ============================================================================
-// ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - Function overloads → EjerciciosPropuestos/ejerciciosTS.md §9 (Funciones) P5
+// 🔁 Function overloads: se definen justo debajo; se practican en
+// EjerciciosPropuestos/ejerciciosTS.md §9 (Funciones) P5
 
 function procesarEntrada(x: string): string[];
 function procesarEntrada(x: number): number[];
@@ -509,174 +297,141 @@ console.log(ejecutarOperacion(5, 3, (a, b) => a + b));
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
 
-### 📦 Ejemplo completo: `generics-utility-types.ts`
+> ✏️ **Práctica:** [`s02/09-funciones.ts`](../../../ejercicios/s02/09-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/08-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/08-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/06-utility-types.ts`](../../../ejercicios/s03/06-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25, S3·23 y S3·18](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
-Generics (identidad, filtros, constraints, factorías) y utility types (Partial, Pick, Omit, Record, ReturnType…).
+---
+
+<a id="8-ámbito-scope-en-typescript"></a>
+## 8. Ámbito (Scope) en TypeScript
+
+En JavaScript, el ámbito (scope) se refiere a las reglas que determinan dónde pueden ser accedidas las variables y funciones dentro de un programa. Comprender el ámbito y el uso de `this` es fundamental para escribir código JavaScript efectivo.
+// ⚠️ `this` no se cubre en este curso: modern TS/React evita `this` (arrow functions y hooks).
+Este manual explora los conceptos de ámbito y `this` en ECMAScript 6 y versiones posteriores, y muestra cómo TypeScript los tipa y protege.
+
+<a id="81-ámbito-scope"></a>
+### 8.1. Ámbito (Scope)
+
+El ámbito en JavaScript determina dónde una variable o función es accesible en un programa. ECMAScript 6 introduce nuevos tipos de ámbito, como el ámbito de bloque.
+
+<a id="811-ámbito-global"></a>
+#### 8.1.1 Ámbito Global
+
+Las variables declaradas fuera de cualquier función tienen un ámbito global y pueden ser accedidas desde cualquier lugar del código.
+
+Ejemplo:
 
 ```typescript
+let globalVar: string = "Soy global";
 
-/**
- * Fichero 19: Generics y Utility Types
- * -------------------------------------------
- * - Generics: identidad, primero, filtros, constraints (extends), factorias
- * - Utility Types: Partial, Pick, Omit, Record, Parameters, ReturnType, NonNullable
- *
- * Son la base del TS aplicado a React y Tauri:
- * - `useState<T>`, `useRef<T>`, `invoke<T>`, componentes genericos `<T>`
- * - `Partial<Pelicula>` (formularios), `Omit` (crear sin id), `Record` (tablas de
- *   correspondencias), `ReturnType` (tipar hooks/resultados)
- */
-
-// ============================================================================
-// GENERICS: el tipo se decide en la llamada
-// ============================================================================
-
-// Funcion identidad: devuelve el valor con SU tipo, sin cambiarlo
-function identidad<T>(valor: T): T {
-    return valor;
+function exampleFunction(): void {
+  console.log(globalVar); // Acceso a globalVar desde la función
 }
 
-const n = identidad(42);        // number
-const s = identidad("hola");    // string
-console.log(n, s);
-
-// primero<T>: el primer elemento o undefined (noUncheckedIndexedAccess)
-function primero<T>(arr: T[]): T | undefined {
-    return arr[0];
-}
-
-const primeroN = primero([10, 20, 30]); // number | undefined
-const primeroS = primero(["a", "b"]);   // string | undefined
-console.log(primeroN, primeroS);
-
-// Filtro generico con predicado tipado
-function filtrarPor<T>(arr: T[], predicado: (item: T) => boolean): T[] {
-    return arr.filter(predicado);
-}
-
-const pares = filtrarPor([1, 2, 3, 4, 5], (x) => x % 2 === 0);
-console.log(pares); // [2, 4]
-
-// Constraints con extends: solo tipos que tengan .length
-function esLargo<T extends { length: number }>(valor: T, max: number): boolean {
-    return valor.length <= max;
-}
-
-console.log(esLargo("prueba", 10));    // true (string tiene length)
-console.log(esLargo([1, 2, 3], 2));    // false (array tiene length)
-
-// Acceso indexado seguro: K queda restringido a las claves reales de T
-// `keyof T` devuelve la unión de las claves del objeto; `K extends keyof T` obliga
-// a que la clave indicada exista, y `T[K]` da el tipo exacto de ese valor.
-function obtenerValor<T, K extends keyof T>(obj: T, key: K): T[K] {
-    return obj[key];
-}
-
-const usuario = { id: 1, nombre: "Ana", email: "ana@mail.com" };
-console.log(obtenerValor(usuario, "nombre"));    // "Ana"
-// obtenerValor(usuario, "telefono");             // Error: no existe en Usuario
-
-// Factoria generica sin clases: devuelve un objeto con metodos
-function crearCola<T>() {
-    const items: T[] = [];
-
-    return {
-        encolar(item: T): void {
-            items.push(item);
-        },
-        desencolar(): T | undefined {
-            return items.shift();
-        },
-        estaVacia(): boolean {
-            return items.length === 0;
-        }
-    };
-}
-
-const cola = crearCola<string>();
-cola.encolar("primero");
-cola.encolar("segundo");
-console.log(cola.desencolar()); // "primero"
-console.log(cola.estaVacia());  // false
-
-// ----------------------------------------------------------------------------
-// Generics en React / Tauri (patron que veras a diario)
-// ----------------------------------------------------------------------------
-// ⚠️ ESTOS CONCEPTOS SE DESARROLLARÁN MÁS ADELANTE:
-// - `invoke<T>` (Tauri) → sesiones S03+
-// - `useState<T>` (React) → sesiones S04+
-// - `TablaGenerica<T>` (React) → sesiones S04+
-// ----------------------------------------------------------------------------
-// type RespuestaApi<T>      -> invoke<T> tipa lo que devuelve el backend Rust
-// useState<Todo[]>([])      -> el estado sabe su tipo desde el inicio
-// function TablaGenerica<T>(...) -> un componente sirve para cualquier entidad
-
-// ============================================================================
-// UTILITY TYPES: tipos derivados sin escribirlos a mano
-// ============================================================================
-// ⚠️ ESTOS CONCEPTOS SE DESARROLLARÁN MÁS ADELANTE:
-// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §20 (Utility Types)
-// - `Pick<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §20
-// - `Omit<T, K>` → EjerciciosPropuestos/ejerciciosTS.md §20
-// - `Record<K, V>` → EjerciciosPropuestos/ejerciciosTS.md §20
-// - `Parameters<T>` → EjerciciosPropuestos/ejerciciosTS.md §20
-// - `ReturnType<T>` → EjerciciosPropuestos/ejerciciosTS.md §20
-// - `NonNullable<T>` → EjerciciosPropuestos/ejerciciosTS.md §20
-
-interface Producto {
-    id: number;
-    nombre: string;
-    precio: number;
-    descripcion?: string;
-}
-
-const productoBase: Producto = { id: 1, nombre: "Teclado", precio: 49.9 };
-
-// Partial<T>: todas las props opcionales (perfecto para "editar")
-const edicion: Partial<Producto> = { precio: 35 }; // solo tocas lo que cambia
-console.log({ ...productoBase, ...edicion });
-
-// Pick<T, K>: solo las props indicadas
-type ResumenProducto = Pick<Producto, "id" | "nombre">;
-const resumen: ResumenProducto = { id: 1, nombre: "Teclado" };
-console.log(resumen);
-
-// Omit<T, K>: quita props (en React: crear una Pelicula sin el id auto)
-type ProductoSinDescripcion = Omit<Producto, "descripcion">;
-const sinDesc: ProductoSinDescripcion = { id: 2, nombre: "Raton", precio: 12 };
-console.log(sinDesc);
-
-// Record<K, V>: diccionario con claves conocidas (tablas de correspondencias)
-type Semana = Record<"lunes" | "martes" | "miercoles", string>;
-const horarios: Semana = {
-    lunes: "9:00",
-    martes: "10:00",
-    miercoles: "11:00"
-};
-console.log(horarios);
-
-// Parameters<T> y ReturnType<T>: extraer tipos de una funcion
-function crearProducto(nombre: string, precio: number): Producto {
-    return { id: 0, nombre, precio } as Producto;
-}
-
-type ParamsCrear = Parameters<typeof crearProducto>;      // [string, number]
-type RetornoCrear = ReturnType<typeof crearProducto>;     // Producto
-
-function usarParams(args: ParamsCrear): Producto {
-    return crearProducto(...args);
-}
-console.log(usarParams(["Monitor", 199]));
-
-// NonNullable<T>: elimina null | undefined de una union
-type ValorPosible = string | null | undefined;
-type ValorLimpio = NonNullable<ValorPosible>;  // string
-const limpio: ValorLimpio = "texto seguro";
-console.log(limpio);
+exampleFunction(); // Imprime "Soy global"
+console.log(globalVar); // También se puede acceder aquí
 ```
 
-> ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-> ✏️ **Práctica:** [`s02/06-funciones.ts`](../../../ejercicios/s02/06-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/07-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/07-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/02-generics.ts`](../../../ejercicios/s03/02-generics.ts) (genéricos) · [`s03/03-utility-types.ts`](../../../ejercicios/s03/03-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25, S3·23 y S3·18](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+
+<a id="812-ámbito-de-función"></a>
+#### 8.1.2 Ámbito de Función
+
+Las variables declaradas dentro de una función tienen un ámbito local y solo pueden ser accedidas desde dentro de esa función.
+
+Ejemplo:
+
+```typescript
+function exampleFunction(): void {
+  let localVar: string = "Soy local";
+  console.log(localVar); // Acceso a localVar dentro de la función
+}
+
+exampleFunction(); // Imprime "Soy local"
+// console.log(localVar); // Error: localVar no está definida fuera de la función
+```
+
+<a id="813-ámbito-de-bloque"></a>
+#### 8.1.3 Ámbito de Bloque
+
+ECMAScript 6 introduce el ámbito de bloque, que se aplica a variables declaradas con `let` y `const`. Estas variables solo son accesibles dentro del bloque en el que se declaran.
+
+Ejemplo:
+
+```typescript
+if (true) {
+  let blockVar: string = "Soy local de bloque";
+  console.log(blockVar); // Acceso a blockVar dentro del bloque
+}
+
+// console.log(blockVar); // Error: blockVar no está definida fuera del bloque
+```
+
+<a id="814-ámbito-de-cierre-closures"></a>
+#### 8.1.4 Ámbito de Cierre (Closures)
+
+Un componente padre en React puede pasarle datos (props) a sus hijos, pero la comunicación en sentido inverso no ocurre mediante el envío directo de datos del hijo al padre, sino a través de funciones callback pasadas como props. 
+
+Cuando un hijo (como un botón dentro de un formulario) ejecuta esa función recibida, esta se ejecuta dentro del contexto del padre gracias a los closures de JavaScript: la función retiene el acceso al ámbito  donde fue creada en el padre (incluyendo sus variables y funciones para actualizar el estado), permitiendo que la interacción ocurrida en el hijo modifique y actualice el estado del componente superior..
+
+
+
+
+> [!NOTE]
+>En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados.
+<a id="7-otros-tipos-de-función-callbacks"></a>
+> 
+Ejemplo:
+
+```typescript
+function outerFunction(): () => void {
+  let outerVar: string = "Externa";
+
+  function innerFunction(): void {
+    console.log(outerVar); // Acceso a outerVar dentro del closure
+  }
+
+  return innerFunction;
+}
+
+const closureExample: () => void = outerFunction();
+closureExample(); // Imprime "Externa" ¿cómo es posible si la función ya se ejecutó y acabó?
+```
+
+<a id="82-ejemplos-prácticos"></a>
+### 8.2. Ejemplos Prácticos
+
+<a id="ejemplo-1-closure-contador-ámbito-léxico-en-acción"></a>
+#### 8.2.1 Ejemplo: Closure contador 
+
+```typescript
+interface Contador {
+  incrementar: () => number;
+  decrementar: () => number;
+  valor: () => number;
+}
+
+function crearContador(inicial: number = 0): Contador {
+  let contador: number = inicial; // Variable privada dentro del closure
+
+  return {
+    incrementar: () => ++contador,
+    decrementar: () => --contador,
+    valor: () => contador,
+  };
+}
+
+const c: Contador = crearContador(10);
+console.log(c.incrementar()); // 11
+console.log(c.incrementar()); // 12
+console.log(c.decrementar()); // 11
+console.log(c.valor());       // 11
+```
+
+
+> 📖 **Los closures** (§8.1.4 y §8.2.1) son también la lógica interna de los hooks de React: cada renderizado es una llamada a función y por eso el estado se captura por cierre.
+
+---
+
+[Volver al índice general](../../../README.md#5-distribución-temporal-y-contenidos-s00s13)
 
 ---
 

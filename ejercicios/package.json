@@ -6,8 +6,8 @@
   "description": "Batería de ejercicios por sesión del curso DI-RT, con soluciones.",
   "scripts": {
     "typecheck": "tsc",
-    "run:s02": "tsx soluciones/s02/01-tipos-primitivos.ts && tsx soluciones/s02/02-tipos-especiales.ts && tsx soluciones/s02/03-unions-narrowing.ts && tsx soluciones/s02/05-interfaces-types.ts && tsx soluciones/s02/06-funciones.ts && tsx soluciones/s02/07-type-guards.ts && tsx soluciones/s02/08-conversion-operadores.ts && tsx soluciones/s02/09-control-de-flujo.ts && tsx soluciones/s02/10-reto-s02.ts",
-    "run:s03": "tsx soluciones/s03/01-arrays-tuplas.ts && tsx soluciones/s03/02-generics.ts && tsx soluciones/s03/03-utility-types.ts && tsx soluciones/s03/04-arrays-set-map.ts && tsx soluciones/s03/05-objetos.ts && tsx soluciones/s03/06-async.ts && tsx soluciones/s03/07-desestructuracion-spread-optional.ts"
+    "run:s02": "tsx soluciones/s02/01-tipos-primitivos.ts && tsx soluciones/s02/02-type-inference.ts && tsx soluciones/s02/03-tipos-especiales.ts && tsx soluciones/s02/04-interfaces.ts && tsx soluciones/s02/05-type-aliases.ts && tsx soluciones/s02/06-unions-intersection.ts && tsx soluciones/s02/07-conversion-tipos.ts && tsx soluciones/s02/08-operadores.ts && tsx soluciones/s02/09-funciones.ts && tsx soluciones/s02/10-control-de-flujo.ts && tsx soluciones/s02/11-unions-narrowing.ts && tsx soluciones/s02/12-type-guards.ts && tsx soluciones/s02/13-reto-s02.ts",
+    "run:s03": "tsx soluciones/s03/01-arrays-tuplas.ts && tsx soluciones/s03/02-arrays-metodos.ts && tsx soluciones/s03/03-set.ts && tsx soluciones/s03/04-map.ts && tsx soluciones/s03/05-objetos.ts && tsx soluciones/s03/06-utility-types.ts && tsx soluciones/s03/07-async.ts && tsx soluciones/s03/08-desestructuracion-spread-optional.ts"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

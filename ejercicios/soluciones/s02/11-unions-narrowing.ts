@@ -71,4 +71,4 @@ assert.equal(nombreOVisitante("Ana"), "Ana");
 assert.equal(procesar("hola"), "HOLA");
 assert.equal(procesar(21), "42");
 assert.equal(procesar(true), "desconocido");
-console.log("S02 · Ejercicio 4 · ¡OK!");
+console.log("S02 · Ejercicio 11 · ¡OK!");

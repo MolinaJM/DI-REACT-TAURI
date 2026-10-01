@@ -71,4 +71,4 @@ assert.equal(filtrarActivos(usuarios).length, 2);
 
 assert.equal(procesarMensaje("hola"), "HOLA");
 assert.throws(() => procesarMensaje(42));
-console.log("S02 · Ejercicio 7 · ¡OK!");
+console.log("S02 · Ejercicio 12 · ¡OK!");

@@ -48,4 +48,4 @@ assert.equal(mostrarId("abc"), "ID: abc");
 assert.equal(mostrarId(123), "ID: 123");
 assert.equal(personaEmpleado.nombre, "Ana");
 assert.equal(personaEmpleado.departamento, "Ingeniería");
-console.log("S02 · Ejercicio 4b · ¡OK!");
+console.log("S02 · Ejercicio 6 · ¡OK!");

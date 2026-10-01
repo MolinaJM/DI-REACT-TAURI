@@ -1,7 +1,7 @@
 // ============================================================
 // S02 · Ejercicio 6 · Funciones en profundidad
 // ============================================================
-// Completa. Solución: soluciones/s02/06-funciones.ts
+// Completa. Solución: soluciones/s02/09-funciones.ts
 
 // 1) Parámetros obligatorios con tipo de retorno
 function saludar(nombre: string, edad: number): string {

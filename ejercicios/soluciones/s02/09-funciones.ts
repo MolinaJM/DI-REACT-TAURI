@@ -62,4 +62,4 @@ const duplicar = crearMultiplicador(2);
 assert.equal(duplicar(5), 10);
 assert.deepEqual(procesarEntrada("hola"), ["h", "o", "l", "a"]);
 assert.deepEqual(procesarEntrada(5), [1, 2, 3, 4, 5]);
-console.log("S02 · Ejercicio 6 · ¡OK!");
+console.log("S02 · Ejercicio 9 · ¡OK!");

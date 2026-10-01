@@ -74,7 +74,7 @@
 //          (constrúyelo uniendo el catálogo).
 //
 // Al terminar, comprueba el resultado ejecutando el reto y, si te atascas,
-// compara TU versión con la solución de referencia (soluciones/s02/10-reto-s02.ts)
+// compara TU versión con la solución de referencia (soluciones/s02/13-reto-s02.ts)
 // solo como autocomprobación: lo importante es que lo acabes explicando tú.
 //
 // ============================================================
@@ -87,7 +87,7 @@
 //   - switch exhaustivo con `never`
 //   - ámbito y closures
 //   - aserciones y manejo de `undefined` / `null`
-// Completa. Solución: soluciones/s02/10-reto-s02.ts
+// Completa. Solución: soluciones/s02/13-reto-s02.ts
 
 // 1) Estado de la máquina (unión de literales) + switch exhaustivo
 type EstadoMaquina = "apagada" | "encendida" | "averiada";

@@ -1,23 +1,26 @@
 // ============================================================
-// S02 · Ejercicio 10 · Conversión de tipos y operadores
+// S02 · Ejercicio 6 · Operadores
 // ============================================================
-// Completa. Solución: soluciones/s02/08-conversion-operadores.ts
-// Catálogo: sesiones/EjerciciosPropuestos/ejerciciosTS.md · Sesión 2 · Bloques 9 y 12
+// Catálogo: sesiones/EjerciciosPropuestos/ejerciciosTS.md · Bloque 8 · Operadores
+// Completa. Solución: soluciones/08-operadores.ts
 
 // 1) `==` frente a `===`: comparación estricta
 function sonIguales(a: unknown, b: unknown): boolean {
   return a == b; // TODO: usa `===`
 }
 
+
 // 2) Operador ternario
 function clasificar(nota: number): "aprobado" | "suspenso" {
   return "suspenso"; // TODO: ternario nota >= 5
 }
 
+
 // 3) `??` (nullish) frente a `||`: con `??` el `0` es un valor válido
 function conDefecto(valor: number | null | undefined, porDefecto: number): number {
   return valor || porDefecto; // TODO: usa `??`
 }
+
 
 // 4) Short-circuit `&&`: no ejecuta la llamada si la condición falla
 let veces = 0;
@@ -27,16 +30,4 @@ const operacion = (): number => {
 };
 function correrSi(condicion: boolean): number | false {
   return 0; // TODO: `condicion && operacion()`
-}
-
-// 5) `JSON.stringify` / `JSON.parse` tipados
-interface Pedido {
-  id: number;
-  total: number;
-}
-function serializar(pedido: Pedido): string {
-  return ""; // TODO: JSON.stringify
-}
-function deserializar(guardado: string): Pedido {
-  return JSON.parse(guardado) as Pedido;
 }

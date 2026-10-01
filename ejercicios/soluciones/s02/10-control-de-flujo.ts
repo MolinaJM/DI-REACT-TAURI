@@ -51,4 +51,4 @@ assert.equal(etiquetaEstado("pendiente"), "⏳");
 assert.equal(etiquetaEstado("error"), "❌");
 assert.equal(contarLetras(["hola", "mundo"]), 9);
 assert.deepEqual(cuentaAtras(3), [3, 2, 1]);
-console.log("S02 · Ejercicio 11 · ¡OK!");
+console.log("S02 · Ejercicio 10 · ¡OK!");

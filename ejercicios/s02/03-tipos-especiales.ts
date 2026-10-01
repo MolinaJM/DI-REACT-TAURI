@@ -1,7 +1,7 @@
 // ============================================================
 // S02 · Ejercicio 3 · any, unknown, never y void
 // ============================================================
-// Completa. Solución: soluciones/s02/02-tipos-especiales.ts
+// Completa. Solución: soluciones/s02/03-tipos-especiales.ts
 
 // 2) `any` por debajo del capó: la siguiente función NO usa any, pero dado `unknown`
 //    tras validarlo. Completa la versión segura equivalente sin usar any.

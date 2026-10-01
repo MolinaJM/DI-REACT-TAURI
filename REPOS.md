@@ -188,18 +188,18 @@ Los ejemplos interactivos de TypeScript ya no viven en un repositorio aparte: ca
 | Bloque `REPO-*.ts` (en los apuntes) | Sección "📦 Ejemplo completo" en |
 |---|---|
 | `REPO-01-tipos-primitivos.ts` | `s02/01_SintaxisBasica.md` |
-| `REPO-02-arrays-tuples.ts` | `s03/07_Arrays.md` |
+| `REPO-02-arrays-tuples.ts` | `s03/06_Arrays.md` |
 | `REPO-03-tipos-especiales.ts` | `s02/01_SintaxisBasica.md` |
 | `REPO-04-unions-intersections.ts` | `s02/05_ControlDeFlujo.md` |
-| `REPO-05-interfaces-types.ts` | `s03/08_Estructuras_de_Datos.md` |
+| `REPO-05-interfaces-types.ts` | `s03/07_Estructuras_de_Datos.md` |
 | `REPO-06-funciones.ts` | `s02/04_Funciones.md` |
 | `REPO-07-type-guards-conversion.ts` | `s02/02_ConversionTipos.md` |
 | `REPO-08-control-flow-scope.ts` | `s02/05_ControlDeFlujo.md` |
-| `REPO-12-modulos.ts` | `s03/09_Modulos.md` |
-| `REPO-13-async-await.ts` | `s03/11_Asincronismo_Callbacks_Promesas_AsyncAwait.md` |
-| `REPO-15-arrays-avanzado.ts` | `s03/07_Arrays.md` |
+| `REPO-12-modulos.ts` | `s03/08_Modulos.md` |
+| `REPO-13-async-await.ts` | `s03/10_Asincronismo_Callbacks_Promesas_AsyncAwait.md` |
+| `REPO-15-arrays-avanzado.ts` | `s03/06_Arrays.md` |
 | `REPO-17-que-es-typescript.ts` | `s02/00_Introduccion.md` |
-| `REPO-18-instalacion-configuracion.ts` | `s03/10_NPM.md` |
+| `REPO-18-instalacion-configuracion.ts` | `s03/09_NPM.md` |
 | `REPO-19-generics-utility-types.ts` | `s02/04_Funciones.md` |
 
 ## Matriz: sesión ⇄ apuntes ⇄ repositorio ⇄ ejercicios

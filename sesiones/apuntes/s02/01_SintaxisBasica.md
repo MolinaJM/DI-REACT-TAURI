@@ -128,7 +128,7 @@ let dato: unknown = JSON.parse('{"edad": 30}');
 console.log(dato.edad); // Error: Object is of type 'unknown'. No peta, pero no está bien hecho
 if (typeof dato === "object" && dato !== null) {
     // aquí `dato` ya está estrechado a object y se puede usar
-    const obj = dato as Record<string, unknown>;// ESTE CONCEPTO SE VERÁ MÁS ADELANTE
+    const obj = dato as Record<string, unknown>; // `Record` se explica en 07_Estructuras_de_Datos.md §7.11
     console.log(obj.edad); // Sin error
 }
 ```
@@ -317,6 +317,33 @@ interface User {
 > [!TIP]
 > Usa `interface` para entidades y props de React; usa `type` para uniones, tuplas y alias. Ni `interface` ni `type` generan código en runtime (sintaxis *erasable-only*), así que puedes usarlos sin restricción.
 
+> [!IMPORTANT]
+> **Define los tipos en un `.ts` aparte e impórtalos.** En un proyecto real los `interface`/`type` no viven dentro del fichero que los consume: se declaran en un archivo de tipos (habitualmente `types.ts` o `types/`) y se importan con `import type`, que es la forma de pedirle a TypeScript que **no genere** ese import en el JavaScript final. Así evitas repetir la definición en cada componente y el autocompletado te ofrece las props en cualquier sitio.
+
+```typescript
+// types.ts — la definición vive aquí, una sola vez
+export interface Cancion {
+  readonly id: number;
+  titulo: string;
+  artista: string;
+  duracion?: number;
+}
+```
+
+```typescript
+// cancion.ts — el consumo: solo se importa el tipo
+import type { Cancion } from "./types";
+
+function reproducir(c: Cancion): void {
+  console.log(`Reproduciendo ${c.titulo}...`);
+}
+
+const datosCancion: Cancion = { id: 1, titulo: "Heroes", artista: "David Bowie" };
+reproducir(datosCancion);
+```
+
+> Excepciones: los tipos que describe una sola pantalla o un solo componente (por ejemplo las `Props` de ese componente) se definen justo encima, en el mismo fichero. La separación en un `.ts` externo compensa cuando el tipo se comparte entre varios ficheros.
+
 > [!NOTE]
 > **Características raras o innecesarias en React y Tauri:**
 > - **Declaration Merging** — es interesante pero no es algo que hagas a propósito: ocurre automáticamente cuando defines dos interfaces con el mismo nombre. No es un patrón de diseño, sino un comportamiento del compilador.> -
@@ -373,8 +400,7 @@ function procesarRespuesta(respuesta: RespuestaAPI) {
 La **intersección (`&`)** combina tipos (interfaces y types) exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
 
 ```typescript
-// ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `interface` → 01_SintaxisBasica.md §1.3 (Interfaces y Type Aliases)
+// 🔁 `interface` → ya explicado en §1.3 (Interfaces y Type Aliases)
 interface Persona { 
   nombre: string; 
 }

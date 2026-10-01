@@ -1,7 +1,7 @@
 // ============================================================
 // S02 · Ejercicio 7 · Type guards avanzados
 // ============================================================
-// Completa. Solución: soluciones/s02/07-type-guards.ts
+// Completa. Solución: soluciones/s02/12-type-guards.ts
 
 // 1) Predicado de tipo: `esPez(animal)` debe devolver `animal is Pez`
 interface Pez {
