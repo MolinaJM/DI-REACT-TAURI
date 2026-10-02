@@ -433,6 +433,4 @@ console.log(c.valor());       // 11
 
 [Volver al índice general](../../../README.md#5-distribución-temporal-y-contenidos-s00s13)
 
----
 
-[Volver al índice general](../../../README.md#5-distribución-temporal-y-contenidos-s00s13)

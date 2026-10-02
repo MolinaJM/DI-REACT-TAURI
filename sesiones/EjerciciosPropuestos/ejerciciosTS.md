@@ -7,6 +7,12 @@
 > ✅ **Soluciones.** Cada bloque resuelto enlaza a su fichero en [`ejercicios/soluciones/`](../../ejercicios/soluciones/). Hoy están **fuera del repositorio** (`.gitignore`): al publicarlos, los enlaces se activarán automáticamente. Todos los bloques tienen fichero de ejercicio y de solución propios.
 > 🧪 **Ejercicio ejecutable** en [`ejercicios/s0X/`](../../ejercicios/) · 📖 **Teoría** en [`apuntes/s0X/`](../apuntes/).
 
+> ⚠️ **`export {}` al principio de cada ejercicio.** Cada fichero debe abrir con un `export {}` (o con cualquier `import`/`export`) para que TypeScript lo trate como **módulo** y no como **script**. Sin esa línea, todas las declaraciones de primer nivel (`const`, `function`, `type`, `interface`…) comparten el **ámbito global** y dos ejercicios que declaren el mismo nombre chocan entre sí al compilarse juntos o al concatenarse.
+>
+> Colisiones reales en el catálogo actual: `Usuario` (`s02/04-interfaces.ts`, `s03/05-objetos.ts`, `s03/06-utility-types.ts`), `Producto` (`s02/13-reto-s02.ts`, `s03/02-arrays-metodos.ts`, `s03/05-objetos.ts`), `Pedido`, `Id`, `EstadoPedido`, `numeros`, `texto`, `numero`, `activo`, `usuario` y `coordenada`.
+>
+> Con `export {}` cada ejercicio se compila, se ejecuta y se evalúa **por separado**, sin depender del orden de carga ni del estado que dejó el anterior.
+
 
 ## 🎯 Prioridad para React y Tauri (P1–P5)
 
