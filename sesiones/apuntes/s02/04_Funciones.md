@@ -103,7 +103,7 @@ console.log(cuadrados2); // [1, 4, 9, 16, 25]
 
 const mifuncioncubo:ff = (numero) => numero**3;
 const cubos: number[] = numeros.map(mifuncioncubo);
-console.log(cubos); // [1, 4, 9, 16, 25]
+console.log(cubos); // [1, 8, 27, 64, 125]
 ```
 
 > [!TIP]
