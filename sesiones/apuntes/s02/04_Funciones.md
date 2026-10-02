@@ -191,7 +191,7 @@ El tipo del parámetro `funcion` es `(nombre: string) => void`: "una función qu
 
 ## 7. Otros tipos de función: callbacks
 
-Para terminar el capítulo, hay más tipos de funciones que veremos en siguientes capítulos (como las firmas de funciones) o como los callbacks.:
+Para terminar el capítulo, un resumen de firmas de funciones y de otros  tipos que veremos en siguientes capítulos como los callbacks. Un callback es simplemente una función que le pasas a otra función como si fuera un parámetro más (como un número o un texto), para que la ejecute después.:
 
 ```typescript
 // Tipo de función reutilizable (la "firma" que ya conocemos).
@@ -368,9 +368,9 @@ if (true) {
 <a id="814-ámbito-de-cierre-closures"></a>
 #### 8.1.4 Ámbito de Cierre (Closures)
 
-Un componente padre en React puede pasarle datos (props) a sus hijos, pero la comunicación en sentido inverso no ocurre mediante el envío directo de datos del hijo al padre, sino a través de funciones callback pasadas como props. 
+Un componente padre en React puede pasarle datos (props) a sus hijos, pero la comunicación en sentido inverso no ocurre mediante el envío directo de datos del hijo al padre, sino a través de funciones **callback** pasadas como props. 
 
-Cuando un hijo (como un botón dentro de un formulario) ejecuta esa función recibida, esta se ejecuta dentro del contexto del padre gracias a los closures de JavaScript: la función retiene el acceso al ámbito  donde fue creada en el padre (incluyendo sus variables y funciones para actualizar el estado), permitiendo que la interacción ocurrida en el hijo modifique y actualice el estado del componente superior..
+Cuando un hijo (como un botón dentro de un formulario) ejecuta esa función recibida, esta se ejecuta dentro del contexto del padre gracias a los closures de JavaScript: la función **callback** *retiene el acceso al ámbito  donde fue creada en el padre* (incluyendo sus variables y funciones para actualizar el estado), permitiendo que la interacción ocurrida en el hijo modifique y actualice el estado del componente superior..
 
 
 
