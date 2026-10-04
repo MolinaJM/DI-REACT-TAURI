@@ -128,29 +128,31 @@ switch (diaSemana) {
 ```
 
 > [!NOTE]
-> En `strict` mode, un `switch` sobre un tipo **unión** (p. ej. `type Estado = "ok" | "cargando" | "error"`) estrecha el tipo en cada `case`. Si además usamos el patrón *exhaustive check* con `never`, TypeScript nos avisa si falta un caso. Ya lo viste en el bloque "Ejemplo completo-resumen" al final de [`01_SintaxisBasica.md`](01_SintaxisBasica.md) (sección *never en exhaustiveness checking*), con una variable `_exhaustivo: never` en el `default`.
+> En `strict` mode, un `switch` sobre un tipo **unión** (p. ej. `type Estado = "ok" | "cargando" | "error"`) estrecha el tipo en cada `case`. Si además usamos el patrón *exhaustive check* con `never`, TypeScript nos avisa si falta un caso. Ya lo vimos en   [`01_SintaxisBasica.md`](01_SintaxisBasica.md) (sección *never en exhaustiveness checking*), con una variable `_exhaustivo: never` en el `default`.
 
 <a id="54-narrowing-el-control-de-flujo-tipado"></a>
 ## 5.4. Narrowing: el control de flujo tipado
 
 TypeScript analiza el flujo del programa y **reduce el tipo** de una variable según las condiciones por las que pasa. Esto se llama *type narrowing* y es la forma segura de "filtrar" tipos unión.
 
+Ejemplos de narrowing básico:
+
 ```typescript
-function mostrarLongitud(valor: string | number): void {
+function hazCambios(valor: string | number): void {
   if (typeof valor === "string") {
-    // aquí valor es string
+    // aquí valor es string --> a Mayúsculas
     console.log(valor.toUpperCase());
-  } else {
-    // aquí valor es number
+  } else {´//Realmente esto sobraría...
+    // aquí valor es number --> Redondea decimales
     console.log(valor.toFixed(2));
   }
 }
 
 function procesar(dato: Usuario | null): string {
-  if (dato === null) {
+  if (dato === null) { // narrowing por igualdad (equality narrowing). No usa typeof/instanceof...
     return "Sin datos";
   }
-  // aquí dato es Usuario
+  // aquí dato es Usuario (narrowing implícito) Si el ascensor no va hacia arriba ... entonces??
   return dato.nombre;
 }
 
@@ -158,8 +160,8 @@ interface Usuario {
   nombre: string;
 }
 
-mostrarLongitud(3);
-mostrarLongitud("TRES");
+hazCambios(3);
+hazCambios("TRES");
 console.log(procesar(null)); 
 let u:Usuario={nombre:"Profe"};
 console.log(procesar(u)); 
@@ -172,9 +174,88 @@ console.log(procesar(u));
 | `Array.isArray(x)` | Arrays (porque `typeof []` es `"object"`) | `Array.isArray(lista)` |
 | `instanceof` | Instancias de `Error`/clases | `x instanceof Error` |
 
+```typescript
+// Ejemplo mínimo de las tres herramientas: `in`, `Array.isArray(x)` e `instanceof`
+
+interface Perro { 
+    ladrar(): void 
+}
+interface Gato { 
+    maullar(): void 
+}
+type Animal = Perro | Gato;
+
+function hablar(animal: Animal): string {
+  if ("ladrar" in animal) {   // `in` estrecha la unión a Perro
+    animal.ladrar();
+    return "Guau";
+  }
+  animal.maullar(); // aquí TypeScript ya sabe que es Gato (narrowing implícito)
+  return "Miau";
+}
+
+type Dato = string | number | string[] | Error;
+
+function describir(dato: Dato): string {
+  if (Array.isArray(dato)) {   // único narrowing fiable para arrays (typeof [] es "object")
+    return `Lista de ${dato.length}: ${dato.join(", ")}`;
+  }
+  if (dato instanceof Error) { // instanceof mira la clase real del objeto
+    return `Error: ${dato.message}`;
+  }
+  return `Valor: ${dato}`;
+}
+
+console.log(hablar({ ladrar: () => {} }));  // Guau
+console.log(hablar({ maullar: () => {} })); // Miau
+console.log(describir("hola"));             // Valor: hola
+console.log(describir(42));                 // Valor: 42
+console.log(describir(["a", "b"]));         // Lista de 2: a, b
+console.log(describir(new Error("boom")));  // Error: boom
+```
+
+### Unión discriminada (narrowing por discriminante)
+
+Cuando **todos** los miembros de una unión comparten la misma propiedad literal (la que se llama *discriminante*), el `switch` deja de ser un `switch` cualquiera: en cada `case`, TypeScript reduce el tipo al miembro correspondiente y **solo deja acceder a las propiedades de ese miembro**. Es el patrón más usado en React y en Tauri para modelar estados.
+
+Ya se introdujo en [`01_SintaxisBasica.md`](01_SintaxisBasica.md) (sección *Unión de tipos*) con `status: 'success' | 'error'`; aquí se ve el efecto sobre el control de flujo:
+
+```typescript
+interface Circulo { tipo: "circulo"; radio: number }          // `tipo` es el discriminante
+interface Rectangulo { tipo: "rectangulo"; ancho: number; alto: number }
+type Figura = Circulo | Rectangulo;
+
+function calcularArea(fig: Figura): number {
+  switch (fig.tipo) {
+    case "circulo":       // aquí fig es Circulo: existe fig.radio
+      return Math.PI * fig.radio ** 2;
+    case "rectangulo":    // aquí fig es Rectangulo: existen fig.ancho y fig.alto
+      return fig.ancho * fig.alto;
+    default: {
+      const _exhaustivo: never = fig;   // exhaustiveness check (§5.3.1)
+      return _exhaustivo;
+    }
+  }
+}
+
+console.log(calcularArea({ tipo: "circulo", radio: 5 }));        // 78.53981633974483
+console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 })); // 24
+```
+
+Qué aporta frente a un objeto normal:
+
+- **No hace falta optional chaining** (`fig.radio?.`) ni aserciones `as`: en cada rama las propiedades existen de verdad.
+- **El `default` con `never` avisa si falta un caso**: al añadir un tercer miembro a `Figura`, el compilador señala el `switch` que se ha quedado corto.
+- Cada rama trabaja con **tipos distintos**, así que el compilador ayuda también con autocompletado y con el renombrado de propiedades.
+
+> [!NOTE]
+> Si el discriminante es un `string` en vez de un literal (`tipo: string`), el narrowing se pierde: `instanceof` y las aserciones no ayudan aquí porque la forma no distingue. Mantén siempre literales (`"circulo"`, `"rectangulo"`).
+
 ### Type guards con predicados (`is`)
 
 Las herramientas anteriores (`typeof`, `in`, `instanceof`) son narrowing integrado en el lenguaje. Pero a veces necesitas comprobar algo más específico: "¿este objeto cumple la forma de `Usuario`?". Para eso se usan **type guards con predicados**: funciones que devuelven `boolean` pero cuyo tipo de retorno se anota como `valor is Tipo`. Esto le dice a TypeScript: "cuando esta función devuelve `true`, dentro del `if` el valor es de ese tipo".
+
+Estos typeguards suelen denotarse como **esLOQUESEA()** devolviendo un boolean.
 
 ```typescript
 interface Usuario {
@@ -234,7 +315,15 @@ function validarConfig(config: unknown): asserts config is Config {
   if (typeof config !== "object" || config === null) {
     throw new TypeError("La configuración debe ser un objeto");
   }
-  const c = config as Record<string, unknown>;
+  // Podríasmo poner ahora esto:
+  // const c = config as Config;
+  // ERROR! Es una aserción que deberíamos evitar. Hay que comprobar que 
+  // exactamente tengo un "objeto" con los campos correctos en nombre y contenido  
+ 
+  // Usamos RECORD: se verá en la sección de Arrays
+  // Castea 'config' a un objeto con claves de texto y valores 'unknown',
+  // lo que permite acceder a sus propiedades (c.url, c.timeout) para validarlas.
+  const c = config as Record<string, unknown>;  
   if (typeof c.url !== "string") {
     throw new TypeError("La configuración debe tener 'url' como string");
   }
@@ -252,10 +341,8 @@ console.log(datos.url); // sin error
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
 
-> ✏️ **Práctica:** [`s02/12-type-guards.ts`](../../../ejercicios/s02/12-type-guards.ts) (guards `is`/`asserts`) · [`s02/11-unions-narrowing.ts`](../../../ejercicios/s02/11-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·9 y S2·13](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/12-type-guards.ts`](../../../ejercicios/s02/12-type-guards.ts) (guards `is`/`asserts`) · [`s02/11-unions-narrowing.ts`](../../../ejercicios/s02/11-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·11 y S2·12](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
-> [!IMPORTANT]
-> Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
 
 ---
 ### 📦 Ejemplo completo: `unions-intersections.ts`
@@ -365,126 +452,7 @@ console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 }));
 ```
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `05_ControlDeFlujo.ts` y ejecuta `npx tsx 05_ControlDeFlujo.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-
-### 📦 Ejemplo completo: `control-flow-scope.ts`
-
-Control de flujo (switch exhaustivo, bucles), hoisting, TDZ y closures.
-
-```typescript
-
-/**
- * Fichero 08: Control de Flujo y Scope
- * -------------------------------------------
- * - Condicionales (if/else, switch exhaustivo)
- * - Bucles (for...of)
- * - Hoisting y Temporal Dead Zone
- * - Clausuras (Closures)
- */
-// 🔁 CONCEPTOS YA VISTOS O TRATADOS EN ESTE MISMO EJEMPLO:
-// - Hoisting y Temporal Dead Zone (TDZ) → se explican más abajo ("Ámbito y hoisting")
-// - Closures → 04_Funciones.md §8.1.4 (ya visto)
-
-// ============================================================================
-// CONDICIONALES
-// ============================================================================
-
-const puntuacion: number = 85;
-
-if (puntuacion >= 90) {
-    console.log("Excelente");
-} else if (puntuacion >= 70) {
-    console.log("Aprobado");
-} else {
-    console.log("Reprobado");
-}
-
-// Switch exhaustivo con tipos
-type DiaSemana = "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes";
-
-function actividad(dia: DiaSemana): string {
-    switch (dia) {
-        case "Lunes":     return "Reunion semanal";
-        case "Martes":    return "Desarrollo";
-        case "Miercoles": return "Code review";
-        case "Jueves":    return "Desarrollo";
-        case "Viernes":   return "Deploy";
-        default:
-            // Exhaustiveness check
-            const _exhaustivo: never = dia;
-            return _exhaustivo;
-    }
-}
-
-// ============================================================================
-// BUCLES
-// ============================================================================
-
-const frutas: string[] = ["manzana", "pera", "uva"];
-
-
-// for...of (iterables)
-for (const fruta of frutas) {
-    console.log(fruta);
-}
-
-// for...of con strings
-for (const letra of "TypeScript") {
-    console.log(letra);
-}
-
-
-
-// ============================================================================
-// AMBITO (SCOPE) Y HOISTING
-// ============================================================================
-
-
-// let/const: ambito de bloque, Temporal Dead Zone (TDZ)
-function ejemploLet(): void {
-    // console.log(y); // ReferenceError: TDZ
-    let y: number = 10;
-    const z: number = 15;
-}
-
-// Block scope con let
-if (true) {
-    let blockVar: string = "Solo aqui";
-    console.log(blockVar); // OK
-}
-// console.log(blockVar); // Error: no definida fuera
-
-// ============================================================================
-// CLAUSURAS (CLOSURES)
-// ============================================================================
-
-function crearContador(inicial: number = 0): {
-    incrementar: () => number;
-    decrementar: () => number;
-    valor: () => number;
-} {
-    let contador: number = inicial;
-
-    return {
-        incrementar: () => ++contador,
-        decrementar: () => --contador,
-        valor: () => contador,
-    };
-}
-
-const c = crearContador(10);
-console.log(c.incrementar()); // 11
-console.log(c.incrementar()); // 12
-console.log(c.decrementar()); // 11
-console.log(c.valor());       // 11
-
-
-// Ejecutar ejemplos
-ejemploLet();
-console.log(actividad("Lunes"));
-```
-
-> ▶ **Cómo probarlo:** copia este bloque a `bancop` como `05_ControlDeFlujo.ts` y ejecuta `npx tsx 05_ControlDeFlujo.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-> ✏️ **Práctica:** [`s02/10-control-de-flujo.ts`](../../../ejercicios/s02/10-control-de-flujo.ts) (switch exhaustivo `never` = patrón reducer de React) · [`s02/11-unions-narrowing.ts`](../../../ejercicios/s02/11-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·11 y S2·13](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+> ✏️ **Práctica:** [`s02/10-control-de-flujo.ts`](../../../ejercicios/s02/10-control-de-flujo.ts) (switch exhaustivo `never` = patrón reducer de React) · [`s02/11-unions-narrowing.ts`](../../../ejercicios/s02/11-unions-narrowing.ts) (narrowing §5.4) · [catálogo S2·10 y S2·11](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
 
 ---
 

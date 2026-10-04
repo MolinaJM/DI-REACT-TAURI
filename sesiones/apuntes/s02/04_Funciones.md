@@ -210,7 +210,7 @@ function procesar(numeros: number[], callback: (n: number) => void): void {
 procesar([1, 2, 3], n => console.log("procesado:", n));
 ```
 
-> 🔜 **Dónde se desarrolla esto.** Un callback no es un invento de este capítulo: es el mismo mecanismo que verás en `forEach`/`map`/`filter` (*Arrays*, s03/06), en los `.then()` de las promesas (`s03/10_Asincronismo…` §10.3) y en los `useEffect` de React. Aquí solo se presenta la **forma de escribirlo**: una función que recibe a otra como parámetro y la tipa.
+> 🔜 **Dónde se desarrolla esto.** Un callback no es un invento de este capítulo: es el mismo mecanismo que verás en `forEach`/`map`/`filter` (*Arrays*, s03/06), en los `.then()` de las promesas (`s03/08_Asincronismo…` §8.3) y en los `useEffect` de React. Aquí solo se presenta la **forma de escribirlo**: una función que recibe a otra como parámetro y la tipa.
 
 ### 📦 Ejemplo completo: `funciones.ts`
 

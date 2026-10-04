@@ -195,11 +195,11 @@ Los ejemplos interactivos de TypeScript ya no viven en un repositorio aparte: ca
 | `REPO-06-funciones.ts` | `s02/04_Funciones.md` |
 | `REPO-07-type-guards-conversion.ts` | `s02/02_ConversionTipos.md` |
 | `REPO-08-control-flow-scope.ts` | `s02/05_ControlDeFlujo.md` |
-| `REPO-12-modulos.ts` | `s03/08_Modulos.md` |
-| `REPO-13-async-await.ts` | `s03/10_Asincronismo_Callbacks_Promesas_AsyncAwait.md` |
+| `REPO-12-modulos.ts` | `s03/09_Miscelánea.md` (Parte A) |
+| `REPO-13-async-await.ts` | `s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md` |
 | `REPO-15-arrays-avanzado.ts` | `s03/06_Arrays.md` |
 | `REPO-17-que-es-typescript.ts` | `s02/00_Introduccion.md` |
-| `REPO-18-instalacion-configuracion.ts` | `s03/09_NPM.md` |
+| `REPO-18-instalacion-configuracion.ts` | `s03/09_Miscelánea.md` (Parte B) |
 | `REPO-19-generics-utility-types.ts` | `s02/04_Funciones.md` |
 
 ## Matriz: sesión ⇄ apuntes ⇄ repositorio ⇄ ejercicios

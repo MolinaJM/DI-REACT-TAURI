@@ -36,7 +36,7 @@ TypeScript es un lenguaje de programación que extiende JavaScript añadiendo:
 - **Enum → uniones de tipos**: Enum es algo de TS que no reconoce JS. Este curso reemplaza las enumeraciones (`enum`) por uniones de string literals, compatibles con Node 24. A partir de Node 22 se introdujo de forma nativa el Type Stripping (la capacidad de ejecutar archivos .ts directamente borrando las anotaciones de tipo). Sin embargo, para que Node pueda ejecutar un archivo .ts sin compilar con tsx, la sintaxis de TypeScript debe ser 100% removible. Y los enum no dejan hacer eso.)
 - **Genéricos**: Funciones y clases que trabajan con varios tipos
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `Genéricos` → s03/11_Generics.md §1
+// - `Genéricos` → s03/10_Generics.md §1
 - **Type narrowing**: Refinar el tipo según el flujo del programa
 // ⚠️ ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
 // - `Type narrowing` → 05_ControlDeFlujo.md §5.4, EjerciciosPropuestos/ejerciciosTS.md §11
@@ -300,8 +300,8 @@ JavaScript es conocido por su enfoque **asíncrono** y su capacidad para manejar
 // - `interface` → 01_SintaxisBasica.md §1.3
 // - `unknown` → 01_SintaxisBasica.md §1.2
 // - `as` (type assertion) → 02_ConversionTipos.md (Conversión con tipos en TypeScript)
-// - `Record<K,V>` → EjerciciosPropuestos/ejerciciosTS.md §19 (Utility Types)
-// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §19 (Utility Types)
+// - `Record<K,V>` → EjerciciosPropuestos/ejerciciosTS.md §22 (Utility Types)
+// - `Partial<T>` → EjerciciosPropuestos/ejerciciosTS.md §22 (Utility Types)
 // - `Array.isArray()` → 05_ControlDeFlujo.md §5.4 (narrowing)
 // - `valor is T` (type guard predicate) → 05_ControlDeFlujo.md §5.4, EjerciciosPropuestos/ejerciciosTS.md §12
 // - `async` / `await` / `Promise` → EjerciciosPropuestos/ejerciciosTS.md §20
@@ -717,7 +717,7 @@ mostrarInfoPersona(profesor);
 
 // TypeScript: Genéricos
 // ESTE CONCEPTO SE DESARROLLARÁ MÁS ADELANTE:
-// - `<T>` genéricos → s03/11_Generics.md §1
+// - `<T>` genéricos → s03/10_Generics.md §1
 function crearArray<T>(items: T[]): T[] {
   return new Array<T>().concat(items);
 }

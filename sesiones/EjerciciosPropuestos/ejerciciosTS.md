@@ -9,7 +9,7 @@
 
 > ⚠️ **`export {}` al principio de cada ejercicio.** Cada fichero debe abrir con un `export {}` (o con cualquier `import`/`export`) para que TypeScript lo trate como **módulo** y no como **script**. Sin esa línea, todas las declaraciones de primer nivel (`const`, `function`, `type`, `interface`…) comparten el **ámbito global** y dos ejercicios que declaren el mismo nombre chocan entre sí al compilarse juntos o al concatenarse.
 >
-> Colisiones reales en el catálogo actual: `Usuario` (`s02/04-interfaces.ts`, `s03/05-objetos.ts`, `s03/06-utility-types.ts`), `Producto` (`s02/13-reto-s02.ts`, `s03/02-arrays-metodos.ts`, `s03/05-objetos.ts`), `Pedido`, `Id`, `EstadoPedido`, `numeros`, `texto`, `numero`, `activo`, `usuario` y `coordenada`.
+> Colisiones reales en el catálogo actual: `Usuario` (`s02/04-interfaces.ts`, `s03/05-objetos.ts`, `s03/06-utility-types.ts`), `Producto` (`s02/13-reto-s02.ts`, `s03/05-objetos.ts`), `Planeta` (`s03/02-arrays-metodos.ts`), `Pedido`, `Id`, `EstadoPedido`, `numeros`, `texto`, `numero`, `activo`, `usuario` y `coordenada`.
 >
 > Con `export {}` cada ejercicio se compila, se ejecuta y se evalúa **por separado**, sin depender del orden de carga ni del estado que dejó el anterior.
 
@@ -53,17 +53,11 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 | 16 · Set | `s03/03` | **P3** | Deduplicar listas y cachés; casos concretos. |
 | 17 · Map | `s03/04` | **P3** | Caché/persistencia clave-valor; `Record` cubre la mayoría. |
 | 18 · Objetos en profundidad | `s03/05` | **P2** | Entidades, formularios, JSON y cloning sin mutar el estado. |
-| 19 · Utility Types | `s03/06` | **P3** | `Partial`/`Pick`/`Omit`/`Record` en formularios de edición y props. |
+| 19 · Desestructuración/spread/optional chaining | `s03/08` | **P1** | El puente: destructuring de props, spread de `setState`, `?.`/`??` — lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
 | 20 · Programación asíncrona | `s03/07` | **P1** | `Promise.all` + `try/catch` = patrón `invoke` y del `useEffect` de carga. |
-| 21 · Desestructuración/spread/optional chaining | `s03/08` | **P1** | El puente: destructuring de props, spread de `setState`, `?.`/`??` — lo primero de cada componente. |
+| 22 · Utility Types *(optativo)* | `s03/06` | **P3** | `Partial`/`Pick`/`Omit`/`Record`: se imparte en Generics (`s03/10`). Bloque final, asociado al apunte optativo. |
 
 
-
-
-
-
-
-## Sesión 2: Introducción a TypeScript (Parte 1)
 
 
 
@@ -255,7 +249,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 1. Estás desarrollando un sistema de calificaciones para una plataforma educativa. Escribe un `if/else if/else` que clasifique una nota numérica en Sobresaliente, Notable, Aprobado, Suspenso.
 2. Estás implementando un manejador de estados para una petición HTTP que puede tener múltiples estados. Crea un `switch` exhaustivo con un tipo unión de 4 valores literales. Incluye exhaustiveness check con `never`.
 3. Estás procesando una lista de nombres y necesitas calcular el total de caracteres. Recorre un array de strings con `for...of` y suma sus longitudes.
-4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `hasta…1` en un array usando `for...of` sobre un rango (`Array.from`).
+4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `hasta…1` en un array usando `for...of` sobre un rango (`Array.from`, visto en [`04_Funciones.md`](../apuntes/s02/04_Funciones.md)).
 
 
 
@@ -270,14 +264,14 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 > 🧪 **Ejercicio:** [`s02/11-unions-narrowing.ts`](../../ejercicios/s02/11-unions-narrowing.ts).
 > ✅ **Solución:** [`soluciones/s02/11-unions-narrowing.ts`](../../ejercicios/soluciones/s02/11-unions-narrowing.ts).
 > 🎯 Prioridad **P1** — `typeof`/`in` y discriminated unions: los estados de una petición o evento.
+> ℹ️ Los **tipos literales** (`"N" | "S"`, `EstadoPedido`) se explican en [`01_SintaxisBasica.md`](../apuntes/s02/01_SintaxisBasica.md); aquí se ponen en práctica.
 1. Estás construyendo un sistema de navegación que trabaja con puntos cardinales. Define un tipo literal `Direccion` con valores `"N" | "S" | "E" | "O"`. Escribe una función que devuelva el nombre completo.
 2. Estás implementando un motor de cálculo de áreas para un programa de diseño gráfico. Crea una discriminated union `Triangulo | Cuadrado` con la propiedad discriminante `tipo`. Implementa `calcularArea`.
 3. Estás procesando datos que pueden ser de tres tipos diferentes y necesitas aplicar una lógica distinta a cada uno. Usa `typeof` narrowing en una función que acepte `string | number | boolean` y aplique una transformación distinta a cada caso.
 4. Estás trabajando con dos tipos de objetos que comparten propiedades pero tienen diferencias. Usa `in` narrowing para distinguir entre dos interfaces.
 5. Estás desarrollando un sistema de seguimiento de pedidos. Define un type alias `EstadoPedido` con las literales `"pendiente" | "enviado" | "entregado"` y crea `actualizarEstado(estado)` que imprima en consola la notificación del cambio.
-6. Estás definiendo roles de usuario a partir de un objeto constante y necesitas derivar un tipo que solo admita los valores válidos. Dado `const roles = { admin: "ADMINISTRADOR", user: "USUARIO_ESTANDAR" } as const`, deriva un tipo a partir de los valores de `roles` que solo admita `"ADMINISTRADOR" | "USUARIO_ESTANDAR"`.
-7. Estás procesando una entrada que puede ser un texto o un número y necesitas transformarla según su tipo. Escribe `procesarEntrada(entrada: string | number)`: si es `string` devuelve el texto en mayúsculas; si es `number`, el doble del número.
-8. Estás recibiendo datos de una API externa y necesitas validar su tipo antes de procesarlos. Escribe `procesar(valor: unknown)`: si es `string`, devuelve su longitud en mayúsculas; si es `number`, su doble como string; si no, `"desconocido"`.
+6. Estás procesando una entrada que puede ser un texto o un número y necesitas transformarla según su tipo. Escribe `procesarEntrada(entrada: string | number)`: si es `string` devuelve el texto en mayúsculas; si es `number`, el doble del número.
+7. Estás recibiendo datos de una API externa y necesitas validar su tipo antes de procesarlos. Escribe `procesar(valor: unknown)`: si es `string`, devuelve su longitud en mayúsculas; si es `number`, su doble como string; si no, `"desconocido"`.
 
 
 
@@ -350,11 +344,27 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 > 🧪 **Ejercicio:** [`s03/02-arrays-metodos.ts`](../../ejercicios/s03/02-arrays-metodos.ts).
 > ✅ **Solución:** [`soluciones/s03/02-arrays-metodos.ts`](../../ejercicios/soluciones/s03/02-arrays-metodos.ts).
 > 🎯 Prioridad **P1** — `map`/`filter`/`reduce`/`find` son omnipresentes en el JSX de las listas.
+>
+> 🌌 **Datos de ejemplo:** los planetas usados en los ejercicios 2 y 5 son reales, extraídos de la API pública [swapi.info/api/planets](https://swapi.info/api/planets). Se han **hardcodeado** en el fichero de ejercicio (no se hace `fetch`): la asincronía (`async/await`, `Promise`) se imparte en la sesión 9 (`s03/08_Asincronismo`), así que aquí trabajamos con datos estáticos para centrarnos en los métodos de array.
+>
+> **JSON de los planetas** (los 4 campos que se usan en los ejercicios):
+>
+> ```json
+> [
+>   { "name": "Tatooine",  "population": 200000,     "climate": "arid",                "films": ["films/1", "films/3", "films/4", "films/5", "films/6"] },
+>   { "name": "Alderaan",  "population": 2000000000, "climate": "temperate",           "films": ["films/1", "films/6"] },
+>   { "name": "Yavin IV",  "population": 1000,       "climate": "temperate, tropical", "films": ["films/1"] },
+>   { "name": "Hoth",      "population": 0,          "climate": "frozen",              "films": ["films/2"] },
+>   { "name": "Dagobah",   "population": 0,          "climate": "murky",               "films": ["films/2", "films/3", "films/6"] }
+> ]
+> ```
+>
+> *(En la API real, `population` viene como `string` (o `"unknown"`) y `films` como URLs completas; aquí se convierten a `number` y a IDs cortos para simplificar los ejercicios.)*
 1. Estás procesando una lista de números para transformarlos, filtrarlos y calcular un total. Dado `[1, 2, 3, 4, 5]`, usa `map` para duplicar, `filter` para pares, `reduce` para sumar.
-2. Estás buscando productos específicos en un catálogo. Usa `find`, `findIndex`, `some` y `every` sobre un array de objetos `Producto`.
+2. Estás buscando planetas específicos en un catálogo. Usa `find`, `findIndex`, `some` y `every` sobre el array de objetos `Planeta` (datos de swapi).
 3. Estás trabajando con datos que no deben mutar y necesitas versiones ordenadas o invertidas del array. Usa `toSorted`, `toReversed` y `with` (ES2023) y comprueba que el original no muta.
 4. Estás implementando un buscador eficiente en una lista ordenada. Implementa una búsqueda binaria tipada.
-5. Estás gestionando una lista de usuarios y necesitas filtrar solo los activos. Dada la interface `Usuario { nombre: string; activo: boolean }`, escribe `obtenerActivos(usuarios: Usuario[])` que devuelva un nuevo array solo con los `activo === true`.
+5. Estás gestionando una lista de planetas y necesitas filtrar solo los habitables. Dada la interface `Planeta { name: string; population: number; climate: string }`, escribe `obtenerHabitable(planetas: Planeta[])` que devuelva un nuevo array solo con los de `climate === "temperate"`.
 6. Estás implementando una pila de tareas y necesitas modificar el array en su lugar. Usa los métodos que **mutan** el array en su lugar: `push` y `pop` sobre una pila, y `sort` con un comparador numérico `(a, b) => a - b`. Comprueba que `sort` modifica el array original.
 7. Estás trabajando con listas de datos y necesitas crear copias que puedas modificar sin afectar la original. Crea una copia de un array con `slice()` y con el spread `[...arr]`, y modifica la copia sin afectar al original (contrasta con `sort` que sí muta).
 
@@ -405,7 +415,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 <a id="18-objetos-en-profundidad"></a>
 
-### 18. Objetos en profundidad
+### 18. Estructuras de Datos - Objetos en profundidad
 
 
 > 🧪 **Ejercicio:** [`s03/05-objetos.ts`](../../ejercicios/s03/05-objetos.ts).
@@ -414,7 +424,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 1. Estás explorando las propiedades de un objeto para inspeccionar su contenido. Dado un objeto `persona`, usa `Object.keys`, `Object.values` y `Object.entries`.
 2. Estás extrayendo datos específicos de un objeto y necesitas hacerlo de forma concisa. Usa destructuring básico: alias y valores por defecto.
 3. Estás clonando un objeto complejo y necesitas preservar tipos como `Date` o `Map` que `JSON.parse` no maneja. Clona un objeto con `structuredClone` — ¿qué tipos preserva que `JSON.parse(JSON.stringify(x))` no?
-4. Estás agrupando productos por categoría para mostrarlos en secciones. Usa `Object.groupBy` para agrupar productos por categoría y observa el tipo de retorno.
+4. Estás agrupando planetas por clima para mostrarlos en secciones. Usa `Object.groupBy` para agrupar el array de `Planeta` (datos de swapi) por `climate` y observa el tipo de retorno.
 5. Estás protegiendo un objeto de modificaciones accidentales. Usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
 
 
@@ -424,26 +434,32 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 
 
-<a id="19-utility-types"></a>
-
-### 19. Utility Types
-
-
-> 🧪 **Ejercicio:** [`s03/06-utility-types.ts`](../../ejercicios/s03/06-utility-types.ts).
-> ✅ **Solución:** [`soluciones/s03/06-utility-types.ts`](../../ejercicios/soluciones/s03/06-utility-types.ts).
-> 🎯 Prioridad **P3** — `Partial`/`Pick`/`Omit`/`Record` en formularios de edición y props.
-1. Estás diseñando los tipos para un formulario de edición de productos. Dada una interface `Producto { id: number; nombre: string; precio: number; descripcion?: string }`:
-    - Estás creando un tipo para un formulario donde todos los campos son opcionales. Crea un tipo `ProductoParcial` con todas las propiedades opcionales.
-    - Estás definiendo un tipo para una respuesta que no necesita la descripción. Crea un tipo `ProductoSinDescripcion` que omita `descripcion`.
-    - Estás creando un tipo para una tarjeta resumen que solo muestre id y nombre. Crea un tipo `ResumenProducto` que solo tenga `id` y `nombre`.
-2. Estás modelando la agenda semanal de una aplicación donde cada día tiene un valor de tipo string. Usa `Record` para crear un tipo `Semana` con días como claves y `string` como valores.
-3. Estás trabajando con una función existente y necesitas derivar tipos a partir de su firma. Usa `Parameters` y `ReturnType` con una función existente.
-4. Estás limpiando un tipo unión que contiene `null` o `undefined` y solo quieres las partes válidas. Usa `NonNullable` para eliminar `null | undefined` de un tipo unión.
 
 
 
 
 
+
+<a id="19-desestructuración-spreadrest-y-optional-chaining-puente-a-react"></a>
+
+### 19. Desestructuración, spread/rest y optional chaining (puente a React)
+
+
+
+
+> 🔑 **Puente a React.** Es lo primero que usarás en **cada** componente: destructuring de `props` en la firma de la función, `const [valor, setValor] = useState(...)`, `setState({ ...prev, ... })` y `?.`/`??` para navegar datos anidados (API, store). **Prioridad máxima antes de S04.**
+> 🧪 **Ejercicio:** [`s03/08-desestructuracion-spread-optional.ts`](../../ejercicios/s03/08-desestructuracion-spread-optional.ts).
+> ✅ **Solución:** [`soluciones/s03/08-desestructuracion-spread-optional.ts`](../../ejercicios/soluciones/s03/08-desestructuracion-spread-optional.ts).
+> 🎯 Prioridad **P1** — destructuring de props, spread de `setState`, `?.`/`??`: lo primero de cada componente.
+1. Estás escribiendo un componente de React que recibe sus datos a través de `props`. Crea `Tarjeta({ nombre, edad, activo })` que reciba el objeto como parámetro y lo desestructure en la firma (patrón `props`). Devuelve el nombre, la edad y si está en línea.
+2. Estás implementando un mini hook que simula `useState` y devuelve una tupla con el valor y su setter. Desestructura la tupla `[valor, setValor]` que devuelve una factoría `useMiniEstado` (patrón `useState`). Escribe `incrementarContador` que sume 1.
+3. Estás procesando la respuesta de una API (swapi) con datos anidados y necesitas extraer campos con valores por defecto. Implementa `resumenPlaneta(resp)` con desestructuración **anidada** de `resp.datos.planeta`, extrayendo `name`, `climate` (default `"desconocido"`) y el primer film de `films` (default `"sin films"`) en una sola línea.
+4. Estás pasando todos los campos de un objeto como props a un componente excepto uno. Usa **rest** en destructuring: `separarId(pelicula)` debe separar `id` y devolver el resto (el patrón de `<Componente {...resto} />`).
+5. Estás actualizando el estado de un componente mezclando una configuración parcial con los valores por defecto. Usa **spread** de objetos: `mergeConfig(parcial)` mezcla `CONFIG_DEFECTO` con `parcial` en un objeto nuevo sin mutar (patrón `setState({ ...prev, ...parcial })`).
+6. Estás añadiendo un elemento a un array sin mutar el original y necesites encontrar el máximo. Usa **spread** de arrays: `anadirPuntuacion(arr, nueva)` añade sin mutar (alternativa inmutable a `push`) y `mejorPuntuacion(...args)` despliega un array en `Math.max`.
+7. Estás navegando por datos anidados que pueden no existir y necesitas un valor por defecto. Usa **optional chaining** `?.` + `??`: `direccionEnvio(carrito)` navega `carrito.cliente.envio.direccion` (todo opcional) con default `"Sin dirección"`.
+8. Estás definiendo las props de un botón que tiene valores por defecto para la etiqueta y el estado. Desestructura en el parámetro con **valores por defecto**: `Boton({ etiqueta = "Enviar", deshabilitado = false })`.
+9. Estás implementando un update funcional como el de React que evita clausuras obsoletas. Implementa el **update funcional**: `acumularConUpdater()` con un setter que reciba `(prev) => prev + …` y encadena tres actualizaciones (`+1`, `+2`, `+3`) — es el `setCuenta((c) => c + 1)` de React, que evita clausuras obsoletas.
 
 
 
@@ -455,8 +471,10 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 > 🧪 **Ejercicio:** [`s03/07-async.ts`](../../ejercicios/s03/07-async.ts).
 > ✅ **Solución:** [`soluciones/s03/07-async.ts`](../../ejercicios/soluciones/s03/07-async.ts).
 > 🎯 Prioridad **P1** — `Promise.all` + `try/catch` = patrón `invoke` y del `useEffect` de carga.
+>
+> 🌌 **Aquí SÍ se hace `fetch` real:** a diferencia de los bloques 15–19 (donde los datos de swapi estaban hardcodeados porque la asincronía aún no se había impartido), en este bloque ya se enseña `async/await` y `Promise`, así que el ejercicio 2 hace una petición real a [swapi.info/api/planets](https://swapi.info/api/planets).
 1. Estás implementando una función que simule un retardo antes de completar una operación. Crea una función `esperar(ms)` que devuelva una promesa que se resuelva tras `ms` milisegundos.
-2. Estás construyendo un hook que carga datos desde una API. Escribe una función `async` `cargarDatos` que devuelva una lista tras un pequeño retardo.
+2. Estás construyendo una función que carga datos desde una API real. Escribe una función `async` `cargarPlanetas` que haga `fetch` a `https://swapi.info/api/planets` y devuelva la lista de planetas (tipada como `Planeta[]`).
 3. Estás cargando datos de múltiples fuentes simultáneamente para acelerar la carga. Lanza dos promesas a la vez con `Promise.all` en `cargarParalelo`.
 4. Estás procesando datos que pueden fallar y necesitas manejar los errores sin que se propaguen. Usa `try/catch` en `procesarSeguro` para nunca propagar errores.
 5. Estás implementando un sistema de tareas que ejecuta un callback en medio de su ejecución. Escribe `hacerTarea(callback: () => void)` que imprima "inicio", ejecute el `callback` y luego imprima "fin". Llámala pasando un `callback` que imprima "tarea".
@@ -465,29 +483,22 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 
 
+<a id="22-utility-types"></a>
+
+### 22. Utility Types *(optativo)*
 
 
-
-
-
-<a id="21-desestructuración-spreadrest-y-optional-chaining-puente-a-react"></a>
-
-### 21. Desestructuración, spread/rest y optional chaining (puente a React)
-
-
-> 🔑 **Puente a React.** Es lo primero que usarás en **cada** componente: destructuring de `props` en la firma de la función, `const [valor, setValor] = useState(...)`, `setState({ ...prev, ... })` y `?.`/`??` para navegar datos anidados (API, store). **Prioridad máxima antes de S04.**
-> 🧪 **Ejercicio:** [`s03/08-desestructuracion-spread-optional.ts`](../../ejercicios/s03/08-desestructuracion-spread-optional.ts).
-> ✅ **Solución:** [`soluciones/s03/08-desestructuracion-spread-optional.ts`](../../ejercicios/soluciones/s03/08-desestructuracion-spread-optional.ts).
-> 🎯 Prioridad **P1** — destructuring de props, spread de `setState`, `?.`/`??`: lo primero de cada componente.
-1. Estás escribiendo un componente de React que recibe sus datos a través de `props`. Crea `Tarjeta({ nombre, edad, activo })` que reciba el objeto como parámetro y lo desestructure en la firma (patrón `props`). Devuelve el nombre, la edad y si está en línea.
-2. Estás implementando un mini hook que simula `useState` y devuelve una tupla con el valor y su setter. Desestructura la tupla `[valor, setValor]` que devuelve una factoría `useMiniEstado` (patrón `useState`). Escribe `incrementarContador` que sume 1.
-3. Estás procesando la respuesta de una API con datos anidados y necesitas extraer campos con valores por defecto. Implementa `resumenPerfil(resp)` con desestructuración **anidada** de `resp.datos.usuario`, extrayendo `nombre`, `perfil.ciudad` (default `"desconocida"`) y `perfil.bio` (default `"Sin bio"`) en una sola línea.
-4. Estás pasando todos los campos de un objeto como props a un componente excepto uno. Usa **rest** en destructuring: `separarId(pelicula)` debe separar `id` y devolver el resto (el patrón de `<Componente {...resto} />`).
-5. Estás actualizando el estado de un componente mezclando una configuración parcial con los valores por defecto. Usa **spread** de objetos: `mergeConfig(parcial)` mezcla `CONFIG_DEFECTO` con `parcial` en un objeto nuevo sin mutar (patrón `setState({ ...prev, ...parcial })`).
-6. Estás añadiendo un elemento a un array sin mutar el original y necesites encontrar el máximo. Usa **spread** de arrays: `anadirPuntuacion(arr, nueva)` añade sin mutar (alternativa inmutable a `push`) y `mejorPuntuacion(...args)` despliega un array en `Math.max`.
-7. Estás navegando por datos anidados que pueden no existir y necesitas un valor por defecto. Usa **optional chaining** `?.` + `??`: `direccionEnvio(carrito)` navega `carrito.cliente.envio.direccion` (todo opcional) con default `"Sin dirección"`.
-8. Estás definiendo las props de un botón que tiene valores por defecto para la etiqueta y el estado. Desestructura en el parámetro con **valores por defecto**: `Boton({ etiqueta = "Enviar", deshabilitado = false })`.
-9. Estás implementando un update funcional como el de React que evita clausuras obsoletas. Implementa el **update funcional**: `acumularConUpdater()` con un setter que reciba `(prev) => prev + …` y encadena tres actualizaciones (`+1`, `+2`, `+3`) — es el `setCuenta((c) => c + 1)` de React, que evita clausuras obsoletas.
+> ⚠️ **Bloque optativo.** Se imparte en [`s03/10_Generics.md`](../apuntes/s03/10_Generics.md) (capítulo 10, optativo). No entra en el temario oficial ni en los exámenes; es refuerzo para quien quiera usar `Partial`/`Pick`/`Omit`/`Record` con soltura en formularios y props.
+> 🧪 **Ejercicio:** [`s03/06-utility-types.ts`](../../ejercicios/s03/06-utility-types.ts).
+> ✅ **Solución:** [`soluciones/s03/06-utility-types.ts`](../../ejercicios/soluciones/s03/06-utility-types.ts).
+> 🎯 Prioridad **P3** — `Partial`/`Pick`/`Omit`/`Record` en formularios de edición y props.
+1. Estás diseñando los tipos para un formulario de edición de planetas. Dada una interface `Planeta { name: string; population: number; climate: string; films?: string[] }` (datos de swapi):
+    - Estás creando un tipo para un formulario donde todos los campos son opcionales. Crea un tipo `PlanetaParcial` con todas las propiedades opcionales.
+    - Estás definiendo un tipo para una respuesta que no necesita las películas. Crea un tipo `PlanetaSinFilms` que omita `films`.
+    - Estás creando un tipo para una tarjeta resumen que solo muestre name y population. Crea un tipo `ResumenPlaneta` que solo tenga `name` y `population`.
+2. Estás modelando la agenda semanal de una aplicación donde cada día tiene un valor de tipo string. Usa `Record` para crear un tipo `Semana` con días como claves y `string` como valores.
+3. Estás trabajando con una función existente y necesitas derivar tipos a partir de su firma. Usa `Parameters` y `ReturnType` con una función existente.
+4. Estás limpiando un tipo unión que contiene `null` o `undefined` y solo quieres las partes válidas. Usa `NonNullable` para eliminar `null | undefined` de un tipo unión.
 
 
 

@@ -1,5 +1,5 @@
 // ============================================================
-// S02 · Ejercicio 7 · Type guards avanzados
+// S02 · Ejercicio 12 · Type guards avanzados
 // ============================================================
 // Completa. Solución: soluciones/s02/12-type-guards.ts
 

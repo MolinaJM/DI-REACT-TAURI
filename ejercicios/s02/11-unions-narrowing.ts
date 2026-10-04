@@ -1,5 +1,5 @@
 // ============================================================
-// S02 · Ejercicio 4 · Union types, literal types y narrowing
+// S02 · Ejercicio 11 · Union types, literal types y narrowing
 // ============================================================
 // Completa. Solución: soluciones/s02/11-unions-narrowing.ts
 

@@ -187,7 +187,7 @@ Node.js incluye npm (Node Package Manager), el gestor de paquetes más grande de
 - Los scripts se ejecutan con `npm run <nombre>` (p. ej. `dev`, `build`).
 - **nvm** permite instalar y cambiar entre versiones de Node; este curso usa **Node 24** (que ejecuta TypeScript directamente borrando los tipos, sin transpilar).
 
-> 🌐 La **guía operativa completa** (crear un proyecto, `npm init`, instalar paquetes, scripts, `nvm`, y cómo configurar el canónico de `tsconfig.json`) está en el apunte **10 · Node.js, npm y Vite en TypeScript** → [`apuntes/s03/09_NPM.md`](apuntes/s03/09_NPM.md).
+> 🌐 La **guía operativa completa** (crear un proyecto, `npm init`, instalar paquetes, scripts, `nvm`, y cómo configurar el canónico de `tsconfig.json`) está en el apunte **09 · Miscelánea: Módulos y NPM** → [`apuntes/s03/09_Miscelánea.md`](apuntes/s03/09_Miscelánea.md).
 
 ## Vite: Empaquetador Moderno
 
@@ -198,7 +198,7 @@ Vite proporciona un servidor de desarrollo con recarga instantánea (HMR) y empa
 npm create vite@latest mi-app -- --template react-ts
 ```
 
-> 🌐 Paso a paso en el capítulo de Vite de **10 · Node.js, npm y Vite** → [`apuntes/s03/09_NPM.md`](apuntes/s03/09_NPM.md) (`npm create`, estructura, `dev`, `build`).
+> 🌐 Paso a paso en el capítulo de Vite de **09 · Miscelánea: Módulos y NPM** → [`apuntes/s03/09_Miscelánea.md`](apuntes/s03/09_Miscelánea.md) (`npm create`, estructura, `dev`, `build`).
 
 ### Configuración de Vite (vite.config.ts)
 
