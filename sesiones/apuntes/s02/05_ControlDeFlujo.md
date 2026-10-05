@@ -6,6 +6,9 @@
     - [5.1.2. Declaración `else`](#512-declaraci%C3%B3n-else)
     - [5.1.3. `else if`](#513-else-if)
   - [5.2. Bucles](#52-bucles)
+    - [5.2.1. `for` Loop (clásico)](#521-for-loop-clásico)
+    - [5.2.2. `while` Loop](#522-while-loop)
+    - [5.2.3. `do...while` Loop](#523-dowhile-loop)
     - [5.2.4. `for...of` Loop (ES6)](#524-forof-loop-es6)
   - [5.3. Estructuras de Control Avanzadas](#53-estructuras-de-control-avanzadas)
     - [5.3.1. `switch` Statement](#531-switch-statement)
@@ -79,6 +82,67 @@ if (puntuacion >= 90) {
 <a id="52-bucles"></a>
 ## 5.2. Bucles
 
+Un **bucle** repite un bloque de código mientras se cumpla una condición. En TypeScript, como en JavaScript, hay cuatro formas de iterar: `for` (clásico), `while`, `do...while` y `for...of` (la moderna, para iterables).
+
+<a id="521-for-loop-clásico"></a>
+### 5.2.1. `for` Loop (clásico)
+
+El bucle `for` es el más versátil: controlas **inicialización**, **condición** y **paso** en una sola línea. Es la opción cuando necesitas el **índice** o un paso no lineal.
+
+```typescript
+const numeros: number[] = [10, 20, 30, 40];
+
+for (let i = 0; i < numeros.length; i++) {
+  console.log(`Índice ${i}: ${numeros[i]}`);
+}
+// Imprime:
+// Índice 0: 10
+// Índice 1: 20
+// Índice 2: 30
+// Índice 3: 40
+```
+
+> [!TIP]
+> Usa `for` clásico cuando necesites el **índice** (`i`) o quieras saltar elementos (`i += 2`). Si solo te interesa el **valor**, prefiere `for...of` (§5.2.4): es más corto y el tipo de cada elemento se infiere solo.
+
+<a id="522-while-loop"></a>
+### 5.2.2. `while` Loop
+
+El bucle `while` repite mientras su condición sea `true`. La condición se comprueba **antes** de cada iteración; si es falsa desde el principio, el bloque **no se ejecuta ni una vez**.
+
+```typescript
+let contador: number = 1;
+
+while (contador <= 3) {
+  console.log(`Ronda ${contador}`);
+  contador++; // sin esto, bucle infinito
+}
+// Imprime: Ronda 1, Ronda 2, Ronda 3
+```
+
+> [!NOTE]
+> La condición debe **cambiar** dentro del bucle (aquí `contador++`), o el bucle será infinito. Úsalo cuando no sepas de antemano cuántas iteraciones harás (p. ej. leer hasta que el usuario escriba "salir").
+
+<a id="523-dowhile-loop"></a>
+### 5.2.3. `do...while` Loop
+
+El bucle `do...while` es como `while`, pero la condición se comprueba **después**: el bloque se ejecuta **al menos una vez**, aunque la condición sea falsa desde el inicio.
+
+```typescript
+let intentos: number = 0;
+let correcto: boolean = false;
+
+do {
+  intentos++;
+  console.log(`Intento ${intentos}`);
+  correcto = intentos === 2; // "acierta" en el 2º intento
+} while (!correcto);
+// Imprime: Intento 1, Intento 2
+```
+
+> [!NOTE]
+> Diferencia clave con `while`: `do...while` garantiza **una ejecución mínima**. Es útil para menús o validaciones donde primero se muestra la opción y después se pregunta si se repite.
+
 <a id="524-forof-loop-es6"></a>
 ### 5.2.4. `for...of` Loop (ES6)
 
@@ -99,7 +163,7 @@ for (const letra of "Hola") {
 // Imprime: H, o, l, a
 ```
 
-> `for...of` obtiene directamente el **valor** de cada elemento, a diferencia de `for...in` que itera sobre las **claves** (índices). Para arrays, usa siempre `for...of`.
+> `for...of` obtiene directamente el **valor** de cada elemento, a diferencia de `for...in` que itera sobre las **claves** (índices). Para arrays, usa siempre `for...of`. En apuntes posteriores veremos el uso del `for...in`.
 
 > [!TIP]
 > Con `for...of`, cada `fruta` es automáticamente `string` (inferido del array). Al recorrer un `Map<string, number>` con `for (const [clave, valor] of mapa)`, TypeScript ya sabe que `clave: string` y `valor: number`.
@@ -131,25 +195,36 @@ switch (diaSemana) {
 > En `strict` mode, un `switch` sobre un tipo **unión** (p. ej. `type Estado = "ok" | "cargando" | "error"`) estrecha el tipo en cada `case`. Si además usamos el patrón *exhaustive check* con `never`, TypeScript nos avisa si falta un caso. Ya lo vimos en   [`01_SintaxisBasica.md`](01_SintaxisBasica.md) (sección *never en exhaustiveness checking*), con una variable `_exhaustivo: never` en el `default`.
 
 <a id="54-narrowing-el-control-de-flujo-tipado"></a>
-## 5.4. Narrowing: el control de flujo tipado
+## 5.4. Narrowing: el control de flujo tipado. Los type guards.
 
 TypeScript analiza el flujo del programa y **reduce el tipo** de una variable según las condiciones por las que pasa. Esto se llama *type narrowing* y es la forma segura de "filtrar" tipos unión.
+
+Los **type guards** son las herramientas para producir el narrowing.
+
+El narrowing **NO es algo que nosotros programemos, sino que es una consecuencia del flujo que SÍ hemos programado**.
 
 Ejemplos de narrowing básico:
 
 ```typescript
+//Narrowing clásico con typeof
 function hazCambios(valor: string | number): void {
+console.log(typeof valor);//Aquí, en codificación, me dirá que es de ambos tipos
+//pero en runtime ya sí lo estrechará
   if (typeof valor === "string") {
     // aquí valor es string --> a Mayúsculas
-    console.log(valor.toUpperCase());
-  } else {´//Realmente esto sobraría...
+    console.log(valor.toUpperCase()+"\n");
+  } else {
     // aquí valor es number --> Redondea decimales
-    console.log(valor.toFixed(2));
+    console.log(valor.toFixed(2)+"\n");
   }
 }
 
+hazCambios(3);
+hazCambios("TRES");
+
+ //Narrowing por igualdad/desigualdad (equality narrowing). No usa typeof/instanceof...
 function procesar(dato: Usuario | null): string {
-  if (dato === null) { // narrowing por igualdad (equality narrowing). No usa typeof/instanceof...
+  if (dato === null) {
     return "Sin datos";
   }
   // aquí dato es Usuario (narrowing implícito) Si el ascensor no va hacia arriba ... entonces??
@@ -160,19 +235,18 @@ interface Usuario {
   nombre: string;
 }
 
-hazCambios(3);
-hazCambios("TRES");
 console.log(procesar(null)); 
 let u:Usuario={nombre:"Profe"};
 console.log(procesar(u)); 
 ```
 
-| Herramienta | Cuándo usarla | Ejemplo |
+| Type Guard  | Cuándo usarla | Ejemplo |
 |-------------|---------------|---------|
 | `typeof` | Tipos primitivos de JS (`string`, `number`, `boolean`, `undefined`, `function`) | `typeof x === "string"` |
 | `in` | Interfaces/objetos con propiedades distintas | `"ladrar" in animal` |
 | `Array.isArray(x)` | Arrays (porque `typeof []` es `"object"`) | `Array.isArray(lista)` |
 | `instanceof` | Instancias de `Error`/clases | `x instanceof Error` |
+| `igualdad/desigualdad` | Para valores concretos. Vale para tipos primitivos (ej: null) o un valor concreto 404| `v == "404"` |
 
 ```typescript
 // Ejemplo mínimo de las tres herramientas: `in`, `Array.isArray(x)` e `instanceof`
@@ -194,10 +268,14 @@ function hablar(animal: Animal): string {
   return "Miau";
 }
 
+console.log(hablar({ ladrar: () => {} }));  // Guau
+console.log(hablar({ maullar: () => {} })); // Miau
+
 type Dato = string | number | string[] | Error;
 
 function describir(dato: Dato): string {
-  if (Array.isArray(dato)) {   // único narrowing fiable para arrays (typeof [] es "object")
+  if (Array.isArray(dato)) {   // único narrowing fiable para arrays porque si hacemos typeof [] da un "object")
+    console.log(typeof dato);//Da object y no valdría para hacer narrowing
     return `Lista de ${dato.length}: ${dato.join(", ")}`;
   }
   if (dato instanceof Error) { // instanceof mira la clase real del objeto
@@ -206,8 +284,7 @@ function describir(dato: Dato): string {
   return `Valor: ${dato}`;
 }
 
-console.log(hablar({ ladrar: () => {} }));  // Guau
-console.log(hablar({ maullar: () => {} })); // Miau
+
 console.log(describir("hola"));             // Valor: hola
 console.log(describir(42));                 // Valor: 42
 console.log(describir(["a", "b"]));         // Lista de 2: a, b
@@ -216,7 +293,15 @@ console.log(describir(new Error("boom")));  // Error: boom
 
 ### Unión discriminada (narrowing por discriminante)
 
-Cuando **todos** los miembros de una unión comparten la misma propiedad literal (la que se llama *discriminante*), el `switch` deja de ser un `switch` cualquiera: en cada `case`, TypeScript reduce el tipo al miembro correspondiente y **solo deja acceder a las propiedades de ese miembro**. Es el patrón más usado en React y en Tauri para modelar estados.
+Cuando **todos** los miembros de una unión comparten la misma propiedad literal (la que se llama *discriminante*), el `switch` deja de ser un `switch` cualquiera. Ocurre que en cada `case`, TypeScript reduce el tipo al miembro correspondiente y **solo deja acceder a las propiedades de ese miembro**. 
+
+Es el patrón más usado en React y en Tauri para modelar estados:
+
+- **Gestión de estados asíncronos en UI (React)**: Para no volverte loco con mil booleanos tipo cargando, hayError o tengoDatos que se pisan entre sí. Así la app solo puede estar en un sitio a la vez y te quitas de encima estados raros o imposibles.
+
+- **Manejo de respuestas de comandos IPC (Tauri)**: Básicamente para cuando le pedimos algo al backend en Rust y no sabes si te va a devolver los datos bien o te va a lanzar un error. Así te aseguras de tratar cada caso sin que explote la app.
+
+- **Procesamiento de buses de eventos del sistema (Tauri/React)**: Cuando el sistema lanza avisos por detrás (como que se bajó una actualización o cambió el tamaño de la pantalla), sirve para saber exactamente qué información trae cada aviso sin ir a ciegas.
 
 Ya se introdujo en [`01_SintaxisBasica.md`](01_SintaxisBasica.md) (sección *Unión de tipos*) con `status: 'success' | 'error'`; aquí se ve el efecto sobre el control de flujo:
 
@@ -255,7 +340,7 @@ Qué aporta frente a un objeto normal:
 
 Las herramientas anteriores (`typeof`, `in`, `instanceof`) son narrowing integrado en el lenguaje. Pero a veces necesitas comprobar algo más específico: "¿este objeto cumple la forma de `Usuario`?". Para eso se usan **type guards con predicados**: funciones que devuelven `boolean` pero cuyo tipo de retorno se anota como `valor is Tipo`. Esto le dice a TypeScript: "cuando esta función devuelve `true`, dentro del `if` el valor es de ese tipo".
 
-Estos typeguards suelen denotarse como **esLOQUESEA()** devolviendo un boolean.
+Estos typeguards se usan MUCHO en REACT, sobre todo a la hora de recibir datos desde un JSON. Suelen denotarse como **esLOQUESEA()** devolviendo siempre un boolean.
 
 ```typescript
 interface Usuario {
@@ -281,12 +366,10 @@ function esAdmin(v: unknown): v is Admin {
 }
 
 function saludar(persona: unknown): string {
-  if (esUsuario(persona)) {
-    // aquí persona es Usuario
+  if (esUsuario(persona)) {  // aquí persona es Usuario   
     return `Hola ${persona.nombre}, email: ${persona.email}`;
   }
-  if (esAdmin(persona)) {
-    // aquí persona es Admin
+  if (esAdmin(persona)) { // aquí persona es Admin    
     return `Hola ${persona.nombre}, rol: ${persona.rol}`;
   }
   return "Desconocido";
@@ -304,26 +387,30 @@ console.log(saludar("no soy un objeto"));
 
 A veces no quieres devolver un booleano, sino **afirmar** que un valor es de cierto tipo y lanzar un error si no lo es. Para eso se usa `asserts valor is Tipo` como tipo de retorno. La función no devuelve nada (`void`), pero a cambio le dice a TypeScript que, si no se lanza excepción, el valor es del tipo afirmado.
 
+No se usan mucho en la capa de UI (React), pero en el motor de la app (Tauri/Servicios) sí se usan mucho más. Es el sitio perfecto para decir: "O el servidor/Rust me manda exactamente los datos como yo quiero, o paro todo de golpe todo antes de enviar basura a la pantalla"..
+
 ```typescript
 interface Config {
   url: string;
   timeout: number;
 }
 
-// Afirmación: si no lanza error, config es Config
-function validarConfig(config: unknown): asserts config is Config {
-  if (typeof config !== "object" || config === null) {
+// Afirmación: si no lanza error, nos aseguramos que cfg es Config
+function validarConfig(cfg: unknown): asserts cfg is Config {
+  if (typeof cfg !== "object" || cfg === null) {
     throw new TypeError("La configuración debe ser un objeto");
   }
+  //Si llegamos aquí, necesitamos comprobar si es de tipo Config  
+  
   // Podríasmo poner ahora esto:
   // const c = config as Config;
   // ERROR! Es una aserción que deberíamos evitar. Hay que comprobar que 
   // exactamente tengo un "objeto" con los campos correctos en nombre y contenido  
  
   // Usamos RECORD: se verá en la sección de Arrays
-  // Castea 'config' a un objeto con claves de texto y valores 'unknown',
+  // Castea 'cfg' a un objeto con claves de texto y valores 'unknown',
   // lo que permite acceder a sus propiedades (c.url, c.timeout) para validarlas.
-  const c = config as Record<string, unknown>;  
+  const c = cfg as Record<string, unknown>; //ese string indica la cadena con el nombre del atributo de objeto
   if (typeof c.url !== "string") {
     throw new TypeError("La configuración debe tener 'url' como string");
   }
