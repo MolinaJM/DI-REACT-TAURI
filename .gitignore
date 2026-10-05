@@ -17,10 +17,7 @@ gen/
 /private/*
 /sesiones/sesion*.md
 /sesiones/apuntes/s[0-9][0-9]/
-/ejercicios/s[0-9][0-9]/
-/ejercicios/s01-s/
-/ejercicios/soluciones/s[0-9][0-9]/
-/ejercicios/soluciones/s01-s/
+/ejercicios
 /sesiones/EjerciciosPropuestos/ejerciciosTS.md
 /sesiones/temario-appcine.md
 /ejercicios/soluciones/s02/10-reto-s02.ts
