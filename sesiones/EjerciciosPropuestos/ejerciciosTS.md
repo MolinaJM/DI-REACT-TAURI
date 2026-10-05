@@ -229,7 +229,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 2. Estás implementando una función que sume un número variable de precios de productos. Crea una función con rest parameters que sume todos los números recibidos.
 3. Estás calculando el precio final de un producto con impuestos. Escribe `calcularTotal(precioBase, impuesto = 0.21)` que devuelva el total con impuestos.
 4. Implementa una función `crearAcumulador` que acepte un string inicial opcional y devuelva un objeto con la interfaz AcumuladorTexto (con métodos `anadir`, `ver` y `tama`), manteniendo el estado de la cadena oculto en una variable privada mediante un closure para permitir concatenar nuevos textos, consultar el contenido actual y obtener la longitud total de caracteres.
-5. Estás diseñando una función que formatea datos de entrada que pueden ser un texto o una lista de números. Escribe function overloads para `formatearEntrada` que acepte `string` o `number[]` y devuelva el tipo correspondiente.
+5. Estás diseñando una función que formatea datos de entrada que pueden ser un texto o una lista de números. Escribe una función para `formatearEntrada` que acepte `string` o `number[]` y devuelva el tipo correspondiente.
 6. Estás pasando una función como argumento a otro componente o como prop. Asigna una función a una variable (expresión funcional) y úsala. Prueba también una función flecha que no use el parámetro explícito devuelto por el tipo.
 7. Estás modelando operaciones matemáticas como datos que puedes almacenar y recorrer. Declara un tipo `Operacion = (a: number, b: number) => number` y crea funciones `sumar`, `restar` y `multiplicar` que la cumplan. Guarda las tres en un array y recórrelas.
 

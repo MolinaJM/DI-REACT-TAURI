@@ -513,7 +513,6 @@ function area(forma: Forma): number {
 
 
 
-> ▶ **Cómo probarlo:** copia este bloque a `bancop` como `01_SintaxisBasica.ts` y ejecuta `npx tsx 01_SintaxisBasica.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
 
 ### 📦 Ejemplo completo: 
 
@@ -588,7 +587,7 @@ function procesar({ nombre, edad }: { nombre: string; edad: number }) {
 console.log(procesar({ nombre: "Ana", edad: 30 }));
 ```
 
-> ▶ **Cómo probarlo:** copia este bloque a `bancop` como `01_SintaxisBasica.ts` y ejecuta `npx tsx 01_SintaxisBasica.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
+
 
 ---
 

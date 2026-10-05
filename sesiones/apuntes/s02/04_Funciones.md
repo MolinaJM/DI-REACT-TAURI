@@ -164,17 +164,24 @@ console.log(sumar(...otro));
 Las funciones pueden asignarse a variables y pasarse como argumentos a otras funciones. Esto es **fundamental para conceptos como callbacks y promesas**. En TypeScript podemos tipar la función que se recibe:
 
 ```typescript
-// --- OPCIÓN 1: Tipado 'inline' (directo en la firma) ---
 const funcionSaludo = (nombre: string): void => {
   console.log(`¡Hola, ${nombre}!`);
 };
 
+// --- OPCIÓN 1: Tipado 'inline' (directo en la firma) ---
 const ejecutarFuncion = (f: (nombre: string) => void): void => {
   f("Don Tancredo");//f se puede llamar como queramos, se instancia en ese momento
 }
 ejecutarFuncion(funcionSaludo); // Imprime: ¡Hola, Don Tancredo!
 
 // --- OPCIÓN 2: Usando un tipo explícito (alias de firma) ---
+// Recordamos la Firma: Tipo de función reutilizable (la "firma" que ya conocemos).
+type Operacion = (a: number, b: number) => number;
+// Reutilizamos
+const sumar: Operacion = (a, b) => a + b;
+const multiplicar: Operacion = (a, b) => a * b;
+
+
 type firmafuncion=(nombre: string) => void; //Firma
 const funcionSaluda:firmafuncion=(nombre) => { //Se instancia en una función
     console.log(`¡Hola, ${nombre}!`);
@@ -191,26 +198,9 @@ El tipo del parámetro `funcion` es `(nombre: string) => void`: "una función qu
 
 ## 7. Otros tipos de función: callbacks
 
-Para terminar el capítulo, un resumen de firmas de funciones y de otros  tipos que veremos en siguientes capítulos como los callbacks. Un callback es simplemente una función que le pasas a otra función como si fuera un parámetro más (como un número o un texto), para que la ejecute después.:
+Para terminar esta sección comentar que hay otros tipos de funcinoes:  los callbacks. Un callback es sencillamente una función que se le pasa a otra como argumento (al igual que pasarías un número o un texto) para que sea ejecutada dentro de ella.
 
-```typescript
-// Tipo de función reutilizable (la "firma" que ya conocemos).
-type Operacion = (a: number, b: number) => number;
-
-// Reutilizamos
-const sumar: Operacion = (a, b) => a + b;
-const multiplicar: Operacion = (a, b) => a * b;
-
-// Callback con tipos (MUY IMPORTANTE).
-// Es una función a la que se le pasa otra para que haga algo posterior con los datos.
-function procesar(numeros: number[], callback: (n: number) => void): void {
-  numeros.forEach(callback);
-}
-
-procesar([1, 2, 3], n => console.log("procesado:", n));
-```
-
-> 🔜 **Dónde se desarrolla esto.** Un callback no es un invento de este capítulo: es el mismo mecanismo que verás en `forEach`/`map`/`filter` (*Arrays*, s03/06), en los `.then()` de las promesas (`s03/08_Asincronismo…` §8.3) y en los `useEffect` de React. Aquí solo se presenta la **forma de escribirlo**: una función que recibe a otra como parámetro y la tipa.
+Históricamente usábamos callbacks para gestionar tareas que tardaban un tiempo en responder (como peticiones HTTP o temporizadores). Hoy en día, para operaciones asíncronas preferimos usar **Promesas y async/await** para evitar el código anidado (callback hell). Un ejemplo de esta sintaxis moderna es el que ya vimos en 00_introduccion.md cuando probamos la llamada a una API (swapi).
 
 ### 📦 Ejemplo completo: `funciones.ts`
 

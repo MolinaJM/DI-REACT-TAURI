@@ -342,7 +342,7 @@ const recuperado: Usuario = JSON.parse(json) as Usuario;
 console.log(recuperado.nombre); // "PROFE"
 ```
 
-> ✏️ **Práctica:** [`s02/07-conversion-tipos.ts`](../../../ejercicios/s02/07-conversion-tipos.ts) y [`s02/08-operadores.ts`](../../../ejercicios/s02/08-operadores.ts) (JSON, `??`) · [catálogo S2·7](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+
 
 ---
 
