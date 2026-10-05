@@ -540,6 +540,174 @@ console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 }));
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `05_ControlDeFlujo.ts` y ejecuta `npx tsx 05_ControlDeFlujo.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
 
+<a id="importar-un-json-y-validarlo-con-type-guards"></a>
+### 📦 Importar un JSON de un fichero y validarlo (todo junto)
+
+Hasta aquí los type guards los aplicábamos a datos escritos a mano. El caso real habitual es otro: los datos vienen de un **fichero `.json`**, y hay que importarlos, comprobar que tienen la forma correcta y modelar los estados de la carga. Todo con lo visto en §5.4.
+
+#### 1. El fichero de datos
+
+Los datos van en un `.json` normal, junto al código (o en una carpeta `datos/`):
+
+```json
+// datos/planetas.json
+{
+  "planetas": [
+    { "name": "Tatooine", "population": 200000, "climate": "arid" },
+    { "name": "Hoth",      "population": 0,      "climate": "frozen" },
+    { "name": "Dagobah",   "population": "muchos", "climate": "humid" }
+  ]
+}
+```
+
+#### 2. ⚙️ `tsconfig.json` y el atributo de import
+
+Aquí hay que distinguir **dos cosas** que se confunden y acaban dando el mismo síntoma:
+
+1. El **`tsconfig.json`** solo le importa a `tsc` (y a lo que te marque el editor).
+2. El **atributo `with { type: "json" }`** en el import le importa al **motor de JavaScript**, o sea a `node`.
+
+**Pon siempre el atributo.** He comprobado que funciona igual con `tsc`, con `npx tsx` y con `node`, y te ahorra el susto:
+
+```typescript
+import datos from "./datos/planetas.json" with { type: "json" };
+```
+
+Y en el `tsconfig.json`, **con la configuración del curso no hay que cambiar nada**: `bancop` ya lleva `"moduleResolution": "bundler"`. Solo haría falta añadir algo con otras configuraciones:
+
+| `moduleResolution` | Con `tsc` | Qué hacer |
+|---|---|---|
+| `"bundler"` *(el del curso)* | ✅ funciona | Nada |
+| `"node10"` / `"node"` | ❌ | Añadir `"resolveJsonModule": true` |
+| `"nodenext"` | ✅ con el atributo | El atributo ya es obligatorio en este modo |
+| sin especificar | ❌ | El propio error de TS te dice qué opción añadir |
+
+<details>
+<summary><b>Si te saltas el atributo, verás esto</b></summary>
+
+Con `npx tsx` el import plano funciona, pero en cuanto lo ejecutas con `node` (que es como se ejecuta de verdad) revienta:
+
+```
+TypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module ".../planetas.json" needs an import attribute of "type: json"
+```
+
+El motivo es que en ESM de Node **cada módulo declara su formato** y no se puede adivinar. Por eso `tsx` te lo deja pasar y `node` no: `tsx` es un *transpilador* con su propio cargador de módulos, no el cargador nativo.
+
+⚠️ Y justo en la otra dirección: **`tsx` no comprueba los tipos**. Que un ejemplo funcione con `npx tsx` no significa que esté bien tipado; ejecútalo también con `npx tsc` para verlo.
+</details>
+
+
+#### 3. 🤔 ¿Por qué un JSON local y no un `fetch` real?
+
+Porque en este capítulo toca **`narrowing`**, no asincronía. Para entender el *guard* no hace falta, ni conviene, mezclar promesas:
+
+| | `import datos from "./planetas.json"` | `await fetch(url)` |
+|---|---|---|
+| ¿Cuándo llega el dato? | Al cargar el módulo, **síncrono** | Después, **asíncrono** (devuelve `Promise<T>`) |
+| ¿Dónde se resuelve? | En **compilación**, lo empaqueta el bundler | En **ejecución**, contra un servidor |
+| ¿Puede fallar? | Si el `.json` es inválido, da error de TS al compilar. Ojo: `tsx` **no** comprueba tipos, así que también puede reventar al ejecutar | Sí: red caída, `404`, sin cobertura, y el servidor puede cambiar la forma de los datos |
+| ¿Repetible? | Siempre igual | Depende del servidor en cada ejecución |
+
+Y lo clave: **el problema es el mismo en ambos casos**. El dato es una fuente externa, así que da igual de dónde venga, hay que tratarlo como `unknown` y validarlo. El *guard* **no cambia ni una línea**:
+
+```typescript
+function esPlaneta(valor: unknown): valor is Planeta { /* igual */ }
+
+// Solo cambia CÓMO se consigue el valor:
+const valor: unknown = datosCrudos.planetas;             // con import
+const valor: unknown = await (await fetch(url)).json();  // con fetch
+```
+
+> [!TIP]
+> Por eso el `fetch` de verdad llega después. En [00_Introduccion §0.4.6](#6-asincronía-nativa-y-moderna) ya lo vimos de pasada contra SWAPI, pero **anunciando que los conceptos se desarrollan más adelante** (`async`/`await`/`Promise`, en [Asincronismo §8.4](#84-asyncawait-simplificando-el-uso-de-promesas)). Cuando llegues allí, este ejemplo cambiará **dos líneas** y el type guard seguirá exactamente igual.
+
+> [!NOTE]
+> **Un matiz honesto:** con un import estático **no hay un estado `cargando` real** (el dato ya está disponible al arrancar). Lo modelamos igualmente porque es la forma que necesitarás cuando el dato sí tarde, y de paso practicas unión discriminada y `switch` exhaustivo.
+
+#### 4. El código: import + `unknown` + type guard + estados
+
+```typescript
+/**
+ * Fichero: cargar-json.ts
+ * -----------------------------------------------------------------
+ * Traer datos de un fichero .json, validarlos con un type guard
+ * y modelar los estados de la carga con una unión discriminada.
+ */
+
+// El import normal. TS YA CONOCE la forma: `datosCrudos.planetas[0].noExiste`
+// daría error, no `any`. Aun así, el JSON es una FUENTE EXTERNA:
+// lo tratamos como `unknown` y lo validamos antes de confiar en él.
+import datosCrudos from "./datos/planetas.json" with { type: "json" };
+
+// El tipo que NOSOTROS queremos (el .json no sabe nada de él)
+interface Planeta {
+    name: string;
+    population: number;
+    climate: string;
+}
+
+// Type guard con predicado `is` (§5.4): comprueba la forma EN EJECUCIÓN.
+function esPlaneta(valor: unknown): valor is Planeta {
+    if (typeof valor !== "object" || valor === null) return false;   // null y primitivos fuera
+    const p = valor as Record<string, unknown>;                      // ya es un objeto
+    return typeof p.name === "string"
+        && typeof p.population === "number"
+        && typeof p.climate === "string";
+}
+
+// `filter` con un predicado `is` devuelve el array YA TIPADO como Planeta[]
+const planetas: Planeta[] = datosCrudos.planetas.filter(esPlaneta);
+
+console.log(planetas.map((p) => `${p.name}: ${p.population}`));
+// Dagobah NO aparece: su "population" es un string, el guard lo descarta
+
+// Unión discriminada: los ESTADOS de la carga. Solo se accede a las
+// propiedades de cada variante dentro de su `case` (narrowing por discriminante).
+type EstadoCarga =
+    | { estado: "cargando" }
+    | { estado: "error"; mensaje: string }
+    | { estado: "listo"; planetas: Planeta[] };
+
+function procesar(estado: EstadoCarga): string {
+    switch (estado.estado) {                       // switch exhaustivo (§5.3.1)
+        case "cargando": return "Cargando...";
+        case "error":    return `Error: ${estado.mensaje}`;
+        case "listo":    return `${estado.planetas.length} planetas`;
+        default: {
+            const nunca: never = estado;          // ¿te falta un caso? ERROR aquí
+            return nunca;
+        }
+    }
+}
+
+console.log(procesar({ estado: "cargando" }));
+console.log(procesar({ estado: "error", mensaje: "sin red" }));
+console.log(procesar({ estado: "listo", planetas }));
+```
+
+> ▶ **Cómo probarlo:** copia el `.json` a `bancop/datos/planetas.json` y el bloque a `bancop` como `cargar-json.ts`; ejecuta `npx tsx cargar-json.ts` (desde `bancop/`) y después `npx tsc` para ver los tipos.
+> Ejercicios relacionados en `EjerciciosPropuestos/ejerciciosTS.md`: §12 (type guards) y §20 (estados de carga).
+
+#### 5. ⚠️ Tres errores típicos
+
+> [!IMPORTANT]
+> - **No uses `node:fs` (`readFileSync`, `readFileSyncSync`)** para leer el JSON. No existe en el navegador, así que el código te dejará de funcionar en cuanto llegues a React.
+> - **No uses `fetch("./datos/planetas.json")`**: `fetch` no admite rutas relativas (necesita URL absoluta) ni el protocolo `file://`. `fetch` es para pedir datos a un **backend real** (ver [Asincronismo (S03·8)](#85-el-tipado-de-promiset-la-clave-de-typescript)).
+> - **El JSON importado es un objeto ÚNICO compartido** (singleton): todas las importaciones ven la misma referencia. **No lo mutes**; deriva una copia con spread, como en [Estructuras de Datos (S03·7)](#75-métodos-importantes).
+
+```typescript
+import datos from "./datos/planetas.json" with { type: "json" };
+
+// ❌ Mutar el singleton: lo ven todos los que importan el módulo
+datos.planetas[0].population = 999;
+
+// ✅ Derivar una copia nueva con spread (inmutabilidad)
+const copia = datos.planetas.map((p) =>
+    p.name === "Hoth" ? { ...p, population: 999 } : p,
+);
+```
+
+
 
 ---
 

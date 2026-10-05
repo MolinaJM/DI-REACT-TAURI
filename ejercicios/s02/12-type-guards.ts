@@ -50,3 +50,26 @@ function afirmarString(valor: unknown): void {
     throw new Error("Se esperaba un string");
   }
 }
+
+// 5) Datos externos: `planetas.json` llega como `unknown` desde el "backend".
+//    Los datos estáticos se importan como módulo JSON (NO con node:fs ni con
+//    fetch sobre el fichero: el import es lo que funciona en Node y en Vite).
+import datosCrudos from "../../datos/planetas.json" with { type: "json" };
+
+interface Planeta {
+  name: string;
+  population: number;
+  climate: string;
+  films?: string[];
+}
+
+// TODO: escribe el type guard que valida que `bruto` es un Planeta
+function esPlaneta(bruto: unknown): bruto is Planeta {
+  return false;
+}
+
+// TODO: carga el JSON, valida cada elemento y devuelve solo los planetas
+//       habitados (population > 0). Si el JSON no fuera un array, lanza.
+function planetasHabitados(): Planeta[] {
+  return [];
+}

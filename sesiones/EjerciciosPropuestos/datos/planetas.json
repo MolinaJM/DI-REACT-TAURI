@@ -1,0 +1,12 @@
+{
+  "planetas": [
+    { "name": "Tatooine", "population": 200000, "climate": "arid", "films": ["A New Hope", "Attack of the Clones"] },
+    { "name": "Hoth", "population": 0, "climate": "frozen", "films": ["The Empire Strikes Back"] },
+    { "name": "Mustafar", "population": 0, "climate": "hot", "films": ["Revenge of the Sith"] },
+    { "name": "Alderaan", "population": 1000000000, "climate": "temperate", "films": ["A New Hope"] },
+    { "name": "Dagobah", "population": 0, "climate": "humid", "films": ["Return of the Jedi"] },
+    { "name": "Coruscant", "population": 3000000000, "climate": "urban", "films": [] },
+    { "name": "Naboo", "population": 2000000000, "climate": "temperate", "films": ["The Phantom Menace", "Attack of the Clones"] },
+    { "name": "Endor", "population": 0, "climate": "temperate", "films": ["Return of the Jedi"] }
+  ]
+}
