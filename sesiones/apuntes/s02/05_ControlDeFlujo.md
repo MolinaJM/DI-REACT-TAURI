@@ -13,7 +13,16 @@
   - [5.3. Estructuras de Control Avanzadas](#53-estructuras-de-control-avanzadas)
     - [5.3.1. `switch` Statement](#531-switch-statement)
   - [5.4. Narrowing: el control de flujo tipado](#54-narrowing-el-control-de-flujo-tipado)
-- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../EjerciciosPropuestos/ejerciciosTS.md#10-estructuras-de-control-de-flujo) · [Literal Types y Narrowing](../../EjerciciosPropuestos/ejerciciosTS.md#11-literal-types-y-type-narrowing)
+    - [Unión discriminada (narrowing por discriminante)](#unión-discriminada-narrowing-por-discriminante)
+    - [Type guards con predicados (`is`)](#type-guards-con-predicados-is)
+    - [Type guards con `asserts`](#type-guards-con-asserts)
+  - [5.5. Importar un JSON de un fichero y validarlo](#55-importar-un-json-y-validarlo)
+    - [5.5.1. El fichero de datos](#551-el-fichero-de-datos)
+    - [5.5.2. `tsconfig.json` y el atributo de import](#552-tsconfig-y-el-atributo-de-import)
+    - [5.5.3. ¿Por qué un JSON local y no un `fetch` real?](#553-por-qué-json-local-y-no-fetch-real)
+    - [5.5.4. El código: import + `unknown` + type guard + estados](#554-el-código)
+    - [5.5.5. Tres errores típicos](#555-tres-errores-típicos)
+- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../EjerciciosPropuestos/ejerciciosTS.md#10-estructuras-de-control-de-flujo) · [Literal Types y Narrowing](../../EjerciciosPropuestos/ejerciciosTS.md#11-literal-types-y-type-narrowing) · [Type Guards Avanzados](../../EjerciciosPropuestos/ejerciciosTS.md#12-type-guards-avanzados)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -291,6 +300,7 @@ console.log(describir(["a", "b"]));         // Lista de 2: a, b
 console.log(describir(new Error("boom")));  // Error: boom
 ```
 
+<a id="unión-discriminada-narrowing-por-discriminante"></a>
 ### Unión discriminada (narrowing por discriminante)
 
 Cuando **todos** los miembros de una unión comparten la misma propiedad literal (la que se llama *discriminante*), el `switch` deja de ser un `switch` cualquiera. Ocurre que en cada `case`, TypeScript reduce el tipo al miembro correspondiente y **solo deja acceder a las propiedades de ese miembro**. 
@@ -336,6 +346,7 @@ Qué aporta frente a un objeto normal:
 > [!NOTE]
 > Si el discriminante es un `string` en vez de un literal (`tipo: string`), el narrowing se pierde: `instanceof` y las aserciones no ayudan aquí porque la forma no distingue. Mantén siempre literales (`"circulo"`, `"rectangulo"`).
 
+<a id="type-guards-con-predicados-is"></a>
 ### Type guards con predicados (`is`)
 
 Las herramientas anteriores (`typeof`, `in`, `instanceof`) son narrowing integrado en el lenguaje. Pero a veces necesitas comprobar algo más específico: "¿este objeto cumple la forma de `Usuario`?". Para eso se usan **type guards con predicados**: funciones que devuelven `boolean` pero cuyo tipo de retorno se anota como `valor is Tipo`. Esto le dice a TypeScript: "cuando esta función devuelve `true`, dentro del `if` el valor es de ese tipo".
@@ -383,6 +394,7 @@ console.log(saludar("no soy un objeto"));
 > [!TIP]
 > El predicado `v is T` se escribe en el **retorno de la función**, no en los parámetros. TypeScript usa esa información para hacer narrowing automáticamente en el `if`. Es como decirle al compilador: "yo me hago cargo de la comprobación, confía en mí".
 
+<a id="type-guards-con-asserts"></a>
 ### Type guards con `asserts`
 
 A veces no quieres devolver un booleano, sino **afirmar** que un valor es de cierto tipo y lanzar un error si no lo es. Para eso se usa `asserts valor is Tipo` como tipo de retorno. La función no devuelve nada (`void`), pero a cambio le dice a TypeScript que, si no se lanza excepción, el valor es del tipo afirmado.
@@ -431,121 +443,13 @@ console.log(datos.url); // sin error
 
 
 
----
-### 📦 Ejemplo completo: `unions-intersections.ts`
+<a id="55-importar-un-json-y-validarlo"></a>
+## 5.5. Importar un JSON de un fichero y validarlo
 
-Union types, intersección, literal types y type narrowing.
+Hasta aquí los type guards los aplicábamos a datos escritos a mano. El caso real habitual es otro: los datos vienen de un **fichero `.json`**, y hay que importarlos, comprobar que tienen la forma correcta y modelar los estados de la carga. Este apartado reutiliza los type guards de §5.4.
 
-```typescript
-
-/**
- * Fichero 04: Union Types, Interseccion, Literales y Type Narrowing
- * -----------------------------------------------------------------
- * - Union Types (|)
- * - Interseccion de Tipos (&)
- * - Literal Types
- * - Type Narrowing (typeof, in, discriminated unions)
- */
-// 🔁 `switch` exhaustivo con `never` → ya explicado en §5.3.1; se practica en
-// EjerciciosPropuestos/ejerciciosTS.md §10 (Control de flujo)
-
-// ============================================================================
-// UNION TYPES (|)
-// ============================================================================
-
-type Id = string | number;
-let userId: Id = 123;
-userId = "ABC-123";
-
-// Union en parametros
-function imprimirId(id: string | number): void {
-    if (typeof id === "string") {
-        console.log(id.toUpperCase());
-    } else {
-        console.log(id.toFixed(2));
-    }
-}
-
-// Union de literales
-type EstadoPedido = "pendiente" | "enviado" | "entregado" | "cancelado";
-let estado: EstadoPedido = "pendiente";
-
-// ============================================================================
-// INTERSECCION DE TIPOS (&)
-// ============================================================================
-
-interface Persona { nombre: string; edad: number; }
-interface Empleado { empresa: string; salario: number; }
-
-type EmpleadoPersona = Persona & Empleado;
-
-const trabajador: EmpleadoPersona = {
-    nombre: "Luis",
-    edad: 30,
-    empresa: "Tech Corp",
-    salario: 50000
-};
-
-// ============================================================================
-// LITERAL TYPES
-// ============================================================================
-
-let saludo: "hola" = "hola";
-// saludo = "adios";  // Error
-let puerto: 3000 | 3001 | 8080 = 3000;
-
-// ============================================================================
-// TYPE NARROWING
-// ============================================================================
-
-// TYPEOF
-function procesarValor(valor: string | number | boolean) {
-    if (typeof valor === "string") return valor.toUpperCase();
-    if (typeof valor === "number") return valor.toFixed(2);
-    return valor ? "si" : "no";
-}
-
-// IN NARROWING
-interface Casa { jardin: boolean; }
-interface Piso { piso: number; }
-type Vivienda = Casa | Piso;
-
-function describir(v: Vivienda) {
-    if ("jardin" in v) {
-        console.log("Casa con jardin");
-    } else {
-        console.log("Piso");
-    }
-}
-
-// DISCRIMINATED UNIONS
-interface Circulo { tipo: "circulo"; radio: number; }
-interface Rectangulo { tipo: "rectangulo"; ancho: number; alto: number; }
-type Figura = Circulo | Rectangulo;
-
-function calcularArea(fig: Figura): number {
-    switch (fig.tipo) {
-        case "circulo": return Math.PI * fig.radio ** 2;
-        case "rectangulo": return fig.ancho * fig.alto;
-    }
-}
-
-console.log(imprimirId(123));
-console.log(imprimirId("ABC"));
-console.log(procesarValor("hola"));
-console.log(procesarValor(42));
-console.log(calcularArea({ tipo: "circulo", radio: 5 }));
-console.log(calcularArea({ tipo: "rectangulo", ancho: 4, alto: 6 }));
-```
-
-> ▶ **Cómo probarlo:** copia este bloque a `bancop` como `05_ControlDeFlujo.ts` y ejecuta `npx tsx 05_ControlDeFlujo.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
-
-<a id="importar-un-json-y-validarlo-con-type-guards"></a>
-### 📦 Importar un JSON de un fichero y validarlo (todo junto)
-
-Hasta aquí los type guards los aplicábamos a datos escritos a mano. El caso real habitual es otro: los datos vienen de un **fichero `.json`**, y hay que importarlos, comprobar que tienen la forma correcta y modelar los estados de la carga. Todo con lo visto en §5.4.
-
-#### 1. El fichero de datos
+<a id="551-el-fichero-de-datos"></a>
+### 5.5.1. El fichero de datos
 
 Los datos van en un `.json` normal, junto al código (o en una carpeta `datos/`):
 
@@ -560,7 +464,8 @@ Los datos van en un `.json` normal, junto al código (o en una carpeta `datos/`)
 }
 ```
 
-#### 2. ⚙️ `tsconfig.json` y el atributo de import
+<a id="552-tsconfig-y-el-atributo-de-import"></a>
+### 5.5.2. `tsconfig.json` y el atributo de import
 
 Aquí hay que distinguir **dos cosas** que se confunden y acaban dando el mismo síntoma:
 
@@ -597,7 +502,8 @@ El motivo es que en ESM de Node **cada módulo declara su formato** y no se pued
 </details>
 
 
-#### 3. 🤔 ¿Por qué un JSON local y no un `fetch` real?
+<a id="553-por-qué-json-local-y-no-fetch-real"></a>
+### 5.5.3. ¿Por qué un JSON local y no un `fetch` real?
 
 Porque en este capítulo toca **`narrowing`**, no asincronía. Para entender el *guard* no hace falta, ni conviene, mezclar promesas:
 
@@ -624,7 +530,8 @@ const valor: unknown = await (await fetch(url)).json();  // con fetch
 > [!NOTE]
 > **Un matiz honesto:** con un import estático **no hay un estado `cargando` real** (el dato ya está disponible al arrancar). Lo modelamos igualmente porque es la forma que necesitarás cuando el dato sí tarde, y de paso practicas unión discriminada y `switch` exhaustivo.
 
-#### 4. El código: import + `unknown` + type guard + estados
+<a id="554-el-código"></a>
+### 5.5.4. El código: import + `unknown` + type guard + estados
 
 ```typescript
 /**
@@ -688,7 +595,8 @@ console.log(procesar({ estado: "listo", planetas }));
 > ▶ **Cómo probarlo:** copia el `.json` a `bancop/datos/planetas.json` y el bloque a `bancop` como `cargar-json.ts`; ejecuta `npx tsx cargar-json.ts` (desde `bancop/`) y después `npx tsc` para ver los tipos.
 > Ejercicios relacionados en `EjerciciosPropuestos/ejerciciosTS.md`: §12 (type guards) y §20 (estados de carga).
 
-#### 5. ⚠️ Tres errores típicos
+<a id="555-tres-errores-típicos"></a>
+### 5.5.5. Tres errores típicos
 
 > [!IMPORTANT]
 > - **No uses `node:fs` (`readFileSync`, `readFileSyncSync`)** para leer el JSON. No existe en el navegador, así que el código te dejará de funcionar en cuanto llegues a React.
@@ -698,10 +606,10 @@ console.log(procesar({ estado: "listo", planetas }));
 ```typescript
 import datos from "./datos/planetas.json" with { type: "json" };
 
-// ❌ Mutar el singleton: lo ven todos los que importan el módulo
+// ERROR!! Mutar el singleton: lo ven todos los que importan el módulo
 datos.planetas[0].population = 999;
 
-// ✅ Derivar una copia nueva con spread (inmutabilidad)
+// OK!!! Derivar una copia nueva con spread (inmutabilidad)
 const copia = datos.planetas.map((p) =>
     p.name === "Hoth" ? { ...p, population: 999 } : p,
 );

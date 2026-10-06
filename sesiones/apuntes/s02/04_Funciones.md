@@ -287,7 +287,7 @@ console.log(ejecutarOperacion(5, 3, (a, b) => a + b));
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
 
-> ✏️ **Práctica:** [`s02/09-funciones.ts`](../../../ejercicios/s02/09-funciones.ts) (params, rest, callbacks, closures) · 🔑 [`s03/08-desestructuracion-spread-optional.ts`](../../../ejercicios/s03/08-desestructuracion-spread-optional.ts) (rest/spread, puente a React) · [`s03/06-utility-types.ts`](../../../ejercicios/s03/06-utility-types.ts) (`Partial`/`Pick`/`Omit`/`Record`) · [catálogo S2·10, S3·25, S3·23 y S3·18](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md).
+> ✏️ **Práctica:** [bloque 9 · Funciones en profundidad](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad) (params, rest, callbacks, closures) · 🔑 [bloque 19 · Desestructuración, spread/rest y optional chaining](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#19-desestructuración-spreadrest-y-optional-chaining-puente-a-react) (rest/spread, puente a React) · [bloque 22 · Utility Types](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#22-utility-types) (`Partial`/`Pick`/`Omit`/`Record`).
 
 ---
 
