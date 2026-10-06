@@ -4,11 +4,10 @@
 
 > 📌 **Ruta React + Tauri.** Todo el catálogo está orientado a TypeScript aplicado a React y a Tauri. Los temas ajenos a ese objetivo (enums, clases y herencia, `.d.ts`, manipulación manual del DOM y Web APIs del navegador) se han **eliminado** del catálogo: React se encarga del DOM y la app es TypeScript *erasable-only*.
 
-> ✅ **Soluciones.** Cada bloque tiene su solución resuelta en `private/solucEjerTS/<BLOQUE>/solucion.ts` (`12/solucion.ts` para el bloque 12, `18/solucion.ts` para el 18, etc.). Siguen estas convenciones: cabecera `//JMM:`, numeración `//JMM: (N)`, demostraciones con `console.log` en lugar de `assert` y comentarios que expliquen el porqué. Son material de estudio, no una suite de tests. 📖 **Teoría** en [`apuntes/s0X/`](../apuntes/).
+> ✅ **Soluciones.** Cada bloque tiene su solución resuelta en su carpeta correspondiente.
 
 > ⚠️ **`export {}` al principio de cada ejercicio.** Si creas un fichero por ejercicio, debe abrir con un `export {}` (o con cualquier `import`/`export`) para que TypeScript lo trate como **módulo** y no como **script**. Sin esa línea, todas las declaraciones de primer nivel (`const`, `function`, `type`, `interface`…) comparten el **ámbito global** y dos ejercicios que declaren el mismo nombre chocan entre sí al compilarse juntos o al concatenarse.
 >
-> Colisiones reales en el catálogo actual: `Usuario` (bloques 4, 18 y 22), `Producto` (bloques 13 y 18), `Planeta` (bloque 15), `Pedido`, `Id`, `EstadoPedido`, `numeros`, `texto`, `numero`, `activo`, `usuario` y `coordenada`.
 >
 > Con `export {}` cada ejercicio se compila, se ejecuta y se evalúa **por separado**, sin depender del orden de carga ni del estado que dejó el anterior.
 
@@ -31,30 +30,30 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
-| 1 · Tipos Primitivos | `s02/01` | **P2** | Base de todo el tipado, pero elemental y breve. |
-| 2 · Type Inference | `s02/02` | **P2** | El editor deduce tipos (inferencia contextual en `map`, hooks). |
-| 3 · Tipos Especiales | `s02/03` | **P2** | `unknown`/`never` esenciales; se aplican de lleno con los guards (P1). |
-| 4 · Interfaces · **5 · Type Aliases** | `s02/04` | **P1** | `interface Props` = contrato de cada componente; modelas entidades. |
-| 6 · Union Types e Intersección | `s02/06` | **P1** | Props multiforma y estado discriminado: el pan de cada día de un componente. |
-| 7 · Conversión de tipos · **8 · Operadores** | `s02/07` | **P3** | JSON en persistencia y `??` para defaults; ternario/short-circuit a diario. |
-| 9 · Funciones en Profundidad | `s02/09` | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
-| 10 · Estructuras de control de flujo | `s02/10` | **P2** | `switch`+`never` = patrón `useReducer`; llega en React II. |
-| 11 · Literal Types y Narrowing | `s02/11` | **P1** | `typeof`/`in` narrowing y discriminated unions. |
-| 12 · Type Guards Avanzados | `s02/12` | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
-| 13 · 🏁 Reto final de S2 | `s02/13` | **P4** | Integración/repaso de S2; sin concepto nuevo. |
+| 1 · Tipos Primitivos | [01](01/solucion.ts) | **P2** | Base de todo el tipado, pero elemental y breve. |
+| 2 · Type Inference | [02](02/solucion.ts) | **P2** | El editor deduce tipos (inferencia contextual en `map`, hooks). |
+| 3 · Tipos Especiales | [03](03/solucion.ts) | **P2** | `unknown`/`never` esenciales; se aplican de lleno con los guards (P1). |
+| 4 · Interfaces · **5 · Type Aliases** | [04](04/solucion.ts) · [05](05/solucion.ts) | **P1** | `interface Props` = contrato de cada componente; modelas entidades. |
+| 6 · Union Types e Intersección | [06](06/solucion.ts) | **P1** | Props multiforma y estado discriminado: el pan de cada día de un componente. |
+| 7 · Conversión de tipos · **8 · Operadores** | [07](07/solucion.ts) · [08](08/solucion.ts) | **P3** | JSON en persistencia y `??` para defaults; ternario/short-circuit a diario. |
+| 9 · Funciones en Profundidad | [09](09/solucion.ts) | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
+| 10 · Estructuras de control de flujo | [10](10/solucion.ts) | **P2** | `switch`+`never` = patrón `useReducer`; llega en React II. |
+| 11 · Literal Types y Narrowing | [11](11/solucion.ts) | **P1** | `typeof`/`in` narrowing y discriminated unions. |
+| 12 · Type Guards Avanzados | [12](12/solucion.ts) | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
+| 13 · 🏁 Reto final de S2 | [13](13/solucion.ts) | **P4** | Integración/repaso de S2; sin concepto nuevo. |
 
 ### Sesión 3
 
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
-| 14 · Arrays y Tuplas | `s03/01` | **P2** | La tupla `[valor, setter]` de `useState` y las listas básicas. |
-| 15 · Arrays: métodos fundamentales | `s03/02` | **P1** | `map`/`filter`/`reduce`/`find` omnipresentes en el JSX de las listas. |
-| 16 · Set | `s03/03` | **P3** | Deduplicar listas y cachés; casos concretos. |
-| 17 · Map | `s03/04` | **P3** | Caché/persistencia clave-valor; `Record` cubre la mayoría. |
-| 18 · Objetos en profundidad | `s03/05` | **P2** | Entidades, formularios, JSON y cloning sin mutar el estado. |
-| 19 · Desestructuración/spread/optional chaining | `s03/08` | **P1** | El puente: destructuring de props, spread de `setState`, `?.`/`??` — lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
-| 20 · Programación asíncrona | `s03/07` | **P1** | `Promise.all` + `try/catch` = patrón `invoke` y del `useEffect` de carga. |
-| 22 · Utility Types *(optativo)* | `s03/06` | **P3** | `Partial`/`Pick`/`Omit`/`Record`: se imparte en Generics (`s03/10`). Bloque final, asociado al apunte optativo. |
+| 14 · Arrays y Tuplas | [14](14/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas básicas. |
+| 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce`/`find` omnipresentes en el JSX de las listas. |
+| 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar listas y cachés; casos concretos. |
+| 17 · Map | [17](17/solucion.ts) | **P3** | Caché/persistencia clave-valor; `Record` cubre la mayoría. |
+| 18 · Objetos en profundidad | [18](18/solucion.ts) | **P2** | Entidades, formularios, JSON y cloning sin mutar el estado. |
+| 19 · Desestructuración/spread/optional chaining | [21](21/solucion.ts) | **P1** | El puente: destructuring de props, spread de `setState`, `?.`/`??` — lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
+| 20 · Programación asíncrona | [20](20/solucion.ts) | **P1** | `Promise.all` + `try/catch` = patrón `invoke` y del `useEffect` de carga. |
+| 22 · Utility Types *(optativo)* | [19](19/solucion.ts) | **P3** | `Partial`/`Pick`/`Omit`/`Record`: se imparte en Generics (`s03/10`). Bloque final, asociado al apunte optativo. |
 
 
 ## Sesión 2: Introducción a TypeScript (Parte 1)
@@ -188,7 +187,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 1. Estás desarrollando un sistema de calificaciones para una plataforma educativa. Escribe un `if/else if/else` que clasifique una nota numérica en Sobresaliente, Notable, Aprobado, Suspenso.
 2. Estás implementando un manejador de estados para una petición HTTP que puede tener múltiples estados. Crea un `switch` exhaustivo con un tipo unión de 4 valores literales. Incluye exhaustiveness check con `never`.
 3. Estás procesando una lista de nombres y necesitas calcular el total de caracteres. Recorre un array de strings con `for...of` y suma sus longitudes.
-4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `hasta…1` en un array usando `for...of` sobre un rango (`Array.from`, visto en [`04_Funciones.md`](../apuntes/s02/04_Funciones.md)).
+4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `hasta…1` en un array usando `for...of` sobre un rango (`Array.from`, visto en [`04_Funciones.md`](../sesiones/apuntes/s02/04_Funciones.md)).
 
 
 <a id="11-literal-types-y-type-narrowing"></a>
@@ -196,7 +195,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 11. Literal Types y Type Narrowing
 
 > 🎯 Prioridad **P1** — `typeof`/`in` y discriminated unions: los estados de una petición o evento.
-> ℹ️ Los **tipos literales** (`"N" | "S"`, `EstadoPedido`) se explican en [`01_SintaxisBasica.md`](../apuntes/s02/01_SintaxisBasica.md); aquí se ponen en práctica.
+> ℹ️ Los **tipos literales** (`"N" | "S"`, `EstadoPedido`) se explican en [`01_SintaxisBasica.md`](../sesiones/apuntes/s02/01_SintaxisBasica.md); aquí se ponen en práctica.
 
 1. Estás construyendo un sistema de navegación que trabaja con puntos cardinales. Define un tipo literal `Direccion` con valores `"N" | "S" | "E" | "O"`. Escribe una función que devuelva el nombre completo.
 2. Estás implementando un motor de cálculo de áreas para un programa de diseño gráfico. Crea una discriminated union `Triangulo | Cuadrado` con la propiedad discriminante `tipo`. Implementa `calcularArea`.
@@ -365,7 +364,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 22. Utility Types *(optativo)*
 
 
-> ⚠️ **Bloque optativo.** Se imparte en [`s03/10_Generics.md`](../apuntes/s03/10_Generics.md) (capítulo 10, optativo). No entra en el temario oficial ni en los exámenes; es refuerzo para quien quiera usar `Partial`/`Pick`/`Omit`/`Record` con soltura en formularios y props.
+> ⚠️ **Bloque optativo.** Se imparte en [`s03/10_Generics.md`](../sesiones/apuntes/s03/10_Generics.md) (capítulo 10, optativo). No entra en el temario oficial ni en los exámenes; es refuerzo para quien quiera usar `Partial`/`Pick`/`Omit`/`Record` con soltura en formularios y props.
 > 🎯 Prioridad **P3** — `Partial`/`Pick`/`Omit`/`Record` en formularios de edición y props.
 
 1. Estás diseñando los tipos para un formulario de edición de planetas. Dada una interface `Planeta { name: string; population: number; climate: string; films?: string[] }` (datos de swapi):

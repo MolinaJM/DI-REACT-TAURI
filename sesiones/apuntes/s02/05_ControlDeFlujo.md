@@ -22,7 +22,7 @@
     - [5.5.3. ¿Por qué un JSON local y no un `fetch` real?](#553-por-qué-json-local-y-no-fetch-real)
     - [5.5.4. El código: import + `unknown` + type guard + estados](#554-el-código)
     - [5.5.5. Tres errores típicos](#555-tres-errores-típicos)
-- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../EjerciciosPropuestos/ejerciciosTS.md#10-estructuras-de-control-de-flujo) · [Literal Types y Narrowing](../../EjerciciosPropuestos/ejerciciosTS.md#11-literal-types-y-type-narrowing) · [Type Guards Avanzados](../../EjerciciosPropuestos/ejerciciosTS.md#12-type-guards-avanzados)
+- 🧪 **Ejercicios:** [Estructuras de control de flujo](../../../ejerciciosTS/ejerciciosTS.md#10-estructuras-de-control-de-flujo) · [Literal Types y Narrowing](../../../ejerciciosTS/ejerciciosTS.md#11-literal-types-y-type-narrowing) · [Type Guards Avanzados](../../../ejerciciosTS/ejerciciosTS.md#12-type-guards-avanzados)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -593,7 +593,7 @@ console.log(procesar({ estado: "listo", planetas }));
 ```
 
 > ▶ **Cómo probarlo:** copia el `.json` a `bancop/datos/planetas.json` y el bloque a `bancop` como `cargar-json.ts`; ejecuta `npx tsx cargar-json.ts` (desde `bancop/`) y después `npx tsc` para ver los tipos.
-> Ejercicios relacionados en `EjerciciosPropuestos/ejerciciosTS.md`: §12 (type guards) y §20 (estados de carga).
+> Ejercicios relacionados en `ejerciciosTS/ejerciciosTS.md`: §12 (type guards) y §20 (estados de carga).
 
 <a id="555-tres-errores-típicos"></a>
 ### 5.5.5. Tres errores típicos

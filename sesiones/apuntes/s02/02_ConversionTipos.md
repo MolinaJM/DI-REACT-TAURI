@@ -16,7 +16,7 @@
   - [Valores truthy y falsy](#valores-truthy-y-falsy)
   - [Conversión con tipos en TypeScript](#conversi%C3%B3n-con-tipos-en-typescript)
     - [Aserciones de tipo (type assertions)](#aserciones-de-tipo-type-assertions)
-- 🧪 **Ejercicios:** [Conversión de tipos](../../EjerciciosPropuestos/ejerciciosTS.md#7-conversión-de-tipos) · [Operadores](../../EjerciciosPropuestos/ejerciciosTS.md#8-operadores)
+- 🧪 **Ejercicios:** [Conversión de tipos](../../../ejerciciosTS/ejerciciosTS.md#7-conversión-de-tipos) · [Operadores](../../../ejerciciosTS/ejerciciosTS.md#8-operadores)
 
 ---
 

@@ -16,7 +16,7 @@
       - [8.1.3 Ámbito de Bloque](#813-%C3%A1mbito-de-bloque)
       - [8.1.4 Ámbito de Cierre (Closures)](#814-%C3%A1mbito-de-cierre-closures)
     - [8.2. Ejemplos Prácticos](#82-ejemplos-pr%C3%A1cticos)
-- 🧪 **Ejercicios:** [Funciones en Profundidad](../../EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad)
+- 🧪 **Ejercicios:** [Funciones en Profundidad](../../../ejerciciosTS/ejerciciosTS.md#9-funciones-en-profundidad)
 
 ---
 
@@ -265,7 +265,7 @@ console.log(duplicar2(5));  // 10
 // FUNCTION OVERLOADS
 // ============================================================================
 // 🔁 Function overloads: se definen justo debajo; se practican en
-// EjerciciosPropuestos/ejerciciosTS.md §9 (Funciones) P5
+// ejerciciosTS/ejerciciosTS.md §9 (Funciones) P5
 
 function procesarEntrada(x: string): string[];
 function procesarEntrada(x: number): number[];
@@ -287,7 +287,7 @@ console.log(ejecutarOperacion(5, 3, (a, b) => a + b));
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
 
-> ✏️ **Práctica:** [bloque 9 · Funciones en profundidad](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#9-funciones-en-profundidad) (params, rest, callbacks, closures) · 🔑 [bloque 19 · Desestructuración, spread/rest y optional chaining](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#19-desestructuración-spreadrest-y-optional-chaining-puente-a-react) (rest/spread, puente a React) · [bloque 22 · Utility Types](../../../sesiones/EjerciciosPropuestos/ejerciciosTS.md#22-utility-types) (`Partial`/`Pick`/`Omit`/`Record`).
+> ✏️ **Práctica:** [bloque 9 · Funciones en profundidad](../../../ejerciciosTS/ejerciciosTS.md#9-funciones-en-profundidad) (params, rest, callbacks, closures) · 🔑 [bloque 19 · Desestructuración, spread/rest y optional chaining](../../../ejerciciosTS/ejerciciosTS.md#19-desestructuración-spreadrest-y-optional-chaining-puente-a-react) (rest/spread, puente a React) · [bloque 22 · Utility Types](../../../ejerciciosTS/ejerciciosTS.md#22-utility-types) (`Partial`/`Pick`/`Omit`/`Record`).
 
 ---
 

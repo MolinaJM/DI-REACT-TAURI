@@ -27,8 +27,7 @@ flowchart LR
 
 - [Distribución Temporal y Contenidos (S00–S13)](#5-distribución-temporal-y-contenidos-s00s13) — guion de sesiones con teoría por sesión.
 - [Instalación y configuración del entorno](sesiones/sesion00.md) — S0 · Node.js, nvm, NPM, Vite, React, Tailwind, Rust y Tauri
-- [Repositorios de código y plan de sesiones](REPOS.md) — repos `01`–`05`, cómo lanzar cada repo y proyecto final
-- [Ejercicios de TypeScript](sesiones/EjerciciosPropuestos/ejerciciosTS.md) — catálogo canónico de ejercicios (S02–S03)
+- [Ejercicios de TypeScript](ejerciciosTS/ejerciciosTS.md) — catálogo canónico de ejercicios (S02–S03)
 - Proyecto final: AppCine
 
 ## 1. Contexto Teórico y Evolución de las Interfaces Web

@@ -17,10 +17,9 @@ gen/
 /private/*
 /sesiones/sesion*.md
 /sesiones/apuntes/s[0-9][0-9]/
-/ejercicios
-/sesiones/EjerciciosPropuestos/ejerciciosTS.md
 /sesiones/temario-appcine.md
-/ejercicios/soluciones/s02/10-reto-s02.ts
+# ejerciciosTS/*: las soluciones se revelan carpeta a carpeta (sección inferior)
+/ejerciciosTS/*
 
 # ===========================================================================
 #  >>> SESIÓN 00 <<  (REVELADA)
@@ -40,29 +39,57 @@ gen/
 # !repos/02-react-ejemplo-minimo/   (comentado: se revela con el flujo de S04)
 
 # ===========================================================================
+#  EJERCICIOS DE TYPESCRIPT (catálogo + soluciones)
+#  Quita el `#` de una fila `!ejerciciosTS/NN/` para revelar esa solución.
+#  Bloques: 01 Tipos primitivos · 02 Type inference · 03 Tipos especiales ·
+#  04 Interfaces · 05 Type aliases · 06 Union types · 07 Conversión · 08 Operadores ·
+#  09 Funciones · 10 Control de flujo · 11 Literal/narrowing · 12 Type guards ·
+#  13 Reto S2 · 14 Arrays/tuplas · 15 Arrays métodos · 16 Set · 17 Map ·
+#  18 Objetos · 19 (→ carpeta 21) Desestructuración/spread/optional ·
+#  20 Async · 22 (→ carpeta 19) Utility Types.
+#  El catálogo y `datos/` (JSON consumido por varios bloques) van siempre.
+# ===========================================================================
+!ejerciciosTS/ejerciciosTS.md
+!ejerciciosTS/datos/
+# !ejerciciosTS/01/
+# !ejerciciosTS/02/
+# !ejerciciosTS/03/
+# !ejerciciosTS/04/
+# !ejerciciosTS/05/
+# !ejerciciosTS/06/
+# !ejerciciosTS/07/
+# !ejerciciosTS/08/
+# !ejerciciosTS/09/
+# !ejerciciosTS/10/
+# !ejerciciosTS/11/
+# !ejerciciosTS/12/
+# !ejerciciosTS/13/
+# !ejerciciosTS/14/
+# !ejerciciosTS/15/
+# !ejerciciosTS/16/
+# !ejerciciosTS/17/
+# !ejerciciosTS/18/
+# !ejerciciosTS/19/
+# !ejerciciosTS/20/
+# !ejerciciosTS/21/
+
+# ===========================================================================
 #  >>> SESIÓN 02 <<  JMM - quitamos el `#` para revelar el material de TS
 # ===========================================================================
-!sesiones/EjerciciosPropuestos/ejerciciosTS.md
 !sesiones/sesion02.md
 !sesiones/apuntes/s02/
-!ejercicios/s02/
-!ejercicios/soluciones/s02/
 
 # ===========================================================================
 #  >>> SESIÓN 03 <<
 # ===========================================================================
 # !sesiones/sesion03.md
 # !sesiones/apuntes/s03/
-# !ejercicios/s03/
-# !ejercicios/soluciones/s03/
 
 # ===========================================================================
 #  >>> SESIÓN 04 <<
 # ===========================================================================
 # !sesiones/sesion04.md
 # !sesiones/apuntes/s04/
-# !ejercicios/s04/
-# !ejercicios/soluciones/s04/
 # !repos/02-react-componentes/
 
 # ===========================================================================
@@ -70,8 +97,6 @@ gen/
 # ===========================================================================
 # !sesiones/sesion05.md
 # !sesiones/apuntes/s05/
-# !ejercicios/s05/
-# !ejercicios/soluciones/s05/
 # !repos/02-react-componentes/
 
 # ===========================================================================
@@ -79,16 +104,12 @@ gen/
 # ===========================================================================
 # !sesiones/sesion06.md
 # !sesiones/apuntes/s06/
-# !ejercicios/s06/
-# !ejercicios/soluciones/s06/
 # !repos/02-react-componentes/
 
 # ===========================================================================
 #  >>> SESIÓN 07 <<
 # ===========================================================================
 # !sesiones/sesion07.md
-# !ejercicios/s07/
-# !ejercicios/soluciones/s07/
 # !repos/03-tauri-ejemplo-minimo/
 # !repos/03-tauri-ipc-filesystem/
 
@@ -96,8 +117,6 @@ gen/
 #  >>> SESIÓN 08 <<
 # ===========================================================================
 # !sesiones/sesion08.md
-# !ejercicios/s08/
-# !ejercicios/soluciones/s08/
 # !repos/04-react-avanzado/
 # !repos/02-react-componentes/
 
@@ -105,32 +124,24 @@ gen/
 #  >>> SESIÓN 09 <<
 # ===========================================================================
 # !sesiones/sesion09.md
-# !ejercicios/s09/
-# !ejercicios/soluciones/s09/
 # !repos/04-react-avanzado/
 
 # ===========================================================================
 #  >>> SESIÓN 10 <<
 # ===========================================================================
 # !sesiones/sesion10.md
-# !ejercicios/s10/
-# !ejercicios/soluciones/s10/
 # !repos/04-react-avanzado/
 
 # ===========================================================================
 #  >>> SESIÓN 11 <<
 # ===========================================================================
 # !sesiones/sesion11.md
-# !ejercicios/s11/
-# !ejercicios/soluciones/s11/
 # !repos/04-react-avanzado/
 
 # ===========================================================================
 #  >>> SESIÓN 12 <<
 # ===========================================================================
 # !sesiones/sesion12.md
-# !ejercicios/s12/
-# !ejercicios/soluciones/s12/
 # !repos/05-testing/
 # !repos/04-react-avanzado/
 

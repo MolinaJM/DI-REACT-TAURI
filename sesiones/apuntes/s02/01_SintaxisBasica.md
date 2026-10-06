@@ -16,8 +16,8 @@
     - [Interfaces y Type Aliases](#interfaces-y-type-aliases)
     - [Unión de tipos](#unión-de-tipos)
     - [Intersección de tipos (`&`)](#intersección-de-tipos-)
-- 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../EjerciciosPropuestos/ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../EjerciciosPropuestos/ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../EjerciciosPropuestos/ejerciciosTS.md#3-tipos-especiales-any-unknown-never-void)
-- 🧪 **Ejercicios (Sesión 3):** [Interfaces](../../EjerciciosPropuestos/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../EjerciciosPropuestos/ejerciciosTS.md#5-type-aliases) · [Union Types](../../EjerciciosPropuestos/ejerciciosTS.md#6-union-types-e-intersección-de-tipos)
+- 🧪 **Ejercicios (Sesión 2):** [Tipos Primitivos](../../../ejerciciosTS/ejerciciosTS.md#1-tipos-primitivos) · [Type Inference](../../../ejerciciosTS/ejerciciosTS.md#2-type-inference) · [Tipos Especiales](../../../ejerciciosTS/ejerciciosTS.md#3-tipos-especiales-any-unknown-never-void)
+- 🧪 **Ejercicios (Sesión 3):** [Interfaces](../../../ejerciciosTS/ejerciciosTS.md#4-interfaces) · [Type Aliases](../../../ejerciciosTS/ejerciciosTS.md#5-type-aliases) · [Union Types](../../../ejerciciosTS/ejerciciosTS.md#6-union-types-e-intersección-de-tipos)
 
 <a id="1-sintaxis-básica-de-typescript"></a>
 # 1. **Sintaxis Básica de TypeScript**

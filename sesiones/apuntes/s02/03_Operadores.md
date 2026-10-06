@@ -15,7 +15,7 @@
   - [3.4. Operador Nullish Coalescing (`??`)](#34-operador-nullish-coalescing)
     - [Ejemplo:](#ejemplo-de-nullish-coalescing)
   - [3.5. Tipos resultantes: cómo los ve TypeScript](#35-tipos-resultantes-cómo-los-ve-typescript)
-- 🧪 **Ejercicios:** [Operadores](../../EjerciciosPropuestos/ejerciciosTS.md#8-operadores)
+- 🧪 **Ejercicios:** [Operadores](../../../ejerciciosTS/ejerciciosTS.md#8-operadores)
 
 ---
 
