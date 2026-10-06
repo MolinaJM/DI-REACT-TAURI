@@ -40,14 +40,6 @@ gen/
 
 # ===========================================================================
 #  EJERCICIOS DE TYPESCRIPT (catálogo + soluciones)
-#  Quita el `#` de una fila `!ejerciciosTS/NN/` para revelar esa solución.
-#  Bloques: 01 Tipos primitivos · 02 Type inference · 03 Tipos especiales ·
-#  04 Interfaces · 05 Type aliases · 06 Union types · 07 Conversión · 08 Operadores ·
-#  09 Funciones · 10 Control de flujo · 11 Literal/narrowing · 12 Type guards ·
-#  13 Reto S2 · 14 Arrays/tuplas · 15 Arrays métodos · 16 Set · 17 Map ·
-#  18 Objetos · 19 (→ carpeta 21) Desestructuración/spread/optional ·
-#  20 Async · 22 (→ carpeta 19) Utility Types.
-#  El catálogo y `datos/` (JSON consumido por varios bloques) van siempre.
 # ===========================================================================
 !ejerciciosTS/ejerciciosTS.md
 !ejerciciosTS/datos/
