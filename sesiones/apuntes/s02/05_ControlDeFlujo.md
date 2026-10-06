@@ -155,7 +155,7 @@ do {
 <a id="524-forof-loop-es6"></a>
 ### 5.2.4. `for...of` Loop (ES6)
 
-El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays:
+El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays. No debes usar forEach cuando necesites detener la iteración con break/continue o manejar código asíncrono con async/await, ya que no soporta control de flujo ni espera la resolución de promesas.
 
 ```typescript
 const frutas: string[] = ["manzana", "pera", "uva"];
