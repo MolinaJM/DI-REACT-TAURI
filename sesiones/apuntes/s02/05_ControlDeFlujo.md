@@ -279,6 +279,10 @@ function hablar(animal: Animal): string {
 
 console.log(hablar({ ladrar: () => {} }));  // Guau
 console.log(hablar({ maullar: () => {} })); // Miau
+//Otra forma equivalente de haber puesto la llamada
+//console.log(hablar({ ladrar() {} }));  // Guau
+//console.log(hablar({ maullar() {} })); // Miau
+
 
 type Dato = string | number | string[] | Error;
 

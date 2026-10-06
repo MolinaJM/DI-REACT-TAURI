@@ -106,7 +106,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > 🎯 Prioridad **P1** — `interface Props` es el contrato de cada componente y con `type`/`interface` modelas las entidades de la app: el esqueleto de todo el tipado.
 
   
-> ✅ ACLARACIÓN IMPORTANTE!! — `Toda la creación de objetos implica también la declaración del constructor y de instancias`. Esto también se aplica a los ejercicios de type.
+> ✅ ACLARACIÓN IMPORTANTE!! — `Toda la creación de objetos incita a declarar su constructor para crear instancias de forma más sencilla. Esto es solamnete un ejercicio de programación, luego es algo que no se suele utilizar.`. Esto también se aplica a los ejercicios de type.
 
 1. Estás diseñando una base de datos de personajes de ciencia ficción. Define una interface `Personaje` con `nombre`, `planeta` y `nave` (opcional), y un método `presentarse()` que devuelva `void`. Crea un "constructor" de Personaje y crea varios personajes.
 2. Estás ampliando la base de datos para incluir personajes que son también pilotos. Extiende `Personaje` con `Piloto` que añada `velocidadMax` y `mision`. Pruébalo (constructor e instancias del objeto.)
