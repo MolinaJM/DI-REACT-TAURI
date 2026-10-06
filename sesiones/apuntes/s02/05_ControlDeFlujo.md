@@ -526,10 +526,10 @@ const valor: unknown = await (await fetch(url)).json();  // con fetch (acordarse
 > Por eso el `fetch` de verdad llega después. En [00_Introduccion §0.4.6](00_Introduccion.md#6-asincronía-nativa-y-moderna) ya lo vimos de pasada contra SWAPI, pero **anunciando que los conceptos se desarrollan más adelante** (`async`/`await`/`Promise`, en [Asincronismo §8.4](../s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md#84-asyncawait-simplificando-el-uso-de-promesas)). Cuando llegues allí, este ejemplo cambiará **dos líneas** y el type guard seguirá exactamente igual.
 
 > [!NOTE]
-> **Un matiz honesto:** con un import estático **no hay un estado `cargando` real** (el dato ya está disponible al arrancar). Lo modelamos igualmente porque es la forma que necesitarás cuando el dato sí tarde, y de paso practicas unión discriminada y `switch` exhaustivo.
+> **Un matiz honesto:** con un import estático **no hay un estado de carga `cargando` real** (el dato ya está disponible al arrancar). Los **estados de carga** le indican a la interfaz qué hacer (mostrar) según el estado de los datos esperados (Ej: una tabla de datos podrá estar en estado cargando/cargado/error).  Lo modelamos igualmente porque es la forma que necesitarás cuando el dato sí tarde, y de paso practicas unión discriminada y `switch` exhaustivo.
 
 <a id="554-el-código"></a>
-### 5.5.4. El código: import + `unknown` + type guard + estados
+### 5.5.4. El código: import + `unknown` + type guard + estados de carga
 
 ```typescript
 /**
@@ -585,7 +585,7 @@ function procesar(estado: EstadoCarga): string {
     }
 }
 
-//Hacemos un test de los estados de carg
+//Hacemos un test de los estados de carga
 //Cuando estemos con funciones ASÍNCRONAS (async) estos estados saltarán
 //según lo que esté pasando con la carga de los datos.
 console.log(procesar({ estado: "cargando" }));
