@@ -6,7 +6,7 @@ Tipos básicos, funciones, objetos, interfaces, type guards y más
 
 ---
 
-> 📚 **Apuntes:** [s02 · A0–A6](apuntes/s02/) · 💻 **Ejemplos:** bloques "📦 Ejemplo completo" al final de cada apunte · ✏️ **Práctica:** [catálogo de ejercicios S02](../ejerciciosTS/ejerciciosTS.md)
+> 📚 **Apuntes:** [s02 · A0–A5](apuntes/s02/) · 💻 **Ejemplos:** bloques "📦 Ejemplo completo" al final de cada apunte · ✏️ **Práctica:** [catálogo de ejercicios S02](../ejerciciosTS/ejerciciosTS.md)
 
 
 > Todo el temario de esta sesión está en los apuntes de [`apuntes/s02/`](apuntes/s02/). Esta página solo enlaza dichos apuntes en el orden recomendado.
@@ -27,23 +27,10 @@ Haz clic en cada apunte para ver el código TypeScript detallado con explicacion
 
 
 - Ejemplos ejecutables: bloques "📦 Ejemplo completo" al final de cada apunte de [`apuntes/s02/`](apuntes/s02/).
-- Ejercicios: bloques 1–13 del [catálogo canónico](../ejerciciosTS/ejerciciosTS.md). Las soluciones resueltas están en `ejerciciosTS/<NN>/solucion.ts` (una carpeta `ejerciciosTS/NN` por bloque).
+- Ejercicios: bloques 1–12 del [catálogo canónico](../ejerciciosTS/ejerciciosTS.md). Las soluciones resueltas están en `ejerciciosTS/<NN>/solucion.ts` (una carpeta `ejerciciosTS/NN` por bloque). El bloque 13 pasa a la Sesión 3 como **23 · Práctica integrada**.
 
 ---
 
-
-## 🧪 Autoevaluación
-
-Marca lo que ya eres capaz de hacer por ti mismo/a:
-
-- [ ] Declaro variables y constantes con los tipos básicos más comunes (`string`, `number`, `boolean`, `string[]`).
-- [ ] Defino `interface` para objetos y la uso como tipo de parámetros en funciones.
-- [ ] Escribo un *type guard* (`typeof`/`Array.isArray`) para estrechar el tipo en un if.
-- [ ] Sé cuándo usar `let` frente a `const` y lo que dice la salida de `tsc`/`npx tsx`.
-
-> **Reto de la sesión:** Declara un `interface Usuario`, una función `saludar(u: Usuario): string` y un guard que distinga dos variantes, todo en un único fichero y compilando sin errores.
-
-> 🏁 **Reto final ampliado (la máquina expendedora):** [bloque 13 · Reto final de S2](../ejerciciosTS/ejerciciosTS.md#13-reto-final-s2) — integra todas las técnicas de la sesión; la solución está en `ejerciciosTS/13/solucion.ts`. Es el esqueleto de un `useReducer` de React.
 
 > 📌 La práctica completa está en el [catálogo canónico de ejercicios](../ejerciciosTS/ejerciciosTS.md).
 [Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md) [S13](sesion13.md)

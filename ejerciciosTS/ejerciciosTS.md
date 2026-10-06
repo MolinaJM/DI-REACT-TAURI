@@ -24,36 +24,38 @@
 | **P4 · Útil pero dilatable** | Según caso; no bloquea. |
 | **P5 · Prescindible** | Se omite sin problema (p. ej. overloads, métodos ES2023/ES2025). |
 
-Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · P4 = 1 · P5 reservado**.
+Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 · P4 = 0 · P5 reservado**.
+
+> 📌 **Qué indica cada columna.** **Prio** es la prioridad del bloque (P1–P5, tabla de arriba). **Por qué (React/Tauri)** resume la utilidad **concreta** de ese bloque para escribir una app: qué patrones de componente entrena (props, estado, JSX), qué hooks prepara (`useState` → tupla `[valor, setter]`, `useEffect` → carga, `useReducer` → `switch`+`never`) y cómo se integra con Tauri (`invoke`, persistencia, validación de datos). **Ese mismo texto es el que encabeza cada bloque del catálogo**, para que sepas de antemano para qué sirve lo que vas a practicar.
 
 ### Sesión 2
 
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
-| 1 · Tipos Primitivos | [01](01/solucion.ts) | **P2** | Base de todo el tipado, pero elemental y breve. |
-| 2 · Type Inference | [02](02/solucion.ts) | **P2** | El editor deduce tipos (inferencia contextual en `map`, hooks). |
-| 3 · Tipos Especiales | [03](03/solucion.ts) | **P2** | `unknown`/`never` esenciales; se aplican de lleno con los guards (P1). |
-| 4 · Interfaces · **5 · Type Aliases** | [04](04/solucion.ts) · [05](05/solucion.ts) | **P1** | `interface Props` = contrato de cada componente; modelas entidades. |
-| 6 · Union Types e Intersección | [06](06/solucion.ts) | **P1** | Props multiforma y estado discriminado: el pan de cada día de un componente. |
-| 7 · Conversión de tipos · **8 · Operadores** | [07](07/solucion.ts) · [08](08/solucion.ts) | **P3** | JSON en persistencia y `??` para defaults; ternario/short-circuit a diario. |
-| 9 · Funciones en Profundidad | [09](09/solucion.ts) | **P1** *(pedagógica)* | Handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*. |
-| 10 · Estructuras de control de flujo | [10](10/solucion.ts) | **P2** | `switch`+`never` = patrón `useReducer`; llega en React II. |
-| 11 · Literal Types y Narrowing | [11](11/solucion.ts) | **P1** | `typeof`/`in` narrowing y discriminated unions. |
-| 12 · Type Guards Avanzados | [12](12/solucion.ts) | **P1** | Validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`). |
-| 13 · 🏁 Reto final de S2 | [13](13/solucion.ts) | **P4** | Integración/repaso de S2; sin concepto nuevo. |
+| 1 · Tipos Primitivos | [01](01/solucion.ts) | **P2** | Base de todo el tipado: toda `interface`/`type` se apoya en primitivos; elemental y breve. |
+| 2 · Type Inference | [02](02/solucion.ts) | **P2** | El editor deduce los tipos por ti (inferencia contextual en `map` y hooks): menos anotaciones, mismos errores capturados. |
+| 3 · Tipos Especiales | [03](03/solucion.ts) | **P2** | `unknown` para lo que llega de fuera (validarlo antes en un guard) y `never` para el `switch` exhaustivo: los cimientos de validar y de los estados. |
+| 4 · Interfaces · **5 · Type Aliases** | [04](04/solucion.ts) · [05](05/solucion.ts) | **P1** | `interface Props` es el contrato de cada componente y con `type` modelas las entidades de la app: el esqueleto de todo el tipado. |
+| 6 · Union Types e Intersección | [06](06/solucion.ts) | **P1** | Props que aceptan varias formas y el estado discriminado `cargando/error/listo`: el pan de cada día de un componente. |
+| 7 · Conversión de tipos · **8 · Operadores** | [07](07/solucion.ts) · [08](08/solucion.ts) | **P3** | `??` para defaults sobre `null`/`undefined` y ternario/`&&` para renderizado condicional y persistencia JSON: a diario. |
+| 9 · Funciones en Profundidad | [09](09/solucion.ts) | **P1** *(decisión pedagógica)* | Handlers `onClick`, callbacks entre componentes y la tupla `[valor, setter]` de `useState<T>`. *Overloads → P5.* |
+| 10 · Estructuras de control de flujo | [10](10/solucion.ts) | **P2** | `switch`+`never` = el patrón `useReducer` de React: cada acción cambia el estado. Llega en React II. |
+| 11 · Literal Types y Narrowing | [11](11/solucion.ts) | **P1** | Uniones de literales y `typeof`/`in` narrowing: distinguir variantes para renderizar estados y eventos. |
+| 12 · Type Guards Avanzados | [12](12/solucion.ts) | **P1** | Validar lo que llega de `invoke`/JSON antes de usarlo: la regla del curso (nunca `any`). |
 
 ### Sesión 3
 
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
-| 14 · Arrays y Tuplas | [14](14/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas básicas. |
-| 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce`/`find` omnipresentes en el JSX de las listas. |
-| 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar listas y cachés; casos concretos. |
-| 17 · Map | [17](17/solucion.ts) | **P3** | Caché/persistencia clave-valor; `Record` cubre la mayoría. |
-| 18 · Objetos en profundidad | [18](18/solucion.ts) | **P2** | Entidades, formularios, JSON y cloning sin mutar el estado. |
-| 19 · Desestructuración/spread/optional chaining | [21](21/solucion.ts) | **P1** | El puente: destructuring de props, spread de `setState`, `?.`/`??` — lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
-| 20 · Programación asíncrona | [20](20/solucion.ts) | **P1** | `Promise.all` + `try/catch` = patrón `invoke` y del `useEffect` de carga. |
-| 22 · Utility Types *(optativo)* | [19](19/solucion.ts) | **P3** | `Partial`/`Pick`/`Omit`/`Record`: se imparte en Generics (`s03/10`). Bloque final, asociado al apunte optativo. |
+| 14 · Arrays y Tuplas | [14](14/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX. |
+| 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce`/`find` para pintar listas y transformar datos; el día a día del JSX. |
+| 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar listas (etiquetas, categorías) y cachés: casos concretos. |
+| 17 · Map | [17](17/solucion.ts) | **P3** | Caché/persistencia clave-valor (p. ej. respuestas de `invoke`); `Record` cubre la mayoría de casos. |
+| 18 · Objetos en profundidad | [18](18/solucion.ts) | **P2** | Entidades, formularios, JSON y clonado **sin mutar** el estado (regla de React). |
+| 19 · Desestructuración/spread/optional chaining | [21](21/solucion.ts) | **P1** | Destructuring de props en la firma, spread de `setState`, `?.`/`??`: lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
+| 20 · Programación asíncrona | [20](20/solucion.ts) | **P1** | `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`. |
+| 22 · Utility Types *(optativo)* | [19](19/solucion.ts) | **P3** | `Partial`/`Pick`/`Omit`/`Record`: derivar tipos para formularios y props; se imparte en Generics (`s03/10`, optativo). |
+| 23 · Práctica integrada | — | **P1** | Integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real. |
 
 
 ## Sesión 2: Introducción a TypeScript (Parte 1)
@@ -62,7 +64,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 1. Tipos Primitivos
 
-> 🎯 Prioridad **P2** — base de todo el tipado, pero elemental y breve.
+> 🎯 Prioridad **P2** — base de todo el tipado: toda `interface`/`type` se apoya en primitivos; elemental y breve.
 
 1. Imagina que estás construyendo un perfil de usuario. Declara variables de tipo `string`, `number`, `boolean`, `null` y `undefined` para representar datos reales de ese perfil (nombre, edad, activo, etc.), asígnales valores e imprímelas.
 2. Imagina que tienes un número 42 guardado en una variable y quieres reasignarle un texto. Intenta reasignar un `number` a una variable declarada como `string`. ¿Qué error obtienes?
@@ -76,7 +78,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 2. Type Inference
 
-> 🎯 Prioridad **P2** — inferencia contextual (`map`, hooks): el editor deduce los tipos por ti.
+> 🎯 Prioridad **P2** — el editor deduce los tipos por ti (inferencia contextual en `map` y hooks): menos anotaciones, mismos errores capturados.
 
 1. Estás escribiendo código y quieres confiar en que el editor haga el trabajo por ti. Declara variables sin anotación de tipo y observa los tipos inferidos por el editor.
 2. Estás procesando datos heterogéneos que llegan de una fuente externa. Crea un array con números y strings mezclados. ¿Qué tipo infiere TypeScript?
@@ -88,7 +90,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 3. Tipos Especiales: any, unknown, never, void
 
-> 🎯 Prioridad **P2** — `unknown`/`never` son esenciales; se aplican de lleno con los guards (P1).
+> 🎯 Prioridad **P2** — `unknown` para lo que llega de fuera (validarlo antes en un guard) y `never` para el `switch` exhaustivo: los cimientos de validar y de los estados.
 
 1. Estás trabajando con datos de origen desconocido y necesitas flexibilidad total. Declara una variable `any` y asígnale distintos tipos. Llama a un método inexistente — ¿qué ocurre en compilación y en runtime (en ejecución)?
 2. Estás recibiendo datos de una API externa y quieres seguridad sin sacrificar flexibilidad. Repite el paso anterior con `unknown`. ¿Qué necesitas hacer para poder llamar a un método sobre `unknown`?
@@ -101,7 +103,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 4. Interfaces
 
-> 🎯 Prioridad **P1** — `interface Props` es el contrato de cada componente.
+> 🎯 Prioridad **P1** — `interface Props` es el contrato de cada componente y con `type`/`interface` modelas las entidades de la app: el esqueleto de todo el tipado.
 
   
 > ✅ ACLARACIÓN IMPORTANTE!! — `Toda la creación de objetos implica también la declaración del constructor y de instancias`. Esto también se aplica a los ejercicios de type.
@@ -118,7 +120,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 5. Type Aliases
 
-> 🎯 Prioridad **P1** — modelar entidades y tipos de datos de la app.
+> 🎯 Prioridad **P1** — con `type`/`interface` modelas las entidades de la app: el esqueleto de todo el tipado.
 
 1. Estás trabajando con un sistema de coordenadas para un mapa. Define un type alias `Coordenadas` como `{ x: number, y: number }`. Crea una función que lo acepte.
 2. Estás definiendo la estructura de una tarjeta de producto para una tienda. Crea un type alias `TarjetaProducto` como `{ titulo: string; precio: number, descripcion?: string }`. Crea una función que lo acepte y lo resuma en un texto.
@@ -132,7 +134,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 6. Union Types e Intersección de Tipos
 
-> 🎯 Prioridad **P1** — props multiforma y estado discriminado: el pan de cada día de un componente.
+> 🎯 Prioridad **P1** — props que aceptan varias formas y el estado discriminado `cargando/error/listo`: el pan de cada día de un componente.
 
 1. Estás diseñando un sistema de identificación que acepta tanto IDs numéricos como alfanuméricos. Define un tipo `ID` que sea `string | number`. Crea una función `mostrarId(id: ID): string` que devuelva el ID formateado con una template literal (`` `ID: ${id}` ``). Pruébala con un número y con un texto.
 2. Estás modelando un sistema de recursos humanos donde una persona puede ser también empleada. Crea dos type `Persona` y `Empleado`. Combínalas con intersección `&` y crea un objeto que cumpla ambas (NOTA: se podría haber hecho también con interface ).
@@ -143,7 +145,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 7. Conversión de tipos
 
-> 🎯 Prioridad **P3** — JSON en persistencia y `??` para defaults; se interioriza con Tauri/formularios.
+> 🎯 Prioridad **P3** — `??` para defaults sobre `null`/`undefined` y ternario/`&&` para renderizado condicional y persistencia JSON: se usan a diario y se aprenden rápido.
 
 1. Estás transformando datos entre formatos: recibes un número como texto y necesitas convertirlo. Convierte explícitamente: `number → string`, `string → number`, `string → boolean`.
 2. Imagina que recibes datos de una API y necesitas convertirlos. Convierte un `number` a `string`, `boolean` y `number` de nuevo con `String()`, `Boolean()` y `Number()`.
@@ -156,7 +158,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 8. Operadores
 
-> 🎯 Prioridad **P3** — ternario/`??`/short-circuit: se usan a diario y se aprenden rápido.
+> 🎯 Prioridad **P3** — ternario/`??`/short-circuit: renderizado condicional y defaults; se usan a diario y se aprenden rápido.
 
 1. Estás comparando valores que pueden ser de tipos diferentes y quieres entender el comportamiento de los operadores de igualdad. Compara `==` vs `===` con `5` y `"5"`. ¿Qué resultados obtienes?
 2. Estás construyendo una lógica condicional compacta para mostrar un mensaje u otro según el estado de un usuario. Usa el operador ternario para asignar un valor según una condición.
@@ -167,7 +169,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 9. Funciones en Profundidad
 
-> 🎯 Prioridad **P1** *(decisión pedagógica)* — handlers `onClick`, callbacks y la semilla de `useState<T>`; *overloads → P5*.
+> 🎯 Prioridad **P1** *(decisión pedagógica)* — handlers `onClick`, callbacks entre componentes y la tupla `[valor, setter]` de `useState<T>`; *overloads → P5*.
 
 1. Estás creando una función que gestiona la configuración de un producto y necesita parámetros obligatorios, opcionales y con valores por defecto. Escribe una función con parámetro obligatorio, otro opcional y otro con valor por defecto.
 2. Estás implementando una función que sume un número variable de precios de productos. Crea una función con rest parameters que sume todos los números recibidos.
@@ -182,10 +184,12 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 10. Estructuras de control de flujo
 
-> 🎯 Prioridad **P2** — `switch`+`never` = el patrón `useReducer`/estados ok·cargando·error (llega en React II).
+> 🎯 Prioridad **P2** — `switch`+`never` = el patrón `useReducer` de React: cada acción cambia el estado. Llega en React II.
+>
+> 📦 **OJO — Modularidad (a partir de aquí).** Este es el primer bloque en el que hay que **crear interfaces y types de objeto**. A partir de este bloque **todos los interfaces y types que describen un objeto se definen en un fichero aparte `tipos.ts`** (junto a `solucion.ts`) y se cargan con `import type { ... } from "./tipos.ts"`. Así se practica la modularidad: el fichero principal solo contiene lógica, y los tipos viven en su módulo. En el fichero principal solo se dejan los tipos que **no** describen un objeto (uniones de literales, tuplas, etc.).
 
 1. Estás desarrollando un sistema de calificaciones para una plataforma educativa. Escribe un `if/else if/else` que clasifique una nota numérica en Sobresaliente, Notable, Aprobado, Suspenso.
-2. Estás implementando un manejador de estados para una petición HTTP que puede tener múltiples estados. Crea un `switch` exhaustivo con un tipo unión de 4 valores literales. Incluye exhaustiveness check con `never`.
+2. Estás implementando un manejador de estados para una petición HTTP que puede tener múltiples estados (cargando/exito/error/cancelado). Modela cada estado con un interface (en `tipos.ts`) y una unión discriminada (también en `tipos.ts`). Crea un `switch` exhaustivo sobre la unión e incluye exhaustiveness check con `never`.
 3. Estás procesando una lista de nombres y necesitas calcular el total de caracteres. Recorre un array de strings con `for...of` y suma sus longitudes.
 4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `hasta…1` en un array usando `for...of` sobre un rango (`Array.from`, visto en [`04_Funciones.md`](../sesiones/apuntes/s02/04_Funciones.md)).
 
@@ -194,13 +198,13 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 11. Literal Types y Type Narrowing
 
-> 🎯 Prioridad **P1** — `typeof`/`in` y discriminated unions: los estados de una petición o evento.
+> 🎯 Prioridad **P1** — uniones de literales y `typeof`/`in` narrowing: distinguir variantes para renderizar estados y eventos.
 > ℹ️ Los **tipos literales** (`"N" | "S"`, `EstadoPedido`) se explican en [`01_SintaxisBasica.md`](../sesiones/apuntes/s02/01_SintaxisBasica.md); aquí se ponen en práctica.
 
 1. Estás construyendo un sistema de navegación que trabaja con puntos cardinales. Define un tipo literal `Direccion` con valores `"N" | "S" | "E" | "O"`. Escribe una función que devuelva el nombre completo.
-2. Estás implementando un motor de cálculo de áreas para un programa de diseño gráfico. Crea una discriminated union `Triangulo | Cuadrado` con la propiedad discriminante `tipo`. Implementa `calcularArea`.
+2. Estás implementando un motor de cálculo de áreas para un programa de diseño gráfico. Crea una discriminated union `Triangulo | Cuadrado` (los interfaces y el type unión en `tipos.ts`) con la propiedad discriminante `tipo`. Implementa `calcularArea`.
 3. Estás procesando datos que pueden ser de tres tipos diferentes y necesitas aplicar una lógica distinta a cada uno. Usa `typeof` narrowing en una función que acepte `string | number | boolean` y aplique una transformación distinta a cada caso.
-4. Estás trabajando con dos tipos de objetos que comparten propiedades pero tienen diferencias. Usa `in` narrowing para distinguir entre dos interfaces.
+4. Estás trabajando con dos tipos de objetos que comparten propiedades pero tienen diferencias. Usa `in` narrowing para distinguir entre dos interfaces (definidas en `tipos.ts`).
 5. Estás desarrollando un sistema de seguimiento de pedidos. Define un type alias `EstadoPedido` con las literales `"pendiente" | "enviado" | "entregado"` y crea `actualizarEstado(estado)` que imprima en consola la notificación del cambio.
 6. Estás procesando una entrada que puede ser un texto o un número y necesitas transformarla según su tipo. Escribe `procesarEntrada(entrada: string | number)`: si es `string` devuelve el texto en mayúsculas; si es `number`, el doble del número.
 7. Estás recibiendo datos de una API externa y necesitas validar su tipo antes de procesarlos. Escribe `procesar(valor: unknown)`: si es `string`, devuelve su longitud en mayúsculas; si es `number`, su doble como string; si no, `"desconocido"`.
@@ -210,20 +214,12 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 ### 12. Type Guards Avanzados
 
-> 🎯 Prioridad **P1** — validar lo que llega de `invoke`/JSON: la regla del curso (nunca `any`).
+> 🎯 Prioridad **P1** — validar lo que llega de `invoke`/JSON antes de usarlo: la regla del curso (nunca `any`).
 
-1. Estás implementando un sistema de roles y necesitas verificar si un usuario tiene permisos de administrador. Crea un custom type guard `esAdmin(usuario)` que compruebe si un usuario tiene rol `"admin"`.
+1. Estás implementando un sistema de roles y necesitas verificar si un usuario tiene permisos de administrador. Crea el interface `Usuario` (en `tipos.ts`) y un custom type guard `esAdmin(usuario)` que compruebe si un usuario tiene rol `"admin"`.
 2. Estás filtrando una lista de elementos que pueden ser de diferentes tipos y solo quieres los de un tipo concreto. Usa un type predicate en un bucle `for...of` para obtener solo los elementos de un tipo concreto de una unión.
 3. Estás escribiendo una función que debe garantizar que un valor cumple un tipo antes de continuar la ejecución. Implementa una assertion function `asegurarNumero(valor: unknown): asserts valor is number`.
-4. Estás cargando datos de un fichero `datos/planetas.json` que no controlas del todo y debes **validarlos antes de usarlos**. Importa el JSON como módulo (`import datos from "../../datos/planetas.json" with { type: "json" }` — **nunca** con `node:fs` ni con `fetch` sobre el fichero, porque el import es lo único que funciona igual en Node y en el bundler de React). El atributo `type: "json"` es **obligatorio si ejecutas con `node`** e inofensivo con `tsx` o `tsc`. Trata el resultado como `unknown`, escribe el type guard `esPlaneta(bruto: unknown): bruto is Planeta` que valide la forma de un elemento (`name`/`population`/`climate` string/number/string y `films` opcional o array), y una función `planetasHabitados(): Planeta[]` que lance si el JSON no es un array y devuelva solo los planetas con `population > 0`. Es la regla del curso: lo que viene de fuera se valida, nunca se castea con `as` a ciegas.
-
-
-<a id="13-reto-final-s2"></a>
-
-### 13. 🏁 Reto final de S2
-> Integra TODO lo visto en S2 en un único programa: uniones de literales, narrowing, *type guards* con predicados, parámetros por defecto, ternario/`??`, `for...of`, `switch` exhaustivo con `never`, closures y aserciones. La entrada en React: piensa en ello como el esqueleto de un `useReducer`.
-> 🎯 Prioridad **P4** — integración/repaso de S2; sin concepto nuevo para React/Tauri.
-
+4. Estás cargando datos de un fichero `datos/planetas.json` que no controlas del todo y debes **validarlos antes de usarlos**. El interface `Planeta` se define en `tipos.ts`. Importa el JSON como módulo (`import datos from "../../datos/planetas.json" with { type: "json" }` — **nunca** con `node:fs` ni con `fetch` sobre el fichero, porque el import es lo único que funciona igual en Node y en el bundler de React). El atributo `type: "json"` es **obligatorio si ejecutas con `node`** e inofensivo con `tsx` o `tsc`. Trata el resultado como `unknown`, escribe el type guard `esPlaneta(bruto: unknown): bruto is Planeta` que valide la forma de un elemento (`name`/`population`/`climate` string/number/string y `films` opcional o array), y una función `planetasHabitados(): Planeta[]` que lance si el JSON no es un array y devuelva solo los planetas con `population > 0`. Es la regla del curso: lo que viene de fuera se valida, nunca se castea con `as` a ciegas.
 
 ---
 
@@ -234,7 +230,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 14. Arrays y Tuplas
 
 
-> 🎯 Prioridad **P2** — la tupla `[valor, setter]` de `useState` y las listas básicas.
+> 🎯 Prioridad **P2** — la tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX.
 
 1. Estás procesando diferentes tipos de datos en tu app. Crea un array de números, otro de strings y otro mixto `(string | number)[]`.
 2. Estás trabajando con datos estructurados de un usuario que tienen un número fijo de campos con tipos distintos. Define una tupla `[string, number, boolean]` con datos de un usuario. Desestructúrala.
@@ -253,7 +249,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 15. Arrays: métodos fundamentales
 
 
-> 🎯 Prioridad **P1** — `map`/`filter`/`reduce`/`find` son omnipresentes en el JSX de las listas.
+> 🎯 Prioridad **P1** — `map`/`filter`/`reduce`/`find` para pintar listas y transformar datos; el día a día del JSX.
 >
 > 🌌 **Datos de ejemplo:** los planetas usados en los ejercicios 2 y 5 son reales, extraídos de la API pública [swapi.info/api/planets](https://swapi.info/api/planets). Se han **hardcodeado** en el fichero de ejercicio (no se hace `fetch`): la asincronía (`async/await`, `Promise`) se imparte en la sesión 9 (`s03/08_Asincronismo`), así que aquí trabajamos con datos estáticos para centrarnos en los métodos de array.
 >
@@ -272,10 +268,10 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 > *(En la API real, `population` viene como `string` (o `"unknown"`) y `films` como URLs completas; aquí se convierten a `number` y a IDs cortos para simplificar los ejercicios.)*
 
 1. Estás procesando una lista de números para transformarlos, filtrarlos y calcular un total. Dado `[1, 2, 3, 4, 5]`, usa `map` para duplicar, `filter` para pares, `reduce` para sumar.
-2. Estás buscando planetas específicos en un catálogo. Usa `find`, `findIndex`, `some` y `every` sobre el array de objetos `Planeta` (datos de swapi).
+2. Estás buscando planetas específicos en un catálogo. Usa `find`, `findIndex`, `some` y `every` sobre el array de objetos `Planeta` (datos de swapi; interface en `tipos.ts`).
 3. Estás trabajando con datos que no deben mutar y necesitas versiones ordenadas o invertidas del array. Usa `toSorted`, `toReversed` y `with` (ES2023) y comprueba que el original no muta.
 4. Estás implementando un buscador eficiente en una lista ordenada. Implementa una búsqueda binaria tipada.
-5. Estás gestionando una lista de planetas y necesitas filtrar solo los habitables. Dada la interface `Planeta { name: string; population: number; climate: string }`, escribe `obtenerHabitable(planetas: Planeta[])` que devuelva un nuevo array solo con los de `climate === "temperate"`.
+5. Estás gestionando una lista de planetas y necesitas filtrar solo los habitables. Dada la interface `Planeta { name: string; population: number; climate: string }` (definida en `tipos.ts`), escribe `obtenerHabitable(planetas: Planeta[])` que devuelva un nuevo array solo con los de `climate === "temperate"`.
 6. Estás implementando una pila de tareas y necesitas modificar el array en su lugar. Usa los métodos que **mutan** el array en su lugar: `push` y `pop` sobre una pila, y `sort` con un comparador numérico `(a, b) => a - b`. Comprueba que `sort` modifica el array original.
 7. Estás trabajando con listas de datos y necesitas crear copias que puedas modificar sin afectar la original. Crea una copia de un array con `slice()` y con el spread `[...arr]`, y modifica la copia sin afectar al original (contrasta con `sort` que sí muta).
 
@@ -285,7 +281,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 16. Set: conjunto de valores únicos
 
 
-> 🎯 Prioridad **P3** — deduplicar listas y cachés; casos concretos.
+> 🎯 Prioridad **P3** — deduplicar listas (etiquetas, categorías) y cachés: casos concretos.
 
 1. Estás gestionando una lista de colores y necesitas que no se repitan. Crea un `Set<string>` con nombres de colores. Añade, elimina y comprueba existencia.
 2. Estás procesando una lista de datos que contiene duplicados y necesitas eliminarlos. Dado un array con duplicados, elimínalos usando `Set`.
@@ -298,10 +294,10 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 17. Map: diccionario clave-valor
 
 
-> 🎯 Prioridad **P3** — caché/persistencia clave-valor; `Record` cubre la mayoría de casos.
+> 🎯 Prioridad **P3** — caché/persistencia clave-valor (p. ej. respuestas de `invoke`): `Record` cubre la mayoría de casos.
 
 1. Estás almacenando datos de personas con sus edades y necesitas acceder a ellos por nombre. Crea un `Map<string, number>` con nombres de personas y sus edades. Itera sobre él.
-2. Estás implementando un sistema de caché para evitar llamadas repetidas a una API. Implementa una caché simple con `Map<string, { data: unknown; timestamp: number }>`.
+2. Estás implementando un sistema de caché para evitar llamadas repetidas a una API. Define el interface `CacheEntry { data: unknown; timestamp: number }` (en `tipos.ts`) e implementa una caché simple con `Map<string, CacheEntry>`.
 
 
 <a id="18-objetos-en-profundidad"></a>
@@ -309,14 +305,14 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 18. Estructuras de Datos - Objetos en profundidad
 
 
-> 🎯 Prioridad **P2** — entidades, formularios, JSON y cloning sin mutar el estado.
+> 🎯 Prioridad **P2** — entidades, formularios, JSON y clonado **sin mutar** el estado (regla de React).
 
 1. Estás explorando las propiedades de un objeto para inspeccionar su contenido. Dado un objeto `persona`, usa `Object.keys`, `Object.values` y `Object.entries`.
 2. Estás extrayendo datos específicos de un objeto y necesitas hacerlo de forma concisa. Usa destructuring básico: alias y valores por defecto.
 3. Estás clonando un objeto complejo y necesitas preservar tipos como `Date` o `Map` que `JSON.parse` no maneja. Clona un objeto con `structuredClone` — ¿qué tipos preserva que `JSON.parse(JSON.stringify(x))` no?
-4. Estás agrupando planetas por clima para mostrarlos en secciones. Usa `Object.groupBy` para agrupar el array de `Planeta` (datos de swapi) por `climate` y observa el tipo de retorno.
-5. Estás protegiendo un objeto de modificaciones accidentales. Usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
-6. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. Importa `../../datos/planetas.json` con el atributo `with { type: "json" }` (import normal; nunca `node:fs` ni `fetch` sobre el fichero) y escribe: (a) `resumenPlaneta(p: Planeta): string` que desestructura la planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 2 películas"`, y `"... · 0 películas"` cuando no hay `films`); (b) `actualizarPoblacion(planetas: readonly Planeta[], name: string, population: number): Planeta[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y (c) `planetaInmutable(name: string): Planeta` que localiza la planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (elementos y array), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
+4. Estás agrupando planetas por clima para mostrarlos en secciones. Usa `Object.groupBy` para agrupar el array de `Planeta` (datos de swapi; interface en `tipos.ts`) por `climate` y observa el tipo de retorno.
+5. Estás protegiendo un objeto de modificaciones accidentales. Define el interface `Config { readonly url; readonly port; readonly debug }` (en `tipos.ts`), usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
+6. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface `Planeta` (con `films?`) y el que tipa el JSON (`PlanetaJSON`) se definen en `tipos.ts`. Importa `../../datos/planetas.json` con el atributo `with { type: "json" }` (import normal; nunca `node:fs` ni `fetch` sobre el fichero) y escribe: (a) `resumenPlaneta(p: Planeta): string` que desestructura la planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 2 películas"`, y `"... · 0 películas"` cuando no hay `films`); (b) `actualizarPoblacion(planetas: readonly Planeta[], name: string, population: number): Planeta[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y (c) `planetaInmutable(name: string): Planeta` que localiza la planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (elementos y array), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
 
 
 <a id="19-desestructuración-spreadrest-y-optional-chaining-puente-a-react"></a>
@@ -325,15 +321,15 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 
 > 🔑 **Puente a React.** Es lo primero que usarás en **cada** componente: destructuring de `props` en la firma de la función, `const [valor, setValor] = useState(...)`, `setState({ ...prev, ... })` y `?.`/`??` para navegar datos anidados (API, store). **Prioridad máxima antes de S04.**
-> 🎯 Prioridad **P1** — destructuring de props, spread de `setState`, `?.`/`??`: lo primero de cada componente.
+> 🎯 Prioridad **P1** — destructuring de props en la firma, spread de `setState`, `?.`/`??`: lo primero de cada componente.
 
-1. Estás escribiendo un componente de React que recibe sus datos a través de `props`. Crea `Tarjeta({ nombre, edad, activo })` que reciba el objeto como parámetro y lo desestructure en la firma (patrón `props`). Devuelve el nombre, la edad y si está en línea.
+1. Estás escribiendo un componente de React que recibe sus datos a través de `props`. Define el interface `TarjetaProps { nombre, edad, activo }` (en `tipos.ts`) y crea `Tarjeta({ nombre, edad, activo })` que reciba el objeto como parámetro y lo desestructure en la firma (patrón `props`). Devuelve el nombre, la edad y si está en línea.
 2. Estás implementando un mini hook que simula `useState` y devuelve una tupla con el valor y su setter. Desestructura la tupla `[valor, setValor]` que devuelve una factoría `useMiniEstado` (patrón `useState`). Escribe `incrementarContador` que sume 1.
-3. Estás procesando la respuesta de una API (swapi) con datos anidados y necesitas extraer campos con valores por defecto. Implementa `resumenPlaneta(resp)` con desestructuración **anidada** de `resp.datos.planeta`, extrayendo `name`, `climate` (default `"desconocido"`) y el primer film de `films` (default `"sin films"`) en una sola línea.
-4. Estás pasando todos los campos de un objeto como props a un componente excepto uno. Usa **rest** en destructuring: `separarId(pelicula)` debe separar `id` y devolver el resto (el patrón de `<Componente {...resto} />`).
-5. Estás actualizando el estado de un componente mezclando una configuración parcial con los valores por defecto. Usa **spread** de objetos: `mergeConfig(parcial)` mezcla `CONFIG_DEFECTO` con `parcial` en un objeto nuevo sin mutar (patrón `setState({ ...prev, ...parcial })`).
+3. Estás procesando la respuesta de una API (swapi) con datos anidados y necesitas extraer campos con valores por defecto. Define el interface `RespuestaPlaneta` (en `tipos.ts`) con la forma `{ datos: { planeta: { name, climate?, films? } } }`. Implementa `resumenPlaneta(resp)` con desestructuración **anidada** de `resp.datos.planeta`, extrayendo `name`, `climate` (default `"desconocido"`) y el primer film de `films` (default `"sin films"`) en una sola línea.
+4. Estás pasando todos los campos de un objeto como props a un componente excepto uno. Define el interface `Pelicula` (en `tipos.ts`). Usa **rest** en destructuring: `separarId(pelicula)` debe separar `id` y devolver el resto (el patrón de `<Componente {...resto} />`).
+5. Estás actualizando el estado de un componente mezclando una configuración parcial con los valores por defecto. Define el type `ConfigParcial` (en `tipos.ts`) — todas las propiedades de `CONFIG_DEFECTO` opcionales. Usa **spread** de objetos: `mergeConfig(parcial)` mezcla `CONFIG_DEFECTO` con `parcial` en un objeto nuevo sin mutar (patrón `setState({ ...prev, ...parcial })`).
 6. Estás añadiendo un elemento a un array sin mutar el original y necesites encontrar el máximo. Usa **spread** de arrays: `anadirPuntuacion(arr, nueva)` añade sin mutar (alternativa inmutable a `push`) y `mejorPuntuacion(...args)` despliega un array en `Math.max`.
-7. Estás navegando por datos anidados que pueden no existir y necesitas un valor por defecto. Usa **optional chaining** `?.` + `??`: `direccionEnvio(carrito)` navega `carrito.cliente.envio.direccion` (todo opcional) con default `"Sin dirección"`.
+7. Estás navegando por datos anidados que pueden no existir y necesitas un valor por defecto. Define el interface `Carrito` (en `tipos.ts`) con `cliente?.envio?.direccion/ciudad/codigoPostal` opcionales. Usa **optional chaining** `?.` + `??`: `direccionEnvio(carrito)` navega `carrito.cliente.envio.direccion` (todo opcional) con default `"Sin dirección"`.
 8. Estás definiendo las props de un botón que tiene valores por defecto para la etiqueta y el estado. Desestructura en el parámetro con **valores por defecto**: `Boton({ etiqueta = "Enviar", deshabilitado = false })`.
 9. Estás implementando un update funcional como el de React que evita clausuras obsoletas. Implementa el **update funcional**: `acumularConUpdater()` con un setter que reciba `(prev) => prev + …` y encadena tres actualizaciones (`+1`, `+2`, `+3`) — es el `setCuenta((c) => c + 1)` de React, que evita clausuras obsoletas.
 
@@ -343,14 +339,14 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 ### 20. Programación asíncrona (promesas y async/await)
 
 
-> 🎯 Prioridad **P1** — `Promise.all` + `try/catch` = patrón `invoke` y del `useEffect` de carga.
+> 🎯 Prioridad **P1** — `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`.
 
 > 🌌 **Aquí SÍ se hace `fetch` real:** a diferencia de los bloques 15–19 (donde los datos de swapi estaban hardcodeados porque la asincronía aún no se había impartido), en este bloque ya se enseña `async/await` y `Promise`, así que el ejercicio 2 hace una petición real a [swapi.info/api/planets](https://swapi.info/api/planets).
 
 1. Estás implementando una función que simule un retardo antes de completar una operación. Crea una función `esperar(ms)` que devuelva una promesa que se resuelva tras `ms` milisegundos.
-2. Estás construyendo una función que carga datos desde una API real. Escribe una función `async` `cargarPlanetas` que haga `fetch` a `https://swapi.info/api/planets` y devuelva la lista de planetas (tipada como `Planeta[]`).
+2. Estás construyendo una función que carga datos desde una API real. Define el interface `Planeta` (en `tipos.ts`). Escribe una función `async` `cargarPlanetas` que haga `fetch` a `https://swapi.info/api/planets` y devuelva la lista de planetas (tipada como `Planeta[]`).
 3. Estás cargando datos de múltiples fuentes simultáneamente para acelerar la carga. Lanza dos promesas a la vez con `Promise.all` en `cargarParalelo`.
-4. Estás procesando datos que pueden fallar y necesitas manejar los errores sin que se propaguen. Usa `try/catch` en `procesarSeguro` para nunca propagar errores. **Modela el estado con una unión discriminada** `EstadoCarga = { estado: "cargando" } | { estado: "error"; mensaje: string } | { estado: "listo"; planetas: Planeta[] }`, **no** con `{ ok, datos?, error? }`: las formas deben ser excluyentes para que sea imposible tener `{ ok: true, error: "…" }`. Añade `describirEstado(e)` con `switch` + `never` y el guard `esListo(e)`. Este es el patrón `cargando/error/listo` del `useState` de React.
+4. Estás procesando datos que pueden fallar y necesitas manejar los errores sin que se propaguen. Usa `try/catch` en `procesarSeguro` para nunca propagar errores. **Modela el estado con una unión discriminada** `EstadoCarga` (en `tipos.ts`): `{ estado: "cargando" } | { estado: "error"; mensaje: string } | { estado: "listo"; planetas: Planeta[] }`, **no** con `{ ok, datos?, error? }`: las formas deben ser excluyentes para que sea imposible tener `{ ok: true, error: "…" }`. Añade `describirEstado(e)` con `switch` + `never` y el guard `esListo(e)`. Este es el patrón `cargando/error/listo` del `useState` de React.
 5. Estás **`response.json()` devuelve `unknown`**, así que no puedes castear a ciegas. Escribe `esPlanetaCrudo(bruto: unknown): bruto is { name: string; population: string; climate: string }` (recuerda: swapi devuelve la población como texto y `"unknown"` cuando no consta) y `cargarDesdeFetch(url)` que compruebe `res.ok`, valide `Array.isArray`, **descarte** los elementos que no validen y convierta `"unknown"` a `0`.
 > 💡 Para probar el camino de `fetch` **sin depender de la red**, usa una URL `data:` (`fetch("data:application/json," + encodeURIComponent(JSON.stringify(x)))`), que sí resuelve Node. Es lo que hace la solución.
 
@@ -365,12 +361,19 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 
 
 > ⚠️ **Bloque optativo.** Se imparte en [`s03/10_Generics.md`](../sesiones/apuntes/s03/10_Generics.md) (capítulo 10, optativo). No entra en el temario oficial ni en los exámenes; es refuerzo para quien quiera usar `Partial`/`Pick`/`Omit`/`Record` con soltura en formularios y props.
-> 🎯 Prioridad **P3** — `Partial`/`Pick`/`Omit`/`Record` en formularios de edición y props.
+> 🎯 Prioridad **P3** — `Partial`/`Pick`/`Omit`/`Record`: derivar tipos para formularios y props; se imparte en Generics (`s03/10`, optativo).
 
-1. Estás diseñando los tipos para un formulario de edición de planetas. Dada una interface `Planeta { name: string; population: number; climate: string; films?: string[] }` (datos de swapi):
+1. Estás diseñando los tipos para un formulario de edición de planetas. Dada una interface `Planeta { name: string; population: number; climate: string; films?: string[] }` (datos de swapi; definida en `tipos.ts`):
     - Estás creando un tipo para un formulario donde todos los campos son opcionales. Crea un tipo `PlanetaParcial` con todas las propiedades opcionales.
     - Estás definiendo un tipo para una respuesta que no necesita las películas. Crea un tipo `PlanetaSinFilms` que omita `films`.
     - Estás creando un tipo para una tarjeta resumen que solo muestre name y population. Crea un tipo `ResumenPlaneta` que solo tenga `name` y `population`.
 2. Estás modelando la agenda semanal de una aplicación donde cada día tiene un valor de tipo string. Usa `Record` para crear un tipo `Semana` con días como claves y `string` como valores.
 3. Estás trabajando con una función existente y necesitas derivar tipos a partir de su firma. Usa `Parameters` y `ReturnType` con una función existente.
-4. Estás limpiando un tipo unión que contiene `null` o `undefined` y solo quieres las partes válidas. Usa `NonNullable` para eliminar `null | undefined` de un tipo unión.
+4. Estás limpiando un tipo unión que contiene `null` o `undefined` y solo quieres las partes válidas. Define el interface `RespuestaAPI` (en `tipos.ts`) que modele una respuesta con campos que pueden ser `null`. Usa `NonNullable` para eliminar `null | undefined` de los campos.
+
+
+<a id="23-práctica-integrada"></a>
+
+### 23. Práctica integrada
+> Realización de una práctica que integre todos los conocimientos vistos para TS.
+> 🎯 Prioridad **P1** — integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real.

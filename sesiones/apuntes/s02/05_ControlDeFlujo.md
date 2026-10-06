@@ -446,9 +446,7 @@ console.log(datos.url); // sin error
 <a id="55-importar-un-json-y-validarlo"></a>
 ## 5.5. Importar un JSON de un fichero y validarlo
 
-Hasta aquí los type guards los aplicábamos a datos escritos a mano. El caso real habitual es otro: los datos vienen de un **fichero `.json`**, y hay que importarlos, comprobar que tienen la forma correcta y modelar los estados de la carga. Este apartado reutiliza los type guards de §5.4.
-
-Ahora también veremos por qué usamos un JSON local y no lo leemos de una API.
+Hasta aquí los type guards los aplicábamos a datos escritos a mano. El caso real habitual es otro: los datos vienen del exterior, normalmente vía una API. Dado que aún no hemos visto el capítulo de asincronía, lo vamos a realizar mediante un **fichero `.json`**.  Hay que importar los datos, comprobar que tienen la forma correcta y modelar los estados de la carga. Este apartado reutiliza los type guards de §5.4.
 
 <a id="551-el-fichero-de-datos"></a>
 ### 5.5.1. El fichero de datos

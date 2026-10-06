@@ -2,7 +2,7 @@
 
 **Segundo curso de Desarrollo de Aplicaciones Multiplataforma**
 
->Este material no busca ser una guía exhaustiva de TypeScript y React, sino un recorrido directo por lo estrictamente necesario para dominar Tauri.
+>Este material no busca ser una guía exhaustiva de TypeScript y React, sino un recorrido directo por lo estrictamente necesario para aprender Tauri.
 
 ---
 
