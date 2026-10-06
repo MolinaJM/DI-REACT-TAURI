@@ -448,6 +448,8 @@ console.log(datos.url); // sin error
 
 Hasta aquí los type guards los aplicábamos a datos escritos a mano. El caso real habitual es otro: los datos vienen de un **fichero `.json`**, y hay que importarlos, comprobar que tienen la forma correcta y modelar los estados de la carga. Este apartado reutiliza los type guards de §5.4.
 
+Ahora también veremos por qué usamos un JSON local y no lo leemos de una API.
+
 <a id="551-el-fichero-de-datos"></a>
 ### 5.5.1. El fichero de datos
 
@@ -472,7 +474,7 @@ Aquí hay que distinguir **dos cosas** que se confunden y acaban dando el mismo 
 1. El **`tsconfig.json`** solo le importa a `tsc` (y a lo que te marque el editor).
 2. El **atributo `with { type: "json" }`** en el import le importa al **motor de JavaScript**, o sea a `node`.
 
-**Pon siempre el atributo.** He comprobado que funciona igual con `tsc`, con `npx tsx` y con `node`, y te ahorra el susto:
+**Pon siempre el atributo.** Funciona igual con `tsc`, con `npx tsx` y con `node`:
 
 ```typescript
 import datos from "./datos/planetas.json" with { type: "json" };
@@ -525,7 +527,7 @@ const valor: unknown = await (await fetch(url)).json();  // con fetch
 ```
 
 > [!TIP]
-> Por eso el `fetch` de verdad llega después. En [00_Introduccion §0.4.6](#6-asincronía-nativa-y-moderna) ya lo vimos de pasada contra SWAPI, pero **anunciando que los conceptos se desarrollan más adelante** (`async`/`await`/`Promise`, en [Asincronismo §8.4](#84-asyncawait-simplificando-el-uso-de-promesas)). Cuando llegues allí, este ejemplo cambiará **dos líneas** y el type guard seguirá exactamente igual.
+> Por eso el `fetch` de verdad llega después. En [00_Introduccion §0.4.6](00_Introduccion.md#6-asincronía-nativa-y-moderna) ya lo vimos de pasada contra SWAPI, pero **anunciando que los conceptos se desarrollan más adelante** (`async`/`await`/`Promise`, en [Asincronismo §8.4](../s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md#84-asyncawait-simplificando-el-uso-de-promesas)). Cuando llegues allí, este ejemplo cambiará **dos líneas** y el type guard seguirá exactamente igual.
 
 > [!NOTE]
 > **Un matiz honesto:** con un import estático **no hay un estado `cargando` real** (el dato ya está disponible al arrancar). Lo modelamos igualmente porque es la forma que necesitarás cuando el dato sí tarde, y de paso practicas unión discriminada y `switch` exhaustivo.
@@ -600,8 +602,8 @@ console.log(procesar({ estado: "listo", planetas }));
 
 > [!IMPORTANT]
 > - **No uses `node:fs` (`readFileSync`, `readFileSyncSync`)** para leer el JSON. No existe en el navegador, así que el código te dejará de funcionar en cuanto llegues a React.
-> - **No uses `fetch("./datos/planetas.json")`**: `fetch` no admite rutas relativas (necesita URL absoluta) ni el protocolo `file://`. `fetch` es para pedir datos a un **backend real** (ver [Asincronismo (S03·8)](#85-el-tipado-de-promiset-la-clave-de-typescript)).
-> - **El JSON importado es un objeto ÚNICO compartido** (singleton): todas las importaciones ven la misma referencia. **No lo mutes**; deriva una copia con spread, como en [Estructuras de Datos (S03·7)](#75-métodos-importantes).
+> - **No uses `fetch("./datos/planetas.json")`**: `fetch` no admite rutas relativas (necesita URL absoluta) ni el protocolo `file://`. `fetch` es para pedir datos a un **backend real** (ver [Asincronismo (S03·8)](../s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md#85-el-tipado-de-promiset-la-clave-de-typescript)).
+> - **El JSON importado es un objeto ÚNICO compartido** (singleton): todas las importaciones ven la misma referencia. **No lo mutes**; deriva una copia con spread, como en [Estructuras de Datos (S03·7)](../s03/07_Estructuras_de_Datos.md#75-métodos-importantes).
 
 ```typescript
 import datos from "./datos/planetas.json" with { type: "json" };
