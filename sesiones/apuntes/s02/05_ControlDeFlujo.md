@@ -477,8 +477,8 @@ Aquí hay que distinguir **dos cosas** que se confunden y acaban dando el mismo 
 ```typescript
 //En fichero donde quiero consumir esos datos
 import datos from "./planetas.json" with { type: "json" };
-const datossCrudos: unknown = datos;
-console.log(datosCrudos));//Mostramos en crudo (habría que tratarlos)
+const datosCrudos: unknown = datos;
+console.log(datosCrudos);//Mostramos en crudo (habría que tratarlos)
 ```
 
 Y en el `tsconfig.json`, **con la configuración del curso no hay que cambiar nada**: `bancop` ya lleva `"moduleResolution": "bundler"`.  `bundler`es el "empaquetador" que revisa todo (.ts, .css, .json, imágenes, etc..) y lo empaqueta en un único .js. Como ventaja, trata los json de forma distinta a los .ts o .tsx. Node sabe que es un fichero "distinto" y lo trata de forma distinta (es un recurso)..
@@ -605,10 +605,10 @@ console.log(procesar({ estado: "listo", planetas }));
 > - **El JSON importado es un objeto ÚNICO compartido** (singleton): todas las importaciones ven la misma referencia. **No lo mutes**; deriva una copia con spread, como en [Estructuras de Datos (S03·7)](../s03/07_Estructuras_de_Datos.md#75-métodos-importantes).
 
 ```typescript
-import datos from "./datos/planetas.json" with { type: "json" };
+import datos from "./planetas.json" with { type: "json" };
 
 // ERROR!! Mutar el singleton: lo ven todos los que importan el módulo
-datos.planetas[0].population = 999;
+datos.planetas[1].population = 999; //Intento de cambio de población a Hoth
 
 // OK!!! Derivar una copia nueva con spread (inmutabilidad)
 // Estamos intentando "modificar" su copia correctamente copiada
