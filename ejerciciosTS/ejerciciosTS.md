@@ -186,7 +186,8 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 
 > 🎯 Prioridad **P2** — `switch`+`never` = el patrón `useReducer` de React: cada acción cambia el estado. Llega en React II.
 >
-> 📦 **OJO — Modularidad (a partir de aquí).** Este es el primer bloque en el que hay que **crear interfaces y types de objeto**. A partir de este bloque **todos los interfaces y types que describen un objeto se definen en un fichero aparte `tipos.ts`** (junto a `solucion.ts`) y se cargan con `import type { ... } from "./tipos.ts"`. Así se practica la modularidad: el fichero principal solo contiene lógica, y los tipos viven en su módulo. En el fichero principal solo se dejan los tipos que **no** describen un objeto (uniones de literales, tuplas, etc.).
+> 📦 **OJO — Modularidad (a partir de aquí).** Este es el primer bloque en el que hay que empezar a modularizar  **todos los interfaces y types que describen un objeto se definen en un fichero aparte `tipos.ts`** (junto a `solucion.ts`)  Todo lo que quiera que se vea "fuera" (variable, función u objeto) hay que exportarlo con export. Esto se desarrolla en los apuntes de 09_Miscelánea 
+> Se cargan con `import type { ... } from "./tipos.ts"`. Así se practica la modularidad: el fichero principal solo contiene lógica, y los tipos viven en su módulo. En el fichero principal solo se dejan los tipos que **no** describen un objeto (uniones de literales, tuplas, etc.).
 
 1. Estás desarrollando un sistema de calificaciones para una plataforma educativa. Escribe un `if/else if/else` que clasifique una nota numérica en Sobresaliente, Notable, Aprobado, Suspenso.
 2. Estás implementando un manejador de estados para una petición HTTP que puede tener múltiples estados (cargando/exito/error/cancelado). Modela cada estado con un interface (en `tipos.ts`) y una unión discriminada (también en `tipos.ts`). Crea un `switch` exhaustivo sobre la unión e incluye exhaustiveness check con `never`.
