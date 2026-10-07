@@ -257,7 +257,7 @@ console.log(procesar(u));
 | Type Guard  | Cuándo usarla | Ejemplo |
 |-------------|---------------|---------|
 | `typeof` | Tipos primitivos de JS (`string`, `number`, `boolean`, `undefined`, `function`) | `typeof x === "string"` |
-| `in` | Interfaces/objetos con propiedades distintas | `"ladrar" in animal` |
+| `in` | Interfaces/objetos con propiedades distintas. Ojo, solo comprueba EXISTENCIA, NO TIPO| `"ladrar" in animal` |
 | `Array.isArray(x)` | Arrays (porque `typeof []` es `"object"`) | `Array.isArray(lista)` |
 | `instanceof` | Instancias de `Error`/clases | `x instanceof Error` |
 | `igualdad/desigualdad` | Para valores concretos. Vale para tipos primitivos (ej: null) o un valor concreto 404| `v == "404"` |
