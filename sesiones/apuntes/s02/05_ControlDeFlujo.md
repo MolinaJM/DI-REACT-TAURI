@@ -284,14 +284,13 @@ function hablar(animal: Animal): string {
 
 console.log(hablar({ ladrar: () => {} }));  // Guau
 console.log(hablar({ maullar: () => {} })); // Miau
-//Otra forma equivalente de haber puesto la llamada
+//Otra forma equivalente de haber puesto la llamada:
 console.log(hablar({ ladrar() {} }));  // Guau
 console.log(hablar({ maullar() {} })); // Miau
-//¿Por qué funciona?
-// Cuando creas un objeto y no usas clave:valor, toma el primer texto como clave y el resto como valor.
+//¿Por qué funciona sin clave: valor?
+// Cuando creas un objeto y no usas 'clave:valor', toma el primer texto como clave y el resto como valor.
 // En ese caso no se puede usar la función flecha =>
-
-//Otro ejemplo
+// Otro ejemplo de este efecto
 let edad:number=99
 let persona = {edad}
 console.log(persona.edad);
