@@ -192,7 +192,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 1. Estás desarrollando un sistema de calificaciones para una plataforma educativa. Escribe un `if/else if/else` que clasifique una nota numérica en Sobresaliente, Notable, Aprobado, Suspenso.
 2. Estás implementando un manejador de estados para una petición HTTP que puede tener múltiples estados (cargando/exito/error/cancelado). Modela cada estado con un interface (en `tipos.ts`) y una unión discriminada (también en `tipos.ts`). Crea un `switch` exhaustivo sobre la unión e incluye exhaustiveness check con `never`.
 3. Estás procesando una lista de nombres y necesitas calcular el total de caracteres. Recorre un array de strings con `for...of` y suma sus longitudes.
-4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `hasta…1` en un array usando `for...of` sobre un rango (`Array.from`, visto en [`04_Funciones.md`](../sesiones/apuntes/s02/04_Funciones.md)).
+4. Estás generando una secuencia de números para paginar resultados. Genera la secuencia `1...hasta` en un array usando `for...of` sobre un rango (`Array.from`, visto en [`04_Funciones.md`](../sesiones/apuntes/s02/04_Funciones.md)).
 
 
 <a id="11-literal-types-y-type-narrowing"></a>
