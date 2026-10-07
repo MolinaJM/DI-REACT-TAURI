@@ -76,8 +76,8 @@ gen/
 # ===========================================================================
 # !sesiones/sesion03.md
 !sesiones/apuntes/s03/
-sesiones/apuntes/s03/*.md
-sesiones/apuntes/s03/06_Arrays.md
+!sesiones/apuntes/s03/*.md
+!sesiones/apuntes/s03/06_Arrays.md
 # !sesiones/apuntes/s03/07_Estructuras_de_Datos.md
 # !sesiones/apuntes/s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md
 # !sesiones/apuntes/s03/09_Miscelánea.md
