@@ -155,7 +155,7 @@ do {
 <a id="524-forof-loop-es6"></a>
 ### 5.2.4. `for...of` Loop (ES6)
 
-El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays. No debes usar forEach cuando necesites detener la iteración con break/continue o manejar código asíncrono con async/await, ya que no soporta control de flujo, no funciona con tipos distintos de los arrays (Map, Set, etc...), ni espera la resolución de promesas (`for.. of` permise usar async await dentro)..
+El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays. **No debes usar forEach** porque es menos versátil: no soporta control de flujo (no puede controlar la iteración con break/continue), no funciona con tipos distintos de los arrays (Map, Set, etc...), ni espera la resolución de promesas (`for.. of` permise usar async await dentro).
 
 ```typescript
 const frutas: string[] = ["manzana", "pera", "uva"];
@@ -456,8 +456,8 @@ console.log(datos.url); // sin error
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
 
-
-
+> [!IMPORTANT]
+> Cuándo usar in o Record+typeof? Se usa `in`: para discriminar entre tipos o interfaces ya definidos en tu propio código (narrowing interno) en **tiempo de compilación**. NO COMPRUEBA EL TIPO, SOLO LA EXISTENCIA. Usa `Record+typeof`: para validar datos externos o desconocidos en **tiempo de ejecución**, comprobando el tipo del valor (string, number, etc.) tras asegurar que el objeto no es null ni undefined. COMPRUEBA TIPO Y EXISTENCIA.
 
 <a id="55-importar-un-json-y-validarlo"></a>
 ## 5.5. Importar un JSON de un fichero y validarlo
