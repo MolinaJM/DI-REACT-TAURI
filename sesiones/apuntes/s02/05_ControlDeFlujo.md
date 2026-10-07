@@ -155,7 +155,7 @@ do {
 <a id="524-forof-loop-es6"></a>
 ### 5.2.4. `for...of` Loop (ES6)
 
-El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays. No debes usar forEach cuando necesites detener la iteración con break/continue o manejar código asíncrono con async/await, ya que no soporta control de flujo ni espera la resolución de promesas.
+El bucle `for...of` itera sobre los **valores** de un iterable (arrays, strings, Map, Set, etc.). Es la forma moderna y recomendada para recorrer arrays. No debes usar forEach cuando necesites detener la iteración con break/continue o manejar código asíncrono con async/await, ya que no soporta control de flujo, no funciona con tipos distintos de los arrays (Map, Set, etc...), ni espera la resolución de promesas (`for.. of` permise usar async await dentro)..
 
 ```typescript
 const frutas: string[] = ["manzana", "pera", "uva"];
@@ -165,7 +165,12 @@ for (const fruta of frutas) {
 }
 // Imprime: manzana, pera, uva
 
-// También funciona con strings
+// Equivalente con forEach
+frutas.forEach((fruta) => {
+  console.log(fruta);
+});
+
+// También funciona con strings, Map y Set
 for (const letra of "Hola") {
   console.log(letra);
 }
@@ -280,9 +285,16 @@ function hablar(animal: Animal): string {
 console.log(hablar({ ladrar: () => {} }));  // Guau
 console.log(hablar({ maullar: () => {} })); // Miau
 //Otra forma equivalente de haber puesto la llamada
-//console.log(hablar({ ladrar() {} }));  // Guau
-//console.log(hablar({ maullar() {} })); // Miau
+console.log(hablar({ ladrar() {} }));  // Guau
+console.log(hablar({ maullar() {} })); // Miau
+//¿Por qué funciona?
+// Cuando creas un objeto y no usas clave:valor, toma el primer texto como clave y el resto como valor.
+// En ese caso no se puede usar la función flecha =>
 
+//Otro ejemplo
+let edad:number=99
+let persona = {edad}
+console.log(persona.edad);
 
 type Dato = string | number | string[] | Error;
 
