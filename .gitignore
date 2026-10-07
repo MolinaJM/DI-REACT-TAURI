@@ -74,7 +74,7 @@ gen/
 # ===========================================================================
 #  >>> SESIÓN 03 <<
 # ===========================================================================
-# !sesiones/sesion03.md
+!sesiones/sesion03.md
 !sesiones/apuntes/s03/
 !sesiones/apuntes/s03/*.md
 !sesiones/apuntes/s03/06_Arrays.md
