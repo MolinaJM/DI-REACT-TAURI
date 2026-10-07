@@ -484,7 +484,7 @@ Los datos van en un `.json` normal, junto al código (o en una carpeta `datos/`)
 
 Aquí hay que distinguir **dos cosas** que se confunden y acaban dando el mismo síntoma:
 
-1. El **`tsconfig.json`** solo lo usa `tsc` (y a lo que indique  el editor como por ejemplos, VSCODE). `Node` no lo mira!!, y `tsc`no usa otra cosa para saber qué hacer.
+1. El **`tsconfig.json`** solo lo usa `tsc` (y a lo que indique  el editor como por ejemplos, VSCODE). `Node` no lo mira!!, y `tsc`no usa otra cosa para saber qué hacer. `npx tsx` también lee `tsconfig.json`.
 2. El **atributo `with { type: "json" }`** en el import le importa al **motor de JavaScript**, o sea a `node`.
 
 **CONCLUSIÓN? Pon siempre el atributo.** Funciona igual con `tsc`, con `npx tsx` y con `node`:
