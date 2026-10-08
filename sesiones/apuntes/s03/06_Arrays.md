@@ -595,13 +595,13 @@ const poblacion: Map<string, number> = new Map(
 );
 console.log(poblacion.get("Coruscant")); // 3000000000
 
-// SERIALIZAR (Map -> string JSON): JSON no sabe qué es un Map,
+// SERIALIZAR (Objeto a cadena) (Map -> string JSON): JSON no sabe qué es un Map,
 // así que primero lo pasamos a objeto plano con Object.fromEntries.
 // (JSON.stringify(poblacion) daría "{}" — el Map se perdería)
 const json: string = JSON.stringify(Object.fromEntries(poblacion));
 console.log(json); // {"Tatooine":200000,"Hoth":0,...}
 
-// DESERIALIZAR (string JSON -> Map): JSON.parse devuelve un objeto plano,
+// DESERIALIZAR (cadena a Objeto) (string JSON -> Map): JSON.parse devuelve un objeto plano,
 // así que lo envolvemos de nuevo en un Map con new Map(Object.entries(...)).
 const deVuelta: Map<string, number> = new Map(Object.entries(JSON.parse(json)));
 console.log(deVuelta.get("Coruscant")); // 3000000000 (igual que al principio)
