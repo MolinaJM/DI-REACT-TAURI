@@ -287,6 +287,10 @@ array.sort([comparador]);
 const numeros: number[] = [4, 2, 9, 1, 5];
 numeros.sort((a, b) => a - b); //es decir, el "primero ha de ser menor que el segundo" (ordena ascendentemente)
 console.log(numeros); // Resultado: [1, 2, 4, 5, 9]
+
+const numeros: number[] = [4, 2, 9, 1, 5];
+numeros.sort((a, b) => b - a); //es decir, el "primero ha de ser mayor que el segundo" (ordena descendentemente)
+console.log(numeros); // Resultado: [9, 5, 4, 2, 1]
 ```
 
 ```typescript
@@ -317,6 +321,7 @@ const invertido: number[] = original.toReversed(); // [2, 1, 3]
 
 // toSpliced(inicio, cuantosBorrar, ...elementosAInsertar)  spliced inmutable
 const reemplazado: number[] = original.toSpliced(0, 1, 99); // [99, 1, 2]
+const reemplazado2: number[] = original.toSpliced(0, 1, 99, 200, 300); // [99, 200, 300, 1, 2]
 
 // with(index, value) — reemplaza un elemento sin mutar
 // Es la vesión inmutable de array[indice]=valor
