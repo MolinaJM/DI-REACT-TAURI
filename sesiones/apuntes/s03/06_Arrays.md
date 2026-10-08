@@ -527,7 +527,7 @@ console.log(resto); // Imprimirá [3, 4, 5]
 
 `Map` es la estructura clave-valor de ES6 (ECMA 2015). A diferencia de un objeto plano `{}`: la clave **puede ser cualquier tipo** (no sólo `string`/`symbol`. NO tiene los métodos de Array (filter, map, etc...) 
 
-En React/Tauri aparece continuamente para configuraciones, caches y enrutado.
+En React/Tauri aparece para configuraciones, caches y enrutado. En React se suele utilizar para guardar datos en el localStorage (como por ejemplo, los ítems favoritos que quieres que muestre al principio en una web/ventana):  
 
 ### API básica
 
