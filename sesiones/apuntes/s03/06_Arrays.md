@@ -286,15 +286,18 @@ array.sort([comparador]);
 ```typescript
 const numeros: number[] = [4, 2, 9, 1, 5];
 numeros.sort((a, b) => a - b); //es decir, el "primero ha de ser menor que el segundo" (ordena ascendentemente)
+// si a-b < 0 : a se pone antes que b. si a-b > 0: b se pone antes que a
 console.log(numeros); // Resultado: [1, 2, 4, 5, 9]
 
 const numeros: number[] = [4, 2, 9, 1, 5];
 numeros.sort((a, b) => b - a); //es decir, el "primero ha de ser mayor que el segundo" (ordena descendentemente)
+// si b-a < 0 : a se pone antes que b. si b-a > 0: b se pone antes que a
 console.log(numeros); // Resultado: [9, 5, 4, 2, 1]
 ```
 
 ```typescript
 const letras: string[] = ["b", "d", "a", "c"];
+letras.sort();
 letras.sort().reverse(); //Reverse ya es una función preestablecida.
 console.log(letras); // Resultado: ["d", "c", "b", "a"]
 ```
@@ -578,71 +581,38 @@ console.log("\nENTRIES:"); for (const par of config.entries()) console.log(par);
 
 - **Conversión con objetos:** `new Map(Object.entries(obj))` crea un `Map` desde un objeto, y `Object.fromEntries(map)` crea un objeto desde un `Map`. Ambas muy usadas para serializar/deserializar.
 
-### Casos de uso reales (React/Tauri)
-
-**Cache de datos con `invoke`/`fetch`** — el patrón "comprobar antes de pedir" que usarás constantemente.
-
-OJO! Este ejemplo contiene patrones callback que se verán  más adelante, pero es un ejemplo completo del uso de Map. NO  ENTRA NADA DE ESTO EN UN EXAMEN DE TS!
+**Ejemplo: `Map` de búsqueda con `planetas.json`.** Con un array, buscar un planeta por nombre obliga a recorrerlo (`find`o`filter', `O(N)`). Un `Map` con el nombre como clave lo hace en `O(1)`:
 
 ```typescript
-// 1. CAPA DE DATOS + CACHÉ
-// Un sistema de caché en memoria en TypeScript que guarda la respuesta de una API tras la primera petición 
-// para devolverla desde la RAM en las siguientes y evitar llamadas innecesarias a la red.
-const cache = new Map<string, unknown>();
+//Vamos a suponer que tenemos un array filtrado de planetas válidos
+const planetas: Planeta[] = datos.planetas;
 
-async function obtenerDatos(id: string): Promise<unknown> {
-  if (cache.has(id)) return cache.get(id);
+//Buscar entre 1.000.000 planetas? filter tiene O(n) (lineal) 
 
-  const res = await fetch(`https://swapi.py4e.com/api/people/${id}/`);
-  const data: unknown = await res.json();
-  cache.set(id, data);
-  return data;
-}
+// Array -> Map: nombre -> población (búsqueda O(1) en vez de recorrer el array)
+const poblacion: Map<string, number> = new Map(
+  planetas.map((p) => [p.name, p.population] as [string, number]),
+);
+console.log(poblacion.get("Coruscant")); // 3000000000
 
-obtenerDatos("1").then(console.log); // Red
-obtenerDatos("1").then(console.log); // Caché
+// SERIALIZAR (Map -> string JSON): JSON no sabe qué es un Map,
+// así que primero lo pasamos a objeto plano con Object.fromEntries.
+// (JSON.stringify(poblacion) daría "{}" — el Map se perdería)
+const json: string = JSON.stringify(Object.fromEntries(poblacion));
+console.log(json); // {"Tatooine":200000,"Hoth":0,...}
+
+// DESERIALIZAR (string JSON -> Map): JSON.parse devuelve un objeto plano,
+// así que lo envolvemos de nuevo en un Map con new Map(Object.entries(...)).
+const deVuelta: Map<string, number> = new Map(Object.entries(JSON.parse(json)));
+console.log(deVuelta.get("Coruscant")); // 3000000000 (igual que al principio)
 ```
 
-**Enrutado SPA** — mapear rutas a componentes (base de un router minimalista):
+> **Cuándo usar cada conversión:**
+> - `Object.fromEntries(map)` (Map → objeto): **antes de serializar** — cuando los datos van a *salir* (backend, `localStorage`, `JSON.stringify`, `invoke` de Tauri). Es el paso de **salida**.
+> - `new Map(Object.entries(obj))` (objeto → Map): **después de deserializar** — cuando los datos *entran* (`JSON.parse`, respuesta de un backend, `localStorage`) y quieres búsquedas O(1). Es el paso de **entrada**.
 
-```typescript
-// 2. ENRUTADOR (cambiamos Componente a Promise<string>)
-// Este Map es el "recepcionista" de la app: según la URL que le pidas, 
-// te da directamente la plantilla HTML sin recargar la página del navegador.
-type Componente = () => Promise<string>;
+> ▶ **Cómo probarlo:** copia `planetas.json` a `bancop/datos/` y este bloque a `bancop/map-planetas.ts`; ejecuta `npx tsx map-planetas.ts` (desde `bancop/`).
 
-// Creador de componentes para no repetir el fetch ni la plantilla HTML
-const personaje = (id: string): Componente => async () => {
-  const p = (await obtenerDatos(id)) as { name: string };
-  return `<h1>${p.name}</h1>`;
-};
-
-const rutas: Map<string, Componente> = new Map([
-  ["/luke", personaje("1")],
-  ["/vader", personaje("4")],
-]);
-
-// 3. NAVEGACIÓN (ahora es async)
-async function navegar(ruta: string) {
-  const render = rutas.get(ruta);
-
-  if (render) {
-    console.log(await render()); // Espera la promesa del componente
-  } else {
-    console.log("<h1>404 - Ruta no encontrada</h1>");
-  }
-}
-
-// PRUEBA EN CADENA
-async function probar() {
-  await navegar("/luke"); // Va a la Red (SWAPI)
-  await navegar("/luke"); // Sale de la Caché al instante
-}
-
-probar();
-```
-
-> En Tauri, el equivalente a `Map` en el lado Rust es `HashMap` / `BTreeMap`. La idea de "clave-valor con acceso rápido" es la misma; los métodos cambian (`map.insert(k, v)`, `map.get(&k)`).
 
 <a id="612-set-conjunto-de-valores-únicos"></a>
 ## 6.12 Set: conjunto de valores únicos
@@ -659,6 +629,29 @@ colores.delete("verde");      // elimina
 const conDuplicados: number[] = [1, 2, 2, 3, 3, 3];
 const sinDuplicados: number[] = [...new Set(conDuplicados)]; // [1, 2, 3]
 ```
+
+### Operaciones entre conjuntos (unión, intersección, diferencia)
+
+Dado dos `Set`, estas son las tres operaciones clásicas. El truco es combinar el spread (`...`) con `filter` + `has()`:
+
+```typescript
+const A: Set<number> = new Set([1, 2, 3, 4]);
+const B: Set<number> = new Set([3, 4, 5, 6]);
+
+// Unión: todos los elementos de A y B (sin repetidos)
+const union: Set<number> = new Set([...A, ...B]);
+console.log([...union]); // [1, 2, 3, 4, 5, 6]
+
+// Intersección: solo los que están en A Y en B
+const interseccion: number[] = [...A].filter((x) => B.has(x));
+console.log(interseccion); // [3, 4]
+
+// Diferencia: los que están en A pero NO en B
+const diferencia: number[] = [...A].filter((x) => !B.has(x));
+console.log(diferencia); // [1, 2]
+```
+
+> 💡 **ES2025** ya trae estos métodos nativos: `A.union(B)`, `A.intersection(B)`, `A.difference(B)` y `A.isSubsetOf(B)`. Hacen lo mismo que el código de arriba, pero el enfoque manual (`filter` + `has`) funciona en cualquier versión y deja ver qué pasa por dentro.
 
 
 <a id="613-cuándo-usar-array-y-cuándo-mapset"></a>

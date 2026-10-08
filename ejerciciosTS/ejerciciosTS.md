@@ -287,7 +287,6 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 1. Estás gestionando una lista de colores y necesitas que no se repitan. Crea un `Set<string>` con nombres de colores. Añade, elimina y comprueba existencia.
 2. Estás procesando una lista de datos que contiene duplicados y necesitas eliminarlos. Dado un array con duplicados, elimínalos usando `Set`.
 3. Estás trabajando con dos conjuntos de datos y necesitas calcular operaciones entre ellos. Dados dos conjuntos `A` y `B`, calcula: unión, intersección y diferencia.
-4. Estás usando una versión moderna de TypeScript con ES2025 y quieres aprovechar los métodos nativos de Set. Prueba los métodos nativos ES2025: `union`, `intersection`, `difference`, `isSubsetOf`.
 
 
 <a id="17-map-diccionario-clave-valor"></a>
