@@ -50,7 +50,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 | 14 · Arrays y Tuplas | [14](14/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX. |
 | 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce`/`find` para pintar listas y transformar datos; el día a día del JSX. |
 | 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar listas (etiquetas, categorías) y cachés: casos concretos. |
-| 17 · Map | [17](17/solucion.ts) | **P3** | Caché/persistencia clave-valor (p. ej. respuestas de `invoke`); `Record` cubre la mayoría de casos. |
+| 17 · Map | [17](17/solucion.ts) | **P3** | Índice de búsqueda O(1) y agrupación con `planetas.json`; serialización Map↔objeto; `Record` cubre la mayoría de casos. |
 | 18 · Objetos en profundidad | [18](18/solucion.ts) | **P2** | Entidades, formularios, JSON y clonado **sin mutar** el estado (regla de React). |
 | 19 · Desestructuración/spread/optional chaining | [21](21/solucion.ts) | **P1** | Destructuring de props en la firma, spread de `setState`, `?.`/`??`: lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
 | 20 · Programación asíncrona | [20](20/solucion.ts) | **P1** | `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`. |
@@ -294,10 +294,15 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 ### 17. Map: diccionario clave-valor
 
 
-> 🎯 Prioridad **P3** — caché/persistencia clave-valor (p. ej. respuestas de `invoke`): `Record` cubre la mayoría de casos.
+> 🎯 Prioridad **P3** — diccionario clave-valor: índice de búsqueda O(1), agrupación y serialización (p. ej. caché de respuestas de `invoke`): `Record` cubre la mayoría de casos.
 
 1. Estás almacenando datos de personas con sus edades y necesitas acceder a ellos por nombre. Crea un `Map<string, number>` con nombres de personas y sus edades. Itera sobre él.
-2. Estás implementando un sistema de caché para evitar llamadas repetidas a una API. Define el interface `CacheEntry { data: unknown; timestamp: number }` (en `tipos.ts`) e implementa una caché simple con `Map<string, CacheEntry>`.
+2. Estás construyendo un **índice de planetas** para buscarlos y agruparlos rápido. El interface `Planeta` se define en `tipos.ts`. Importa `../datos/planetas.json` como módulo (`import datos from "../datos/planetas.json" with { type: "json" }` — nunca `node:fs` ni `fetch` sobre el fichero) y escribe:
+   - (a) `indicePorNombre(planetas: readonly Planeta[]): Map<string, Planeta>` — un `Map` con el `name` como clave, para buscar en O(1) en vez de recorrer el array.
+   - (b) `buscarPlaneta(indice: Map<string, Planeta>, name: string): Planeta | undefined` — devuelve el planeta o `undefined` si no existe.
+   - (c) `planetasPorClima(planetas: readonly Planeta[]): Map<string, Planeta[]>` — agrupa los planetas por `climate` (cada clave es un clima, el valor el array de planetas con ese clima).
+   - (d) `poblacionPorClima(planetas: readonly Planeta[]): Map<string, number>` — para cada clima, la suma de las poblaciones de sus planetas.
+   - (e) Serializa el índice (a) a JSON con `JSON.stringify(Object.fromEntries(...))` y deserialízalo de vuelta a `Map` con `new Map(Object.entries(JSON.parse(...)))`, comprobando que la búsqueda sigue funcionando.
 
 
 <a id="18-objetos-en-profundidad"></a>
