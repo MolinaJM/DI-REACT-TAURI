@@ -587,7 +587,7 @@ console.log("\nENTRIES:"); for (const par of config.entries()) console.log(par);
 //Vamos a suponer que tenemos un array filtrado de planetas válidos
 const planetas: Planeta[] = datos.planetas;
 
-//Buscar entre 1.000.000 planetas? filter tiene O(n) (lineal) 
+//Buscar entre 1.000.000 planetas? filter/find tiene O(n) (lineal) 
 
 // Array -> Map: nombre -> población (búsqueda O(1) en vez de recorrer el array)
 const poblacion: Map<string, number> = new Map(
@@ -608,11 +608,29 @@ console.log(deVuelta.get("Coruscant")); // 3000000000 (igual que al principio)
 ```
 
 > **Cuándo usar cada conversión:**
-> - `Object.fromEntries(map)` (Map → objeto): **antes de serializar** — cuando los datos van a *salir* (backend, `localStorage`, `JSON.stringify`, `invoke` de Tauri). Es el paso de **salida**.
-> - `new Map(Object.entries(obj))` (objeto → Map): **después de deserializar** — cuando los datos *entran* (`JSON.parse`, respuesta de un backend, `localStorage`) y quieres búsquedas O(1). Es el paso de **entrada**.
+> - `Object.fromEntries(map)` (Map → objeto): **antes de serializar para exponerlos al exterior** — cuando los datos van a *salir* (backend, `localStorage`, `JSON.stringify`, `invoke` de Tauri). Es el paso de **salida**.
+> - `new Map(Object.entries(obj))` (objeto → Map): **después de deserializar para usarlos** — cuando los datos *entran* (`JSON.parse`, respuesta de un backend, `localStorage`) y quieres búsquedas O(1). Es el paso de **entrada**.
 
-> ▶ **Cómo probarlo:** copia `planetas.json` a `bancop/datos/` y este bloque a `bancop/map-planetas.ts`; ejecuta `npx tsx map-planetas.ts` (desde `bancop/`).
+### Conversión `Map` ⇄ `Object`
 
+```mermaid
+graph LR
+    Ext["JSON / API / Storage"]
+    
+    Ext -->|"JSON.parse"| ObjIn["Object {}"]
+    ObjIn -->|"Object.entries"| PairsIn["[['k','v']]"]
+    PairsIn -->|"new Map()"| Map["Map (Memoria)"]
+    
+    Map -->|"Object.fromEntries"| ObjOut["Object {}"]
+    ObjOut -->|"JSON.stringify"| Ext
+
+    style Map fill:#e8f5e9,stroke:#388e3c
+```
+
+| Dirección | Método | Uso |
+| :--- | :--- | :--- |
+| **Entrada** | `new Map(Object.entries(obj))` | **Post-`JSON.parse`**: Búsquedas $O(1)$ en memoria. |
+| **Salida** | `Object.fromEntries(map)` | **Pre-`JSON.stringify`**: Formato compatible con red/storage. |
 
 <a id="612-set-conjunto-de-valores-únicos"></a>
 ## 6.12 Set: conjunto de valores únicos
