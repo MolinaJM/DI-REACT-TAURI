@@ -15,7 +15,6 @@ gen/
 # --- BLOQUE BASE: material OCULTO por defecto (no tocar) ---
 /repos/*
 /private/*
-/sesiones/s*
 /sesiones/sesion*.md
 /sesiones/apuntes/s[0-9][0-9]/
 /sesiones/temario-appcine.md
