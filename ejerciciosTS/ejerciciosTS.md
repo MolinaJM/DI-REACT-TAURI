@@ -49,8 +49,8 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 |---|---|---|---|
 | 14 · Arrays y Tuplas | [14](14/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX. |
 | 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce`/`find` para pintar listas y transformar datos; el día a día del JSX. |
-| 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar listas (etiquetas, categorías) y cachés: casos concretos. |
-| 17 · Map | [17](17/solucion.ts) | **P3** | Índice de búsqueda O(1) y agrupación con `planetas.json`; serialización Map↔objeto; `Record` cubre la mayoría de casos. |
+| 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar y caché de pertenencia con `planetas2.json` (JSON suelto); operaciones entre conjuntos; serialización Set↔array. |
+| 17 · Map | [17](17/solucion.ts) | **P3** | Índice de búsqueda O(1) y agrupación con `planetas2.json` (JSON suelto); serialización Map↔objeto; `Record` cubre la mayoría de casos. |
 | 18 · Objetos en profundidad | [18](18/solucion.ts) | **P2** | Entidades, formularios, JSON y clonado **sin mutar** el estado (regla de React). |
 | 19 · Desestructuración/spread/optional chaining | [21](21/solucion.ts) | **P1** | Destructuring de props en la firma, spread de `setState`, `?.`/`??`: lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
 | 20 · Programación asíncrona | [20](20/solucion.ts) | **P1** | `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`. |
@@ -254,8 +254,9 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > 🌌 **Datos de ejemplo:** los planetas usados en los ejercicios 2 y 5 son reales, extraídos de la API pública [swapi.info/api/planets](https://swapi.info/api/planets). Se han **hardcodeado** en el fichero de ejercicio (no se hace `fetch`): la asincronía (`async/await`, `Promise`) se imparte en la sesión 9 (`s03/08_Asincronismo`), así que aquí trabajamos con datos estáticos para centrarnos en los métodos de array.
 >
 > **JSON de los planetas** (los 4 campos que se usan en los ejercicios):
+> Para hacer los ejercicios, o bien, creas un array "inline" o bien (sería lo mejor la verdad), guarda este json como planetas2.json (también está en la subcarpeta datos). El json de los apuntes es el mismo del ejercicio 12, pero vamos a trabajar con sin wrapper.
 >
-> ```json
+>  ```json
 > [
 >   { "name": "Tatooine",  "population": 200000,     "climate": "arid",                "films": ["films/1", "films/3", "films/4", "films/5", "films/6"] },
 >   { "name": "Alderaan",  "population": 2000000000, "climate": "temperate",           "films": ["films/1", "films/6"] },
@@ -264,6 +265,14 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 >   { "name": "Dagobah",   "population": 0,          "climate": "murky",               "films": ["films/2", "films/3", "films/6"] }
 > ]
 > ```
+>
+> **Y sin wrapper hay dos formas de encontrártelo** (y se consumen distinto):
+> - **Corchetes → array en la raíz**, como este `planetas2.json`: el import **ya es** el array → `const planetas: Planeta[] = datos;`.
+> - **Llaves → objeto en la raíz**: los datos cuelgan de claves (p. ej. cada planeta colgado de su nombre) y se extraen con el trío `Object.keys` / `Object.values` / `Object.entries`.
+>
+> ⚠️ Lo que **no** te puedes encontrar: `{ { ... }, { ... } }` — objetos sueltos entre llaves. Las llaves exigen `"clave": valor`; lo suelto va entre **corchetes** `[ ]`.
+>
+> Da igual cuál de las dos formas llegue: se trata como `unknown` y se valida con el type guard del bloque 12.
 >
 > *(En la API real, `population` viene como `string` (o `"unknown"`) y `films` como URLs completas; aquí se convierten a `number` y a IDs cortos para simplificar los ejercicios.)*
 
@@ -281,11 +290,16 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 ### 16. Set: conjunto de valores únicos
 
 
-> 🎯 Prioridad **P3** — deduplicar listas (etiquetas, categorías) y cachés: casos concretos.
+> 🎯 Prioridad **P3** — deduplicar, caché de pertenencia y operaciones entre conjuntos: casos concretos.
 
-1. Estás gestionando una lista de colores y necesitas que no se repitan. Crea un `Set<string>` con nombres de colores. Añade, elimina y comprueba existencia.
-2. Estás procesando una lista de datos que contiene duplicados y necesitas eliminarlos. Dado un array con duplicados, elimínalos usando `Set`.
-3. Estás trabajando con dos conjuntos de datos y necesitas calcular operaciones entre ellos. Dados dos conjuntos `A` y `B`, calcula: unión, intersección y diferencia.
+1. Estás construyendo un **catálogo de planetas** para deduplicar, comprobar pertenencia y cruzar información. Importa `../datos/planetas2.json`(ya sabes cómo). Ten en cuenta que el JSON va **suelto** en la raíz, sin envoltorio `planetas`) y escribe:
+
+   - (a) `climasUnicos(planetas: readonly Planeta[]): Set<string>` — los climas de todos los planetas, sin repetir.
+   - (b) `peliculas(planetas: readonly Planeta[]): Set<string>` — todas las películas en las que aparecen los planetas, sin repetir (`films` es opcional).
+   - (c) `nombresDe(planetas: readonly Planeta[]): Set<string>` y `existePlaneta(nombres: Set<string>, name: string): boolean` — caché de pertenencia: comprobar en O(1) si un planeta existe.
+   - (d) Deriva dos conjuntos de nombres — `poblados` (`population > 0`) y `temperados` (`climate === "temperate"`) — y calcula su unión, intersección y diferencia con el enfoque manual (`new Set([...A, ...B])`, `[...A].filter(x => B.has(x))`).
+   - (e) Repite (d) con los métodos nativos ES2025 (`union`, `intersection`, `difference`) y comprueba con `isSubsetOf` si `temperados` es subconjunto de `poblados`.
+   - (f) Serializa el conjunto de climas (a) a JSON (`JSON.stringify([...set])` — un `Set` se serializa como array) y deserialízalo de vuelta (`new Set<string>(JSON.parse(json))`), comprobando que `has()` sigue funcionando.
 
 
 <a id="17-map-diccionario-clave-valor"></a>
@@ -296,7 +310,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > 🎯 Prioridad **P3** — diccionario clave-valor: índice de búsqueda O(1), agrupación y serialización (p. ej. caché de respuestas de `invoke`): `Record` cubre la mayoría de casos.
 
 1. Estás almacenando datos de personas con sus edades y necesitas acceder a ellos por nombre. Crea un `Map<string, number>` con nombres de personas y sus edades. Itera sobre él.
-2. Estás construyendo un **índice de planetas** para buscarlos y agruparlos rápido. El interface `Planeta` se define en `tipos.ts`. Importa `../datos/planetas.json` como módulo (`import datos from "../datos/planetas.json" with { type: "json" }` — nunca `node:fs` ni `fetch` sobre el fichero) y escribe:
+2. Estás construyendo un **índice de planetas** para buscarlos y agruparlos rápido. El interface `Planeta` se define en `tipos.ts`. Importa `../datos/planetas2.json`(ya sabes cómo). Ten en cuenta que el JSON va **suelto** en la raíz, sin envoltorio `planetas`) y escribe:
    - (a) `indicePorNombre(planetas: readonly Planeta[]): Map<string, Planeta>` — un `Map` con el `name` como clave, para buscar en O(1) en vez de recorrer el array.
    - (b) `buscarPlaneta(indice: Map<string, Planeta>, name: string): Planeta | undefined` — devuelve el planeta o `undefined` si no existe.
    - (c) `planetasPorClima(planetas: readonly Planeta[]): Map<string, Planeta[]>` — agrupa los planetas por `climate` (cada clave es un clima, el valor el array de planetas con ese clima).
@@ -316,7 +330,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 3. Estás clonando un objeto complejo y necesitas preservar tipos como `Date` o `Map` que `JSON.parse` no maneja. Clona un objeto con `structuredClone` — ¿qué tipos preserva que `JSON.parse(JSON.stringify(x))` no?
 4. Estás agrupando planetas por clima para mostrarlos en secciones. Usa `Object.groupBy` para agrupar el array de `Planeta` (datos de swapi; interface en `tipos.ts`) por `climate` y observa el tipo de retorno.
 5. Estás protegiendo un objeto de modificaciones accidentales. Define el interface `Config { readonly url; readonly port; readonly debug }` (en `tipos.ts`), usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
-6. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface `Planeta` (con `films?`) y el que tipa el JSON (`PlanetaJSON`) se definen en `tipos.ts`. Importa `../../datos/planetas.json` con el atributo `with { type: "json" }` (import normal; nunca `node:fs` ni `fetch` sobre el fichero) y escribe: (a) `resumenPlaneta(p: Planeta): string` que desestructura la planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 2 películas"`, y `"... · 0 películas"` cuando no hay `films`); (b) `actualizarPoblacion(planetas: readonly Planeta[], name: string, population: number): Planeta[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y (c) `planetaInmutable(name: string): Planeta` que localiza la planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (elementos y array), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
+6. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface `Planeta` (con `films?`) y el que tipa el JSON (`PlanetaJSON`) se definen en `tipos.ts`. Importa `../datos/planetas2.json` con el atributo `with { type: "json" }` (import normal; nunca `node:fs` ni `fetch` sobre el fichero; el JSON va **suelto** en la raíz, sin envoltorio `planetas`, como en los bloques 16 y 17) y escribe: (a) `resumenPlaneta(p: Planeta): string` que desestructura la planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 5 películas"`, y `"... · 0 películas"` si faltara `films`); (b) `actualizarPoblacion(planetas: readonly Planeta[], name: string, population: number): Planeta[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y (c) `planetaInmutable(name: string): Planeta` que localiza la planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (elementos y array), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
 
 
 <a id="19-desestructuración-spreadrest-y-optional-chaining-puente-a-react"></a>

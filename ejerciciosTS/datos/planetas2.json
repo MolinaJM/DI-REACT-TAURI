@@ -1,0 +1,7 @@
+[
+  { "name": "Tatooine", "population": 200000, "climate": "arid", "films": ["films/1", "films/3", "films/4", "films/5", "films/6"] },
+  { "name": "Alderaan", "population": 2000000000, "climate": "temperate", "films": ["films/1", "films/6"] },
+  { "name": "Yavin IV", "population": 1000, "climate": "temperate, tropical", "films": ["films/1"] },
+  { "name": "Hoth", "population": 0, "climate": "frozen", "films": ["films/2"] },
+  { "name": "Dagobah", "population": 0, "climate": "murky", "films": ["films/2", "films/3", "films/6"] }
+]
