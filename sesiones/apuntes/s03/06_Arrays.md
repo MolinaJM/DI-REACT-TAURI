@@ -584,7 +584,7 @@ console.log("\nENTRIES:"); for (const par of config.entries()) console.log(par);
 **Ejemplo: `Map` de búsqueda con `planetas.json`.** Con un array, buscar un planeta por nombre obliga a recorrerlo (`find`o`filter', `O(N)`). Un `Map` con el nombre como clave lo hace en `O(1)`. La función `find` no la vamos a usar porque solo devuelve el primer elemento que cumple, usaremos `filter` que es más versátil.
 
 ```typescript
-//Vamos a suponer que tenemos un array filtrado de planetas válidos
+//A) Vamos a suponer que tenemos un array filtrado de planetas válidos
 const planetas: Planeta[] = datos.planetas;
 
 //Buscar entre 1.000.000 planetas? filter/find tiene O(n) (lineal) 
@@ -595,7 +595,7 @@ const poblacion: Map<string, number> = new Map(
 );
 console.log(poblacion.get("Coruscant")); // 3000000000
 
-//Convendría guardarlo porque la conversión tarda. Convertimos MAP-->JSON-->localStorage
+//B) Convendría guardarlo porque la conversión tarda. Convertimos MAP-->JSON-->localStorage
 
 // SERIALIZAR (Objeto a cadena) (Map -> string JSON): JSON no sabe qué es un Map,
 // así que primero lo pasamos a objeto plano con Object.fromEntries.
@@ -605,7 +605,7 @@ console.log(json); // {"Tatooine":200000,"Hoth":0,...}
 //Observación: la diferencia entre un objeto y un JSON, es que las claves del JSON van entrecomilladas
 //al ser string.
 
-//Al volver a cargar el programa, RECUPERAMOS. Leería ese localStorage-->JSON-->MAP
+//C) Al volver a cargar el programa, RECUPERAMOS. Leería ese localStorage-->JSON-->MAP
 
 // DESERIALIZAR (cadena a Objeto) (string JSON -> Map): JSON.parse devuelve un objeto plano,
 // así que lo envolvemos de nuevo en un Map con new Map(Object.entries(...)).
