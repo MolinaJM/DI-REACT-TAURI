@@ -572,6 +572,8 @@ for (const [clave, valor] of config) {
   console.log(`${clave}: ${valor}`);
 }
 
+//Otra forma es mediante KEYS, VALUES y ENTRIES
+//keys, values y entries son métodos genéricos de cualquier objeto, se verán en la siguiente parte de apuntes
 console.log("\nKEYS:"); for (const clave of config.keys()) console.log(clave);
 console.log("\nVALUES:"); for (const valor of config.values()) console.log(valor);
 console.log("\nENTRIES:"); for (const par of config.entries()) console.log(par);
