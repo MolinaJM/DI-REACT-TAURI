@@ -48,7 +48,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
 | 14 · Arrays y Tuplas | [14](14/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX. |
-| 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce`/`find` para pintar listas y transformar datos; el día a día del JSX. |
+| 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce` para pintar listas y transformar datos; el día a día del JSX. |
 | 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar y caché de pertenencia con `planetas2.json` (JSON suelto); operaciones entre conjuntos; serialización Set↔array. |
 | 17 · Map | [17](17/solucion.ts) | **P3** | Índice de búsqueda O(1) y agrupación con `planetas2.json` (JSON suelto); serialización Map↔objeto; `Record` cubre la mayoría de casos. |
 | 18 · Objetos en profundidad | [18](18/solucion.ts) | **P2** | Entidades, formularios, JSON y clonado **sin mutar** el estado (regla de React). |
@@ -249,9 +249,9 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 ### 15. Arrays: métodos fundamentales
 
 
-> 🎯 Prioridad **P1** — `map`/`filter`/`reduce`/`find` para pintar listas y transformar datos; el día a día del JSX.
+> 🎯 Prioridad **P1** — `map`/`filter`/`reduce` para pintar listas y transformar datos; el día a día del JSX.
 >
-> 🌌 **Datos de ejemplo:** los planetas usados en los ejercicios 2 y 5 son reales, extraídos de la API pública [swapi.info/api/planets](https://swapi.info/api/planets). Se han **hardcodeado** en el fichero de ejercicio (no se hace `fetch`): la asincronía (`async/await`, `Promise`) se imparte en la sesión 9 (`s03/08_Asincronismo`), así que aquí trabajamos con datos estáticos para centrarnos en los métodos de array.
+> 🌌 **Datos de ejemplo:** los planetas usados en el ejercicio 4 son reales, extraídos de la API pública [swapi.info/api/planets](https://swapi.info/api/planets). Se han **hardcodeado** en el fichero de ejercicio (no se hace `fetch`): la asincronía (`async/await`, `Promise`) se imparte en la sesión 9 (`s03/08_Asincronismo`), así que aquí trabajamos con datos estáticos para centrarnos en los métodos de array.
 >
 > **JSON de los planetas** (los 4 campos que se usan en los ejercicios):
 > Para hacer los ejercicios, o bien, creas un array "inline" o bien (sería lo mejor la verdad), guarda este json como planetas2.json (también está en la subcarpeta datos). El json de los apuntes es el mismo del ejercicio 12, pero vamos a trabajar con sin wrapper.
@@ -277,12 +277,11 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > *(En la API real, `population` viene como `string` (o `"unknown"`) y `films` como URLs completas; aquí se convierten a `number` y a IDs cortos para simplificar los ejercicios.)*
 
 1. Estás procesando una lista de números para transformarlos, filtrarlos y calcular un total. Dado `[1, 2, 3, 4, 5]`, usa `map` para duplicar, `filter` para pares, `reduce` para sumar.
-2. Estás buscando planetas específicos en un catálogo. Usa `find`, `findIndex`, `some` y `every` sobre el array de objetos `Planeta` (datos de swapi; interface en `tipos.ts`).
-3. Estás trabajando con datos que no deben mutar y necesitas versiones ordenadas o invertidas del array. Usa `toSorted`, `toReversed` y `with` (ES2023) y comprueba que el original no muta.
-4. Estás implementando un buscador eficiente en una lista ordenada. Implementa una búsqueda binaria tipada.
-5. Estás gestionando una lista de planetas y necesitas filtrar solo los habitables. Dada la interface `Planeta { name: string; population: number; climate: string }` (definida en `tipos.ts`), escribe `obtenerHabitable(planetas: Planeta[])` que devuelva un nuevo array solo con los de `climate === "temperate"`.
-6. Estás implementando una pila de tareas y necesitas modificar el array en su lugar. Usa los métodos que **mutan** el array en su lugar: `push` y `pop` sobre una pila, y `sort` con un comparador numérico `(a, b) => a - b`. Comprueba que `sort` modifica el array original.
-7. Estás trabajando con listas de datos y necesitas crear copias que puedas modificar sin afectar la original. Crea una copia de un array con `slice()` y con el spread `[...arr]`, y modifica la copia sin afectar al original (contrasta con `sort` que sí muta).
+2. Estás trabajando con datos que no deben mutar y necesitas versiones ordenadas o invertidas del array. Usa `toSorted`, `toReversed` y `with` (ES2023) y comprueba que el original no muta.
+3. Estás implementando un buscador eficiente en una lista ordenada. Implementa una búsqueda binaria tipada.
+4. Estás gestionando una lista de planetas y necesitas filtrar solo los habitables. Dada la interface `Planeta { name: string; population: number; climate: string }` (definida en `tipos.ts`), escribe `obtenerHabitable(planetas: Planeta[])` que devuelva un nuevo array solo con los de `climate === "temperate"`.
+5. Estás implementando una pila de tareas y necesitas modificar el array en su lugar. Usa los métodos que **mutan** el array en su lugar: `push` y `pop` sobre una pila, y `sort` con un comparador numérico `(a, b) => a - b`. Comprueba que `sort` modifica el array original.
+6. Estás trabajando con listas de datos y necesitas crear copias que puedas modificar sin afectar la original. Crea una copia de un array con `slice()` y con el spread `[...arr]`, y modifica la copia sin afectar al original (contrasta con `sort` que sí muta).
 
 
 <a id="16-set-conjunto-de-valores-únicos"></a>
@@ -292,7 +291,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 
 > 🎯 Prioridad **P3** — deduplicar, caché de pertenencia y operaciones entre conjuntos: casos concretos.
 
-1. Estás construyendo un **catálogo de planetas** para deduplicar, comprobar pertenencia y cruzar información. Importa `../datos/planetas2.json`(ya sabes cómo). Ten en cuenta que el JSON va **suelto** en la raíz, sin envoltorio `planetas`) y escribe:
+1. Estás construyendo un **catálogo de planetas** para deduplicar, comprobar pertenencia y cruzar información. Importa `../datos/planetas2.json` (ya sabes cómo; el JSON va **suelto** en la raíz, sin envoltorio `planetas`) y escribe:
 
    - (a) `climasUnicos(planetas: readonly Planeta[]): Set<string>` — los climas de todos los planetas, sin repetir.
    - (b) `peliculas(planetas: readonly Planeta[]): Set<string>` — todas las películas en las que aparecen los planetas, sin repetir (`films` es opcional).
@@ -310,7 +309,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > 🎯 Prioridad **P3** — diccionario clave-valor: índice de búsqueda O(1), agrupación y serialización (p. ej. caché de respuestas de `invoke`): `Record` cubre la mayoría de casos.
 
 1. Estás almacenando datos de personas con sus edades y necesitas acceder a ellos por nombre. Crea un `Map<string, number>` con nombres de personas y sus edades. Itera sobre él.
-2. Estás construyendo un **índice de planetas** para buscarlos y agruparlos rápido. El interface `Planeta` se define en `tipos.ts`. Importa `../datos/planetas2.json`(ya sabes cómo). Ten en cuenta que el JSON va **suelto** en la raíz, sin envoltorio `planetas`) y escribe:
+2. Estás construyendo un **índice de planetas** para buscarlos y agruparlos rápido. El interface `Planeta` se define en `tipos.ts`. Importa `../datos/planetas2.json` (ya sabes cómo; el JSON va **suelto** en la raíz, sin envoltorio `planetas`) y escribe:
    - (a) `indicePorNombre(planetas: readonly Planeta[]): Map<string, Planeta>` — un `Map` con el `name` como clave, para buscar en O(1) en vez de recorrer el array.
    - (b) `buscarPlaneta(indice: Map<string, Planeta>, name: string): Planeta | undefined` — devuelve el planeta o `undefined` si no existe.
    - (c) `planetasPorClima(planetas: readonly Planeta[]): Map<string, Planeta[]>` — agrupa los planetas por `climate` (cada clave es un clima, el valor el array de planetas con ese clima).
@@ -330,7 +329,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 3. Estás clonando un objeto complejo y necesitas preservar tipos como `Date` o `Map` que `JSON.parse` no maneja. Clona un objeto con `structuredClone` — ¿qué tipos preserva que `JSON.parse(JSON.stringify(x))` no?
 4. Estás agrupando planetas por clima para mostrarlos en secciones. Usa `Object.groupBy` para agrupar el array de `Planeta` (datos de swapi; interface en `tipos.ts`) por `climate` y observa el tipo de retorno.
 5. Estás protegiendo un objeto de modificaciones accidentales. Define el interface `Config { readonly url; readonly port; readonly debug }` (en `tipos.ts`), usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
-6. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface `Planeta` (con `films?`) y el que tipa el JSON (`PlanetaJSON`) se definen en `tipos.ts`. Importa `../datos/planetas2.json` con el atributo `with { type: "json" }` (import normal; nunca `node:fs` ni `fetch` sobre el fichero; el JSON va **suelto** en la raíz, sin envoltorio `planetas`, como en los bloques 16 y 17) y escribe: (a) `resumenPlaneta(p: Planeta): string` que desestructura la planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 5 películas"`, y `"... · 0 películas"` si faltara `films`); (b) `actualizarPoblacion(planetas: readonly Planeta[], name: string, population: number): Planeta[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y (c) `planetaInmutable(name: string): Planeta` que localiza la planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (elementos y array), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
+6. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface que tipa el JSON (`PlanetaJSON`, con `films?`) se define en `tipos.ts`. Importa `../datos/planetas2.json` con el atributo `with { type: "json" }` (import normal; nunca `node:fs` ni `fetch` sobre el fichero; el JSON va **suelto** en la raíz, sin envoltorio `planetas`, como en los bloques 16 y 17) y escribe: (a) `resumenPlaneta(p: PlanetaJSON): string` que desestructura la planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 5 películas"`, y `"... · 0 películas"` si faltara `films`); (b) `actualizarPoblacion(planetas: readonly PlanetaJSON[], name: string, population: number): PlanetaJSON[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y (c) `planetaInmutable(name: string): Readonly<PlanetaJSON>` que localiza la planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (planeta y array `films`), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
 
 
 <a id="19-desestructuración-spreadrest-y-optional-chaining-puente-a-react"></a>
