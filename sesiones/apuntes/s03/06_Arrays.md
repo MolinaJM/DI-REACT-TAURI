@@ -533,7 +533,7 @@ console.log(resto); // Imprimirá [3, 4, 5]
 <a id="611-map-el-diccionario-clave-valor"></a>
 ## 6.11 `Map`: el diccionario clave-valor
 
-`Map` es la estructura clave-valor de ES6 (ECMA 2015). A diferencia de un objeto plano `{}`: la clave **puede ser cualquier tipo** (no sólo `string`/`symbol`. NO tiene los métodos de Array (filter, map, etc...) 
+`Map` es la estructura clave-valor de ES6 (ECMA 2015). A diferencia de un objeto plano `{}`: la clave **puede ser cualquier tipo** (no sólo `string`/`symbol`). De hecho lo usaremos con **objetos** como valor. NO tiene los métodos de Array (filter, map, etc...) 
 
 En React/Tauri aparece para configuraciones, caches y enrutado. En React se suele utilizar para guardar datos en el localStorage (como por ejemplo, los ítems favoritos que quieres que muestre al principio en una web/ventana):  
 
@@ -581,7 +581,7 @@ console.log("\nENTRIES:"); for (const par of config.entries()) console.log(par);
 
 - **Conversión con objetos:** `new Map(Object.entries(obj))` crea un `Map` desde un objeto, y `Object.fromEntries(map)` crea un objeto desde un `Map`. Ambas muy usadas para serializar/deserializar.
 
-**Ejemplo: `Map` de búsqueda con `planetas.json`.** Con un array, buscar un planeta por nombre obliga a recorrerlo (`find`o`filter', `O(N)`). Un `Map` con el nombre como clave lo hace en `O(1)`:
+**Ejemplo: `Map` de búsqueda con `planetas.json`.** Con un array, buscar un planeta por nombre obliga a recorrerlo (`find`o`filter', `O(N)`). Un `Map` con el nombre como clave lo hace en `O(1)`. La función `find` no la vamos a usar porque solo devuelve el primer elemento que cumple, usaremos `filter` que es más versátil.
 
 ```typescript
 //Vamos a suponer que tenemos un array filtrado de planetas válidos
@@ -595,11 +595,17 @@ const poblacion: Map<string, number> = new Map(
 );
 console.log(poblacion.get("Coruscant")); // 3000000000
 
+//Convendría guardarlo porque la conversión tarda. Convertimos MAP-->JSON-->localStorage
+
 // SERIALIZAR (Objeto a cadena) (Map -> string JSON): JSON no sabe qué es un Map,
 // así que primero lo pasamos a objeto plano con Object.fromEntries.
 // (JSON.stringify(poblacion) daría "{}" — el Map se perdería)
 const json: string = JSON.stringify(Object.fromEntries(poblacion));
 console.log(json); // {"Tatooine":200000,"Hoth":0,...}
+//Observación: la diferencia entre un objeto y un JSON, es que las claves del JSON van entrecomilladas
+//al ser string.
+
+//Al volver a cargar el programa, RECUPERAMOS. Leería ese localStorage-->JSON-->MAP
 
 // DESERIALIZAR (cadena a Objeto) (string JSON -> Map): JSON.parse devuelve un objeto plano,
 // así que lo envolvemos de nuevo en un Map con new Map(Object.entries(...)).
@@ -635,7 +641,7 @@ graph LR
 <a id="612-set-conjunto-de-valores-únicos"></a>
 ## 6.12 Set: conjunto de valores únicos
 
-Un `Set<T>` guarda valores **sin repetición**: intentar añadir un valor que ya existe no tiene efecto. Es la estructura ideal para deduplicar listas y para cachés de pertenencia (`has()` es O(1)).
+Un `Set<T>` guarda valores **sin repetición**: intentar añadir un valor que ya existe no tiene efecto. Es la estructura ideal para deduplicar listas y para cachés de pertenencia (`has()` es O(1)). Ejemplo: Gestión de carritos de compras o favoritos: evitamos que el usuario añada dos veces el mismo ID de producto
 
 ```typescript
 const colores: Set<string> = new Set(["rojo", "verde"]);
@@ -657,19 +663,23 @@ const A: Set<number> = new Set([1, 2, 3, 4]);
 const B: Set<number> = new Set([3, 4, 5, 6]);
 
 // Unión: todos los elementos de A y B (sin repetidos)
-const union: Set<number> = new Set([...A, ...B]);
+const union: Set<number> = A.union(B);
+console.log(union); // 1, 2, 3, 4, 5, 6
+//Usamos spred para mostrarlo en forma de lista y manejarlo mejor
 console.log([...union]); // [1, 2, 3, 4, 5, 6]
 
 // Intersección: solo los que están en A Y en B
-const interseccion: number[] = [...A].filter((x) => B.has(x));
-console.log(interseccion); // [3, 4]
+const interseccion: Set<number> = A.intersection(B);
+console.log([...interseccion]); // [3, 4]
 
 // Diferencia: los que están en A pero NO en B
-const diferencia: number[] = [...A].filter((x) => !B.has(x));
-console.log(diferencia); // [1, 2]
-```
+const diferencia: Set<number> = A.difference(B);
+console.log([...diferencia]); // [1, 2]
 
-> 💡 **ES2025** ya trae estos métodos nativos: `A.union(B)`, `A.intersection(B)`, `A.difference(B)` y `A.isSubsetOf(B)`. Hacen lo mismo que el código de arriba, pero el enfoque manual (`filter` + `has`) funciona en cualquier versión y deja ver qué pasa por dentro.
+// Diferencia Simétrica: los que están en A o en B, pero NO en ambos
+const diferenciaSimetrica: Set<number> = A.symmetricDifference(B);
+console.log([...diferenciaSimetrica]); // [1, 2, 5, 6]
+```
 
 
 <a id="613-cuándo-usar-array-y-cuándo-mapset"></a>
