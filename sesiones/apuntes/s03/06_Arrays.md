@@ -656,7 +656,7 @@ const sinDuplicados: number[] = [...new Set(conDuplicados)]; // [1, 2, 3]
 
 ### Operaciones entre conjuntos (unión, intersección, diferencia)
 
-Dado dos `Set`, estas son las tres operaciones clásicas. El truco es combinar el spread (`...`) con `filter` + `has()`:
+Dado dos `Set`, estas son las tres operaciones clásicas:
 
 ```typescript
 const A: Set<number> = new Set([1, 2, 3, 4]);
