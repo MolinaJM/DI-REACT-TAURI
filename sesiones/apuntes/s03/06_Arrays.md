@@ -604,8 +604,14 @@ const json: string = JSON.stringify(Object.fromEntries(poblacion));
 console.log(json); // {"Tatooine":200000,"Hoth":0,...}
 //Observación: la diferencia entre un objeto y un JSON, es que las claves del JSON van entrecomilladas
 //al ser string.
+//En este punto, ya podría guardar los datos en JSON o en otro formato. Siempre DEPENDE de lo que 
+//quieras hacer con ellos
 
 //C) Al volver a cargar el programa, RECUPERAMOS. Leería ese localStorage-->JSON-->MAP
+// Nota: en este ejemplo de código, realmente no tiene sentido usar stringify seguido de Parse
+// ya que no estamos haciendo nada entre medias. Recordamos que estamos "SIMULANDO"
+// una reentrada al programa y los datos que manejamos con JSON.parse podrían haberse
+// guardado de distintas formas.
 
 // DESERIALIZAR (cadena a Objeto) (string JSON -> Map): JSON.parse devuelve un objeto plano,
 // así que lo envolvemos de nuevo en un Map con new Map(Object.entries(...)).
