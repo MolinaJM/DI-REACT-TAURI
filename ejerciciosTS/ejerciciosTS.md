@@ -254,7 +254,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > 🌌 **Datos de ejemplo:** los planetas usados en el ejercicio 4 son reales, extraídos de la API pública [swapi.info/api/planets](https://swapi.info/api/planets). Se han **hardcodeado** en el fichero de ejercicio (no se hace `fetch`): la asincronía (`async/await`, `Promise`) se imparte en la sesión 9 (`s03/08_Asincronismo`), así que aquí trabajamos con datos estáticos para centrarnos en los métodos de array.
 >
 > **JSON de los planetas** (los 4 campos que se usan en los ejercicios):
-> Para hacer los ejercicios, o bien, creas un array "inline" o bien (sería lo mejor la verdad), guarda este json como planetas2.json (también está en la subcarpeta datos). El json de los apuntes es el mismo del ejercicio 12, pero vamos a trabajar con sin wrapper.
+> Para hacer los ejercicios, o bien, creas un array "inline" (hardcodeado), o bien, (sería lo mejor la verdad), guarda este json como planetas2.json (también está en la subcarpeta datos). El json de los apuntes es el mismo del ejercicio 12, pero vamos a trabajar sin wrapper.
 >
 >  ```json
 > [
