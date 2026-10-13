@@ -530,6 +530,46 @@ console.log(resto); // Imprimirá [3, 4, 5]
 ```
 
 
+<a id="610-tipado-de-arrays-tipos-y-genéricos"></a>
+## 6.10 Tipado de arrays: tipos y genéricos
+
+Hasta ahora hemos usado `T[]` y `Array<T>` (equivalentes). Dos variantes más completan el cuadro cuando quieres que el dato no se modifique o que cada posición tenga un significado.
+
+### a. Arrays y tuplas `readonly`
+
+Un array (o tupla) declarado con `readonly` no se puede modificar: ni con métodos mutadores (`push`, `pop`, …) ni asignando por índice. Es la misma palabra clave que vimos para las propiedades de un objeto (s02 §Sintaxis básica), pero aplicada a la colección entera:
+
+```typescript
+const numeros: readonly number[] = [1, 2, 3];
+// numeros.push(4);   // ❌ Error: Property 'push' does not exist on type 'readonly number[]'
+// numeros[0] = 99;   // ❌ Error: Index signature ... only permits reading
+
+const punto: readonly [number, number] = [10, 20]; // tupla readonly
+// punto[0] = 15;     // ❌ Error: Cannot assign to '0' because it is a read-only property
+```
+
+- `readonly` es la garantía **en el tipo** de la regla de §6.2: el compilador te lo impide, no tu disciplina. Vale tanto para arrays (`readonly number[]`) como para tuplas (`readonly [number, number]`), y como tipo de parámetro: `function sumar(arr: readonly number[]): number`.
+- Ojo: es "shallow". El array/tupla en sí no se puede reasignar elemento a elemento, pero los **objetos** que contenga sí podrían mutarse si no son a su vez `readonly`.
+- `as const` (sesión 04) produce arrays de este estilo de forma implícita: `const RUTAS = ["/inicio", "/catalogo"] as const;` → tipo `readonly ["/inicio", "/catalogo"]`.
+
+### b. Tuplas etiquetadas (named tuples)
+
+A una tupla se le puede poner un **nombre a cada posición** para que el lector (y el IDE) sepa qué significa ese dato. El nombre es solo documentación/autocompletado: el acceso sigue siendo **por índice**, nunca por el nombre.
+
+```typescript
+type Punto = [lat: number, lng: number];
+const centro: Punto = [40.4168, -3.7038];
+
+console.log(centro[0]); // ✅ Imprime 40.4168 (por índice)
+// console.log(centro.lat); // ❌ Error: Property 'lat' does not exist on type 'Punto'
+
+type Coordenadas = [x: number, y: number, z?: number]; // el último puede ser opcional
+```
+
+- Es el caso que vimos en s02 con el type alias: `type ApiResponse = [status: number, message: string]`. Las etiquetas no cambian el comportamiento de la tupla, solo lo documentan.
+- Si además quieres que no se pueda modificar, combina ambas cosas: una tupla `readonly` etiquetada → `const fijo: readonly [lat: number, lng: number] = [0, 0];`.
+
+
 <a id="611-map-el-diccionario-clave-valor"></a>
 ## 6.11 `Map`: el diccionario clave-valor
 

@@ -254,7 +254,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 > 🌌 **Datos de ejemplo:** los planetas usados en el ejercicio 4 son reales, extraídos de la API pública [swapi.info/api/planets](https://swapi.info/api/planets). Se han **hardcodeado** en el fichero de ejercicio (no se hace `fetch`): la asincronía (`async/await`, `Promise`) se imparte en la sesión 9 (`s03/08_Asincronismo`), así que aquí trabajamos con datos estáticos para centrarnos en los métodos de array.
 >
 > **JSON de los planetas** (los 4 campos que se usan en los ejercicios):
-> Para hacer los ejercicios, o bien, creas un array "inline" (hardcodeado), o bien, (sería lo mejor la verdad), guarda este json como planetas2.json (también está en la subcarpeta datos). El json de los apuntes es el mismo del ejercicio 12, pero vamos a trabajar sin wrapper.
+> Para hacer los ejercicios, o bien, creas un array "inline" (hardcodeado), o bien, (sería lo mejor la verdad), guarda este json como planetas2.json (también está en la subcarpeta datos). El json de los apuntes es el mismo del bloque de ejercicios 12, pero vamos a trabajar sin wrapper.
 >
 >  ```json
 > [
@@ -278,7 +278,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 
 1. Estás procesando una lista de números para transformarlos, filtrarlos y calcular un total. Dado `[1, 2, 3, 4, 5]`, usa `map` para duplicar, `filter` para pares, `reduce` para sumar.
 2. Estás trabajando con datos que no deben mutar y necesitas versiones ordenadas o invertidas del array. Usa `toSorted`, `toReversed` y `with` (ES2023) y comprueba que el original no muta.
-3. Estás implementando un buscador eficiente en una lista ordenada. Implementa una búsqueda binaria tipada.
+3. Estás implementando un buscador eficiente en una lista ordenada. Implementa una búsqueda binaria tipada: algoritmo que parte de datos ordenados, con O(log(n)), es decir, muy muy rápido incluso con grandes volúmentes de datos (1000 elementos, nos llevaría 10 pasos, 1 millón nos llevaría 20 pasos). https://es.wikipedia.org/wiki/B%C3%BAsqueda_binaria  (pensar en el juego de adivinar un número).
 4. Estás gestionando una lista de planetas y necesitas filtrar solo los habitables. Dada la interface `Planeta { name: string; population: number; climate: string }` (definida en `tipos.ts`), escribe `obtenerHabitable(planetas: Planeta[])` que devuelva un nuevo array solo con los de `climate === "temperate"`.
 5. Estás implementando una pila de tareas y necesitas modificar el array en su lugar. Usa los métodos que **mutan** el array en su lugar: `push` y `pop` sobre una pila, y `sort` con un comparador numérico `(a, b) => a - b`. Comprueba que `sort` modifica el array original.
 6. Estás trabajando con listas de datos y necesitas crear copias que puedas modificar sin afectar la original. Crea una copia de un array con `slice()` y con el spread `[...arr]`, y modifica la copia sin afectar al original (contrasta con `sort` que sí muta).
