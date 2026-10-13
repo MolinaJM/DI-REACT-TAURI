@@ -15,24 +15,23 @@
     - [v. `reduce()`](#v-reduce)
     - [vi. `sort()`](#vi-sort)
     - [vii. Métodos inmutables](#vii-métodos-inmutables)
-  - [6.5 Arrays Multidimensionales](#65-arrays-multidimensionales)
-  - [6.6 Metodos que modifican o no el Array original](#66-metodos-que-modifican-o-no-el-array-original)
-    - [6.6.1 Modificar el Array Original](#661-modificar-el-array-original)
-    - [6.6.2 Crear una Copia](#662-crear-una-copia)
-  - [6.7 Recorrer Arrays en TypeScript](#67-recorrer-arrays-en-typescript)
-    - [6.7.1 Usando `for...of`](#671-usando-forof)
-    - [6.7.2 Método `forEach`](#672-método-foreach)
-  - [6.8 Clonar un Array](#68-clonar-un-array)
-  - [6.9 Destructuring con Arrays](#69-destructuring-con-arrays)
+  - [6.5 Metodos que modifican o no el Array original](#65-metodos-que-modifican-o-no-el-array-original)
+    - [6.5.1 Modificar el Array Original](#651-modificar-el-array-original)
+    - [6.5.2 Crear una Copia](#652-crear-una-copia)
+  - [6.6 Recorrer Arrays en TypeScript](#66-recorrer-arrays-en-typescript)
+    - [6.6.1 Usando `for...of`](#661-usando-forof)
+    - [6.6.2 Método `forEach`](#662-método-foreach)
+  - [6.7 Clonar un Array](#67-clonar-un-array)
+  - [6.8 Destructuring con Arrays](#68-destructuring-con-arrays)
     - [a. Destructuring Básico](#a-destructuring-básico)
     - [b. Asignación por Defecto](#b-asignación-por-defecto)
     - [c. Destructuring Anidado](#c-destructuring-anidado)
     - [d. Rest Parameters](#d-rest-parameters)
-  - [6.10 Tipado de arrays: tipos y genéricos](#610-tipado-de-arrays-tipos-y-genéricos)
-  - [6.11 `Map`: el diccionario clave-valor](#611-map-el-diccionario-clave-valor)
-  - [6.12 `Set`: conjunto de valores únicos](#612-set-conjunto-de-valores-únicos)
-  - [6.13 ¿Cuándo usar Array y cuándo Map/Set?](#613-cuándo-usar-array-y-cuándo-mapset)
-- 🧪 **Ejercicios:** [Arrays y Tuplas](../../../ejerciciosTS/ejerciciosTS.md#14-arrays-y-tuplas) · [Arrays: métodos fundamentales](../../../ejerciciosTS/ejerciciosTS.md#15-arrays-métodos-fundamentales) · [Set](../../../ejerciciosTS/ejerciciosTS.md#16-set-conjunto-de-valores-únicos) · [Map](../../../ejerciciosTS/ejerciciosTS.md#17-map-diccionario-clave-valor)
+  - [6.9 Tipado de arrays: tipos y genéricos](#69-tipado-de-arrays-tipos-y-genéricos)
+  - [6.10 `Map`: el diccionario clave-valor](#610-map-el-diccionario-clave-valor)
+  - [6.11 `Set`: conjunto de valores únicos](#611-set-conjunto-de-valores-únicos)
+  - [6.12 ¿Cuándo usar Array y cuándo Map/Set?](#612-cuándo-usar-array-y-cuándo-mapset)
+- 🧪 **Ejercicios:** [Arrays y Tuplas](../../../ejerciciosTS/ejerciciosTS.md#13-arrays-y-tuplas) · [Arrays: métodos fundamentales](../../../ejerciciosTS/ejerciciosTS.md#14-arrays-métodos-fundamentales) · [Set](../../../ejerciciosTS/ejerciciosTS.md#15-set-conjunto-de-valores-únicos) · [Map](../../../ejerciciosTS/ejerciciosTS.md#16-map-diccionario-clave-valor)
 
 ---
 
@@ -343,30 +342,13 @@ console.log(etiquetas.join());      // "suspense,thriller,2024" (separador por d
 
 > 💡 En React lo usarás para construir strings a partir de arrays: badges de etiquetas (pequeños iconitos representando una clasificación[ ejemplo: disponible/no disponible en una tienda virtual]), query strings (`params.join("&")`) o exportar datos en CSV.
 
-<a id="65-arrays-multidimensionales"></a>
-## 6.5 Arrays Multidimensionales
-
-Los arrays multidimensionales son arrays que contienen otros arrays como elementos. Pueden utilizarse para representar matrices y estructuras de datos más complejas. En TypeScript se escriben como `number[][]` (array de array de numbers).
-
-```typescript
-const matriz: number[][] = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-];
-const primerElemento: number | undefined = matriz[0]?.[0]; // 1
-```
-
-> [!NOTE]
-> Con `noUncheckedIndexedAccess`, `matriz[0]` es `number[] | undefined`. El acceso seguro es `matriz[0]?.[0]` (optional chaining), que devuelve `number | undefined`.
-
-<a id="66-metodos-que-modifican-o-no-el-array-original"></a>
-## 6.6 Resumen de métodos que modifican o no el Array original
+<a id="65-metodos-que-modifican-o-no-el-array-original"></a>
+## 6.5 Resumen de métodos que modifican o no el Array original
 
 Aquí están los métodos de arrays que pueden modificar el array original y los que crean una copia:
 
-<a id="661-modificar-el-array-original"></a>
-### 6.6.1 Modificar el Array Original❌(evitar cara a React)
+<a id="651-modificar-el-array-original"></a>
+### 6.5.1 Modificar el Array Original❌(evitar cara a React)
 
 1. `push(elemento)`: Agrega un elemento al final del array. Modifica el array original al agregar un nuevo elemento al final.
 
@@ -376,8 +358,8 @@ Aquí están los métodos de arrays que pueden modificar el array original y los
 
 4. `sort([comparador])`: Ordena los elementos de un array, modificando dicho array y aplicando el comparador para establecer el orden.
 
-<a id="662-crear-una-copia"></a>
-### 6.6.2 Crear una Copia✅
+<a id="652-crear-una-copia"></a>
+### 6.5.2 Crear una Copia✅
 
 1. `map(función)`: Crea un nuevo array aplicando una función a cada elemento del array original sin modificar el array original. `map` crea una copia transformada.
 
@@ -387,13 +369,13 @@ Aquí están los métodos de arrays que pueden modificar el array original y los
 
 4. `toSorted()`, `toReversed()`, `toSpliced()` y `with()` (ES2023): devuelven copias sin tocar el original.
 
-<a id="67-recorrer-arrays-en-typescript"></a>
-## 6.7 Recorrer Arrays en TypeScript
+<a id="66-recorrer-arrays-en-typescript"></a>
+## 6.6 Recorrer Arrays en TypeScript
 
 En JavaScript, hay varias formas de recorrer un array. Las dos más comunes son utilizando `for...in` y `for...of`. Cada uno tiene sus propias características y diferencias.
 
-<a id="671-usando-forof"></a>
-### 6.7.1 Usando `for...of`
+<a id="661-usando-forof"></a>
+### 6.6.1 Usando `for...of`
 
 El bucle `for...of` se introdujo en ECMAScript 6 y es la forma más recomendada de recorrer arrays en JavaScript. Proporciona una forma más limpia y sencilla de acceder a los elementos de un array, y en TypeScript cada elemento queda **tipado automáticamente**.
 
@@ -412,8 +394,8 @@ for (const fruta of frutas) {
 3. Garantiza un orden específico en la iteración.
 4. El tipo del elemento se infiere de `T[]` (aquí `string`).
 
-<a id="672-método-foreach"></a>
-### 6.7.2 Método `forEach`
+<a id="662-método-foreach"></a>
+### 6.6.2 Método `forEach`
 
 El método `forEach()` en JavaScript se utiliza para iterar sobre los elementos de un array y ejecutar una función proporcionada una vez por cada elemento. Es una forma de recorrer el array y realizar operaciones en cada elemento sin necesidad de utilizar bucles `for` o `while`.
 
@@ -454,8 +436,8 @@ numeros.forEach(function (numero) {
 console.log(`La suma de los números es: ${suma}`);
 ```
 
-<a id="68-clonar-un-array"></a>
-## 6.8 Clonar un Array
+<a id="67-clonar-un-array"></a>
+## 6.7 Clonar un Array
 
 Para **estado inmutable en React** (no mutar el original), clona el array antes de modificarlo. Las dos formas idiomaticas:
 
@@ -475,8 +457,8 @@ Para **estado inmutable en React** (no mutar el original), clona el array antes 
 
 > En React, para añadir sin mutar: `[...items, nuevo]`; para eliminar: `items.filter(...)`; para reemplazar: `items.map(...)`.
 
-<a id="69-destructuring-con-arrays"></a>
-## 6.9 Destructuring con Arrays
+<a id="68-destructuring-con-arrays"></a>
+## 6.8 Destructuring con Arrays
 
 El **destructuring** es una técnica que permite extraer valores de un array y asignarlos a variables en una sola línea de código. Esto simplifica la extracción de datos de arrays y mejora la legibilidad del código.
 
@@ -530,8 +512,8 @@ console.log(resto); // Imprimirá [3, 4, 5]
 ```
 
 
-<a id="610-tipado-de-arrays-tipos-y-genéricos"></a>
-## 6.10 Tipado de arrays: tipos y genéricos
+<a id="69-tipado-de-arrays-tipos-y-genéricos"></a>
+## 6.9 Tipado de arrays: tipos y genéricos
 
 Hasta ahora hemos usado `T[]` y `Array<T>` (equivalentes). Dos variantes más completan el cuadro cuando quieres que el dato no se modifique o que cada posición tenga un significado.
 
@@ -541,11 +523,11 @@ Un array (o tupla) declarado con `readonly` no se puede modificar: ni con métod
 
 ```typescript
 const numeros: readonly number[] = [1, 2, 3];
-// numeros.push(4);   // ❌ Error: Property 'push' does not exist on type 'readonly number[]'
-// numeros[0] = 99;   // ❌ Error: Index signature ... only permits reading
+// numeros.push(4);   // Error: Property 'push' does not exist on type 'readonly number[]'
+// numeros[0] = 99;   // Error: Index signature ... only permits reading
 
 const punto: readonly [number, number] = [10, 20]; // tupla readonly
-// punto[0] = 15;     // ❌ Error: Cannot assign to '0' because it is a read-only property
+// punto[0] = 15;     // Error: Cannot assign to '0' because it is a read-only property
 ```
 
 - `readonly` es la garantía **en el tipo** de la regla de §6.2: el compilador te lo impide, no tu disciplina. Vale tanto para arrays (`readonly number[]`) como para tuplas (`readonly [number, number]`), y como tipo de parámetro: `function sumar(arr: readonly number[]): number`.
@@ -570,8 +552,8 @@ type Coordenadas = [x: number, y: number, z?: number]; // el último puede ser o
 - Si además quieres que no se pueda modificar, combina ambas cosas: una tupla `readonly` etiquetada → `const fijo: readonly [lat: number, lng: number] = [0, 0];`.
 
 
-<a id="611-map-el-diccionario-clave-valor"></a>
-## 6.11 `Map`: el diccionario clave-valor
+<a id="610-map-el-diccionario-clave-valor"></a>
+## 6.10 `Map`: el diccionario clave-valor
 
 `Map` es la estructura clave-valor de ES6 (ECMA 2015). A diferencia de un objeto plano `{}`: la clave **puede ser cualquier tipo** (no sólo `string`/`symbol`). De hecho lo usaremos con **objetos** como valor. NO tiene los métodos de Array (filter, map, etc...) 
 
@@ -687,8 +669,8 @@ graph LR
 | **Entrada** | `new Map(Object.entries(obj))` | **Post-`JSON.parse`**: Búsquedas $O(1)$ en memoria. |
 | **Salida** | `Object.fromEntries(map)` | **Pre-`JSON.stringify`**: Formato compatible con red/storage. |
 
-<a id="612-set-conjunto-de-valores-únicos"></a>
-## 6.12 Set: conjunto de valores únicos
+<a id="611-set-conjunto-de-valores-únicos"></a>
+## 6.11 Set: conjunto de valores únicos
 
 Un `Set<T>` guarda valores **sin repetición**: intentar añadir un valor que ya existe no tiene efecto. Es la estructura ideal para deduplicar listas y para cachés de pertenencia (`has()` es O(1)). Ejemplo: Gestión de carritos de compras o favoritos: evitamos que el usuario añada dos veces el mismo ID de producto
 
@@ -731,8 +713,8 @@ console.log([...diferenciaSimetrica]); // [1, 2, 5, 6]
 ```
 
 
-<a id="613-cuándo-usar-array-y-cuándo-mapset"></a>
-## 6.13 ¿Cuándo usar Array y cuándo Map/Set?
+<a id="612-cuándo-usar-array-y-cuándo-mapset"></a>
+## 6.12 ¿Cuándo usar Array y cuándo Map/Set?
 
 Tres estructuras para lo mismo (guardar datos) con comportamientos distintos. Esta tabla resume cuándo conviene cada una:
 

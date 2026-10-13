@@ -27,7 +27,7 @@ Haz clic en cada apunte para ver el código TypeScript detallado con explicacion
 
 
 - Ejemplos ejecutables: bloques "📦 Ejemplo completo" al final de cada apunte de [`apuntes/s02/`](apuntes/s02/).
-- Ejercicios: bloques 1–12 del [catálogo canónico](../ejerciciosTS/ejerciciosTS.md). Las soluciones resueltas están en `ejerciciosTS/<NN>/solucion.ts` (una carpeta `ejerciciosTS/NN` por bloque). El bloque 13 pasa a la Sesión 3 como **23 · Práctica integrada**.
+- Ejercicios: bloques 1–12 del [catálogo canónico](../ejerciciosTS/ejerciciosTS.md). Las soluciones resueltas están en `ejerciciosTS/<NN>/solucion.ts` (una carpeta `ejerciciosTS/NN` por bloque). El bloque de práctica integrada pasa a la Sesión 3 como **20 · Práctica integrada**.
 
 ---
 

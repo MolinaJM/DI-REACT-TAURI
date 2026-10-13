@@ -128,7 +128,7 @@ let dato: unknown = JSON.parse('{"edad": 30}');
 console.log(dato.edad); // Error: Object is of type 'unknown'. No peta, pero no está bien hecho
 if (typeof dato === "object" && dato !== null) {
     // aquí `dato` ya está estrechado a object y se puede usar
-    const obj = dato as Record<string, unknown>; // `Record` se explica en 07_Estructuras_de_Datos.md §7.11
+    const obj = dato as Record<string, unknown>; // `Record` se explica en 07_Estructuras_de_Datos.md §7.10
     console.log(obj.edad); // Sin error
 }
 ```

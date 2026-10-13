@@ -55,7 +55,8 @@ gen/
 !ejerciciosTS/10/
 !ejerciciosTS/11/
 !ejerciciosTS/12/
-# !ejerciciosTS/13/ # RETO, no subir
+# !ejerciciosTS/reto-s02/  # RETO S02, no subir
+# !ejerciciosTS/13/
 # !ejerciciosTS/14/
 # !ejerciciosTS/15/
 # !ejerciciosTS/16/
@@ -63,7 +64,6 @@ gen/
 # !ejerciciosTS/18/
 # !ejerciciosTS/19/
 # !ejerciciosTS/20/
-# !ejerciciosTS/21/
 
 # ===========================================================================
 #  >>> SESIÓN 02 <<  JMM - quitamos el `#` para revelar el material de TS

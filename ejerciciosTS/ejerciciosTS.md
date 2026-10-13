@@ -24,7 +24,7 @@
 | **P4 · Útil pero dilatable** | Según caso; no bloquea. |
 | **P5 · Prescindible** | Se omite sin problema (p. ej. overloads, métodos ES2023/ES2025). |
 
-Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 · P4 = 0 · P5 reservado**.
+Resumen sobre los **20 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · P4 = 0 · P5 reservado**.
 
 > 📌 **Qué indica cada columna.** **Prio** es la prioridad del bloque (P1–P5, tabla de arriba). **Por qué (React/Tauri)** resume la utilidad **concreta** de ese bloque para escribir una app: qué patrones de componente entrena (props, estado, JSX), qué hooks prepara (`useState` → tupla `[valor, setter]`, `useEffect` → carga, `useReducer` → `switch`+`never`) y cómo se integra con Tauri (`invoke`, persistencia, validación de datos). **Ese mismo texto es el que encabeza cada bloque del catálogo**, para que sepas de antemano para qué sirve lo que vas a practicar.
 
@@ -47,15 +47,14 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 
 | Bloque | Ejercicio | Prio | Por qué (React/Tauri) |
 |---|---|---|---|
-| 14 · Arrays y Tuplas | [14](14/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX. |
-| 15 · Arrays: métodos fundamentales | [15](15/solucion.ts) | **P1** | `map`/`filter`/`reduce` para pintar listas y transformar datos; el día a día del JSX. |
-| 16 · Set | [16](16/solucion.ts) | **P3** | Deduplicar y caché de pertenencia con `planetas2.json` (JSON suelto); operaciones entre conjuntos; serialización Set↔array. |
-| 17 · Map | [17](17/solucion.ts) | **P3** | Índice de búsqueda O(1) y agrupación con `planetas2.json` (JSON suelto); serialización Map↔objeto; `Record` cubre la mayoría de casos. |
-| 18 · Objetos en profundidad | [18](18/solucion.ts) | **P2** | Entidades, formularios, JSON y clonado **sin mutar** el estado (regla de React). |
-| 19 · Desestructuración/spread/optional chaining | [21](21/solucion.ts) | **P1** | Destructuring de props en la firma, spread de `setState`, `?.`/`??`: lo primero de cada componente. Se imparte en Estructuras de Datos (§7.12). |
-| 20 · Programación asíncrona | [20](20/solucion.ts) | **P1** | `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`. |
-| 22 · Utility Types *(optativo)* | [19](19/solucion.ts) | **P3** | `Partial`/`Pick`/`Omit`/`Record`: derivar tipos para formularios y props; se imparte en Generics (`s03/10`, optativo). |
-| 23 · Práctica integrada | — | **P1** | Integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real. |
+| 13 · Arrays y Tuplas | [13](13/solucion.ts) | **P2** | La tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX. |
+| 14 · Arrays: métodos fundamentales | [14](14/solucion.ts) | **P1** | `map`/`filter`/`reduce` para pintar listas y transformar datos; el día a día del JSX. |
+| 15 · Set | [15](15/solucion.ts) | **P3** | Deduplicar y caché de pertenencia con `planetas2.json` (JSON suelto); operaciones entre conjuntos; serialización Set↔array. |
+| 16 · Map | [16](16/solucion.ts) | **P3** | Índice de búsqueda O(1) y agrupación con `planetas2.json` (JSON suelto); serialización Map↔objeto; `Record` cubre la mayoría de casos. |
+| 17 · Objetos en profundidad | [17](17/solucion.ts) | **P2** | Entidades, formularios, JSON y copias **sin mutar** el estado (regla de React). |
+| 18 · Programación asíncrona | [18](18/solucion.ts) | **P1** | `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`. |
+| 19 · Utility Types *(optativo)* | [19](19/solucion.ts) | **P3** | `Partial`/`Pick`/`Omit`/`Record`: derivar tipos para formularios y props; se imparte en Generics (`s03/10`, optativo). |
+| 20 · Práctica integrada | — | **P1** | Integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real. |
 
 
 ## Sesión 2: Introducción a TypeScript (Parte 1)
@@ -225,9 +224,9 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 
 ## Sesión 3: Introducción a TypeScript (Parte 2)
 
-<a id="14-arrays-y-tuplas"></a>
+<a id="13-arrays-y-tuplas"></a>
 
-### 14. Arrays y Tuplas
+### 13. Arrays y Tuplas
 
 
 > 🎯 Prioridad **P2** — la tupla `[valor, setter]` de `useState` y las listas que recorres en el JSX.
@@ -244,9 +243,9 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 10. Estás procesando datos de un usuario almacenados en una tupla y necesitas separar cada campo. Dada `const usuario: [number, string, boolean] = [1, "Ana", true]`, desestructúrala en variables individuales tipadas explícitamente.
 
 
-<a id="15-arrays-métodos-fundamentales"></a>
+<a id="14-arrays-métodos-fundamentales"></a>
 
-### 15. Arrays: métodos fundamentales
+### 14. Arrays: métodos fundamentales
 
 
 > 🎯 Prioridad **P1** — `map`/`filter`/`reduce` para pintar listas y transformar datos; el día a día del JSX.
@@ -268,7 +267,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 >
 > **Y sin wrapper hay dos formas de encontrártelo** (y se consumen distinto):
 > - **Corchetes → array en la raíz**, como este `planetas2.json`: el import **ya es** el array → `const planetas: Planeta[] = datos;`.
-> - **Llaves → objeto en la raíz**: los datos cuelgan de claves (p. ej. cada planeta colgado de su nombre). Cómo se explora un objeto así se ve en el bloque 18.
+> - **Llaves → objeto en la raíz**: los datos cuelgan de claves (p. ej. cada planeta colgado de su nombre). Cómo se explora un objeto así se ve en el bloque 17.
 >
 > ⚠️ Lo que **no** te puedes encontrar: `{ { ... }, { ... } }` — objetos sueltos entre llaves. Las llaves exigen `"clave": valor`; lo suelto va entre **corchetes** `[ ]`.
 >
@@ -284,9 +283,9 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 6. Estás trabajando con listas de datos y necesitas crear copias que puedas modificar sin afectar la original. Crea una copia de un array con `slice()` y con el spread `[...arr]`, y modifica la copia sin afectar al original (contrasta con `sort` que sí muta).
 
 
-<a id="16-set-conjunto-de-valores-únicos"></a>
+<a id="15-set-conjunto-de-valores-únicos"></a>
 
-### 16. Set: conjunto de valores únicos
+### 15. Set: conjunto de valores únicos
 
 
 > 🎯 Prioridad **P3** — deduplicar, caché de pertenencia y operaciones entre conjuntos: casos concretos.
@@ -301,9 +300,9 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
    - (f) Serializa el conjunto de climas (a) a JSON (`JSON.stringify([...set])` — un `Set` se serializa como array) y deserialízalo de vuelta (`new Set<string>(JSON.parse(json))`), comprobando que `has()` sigue funcionando.
 
 
-<a id="17-map-diccionario-clave-valor"></a>
+<a id="16-map-diccionario-clave-valor"></a>
 
-### 17. Map: diccionario clave-valor
+### 16. Map: diccionario clave-valor
 
 
 > 🎯 Prioridad **P3** — diccionario clave-valor: índice de búsqueda O(1), agrupación y serialización (p. ej. caché de respuestas de `invoke`): `Record` cubre la mayoría de casos.
@@ -317,47 +316,31 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
    - (e) Serializa el índice (a) a JSON con `JSON.stringify(Object.fromEntries(...))` y deserialízalo de vuelta a `Map` con `new Map(Object.entries(JSON.parse(...)))`, comprobando que la búsqueda sigue funcionando.
 
 
-<a id="18-objetos-en-profundidad"></a>
+<a id="17-objetos-en-profundidad"></a>
 
-### 18. Estructuras de Datos - Objetos en profundidad
+### 17. Estructuras de Datos - Objetos en profundidad
 
 
-> 🎯 Prioridad **P2** — entidades, formularios, JSON y clonado **sin mutar** el estado (regla de React).
+> 🎯 Prioridad **P2** — entidades, formularios, JSON y copias **sin mutar** el estado (regla de React).
 
 1. Estás explorando las propiedades de un objeto para inspeccionar su contenido. Dado un objeto `persona`, usa `Object.keys`, `Object.values` y `Object.entries`.
 2. Estás extrayendo datos específicos de un objeto y necesitas hacerlo de forma concisa. Usa destructuring básico: alias y valores por defecto.
-3. Estás clonando un objeto complejo y necesitas preservar tipos como `Date` o `Map` que `JSON.parse` no maneja. Clona un objeto con `structuredClone` — ¿qué tipos preserva que `JSON.parse(JSON.stringify(x))` no?
+3. Estás duplicando un objeto complejo para editarlo sin tocar el original. Crea una copia **superficial** con `Object.assign({}, obj)` y comprueba que los objetos anidados siguen compartidos (al mutar la copia cambia el original); después crea una copia **profunda** con `JSON.parse(JSON.stringify(obj))` y observa qué se pierde por el camino: los `Date` vuelven como `string` y `Set`/`Map` no sobreviven.
 4. Estás protegiendo un objeto de modificaciones accidentales. Define el interface `Config { readonly url; readonly port; readonly debug }` (en `tipos.ts`), usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
-5. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface que tipa el JSON (`PlanetaJSON`, con `films?`) se define en `tipos.ts`. Importa `../datos/planetas2.json` con el atributo `with { type: "json" }` (import normal; nunca `node:fs` ni `fetch` sobre el fichero; el JSON va **suelto** en la raíz, sin envoltorio `planetas`, como en los bloques 16 y 17) y escribe: (a) `resumenPlaneta(p: PlanetaJSON): string` que desestructura el planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 5 películas"`, y `"... · 0 películas"` si faltara `films`); (b) `actualizarPoblacion(planetas: readonly PlanetaJSON[], name: string, population: number): PlanetaJSON[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y (c) `planetaInmutable(name: string): PlanetaJSON` que localiza el planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (planeta y array `films`), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
+5. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface que tipa el JSON (`PlanetaJSON`, con `films?`) se define en `tipos.ts`. Importa `../datos/planetas2.json` con el atributo `with { type: "json" }` (el JSON va **suelto** en la raíz, sin envoltorio `planetas`, como en los bloques 15 y 16) y escribe: 
+- (a) `resumenPlaneta(p: PlanetaJSON): string` que desestructura el planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 5 películas"`, y `"... · 0 películas"` si faltara `films`); 
+- (b) `actualizarPoblacion(planetas: readonly PlanetaJSON[], name: string, population: number): PlanetaJSON[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y 
+- (c) `planetaInmutable(name: string): PlanetaJSON` que localiza el planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (planeta y array `films`), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
 
 
-<a id="19-desestructuración-spreadrest-y-optional-chaining-puente-a-react"></a>
+<a id="18-programación-asíncrona-promesas-y-asyncawait"></a>
 
-### 19. Desestructuración, spread/rest y optional chaining (puente a React)
-
-
-> 🔑 **Puente a React.** Es lo primero que usarás en **cada** componente: destructuring de `props` en la firma de la función, `const [valor, setValor] = useState(...)`, `setState({ ...prev, ... })` y `?.`/`??` para navegar datos anidados (API, store). **Prioridad máxima antes de S04.**
-> 🎯 Prioridad **P1** — destructuring de props en la firma, spread de `setState`, `?.`/`??`: lo primero de cada componente.
-
-1. Estás escribiendo un componente de React que recibe sus datos a través de `props`. Define el interface `TarjetaProps { nombre, edad, activo }` (en `tipos.ts`) y crea `Tarjeta({ nombre, edad, activo })` que reciba el objeto como parámetro y lo desestructure en la firma (patrón `props`). Devuelve el nombre, la edad y si está en línea.
-2. Estás implementando un mini hook que simula `useState` y devuelve una tupla con el valor y su setter. Desestructura la tupla `[valor, setValor]` que devuelve una factoría `useMiniEstado` (patrón `useState`). Escribe `incrementarContador` que sume 1.
-3. Estás procesando la respuesta de una API (swapi) con datos anidados y necesitas extraer campos con valores por defecto. Define el interface `RespuestaPlaneta` (en `tipos.ts`) con la forma `{ datos: { planeta: { name, climate?, films? } } }`. Implementa `resumenPlaneta(resp)` con desestructuración **anidada** de `resp.datos.planeta`, extrayendo `name`, `climate` (default `"desconocido"`) y el primer film de `films` (default `"sin films"`) en una sola línea.
-4. Estás pasando todos los campos de un objeto como props a un componente excepto uno. Define el interface `Pelicula` (en `tipos.ts`). Usa **rest** en destructuring: `separarId(pelicula)` debe separar `id` y devolver el resto (el patrón de `<Componente {...resto} />`).
-5. Estás actualizando el estado de un componente mezclando una configuración parcial con los valores por defecto. Define el type `ConfigParcial` (en `tipos.ts`) — todas las propiedades de `CONFIG_DEFECTO` opcionales. Usa **spread** de objetos: `mergeConfig(parcial)` mezcla `CONFIG_DEFECTO` con `parcial` en un objeto nuevo sin mutar (patrón `setState({ ...prev, ...parcial })`).
-6. Estás añadiendo un elemento a un array sin mutar el original y necesites encontrar el máximo. Usa **spread** de arrays: `anadirPuntuacion(arr, nueva)` añade sin mutar (alternativa inmutable a `push`) y `mejorPuntuacion(...args)` despliega un array en `Math.max`.
-7. Estás navegando por datos anidados que pueden no existir y necesitas un valor por defecto. Define el interface `Carrito` (en `tipos.ts`) con `cliente?.envio?.direccion/ciudad/codigoPostal` opcionales. Usa **optional chaining** `?.` + `??`: `direccionEnvio(carrito)` navega `carrito.cliente.envio.direccion` (todo opcional) con default `"Sin dirección"`.
-8. Estás definiendo las props de un botón que tiene valores por defecto para la etiqueta y el estado. Desestructura en el parámetro con **valores por defecto**: `Boton({ etiqueta = "Enviar", deshabilitado = false })`.
-9. Estás implementando un update funcional como el de React que evita clausuras obsoletas. Implementa el **update funcional**: `acumularConUpdater()` con un setter que reciba `(prev) => prev + …` y encadena tres actualizaciones (`+1`, `+2`, `+3`) — es el `setCuenta((c) => c + 1)` de React, que evita clausuras obsoletas.
-
-
-<a id="20-programación-asíncrona-promesas-y-asyncawait"></a>
-
-### 20. Programación asíncrona (promesas y async/await)
+### 18. Programación asíncrona (promesas y async/await)
 
 
 > 🎯 Prioridad **P1** — `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`.
 
-> 🌌 **Aquí SÍ se hace `fetch` real:** a diferencia de los bloques 15–19 (donde los datos de swapi estaban hardcodeados porque la asincronía aún no se había impartido), en este bloque ya se enseña `async/await` y `Promise`, así que el ejercicio 2 hace una petición real a [swapi.info/api/planets](https://swapi.info/api/planets).
+> 🌌 **Aquí SÍ se hace `fetch` real:** a diferencia de los bloques 14–17 (donde los datos de swapi estaban hardcodeados porque la asincronía aún no se había impartido), en este bloque ya se enseña `async/await` y `Promise`, así que el ejercicio 2 hace una petición real a [swapi.info/api/planets](https://swapi.info/api/planets).
 
 1. Estás implementando una función que simule un retardo antes de completar una operación. Crea una función `esperar(ms)` que devuelva una promesa que se resuelva tras `ms` milisegundos.
 2. Estás construyendo una función que carga datos desde una API real. Define el interface `Planeta` (en `tipos.ts`). Escribe una función `async` `cargarPlanetas` que haga `fetch` a `https://swapi.info/api/planets` y devuelva la lista de planetas (tipada como `Planeta[]`).
@@ -371,9 +354,9 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 8. Estás simulando una operación asíncrona con un callback. Usa `setTimeout` para simular una operación asíncrona: `simularEspera(ms, callback)` que llame al `callback` tras `ms` milisegundos. Ordena los `console.log` para comprobar que el callback se ejecuta después.
 
 
-<a id="22-utility-types"></a>
+<a id="19-utility-types"></a>
 
-### 22. Utility Types *(optativo)*
+### 19. Utility Types *(optativo)*
 
 
 > ⚠️ **Bloque optativo.** Se imparte en [`s03/10_Generics.md`](../sesiones/apuntes/s03/10_Generics.md) (capítulo 10, optativo). No entra en el temario oficial ni en los exámenes; es refuerzo para quien quiera usar `Partial`/`Pick`/`Omit`/`Record` con soltura en formularios y props.
@@ -388,8 +371,8 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 4. Estás limpiando un tipo unión que contiene `null` o `undefined` y solo quieres las partes válidas. Define el interface `RespuestaAPI` (en `tipos.ts`) que modele una respuesta con campos que pueden ser `null`. Usa `NonNullable` para eliminar `null | undefined` de los campos.
 
 
-<a id="23-práctica-integrada"></a>
+<a id="20-práctica-integrada"></a>
 
-### 23. Práctica integrada
+### 20. Práctica integrada
 > Realización de una práctica que integre todos los conocimientos vistos para TS.
 > 🎯 Prioridad **P1** — integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real.
