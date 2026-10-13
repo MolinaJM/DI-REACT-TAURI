@@ -296,7 +296,7 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
    - (a) `climasUnicos(planetas: readonly Planeta[]): Set<string>` — los climas de todos los planetas, sin repetir.
    - (b) `peliculas(planetas: readonly Planeta[]): Set<string>` — todas las películas en las que aparecen los planetas, sin repetir (`films` es opcional).
    - (c) `nombresDe(planetas: readonly Planeta[]): Set<string>` y `existePlaneta(nombres: Set<string>, name: string): boolean` — caché de pertenencia: comprobar en O(1) si un planeta existe.
-   - (d) Deriva dos conjuntos de nombres — `poblados` (`population > 0`) y `temperados` (`climate === "temperate"`) — y calcula su unión, intersección y diferencia con el enfoque manual (`new Set([...A, ...B])`, `[...A].filter(x => B.has(x))`).
+   - (d) Deriva dos conjuntos de nombres — `poblados` (`population > 0`) y `temperatura` (`climate === "temperate"`) — y calcula su unión, intersección y diferencia con el enfoque manual (`new Set([...A, ...B])`, `[...A].filter(x => B.has(x))`).
    - (e) Repite (d) con los métodos nativos ES2025 (`union`, `intersection`, `difference`).
    - (f) Serializa el conjunto de climas (a) a JSON (`JSON.stringify([...set])` — un `Set` se serializa como array) y deserialízalo de vuelta (`new Set<string>(JSON.parse(json))`), comprobando que `has()` sigue funcionando.
 

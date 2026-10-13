@@ -550,7 +550,7 @@ const punto: readonly [number, number] = [10, 20]; // tupla readonly
 
 - `readonly` es la garantía **en el tipo** de la regla de §6.2: el compilador te lo impide, no tu disciplina. Vale tanto para arrays (`readonly number[]`) como para tuplas (`readonly [number, number]`), y como tipo de parámetro: `function sumar(arr: readonly number[]): number`.
 - Ojo: es "shallow". El array/tupla en sí no se puede reasignar elemento a elemento, pero los **objetos** que contenga sí podrían mutarse si no son a su vez `readonly`.
-- `as const` (sesión 04) produce arrays de este estilo de forma implícita: `const RUTAS = ["/inicio", "/catalogo"] as const;` → tipo `readonly ["/inicio", "/catalogo"]`.
+- `as const` (s02/02_ConversionTipos, §Aserciones de tipo — variante 4) produce arrays de este estilo de forma implícita: `const RUTAS = ["/inicio", "/catalogo"] as const;` → tipo `readonly ["/inicio", "/catalogo"]`.
 
 ### b. Tuplas etiquetadas (named tuples)
 
@@ -566,7 +566,7 @@ console.log(centro[0]); // ✅ Imprime 40.4168 (por índice)
 type Coordenadas = [x: number, y: number, z?: number]; // el último puede ser opcional
 ```
 
-- Es el caso que vimos en s02 con el type alias: `type ApiResponse = [status: number, message: string]`. Las etiquetas no cambian el comportamiento de la tupla, solo lo documentan.
+- Es el caso que vimos en s02/01_SintaxisBasica (§1.3 Interfaces y Type Aliases) con el type alias: `type ApiResponse = [status: number, message: string]`. Las etiquetas no cambian el comportamiento de la tupla, solo lo documentan.
 - Si además quieres que no se pueda modificar, combina ambas cosas: una tupla `readonly` etiquetada → `const fijo: readonly [lat: number, lng: number] = [0, 0];`.
 
 
