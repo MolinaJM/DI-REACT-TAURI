@@ -234,13 +234,13 @@ Resumen sobre los **21 bloques con ejercicio**: **P1 = 10 · P2 = 6 · P3 = 5 ·
 
 1. Estás procesando diferentes tipos de datos en tu app. Crea un array de números, otro de strings y otro mixto `(string | number)[]`.
 2. Estás trabajando con datos estructurados de un usuario que tienen un número fijo de campos con tipos distintos. Define una tupla `[string, number, boolean]` con datos de un usuario. Desestructúrala.
-3. Estás trabajando con coordenadas geográficas y necesitas que ciertos datos no se modifiquen. Crea una tupla etiquetada `[lat: number, lng: number]` y un array `readonly` de números. Intenta modificar ambos y observa los errores.
+3. Estás trabajando con coordenadas geográficas y necesitas que ciertos datos no se modifiquen. Crea una tupla etiquetada `[lat: number, lng: number]` y un array `readonly` de números. Intenta modificar ambos y observa los errores. NOTA: La tupla etiquetada se explicó en 01_SintaxisBasica.md.
 4. Estás calculando el puntaje total de una lista de números accediendo a cada elemento. Escribe una función que reciba un `ReadonlyArray<number>` y devuelva su suma accediendo por índice.
 5. Estás desarrollando un juego donde un punto se mueve en un plano 2D. Define una tupla `Coordenadas2D` de exactamente dos números `[x, y]` y crea `moverPunto(tupla, dx, dy)` que devuelva una nueva tupla con la posición actualizada.
 6. Estás trabajando con una lista de ciudades y prefieres la sintaxis genérica explícita. Declara un array de strings con la sintaxis genérica `Array<string>` e inicialízalo con tres ciudades.
 7. Estás diseñando un sistema de respuestas que puede contener tanto números como booleanos. Crea un array `respuestas` que contenga solo `boolean | number` y rellénalo con al menos 4 elementos variados.
 8. Estás modelando la respuesta de una llamada HTTP con un código de estado y un posible mensaje de error. Define una tupla `RespuestaHTTP` que contenga un código de estado (`number`, obligatorio) y un mensaje de error (`string`, opcional).
-9. Estás trabajando con puntos cartesianos y quieres que no se modifiquen por accidente. Crea una tupla `readonly [number, number]` para un punto cartesiano e intenta modificarla por asignación directa. ¿Qué ocurre?
+9. Estás trabajando con puntos cartesianos y quieres que no se modifiquen por accidente. Crea una tupla `readonly [number, number]` para un punto cartesiano e intenta modificarla por asignación directa. ¿Qué ocurre? Una tupla readonly es como cualquier objeto `readonly`, evita que el objeto sea mutable.
 10. Estás procesando datos de un usuario almacenados en una tupla y necesitas separar cada campo. Dada `const usuario: [number, string, boolean] = [1, "Ana", true]`, desestructúrala en variables individuales tipadas explícitamente.
 
 
