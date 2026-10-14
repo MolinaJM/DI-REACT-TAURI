@@ -29,6 +29,7 @@
       - [Ejemplo 3: Conversión básica](#ejemplo-3-conversión-básica)
     - [Resumen](#resumen)
   - [7.9 Tipos de Objeto en TypeScript](#79-tipos-de-objeto-en-typescript)
+  - [7.10 `Record<K, V>`](#710-record-k-v)
 - 🧪 **Ejercicios:** [Objetos en profundidad](../../../ejerciciosTS/ejerciciosTS.md#17-objetos-en-profundidad)
 
 ---
@@ -247,6 +248,7 @@ interface FuenteB {
   b: number;
 }
 
+//El primer {} es el objeto destino, los siguientes son los objetos fuente
 const destino: { a: number; b: number } = Object.assign({}, { a: 1 }, { b: 2 });
 console.log(destino); // { a: 1, b: 2 }
 ```
@@ -514,7 +516,7 @@ interface Config {
   readonly puerto: number;
 }
 
-// tipo record: "diccionario" de clave string -> valor
+// tipo record: "diccionario" de clave string -> valor (detalle en §7.10)
 // Lo usaremos cuando lleguemos a Tauri
 type Diccionario = Record<string, string | number>;
 
@@ -533,6 +535,43 @@ type Estado = { tipo: "cargando" } | { tipo: "listo"; datos: string[] };
 > **Declaration merging (fusión de declaraciones):** si defines dos o más interfaces con el mismo nombre en diferentes partes del código (o incluso en diferentes archivos), TypeScript las junta automáticamente en una sola interfaz combinada. Esto solo funciona con `interface`, no con `type` (para `type` se usa `&`). En React es útil para extender props o configuraciones desde múltiples módulos.
 
 > 📖 **Los operadores de tipo `keyof`, `typeof` y `satisfies`** (que combinan con `Record<K, V>` en `Partial<Record<keyof T, string>>`, el patrón de errores de formulario en React) se explican en [`s03/10_Generics.md` §3](10_Generics.md#3-keyof-typeof-y-satisfies), junto a los genéricos que los hacen útiles.
+
+<a id="710-record-k-v"></a>
+## 7.10 `Record<K, V>`
+
+`Record<K, V>` es un **utility type** de TypeScript que describe un objeto "diccionario": un conjunto de propiedades cuya **clave** es de tipo `K` y cuyo **valor** es de tipo `V`. Sirve cuando no sabes cuántas propiedades vas a tener ni cómo se van a llamar, pero sí sabes qué tipo de dato tendrá la llave y qué tipo de dato tendrá el valor. Nosotros lo hemos utilizado en los type guards.
+
+Record y Map ambos son pareja clave-valor. La diferencia principal es que Map es un objeto completo (con sus funciones) y Record es un objeto genérico de JS.
+
+```typescript
+type Diccionario = Record<string, number>;          // cualquier clave string -> number
+type Traduccion = Record<"usuario" | "admin", string>; // solo esas dos claves -> string
+
+// Las claves son strings ("Luke", "Leia") y los valores son números (17)
+const destinoRecord: Record<string, number> = {
+  Luke: 17,
+  Leia: 17
+};
+console.log(destinoRecord); // { Luke: 17, Leia: 17 }
+console.log(destinoRecord.Luke); // 171
+
+// Creamos el Map indicando que las claves son strings y los valores números
+const destinoMap = new Map<string, number>();
+// Añadimos los valores usando .set()
+destinoMap.set("Luke", 17);
+destinoMap.set("Leia", 17);
+
+console.log(destinoMap); // Map(2) { 'Luke' => 17, 'Leia' => 17 }
+console.log(destinoMap.get("Luke")); // 17
+```
+
+###
+
+###
+
+> [!IMPORTANT]
+> Regla práctica: usa `interface` para entidades, `Record<K, V>` para "diccionarios" tipados y `Map` cuando necesites la estructura en ejecución (cachés de búsqueda). Un `Record` es un objeto plano de JS; un `Map` es una colección propia.
+
 
 
 ---

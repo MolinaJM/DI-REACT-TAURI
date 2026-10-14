@@ -327,13 +327,13 @@ Resumen sobre los **20 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 2. Estás extrayendo datos específicos de un objeto y necesitas hacerlo de forma concisa. Usa destructuring básico: alias y valores por defecto.
 3. Estás duplicando un objeto complejo para editarlo sin tocar el original. Crea una copia **superficial** con `Object.assign({}, obj)` y comprueba que los objetos anidados siguen compartidos (al mutar la copia cambia el original); después crea una copia **profunda** con `JSON.parse(JSON.stringify(obj))` y observa qué se pierde por el camino: los `Date` vuelven como `string` y `Set`/`Map` no sobreviven.
 4. Estás protegiendo un objeto de modificaciones accidentales. Define el interface `Config { readonly url; readonly port; readonly debug }` (en `tipos.ts`), usa `Object.freeze` y comprueba que el objeto es readonly en runtime.
-5. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface que tipa el JSON (`PlanetaJSON`, con `films?`) se define en `tipos.ts`. Importa `../datos/planetas2.json` con el atributo `with { type: "json" }` (el JSON va **suelto** en la raíz, sin envoltorio `planetas`, como en los bloques 15 y 16) y escribe: 
+5. Estás construyendo una vista de tarjetas de planetas y notas que el array importado se comporta de forma extraña al "cambiarlo": el módulo JSON es un **único objeto compartido por todos los que lo importan**, así que hay que consumirlo **sin mutarlo**, igual que el estado de un componente en React. El interface que tipa el JSON (`PlanetaJSON`, con `films?`) se define en `tipos.ts`. Importa `../datos/planetas2.json` con el atributo `with { type: "json" }`; el JSON va **suelto** en la raíz, sin envoltorio `planetas`, como en los bloques 15 y 16) y escribe: 
 - (a) `resumenPlaneta(p: PlanetaJSON): string` que desestructura el planeta y usa `??` para el array opcional `films` (`"Tatooine · 200000 hab. · 5 películas"`, y `"... · 0 películas"` si faltara `films`); 
 - (b) `actualizarPoblacion(planetas: readonly PlanetaJSON[], name: string, population: number): PlanetaJSON[]` que devuelve un **array nuevo** con la población actualizada **sin tocar el original** (spread + `map`, nunca `push` sobre el array recibido); y 
 - (c) `planetaInmutable(name: string): PlanetaJSON` que localiza el planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (planeta y array `films`), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
 
 
-<a id="18-programación-asíncrona-promesas-y-asyncawait"></a>
+<a iSíd="18-programación-asíncrona-promesas-y-asyncawait"></a>
 
 ### 18. Programación asíncrona (promesas y async/await)
 
