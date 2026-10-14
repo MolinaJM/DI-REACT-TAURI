@@ -553,7 +553,7 @@ const destinoRecord: Record<string, number> = {
   Leia: 17
 };
 console.log(destinoRecord); // { Luke: 17, Leia: 17 }
-console.log(destinoRecord.Luke); // 171
+console.log(destinoRecord.Luke); // 17
 
 // Creamos el Map indicando que las claves son strings y los valores números
 const destinoMap = new Map<string, number>();
