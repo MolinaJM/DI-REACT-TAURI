@@ -545,7 +545,11 @@ Record y Map ambos son pareja clave-valor. La diferencia principal es que Map es
 
 ```typescript
 type Diccionario = Record<string, number>;          // cualquier clave string -> number
-type Traduccion = Record<"usuario" | "admin", string>; // solo esas dos claves -> string
+type Passwords = Record<"usuario" | "admin", string>; // solo esas dos claves -> string
+
+//Da error por duplicidad
+//const p1:Passwords = {admin:"YO", admin:"TU"}
+const p2:Passwords = {admin:"YO1278!_", usuario:"TU37883??_"}
 
 // Las claves son strings ("Luke", "Leia") y los valores son números (17)
 const destinoRecord: Record<string, number> = {
