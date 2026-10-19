@@ -37,7 +37,7 @@
 <a id="7-estructura-de-datos-objeto-en-typescript-es6"></a>
 # 7. Estructura de Datos Objeto en TypeScript (ES6)
 
-Los objetos en JavaScript son una de las estructuras de datos más fundamentales y poderosas. Son colecciones de **pares clave-valor** y se utilizan para representar datos estructurados. En TypeScript, los objetos se describen con `interface` o `type`, lo que permite pasar de "cualquier forma" (JS dinámico) a formas conocidas de antemano que el compilador valida.
+Los objetos en JavaScript son una de las estructuras de datos más fundamentales y poderosas. Son colecciones de **pares clave-valor** y se utilizan para representar **datos estructurados**. En TypeScript, los objetos se describen con `interface` o `type`, lo que permite pasar de "cualquier forma" (JS dinámico) a formas conocidas de antemano que el compilador valida.
 
 <a id="71-formas-de-crear-objetos"></a>
 ## 7.1 Formas de crear Objetos
@@ -101,7 +101,7 @@ delete persona.profesion;
 ```
 
 > [!NOTE]
-> Si declaras `profesion` como opcional (`profesion?: string`), el borrado es más natural para TypeScript. Si la propiedad es obligatoria, `delete persona.profesion` produce un error de tipo (la propiedad deja de existir pero su tipo no lo refleja).
+> Si declaras `profesion` como opcional (`profesion?: string`), el borrado es más natural para TypeScript. Si la propiedad es obligatoria, `delete persona.profesion` produce un error de tipo (la propiedad deja de existir pero su tipo no lo refleja. Al intentar usar ese dato saldrá `undefined`).
 
 <a id="75-métodos-importantes"></a>
 ## 7.5 Métodos Importantes
@@ -133,31 +133,33 @@ type ClavesPersona = keyof Persona; // "nombre" | "edad" | "profesion". ACTÚA E
 ```
 
 > [!NOTE]
-> **`Object.keys` (runtime) no es `keyof` (compile-time).** `Object.keys(obj)` es un método de JavaScript que devuelve un `string[]` **en tiempo de ejecución**: no sabe nada de tipos. Su par "de tipos" es el operador `keyof T`, que devuelve la **unión de las claves de un tipo** y solo existe en compilación:
+> **`Object.keys` (runtime) no es `keyof` (compile-time).** `Object.keys(obj)` es un método de JavaScript que devuelve un `string[]` **en tiempo de ejecución**: no sabe nada de tipos. Su alter-ego "de tipos" es el operador `keyof T`, que devuelve la **unión de las claves de un tipo** y solo existe en compilación.
 
 > [!NOTE]
-> `keyof` es lo que usan los **genéricos** y los **utility types** (`Partial<T>`, `Pick<T, K>`, `Omit<T, K>`, `Record<keyof T, …>`). El puente entre ambos: un genérico indexado con `keyof T` puede recorrer sus campos con `Object.keys` en runtime, y el compilador garantiza que cada `key` es una clave válida (ver `s03/10_Generics.md`).
+> **`keyof`** es lo que usan los **genéricos** y los **utility types** (`Partial<T>`, `Pick<T, K>`, `Omit<T, K>`, `Record<keyof T, …>`).  Los  **utility types** sirven para manejar tipos: transforma, manipula y reutiliza tipos.
+El puente entre ambos: un genérico indexado con `keyof T` puede recorrer sus campos con `Object.keys` en runtime, y el compilador garantiza que cada `key` es una clave válida (ver `s03/10_Generics.md`).
 
 
 1. Usa keyof cuando estés ESCRIBIENDO TIPOS (Para el compilador)
-    - **Dónde se escribe**: En firmas de funciones, genéricos, type o interface.
+    - **Dónde se usan**: En firmas de funciones, genéricos, type o interface.
     - **Para qué sirve**: Es como un vigilante que revisa tu código antes de compilarlo para crear un molde estricto con los nombres exactos de las propiedades (por ejemplo: "nombre" | "edad" | "profesion"). Le dice a TypeScript: "el valor de esta variable solo puede ser una de las claves válidas de este tipo".
     - **Resultado**: Te da autocompletado inteligente y salta un error en el editor antes de que el código llegue a ejecutarse si te equivocas al escribir el nombre de una propiedad.
 
 2. Usa Object.keys() cuando estés EJECUTANDO CÓDIGO (Runtime)
-    - **Dónde se escribe**: En la lógica de tu programa cuando este ya está en marcha y necesitas interactuar con datos reales.
+    - **Dónde se usan**: En la lógica de tu programa cuando este ya está en marcha y necesitas interactuar con datos reales.
     - **Para qué sirve**: Funciona como un inspector que va a tu objeto en tiempo de ejecución, lee su estructura en la memoria del navegador o de Node.js y extrae los nombres de las propiedades reales.
     -  **Resultado** : Te devuelve un Array real de JavaScript en formato de texto (string[]) para que puedas recorrerlo en un bucle, contar cuántas propiedades tiene el objeto, filtrarlas o pintarlas dinámicamente en la pantalla.
 
 Resumen mental para recordarlo siempre:
 
 - keyof es preventivo (Estático): Trabaja en tu editor con las reglas del juego. 
-    No genera código en el archivo final (.js). 
-    Sirve para que tú (o tus genéricos) no escribáis mal una propiedad.
+    - No genera código en el archivo final (.js). 
+    - Sirve para que tú (o tus genéricos) no escribáis mal una propiedad.
+    - Ejemplo: Imagina que estás creando una función genérica para consultar datos de un personaje de Star Wars y quieres que el compilador te asegure que solo pidas propiedades que realmente existen.
 
 - Object.keys() es ejecutivo (Dinámico): Trabaja cuando la aplicación corre en el navegador. 
-    Analiza el objeto real que hay en la memoria RAM en ese preciso instante y te da un array de 
-    JavaScript con el que puedes iterar (.map, .forEach, etc.).
+    - Analiza el objeto real que hay en la memoria RAM en ese preciso instante y te da un array con el que puedes iterar (.map, .forEach, etc.).
+    - Ejemplo: Ahora imagina que haces una petición real a la SWAPI (fetch) y recibes un objeto JSON con los datos de un personaje en la memoria del navegador. Necesitas recorrerlo dinámicamente para pintar una lista en pantalla.
 
 
 
@@ -220,7 +222,7 @@ listarPropiedadesEnEjecucion(persona);
 El método `Object.values(obj)` devuelve un array con los valores de un objeto:
 
 ```typescript
-const valores = Object.values(persona); // (string | number)[]
+const valores = Object.values(persona); // Me devuelve (string | number)[]
 console.log(valores); // ["Juan", 30, "Desarrollador"]
 ```
 
@@ -233,6 +235,7 @@ El método `Object.entries(obj)` devuelve un array de arrays con pares clave-val
 const entradas = Object.entries(persona); // [string, string | number][]
 console.log(entradas);
 // [["nombre", "Juan"], ["edad", 30], ["profesion", "Desarrollador"]]
+// lo podemos recorrer con un for .. of instanciando [clave,valor]
 ```
 
 <a id="754-objectassign"></a>
@@ -248,9 +251,15 @@ interface FuenteB {
   b: number;
 }
 
-//El primer {} es el objeto destino, los siguientes son los objetos fuente
-const destino: { a: number; b: number } = Object.assign({}, { a: 1 }, { b: 2 });
+const fuente1: FuenteA = { a: 1 };
+const fuente2: FuenteB = { b: 2 };
+
+// TypeScript infiere automáticamente que 'destino' es { a: number; b: number }
+const destino = Object.assign({}, fuente1, fuente2);
+
 console.log(destino); // { a: 1, b: 2 }
+
+//Si necesitamos escoger algunas propiedades ya hay que usar los Utility Types
 ```
 
 <a id="755-objectfreeze"></a>
@@ -259,7 +268,8 @@ console.log(destino); // { a: 1, b: 2 }
 El método `Object.freeze(obj)` devuelve el mismo objeto pero marcado como **inmutable en runtime**: no se pueden añadir, modificar ni eliminar propiedades. Es el equivalente en runtime de `readonly` en TypeScript (que solo protege en compile-time).
 
 ```typescript
-//Vamos a suponer que queremos que NO se toque algo, ni en compilación ni en ejecución
+//Vamos a suponer que queremos que e la configuración de un juego NO se toque algo, 
+// ni en compilación ni en ejecución
 
 // 1. Definimos la interfaz con 'readonly' para que TypeScript nos proteja en el editor
 interface Ajustes {
@@ -273,6 +283,7 @@ const ajustes: Ajustes = Object.freeze({
   dificultad: "normal"
 });
 
+
 // 1. PROTECCIÓN EN COMPILE-TIME (TypeScript):
 // Si intentas hacer esto, el editor te pone la línea en rojo de inmediato:
 ajustes.volumen = 100; // Error: Cannot assign to 'volumen' because it is a read-only property.
@@ -284,8 +295,13 @@ ajustes.volumen = 100; // Error: Cannot assign to 'volumen' because it is a read
 console.log("Volumen actual:", ajustes.volumen); // 80
 console.log("¿Está congelado en memoria?", Object.isFrozen(ajustes)); // true
 
+//Prueba 1 :Probar a quitar el Object.freeze a ver qué ocurre
+
 //Muy IMPORTANTE entender lo siguiente....
-//Ahora bien, qué ocurre si quitamos el readonly? nos informa del error? peta??
+//Prueba 2: Ahora bien, qué ocurre si volvemos a congelar el objeto pero
+//quitamos el readonly? Cambia el resultado? nos informa del error? peta??
+
+//Prueba 3: Probar a crear un subobjeto en Ajustes y ver si lo congela o no (shalow)
 ```
 
 > [!NOTE]
@@ -355,7 +371,7 @@ const producto = {
   },
 };
 
-// Desestructuración de propiedades anidadas
+// Desestructuración de propiedades anidadas (no es necesario sacarlas todas)
 const {
   nombre,
   detalles: { peso, precio },
@@ -369,10 +385,21 @@ console.log(precio); // Resultado: 950      (tipo number)
 <a id="77-arrayfrom-en-typescript"></a>
 ## 7.7 `Array.from()` en TypeScript
 
-`Array.from()` crea un array a partir de una secuencia iterable (una cadena, un `Set`, un `Map`, o un objeto "similar a un array" con `length` e índices). Es la forma tipada de convertir "casi-un-array" en array de verdad. Las firmas serían: 
-`Array.from<T>(iterable: Iterable<T> | ArrayLike<T>): T[]` 
-Con función de mapeo (equivale a .map() sobre la conversión):
-`Array.from<S, T>(iterable: Iterable<S> | ArrayLike<S>, mapFn: (v: S, k: number) => T): T[]`;
+Un 'casi-un-array' (o **array-like object**)es un objeto común y corriente que no es un array real (no hereda de Array.prototype), pero que cumple con dos características clave: tiene .length y sus elementos se guardan en claves numéricas. Ej: argumentos en una función.
+
+```typescript
+function mostrarArgumentos(...argumentos: unknown[]) {
+  console.log(arguments.length); // 3 (Tiene length)
+  console.log(arguments[0]);     // "Hola" (Tiene índices numéricos)  
+  // PERO NO ES UN ARRAY REAL:
+  // arguments.push("nuevo"); // ¡Error! push no existe en un objeto casi-un-array
+}
+
+
+mostrarArgumentos("Hola", "mundo", 2026);
+```
+
+`Array.from()` crea un array a partir de una secuencia iterable (una cadena, un `Set`, un `Map`, o un objeto "similar a un array" con `length` e índices). Es la forma tipada de convertir "casi-un-array" en array de verdad. Permite incluso hacer "mapeos", aunque lo más sencillo es crear el Array y luego usar el mapeo normal con (.map)
 ```typescript
 const caracteres: string[] = Array.from("JavaScript");               // ['J', 'a', ...]
 const duplicados: number[] = Array.from([1, 2, 3], (n) => n * 2);    // [2, 4, 6]
@@ -382,11 +409,9 @@ const desdeSet: string[] = Array.from(new Set(["a", "b", "a"]));     // ['a', 'b
 > En React/Tauri te servirá para convertir resultados "iterables" en arrays antes de mapearlos con `.map()` al render.
 
 No confundir con Object.entries() y Object.fromEntries():  
-- Array.from(): Convierte un objeto iterable (como un Set o un Map) o una estructura similar a un array en un Array real.
-
-- Object.entries(): Desmonta un Objeto plano convirtiéndolo en un array de pares clave-valor ([clave, valor]).
-
-- Object.fromEntries(): Hace lo inverso: transforma un array de pares clave-valor ([clave, valor]) o un Map en un Objeto plano.
+- Array.from(): Convierte un objeto iterable (como un Set o un Map o "casi-un-array") en un array en un Array real.
+- Object.entries(): Desmonta un Objeto plano (Object) convirtiéndolo en un array de pares clave-valor ([clave, valor]).
+- Object.fromEntries(): Hace lo inverso, transforma un array de pares clave-valor ([clave, valor]) o un Map en un Objeto plano (Object).
 
  
 <a id="78-métodos-para-trabajar-con-json-en-typescript-jsonstringify-y-jsonparse"></a>
@@ -406,7 +431,7 @@ JSON.stringify(objeto, replacer?, espacio?);
 ```
 
 - `objeto`: El objeto que se va a convertir en una cadena JSON.
-- `replacer` (opcional): Una función que permite personalizar la conversión. Puede ser un array o una función. No lo vamos a utilizar de momento.
+- `replacer` (opcional): Una función que permite personalizar la conversión. Puede ser un array o una función. No lo vamos a utilizar de momento. Ej: tengo un texto en mayúscula y lo cambio a minúscula.
 - `espacio` (opcional): La cantidad de espacio (indentación) que se usará para formatear la cadena JSON resultante.
 
 <a id="ejemplos-de-jsonstringify"></a>
@@ -417,7 +442,7 @@ JSON.stringify(objeto, replacer?, espacio?);
 
 ```typescript
 const usuario = {
-  nombre: "Juan",
+  nombre: "JUAN",
   edad: 30,
   isAdmin: false,
 };
@@ -425,7 +450,7 @@ const usuario = {
 const jsonString: string = JSON.stringify(usuario);
 
 console.log(jsonString);
-// Resultado: {"nombre":"Juan","edad":30,"isAdmin":false}
+// Resultado: {"nombre":"JUAN","edad":30,"isAdmin":false}
 ```
 
 En este ejemplo, el objeto `usuario` se convierte en una cadena JSON simple.
@@ -465,7 +490,7 @@ JSON.parse(cadenaJSON, reviver?);
 ```
 
 - `cadenaJSON`: La cadena JSON que se va a analizar y convertir en un objeto JavaScript.
-- `reviver` (opcional): Una función que permite personalizar la conversión durante el análisis. No lo vamos a usar de momento.
+- `reviver` (opcional): Una función que permite personalizar la conversión durante el análisis. No lo vamos a usar de momento. Ej: pasar a mayúscula un campo string o formatear una fecha (hay gran variabilidad según base de datos destino).
 
 <a id="ejemplos-de-jsonparse"></a>
 ### Ejemplos de `JSON.parse()`
@@ -476,7 +501,8 @@ JSON.parse(cadenaJSON, reviver?);
 ```typescript
 const cadenaJSON = '{"nombre": "Maria", "edad": 35, "isAdmin": false}';
 
-const usuario = JSON.parse(cadenaJSON) as { nombre: string; edad: number; isAdmin: boolean };
+const usuario = JSON.parse(cadenaJSON) as { nombre: string; edad: number; isAdmin: boolean }; //Usamos aserción 
+//por simplificar el ejemplo
 
 console.log(usuario);
 // Resultado: { nombre: 'Maria', edad: 35, isAdmin: false }
@@ -493,7 +519,7 @@ En este ejemplo, la cadena JSON se convierte en un objeto JavaScript llamado `us
 - `JSON.stringify()` se utiliza para convertir un objeto JavaScript en una cadena JSON.
 - `JSON.parse()` se utiliza para convertir una cadena JSON en un objeto JavaScript.
 - Ambos métodos son esenciales para trabajar con la serialización y deserialización de datos en aplicaciones web y comunicaciones cliente-servidor.
-
+- `Replacer` y `Reviver` sirven para conversiones de datos. Son dos caras de la misma moneda y actúan en sentidos totalmente opuestos.
 - Utiliza `JSON.stringify()` con `space` para dar formato legible a los datos JSON.
 - **Limitación:** `JSON.stringify()` no maneja referencias circulares, `undefined`, `Symbol`, ni funciones. Lanza `TypeError` con objetos circulares.
 - En TypeScript, modela los datos con `interface` y valida la entrada con *type guards* antes de usarlos.
@@ -539,19 +565,23 @@ type Estado = { tipo: "cargando" } | { tipo: "listo"; datos: string[] };
 <a id="710-record-k-v"></a>
 ## 7.10 `Record<K, V>`
 
-`Record<K, V>` es un **utility type** de TypeScript que describe un objeto "diccionario": un conjunto de propiedades cuya **clave** es de tipo `K` y cuyo **valor** es de tipo `V`. Sirve cuando no sabes cuántas propiedades vas a tener ni cómo se van a llamar, pero sí sabes qué tipo de dato tendrá la llave y qué tipo de dato tendrá el valor. Nosotros lo hemos utilizado en los type guards.
+`Record<K, V>` es un **utility type** de TypeScript que describe un objeto "diccionario": un conjunto de propiedades cuya **clave** es de tipo `K` y cuyo **valor** es de tipo `V`. Sirve cuando no sabes cuántas propiedades vas a tener ni cómo se van a llamar, pero sí sabes qué tipo de dato tendrá la llave y qué tipo de dato tendrá el valor. Nosotros lo hemos utilizado en los `type guards`.
 
 Record y Map ambos son pareja clave-valor. La diferencia principal es que Map es un objeto completo (con sus funciones) y Record es un objeto genérico de JS.
 
 ```typescript
+//Ej1
 type Diccionario = Record<string, number>;          // cualquier clave string -> number
+
+//Ej2
 type Passwords = Record<"usuario" | "admin", string>; // solo esas dos claves -> string
 
 //Da error por duplicidad
 //const p1:Passwords = {admin:"YO", admin:"TU"}
 const p2:Passwords = {admin:"YO1278!_", usuario:"TU37883??_"}
 
-// Las claves son strings ("Luke", "Leia") y los valores son números (17)
+//Ej3
+//Las claves son strings ("Luke", "Leia") y los valores son números (17)
 const destinoRecord: Record<string, number> = {
   Luke: 17,
   Leia: 17
@@ -570,10 +600,7 @@ console.log(destinoMap.get("Luke")); // 17
 ```
 
 ###
-
-###
-
-> [!IMPORTANT]
+[!IMPORTANT]
 > Regla práctica: usa `interface` para entidades, `Record<K, V>` para "diccionarios" tipados y `Map` cuando necesites la estructura en ejecución (cachés de búsqueda). Un `Record` es un objeto plano de JS; un `Map` es una colección propia.
 
 
