@@ -37,7 +37,7 @@
 <a id="7-estructura-de-datos-objeto-en-typescript-es6"></a>
 # 7. Estructura de Datos Objeto en TypeScript (ES6)
 
-Los objetos en JavaScript son una de las estructuras de datos más fundamentales y poderosas. Son colecciones de pares clave-valor y se utilizan para representar datos estructurados. En TypeScript, los objetos se describen con `interface` o `type`, lo que permite pasar de "cualquier forma" (JS dinámico) a formas conocidas de antemano que el compilador valida.
+Los objetos en JavaScript son una de las estructuras de datos más fundamentales y poderosas. Son colecciones de **pares clave-valor** y se utilizan para representar datos estructurados. En TypeScript, los objetos se describen con `interface` o `type`, lo que permite pasar de "cualquier forma" (JS dinámico) a formas conocidas de antemano que el compilador valida.
 
 <a id="71-formas-de-crear-objetos"></a>
 ## 7.1 Formas de crear Objetos
