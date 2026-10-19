@@ -572,7 +572,8 @@ Record y Map ambos son pareja clave-valor. La diferencia principal es que Map es
 ```typescript
 //Ej1
 type Puntos = Record<string, number>;          // cualquier clave string : number
-const p:Puntos={"Jugador":100}//Ojo, usa :
+const p:Puntos={"Jugador":100}//Ojo, usa 
+console.log(p.Jugador);
 
 //Ej2
 type Passwords = Record<"usuario" | "admin", string>; // solo esas dos claves -> string
