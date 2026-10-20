@@ -487,7 +487,7 @@ realizarTareas();
 <a id="4-uso-de-asyncawait-con-fetch"></a>
 #### 4. Uso de Async/Await con Fetch:
 
-Ya hemos visto un ejemplo más arriba. Aquí va otro ejemplo:
+Ya hemos visto un ejemplo más arriba. Aquí va otro ejemplo con fetch (que devuelve también una promesa):
 
 ```typescript
 interface DatosPost {
@@ -503,6 +503,8 @@ async function obtenerDatosDesdeAPI(): Promise<void> {
       throw new Error("No se pudo obtener los datos");
     }
 
+    //response.json() también es una promesa porque podría tardar tiempo 
+    //en ejecutarse
     const datos = (await response.json()) as DatosPost; //Habría que hacer typeguard
     console.log("Datos desde la API:", datos.name);
   } catch (error) {
