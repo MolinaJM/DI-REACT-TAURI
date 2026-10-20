@@ -544,9 +544,6 @@ En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitu
 > [!IMPORTANT]
 > El cuerpo se lee **una sola vez**: al leerlo `bodyUsed` pasa a `true` y un segundo `.json()`/`.text()` lanza `TypeError: body already used`. Para releerlo, `response.clone()` **antes** de la primera lectura. (También existen `.blob()`, `.arrayBuffer()` y `.formData()` para binarios y formularios; apenas se usan aquí porque los ficheros van por el backend Rust.)
 
-> [!IMPORTANT]
-> **El error HTTP no es una excepción.** `fetch` **no** rechaza por un 404/500: resuelve con `response.ok === false` y hay que comprobarlo (como en §8.3.2, §8.3.3 y en [el ejemplo 4 de §8.4](#4-uso-de-asyncawait-con-fetch)). El `catch` solo salta ante fallos de **red** (sin conexión, DNS, CORS, `AbortController`).
-
 ---
 
 ---
