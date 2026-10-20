@@ -477,6 +477,9 @@ realizarTareas();
 > [!IMPORTANT]
 > Una función `async` devuelve SIEMPRE una `Promise`. Anota el tipo de retorno con `Promise<X>` (o `Promise<void>` si no devuelve nada). Con `await`, el valor "desempaquetado" ya tiene el tipo interno de la promesa.`await` pausa la ejecución hasta que la Promesa se resuelva o se rechace.
 
+> [!TIP]
+> **Secuencial vs. paralelo.** Un `await` dentro de un `for...of` espera a que termine una petición antes de lanzar la siguiente (serializa, pero permite `continue`/`break` según el resultado); si las peticiones son independientes, `await Promise.all([...])` las lanza a la vez (§8.3.5).
+
 <a id="otros-ejemplos"></a>
 ### Otros Ejemplos:
 
