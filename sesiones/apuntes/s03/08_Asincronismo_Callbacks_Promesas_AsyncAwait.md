@@ -533,7 +533,7 @@ En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitu
 | Lectura del cuerpo | Devuelve | Cuándo |
 |--------------------|----------|--------|
 | `.json()` | `Promise<any>` (o `unknown`) | respuesta JSON → **valida/estrecha** con un type guard |
-| `.text()` | `Promise<string>` | texto plano/HTML y para depurar la respuesta cruda |
+| `.text()` | `Promise<string>` | texto plano/HTML (.txt, .csv, .md) |
 
 > [!TIP]
 > Para validar la forma de lo recibido (p. ej. comprobar que es un array) usa *type guards* + `Array.isArray` y el *narrowing* vistos en [§5.4. Narrowing](../s02/05_ControlDeFlujo.md#54-narrowing-el-control-de-flujo-tipado).
@@ -546,9 +546,6 @@ En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitu
 
 > [!IMPORTANT]
 > **El error HTTP no es una excepción.** `fetch` **no** rechaza por un 404/500: resuelve con `response.ok === false` y hay que comprobarlo (como en §8.3.2, §8.3.3 y en [el ejemplo 4 de §8.4](#4-uso-de-asyncawait-con-fetch)). El `catch` solo salta ante fallos de **red** (sin conexión, DNS, CORS, `AbortController`).
-
-> [!NOTE]
-> **Puente a React/Tauri.** En React este patrón (`fetch` → `ok` → `.json()` → validar) es el de cualquier API pública, y siempre dentro de un `useEffect` que guarda el resultado en `useState` (con estados `cargando/error/listo`). En Tauri, para tus propios datos usarás `const datos = await invoke<T>("comando")`: el backend Rust hace la petición y **serde** ya te entrega el objeto tipado — no hay `Response`, ni `.ok`, ni `.json()`, y el `Err` de Rust llega como promesa **rechazada** (al `catch`). Si necesitas `fetch` desde el webview saltando CORS, Tauri ofrece `@tauri-apps/plugin-http`.
 
 ---
 
