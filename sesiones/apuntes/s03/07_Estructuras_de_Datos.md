@@ -6,6 +6,7 @@
   - [7.1 Formas de crear Objetos](#71-formas-de-crear-objetos)
     - [7.1.1 Sintaxis de Objeto Literal](#711-sintaxis-de-objeto-literal)
   - [7.2 Acceso a Propiedades](#72-acceso-a-propiedades)
+    - [7.2.1 Encadenamiento opcional (`?.`) y `??`](#721-encadenamiento-opcional)
   - [7.3 Modificación de Propiedades](#73-modificación-de-propiedades)
   - [7.4 Eliminación de Propiedades](#74-eliminación-de-propiedades)
   - [7.5 Métodos Importantes](#75-métodos-importantes)
@@ -81,6 +82,74 @@ console.log(persona.nombre); // "Juan"
 // Notación de corchetes
 console.log(persona["edad"]); // 30
 ```
+
+<a id="721-encadenamiento-opcional"></a>
+### 7.2.1 Encadenamiento opcional (`?.`) y `??`
+
+El nullish coalescing ??, como ya sabemos, devuelve el valor de la derecha **solo** cuando el de la izquierda es `null` o `undefined`. 
+**Pero `??` decide el *valor*, no protege el *acceso*.** Para aplicarlo, primero hay que evaluar lo que hay a la izquierda. 
+Pero, si lo que falta no es el valor sino **la propiedad que lo contiene**, ese acceso ya ha reventado antes de que `??` llegue a decidir nada:
+
+```typescript
+// Si no hay dirección...
+// persona.direccion.ciudad ?? "sin ciudad"
+//            ↑ TypeError: Cannot read properties of undefined (reading 'ciudad')
+```
+
+Ese es justo el hueco que llena el concepto nuevo.
+
+**Encadenamiento opcional / Optional Chaining (`?.`)**: si lo que hay a la izquierda es `null` o `undefined`, **la cadena se corta** y la expresión completa vale `undefined`, en lugar de lanzar un `TypeError`. Ahí está su utilidad: recorrer propiedades, niveles de anidado o índices que **pueden no existir** hasta llegar al final sin romperse. Se combina con lo ya conocido: `?.` llega sin choque hasta el final y `??` le pone el valor por defecto → `persona.direccion?.ciudad ?? "sin ciudad"`.
+
+**Ejemplo A — índice de array**
+
+```typescript
+const asistentes: Persona[] = [
+  { nombre: "Juan", edad: 30, profesion: "Desarrollador" },
+  { nombre: "María", edad: 25, profesion: "Diseñadora" },
+];
+
+console.log(asistentes[0]?.nombre); // "Juan"
+console.log(asistentes[0]?.profesion); // "Desarrollador"
+
+const mayores = asistentes.filter((p) => p.edad >= 40);
+console.log(mayores[0]?.nombre); // undefined (sin TypeError)
+```
+
+> [!NOTE]
+> `asistentes[0]` es `Persona | undefined` (con `noUncheckedIndexedAccess`, activo en este curso). Sin `?.`, TypeScript te avisa **al compilar** al acceder a `.nombre` con un `Object possibly undefined`; en runtime saltaría `TypeError: Cannot read properties of undefined`.
+
+**Ejemplo B — propiedad anidada opcional**
+
+Completamos `Persona` con una propiedad (objeto) anidada **opcional**. Fíjate en que hace falta anotar el tipo: en un objeto literal "a secas" TypeScript no sabe que `direccion` puede faltar.
+
+```typescript
+interface Persona {
+  nombre: string;
+  edad: number;
+  profesion: string;
+  direccion?: { ciudad: string; cp: string }; // puede faltar
+}
+
+const persona: Persona = {
+  nombre: "Juan",
+  edad: 30,
+  profesion: "Desarrollador",
+  direccion: { ciudad: "Granada", cp: "18000" },
+};
+
+const sinDireccion: Persona = { nombre: "María", edad: 25, profesion: "Diseñadora" };
+
+console.log(persona.direccion?.ciudad); // "Granada"
+console.log(persona.direccion?.cp); // "18000"
+console.log(sinDireccion.direccion?.ciudad); // undefined (sin TypeError)
+
+// Con `??` no nos queda un undefined escondido
+console.log(persona.direccion?.ciudad ?? "sin ciudad"); // "Granada"
+console.log(sinDireccion.direccion?.ciudad ?? "sin ciudad"); // "sin ciudad"
+```
+
+
+
 <a id="73-modificación-de-propiedades"></a>
 ## 7.3 Modificación de Propiedades
 

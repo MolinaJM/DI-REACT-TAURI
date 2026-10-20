@@ -239,14 +239,14 @@ let productos: Producto[] = [
 
 //Quédate solo con los disponibles
 const enStock = productos.filter((p) => p.disponible); //Devuelve mismo tipo
-console.log(enStock[0]?.nombre); //Optional Chaining (se verá más adelante)
+console.log(enStock[0]?.nombre); //Optional Chaining (ver §7.2.1 del capítulo 07)
 //Si no lo ponemos, TS avisa de que puede devolver undefined
 //Si enStock[0] existe, accede a .nombre; si no existe, 
 //devuelve undefined sin lanzar un error en tiempo de ejecución".
 ```
 
 > [!NOTE]
-> `Optional Chaining` se verá en capítulo 07_Estructuras_de_Datos.md.
+> `Optional Chaining` se explica en [07_Estructuras_de_Datos §7.2.1](07_Estructuras_de_Datos.md#721-encadenamiento-opcional).
 
 <a id="v-reduce"></a>
 ### v. `reduce()`
