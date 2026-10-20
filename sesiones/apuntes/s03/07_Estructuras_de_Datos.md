@@ -100,7 +100,7 @@ Ese es justo el hueco que llena el concepto nuevo.
 
 **Encadenamiento opcional / Optional Chaining (`?.`)**: si lo que hay a la izquierda es `null` o `undefined`, **la cadena se corta** y la expresión completa vale `undefined`, en lugar de lanzar un `TypeError`. Ahí está su utilidad: recorrer propiedades, niveles de anidado o índices que **pueden no existir** hasta llegar al final sin romperse. Se combina con lo ya conocido: `?.` llega sin choque hasta el final y `??` le pone el valor por defecto → `persona.direccion?.ciudad ?? "sin ciudad"`.
   
-¿Qué tiene en común un array y una propiedad opcional?
+Pregunta: ¿Qué tiene en común un array y una propiedad opcional?
 
 **Ejemplo A — índice de array**
 
@@ -139,7 +139,7 @@ const persona: Persona = {
   direccion: { ciudad: "Granada", cp: "18000" },
 };
 
-const sinDireccion: Persona = { nombre: "María", edad: 25, profesion: "Diseñadora" };
+const sinDireccion: Persona = { nombre: "María", edad: 25, profesion: "Diseñadora" }; //obviamos direc
 
 console.log(persona.direccion?.ciudad); // "Granada"
 console.log(persona.direccion?.cp); // "18000"
