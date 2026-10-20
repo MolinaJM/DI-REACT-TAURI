@@ -448,9 +448,12 @@ realizarTareas();
 
 //Escrito con función flecha y completo:
 
-// Implementación de realizarTarea1 utilizando una Promesa con un temporizador simulado
+// Implementación de realizarTarea1 utilizando una Promesa con un temporizador simulado.
+// Aquí ya no estamos haciendo como antes, que guardábamos una Promesa en una variable:
+// const miPromesa: Promise<string> = new Promise<string>((resolve, reject) => {...}
+// Aquí hacemos una función, que crea una promesa y la devuelve directamente en el return
 const realizarTarea1 = (): Promise<string> => {
-  return new Promise((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     setTimeout(() => {      
       resolve("HOLA"); // Simulamos que todo sale bien y resolvemos con un string
     }, 1000);
@@ -507,14 +510,14 @@ obtenerDatosDesdeAPI();
 ```
 
 > [!IMPORTANT]
-> `response.json()` devuelve `Promise<any>` (en TS moderno `unknown` según `lib`) porque la respuesta JSON puede ser cualquier cosa. Definimos una `interface DatosPost` y validamos/casteamos el resultado, como vimos en el capítulo de `JSON.parse`. **No confies el tipo sin validar, habría que hacer un typeguard**
+> `response.json()` devuelve `Promise<unknown>` porque la respuesta JSON puede ser cualquier cosa. Definimos una `interface DatosPost` y validamos/casteamos el resultado, como vimos en el capítulo de `JSON.parse`. **No confies el tipo sin validar, habría que hacer un typeguard**
 
 En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitud HTTP y manejar los datos resultantes de manera asincrónica. Usamos `fetch` aquí como **vehículo didáctico**: en un proyecto Tauri este patrón es idéntico pero llamando a `invoke` — `const datos = await invoke<DatosPost>("obtener_datos")` — donde el backend Rust es el que hace el trabajo en vez de un servidor HTTP.
 
 <a id="85-la-respuesta-de-fetch-la-interfaz-response"></a>
 ## 8.5. La respuesta de `fetch`: la interfaz `Response`
 
-`fetch` no devuelve los datos: resuelve con un objeto **`Response`** que describe la respuesta HTTP. En la práctica solo necesitas saber si fue bien, con qué código y leer el cuerpo.
+`fetch` no devuelve los datos: resuelve con un objeto **`Response`** (que suele instanciarse con `response`) que describe la respuesta HTTP. En la práctica solo necesitas saber si fue bien, con qué código y leer el cuerpo.
 
 | Miembro | Tipo | Para qué lo usarás |
 |---------|------|--------------------|
