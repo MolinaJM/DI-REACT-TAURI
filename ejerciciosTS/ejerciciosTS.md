@@ -333,25 +333,22 @@ Resumen sobre los **20 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 - (c) `planetaInmutable(name: string): PlanetaJSON` que localiza el planeta en los datos importados y la devuelve con **`Object.freeze` en profundidad** (planeta y array `films`), comprobando con `Object.isFrozen` que mutarla lanza `TypeError`.
 
 
-<a iSíd="18-programación-asíncrona-promesas-y-asyncawait"></a>
+<a id="18-programación-asíncrona-promesas-y-asyncawait"></a>
 
 ### 18. Programación asíncrona (promesas y async/await)
 
 
 > 🎯 Prioridad **P1** — `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`.
 
-> 🌌 **Aquí SÍ se hace `fetch` real:** a diferencia de los bloques 14–17 (donde los datos de swapi estaban hardcodeados porque la asincronía aún no se había impartido), en este bloque ya se enseña `async/await` y `Promise`, así que el ejercicio 2 hace una petición real a [swapi.info/api/planets](https://swapi.info/api/planets).
+> 🌌 **Aquí SÍ se hace `fetch` real:** a diferencia de los bloques 14–17 (donde los datos de swapi estaban hardcodeados porque la asincronía aún no se había impartido), en este bloque ya se enseña `async/await`, así que todos los ejercicios piden datos reales de planetas a [swapi.info/api/planets](https://swapi.info/api/planets). Supón que **siempre hay red y la API responde bien**.
 
-1. Estás implementando una función que simule un retardo antes de completar una operación. Crea una función `esperar(ms)` que devuelva una promesa que se resuelva tras `ms` milisegundos.
-2. Estás construyendo una función que carga datos desde una API real. Define el interface `Planeta` (en `tipos.ts`). Escribe una función `async` `cargarPlanetas` que haga `fetch` a `https://swapi.info/api/planets` y devuelva la lista de planetas (tipada como `Planeta[]`).
-3. Estás cargando datos de múltiples fuentes simultáneamente para acelerar la carga. Lanza dos promesas a la vez con `Promise.all` en `cargarParalelo`.
-4. Estás procesando datos que pueden fallar y necesitas manejar los errores sin que se propaguen. Usa `try/catch` en `procesarSeguro` para nunca propagar errores. **Modela el estado con una unión discriminada** `EstadoCarga` (en `tipos.ts`): `{ estado: "cargando" } | { estado: "error"; mensaje: string } | { estado: "listo"; planetas: Planeta[] }`, **no** con `{ ok, datos?, error? }`: las formas deben ser excluyentes para que sea imposible tener `{ ok: true, error: "…" }`. Añade `describirEstado(e)` con `switch` + `never` y el guard `esListo(e)`. Este es el patrón `cargando/error/listo` del `useState` de React.
-5. Estás **`response.json()` puede devolver `unknown`**, así que no puedes castear a ciegas. Escribe `esPlanetaCrudo(bruto: unknown): bruto is { name: string; population: string; climate: string }` (recuerda: swapi devuelve la población como texto y `"unknown"` cuando no consta) y `cargarDesdeFetch(url)` que compruebe `res.ok`, valide `Array.isArray`, **descarte** los elementos que no validen y convierta `"unknown"` a `0`.
-> 💡 Para probar el camino de `fetch` **sin depender de la red**, usa una URL `data:` (`fetch("data:application/json," + encodeURIComponent(JSON.stringify(x)))`), que sí resuelve Node. Es lo que hace la solución.
-
-6. Estás implementando un sistema de tareas que ejecuta un callback en medio de su ejecución. Escribe `hacerTarea(callback: () => void)` que imprima "inicio", ejecute el `callback` y luego imprima "fin". Llámala pasando un `callback` que imprima "tarea".
-7. Estás transformando una lista de números aplicando una operación personalizada sin usar `map`. Escribe `mapearConCallback(numeros: number[], callback: (n: number) => number): number[]` que devuelva un array nuevo aplicando el `callback` a cada elemento (sin usar `map`).
-8. Estás simulando una operación asíncrona con un callback. Usa `setTimeout` para simular una operación asíncrona: `simularEspera(ms, callback)` que llame al `callback` tras `ms` milisegundos. Ordena los `console.log` para comprobar que el callback se ejecuta después.
+1. Estás cargando la lista de planetas desde la API. Define el interface `Planeta { name: string; population: number; climate: string }` (en `tipos.ts`). Escribe la función `async` `cargarPlanetas(): Promise<Planeta[]>` que:
+    - haga `fetch` a `https://swapi.info/api/planets`;
+    - compruebe `res.ok` **antes** de leer y trate el cuerpo como `unknown` (`const bruto: unknown = await res.json()`), porque `response.json()` no garantiza la forma;
+    - valide `Array.isArray` y use el *type guard* `esPlanetaCrudo(bruto: unknown): bruto is { name: string; population: string; climate: string }` (swapi devuelve la población como **texto** y `"unknown"` cuando no consta);
+    - **descarte** los elementos que no validen y convierta `"unknown"` a `0` (`Number(...)`).
+2. Estás cargando varias fichas de planeta a la vez para acelerar la pantalla. Escribe `cargarPlaneta(url: string): Promise<Planeta>` (reutiliza `esPlanetaCrudo`, que aquí recibe **un objeto**, no un array) y `cargarParalelo(): Promise<[Planeta, Planeta]>` que lance con `Promise.all` las fichas de `https://swapi.info/api/planets/1` y `https://swapi.info/api/planets/2`.
+3. Estás preparando el estado de carga de la pantalla de planetas. **Modela el estado con una unión discriminada** `EstadoCarga` (en `tipos.ts`): `{ estado: "cargando" } | { estado: "error"; mensaje: string } | { estado: "listo"; planetas: Planeta[] }`, **no** con `{ ok, datos?, error? }`: las formas deben ser excluyentes para que sea imposible tener `{ ok: true, error: "…" }`. Escribe la función `async` `cargarConEstado(url: string): Promise<EstadoCarga>` con `try/catch` que **nunca** propaga el error: devuelve `listo` con los planetas o `error` con `error instanceof Error ? error.message : "…"`. Añade `describirEstado(e)` con `switch` + comprobación de exhaustividad `never` y el guard `esListo(e)`. Este es el patrón `cargando/error/listo` del `useState` de React.
 
 
 <a id="19-utility-types"></a>

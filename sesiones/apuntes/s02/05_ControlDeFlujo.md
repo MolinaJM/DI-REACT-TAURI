@@ -616,7 +616,7 @@ console.log(procesar({ estado: "listo", planetas }));
 
 > [!IMPORTANT]
 > - **No uses `node:fs` (`readFileSync`, `readFileSyncSync`)** para leer el JSON. Estas librerías NO SIRVEN AQUÍ. No existe en el navegador, así que el código te dejará de funcionar en cuanto llegues a React.
-> - **No uses `fetch("./datos/planetas.json")`**: `fetch` no admite rutas relativas (necesita URL absoluta) ni el protocolo `file://`. `fetch` es para pedir datos a un **backend real** (ver [Asincronismo (S03·8)](../s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md#85-el-tipado-de-promiset-la-clave-de-typescript)).
+> - **No uses `fetch("./datos/planetas.json")`**: `fetch` no admite rutas relativas (necesita URL absoluta) ni el protocolo `file://`. `fetch` es para pedir datos a un **backend real** (ver [Asincronismo (S03·8)](../s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md#asincronismo-callbacks-promesas-y-asyncawait-en-typescript)).
 > - **El JSON importado es un objeto ÚNICO compartido** (singleton): todas las importaciones ven la misma referencia. **No lo mutes**; deriva una copia con spread, como en [Estructuras de Datos (S03·7)](../s03/07_Estructuras_de_Datos.md#75-métodos-importantes).
 
 ```typescript
