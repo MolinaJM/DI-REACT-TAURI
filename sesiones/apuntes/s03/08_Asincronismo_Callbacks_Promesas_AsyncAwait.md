@@ -305,7 +305,7 @@ Hasta ahora, al consumir una promesa solamente hemos puest un .then (el único s
 
 ```typescript
 
-// Consumo y encadenamiento (SIN paréntesis porque son variables)
+// Consumo y encadenamiento
 realizarTarea1
   .then((resultado1: string) => {
     console.log(resultado1);
