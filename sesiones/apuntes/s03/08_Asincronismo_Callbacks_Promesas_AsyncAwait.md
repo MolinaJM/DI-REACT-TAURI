@@ -524,15 +524,12 @@ En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitu
 | `ok` | `boolean` | `true` si el status es 2xx: **el guardia antes de parsear** |
 | `status` | `number` | código HTTP (200, 404, 500…) para ramificar o dar un mensaje |
 | `headers` | `Headers` | cabeceras de la respuesta (`headers.get("content-type")`) |
-| `bodyUsed` | `boolean` | `true` si ya se consumió el cuerpo |
+| `bodyUsed` | `boolean` | `true` si ya se consumió el cuerpo(si ya se uso el response.json) |
 
 | Lectura del cuerpo | Devuelve | Cuándo |
 |--------------------|----------|--------|
 | `.json()` | `Promise<any>` (o `unknown`) | respuesta JSON → **valida/estrecha** con un type guard |
 | `.text()` | `Promise<string>` | texto plano/HTML y para depurar la respuesta cruda |
-
-> [!NOTE]
-> Ojo con la forma **real** de la API: en swapi `population` y `diameter` llegan como **texto** (`"200000"`) y `"unknown"` cuando no consta. Por eso el cuerpo se trata como `unknown`, se valida con un *type guard* y se convierte (`"unknown"` → `0`, resto → `Number(...)`).
 
 > [!TIP]
 > Para validar la forma de lo recibido (p. ej. comprobar que es un array) usa *type guards* + `Array.isArray` y el *narrowing* vistos en [§5.4. Narrowing](../s02/05_ControlDeFlujo.md#54-narrowing-el-control-de-flujo-tipado).
