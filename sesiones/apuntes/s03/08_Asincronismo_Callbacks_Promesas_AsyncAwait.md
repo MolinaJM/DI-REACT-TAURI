@@ -417,6 +417,7 @@ Promise.all([promesa1, promesa2, promesa3])
   .catch((error) => {
     console.error("Algo salió mal:", error);
   });
+  
 ```
 
 > [!NOTE]
@@ -520,6 +521,21 @@ obtenerDatosDesdeAPI();
 
 En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitud HTTP y manejar los datos resultantes de manera asincrónica. Usamos `fetch` aquí como **vehículo didáctico**: en un proyecto Tauri este patrón es idéntico pero llamando a `invoke` — `const datos = await invoke<DatosPost>("obtener_datos")` — donde el backend Rust es el que hace el trabajo en vez de un servidor HTTP.
 
+5. Uso de Async/Await con Fetch y promise.all:
+
+
+```typescript
+//Suponemos que tenemos un modelo Personaje y una función async cargaPersonaje que me da una promesa
+//tipo Personaje 
+async function damePareja(): Promise<[Personaje, Personaje]> {
+  //Promise.all arranca ambas a la vez y tipa el resultado como tupla [Planeta, Planeta]
+  const [primero, segundo] = await Promise.all([
+    cargaPersonaje(`https://swapi.info/api/people/1`),
+    cargaPersonaje(`https://swapi.info/api/people/2`),
+  ]);
+  return [primero, segundo];
+}
+```
 <a id="85-la-respuesta-de-fetch-la-interfaz-response"></a>
 ## 8.5. La respuesta de `fetch`: la interfaz `Response`
 
