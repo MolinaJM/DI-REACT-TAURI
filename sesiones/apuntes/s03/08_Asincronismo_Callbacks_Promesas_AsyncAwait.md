@@ -460,7 +460,7 @@ const realizarTarea1 = (): Promise<string> => {
   });
 };
 
-const realizarTareas = async (): Promise<void> => {
+async function realizarTareas() : Promise<void> {
   try {
     const resultado1: string = await realizarTarea1();
     const resultado2: number = await realizarTarea2(resultado1);
@@ -469,6 +469,7 @@ const realizarTareas = async (): Promise<void> => {
   } catch (error) {
     console.error("Algo salió mal:", error);
   }
+
 };
 
 realizarTareas();
