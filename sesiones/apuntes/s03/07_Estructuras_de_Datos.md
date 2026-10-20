@@ -88,7 +88,7 @@ console.log(persona["edad"]); // 30
 
 El nullish coalescing ??, como ya sabemos, devuelve el valor de la derecha **solo** cuando el de la izquierda es `null` o `undefined`. 
 **Pero `??` decide el *valor*, no protege el *acceso*.** Para aplicarlo, primero hay que evaluar lo que hay a la izquierda. 
-Pero, si lo que falta no es el valor sino **la propiedad que lo contiene**, ese acceso ya ha reventado antes de que `??` llegue a decidir nada:
+Pero, si lo que falta no es el valor sino **la propiedad que lo contiene** o el espacio contenedor (posición de array), ese acceso ya ha reventado antes de que `??` llegue a decidir nada:
 
 ```typescript
 // Si no hay dirección...
