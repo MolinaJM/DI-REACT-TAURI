@@ -390,4 +390,4 @@ http://localhost:3000/planetas
 …así que es la clave `"planetas"` la que produce la ruta `/planetas`. Por eso un fichero como `planetas2.json` (un array en la raíz, sin wrapper) **no funcionaría** con ese nombre: tiene que llevar el wrapper `{ "planetas": [ ... ] }` para que el endpoint se monte como `/planetas`.
 
 > [!IMPORTANT]
-> En tus `fetch`, sustituye la URL de swapi por la local: `await fetch("http://localhost:3000/planetas")`. Ojo: en `planetas.json` la `population` es **numérica**, mientras que swapi la devuelve como texto (`"unknown"` incluido); si reutilizas el *type guard* del bloque 18, tendrás que adaptarlo al formato local.
+> En tus `fetch`, sustituye la URL de swapi por la local: `await fetch("http://localhost:3000/planetas")`. Ojo: se podría filtrar la respuesta de la api variando la URL pero eso NO SE PERMITE. Por ejemplo, podría obtener el primer planeta de la lista o incluso los planetas con población 0 mediante: http://localhost:3000/planets?_limit=1 o con http://localhost:3000/planetas?population=200000 (o cualquier tipo de condición sobre el dato en cuestión).
