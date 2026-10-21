@@ -287,7 +287,7 @@ console.log(ejecutarOperacion(5, 3, (a, b) => a + b));
 
 > ▶ **Cómo probarlo:** copia este bloque a `bancop` como `04_Funciones.ts` y ejecuta `npx tsx 04_Funciones.ts` (desde `bancop/`; entorno estricto + lib ES2024 ya en su tsconfig).
 
-> ✏️ **Práctica:** [bloque 9 · Funciones en profundidad](../../../ejerciciosTS/ejerciciosTS.md#9-funciones-en-profundidad) (params, rest, callbacks, closures) · [bloque 19 · Utility Types](../../../ejerciciosTS/ejerciciosTS.md#19-utility-types) (`Partial`/`Pick`/`Omit`/`Record`).
+> ✏️ **Práctica:** [bloque 9 · Funciones en profundidad](../../../ejerciciosTS/ejerciciosTS.md#9-funciones-en-profundidad) (params, rest, callbacks, closures).
 
 ---
 

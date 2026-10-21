@@ -66,7 +66,7 @@ El examen de TypeScript (sesiones 2 y 3) es **100 % práctico** y sigue siempre 
 
 > 🎯 **De cara al examen:** exporta con los **mismos nombres** del enunciado, todo en `strict`, y nada de extensiones que generen código (solo autocompletado básico de TS).
 
-> 🏁 **Práctica integrada (cierre de la sesión):** [bloque 20 · Práctica integrada](../ejerciciosTS/ejerciciosTS.md#20-práctica-integrada) — Realización de una práctica que integre todos los conocimientos vistos para TS.
+> 🏁 **Práctica integrada (cierre de la sesión):** [bloque 19 · Práctica integrada](../ejerciciosTS/ejerciciosTS.md#19-práctica-integrada) — Realización de una práctica que integre todos los conocimientos vistos para TS.
 
 > 📌 La práctica completa está en el [catálogo canónico de ejercicios](../ejerciciosTS/ejerciciosTS.md).
 [Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md) [S13](sesion13.md)

@@ -24,7 +24,7 @@
 | **P4 · Útil pero dilatable** | Según caso; no bloquea. |
 | **P5 · Prescindible** | Se omite sin problema (p. ej. overloads, métodos ES2023/ES2025). |
 
-Resumen sobre los **20 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · P4 = 0 · P5 reservado**.
+Resumen sobre los **19 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 4 · P4 = 0 · P5 reservado**.
 
 > 📌 **Qué indica cada columna.** **Prio** es la prioridad del bloque (P1–P5, tabla de arriba). **Por qué (React/Tauri)** resume la utilidad **concreta** de ese bloque para escribir una app: qué patrones de componente entrena (props, estado, JSX), qué hooks prepara (`useState` → tupla `[valor, setter]`, `useEffect` → carga, `useReducer` → `switch`+`never`) y cómo se integra con Tauri (`invoke`, persistencia, validación de datos). **Ese mismo texto es el que encabeza cada bloque del catálogo**, para que sepas de antemano para qué sirve lo que vas a practicar.
 
@@ -53,8 +53,7 @@ Resumen sobre los **20 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 | 16 · Map | [16](16/solucion.ts) | **P3** | Índice de búsqueda O(1) y agrupación con `planetas2.json` (JSON suelto); serialización Map↔objeto; `Record` cubre la mayoría de casos. |
 | 17 · Objetos en profundidad | [17](17/solucion.ts) | **P2** | Entidades, formularios, JSON y copias **sin mutar** el estado (regla de React). |
 | 18 · Programación asíncrona | [18](18/solucion.ts) | **P1** | `Promise.all` + `try/catch` = el patrón de carga con `invoke` y en el `useEffect`. |
-| 19 · Utility Types *(optativo)* | [19](19/solucion.ts) | **P3** | `Partial`/`Pick`/`Omit`/`Record`: derivar tipos para formularios y props; se imparte en Generics (`s03/10`, optativo). |
-| 20 · Práctica integrada | — | **P1** | Integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real. |
+| 19 · Práctica integrada | — | **P1** | Integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real. |
 
 
 ## Sesión 2: Introducción a TypeScript (Parte 1)
@@ -354,25 +353,41 @@ Resumen sobre los **20 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 5 · 
 4. Estás preparando el estado de carga de la pantalla de planetas. **Modela el estado con una unión discriminada** `EstadoCarga` (en `tipos.ts`): `{ estado: "cargando" } | { estado: "error"; mensaje: string } | { estado: "listo"; planetas: Planeta[] }`, **no** con `{ ok, datos?, error? }`: las formas deben ser excluyentes para que sea imposible tener `{ ok: true, error: "…" }`. Escribe la función `async` `cargarConEstado(url: string): Promise<EstadoCarga>` con `try/catch` que **nunca** propaga el error: devuelve `listo` con los planetas o `error` con `error instanceof Error ? error.message : "…"`. Añade `describirEstado(e)` con `switch` + comprobación de exhaustividad `never` y el guard `esListo(e)`. Este es el patrón `cargando/error/listo` del `useState` de React.
 
 
-<a id="19-utility-types"></a>
+<a id="19-práctica-integrada"></a>
 
-### 19. Utility Types *(optativo)*
-
-
-> ⚠️ **Bloque optativo.** Se imparte en [`s03/10_Generics.md`](../sesiones/apuntes/s03/10_Generics.md) (capítulo 10, optativo). No entra en el temario oficial ni en los exámenes; es refuerzo para quien quiera usar `Partial`/`Pick`/`Omit`/`Record` con soltura en formularios y props.
-> 🎯 Prioridad **P3** — `Partial`/`Pick`/`Omit`/`Record`: derivar tipos para formularios y props; se imparte en Generics (`s03/10`, optativo).
-
-1. Estás diseñando los tipos para un formulario de edición de planetas. Dada una interface `Planeta { name: string; population: number; climate: string; films?: string[] }` (datos de swapi; definida en `tipos.ts`):
-    - Estás creando un tipo para un formulario donde todos los campos son opcionales. Crea un tipo `PlanetaParcial` con todas las propiedades opcionales.
-    - Estás definiendo un tipo para una respuesta que no necesita las películas. Crea un tipo `PlanetaSinFilms` que omita `films`.
-    - Estás creando un tipo para una tarjeta resumen que solo muestre name y population. Crea un tipo `ResumenPlaneta` que solo tenga `name` y `population`.
-2. Estás modelando la agenda semanal de una aplicación donde cada día tiene un valor de tipo string. Usa `Record` para crear un tipo `Semana` con días como claves y `string` como valores.
-3. Estás trabajando con una función existente y necesitas derivar tipos a partir de su firma. Usa `Parameters` y `ReturnType` con una función existente.
-4. Estás limpiando un tipo unión que contiene `null` o `undefined` y solo quieres las partes válidas. Define el interface `RespuestaAPI` (en `tipos.ts`) que modele una respuesta con campos que pueden ser `null`. Usa `NonNullable` para eliminar `null | undefined` de los campos.
-
-
-<a id="20-práctica-integrada"></a>
-
-### 20. Práctica integrada
+### 19. Práctica integrada
 > Realización de una práctica que integre todos los conocimientos vistos para TS.
 > 🎯 Prioridad **P1** — integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real.
+
+---
+
+<a id="montar-api-local-con-fakeapi"></a>
+## Montar API local con FAKEAPI
+
+Si no quieres depender de internet (o de que swapi esté disponible), puedes levantar una API local con [`json-server`](https://github.com/typicode/json-server) a partir de un JSON con la forma de `datos/planetas.json`. Desde `ejerciciosTS/datos/` (o pasando la ruta: `npx json-server datos/planetas.json`):
+
+```bash
+npm install json-server@0.17.4
+npx json-server planetas.json
+```
+
+Esto arranca la API en el puerto **3000** y la deja consultable en:
+
+```
+http://localhost:3000/planetas
+```
+
+`json-server` crea **un endpoint por cada clave de primer nivel** del JSON (el *wrapper*), no por el nombre del fichero. `datos/planetas.json` tiene esta forma:
+
+```json
+{
+  "planetas": [
+    { "name": "Tatooine", "population": 200000, "climate": "arid" }
+  ]
+}
+```
+
+…así que es la clave `"planetas"` la que produce la ruta `/planetas`. Por eso un fichero como `planetas2.json` (un array en la raíz, sin wrapper) **no funcionaría** con ese nombre: tiene que llevar el wrapper `{ "planetas": [ ... ] }` para que el endpoint se monte como `/planetas`.
+
+> [!IMPORTANT]
+> En tus `fetch`, sustituye la URL de swapi por la local: `await fetch("http://localhost:3000/planetas")`. Ojo: en `planetas.json` la `population` es **numérica**, mientras que swapi la devuelve como texto (`"unknown"` incluido); si reutilizas el *type guard* del bloque 18, tendrás que adaptarlo al formato local.
