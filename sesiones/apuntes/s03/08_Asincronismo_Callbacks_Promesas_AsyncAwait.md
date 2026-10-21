@@ -455,7 +455,56 @@ realizarTareas();
 > Una función `async` devuelve SIEMPRE una `Promise`. Anota el tipo de retorno con `Promise<X>` (o `Promise<void>` si no devuelve nada). Con `await`, el valor "desempaquetado" ya tiene el tipo interno de la promesa.`await` pausa la ejecución hasta que la Promesa se resuelva o se rechace.
 
 > [!TIP]
-> **Secuencial vs. paralelo.** Un `await` dentro de un `for...of` espera a que termine una petición antes de lanzar la siguiente (serializa, pero permite `continue`/`break` según el resultado); si las peticiones son independientes, `await Promise.all([...])` las lanza a la vez (§8.4.1).
+> **Secuencial vs. paralelo.** Un `await` dentro de un `for...of` espera a que termine una petición antes de lanzar la siguiente (serializa, pero permite `continue`/`break` según el resultado); si las peticiones son independientes, `await Promise.all([...])` las lanza a la vez (§8.4.1).  
+  
+El ejemplo completo anterior pero con async/await:
+
+```typescript
+// Función para realizar las peticiones encadenadas con la API de SWAPI usando async/await
+async function obtenerDetallesDePeliculaDeLuke(): Promise<void> {
+  try {
+    // Paso 1: Pedir el personaje (Luke Skywalker)
+    const response1 = await fetch("https://swapi.dev/api/people/1/");
+    if (!response1.ok) throw new Error("Error al obtener el personaje");
+    
+    const personaje: { name: string; homeworld: string } = await response1.json();
+    console.log(`Paso 1: Personaje obtenido -> ${personaje.name}`);
+
+    // Paso 2: Extraer la URL del planeta y hacer la segunda petición
+    const response2 = await fetch(personaje.homeworld);
+    if (!response2.ok) throw new Error("Error al obtener el planeta");
+    
+    const planeta: { name: string; films: string[] } = await response2.json();
+    console.log(`Paso 2: Planeta obtenido -> ${planeta.name}`);
+
+    // Validar que el planeta tenga películas registradas
+    const primeraPeliculaUrl = planeta.films[0];
+    if (!primeraPeliculaUrl) {
+      throw new Error("El planeta no tiene películas registradas");
+    }
+
+    // Paso 3: Hacer la tercera petición para obtener la película
+    const response3 = await fetch(primeraPeliculaUrl);
+    if (!response3.ok) throw new Error("Error al obtener la película");
+    
+    const pelicula: { title: string } = await response3.json();
+    console.log(`Paso 3: Película obtenida -> ${pelicula.title}`);
+    console.log("¡Todas las tareas encadenadas se han completado con éxito!");
+
+  } catch (error) {
+    // Manejo de errores centralizado con try/catch
+    if (error instanceof Error) {
+      console.error("Algo salió mal en el flujo:", error.message);
+    } else {
+      console.error("Algo salió mal en el flujo: Error desconocido");
+    }
+  }
+}
+
+// Consumimos la función async
+obtenerDetallesDePeliculaDeLuke();
+
+```
 
 <a id="841-promesas-en-paralelo"></a>
 ### 8.4.1 Promesas en Paralelo
