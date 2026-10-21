@@ -424,25 +424,28 @@ const realizarTarea1 = (): Promise<string> => {
 
 //Otra forma de escribirla: se prefiere esta
 async function realizarTarea2(texto: string): Promise<number> {
-  // Simulamos una espera asíncrona
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  
-  // Simulamos una operación, por ejemplo, devolver la longitud del string recibido
-  console.log(`Tarea 2 recibió: ${texto}`);
-  return texto.length; // Retorna un number envuelto en una Promise
+  return new Promise<number>((resolve, reject) => {
+    setTimeout(() => {
+      console.log(`recibido un ${texto}`);      
+      resolve(7); // Simulamos que todo sale bien y resolvemos con un string
+    }, 1000);
+  });
 }
+
+//Faltaría programar la tarea 3
 
 async function realizarTareas() : Promise<void> {
   try {
     const resultado1: string = await realizarTarea1();
     const resultado2: number = await realizarTarea2(resultado1);
-    const resultado3: boolean = await realizarTarea3(resultado2);
+   // const resultado3: boolean = await realizarTarea3(resultado2);
     console.log("Todas las tareas han sido completadas.");
   } catch (error) {
     console.error("Algo salió mal:", error);
   }
 
 };
+
 
 realizarTareas();
 ```
