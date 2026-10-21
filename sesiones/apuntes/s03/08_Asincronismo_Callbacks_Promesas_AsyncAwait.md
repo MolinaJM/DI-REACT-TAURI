@@ -15,8 +15,8 @@
       - [3. Método `finally`:](#3-método-finally)
     - [8.3.3 Encadenamiento de Promesas](#833-encadenamiento-de-promesas)
     - [8.3.4 Manejo de Errores con Promesas](#834-manejo-de-errores-con-promesas)
-    - [8.3.5 Promesas en Paralelo](#835-promesas-en-paralelo)
   - [8.4. Async/Await: Simplificando el Uso de Promesas](#84-asyncawait-simplificando-el-uso-de-promesas)
+    - [8.4.1 Promesas en Paralelo](#841-promesas-en-paralelo)
     - [Otros Ejemplos:](#otros-ejemplos)
       - [4. Uso de Async/Await con Fetch:](#4-uso-de-asyncawait-con-fetch)
   - [8.5. La respuesta de `fetch`: la interfaz `Response`](#85-la-respuesta-de-fetch-la-interfaz-response)
@@ -400,31 +400,6 @@ realizarTarea1()
   });
 ```
 
-<a id="835-promesas-en-paralelo"></a>
-### 8.3.5 Promesas en Paralelo
-
-A menudo, necesitas realizar múltiples operaciones asincrónicas en paralelo y esperar a que todas se completen. Utiliza `Promise.all` para lograrlo:
-
-```typescript
-const promesa1: Promise<string> = hacerAlgoAsincrono1();
-const promesa2: Promise<number> = hacerAlgoAsincrono2();
-const promesa3: Promise<boolean> = hacerAlgoAsincrono3();
-
-Promise.all([promesa1, promesa2, promesa3])
-  .then((resultados: [string, number, boolean]) => {
-    console.log("Todas las tareas han sido completadas:", resultados);
-  })
-  .catch((error) => {
-    console.error("Algo salió mal:", error);
-  });
-  
-```
-
-> [!NOTE]
-> `Promise.all([p1, p2, p3])` tipa el resultado como una **tupla** con los tipos en orden (`[string, number, boolean]`). Es decir: el `resultados[0]` es `string`, el `[1]` es `number`, etc. Mucho más seguro que un `any[]`.  
-
-En los primeros apuntes ya vimos un ejemplo de esto (00_Introducción.md), precisamente con SWAPI (leyendo personajes, naves y planetas a la vez).
-
 <a id="84-asyncawait-simplificando-el-uso-de-promesas"></a>
 ## 8.4. Async/Await: Simplificando el Uso de Promesas
 
@@ -480,13 +455,35 @@ realizarTareas();
 > Una función `async` devuelve SIEMPRE una `Promise`. Anota el tipo de retorno con `Promise<X>` (o `Promise<void>` si no devuelve nada). Con `await`, el valor "desempaquetado" ya tiene el tipo interno de la promesa.`await` pausa la ejecución hasta que la Promesa se resuelva o se rechace.
 
 > [!TIP]
-> **Secuencial vs. paralelo.** Un `await` dentro de un `for...of` espera a que termine una petición antes de lanzar la siguiente (serializa, pero permite `continue`/`break` según el resultado); si las peticiones son independientes, `await Promise.all([...])` las lanza a la vez (§8.3.5).
+> **Secuencial vs. paralelo.** Un `await` dentro de un `for...of` espera a que termine una petición antes de lanzar la siguiente (serializa, pero permite `continue`/`break` según el resultado); si las peticiones son independientes, `await Promise.all([...])` las lanza a la vez (§8.4.1).
+
+<a id="841-promesas-en-paralelo"></a>
+### 8.4.1 Promesas en Paralelo
+
+A menudo necesitas lanzar varias operaciones asincrónicas a la vez y esperar a que **todas** terminen. `Promise.all` recibe un array de promesas y devuelve una sola promesa con los resultados **en el mismo orden**:
+
+```typescript
+//Suponemos que tenemos un modelo Personaje y una función async cargaPersonaje que me da una promesa
+//tipo Personaje 
+async function damePareja(): Promise<[Personaje, Personaje]> {
+  //Promise.all arranca ambas a la vez y tipa el resultado como tupla [Planeta, Planeta]
+  const [primero, segundo] = await Promise.all([
+    cargaPersonaje(`https://swapi.info/api/people/1`),
+    cargaPersonaje(`https://swapi.info/api/people/2`),
+  ]);
+  return [primero, segundo];
+}
+```
+
+> [!NOTE]
+> `Promise.all([p1, p2, p3])` tipa el resultado como una **tupla** con los tipos en orden (`[string, number, boolean]`). Es decir: el `resultados[0]` es `string`, el `[1]` es `number`, etc. Mucho más seguro que un `any[]`.
+
+En los primeros apuntes ya vimos un ejemplo de esto (00_Introducción.md), precisamente con SWAPI (leyendo personajes, naves y planetas a la vez).
 
 <a id="otros-ejemplos"></a>
-### Otros Ejemplos:
+### Otros Ejemplos:Uso de Async/Await con Fetch:
 
 <a id="4-uso-de-asyncawait-con-fetch"></a>
-#### 4. Uso de Async/Await con Fetch:
 
 Ya hemos visto un ejemplo más arriba. Aquí va otro ejemplo con fetch (que devuelve también una promesa):
 
@@ -521,21 +518,7 @@ obtenerDatosDesdeAPI();
 
 En este ejemplo, `fetch` se utiliza junto con `await` para realizar una solicitud HTTP y manejar los datos resultantes de manera asincrónica. Usamos `fetch` aquí como **vehículo didáctico**: en un proyecto Tauri este patrón es idéntico pero llamando a `invoke` — `const datos = await invoke<DatosPost>("obtener_datos")` — donde el backend Rust es el que hace el trabajo en vez de un servidor HTTP.
 
-5. Uso de Async/Await con Fetch y promise.all:
 
-
-```typescript
-//Suponemos que tenemos un modelo Personaje y una función async cargaPersonaje que me da una promesa
-//tipo Personaje 
-async function damePareja(): Promise<[Personaje, Personaje]> {
-  //Promise.all arranca ambas a la vez y tipa el resultado como tupla [Planeta, Planeta]
-  const [primero, segundo] = await Promise.all([
-    cargaPersonaje(`https://swapi.info/api/people/1`),
-    cargaPersonaje(`https://swapi.info/api/people/2`),
-  ]);
-  return [primero, segundo];
-}
-```
 <a id="85-la-respuesta-de-fetch-la-interfaz-response"></a>
 ## 8.5. La respuesta de `fetch`: la interfaz `Response`
 
