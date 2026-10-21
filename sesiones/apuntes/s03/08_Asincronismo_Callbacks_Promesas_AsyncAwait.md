@@ -408,26 +408,12 @@ realizarTarea1()
 `async/await` es una característica introducida en ECMAScript 2017 (también conocido como ES8) que simplifica la escritura y gestión del código asíncrono en JavaScript (y en TypeScript no cambia nada: solo añade tipos). Permite escribir código asíncrono de manera más similar a código síncrono, haciendo que sea más legible y fácil de entender.
 
 ```typescript
-//async indica que se va a devolver una Promise (acorta la cabecera)
-async function realizarTareas(): Promise<void> {
-  try {
-    const resultado1: string = await realizarTarea1();
-    const resultado2: number = await realizarTarea2(resultado1);
-    const resultado3: boolean = await realizarTarea3(resultado2);
-    console.log("Todas las tareas han sido completadas.");
-  } catch (error) {
-    console.error("Algo salió mal:", error);
-  }
-}
-
-realizarTareas();
-
-//Escrito con función flecha y completo:
-
 // Implementación de realizarTarea1 utilizando una Promesa con un temporizador simulado.
 // Aquí ya no estamos haciendo como antes, que guardábamos una Promesa en una variable:
 // const miPromesa: Promise<string> = new Promise<string>((resolve, reject) => {...}
 // Aquí hacemos una función, que crea una promesa y la devuelve directamente en el return
+
+//Cabecera con arrow
 const realizarTarea1 = (): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
     setTimeout(() => {      
@@ -435,6 +421,16 @@ const realizarTarea1 = (): Promise<string> => {
     }, 1000);
   });
 };
+
+//Otra forma de escribirla: se prefiere esta
+async function realizarTarea2(texto: string): Promise<number> {
+  // Simulamos una espera asíncrona
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+  // Simulamos una operación, por ejemplo, devolver la longitud del string recibido
+  console.log(`Tarea 2 recibió: ${texto}`);
+  return texto.length; // Retorna un number envuelto en una Promise
+}
 
 async function realizarTareas() : Promise<void> {
   try {
