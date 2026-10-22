@@ -364,11 +364,11 @@ Resumen sobre los **19 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 4 · 
 <a id="montar-api-local-con-fakeapi"></a>
 ## Montar API local con FAKEAPI
 
-Si no quieres depender de internet (o de que swapi esté disponible), puedes levantar una API local con [`json-server`](https://github.com/typicode/json-server) a partir de un JSON con la forma de `datos/planetas.json`. Desde `ejerciciosTS/datos/` (o pasando la ruta: `npx json-server datos/planetas.json`):
+Si no quieres depender de internet (o de que swapi esté disponible), puedes levantar una API local con [`json-server`](https://github.com/typicode/json-server) a partir de un JSON con la forma de `datos/planetas_mirror.json`. Desde `ejerciciosTS/datos/` (o pasando la ruta: `npx json-server datos/planetas_mirror.json`):
 
 ```bash
 npm install json-server@0.17.4
-npx json-server planetas.json
+npx json-server planetas_mirror.json
 ```
 
 Esto arranca la API en el puerto **3000** y la deja consultable en:
