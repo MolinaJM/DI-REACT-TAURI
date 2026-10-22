@@ -59,7 +59,7 @@ gen/
 !ejerciciosTS/14/
 !ejerciciosTS/15/
 !ejerciciosTS/16/
-# !ejerciciosTS/17/
+!ejerciciosTS/17/
 # !ejerciciosTS/18/
 # !ejerciciosTS/19/
 # !ejerciciosTS/20/
@@ -79,7 +79,7 @@ sesiones/apuntes/s03/*
 !sesiones/apuntes/s03/06_Arrays.md
 !sesiones/apuntes/s03/07_Estructuras_de_Datos.md
 !sesiones/apuntes/s03/08_Asincronismo_Callbacks_Promesas_AsyncAwait.md
-# !sesiones/apuntes/s03/09_Miscelánea.md
+!sesiones/apuntes/s03/09_Miscelánea.md
 # !sesiones/apuntes/s03/10_Generics.md
 
 # ===========================================================================
