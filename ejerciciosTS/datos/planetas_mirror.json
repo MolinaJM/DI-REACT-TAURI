@@ -1,5 +1,6 @@
 { 
-"planetas": [
+"planetas": 
+[
 	{
 		"name": "Tatooine",
 		"rotation_period": "23",
