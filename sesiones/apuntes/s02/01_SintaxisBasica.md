@@ -416,11 +416,16 @@ const profe: Persona & Empleado = {
   cargo: "Profesora",
 };
 
-const profe: Persona & Empleado = { nombre: "Ana", cargo: "Profesora"};
+const profe1: Persona & Empleado = { nombre: "Ana", cargo: "Profesora"};
 const profe2: Persona | Empleado = {nombre: "Ana"};
 const profe3: Persona | Empleado = {cargo: "Profesora"};
 
 console.log(profe.nombre + " " + profe2.nombre + " " + profe3.cargo);
+
+//También se pueden hacer uniones sin tener que definir uno de los tipos
+const profe4: Persona & { sueldo: number} = { nombre: "Juan", sueldo: 2000 }
+const profe5: { sueldo: number} & Persona = { nombre: "Juan", sueldo: 2000 }
+console.log(profe4);console.log(profe5);
 ```
 
 
