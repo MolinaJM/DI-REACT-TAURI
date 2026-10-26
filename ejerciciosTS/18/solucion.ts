@@ -53,6 +53,7 @@ async function cargarLista(url: string): Promise<Planeta[]> {
     if (!esPlanetaCrudo(elemento)) continue; //JMM: descartamos lo que no valida
     planetas.push(aPlaneta(elemento));
   }
+  //Otra forma: planetas.filter(p => esPlanetaCrudo(p)).map(p => aPlaneta(p));
   return planetas;
 }
 
@@ -63,7 +64,6 @@ async function cargarPlanetas(url: string): Promise<Planeta[]> {
 
 
 //JMM: (2) Una ficha suelta  + carga de dos fichas en paralelo con Promise.all
-
 async function cargarPlaneta(url: string): Promise<Planeta> {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
