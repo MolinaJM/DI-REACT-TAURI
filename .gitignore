@@ -20,6 +20,8 @@ gen/
 # ejerciciosTS/*: las soluciones se revelan carpeta a carpeta (sección inferior)
 /ejerciciosTS/*
 /ejerciciosRT/*
+!ejerciciosTS/_bancop
+!ejerciciosRT/_bancop
 
 # ===========================================================================
 #  >>> SESIÓN 00 <<  
