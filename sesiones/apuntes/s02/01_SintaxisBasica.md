@@ -402,7 +402,7 @@ function procesarRespuesta(respuesta: RespuestaAPI) {
 La **intersección (`&`)** combina tipos (interfaces y types) exigiendo que la variable cumpla **todos a la vez**: `A & B` se lee "A y B". Es la forma de componer varias `interface` en un solo objeto (las interfaces se verán un poco después):
 
 ```typescript
-// 🔁 `interface` → ya explicado en §1.3 (Interfaces y Type Aliases)
+// `interface` → ya explicado en §1.3 (Interfaces y Type Aliases)
 interface Persona { 
   nombre: string; 
 }
@@ -426,6 +426,10 @@ console.log(profe.nombre + " " + profe2.nombre + " " + profe3.cargo);
 const profe4: Persona & { sueldo: number} = { nombre: "Juan", sueldo: 2000 }
 const profe5: { sueldo: number} & Persona = { nombre: "Juan", sueldo: 2000 }
 console.log(profe4);console.log(profe5);
+
+//También se puede restringir los tipos // sueldo solo puede ser 2000 (la instanciación daría error)
+const profe6: Persona & { sueldo: 2000} = { nombre: "Juan", sueldo: 2100 }
+
 ```
 
 

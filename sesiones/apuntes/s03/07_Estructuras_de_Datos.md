@@ -493,7 +493,8 @@ En JavaScript, `JSON.stringify()` y `JSON.parse()` son dos métodos esenciales p
 <a id="781-jsonstringify"></a>
 ### 7.8.1 `JSON.stringify()`
 
-`JSON.stringify()` es un método que convierte un objeto JavaScript en una cadena de texto en formato JSON. Esta cadena resultante puede ser utilizada para transmitir datos o para guardarlos en un archivo. Puede tomar tres argumentos: el objeto que se va a convertir, un argumento opcional llamado `replacer` (una función que personaliza la conversión), y otro argumento opcional llamado `space` (para dar formato legible al resultado).
+`JSON.stringify()` es un método que convierte un objeto JavaScript en una cadena de texto en formato JSON.  Es una forma rápida de "ver un objeto json por pantalla" sin tener que hacerle un método de salida de campos con console.log.
+Esta cadena resultante puede ser utilizada para transmitir datos o para guardarlos en un archivo. Puede tomar tres argumentos: el objeto que se va a convertir, un argumento opcional llamado `replacer` (una función que personaliza la conversión), y otro argumento opcional llamado `space` (para dar formato legible al resultado).
 
 **Sintaxis**
 

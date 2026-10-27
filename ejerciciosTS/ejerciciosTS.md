@@ -357,7 +357,7 @@ Resumen sobre los **19 bloques con ejercicio**: **P1 = 9 · P2 = 6 · P3 = 4 · 
 
 ### 19. Práctica integrada
 > Realización de una práctica que integre todos los conocimientos vistos para TS.
-> 🎯 Prioridad **P1** — integra TODO: modelar datos, validar la entrada, cargar de forma asíncrona y producir estado: el esqueleto de un componente real.
+> 🎯 Prioridad **P1** — integra TODO: modelar datos, validar la entrada, hacer búsquedas y consultas al catálogo, funciones sobre arrays y estadísticas, cargar de forma asíncrona y producir estado: el esqueleto de un componente real.
 
 ---
 

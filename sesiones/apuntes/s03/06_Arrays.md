@@ -111,6 +111,7 @@ Puedes crear un array literalmente encerrando elementos entre corchetes `[]` y s
 ```typescript
 const frutas: Array<string> = ["manzana", "plátano", "naranja"];
 const frutas: string[] = ["manzana", "plátano", "naranja"];//se prefiere esta por ser más corta
+console.log(frutas.includes("manzana"));//Este método dice si tiene o no tiene tal dato
 ```
 
 <a id="632-modificación-de-elementos"></a>

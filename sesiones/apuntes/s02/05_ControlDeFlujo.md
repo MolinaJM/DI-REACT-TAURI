@@ -444,7 +444,11 @@ function validarConfig(cfg: unknown): asserts cfg is Config {
   if (typeof c.timeout !== "number") {
     throw new TypeError("La configuración debe tener 'timeout' como number");
   }
-}
+  // Si hubiera tenido un campo unión de literales podríamos haber hecho las comprobaciones de
+  // varias maneras:
+  //(c.estado == "habilitado" || c.estado == "bloqueado") 
+  //Otra opción: if (c.estado as tiposm) // (siendo type tiposm = "habilitado" | "bloqueado"
+  }
 
 const datos = { url: "https://api.ejemplo.com", timeout: 5000 };
 validarConfig(datos);
