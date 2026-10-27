@@ -83,9 +83,11 @@ sesiones/apuntes/s03/*
 !sesiones/apuntes/s03/09_Miscelánea.md
 !sesiones/apuntes/s03/10_Generics.md
 
+# EXAMEN
+!/examen
 
 # ===========================================================================
-#  EJERCICIOS DE TYPESCRIPT (catálogo + soluciones)
+#  EJERCICIOS DE REACT (catálogo + soluciones)
 # ===========================================================================
 #!ejerciciosRT/ejerciciosRT.md
 #!ejerciciosRT/datos/
