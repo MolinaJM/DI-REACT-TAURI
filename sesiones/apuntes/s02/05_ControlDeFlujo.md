@@ -612,6 +612,18 @@ console.log(procesar({ estado: "error", mensaje: "sin red" }));
 console.log(procesar({ estado: "listo", planetas }));
 ```
 
+> [!NOTE]
+> **Por qué `procesar` (o `describirCarga`) tiene poca utilidad en un programa real:**
+> Lo modelamos aquí por didáctica, para entender los distintos estados por los que pasa una carga de datos. En un programa real (p. ej. React), **no** llamarías a `describirCarga(estado)` para renderizar; harías directamente:
+>
+> ```tsx
+> if (estado.estado === "listo") {
+>   render(estado.peliculas);
+> }
+> ```
+>
+> El `switch` exhaustivo con `never` es útil para **comprobar que no te has dejado ningún caso** al compilar, no para generar cadenas de texto.
+
 > ▶ **Cómo probarlo:** copia el `.json` a `bancop/datos/planetas.json` y el bloque a `bancop` como `cargar-json.ts`; ejecuta `npx tsx cargar-json.ts` (desde `bancop/`) y después `npx tsc` para ver los tipos.
 > Ejercicios relacionados en `ejerciciosTS/ejerciciosTS.md`: §12 (type guards) y §20 (estados de carga).
 

@@ -1,0 +1,25 @@
+{
+  "peliculas": [
+    { "id": 1, "titulo": "Oppenheimer", "director": "Christopher Nolan", "anio": 2023, "duracionMin": 180, "esDoblada": true, "puntuacion": 8.9, "estado": "cartelera", "etiquetas": ["drama", "historia"] },
+    { "id": 2, "titulo": "Dune: Parte Dos", "director": "Denis Villeneuve", "anio": 2024, "duracionMin": 166, "esDoblada": false, "estado": "estreno", "etiquetas": ["ciencia-ficcion", "accion"] },
+    { "id": 3, "titulo": "Anatomía de una caída", "director": "Justine Triet", "anio": 2023, "duracionMin": 151, "esDoblada": true, "puntuacion": 7.8, "estado": "cartelera", "etiquetas": ["drama", "judicial"] },
+    { "id": 4, "titulo": "Pobres criaturas", "director": "Yorgos Lanthimos", "anio": 2023, "duracionMin": 141, "esDoblada": false, "estado": "retirada", "etiquetas": ["fantasia", "comedia"] },
+    { "id": 5, "titulo": "Interstellar", "director": "Christopher Nolan", "anio": 2014, "duracionMin": 169, "esDoblada": true, "puntuacion": 8.7, "estado": "estreno", "etiquetas": ["ciencia-ficcion"] }
+  ],
+  "actores": [
+    { "id": 101, "nombre": "Cillian Murphy", "peliculaId": 1, "personaje": "J. Robert Oppenheimer" },
+    { "id": 102, "nombre": "Emily Blunt", "peliculaId": 1, "personaje": "Kitty Oppenheimer" },
+    { "id": 201, "nombre": "Timothée Chalamet", "peliculaId": 2, "personaje": "Paul Atreides" },
+    { "id": 301, "nombre": "Sandra Hüller", "peliculaId": 3, "personaje": "Sandra Voyter" },
+    { "id": 401, "nombre": "Emma Stone", "peliculaId": 4, "personaje": "Bella Baxter" },
+    { "id": 501, "nombre": "Matthew McConaughey", "peliculaId": 5, "personaje": "Joseph Cooper" }
+  ],
+  "proyecciones": [
+    { "id": 5001, "peliculaId": 1, "sala": "Sala 1", "hora": "18:00", "precioEntrada": 7.5 },
+    { "id": 5002, "peliculaId": 1, "sala": "Sala 2", "hora": "20:30", "precioEntrada": 8.0 },
+    { "id": 5003, "peliculaId": 2, "sala": "Sala 1", "hora": "19:00", "precioEntrada": 8.5 },
+    { "id": 5004, "peliculaId": 3, "sala": "Sala 3", "hora": "17:30", "precioEntrada": 7.0 },
+    { "id": 5005, "peliculaId": 5, "sala": "Sala 2", "hora": "21:00", "precioEntrada": 9.0 },
+    { "id": 5006, "peliculaId": 5, "sala": "Sala 4", "hora": "23:15", "precioEntrada": 9.5 }
+  ]
+}
