@@ -4,7 +4,7 @@
 
 > ⚠️ **Atención:** para seguir esta parte de apuntes de forma más sencilla, abre el **proyecto mínimo** [`repos/02-react-ejemplo-minimo`](../../../repos/02-react-ejemplo-minimo/)  (`npm install` más `npm run dev`)— una app React reducida a una caja de texto y un botón con dos componentes. Toda la teoría que verás aquí (props, estado, callbacks) se puede probar ahí al momento. 
 
-> 🗺️ **Árbol de componentes del proyecto mínimo:** `App` es el **padre** que gestiona el estado (la memoria) ¿por qué? porque necesitamos comunicar los hermanos (luego veremos que esto también se podría hacer con un hook específico: `useContext`). Los datos **bajan por props** (⬇) y las acciones **suben por callbacks** (⬆):
+> 🗺️ **Árbol de componentes del proyecto mínimo:** `App` es el **padre** que gestiona el estado (la memoria) ¿por qué? porque necesitamos comunicar los hermanos (luego veremos que esto también se podría hacer con un hook específico: `useContext` o incluso con una librería como **Zustang**). Los datos **bajan por props** (⬇) y las acciones **suben por callbacks** (⬆):
 >
 
 >

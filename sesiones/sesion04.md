@@ -19,18 +19,6 @@ Componentes funcionales, props, children y primeros hooks con tipado
 
 Los ejemplos ejecutables están en el repositorio [`repos/02-react-componentes`](../repos/02-react-componentes/): `src/components/Saludo.tsx`, `Card.tsx`, `ListaTareas.tsx`, `ListaUsuarios.tsx`, `TablaGenerica.tsx`, `Boton.tsx` y `src/hooks/useForm.ts`. Para ejecutarlos: `cd repos/02-react-componentes && npm run dev`.
 
-## 🧪 Autoevaluación
 
-Marca lo que ya eres capaz de hacer por ti mismo/a:
-
-- [ ] Creo un componente funcional y lo compongo dentro de otro.
-- [ ] Tipos props con una interfaz (`interface XProps`) usando obligatorias y opcionales (`?`).
-- [ ] Uso `children` tipado con `ReactNode`.
-- [ ] Uso `useState<T>` con arrays/objetos siguiendo el patrón inmutable.
-- [ ] Uso `useEffect` para cargar datos iniciales con estados `cargando`/`error`/`datos`.
-- [ ] Renderizo listas con `key` y comprendo por qué es necesaria.
-- [ ] Distingo qué expresiones se pueden poner en JSX y cuáles no.
-
-> **Reto de la sesión:** Crea un componente `PeliculaCard` con props tipadas y renderiza una lista de 5 películas con `key`.
 
 [Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md) [S13](sesion13.md)
