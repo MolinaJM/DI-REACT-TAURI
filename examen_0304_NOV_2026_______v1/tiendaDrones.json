@@ -1,0 +1,24 @@
+{
+  "drones": [
+    { "id": 1, "modelo": "DJI Mavic 3 Pro", "marca": "DJI", "autonomiaMin": 43, "precio": 2099, "camara": true, "garantiaMes": 24, "gama": "cinemática", "sensores": ["gps", "lidar"] },
+    { "id": 2, "modelo": "DJI Mini 4 Pro", "marca": "DJI", "autonomiaMin": 34, "precio": 799, "camara": true, "garantiaMes": 12, "gama": "media", "sensores": ["gps"] },
+    { "id": 3, "modelo": "Tello", "marca": "Ryze", "autonomiaMin": 13, "precio": 119, "camara": false, "gama": "básica", "sensores": ["giroscopio"] },
+    { "id": 4, "modelo": "DJI Inspire 3", "marca": "DJI", "autonomiaMin": 28, "precio": 14999, "camara": true, "garantiaMes": 36, "gama": "cinemática", "sensores": ["gps", "lidar", "radar"] },
+    { "id": 5, "modelo": "Autel Evo Lite+", "marca": "Autel", "autonomiaMin": 40, "precio": 1149, "camara": false, "garantiaMes": 6, "gama": "media", "sensores": ["giroscopio"] }
+  ],
+  "accesorios": [
+    { "id": 101, "dronId": 1, "nombre": "Hélice de repuesto", "precio": 25 },
+    { "id": 102, "dronId": 2, "nombre": "Batería de recambio", "precio": 89 },
+    { "id": 103, "dronId": 3, "nombre": "Funda de transporte", "precio": 34 },
+    { "id": 104, "dronId": 4, "nombre": "Gafas FPV de realidad", "precio": 199 },
+    { "id": 105, "dronId": 5, "nombre": "Mando con pantalla", "precio": 129 }
+  ],
+  "pedidos": [
+    { "id": 501, "dronId": 1, "clienteId": 1, "unidades": 1, "estado": "enviado" },
+    { "id": 502, "dronId": 2, "clienteId": 2, "unidades": 2, "estado": "pendiente" },
+    { "id": 503, "dronId": 3, "clienteId": 3, "unidades": 1, "estado": "enviado" },
+    { "id": 504, "dronId": 1, "clienteId": 4, "unidades": 1, "estado": "devuelto" },
+    { "id": 505, "dronId": 4, "clienteId": 5, "unidades": 1, "estado": "enviado" },
+    { "id": 506, "dronId": 5, "clienteId": 6, "unidades": 2, "estado": "pendiente" }
+  ]
+}
