@@ -36,7 +36,7 @@
 >     Saludo-->>App: pinta "¡Hola, {nombre}!"
 > ```
 >
-> 🔎 **Idea clave:** el mensaje sube (callback `onEnviar`), el padre actualiza su estado (`setNombre`), y el dato baja repintado (prop `nombre`).  Este "mecanismo" se llama `lifting state up` y se suele usar en casos simples. En casos más complejos habrá que echar mano del `useContext`.
+> 🔎 **Idea clave:** el mensaje sube (callback `onEnviar`), el padre actualiza su estado (`setNombre`), y el dato baja repintado (prop `nombre`).  Este "mecanismo" se llama `lifting state up` y se suele usar en casos simples. En casos más complejos habrá que echar mano del `useContext` o incluso **Zustang**.
 
 > 📌 **React & TypeScript Cheatsheet (Decálogo):** las **10 reglas de oro** de React con TS y Tauri (props, estado, hooks, callbacks, `invoke`...) en un solo documento de consulta rápida → [**React & TypeScript Cheatsheet**](14_React_TS_Cheatsheet.md).
 
@@ -84,9 +84,17 @@ const alumnos: Alumno[] = [
   { nombre: "Ana", notas: [5, 6, 7] },
 ];
 
-function conMedia(alumno: Alumno): Omit<Alumno, "curso"> & { media: number } {
+type AlumnoConMedia = {
+  nombre: string;
+  notas: number[];
+  media: number;
+};
+
+function conMedia(alumno: Alumno): AlumnoConMedia {
+  const { curso, ...resto } = alumno;
   const media = alumno.notas.reduce((s, n) => s + n, 0) / alumno.notas.length;
-  return { ...alumno, media };
+  
+  return { ...resto, media };
 }
 
 const aprobados = alumnos
@@ -124,7 +132,7 @@ export function filtrar(tareas: Tarea[], filtro: Filtro): Tarea[] {
 > [!NOTE]
 > Separa **tipos**, **lógica pura** y **punto de entrada**. En React esa misma idea son `types/`, `utils/` o `services/` y componentes.
 
-### 11.0.3. Asincronía, `fetch` y cancelación
+### 11.0.3. Asincronía con `fetch` 
 
 ```typescript
 interface Alumno {
@@ -132,44 +140,26 @@ interface Alumno {
   nombre: string;
 }
 
-async function cargarAlumnos(
-  url: string,
-  signal: AbortSignal,
-  setCargando: (v: boolean) => void,
-  setDatos: (d: Alumno[]) => void,
-  setError: (e: string | null) => void
-): Promise<void> {
-  try {
-    setCargando(true);
-    setError(null);
-    const res = await fetch(url, { signal });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const datos = (await res.json()) as Alumno[];
-    setDatos(datos);
-  } catch (err) {
-    if (err instanceof DOMException && err.name === "AbortError") return;
-    setError(err instanceof Error ? err.message : "Error desconocido");
-  } finally {
-    setCargando(false);
-  }
+async function cargarAlumnos(url: string): Promise<Alumno[]> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Error al cargar");
+  return (await res.json()) as Alumno[];
 }
 ```
 
-> [!NOTE]
-> Domina este patrón: **cargando / error / datos** con `try/catch`, tipado `unknown`, y `AbortController`. Es idéntico al que usarás con `useState` + `useEffect`.
 
-### 11.0.4. De TS a React: traducción rápida
+### 11.0.4. De TS a React: traducción rápida (IMPORTANTE)
 
 | Lo que ya sabes (TS) | En React 19 |
 |:---|:---|
-| Función que recibe datos y devuelve un valor | Componente (`function Componente()`) que devuelve JSX |
-| `interface Props` para tipar parámetros | Props tipadas |
-| Variables con tipos (`T \| null`) | `useState<T>()` / `useReducer` |
-| `fetch` + `try/catch` + `async/await` | `useEffect` + `fetch` (mismos estados) |
+| Función que recibe datos y devuelve un valor | Componente (`function Componente(props)`) que devuelve JSX |
+| `interface` para tipar parámetros | Props tipadas mediante `interface` |
+| Variables con tipos (`T \| null`) | `useState<T>()` / `useReducer`("useState avanzado") |
+| `fetch` + `try/catch` + `async/await` | `useEffect` + `fetch` (mismos estados ya vistos... cargando/error/listo) |
 | `map()` / `filter()` sin mutar | Listas con `{items.map(i => <Item key={i.id} />)}` |
-| `if/else`, ternario | Render condicional (`&&`, ternario) |
+| `if/else`, ternario | Render condicional / cortocirtuito (`&&`, ternario) |
 | Módulos ES `import`/`export` | Componentes, tipos y utilidades reutilizables |
-| Unión de literales (`"a" \| "b"`) | Estado controlado (filtros, radios, `select`) |
+| Unión de literales (`"a" \| "b"`) | Estado controlado mediante elementos de UI (filtros, radios, `select`) |
 
 ---
 
@@ -250,7 +240,6 @@ export const Saludo=({ nombre }: { nombre: string }) => {
 }
 
 //En el componente padre habría que llamarlo así
-
 import {Saludo} from "./Saludo.tsx"
 export default function App() {
   const n="Tronco"
@@ -368,9 +357,7 @@ Las props **son de solo lectura**: un componente nunca debe modificar las suyas;
 
 ### 11.3.5. Estado y hooks
 
-El **estado** es información que el componente recuerda entre renderizados y que, al cambiar, dispara un re-render. Los **Hooks** son funciones especiales de React que te permiten "enganchar" (*hook into*) el estado y otras características del ciclo de vida de React dentro de componentes funcionales.
-
-Antes de la llegada de los Hooks (en React 16.8), para manejar estado o lógica de ciclo de vida tenías que usar **componentes basados en clases**. Con los Hooks, puedes hacer todo esto directamente en componentes funcionales simples. 
+El **estado** es información que el componente recuerda entre renderizados y que, al cambiar, dispara un re-render. Los **Hooks** son funciones especiales de React que te permiten "enganchar" (*hook into*) el estado y otras características del ciclo de vida de React dentro de componentes funcionales. En resumen: **un hook es como un almacén para guardar/modificar/leer un estado(variable)**.
 
 ¿Cómo identificas un Hook?
 

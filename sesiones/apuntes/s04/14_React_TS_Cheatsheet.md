@@ -1,6 +1,6 @@
 # 14. React & TypeScript Cheatsheet: Decálogo
 
-> Cheatsheet de las **10 reglas de oro** de React con TypeScript y Tauri. Compañero de consulta rápida de [11 · React de cero: qué es, cómo se usa y por qué TypeScript](11_Que_es_React.md): cada número resume un concepto del apunte y cómo aplicarlo en los proyectos del curso.
+> Cheatsheet de las **10 reglas de oro** de React con TypeScript y Tauri. Cada número resume un concepto del apunte y cómo aplicarlo en los proyectos del curso.
 
 ---
 
@@ -8,7 +8,7 @@
 
 - Las props son los parámetros de **entrada** que un padre le pasa a un hijo (**de solo lectura**).
 - El padre elige el nombre de la prop (ej. `onEnviar`) y el hijo **debe** usar exactamente ese mismo nombre.
-- Las props fluyen únicamente de **arriba a abajo** (Padre → Hijo).
+- Las props fluyen únicamente de **arriba hacia abajo** (Padre → Hijo).
 
 ```tsx
 // El padre pone el nombre de la prop: onEnviar y lo instancia con setNombre
@@ -25,8 +25,8 @@ function FormularioNombre({ onEnviar }: { onEnviar: (texto: string) => void }) {
 ## 2. El estado (`useState`) y hooks
 
 - Usar `useState` es usar un **Hook** (todas las funciones que empiezan con `use` son Hooks).
-- Es la **memoria interna** del componente: cuando cambia, React **re-renderiza** el componente automáticamente.
-- **Regla:** si un componente solo muestra datos que vienen de fuera (como `Saludo`), **no necesita estado**; solo props.
+- Un **Hook** es la **memoria interna** del componente: cuando cambia, React **re-renderiza** el componente automáticamente.
+- **Regla:** si un componente solo muestra datos que vienen de fuera y no necesita guardar ni comunicar nada (como `Saludo`), **no necesita estado**; solo props.
 - **Componentes controlados:** los inputs necesitan estado propio para no quedarse congelados y almacenar lo que el usuario escribe letra a letra.
 - **Estado pasarela:** el padre requiere estado propio cuando necesita guardar la información que le manda un hijo para transmitirla como prop a otro.
 
@@ -35,7 +35,8 @@ function FormularioNombre({ onEnviar }: { onEnviar: (texto: string) => void }) {
 ## 3. Reglas de oro de los hooks
 
 - Llamarlos **solo en el nivel superior** del componente (**nunca** dentro de `if`, bucles `for` o funciones internas).
-- Llamarlos **solo** desde componentes de función de React o **Custom Hooks**.
+- Llamarlos **solo** desde componentes de función de React o **Custom Hooks**: funciones que empiezan por use... y permiten ser reutilizados. Ej: me creo un componente *contador* con useState, pero ahora quiero reutilizar ese "componente" en muchos más sitios. En vez de copiar/pegar código me creo un **Custom Hook** useContador y lo llamo desde donde quiera. 
+- No confundir **Custom Hook** con un componente. El componente devuelve JSX, el otro no, solo sirve para manejar lógica, te puede devolver por ejemplo un booleano.
 
 ---
 
