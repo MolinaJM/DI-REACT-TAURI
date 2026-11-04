@@ -104,8 +104,10 @@ sesiones/apuntes/s03/*
 # ===========================================================================
 !sesiones/sesion04.md
 sesiones/apuntes/s04/*
-!sesiones/apuntes/s04/11*
-# !repos/02-react-*
+!sesiones/apuntes/s04/11_Que_es_React.md
+# !sesiones/apuntes/s04/12_Preparacion_React_19.md
+# !sesiones/apuntes/s04/13_Tipado_en_React_TS.md
+# !sesiones/apuntes/s04/14_React_TS_Cheatsheet.md
 
 # ===========================================================================
 #  >>> SESIÓN 05 <<
