@@ -4,7 +4,7 @@
 
 > ⚠️ **Atención:** para seguir esta parte de apuntes de forma más sencilla, abre el **proyecto mínimo** [`repos/02-react-ejemplo-minimo`](../../../repos/02-react-ejemplo-minimo/)  (`npm install` más `npm run dev`)— una app React reducida a una caja de texto y un botón con dos componentes. Toda la teoría que verás aquí (props, estado, callbacks) se puede probar ahí al momento. 
 
-> 🗺️ **Árbol de componentes del proyecto mínimo:** `App` es el **padre** que gestiona el estado (la memoria) ¿por qué? porque necesitamos comunicar los hermanos (luego veremos que esto también se podría hacer con un hook específico: `useContext` o incluso con una librería como **Zustang**). Los datos **bajan por props** (⬇) y las acciones **suben por callbacks** (⬆):
+> 🗺️ **Árbol de componentes del proyecto mínimo:** `App` es el **padre** que gestiona el estado (la memoria) ¿por qué? porque necesitamos comunicar los hermanos (luego veremos que esto también se podría hacer con un hook específico: `useContext` o incluso con una librería como **Zustang**). Los datos **bajan por props** (⬇) y las acciones **suben por callbacks** (⬆). Ejemplo:
 >
 
 >
@@ -45,23 +45,22 @@
     - [11.0.1. Tipos, interfaces y datos](#1101-tipos-interfaces-y-datos)
     - [11.0.2. Módulos, funciones puras y reutilización](#1102-módulos-funciones-puras-y-reutilización)
     - [11.0.3. Asincronía, `fetch` y cancelación](#1103-asincronía-fetch-y-cancelación)
-    - [11.0.4. De TS a React: traducción rápida](#1104-de-ts-a-react-traducción-rápida)
+    - [11.0.4. Closures](#1103-asincronía-fetch-y-cancelación)
+    - [11.0.5. De TS a React: traducción rápida](#1104-de-ts-a-react-traducción-rápida)
   - [11.1. ¿Qué es React?](#111-qué-es-react)
   - [11.2. ¿Cómo funciona? El modelo mental](#112-cómo-funciona-el-modelo-mental)
     - [11.2.1. Imperativo vs declarativo](#1121-imperativo-vs-declarativo)
     - [11.2.2. El Virtual DOM y el render](#1122-el-virtual-dom-y-el-render)
   - [11.3. Componentes: las piezas de React](#113-componentes-las-piezas-de-react)
     - [11.3.1. Componentes funcionales](#1131-componentes-funcionales)
-    - [11.3.2. JSX](#1132-jsx)
+    - [11.3.2. JSX/TSX](#1132-jsx)
     - [11.3.3. Eventos en JSX: `onClick`, `onChange`, `onSubmit`](#1133-eventos-en-jsx-onclick-onchange-onsubmit)
     - [11.3.4. Props: datos de entrada](#1134-props-datos-de-entrada)
     - [11.3.5. Estado y hooks](#1135-estado-y-hooks)
   - [11.4. El árbol de componentes y el flujo de datos](#114-el-árbol-de-componentes-y-el-flujo-de-datos)
     - [11.4.1. El punto de entrada: de `index.html` a `App`](#1141-el-punto-de-entrada-de-indexhtml-a-app)
-  - [11.5. Los bloques que siempre usas](#115-los-bloques-que-siempre-usas)
-  - [11.6. React con TypeScript: la relación](#116-react-con-typescript-la-relación)
-  - [11.8. Resumen y siguientes pasos](#118-resumen-y-siguientes-pasos)
-  - [11.7. Qué partes de TypeScript son las más usadas](#117-qué-partes-de-typescript-son-las-más-usadas)
+  - [11.5. React con TypeScript: la plantilla mental](#115-react-con-typescript-la-plantilla-mental)
+  - [11.6. Qué partes de TypeScript son las más usadas](#116-qué-partes-de-typescript-son-las-más-usadas)
 - 🧪 **Ejercicios:** [Componentes, JSX y props](../../../ejerciciosRT/ejerciciosRT.md#bloque-11-componentes-jsx-y-props)
 
 ---
@@ -156,8 +155,7 @@ async function cargarAlumnos(url: string): Promise<Alumno[]> {
 
 ```typescript 
 function crearContador() {
-  let contador = 0; //Esta variable está en el ámbito exterior
-
+  let contador = 0; //Esta variable está en el ámbito exterior de crearContador
   return function() {
     contador++; // La función interna accede y modifica la variable exterior
     return contador;
@@ -170,8 +168,8 @@ const contar = crearContador();
 console.log(contar());// 1
 console.log(contar());// 2
 console.log(contar());// 3
-`
-#``## 11.0.5. De TS a React: traducción rápida (IMPORTANTE)
+```
+### 11.0.5. De TS a React: traducción rápida (IMPORTANTE)
 
 | Lo que ya sabes (TS) | En React 19 |
 |:---|:---|
@@ -182,25 +180,22 @@ console.log(contar());// 3
 | `map()` / `filter()` sin mutar | Listas con `{items.map(i => <Item key={i.id} />)}` |
 | `if/else`, ternario | Render condicional / cortocirtuito (`&&`, ternario) |
 | Módulos ES `import`/`export` | Componentes, tipos y utilidades reutilizables |
-| Unión de literales (`"a" \| "b"`) | Estado controlado mediante elementos de UI (filtros, radios, `select`) |
+| Unión de literales (`"a" \| "b"`) | Estado cambiantes controlados mediante elementos de UI (filtros, radios, `select`) |
 
 ---
 
 ## 11.1. ¿Qué es React?
 
-**React** es una **librería JavaScript para construir interfaces de usuario** a partir de piezas reutilizables llamadas **componentes**. La creó Meta (Facebook) en 2013 y hoy es la librería de UI más usada del ecosistema web.
+**React** es una **librería JavaScript para construir interfaces de usuario** a partir de piezas reutilizables llamadas **COMPONENTES** (piezas de Lego). La creó Meta (Facebook) en 2013 y hoy es la librería de UI más usada del ecosistema web.
 
 Puntos clave:
 
+- React **no es un lenguaje**: es JavaScript (con su sintaxis *JSX*) corriendo una librería. *JSX* es una especie de HTML `chetado` (con superpoderes, con código ejecutable dentro de él). Y como en este curso usamos **TypeScript**, todos esos componentes se escriben **tipados**, con `.tsx` en lugar de `.jsx`.
 - Es una **librería**, no un framework completo: se encarga de la **vista** (la UI). La lógica de negocio, el enrutado, el estado global o el acceso a datos son decisiones que tú añades con otras herramientas (React Router, Zustand, `fetch`/`invoke`...).
-- Aplica el concepto de **"UI = f(estado)"**: a partir del estado actual, React calcula qué debe mostrarse.
+- Aplica el concepto de **"UI = f(estado)"**: a partir del estado actual, React calcula qué debe mostrarse. Ej: si cambia el texto de la caja al darle al botón, cambia la etiqueta.
 - Trabaja con **componentes**, funciones que devuelven lo que se pinta en pantalla. Ej: un botón.
 - Vive dentro del **navegador/webview**. En Tauri, React se ejecuta en el *webview* nativo, y el **host Rust** (Tauri) le da capacidades de escritorio.
-
-> [!NOTE]
-> React **no es un lenguaje**: es JavaScript (con su sintaxis *JSX*) corriendo una librería. *JSX* es una especie de HTML `chetado` (con superpoderes, con código ejecutable dentro de él). Y como en este curso usamos **TypeScript**, todos esos componentes se escriben **tipados**, con `.tsx` en lugar de `.jsx`.
-
-Cita rápida para fijarlo: React no manipula el DOM a mano (no haces `document.createElement`como se podría hacer en JS); **declaras qué debe haber** y React se encarga de llevarlo a la pantalla.
+- React no manipula el DOM a mano (no haces `document.createElement`como se podría hacer en JS); **declaras qué debe haber** y React se encarga de llevarlo a la pantalla.
 
 ---
 
@@ -222,7 +217,7 @@ h1.textContent = `Hola, ${nombre}`;
 document.getElementById("app")!.appendChild(h1);
 
 // Declarativo (React): describes la UI
-<h1> Hola, {nombre} </h1>
+<h1> Hola, {nombre} </h1>, mezclando HTML y TS (TSX)
 ```
 
 ### 11.2.2. El Virtual DOM y el render
@@ -233,8 +228,7 @@ Cada vez que el **estado** cambia, React:
 2. Compara la descripción nueva con la anterior (el "diff").
 3. Aplica solo los **cambios mínimos** al DOM real del navegador.
 
-Es por esto que escribes código que "repinta todo" (*digamos que se "prepara" el escenario*), pero el navegador no recarga ni recrea toda la página: React optimiza qué nodos se tocan.
-
+Es por esto que escribes código que "repinta todo" (*digamos que se "prepara" el escenario*), pero el navegador no recarga ni recrea toda la página: React optimiza qué nodos se tocan. En el proyecto de ejemplo al pulsar botón, cambia el estado del padre, que sa su vez envía un prop al hijo Saludo.tsx
 
 ---
 
@@ -272,17 +266,17 @@ export default function App() {
 }
 
 //Y a su vez, App ha de ser llamada desde otro componente inicial. 
-//Normalmente el PUNTO DE ENTRADA main.tsx
+//Normalmente el PUNTO DE ENTRADA es main.tsx (con una estructura más o menos fija)
 ```
 
-Son funciones **puras** respecto a sus props: mismo `nombre` → mismo JSX. Toda la lógica de render de un componente vive dentro de la función. Nota: Las funciones puras en matemáticas son aquellas que bajo los mismos datos de entrada SIEMPRE dan los mismos datos de salida
+Son funciones **puras** respecto a sus props: mismo `nombre` → mismo JSX. Las funciones puras en matemáticas son aquellas que bajo los mismos datos de entrada SIEMPRE dan los mismos datos de salida.
 
-### 11.3.2. JSX
+### 11.3.2. JSX/TSX
 
-**JSX** es una extensión de sintaxis que mezcla HTML y expresiones JavaScript. Reglas esenciales:
+**JSX** es una extensión de sintaxis que mezcla HTML y expresiones JavaScript, **TSX** es su variante tipada. Reglas esenciales:
 
 - **Una sola raíz** por retorno (`<>...</>`). Esa raíz puede tener una estructura jerárquica (padres/hijos). En el siguiente ejemplo la raíz es un `<ul>`
-- Expresiones JavaScript/TypeScript entre **llaves `{}`** (strings, números, ternarios, `&&`, llamadas a `map`...).
+- Expresiones JavaScript/TypeScript entre **llaves `{}`** (strings, números, ternarios, cortocircuitos `&&`, llamadas a `map`...).
 - Declaraciones (`if`, `for`) **no** van entre llaves: van fuera o se sustituyen por ternarios.
 - Atributos en `camelCase`: `onClick` (no `onclick`).
 
@@ -303,6 +297,7 @@ function Lista({ nombres }: { nombres: string[] }) {
 //Con sintaxis extendida, separado en interface y cabecera. Esta opción es PREFERIBLE
 //En el caso anterior teníamos un único parámetro, pero si tenemos 8??
 //Es mejor "envolverlos" en un objeto
+//Se usa XXXProps por norma o convención
 interface ListaProps {
   nombres: string[];
 }
@@ -317,10 +312,12 @@ function Lista({ nombres }: ListaProps) {
     </ul>
   );
 }
+
+//Probamos a meter un componente Lista en la APP de prueba
 ```
 
 > [!NOTE]
-> La **`key`** en las listas es obligatoria: le da a React una identidad estable a cada elemento para poder hacer el *diff* eficientemente. Úsala con un id único, nunca con el índice si la lista cambia de orden.
+> La **`key`** en las listas es obligatoria ya que si hay 2 elementos con el mismo key, si cambia, no sabría cuál re-renderizar: le da a React una identidad estable a cada elemento para poder hacer el *diff* eficientemente. Hay que usarla con un id único, nunca con el índice si la lista cambia de orden. En el navegador podemos ver los problemas asociados a el mal uso de key si no se pone(Probar en EDGE con F12).
 
 ### 11.3.3. Eventos en JSX: `onClick`, `onChange`, `onSubmit`
 
@@ -341,7 +338,6 @@ En JSX, los manejadores de eventos se escriben en **camelCase** (`onClick`, `onC
 |---|---|---|
 | **Sintaxis** | Minúsculas | **camelCase** |
 | **Valor** | Cadena de texto (`"..."`) | **Función** (`() => {}`, `miFuncion`, etc.) |
-| **Naturaleza** | Atributo HTML nativo | **Prop** de React |
 | **Funcionamiento** | Se asigna directamente al elemento del DOM | Gestionado por el **sistema de eventos** de React |
 
 > [!WARNING]
@@ -374,9 +370,12 @@ function PeliculaCard({ titulo, puntuacion, genero }: PeliculaCardProps) {
     </div>
   );
 }
+
+//Probamos a meter el componente en el proyecto de prueba
 ```
 
 Las props **son de solo lectura**: un componente nunca debe modificar las suyas; si necesita cambios, los pide al padre (con *callbacks* pasados por props) o gestiona su propio **estado**.
+Por otra parte estamos usando un cortocircuito con &&. Otra posible forma de manejar `genero` sería mediante un ternario: `{genero ? <span>{genero}</span> : <h1>sin género</h1>}`
 
 ### 11.3.5. Estado y hooks
 
@@ -412,6 +411,8 @@ function Contador() {
     <button onClick={() => setValor((v) => v + 1)}>Clicks: {valor}</button>
   );
 }
+
+//Probamos a meter el componente en el proyecto de prueba
 ```
 
 #### `useEffect` (para efectos secundarios)
@@ -435,11 +436,13 @@ function Titulo() {
 
   return <input value={nombre} onChange={(e) => setNombre(e.target.value)} />;
 }
+
+//Probamos a meter el componente en el proyecto de prueba
 ```
 
 #### 
 
-#### Comunicación entre componentes hermanos con `useContext`
+#### `useContext`: Comunicación entre componentes hermanos 
 
 Cuando dos componentes **hermanos** necesitan compartir información, lo normal es **subir el estado al padre común** (*lifting state up*) y pasar datos/callbacks por props. 
 
@@ -555,8 +558,11 @@ index.html  ── carga con <script> ──▶  src/main.tsx  ── monta con 
 import { createRoot } from "react-dom/client";
 import App from "./App";
 
+//StrictMode hace doble ejecución de useState y useEffect para ver si genera problemas.
+//Ej: componente CHAT que al quitarlo (desmontar) no limpia/reinicia variables o conexiones. Podrías
+// tener varias conexiones. Estas cosas son las que intenta detectar
 createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <React.StrictMode> 
     <App />
   </React.StrictMode>
 );
@@ -605,38 +611,27 @@ Flujo dominante en React:
 
 ---
 
-## 11.5. Los bloques que siempre usas
+## 11.5. React con TypeScript: la plantilla mental
 
-Resumen de la "plantilla mental" de cualquier componente React que harás en el curso:
+TypeScript **no** cambia cómo funciona React: hace que lo que ya escribes sea **comprobable en compilación**. La relación es de "contratos", y se resume en la "plantilla mental" de cualquier componente que harás en el curso:
 
-1. **Tipas los datos** con `interface` / `type` (el modelo de tu app).
+1. **Tipas los datos** con `interface` / `type` (el modelo de tu app, ej. `Pelicula`).
 2. **Tipas las props** del componente con una `interface ...Props` (obligatorias y `?`).
 3. **Renderizas** listas con `.map()` y `key`, y condiciones con ternarios/`&&`.
 4. **Gestionas estado** con `useState<T>` (y `useEffect` para datos asíncronos).
-5. **Comunicas** hijos→padre con callbacks tipados por props.
+5. **Tipas los eventos** de los handlers (`React.FormEvent`, `React.ChangeEvent`, `React.MouseEvent`).
+6. **Comunicas** hijos→padre con callbacks tipados por props.
 
-Es un ciclo que repetirás en todos los componentes; dominarlo es dominar React.
-
----
-
-## 11.6. React con TypeScript: la relación
-
-TypeScript **no** cambia cómo funciona React: hace que lo que ya escribes sea **comprobable en compilación**. La relación es de "contratos":
-
-- **Modelo de datos** → representas tus entidades con `interface` / `type` (ej. `Pelicula`).
-- **Props** → cada componente declara su contrato de entrada (`interface PeliculaCardProps`).
-- **Estado** → tipas el estado con genéricos (`useState<Pelicula[]>([])`).
-- **Eventos** → tipas los handlers (`React.FormEvent`, `React.ChangeEvent`, `React.MouseEvent`).
-- **Componentes** → los escribes en `.tsx` (JSX + TS).
+Los componentes se escriben en `.tsx` (JSX + TS). Es un ciclo que repetirás en todos los componentes; dominarlo es dominar React.
 
 > [!IMPORTANT]
 > El **`strict` mode** de TypeScript es tu red de seguridad: al tipar props, estado y eventos, el compilador te avisa antes de ejecutar si pasas un tipo incorrecto a un componente (p. ej. un `string` donde se espera `number`). En React, casi todos los errores de tipos que se escapan terminan dando *runtime errors* difíciles de depurar — TypeScript los convierte en errores de compilación claros.
 
 ---
 
-## 11.7. Qué partes de TypeScript son las más usadas
+## 11.6. Qué partes de TypeScript son las más usadas
 
-No necesitas todo TypeScript para hacer React: este curso ya te dio lo esencial en S02/S03. Lo que más se repite en componentes React:
+No necesitas todo TypeScript para hacer React: este curso ya te dio lo esencial en S02/S03. Lo que más se repite en componentes React y que iremos viendo:
 
 | Concepto TS | Dónde lo usas en React |
 |-------------|------------------------|
@@ -655,25 +650,6 @@ No necesitas todo TypeScript para hacer React: este curso ya te dio lo esencial 
 > De todo lo anterior, la pareja que hace React + TS "clic" es **interfaces para props + generics para hooks**. Ambas las practica en profundidad el apunte [13 · TypeScript aplicado a React](13_Tipado_en_React_TS.md).
 
 ---
-
-<a id="118-dónde-encaja-en-este-curso-react-tauri"></a>
-
-
----
-
-## 11.8. Resumen y siguientes pasos
-
-| Concepto | Idea clave |
-|----------|------------|
-| React | Librería de UI por componentes, declarativa |
-| Componentes | Funciones `.tsx` que devuelven JSX y reciben props |
-| Props | Datos de entrada, de solo lectura, tipados con `interface` |
-| Estado | Datos que al cambiar re-renderizan; se gestiona con hooks |
-| Hooks | `useState` (estado), `useEffect` (efectos), `useRef` (refs) |
-| Flujo | Datos bajan por props; eventos suben por callbacks |
-| TS | Contratos: props, hooks, eventos y modelo, todo tipado |
-
-
 
 > 📌 **Recuerda:** esto es la teoría. El dominio llega escribiendo componentes; los ejercicios del [catálogo](../../../ejerciciosTS/ejerciciosTS.md) lo practican.
 
