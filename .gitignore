@@ -105,7 +105,8 @@ sesiones/apuntes/s03/*
 !sesiones/apuntes/s04/
 sesiones/apuntes/s04/*
 !sesiones/apuntes/s04/11_Que_es_React.md
-!repos/02-react-ejemplo-minimo/   
+!repos/02-react-ejemplo-minimo/
+!repos/02-react-ejemplo-context/   
 
 # !sesiones/apuntes/s04/12_Preparacion_React_19.md
 # !sesiones/apuntes/s04/13_Tipado_en_React_TS.md
