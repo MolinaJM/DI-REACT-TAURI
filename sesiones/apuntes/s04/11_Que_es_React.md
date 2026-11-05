@@ -68,7 +68,7 @@
 
 ## 11.0. Repaso de TypeScript previo (el puente)
 
-Antes de escribir tu primer componente, asegúrate de dominar esto. Todo es repaso del bloque TS (unidades 07-09). Es el **puente** entre lo que ya sabes de TypeScript y lo que React va a pedirte. No hay ejemplo de closure pero también sería importante tenerlo en mente.
+Antes de escribir tu primer componente, asegúrate de dominar esto. Todo es repaso del bloque TS (unidades 07-09). Es el **puente** entre lo que ya sabes de TypeScript y lo que React va a pedirte. 
 
 ### 11.0.1. Tipos, interfaces y datos
 
@@ -101,8 +101,13 @@ const aprobados = alumnos
   .filter((a) => conMedia(a).media >= 5)
   .map(conMedia);
 
-const [{ nombre: primero }] = aprobados;
-const nuevoAlumno: Alumno = { ...alumnos[0], curso: "DI" };
+console.log(aprobados);  
+
+const primero = aprobados[0]?.nombre ?? "Nadie";
+const nuevoAlumno: Alumno = alumnos[0] 
+  ? { ...alumnos[0], curso: "DI" } 
+  : { nombre: "Sin datos", notas: [], curso: "DI" };
+
 ```
 
 > [!NOTE]
@@ -147,8 +152,26 @@ async function cargarAlumnos(url: string): Promise<Alumno[]> {
 }
 ```
 
+### 11.0.4. Closures 
 
-### 11.0.4. De TS a React: traducción rápida (IMPORTANTE)
+```typescript 
+function crearContador() {
+  let contador = 0; //Esta variable está en el ámbito exterior
+
+  return function() {
+    contador++; // La función interna accede y modifica la variable exterior
+    return contador;
+  };
+}
+
+//Creamos una instancia del contador
+const contar = crearContador();
+
+console.log(contar());// 1
+console.log(contar());// 2
+console.log(contar());// 3
+`
+#``## 11.0.5. De TS a React: traducción rápida (IMPORTANTE)
 
 | Lo que ya sabes (TS) | En React 19 |
 |:---|:---|
