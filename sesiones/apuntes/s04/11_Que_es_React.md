@@ -135,7 +135,7 @@ export function filtrar(tareas: Tarea[], filtro: Filtro): Tarea[] {
 ```
 
 > [!NOTE]
-> Separa **tipos**, **lógica pura** y **punto de entrada**. En React esa misma idea son `types/`, `utils/` o `services/` y componentes.
+> Separa **tipos**, **lógica pura** y **punto de entrada**.
 
 ### 11.0.3. Asincronía con `fetch` 
 
