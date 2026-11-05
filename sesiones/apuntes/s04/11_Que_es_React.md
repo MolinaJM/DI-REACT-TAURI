@@ -68,7 +68,7 @@
 
 ## 11.0. Repaso de TypeScript previo (el puente)
 
-Antes de escribir tu primer componente, asegúrate de dominar esto. Todo es repaso del bloque TS (unidades 07-09). Es el **puente** entre lo que ya sabes de TypeScript y lo que React va a pedirte.
+Antes de escribir tu primer componente, asegúrate de dominar esto. Todo es repaso del bloque TS (unidades 07-09). Es el **puente** entre lo que ya sabes de TypeScript y lo que React va a pedirte. No hay ejemplo de closure pero también sería importante tenerlo en mente.
 
 ### 11.0.1. Tipos, interfaces y datos
 
