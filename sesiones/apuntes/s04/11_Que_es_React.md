@@ -98,8 +98,8 @@ function conMedia(alumno: Alumno): AlumnoConMedia {
 }
 
 const aprobados = alumnos
-  .filter((a) => conMedia(a).media >= 5)
-  .map(conMedia);
+  .map(conMedia)                  
+  .filter((a) => a.media >= 5);   
 
 console.log(aprobados);  
 
