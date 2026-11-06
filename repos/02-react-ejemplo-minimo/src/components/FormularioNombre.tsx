@@ -27,7 +27,7 @@ function FormularioNombre({ onEnviar }: FormularioNombreProps) {
         onChange={(e) => setTexto(e.target.value)} //Aplica setter conforme vamos escribiendo
       />
       <button onClick={enviar}>Saludar</button>
-      <h4>{texto}</h4>
+      <br/>{texto}
     </div>
   );
 }
