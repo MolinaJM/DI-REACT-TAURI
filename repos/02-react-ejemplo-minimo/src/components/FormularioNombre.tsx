@@ -13,8 +13,8 @@ function FormularioNombre({ onEnviar }: FormularioNombreProps) {
     onEnviar(texto); //Usa el primer closure
     setTexto(""); 
     //Probar a: 
-    //A) mantener value={texto} ¿Qué ocurre? => variables atadas (input controlado) : OK
-    //B) comentar value={texto}. ¿Qué ocurre? => variables independientes (input NO controlado) : NO OK
+    //A) mantener value={texto} ¿Qué ocurre? => variables atadas/VINCULADAS (input controlado) : OK
+    //B) comentar value={texto}. ¿Qué ocurre? => variables independientes/DESVINCULADAS (input NO controlado) : NO OK
     //Efecto 1: No engancha (relaciona) las variables (y por tanto, no actualiza bien la caja)
     //Efecto 2: Si se envía el mismo texto varias veces NO renderiza porque NO ha actualizado 
     // y no detecta cambio (no hay onChange). Pero si cambiamos algo, sí que envía.

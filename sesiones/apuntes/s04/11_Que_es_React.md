@@ -419,7 +419,7 @@ function Contador() {
 
 - **Para qué?** Lo usamos cuando necesitamos ejecutar código que NO tiene que ver directamente con el pintado del JSX. 
 - **Cuándo se ejecuta?** Se ejecuta cuando el componente se dibuja en pantalla o cuando cambian ciertas variables. 
-- **En qué casos concretos se usa?** Sirve para hacer **peticiones HTTP**, **suscribirse a eventos** o manipular cosas fuera de React.
+- **En qué casos concretos se usa?** Sirve para hacer **fetch**, para cargar ficheros o manipular cosas fuera de React.
 
 > 💡 **¿Cómo haríamos para...?** actualizar el título de la pestaña cada vez que el usuario escribe su nombre? Con `useEffect`, que recibe un array de dependencias:
 
@@ -435,7 +435,13 @@ function Titulo() {
   }, [nombre]); // <--Array de dependencias
 
   return <input value={nombre} onChange={(e) => setNombre(e.target.value)} />;
-}
+  // Se podría haber hecho todo abajo, pero estamos separando por organización de código
+  /*return <input value={nombre} onChange={(e) => {
+         setNombre(e.target.value);
+         document.title = `Hola, ${nombre}`;
+         } 
+  } />;*
+}/
 
 //Probamos a meter el componente en el proyecto de prueba
 ```
