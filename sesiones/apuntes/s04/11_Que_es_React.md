@@ -657,7 +657,7 @@ No necesitas todo TypeScript para hacer React: este curso ya te dio lo esencial 
 
 ---
 
-> 📌 **Recuerda:** esto es la teoría. El dominio llega escribiendo componentes; los ejercicios del [catálogo](../../../ejerciciosTS/ejerciciosRT.md) lo practican.
+> 📌 **Recuerda:** esto es la teoría. El dominio llega escribiendo componentes; los ejercicios del [catálogo](../../../ejerciciosRT/ejerciciosRT.md) lo practican.
 
 ---
 
