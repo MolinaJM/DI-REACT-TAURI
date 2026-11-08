@@ -19,6 +19,8 @@ Componentes funcionales, props, children y primeros hooks con tipado
 
 Los ejemplos ejecutables están en el repositorio [`repos/02-react-componentes`](../repos/02-react-componentes/): `src/components/Saludo.tsx`, `Card.tsx`, `ListaTareas.tsx`, `ListaUsuarios.tsx`, `TablaGenerica.tsx`, `Boton.tsx`, `TextInput.tsx`, `Select.tsx`, `RadioGroup.tsx`, `Checkbox.tsx`, `SearchBox.tsx`, `ControlesFormulario.tsx`, `RenderCounter.tsx`, `SagaContext.tsx`, `LikeCounter.tsx`, `Reloj.tsx`, `Toast.tsx`, `Pagination.tsx` y `src/hooks/useForm.ts`. Para ejecutarlos: `cd repos/02-react-componentes && npm run dev`.
 
+> 🧭 **Por dónde empezar:** la app tiene navegación por pestañas. Los ejemplos de esta sesión están en las pestañas **Básicos**, **Controles**, **Hooks**, **Extras** y **SWAPI** (ver [mapeo de sesiones](../repos/02-react-componentes/README.md#mapeo-de-sesiones)).
+
 
 
 [Índice](../README.md#5-distribución-temporal-y-contenidos-s00s13) [S0](sesion00.md) [S1](sesion01.md) [S2](sesion02.md) [S3](sesion03.md) [S4](sesion04.md) [S5](sesion05.md) [S6](sesion06.md) [S7](sesion07.md) [S8](sesion08.md) [S9](sesion09.md) [S10](sesion10.md) [S11](sesion11.md) [S12](sesion12.md) [S13](sesion13.md)
