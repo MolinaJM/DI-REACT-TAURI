@@ -1,4 +1,4 @@
-# 11. React de cero: qué es, cómo se usa y por qué TypeScript
+# 11. React de cero: qué es y cómo se usa
 
 > 🧭 **Sesiones donde se aplica:** S04 · S05 · S06 (y base para S07–S13). Esto apuntes son una **teoría de partida**: responde *qué es* React antes de escribir el primer componente. El repo completo `02-react-componentes` es el ejemplo de referencia con todo lo de estas sesiones.
 
@@ -625,7 +625,7 @@ TypeScript **no** cambia cómo funciona React: hace que lo que ya escribes sea *
 2. **Tipas las props** del componente con una `interface ...Props` (obligatorias y `?`).
 3. **Renderizas** listas con `.map()` y `key`, y condiciones con ternarios/`&&`.
 4. **Gestionas estado** con `useState<T>` (y `useEffect` para datos asíncronos).
-5. **Tipas los eventos** de los handlers (`React.FormEvent`, `React.ChangeEvent`, `React.MouseEvent`).
+5. **Tipas los eventos** de los handlers (~~React.FormEvent~~(deprecated) `React.SubmitEvent`/`React.SyntheticEvent`, `React.ChangeEvent`, `React.MouseEvent`). Esto se hace para autocompletado, prevención de errores y cumplimiento de tipos. Ej: error en `console.log(e.valorFalsoDelBoton)`;
 6. **Comunicas** hijos→padre con callbacks tipados por props.
 
 Los componentes se escriben en `.tsx` (JSX + TS). Es un ciclo que repetirás en todos los componentes; dominarlo es dominar React.
@@ -644,7 +644,7 @@ No necesitas todo TypeScript para hacer React: este curso ya te dio lo esencial 
 | `interface` / `type` | Modelo de datos y **tipado de props** |
 | Propiedades opcionales `?` | Props/estado que pueden faltar |
 | **Generics `<T>`** | `useState<T>`, `useRef<T>`, `useReducer<R>`, componentes genéricos |
-| **Utility types** (`Partial`, `Pick`, `Omit`, `Record`) | Formularios de edición, mapas de configuración (ej. colores por género)Volveremos a 10_Generics.md cuando haga falta. |
+| **Utility types** (`Partial`, `Pick`, `Omit`, `Record`) | Formularios de edición, mapas de configuración (ej. colores por género). Volveremos a 10_Generics.md cuando haga falta. |
 | **Uniones de literales** | `type Estado = "crear" \| "editar"` — modela selectores y condiciones |
 | **Narrowing / type guards** | Comprobar datos antes de usarlos (p. ej. en `useEffect` con `fetch`) |
 | **Type assertions** `as` | `as HTMLElement` al tocar el DOM desde `useRef` |

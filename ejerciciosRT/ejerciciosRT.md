@@ -13,7 +13,7 @@
 | Bloque | Apunte de referencia | Datos | Sesión |
 |---|---|---|---|
 | [11 · Componentes, JSX y props](#bloque-11-componentes-jsx-y-props) | [11 · React de cero](../sesiones/apuntes/s04/11_Que_es_React.md) | [datos/peliculas.json](datos/peliculas.json) | S04 |
-| [12 · `useState` y `useEffect` con `fetch`](#bloque-12-usestate-y-useeffect-con-fetch) | [12 · Los tres patrones de React](../sesiones/apuntes/s04/12_Preparacion_React_19.md) | [datos/alumnos.json](datos/alumnos.json) + API | S04 |
+| [12 · `useState` y `useEffect` con `fetch`](#bloque-12-usestate-y-useeffect-con-fetch) | [12 · Los tres patrones de React](../sesiones/apuntes/s04/12_Tres_Patrones_React.md) | [datos/alumnos.json](datos/alumnos.json) + API | S04 |
 | [13 · Tipado en React: props, generics y eventos](#bloque-13-tipado-en-react-props-generics-y-eventos) | [13 · TypeScript aplicado a React](../sesiones/apuntes/s04/13_Tipado_en_React_TS.md) | [datos/peliculas.json](datos/peliculas.json) · [datos/libros.json](datos/libros.json) | S04 |
 | [15 · Gestión de estado y formularios](#bloque-15-gestión-de-estado-y-formularios) | [15 · React: gestión de estado y tipado de formularios](../sesiones/apuntes/s05/15_React_Gestion_Estado_y_Formularios.md) | [datos/peliculas.json](datos/peliculas.json) + API | S05 |
 | [16 · Componentes personalizados](#bloque-16-componentes-personalizados) | [16 · React: creación de componentes personalizados](../sesiones/apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) | [datos/peliculas.json](datos/peliculas.json) | S06 |
@@ -40,7 +40,7 @@
 <a id="bloque-12-usestate-y-useeffect-con-fetch"></a>
 ### 12 · `useState` y `useEffect` con `fetch`
 
-> 🧭 **Apunte:** [12 · Los tres patrones de React](../sesiones/apuntes/s04/12_Preparacion_React_19.md) · **Datos:** [datos/alumnos.json](datos/alumnos.json) — 4 alumnos con `id`, `nombre`, `curso` y `notas`, servidos por `json-server` en `http://localhost:3000/alumnos` (ver [FAKEAPI](#montar-la-api-local-con-fakeapi)).
+> 🧭 **Apunte:** [12 · Los tres patrones de React](../sesiones/apuntes/s04/12_Tres_Patrones_React.md) · **Datos:** [datos/alumnos.json](datos/alumnos.json) — 4 alumnos con `id`, `nombre`, `curso` y `notas`, servidos por `json-server` en `http://localhost:3000/alumnos` (ver [FAKEAPI](#montar-la-api-local-con-fakeapi)).
 >
 > 🚧 **Solo lo visto (además del bloque 11):** `useState` con actualización inmutable (spread/`map`/`filter`), `useEffect` + `fetch` con los tres estados (`cargando`/`error`/`datos`), cancelación con `AbortController` y el input controlado (con `onChange` inferido) del gestor de tareas. Nada de eventos tipados (`ChangeEvent`/`FormEvent`), lifting ni formularios con validación.
 
@@ -53,10 +53,10 @@
 
 > 🧭 **Apunte:** [13 · TypeScript aplicado a React](../sesiones/apuntes/s04/13_Tipado_en_React_TS.md) · **Datos:** [datos/peliculas.json](datos/peliculas.json) — 6 películas reales de AppCine; [datos/libros.json](datos/libros.json) — 3 libros (`id`, `titulo`, `autor`, `anio`).
 >
-> 🚧 **Solo lo visto (además de 11 y 12):** tipado de eventos (`React.ChangeEvent`, `React.FormEvent`), `useState<T>` explícito, utility types (`Record`, `Partial`, `Pick`, `Omit`), `Number.parseInt`/`parseFloat` y componentes genéricos `<T>`. Nada de `useReducer`, `localStorage` ni `children`.
+> 🚧 **Solo lo visto (además de 11 y 12):** tipado de eventos (`React.ChangeEvent`, `SubmitEvent` — el antiguo `React.FormEvent` está deprecated en React 19), `useState<T>` explícito, utility types (`Record`, `Partial`, `Pick`, `Omit`), `Number.parseInt`/`parseFloat` y componentes genéricos `<T>`. Nada de `useReducer`, `localStorage` ni `children`.
 
 1. AppCine colorea el badge del género. Define `COLORES_GENERO: Record<string, string>` con los seis géneros de `datos.json` (`accion`, `comedia`, `drama`, `terror`, `cienciaficcion`, `romantica`) y escribe `colorDeGenero(genero: string): string` que devuelva el color o un neutro con `??`. Crea `PeliculaBadge` (props tipadas con `PeliculaBadgeProps`) que pinte un `<span>` con `backgroundColor: colorDeGenero(pelicula.genero)` y renderiza la cartelera completa con `.map` + `key`.
-2. El formulario de alta de películas debe tipar sus eventos. Crea `NuevaPeliculaForm` con la prop `onGuardar: (datos: Omit<Pelicula, "id">) => void`: inputs controlados para `titulo` (`ChangeEvent<HTMLInputElement>`), `anio` (`Number.parseInt`) y `puntuacion` (`Number.parseFloat`, base decimal), y al `submit` (`FormEvent<HTMLFormElement>` + `preventDefault`) llama a `onGuardar` con la película construida y limpia el formulario.
+2. El formulario de alta de películas debe tipar sus eventos. Crea `NuevaPeliculaForm` con la prop `onGuardar: (datos: Omit<Pelicula, "id">) => void`: inputs controlados para `titulo` (`ChangeEvent<HTMLInputElement>`), `anio` (`Number.parseInt`) y `puntuacion` (`Number.parseFloat`, base decimal), y al `submit` (`SubmitEvent<HTMLFormElement>` + `preventDefault`; el antiguo `FormEvent` está deprecated) llama a `onGuardar` con la película construida y limpia el formulario.
 3. Quieres una misma fila de listado para películas y libros. Crea el componente genérico `Fila<T extends { id?: number; titulo: string }>` (props `FilaProps<T>`) que pinte el `titulo` en un `<li>`, y renderízalo dos veces desde `App`: una para `datos.peliculas` y otra para `datos.libros` (con `.map` + `key`). El mismo componente, dos entidades distintas.
 
 ---
