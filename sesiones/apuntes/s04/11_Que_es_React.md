@@ -648,7 +648,7 @@ Además de lo ya traducido en el **11.0.5** (*De TS a React: traducción rápida
 | Concepto TS | Dónde lo usas en React |
 |-------------|------------------------|
 | Propiedades opcionales `?` | Props/estado que pueden faltar |
-| **Utility types** (`Partial`, `Pick`, `Omit`, `Record`) | Formularios de edición, mapas de configuración (ej. colores por género). Volveremos a 10_Generics.md cuando haga falta. |
+| **Utility types** (`Partial`, `Pick`, `Omit`, `Record`) | Formularios de edición, mapas de configuración (ej. colores por género).  |
 | **Narrowing / type guards** | Comprobar datos antes de usarlos (p. ej. en `useEffect` con `fetch`) |
 | **Type assertions** `as` | `as HTMLElement` al tocar el DOM desde `useRef` |
 | Tipado de funciones/callbacks | Props que reciben funciones (`onEnviar`)  |
