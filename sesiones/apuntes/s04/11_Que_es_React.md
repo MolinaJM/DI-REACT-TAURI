@@ -45,22 +45,22 @@
     - [11.0.1. Tipos, interfaces y datos](#1101-tipos-interfaces-y-datos)
     - [11.0.2. Módulos, funciones puras y reutilización](#1102-módulos-funciones-puras-y-reutilización)
     - [11.0.3. Asincronía, `fetch` y cancelación](#1103-asincronía-fetch-y-cancelación)
-    - [11.0.4. Closures](#1103-asincronía-fetch-y-cancelación)
-    - [11.0.5. De TS a React: traducción rápida](#1104-de-ts-a-react-traducción-rápida)
+    - [11.0.4. Closures](#1104-closures)
+    - [11.0.5. De TS a React: traducción rápida](#1105-de-ts-a-react-traducción-rápida)
   - [11.1. ¿Qué es React?](#111-qué-es-react)
   - [11.2. ¿Cómo funciona? El modelo mental](#112-cómo-funciona-el-modelo-mental)
     - [11.2.1. Imperativo vs declarativo](#1121-imperativo-vs-declarativo)
     - [11.2.2. El Virtual DOM y el render](#1122-el-virtual-dom-y-el-render)
-  - [11.3. Componentes: las piezas de React](#113-componentes-las-piezas-de-react)
-    - [11.3.1. Componentes funcionales](#1131-componentes-funcionales)
-    - [11.3.2. JSX/TSX](#1132-jsx)
-    - [11.3.3. Eventos en JSX: `onClick`, `onChange`, `onSubmit`](#1133-eventos-en-jsx-onclick-onchange-onsubmit)
-    - [11.3.4. Props: datos de entrada](#1134-props-datos-de-entrada)
-    - [11.3.5. Estado y hooks](#1135-estado-y-hooks)
-  - [11.4. El árbol de componentes y el flujo de datos](#114-el-árbol-de-componentes-y-el-flujo-de-datos)
-    - [11.4.1. El punto de entrada: de `index.html` a `App`](#1141-el-punto-de-entrada-de-indexhtml-a-app)
-  - [11.5. React con TypeScript: la plantilla mental](#115-react-con-typescript-la-plantilla-mental)
-  - [11.6. Qué partes de TypeScript son las más usadas](#116-qué-partes-de-typescript-son-las-más-usadas)
+  - [11.3. El punto de entrada: de `index.html` a `App`](#113-el-punto-de-entrada-de-indexhtml-a-app)
+  - [11.4. Componentes: las piezas de React](#114-componentes-las-piezas-de-react)
+    - [11.4.1. Componentes funcionales](#1141-componentes-funcionales)
+    - [11.4.2. JSX/TSX](#1142-jsx)
+    - [11.4.3. Eventos en JSX: `onClick`, `onChange`, `onSubmit`](#1143-eventos-en-jsx-onclick-onchange-onsubmit)
+    - [11.4.4. Props: datos de entrada](#1144-props-datos-de-entrada)
+    - [11.4.5. Estado y hooks](#1145-estado-y-hooks)
+  - [11.5. El árbol de componentes y el flujo de datos](#115-el-árbol-de-componentes-y-el-flujo-de-datos)
+  - [11.6. React con TypeScript: la plantilla mental](#116-react-con-typescript-la-plantilla-mental)
+  - [11.7. Qué partes de TypeScript son las más usadas](#117-qué-partes-de-typescript-son-las-más-usadas)
 - 🧪 **Ejercicios:** [Componentes, JSX y props](../../../ejerciciosRT/ejerciciosRT.md#bloque-11-componentes-jsx-y-props)
 
 ---
@@ -101,11 +101,13 @@ const aprobados = alumnos
   .filter((a) => a.media >= 5);   
 
 console.log(aprobados);  
-
+  
 const primero = aprobados[0]?.nombre ?? "Nadie";
+El código intenta tomar al primer alumno de la lista, conservar sus datos originales pero asegurándose de que su curso sea "DI"; si la lista está vacía, crea un alumno por defecto con datos genéricos y el curso "DI".
 const nuevoAlumno: Alumno = alumnos[0] 
-  ? { ...alumnos[0], curso: "DI" } 
-  : { nombre: "Sin datos", notas: [], curso: "DI" };
+//Si la lista no está vacía (al menos 1 alumno), inicializa curso a DI  
+//Y si no tiene alumno lo inicializa
+  ? { ...alumnos[0], curso: "DI" } : { nombre: "Sin datos", notas: [], curso: "DI" };
 
 ```
 
@@ -153,7 +155,7 @@ async function cargarAlumnos(url: string): Promise<Alumno[]> {
 
 ### 11.0.4. Closures 
 
-```typescript 
+```typescript  (la baese de los hooks)
 function crearContador() {
   let contador = 0; //Esta variable está en el ámbito exterior de crearContador
   return function() {
@@ -175,12 +177,12 @@ console.log(contar());// 3
 |:---|:---|
 | Función que recibe datos y devuelve un valor | Componente (`function Componente(props)`) que devuelve JSX |
 | `interface` para tipar parámetros | Props tipadas mediante `interface` |
-| Variables con tipos (`T \| null`) | `useState<T>()` / `useReducer`("useState avanzado") |
+| Variables con tipos (`T \| null`) | `useState<T>()` / `useReducer`("useState avanzado" ej: ej: formulario con campos interconectados) |
 | `fetch` + `try/catch` + `async/await` | `useEffect` + `fetch` (mismos estados ya vistos... cargando/error/listo) |
-| `map()` / `filter()` sin mutar | Listas con `{items.map(i => <Item key={i.id} />)}` |
+| `map()` / `filter()` sin mutar | Listas con `{items.map(i => <Item key={i.id} />)}`  
 | `if/else`, ternario | Render condicional / cortocirtuito (`&&`, ternario) |
 | Módulos ES `import`/`export` | Componentes, tipos y utilidades reutilizables |
-| Unión de literales (`"a" \| "b"`) | Estado cambiantes controlados mediante elementos de UI (filtros, radios, `select`) |
+| Unión de literales (`"a" \| "b"`) | Estado cambiantes controlados (cerrados) mediante elementos de UI (filtros, `radios`, `select`) |
 
 ---
 
@@ -232,14 +234,75 @@ Es por esto que escribes código que "repinta todo" (*digamos que se "prepara" e
 
 ---
 
-## 11.3. Componentes: las piezas de React
+## 11.3. El punto de entrada: de `index.html` a `App`
+
+Toda app React (y Vite, que es lo que usa este curso) arranca con esta cadena de ficheros:
+
+```
+index.html  ── carga con <script> ──▶  src/main.tsx  ── monta con createRoot ──▶  App.tsx
+```
+
+1. **`index.html`** es la **única página HTML** que sirve el navegador (SPA). Contiene un `<div id="root"></div>` vacío, que será el **hueco donde React inserta la app**, y un `<script type="module" src="/src/main.tsx">` que arranca todo.
+
+> 💡 **¿Cómo haríamos para...?** que el navegador tenga un punto de montaje vacío donde React "cuelgue" toda la app? Un único HTML con un `<div id="root">` y un script que cargue el código TypeScript:
+
+```html
+<!-- index.html -->
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+```
+
+2. **`src/main.tsx`** es el **punto de entrada JavaScript/TypeScript**. Importa el `App` y lo **monta** en el `#root` con `createRoot`. Es el único lugar donde se "manipula" el DOM directamente (para enganchar React a la página):
+
+> 💡 **¿Cómo haríamos para...?** decirle a React que el `<div id="root">` del HTML es suyo y montar ahí la app? `createRoot(...).render(...)` hace el enganche:
+
+```tsx
+// src/main.tsx
+import { createRoot } from "react-dom/client";
+import App from "./App";
+
+//StrictMode hace doble ejecución de useState y useEffect para ver si genera problemas.
+//Ej: componente CHAT que al quitarlo (desmontar) no limpia/reinicia variables o conexiones. Podrías
+// tener varias conexiones. Estas cosas son las que intenta detectar
+createRoot(document.getElementById("root")!).render(
+  <React.StrictMode> 
+    <App />
+  </React.StrictMode>
+);
+```
+
+3. **`src/App.tsx`** es el **componente raíz**: devuelve el JSX de toda la interfaz y da comienzo al árbol de componentes:
+
+> 💡 **¿Cómo haríamos para...?** que ese `App` montado en `main.tsx` contenga el resto de pantallas? `App` es el primer componente y, dentro, se compone de otros:
+
+```tsx
+// src/App.tsx
+function App() {
+  return (
+    <div>
+      <Cabecera />
+      <ListaPeliculas />
+    </div>
+  );
+}
+export default App;
+```
+
+> [!NOTE]
+> `document.getElementById("root")!` usa el **operador de aserción no-null (`!`)** para decirle a TypeScript "sé que `root` existe". 
+
+---
+
+## 11.4. Componentes: las piezas de React
 
 Un **componente** (o componente funcional) es una función que recibe (opcionalmente) **datos de entrada**  o ***props***  y devuelve lo que se pinta. Las convenciones:
 
 - Se nombran con **Mayúscula inicial** (`PeliculaCard`, no `peliculaCard`) — así React distingue un componente de una etiqueta HTML.
 - Se escriben en ficheros `.tsx` (TS + JSX).
 
-### 11.3.1. Componentes funcionales
+### 11.4.1. Componentes funcionales
 
 > 💡 **¿Cómo haríamos para...?** mostrar un saludo que cambie según el nombre que queramos, sin tener que escribir el HTML a mano cada vez? La respuesta es un **componente**: una función reutilizable que recibe el nombre y devuelve el JSX ya montado:
 
@@ -271,7 +334,7 @@ export default function App() {
 
 Son funciones **puras** respecto a sus props: mismo `nombre` → mismo JSX. Las funciones puras en matemáticas son aquellas que bajo los mismos datos de entrada SIEMPRE dan los mismos datos de salida.
 
-### 11.3.2. JSX/TSX
+### 11.4.2. JSX/TSX
 
 **JSX** es una extensión de sintaxis que mezcla HTML y expresiones JavaScript, **TSX** es su variante tipada. Reglas esenciales:
 
@@ -320,7 +383,7 @@ function Lista({ nombres }: ListaProps) {
 > [!NOTE]
 > La **`key`** en las listas es obligatoria ya que si hay 2 elementos con el mismo key, si cambia, no sabría cuál re-renderizar: le da a React una identidad estable a cada elemento para poder hacer el *diff* eficientemente. Hay que usarla con un id único, nunca con el índice si la lista cambia de orden. En el navegador podemos ver los problemas asociados a el mal uso de key si no se pone(Probar en EDGE con F12).
 
-### 11.3.3. Eventos en JSX: `onClick`, `onChange`, `onSubmit`
+### 11.4.3. Eventos en JSX: `onClick`, `onChange`, `onSubmit`
 
 En JSX, los manejadores de eventos se escriben en **camelCase** (`onClick`, `onChange`, `onSubmit`) y se les **pasa una función**, no un string como ocurre con `onclick` en HTML plano.
 
@@ -349,7 +412,7 @@ En JSX, los manejadores de eventos se escriben en **camelCase** (`onClick`, `onC
 >
 > **Sobre `setTexto`/`setNombre`:** no son funciones de React. Son el *setter* devuelto por `useState`. Al hacer `const [texto, setTexto] = useState("")`, `setTexto` es un *closure* que pertenece a ese componente y sirve para actualizar su estado y provocar un nuevo render. Es por eso que lo usamos junto a `onChange` en los **formularios controlados** (`value={texto}` + `onChange={(e) => setTexto(e.target.value)}`).
 
-### 11.3.4. Props: datos de entrada
+### 11.4.4. Props: datos de entrada
 
 Las **props** son los parámetros que recibe un componente desde su padre. En TypeScript se tipan con una **`interface`**, con propiedades obligatorias y opcionales (`?`).
 
@@ -378,7 +441,7 @@ function PeliculaCard({ titulo, puntuacion, genero }: PeliculaCardProps) {
 Las props **son de solo lectura**: un componente nunca debe modificar las suyas; si necesita cambios, los pide al padre (con *callbacks* pasados por props) o gestiona su propio **estado**.
 Por otra parte estamos usando un cortocircuito con &&. Otra posible forma de manejar `genero` sería mediante un ternario: `{genero ? <span>{genero}</span> : <h1>sin género</h1>}`
 
-### 11.3.5. Estado y hooks
+### 11.4.5. Estado y hooks
 
 El **estado** es información que el componente recuerda entre renderizados y que, al cambiar, dispara un re-render. Los **Hooks** son funciones especiales de React que te permiten "enganchar" (*hook into*) el estado y otras características del ciclo de vida de React dentro de componentes funcionales. En resumen: **un hook es como un almacén para guardar/modificar/leer un estado(variable)**.
 
@@ -534,66 +597,7 @@ export default function App() {
 
 ---
 
-## 11.4. El árbol de componentes y el flujo de datos
-
-### 11.4.1. El punto de entrada: de `index.html` a `App`
-
-Toda app React (y Vite, que es lo que usa este curso) arranca con esta cadena de ficheros:
-
-```
-index.html  ── carga con <script> ──▶  src/main.tsx  ── monta con createRoot ──▶  App.tsx
-```
-
-1. **`index.html`** es la **única página HTML** que sirve el navegador (SPA). Contiene un `<div id="root"></div>` vacío, que será el **hueco donde React inserta la app**, y un `<script type="module" src="/src/main.tsx">` que arranca todo.
-
-> 💡 **¿Cómo haríamos para...?** que el navegador tenga un punto de montaje vacío donde React "cuelgue" toda la app? Un único HTML con un `<div id="root">` y un script que cargue el código TypeScript:
-
-```html
-<!-- index.html -->
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-```
-
-2. **`src/main.tsx`** es el **punto de entrada JavaScript/TypeScript**. Importa el `App` y lo **monta** en el `#root` con `createRoot`. Es el único lugar donde se "manipula" el DOM directamente (para enganchar React a la página):
-
-> 💡 **¿Cómo haríamos para...?** decirle a React que el `<div id="root">` del HTML es suyo y montar ahí la app? `createRoot(...).render(...)` hace el enganche:
-
-```tsx
-// src/main.tsx
-import { createRoot } from "react-dom/client";
-import App from "./App";
-
-//StrictMode hace doble ejecución de useState y useEffect para ver si genera problemas.
-//Ej: componente CHAT que al quitarlo (desmontar) no limpia/reinicia variables o conexiones. Podrías
-// tener varias conexiones. Estas cosas son las que intenta detectar
-createRoot(document.getElementById("root")!).render(
-  <React.StrictMode> 
-    <App />
-  </React.StrictMode>
-);
-```
-
-3. **`src/App.tsx`** es el **componente raíz**: devuelve el JSX de toda la interfaz y da comienzo al árbol de componentes:
-
-> 💡 **¿Cómo haríamos para...?** que ese `App` montado en `main.tsx` contenga el resto de pantallas? `App` es el primer componente y, dentro, se compone de otros:
-
-```tsx
-// src/App.tsx
-function App() {
-  return (
-    <div>
-      <Cabecera />
-      <ListaPeliculas />
-    </div>
-  );
-}
-export default App;
-```
-
-> [!NOTE]
-> `document.getElementById("root")!` usa el **operador de aserción no-null (`!`)** para decirle a TypeScript "sé que `root` existe". 
+## 11.5. El árbol de componentes y el flujo de datos
 
 Una app React se compone de una raíz (`App`) que "cuelga" de la etiqueta de montaje (normalmente `#root` en `main.tsx`). Cada componente puede contener otros, formando un **árbol**:
 
@@ -618,7 +622,7 @@ Flujo dominante en React:
 
 ---
 
-## 11.5. React con TypeScript: la plantilla mental
+## 11.6. React con TypeScript: la plantilla mental
 
 TypeScript **no** cambia cómo funciona React: hace que lo que ya escribes sea **comprobable en compilación**. La relación es de "contratos", y se resume en la "plantilla mental" de cualquier componente que harás en el curso:
 
@@ -636,7 +640,7 @@ Los componentes se escriben en `.tsx` (JSX + TS). Es un ciclo que repetirás en 
 
 ---
 
-## 11.6. Qué partes de TypeScript son las más usadas
+## 11.7. Qué partes de TypeScript son las más usadas
 
 No necesitas todo TypeScript para hacer React: este curso ya te dio lo esencial en S02/S03. Lo que más se repite en componentes React y que iremos viendo:
 

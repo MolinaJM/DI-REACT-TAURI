@@ -23,7 +23,7 @@ function FormularioNombre({ onEnviar }: FormularioNombreProps) {
   return (
     <div>
       <input type="text" placeholder="Escribe tu nombre" 
-       //value={texto} //Controla HTML desde REACT
+        value={texto} //Controla HTML desde REACT
         onChange={(e) => setTexto(e.target.value)} //Aplica setter conforme vamos escribiendo
       />
       <button onClick={enviar}>Saludar</button>
