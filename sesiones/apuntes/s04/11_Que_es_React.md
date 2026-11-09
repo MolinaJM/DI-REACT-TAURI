@@ -195,7 +195,7 @@ Puntos clave:
 - React **no es un lenguaje**: es JavaScript (con su sintaxis *JSX*) corriendo una librería. *JSX* es una especie de HTML `chetado` (con superpoderes, con código ejecutable dentro de él). Y como en este curso usamos **TypeScript**, todos esos componentes se escriben **tipados**, con `.tsx` en lugar de `.jsx`.
 - Es una **librería**, no un framework completo: se encarga de la **vista** (la UI). La lógica de negocio, el enrutado, el estado global o el acceso a datos son decisiones que tú añades con otras herramientas (React Router, Zustand, `fetch`/`invoke`...).
 - Aplica el concepto de **"UI = f(estado)"**: a partir del estado actual, React calcula qué debe mostrarse. Ej: si cambia el texto de la caja al darle al botón, cambia la etiqueta.
-- Trabaja con **componentes**, funciones que devuelven lo que se pinta en pantalla. Ej: un botón.
+- Trabaja con **componentes**, funciones que devuelven lo que se pinta en pantalla. Ej: una caja de texto.
 - Vive dentro del **navegador/webview**. En Tauri, React se ejecuta en el *webview* nativo, y el **host Rust** (Tauri) le da capacidades de escritorio.
 - React no manipula el DOM a mano (no haces `document.createElement`como se podría hacer en JS); **declaras qué debe haber** y React se encarga de llevarlo a la pantalla.
 
@@ -212,14 +212,14 @@ Puntos clave:
 
 > 💡 **¿Cómo haríamos para...?** pintar en pantalla el texto "Hola, Tronco!" a partir de un nombre guardado en una variable? Hay dos caminos: hacerlo **a mano** (imperativo: tú gestionas el DOM, paso a paso) o **describirlo** (declarativo: dices qué quieres y React lo monta por ti). Compara los dos:
 
-```typescript
+```tsx
 // Imperativo (vanilla): tú gestionas el DOM a mano
 const h1 = document.createElement("h1");
 h1.textContent = `Hola, ${nombre}`;
 document.getElementById("app")!.appendChild(h1);
 
-// Declarativo (React): describes la UI
-<h1> Hola, {nombre} </h1>, mezclando HTML y TS (TSX)
+// Declarativo (React): describes la UI mezclando HTML y TS (TSX)
+<h1> Hola, {nombre} </h1> 
 ```
 
 ### 11.2.2. El Virtual DOM y el render
@@ -290,9 +290,6 @@ function App() {
 export default App;
 ```
 
-> [!NOTE]
-> `document.getElementById("root")!` usa el **operador de aserción no-null (`!`)** para decirle a TypeScript "sé que `root` existe". 
-
 ---
 
 ## 11.4. Componentes: las piezas de React
@@ -359,7 +356,7 @@ function Lista({ nombres }: { nombres: string[] }) {
 }
 
 //Con sintaxis extendida, separado en interface y cabecera. Esta opción es PREFERIBLE
-//En el caso anterior teníamos un único parámetro, pero si tenemos 8??
+//En eSINTAXIS EXTENDIDAníamos un único parámetro, pero si tenemos 8??
 //Es mejor "envolverlos" en un objeto
 //Se usa XXXProps por norma o convención
 interface ListaProps {
@@ -382,6 +379,10 @@ function Lista({ nombres }: ListaProps) {
 
 > [!NOTE]
 > La **`key`** en las listas es obligatoria ya que si hay 2 elementos con el mismo key, si cambia, no sabría cuál re-renderizar: le da a React una identidad estable a cada elemento para poder hacer el *diff* eficientemente. Hay que usarla con un id único, nunca con el índice si la lista cambia de orden. En el navegador podemos ver los problemas asociados a el mal uso de key si no se pone(Probar en EDGE con F12).
+
+> [!NOTE]
+Si por cualquier razón la págian en Vite se queda en blanco, siempre podemos ver el error en la consola. Cambia de navegador en navegador, pero `F12` funciona en Chrome/Edge. Otras combinaciones válidas: `(Ctrl+Shift+J) [Edge&Chrome]` /`(Ctrl+Shift+K) [Firefox]`
+
 
 ### 11.4.3. Eventos en JSX: `onClick`, `onChange`, `onSubmit`
 
@@ -482,7 +483,7 @@ function Contador() {
 #### `useEffect` (para efectos secundarios)
 
 - **Para qué?** Lo usamos cuando necesitamos ejecutar código que NO tiene que ver directamente con el pintado del JSX. 
-- **Cuándo se ejecuta?** Se ejecuta cuando el componente se dibuja en pantalla o cuando cambian ciertas variables. 
+- **Cuándo se ejecuta?** Se ejecuta cuando el componente se dibuja en pantalla (la primera vez, lo que se llama **"montar"** componente) o cuando cambian ciertas variables. 
 - **En qué casos concretos se usa?** Sirve para hacer **fetch**, para cargar ficheros o manipular cosas fuera de React.
 
 > 💡 **¿Cómo haríamos para...?** actualizar el título de la pestaña cada vez que el usuario escribe su nombre? Con `useEffect`, que recibe un array de dependencias:
@@ -642,23 +643,19 @@ Los componentes se escriben en `.tsx` (JSX + TS). Es un ciclo que repetirás en 
 
 ## 11.7. Qué partes de TypeScript son las más usadas
 
-No necesitas todo TypeScript para hacer React: este curso ya te dio lo esencial en S02/S03. Lo que más se repite en componentes React y que iremos viendo:
+Además de lo ya traducido en el **11.0.5** (*De TS a React: traducción rápida*), estas son las features de TS que más se repiten en componentes React y que iremos viendo:
 
 | Concepto TS | Dónde lo usas en React |
 |-------------|------------------------|
-| `interface` / `type` | Modelo de datos y **tipado de props** |
 | Propiedades opcionales `?` | Props/estado que pueden faltar |
-| **Generics `<T>`** | `useState<T>`, `useRef<T>`, `useReducer<R>`, componentes genéricos |
 | **Utility types** (`Partial`, `Pick`, `Omit`, `Record`) | Formularios de edición, mapas de configuración (ej. colores por género). Volveremos a 10_Generics.md cuando haga falta. |
-| **Uniones de literales** | `type Estado = "crear" \| "editar"` — modela selectores y condiciones |
 | **Narrowing / type guards** | Comprobar datos antes de usarlos (p. ej. en `useEffect` con `fetch`) |
 | **Type assertions** `as` | `as HTMLElement` al tocar el DOM desde `useRef` |
 | Tipado de funciones/callbacks | Props que reciben funciones (`onEnviar`)  |
-| Módulos `import`/`export` | Separar componentes y servicios en ficheros |
 | `Record<string, T>` | Mapas clave-valor (colores, etiquetas) |
 
 > [!TIP]
-> De todo lo anterior, la pareja que hace React + TS "clic" es **interfaces para props + generics para hooks**. Ambas las practica en profundidad el apunte [13 · TypeScript aplicado a React](13_Tipado_en_React_TS.md).
+> De todo lo visto (el puente 11.0.5 y esta tabla), la pareja que hace React + TS "clic" es **interfaces para props + generics para hooks**. Ambas las practica en profundidad el apunte [13 · TypeScript aplicado a React](13_Tipado_en_React_TS.md).
 
 ---
 
