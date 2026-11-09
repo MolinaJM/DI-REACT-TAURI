@@ -275,7 +275,8 @@ Son funciones **puras** respecto a sus props: mismo `nombre` → mismo JSX. Las 
 
 **JSX** es una extensión de sintaxis que mezcla HTML y expresiones JavaScript, **TSX** es su variante tipada. Reglas esenciales:
 
-- **Una sola raíz** por retorno (`<>...</>`). Esa raíz puede tener una estructura jerárquica (padres/hijos). En el siguiente ejemplo la raíz es un `<ul>`
+- **Una sola raíz** por retorno (`<>...</>`). Esa raíz *puede* tener una estructura jerárquica (padres/hijos). En el siguiente ejemplo la raíz es un `<ul>`
+- Si el componente NO tiene hijos componente se pondrá con autocierre `<Nombre />`
 - Expresiones JavaScript/TypeScript entre **llaves `{}`** (strings, números, ternarios, cortocircuitos `&&`, llamadas a `map`...).
 - Declaraciones (`if`, `for`) **no** van entre llaves: van fuera o se sustituyen por ternarios.
 - Atributos en `camelCase`: `onClick` (no `onclick`).
@@ -592,7 +593,7 @@ export default App;
 ```
 
 > [!NOTE]
-> `document.getElementById("root")!` usa el **operador de aserción no-null (`!`)** para decirle a TypeScript "sé que `root` existe". En AppCine/el scaffolding real este fichero de entrada ya está montado; tú solo tocas `App.tsx` y los componentes que crees.
+> `document.getElementById("root")!` usa el **operador de aserción no-null (`!`)** para decirle a TypeScript "sé que `root` existe". 
 
 Una app React se compone de una raíz (`App`) que "cuelga" de la etiqueta de montaje (normalmente `#root` en `main.tsx`). Cada componente puede contener otros, formando un **árbol**:
 
