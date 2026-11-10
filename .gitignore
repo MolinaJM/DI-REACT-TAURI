@@ -109,7 +109,9 @@ sesiones/apuntes/s04/*
 !repos/02-react-ejemplo-minimo/
 !repos/02-react-ejemplo-context/   
 
-# !sesiones/apuntes/s04/12_Preparacion_React_19.md
+!sesiones/apuntes/s04/12_Tres_Patrones_React.md
+!repos/02-react-componentes/
+
 # !sesiones/apuntes/s04/13_Tipado_en_React_TS.md
 !sesiones/apuntes/s04/14_React_TS_Cheatsheet.md
 
@@ -118,7 +120,6 @@ sesiones/apuntes/s04/*
 # ===========================================================================
 # !sesiones/sesion05.md
 # !sesiones/apuntes/s05/
-# !repos/02-react-componentes/
 
 # ===========================================================================
 #  >>> SESIÓN 06 <<

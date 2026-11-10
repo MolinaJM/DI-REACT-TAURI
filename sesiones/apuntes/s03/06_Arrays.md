@@ -12,9 +12,10 @@
     - [ii. `Slice()`](#ii-slice)
     - [iii. `map()`](#iii-map)
     - [iv. `filter()`](#iv-filter)
-    - [v. `reduce()`](#v-reduce)
-    - [vi. `sort()`](#vi-sort)
-    - [vii. Métodos inmutables](#vii-métodos-inmutables)
+    - [v. `find()`, `some()` y `every()`](#v-find-some-y-every)
+    - [vi. `reduce()`](#vi-reduce)
+    - [vii. `sort()`](#vii-sort)
+    - [viii. Métodos inmutables](#viii-métodos-inmutables)
   - [6.5 Metodos que modifican o no el Array original](#65-metodos-que-modifican-o-no-el-array-original)
     - [6.5.1 Modificar el Array Original](#651-modificar-el-array-original)
     - [6.5.2 Crear una Copia](#652-crear-una-copia)
@@ -249,8 +250,44 @@ console.log(enStock[0]?.nombre); //Optional Chaining (ver §7.2.1 del capítulo 
 > [!NOTE]
 > `Optional Chaining` se explica en [07_Estructuras_de_Datos §7.2.1](07_Estructuras_de_Datos.md#721-encadenamiento-opcional).
 
-<a id="v-reduce"></a>
-### v. `reduce()`
+<a id="v-find-some-y-every"></a>
+### v. `find()`, `some()` y `every()`
+
+Los tres son de **búsqueda/verificación** y van de la mano con `filter()`:
+
+- `find(función)`: devuelve el **primer** elemento que cumple la condición (o `undefined` si no hay ninguno). Devuelve un **valor**, no un array.
+- `some(función)`: devuelve `true` si **algún** elemento cumple la condición.
+- `every(función)`: devuelve `true` si **todos** los elementos cumplen la condición.
+
+```typescript
+interface Producto {
+  nombre: string;
+  precio: number;
+  disponible: boolean;
+}
+
+const productos: Producto[] = [
+  { nombre: "pc", precio: 100, disponible: true },
+  { nombre: "cpc", precio: 500, disponible: false },
+  { nombre: "monitor", precio: 300, disponible: true },
+];
+
+// find: el primer disponible (o undefined si no hay ninguno)
+const primero: Producto | undefined = productos.find((p) => p.disponible);
+console.log(primero?.nombre); // "pc" — Optional Chaining: si no hay ninguno, primero es undefined
+
+// some: ¿hay alguno disponible?
+const hayStock: boolean = productos.some((p) => p.disponible); // true
+
+// every: ¿todos están disponibles?
+const todosDisponibles: boolean = productos.every((p) => p.disponible); // false
+```
+
+> [!NOTE]
+> El matiz de TS: `find` devuelve `T | undefined`, así que el resultado se tipa como `Producto | undefined` y se accede con **Optional Chaining** (`primero?.nombre`) o se comprueba antes (`if (primero)`). `some` y `every` devuelven `boolean` y, como `filter`, **no mutan** el array original.
+
+<a id="vi-reduce"></a>
+### vi. `reduce()`
 
 `reduce(función, valorInicial)`: Aplica una función acumulativa a los elementos del array, retornando un único valor acumulado. La función callback recibe `(acumulador, valorActual, índice, array)`. 
 ```typescript
@@ -271,8 +308,8 @@ const sumaSinInicial: number = numeros.reduce((acumulador, numero) => acumulador
 
 > ⚠️ Si llamas a `reduce()` sin valor inicial sobre un **array vacío**, lanza `TypeError`. Usa siempre un valor inicial cuando el array pueda estar vacío. Además, con valor inicial, TypeScript infiere el tipo del acumulador a partir de ese valor: `numeros.reduce((acc, n) => acc + n.toFixed(1), "")` devuelve `string`.
 
-<a id="vi-sort"></a>
-### vi. `sort()`
+<a id="vii-sort"></a>
+### vii. `sort()`
 
 El método `sort()` en JavaScript se utiliza para ordenar los elementos de un array en su lugar (sin crear un nuevo array, MUTA). Por defecto, `sort()` ordena los elementos como cadenas de texto y los compara en orden lexicográfico. Sin embargo, puedes proporcionar una función de comparación personalizada para ordenar elementos de acuerdo a criterios específicos. El valor de retorno de esta función debe ser un número cuyo signo indique el orden relativo de los dos elementos: negativo si a es menor que b, positivo si a es mayor que b, y cero si son iguales.
 
@@ -307,8 +344,8 @@ Primero ordenamos las letras alfabéticamente y luego invertimos el orden usando
 > [!WARNING]
 > `sort()` y `reverse()` **modifican el array original (MUTAN)**. En patrones funcionales (y en estado de React) se prefiere `toSorted()` y `toReversed()`, que devuelven copias (ES2023).
 
-<a id="vii-métodos-inmutables"></a>
-### vii. Métodos inmutables
+<a id="viii-métodos-inmutables"></a>
+### viii. Métodos inmutables
 
 `toSorted()`, `toReversed()`, `toSpliced()` y `with()` son versiones que **no modifican el array original**, devolviendo una copia:
 
@@ -369,6 +406,7 @@ Aquí están los métodos de arrays que pueden modificar el array original y los
 3. `reduce(función, valorInicial)`: Aplica una función acumulativa a los elementos del array, retornando un único valor acumulado sin modificar el array original. No crea una copia, sino que produce un resultado acumulado.
 
 4. `toSorted()`, `toReversed()`, `toSpliced()` y `with()` (ES2023): devuelven copias sin tocar el original.
+5. `find()`, `some()` y `every()`: no devuelven una copia, sino un valor (`T | undefined`) o un `boolean`; no modifican el array original.
 
 <a id="66-recorrer-arrays-en-typescript"></a>
 ## 6.6 Recorrer Arrays en TypeScript
