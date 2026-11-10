@@ -13,7 +13,7 @@
 
 [Volver al índice general](../../../README.md#5-distribución-temporal-y-contenidos-s00s13)
 
-Aquí vemos a fondo los **tres patrones** que usaremos constantemente en React (`componente`, `useState`, `useEffect`), con código. El ejemplo completo que junta los tres (un gestor de tareas) se ve en el apunte 13 (§13.8), ya con el tipado de eventos. Cada sección explica *por qué* se hace, *cómo* se hace y *qué puede salir mal*.
+Aquí vemos a fondo los **tres patrones** que usaremos constantemente en React (`componente`, `useState`, `useEffect`), con código. El **ejemplo completo** que junta los tres (un gestor de tareas) se ve en el apunte 13 (§13.8), ya con el tipado de eventos. Cada sección explica *por qué* se hace, *cómo* se hace y *qué puede salir mal*.
 
 **El ciclo que lo gobierna todo: estado → render → eventos**
 
@@ -48,7 +48,7 @@ Si manipulas el DOM a mano, React no lo sabe. En el siguiente diff, React cree q
 
 ### 12.1.1. Componente: función que recibe datos y devuelve UI
 
-Un **componente** es una función TypeScript que recibe datos (props) y devuelve JSX. Es la unidad básica de composición en React: igual que en TS compones funciones pequeñas para formar funciones grandes, en React compones componentes pequeños para formar la interfaz.
+Repasamos qué es un **componente** y avanzamos. Un componente es una función TypeScript que recibe datos (props) y devuelve JSX. Es la unidad básica de composición en React: igual que en TS compones funciones pequeñas para formar funciones grandes, en React compones componentes pequeños para formar la interfaz.
 
 **¿Por qué componentes?**
 
@@ -124,13 +124,14 @@ import "./estilos.css";
 }
 ```
 > [!NOTE]
-> No obstante, y para separar funcionalidad de diseño, aún NO SE VA A INCLUIR NADA DE ESTILOS hasta llegar a la parte de TailWind CSS, incluyendo el estilo en la propia etiqueta. Ejemplo: `<h2 className="text-xl font-bold text-gray-800 mb-2">{alumno.nombre}</h2>`
+> No obstante, y para separar funcionalidad de diseño, aún NO SE VA A INCLUIR NADA DE ESTILOS hasta llegar a la parte de TailWind CSS, incluyendo el estilo en la propia etiqueta. Ejemplo: 
+`<h2 className="text-xl font-bold text-gray-800 mb-2">{alumno.nombre}</h2>`
 
 **Errores comunes al empezar:**
 
 - **Mutar props:** `alumno.nombre = "X"` → NO. Las props son de solo lectura. Si necesitas cambiar algo, el padre lo cambia y te lo pasa de nuevo.
-- **No existen Olvidar `key` en listas:** si renderizas `{items.map(...)}`, cada elemento necesita `key={item.id}`. Sin `key`, React no sabe qué elemento cambió y puede re-renderizar todo.
-- **Hooks condicionales:** `if (x) { const [a, setA] = useState(0); }` → NO. Los hooks se llaman siempre, en el mismo orden, en cada render.
+- **No olvidar poner `key` en listas:** si renderizas `{items.map(...)}`, cada elemento necesita `key={item.id}`. Sin `key`, React no sabe qué elemento cambió y puede re-renderizar todo.
+- NO se puede meter **Hooks:** en condiciones.  ~~if (x) { const [a, setA] = useState(0); }~~ , esto provoca error de React.. Los hooks se llaman siempre, en el mismo orden, en cada render. 
 
 ---
 
@@ -138,13 +139,13 @@ import "./estilos.css";
 
 **¿Por qué necesitamos estado?**
 
-Una UI no es estática: el usuario escribe, pulsa, selecciona. React necesita un mecanismo para **recordar** valores entre renders y **volver a pintar** cuando cambian. Ese mecanismo es `useState`.
+Ya sabemos que una UI no es estática: el usuario escribe, pulsa, selecciona. React necesita un mecanismo para **recordar** valores entre renders y **volver a pintar** cuando cambian. Ese mecanismo es `useState`.
 
-**Diferencia estado vs. props:**
+**NO CONFUNDIR! Diferencia props vs estado:**
 
 | | Props | Estado (`useState`) |
 |---|---|---|
-| ¿Quién lo gestiona? | El padre | El propio componente |
+| ¿Quién lo gestiona? | El padre (pasando datos y controlando estados) | El propio componente |
 | ¿Puedo cambiarlo? | No (de solo lectura) | Sí, con el *setter* |
 | ¿Cuándo cambia? | Cuando el padre re-renderiza con otro valor | Cuando llamo al *setter* |
 | Ejemplo | `alumno.nombre` | `contador`, `tareas`, `texto` |
@@ -169,7 +170,9 @@ const [valor, setValor] = useState<T>(valorInicial);
 5. React **compara** el JSX nuevo con el anterior (*diff* sobre el Virtual DOM).
 6. React **aplica** solo los cambios mínimos al DOM real.
 
-**Batching:** si en un mismo handler llamas a dos `setState`, React hace **un solo** re-render, no dos. Dentro del batch, el valor "directo" (`x`) es el del render actual, no el que resultará de la llamada anterior — por eso la forma funcional `setX(x => ...)` importa.
+Ejemplo: un botón en un formulario que realiza comprobaciones y "cambia" según estado de fallos.
+
+**Batching:** si en un mismo *handler* (función que se llama al usar un evento `onClick`, `onChange`, etc)  llamas a dos `setState`, React hace **un solo** re-render, no dos. Dentro del batch, el valor "directo" (`x`) es el del render actual, no el que resultará de la llamada anterior — por eso la forma funcional `setX(x => ...)` importa.
 
 **<mark>Inmutabilidad: recordando la regla de oro</mark>**
 
@@ -183,7 +186,7 @@ React detecta cambios por **referencia**. Si mutas el objeto/array en lugar de c
 
 **Actualizaciones funcionales: `setX(x => ...)`** :  es lo contrario a pasar un valor directo (ejemplo: setX(5)), es decir, consiste en pasar una función como argumento al setter de un estado.
 
-**REGLA IMPORTANTE!!** Si la nueva depende del valor anterior, hay que usar la forma funcional:
+**REGLA IMPORTANTE!!** Si el nuevo valor depende del valor anterior, hay que usar la forma funcional:
 
 ```tsx
 // MAL: si React agrupa (batching), 'contador' es el mismo en ambas llamadas
@@ -213,7 +216,9 @@ const pendientes = tareas.filter(t => !t.completada).length;
 
 **<mark>Colocación del estado: ¿dónde vive?</mark>**
 
-El estado vive en el componente **más bajo** que lo necesita. Si dos hermanos lo necesitan, se sube al padre común (*lifting state up*). No lo subas más de lo necesario: si solo lo usa un hijo, que lo tenga él.
+El estado "vive" (se crea y usa) en el componente **más bajo** que lo necesita. Si dos hermanos lo necesitan, se sube al padre común (*lifting state up*). No lo subas más de lo necesario: si solo lo usa un hijo, que lo tenga él. Podemos recordar el ejemplo mínimo del repositorio: `const [texto,setTexto]=setState("")` tiene sentido que el valor se suba al  padre pero no más de ahí.
+
+***Ejemplo Compuesto: Utilizando varios estados en un mismo componente***
 
 ```tsx
 // Ejemplo compuesto: primitivo, objeto y array
@@ -302,7 +307,10 @@ export default EjemploUseStateCompuesto;
 
 **¿Qué es un efecto secundario?**
 
-Cualquier operación que **no** sea "calcular el JSX a partir del estado": hacer una petición HTTP, modificar el DOM directamente, suscribirse a un evento (resize, scroll, websocket...) o programar un `setTimeout`. React no puede hacer estas cosas durante el render (que debe ser puro [siempre con igual resultado ante los mismos datos de entrada] y síncrono), así que las relega a `useEffect`.
+Es cualquier operación que **no** sea "calcular el JSX a partir del estado", sirve para **conectarse a servicios externos**: hacer una petición HTTP, modificar el DOM directamente, suscribirse a un evento (resize, scroll, WebSocket...) o programar un `setTimeout`. React no puede hacer estas cosas durante el render (que debe ser puro [siempre con igual resultado ante los mismos datos de entrada] y síncrono), así que las relega a `useEffect`.
+[!NOTE]
+> HTTP funciona mediante solicitudes puntuales del cliente (que pueden hacerse miles de veces en segundo plano sin recargar la página), mientras que un WebSocket abre un canal continuo y abierto donde el servidor puede enviar datos a la app en cualquier momento.
+
 
 **¿Cuándo se ejecuta `useEffect`?**
 
@@ -327,7 +335,7 @@ El cleanup es el mecanismo que nos ofrece useEffect para **deshacer o limpiar** 
 useEffect(() => {
   const controller = new AbortController(); //API nativa de JavaScript
   // ... fetch con controller.signal
-  return () => controller.abort(); // se ejecuta al desmontar Y antes de re-ejecutar (para sin consecuencias)
+  return () => controller.abort(); // se ejecuta al desmontar y antes de re-ejecutar (para sin consecuencias)
 }, []);
 ```
 
@@ -343,7 +351,7 @@ Sin cleanup: fugas de memoria, peticiones "zombi" que actualizan un componente y
 |---|---|
 | Cargar datos al montar | `useEffect` |
 | Actualizar `document.title` cuando cambia un estado | `useEffect` |
-| Suscribirse a un WebSocket / evento del DOM | `useEffect` |
+| Suscribirse a un WebSocket / evento del DOM  (estar atento a una acción concreta. ej: resize)| `useEffect` |
 | Responder a un clic del usuario | Handler (`onClick`) |
 | Responder a escribir en un input | Handler (`onChange`) |
 | Enviar un formulario | Handler (`onSubmit`) |
