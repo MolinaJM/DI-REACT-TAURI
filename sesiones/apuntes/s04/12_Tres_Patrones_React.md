@@ -365,7 +365,7 @@ Regla: si el código **depende de una interacción del usuario**, va en un handl
 - **Olvidar cleanup:** peticiones en vuelo que actualizan un componente desmontado. React te avisa en consola: *"Can't perform a React state update on an unmounted component"*.
 - **Usar `useEffect` para datos derivados:** si puedes calcularlo en el render (`const pendientes = tareas.filter(...)`), no lo hagas en un efecto. El efecto es para cosas que React no puede calcular.
 
-Ejemplo completo de un **useEffect+fetch+estado de carga+cleanup** (requiere lanzar json-server con alumnos.json):
+Ejercicio 1 - Bloque 12 - Ejemplo completo de un **useEffect+fetch+estado de carga+cleanup** (requiere lanzar json-server con alumnos.json):
 
 ```tsx
 import { useEffect, useState } from "react";
