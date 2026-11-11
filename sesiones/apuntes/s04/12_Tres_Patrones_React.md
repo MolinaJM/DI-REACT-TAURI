@@ -408,6 +408,7 @@ function ListaAlumnos() {
     //Cuando se desmonte el componente o se re-ejecute el efecto,
     //aborta la petición en vuelo para evitar actualizar un componente desmontado
     return () => controller.abort();
+  }, []);
 
   //Al ser una única etiqueta el return puede ir sin ()
   if (cargando) return <p>Cargando...</p>;
