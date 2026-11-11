@@ -438,10 +438,13 @@ function validarConfig(cfg: unknown): asserts cfg is Config {
   // Castea 'cfg' a un objeto con claves de texto y valores 'unknown',
   // lo que permite acceder a sus propiedades (c.url, c.timeout) para validarlas.
   const c = cfg as Record<string, unknown>; //ese string indica la cadena con el nombre del atributo de objeto
-  if (typeof c.url !== "string") {
+  // Comprobación de existencia y tipo para 'url'
+  if (!("url" in c) || typeof c.url !== "string") {
     throw new TypeError("La configuración debe tener 'url' como string");
   }
-  if (typeof c.timeout !== "number") {
+
+  // Comprobación de existencia y tipo para 'timeout'
+  if (!("timeout" in c) || typeof c.timeout !== "number") {
     throw new TypeError("La configuración debe tener 'timeout' como number");
   }
   // Si hubiera tenido un campo unión de literales podríamos haber hecho las comprobaciones de
@@ -458,6 +461,7 @@ console.log(datos.url); // sin error
 
 > [!IMPORTANT]
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
+Observar que este type guard es el más completo visto hasta el momento ya que usa `in` y la comprobación de tipo (además de comprobar que no sea nulo y sí sea un objeto.
 
 > [!IMPORTANT]
 > Cuándo usar in o Record+typeof? Se usa `in`: para discriminar entre tipos o interfaces ya definidos en tu propio código (narrowing interno) en **tiempo de compilación**. NO COMPRUEBA EL TIPO, SOLO LA EXISTENCIA. Usa `Record+typeof`: para validar datos externos o desconocidos en **tiempo de ejecución**, comprobando el tipo del valor (string, number, etc.) tras asegurar que el objeto no es null ni undefined. COMPRUEBA TIPO Y EXISTENCIA.
