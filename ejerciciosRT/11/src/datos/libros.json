@@ -1,0 +1,22 @@
+{
+  "libros": [
+    {
+      "id": 1,
+      "titulo": "Dune",
+      "autor": "Frank Herbert",
+      "anio": 1965
+    },
+    {
+      "id": 2,
+      "titulo": "Neuromante",
+      "autor": "William Gibson",
+      "anio": 1984
+    },
+    {
+      "id": 3,
+      "titulo": "Un mundo feliz",
+      "autor": "Aldous Huxley",
+      "anio": 1932
+    }
+  ]
+}

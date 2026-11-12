@@ -463,10 +463,13 @@ console.log(datos.url); // sin error
 > Preferir **narrowing** a `as`. Una aserción `as` le dice a TypeScript "confía en mí"; el narrowing le permite **comprobar** las ramas. La diferencia es que el narrowing se puede equivocar menos porque está basado en el flujo real del programa.
 Observar que este type guard es el más completo visto hasta el momento ya que usa `in` y la comprobación de tipo (además de comprobar que no sea nulo y sí sea un objeto.
 
-> [!IMPORTANT]
-> Cuándo usar in o Record+typeof? Se usa `in`: para discriminar entre tipos o interfaces ya definidos en tu propio código (narrowing interno) en **tiempo de compilación**. NO COMPRUEBA EL TIPO, SOLO LA EXISTENCIA. Usa `Record+typeof`: para validar datos externos o desconocidos en **tiempo de ejecución**, comprobando el tipo del valor (string, number, etc.) tras asegurar que el objeto no es null ni undefined. COMPRUEBA TIPO Y EXISTENCIA.
+> [!IMPORTANT] **Cuándo usar el operador in vs. castear a Record** 
+>El operador in (combinado con typeof): Se usa para validar datos externos o desconocidos (unknown) directamente en tiempo de ejecución (ya que es JavaScript nativo). Al unir "prop" in m con typeof m.prop, compruebas tanto la existencia como el tipo, permitiendo que TypeScript haga un narrowing seguro sin necesidad de casteos previos.
 
-<a id="55-importar-un-json-y-validarlo"></a>
+>Castear a Record<string, unknown>: Es una alternativa que algunos devs usan para "forzar" a TypeScript a tratar un dato desconocido como un objeto indexable y permitir el acceso a sus propiedades. Sin embargo, por sí solo tampoco valida tipos y suele ser redundante si ya estás utilizando el operador in, que es más limpio y nativo.
+
+> **CONCLUSIÓN**: Si estás validando objetos con propiedades específicas (como  un Usuario, un Producto, etc...): 1) El operador in + typeof es el rey indiscutible. 2) Record es superfluo y usarlo solo sirve para hacer un casteo (as) que te ahorra escribir in, pero no aporta mayor seguridad real en ejecución.
+
 ## 5.5. Importar un JSON de un fichero y validarlo
 
 Hasta aquí los type guards los aplicábamos a datos escritos a mano. El caso real habitual es otro: los datos vienen del exterior, normalmente vía una API. Dado que aún no hemos visto el capítulo de asincronía, lo vamos a realizar mediante un **fichero `.json`**.  Hay que importar los datos, comprobar que tienen la forma correcta y modelar los estados de la carga. Este apartado reutiliza los type guards de §5.4.

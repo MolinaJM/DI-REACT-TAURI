@@ -13,7 +13,7 @@
 
 [Volver al índice general](../../../README.md#5-distribución-temporal-y-contenidos-s00s13)
 
-Aquí vemos a fondo los **tres patrones** que usaremos constantemente en React (`componente`, `useState`, `useEffect`), con código. El **ejemplo completo** que junta los tres (un gestor de tareas) se ve en el apunte 13 (§13.8), ya con el tipado de eventos. Cada sección explica *por qué* se hace, *cómo* se hace y *qué puede salir mal*.
+Aquí vemos a fondo los **tres patrones** que usaremos constantemente en React (`componente`, `useState`, `useEffect`), con código. El **ejemplo completo** que junta los tres (un gestor de peliculas) se ve en el apunte 13 (§13.8), ya con el tipado de eventos. Cada sección explica *por qué* se hace, *cómo* se hace y *qué puede salir mal*.
 
 **El ciclo que lo gobierna todo: estado → render → eventos**
 

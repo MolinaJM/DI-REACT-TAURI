@@ -4,6 +4,8 @@
 
 > ⚠️ **Atención:** para seguir esta parte de apuntes de forma más sencilla, abre el **proyecto mínimo** [`repos/02-react-ejemplo-minimo`](../../../repos/02-react-ejemplo-minimo/)  (`npm install` más `npm run dev`)— una app React reducida a una caja de texto y un botón con dos componentes. Toda la teoría que verás aquí (props, estado, callbacks) se puede probar ahí al momento. 
 
+> No perder de vista que VITE, realmente no compila de la misma forma que TypeScript. Vite *transpila* con `esbuild` eliminando tipos sin hacer verificaciones. De ahí que vaya tan rápido, pero también puede implicar estar mostrando resultado que no cuadra con los tipos que tenemos programados. Lo realmente correcto sería compilar siempre con `npx tsc --noEmit` y si no da error, entonces lanzar Vite con `npm run dev`. 
+
 > 🗺️ **Árbol de componentes del proyecto mínimo:** `App` es el **padre** que gestiona el estado (la memoria) ¿por qué? porque necesitamos comunicar los hermanos (luego veremos que esto también se podría hacer con un hook específico: `useContext` o incluso con una librería como **Zustang**). Los datos **bajan por props** (⬇) y las acciones **suben por callbacks** (⬆). Ejemplo:
 >
 
