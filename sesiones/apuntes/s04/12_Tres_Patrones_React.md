@@ -124,7 +124,9 @@ import "./estilos.css";
 }
 ```
 > [!NOTE]
-> No obstante, y para separar funcionalidad de diseño, aún NO SE VA A INCLUIR NADA DE ESTILOS hasta llegar a la parte de TailWind CSS, incluyendo el estilo en la propia etiqueta. Ejemplo: 
+> Algunos de los ejemplos de los `repos` tienen etiquetas CSS por mejorar la legibilidad.
+
+> PERO, y para separar funcionalidad de diseño, aún NO SE VA A INCLUIR NADA DE ESTILOS hasta llegar a la parte de TailWind CSS, incluyendo el estilo en la propia etiqueta. Ejemplo: 
 `<h2 className="text-xl font-bold text-gray-800 mb-2">{alumno.nombre}</h2>`
 
 **Errores comunes al empezar:**
