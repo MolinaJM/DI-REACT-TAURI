@@ -716,7 +716,7 @@ Cuando tipas eventos o props de bajo nivel, el genérico `<T>` es el **tipo del 
 <a id="1311-hoja-de-patrones-reconstruir-un-crud-en-cualquier-dominio"></a>
 ## 13.11. Hoja de patrones: reconstruir un CRUD en cualquier dominio
 
-Este esqueleto se puede adaptar a **otro dominio** (libros, tareas, alumnos…). Se trata de ADAPTAR lo visto aquí aplicando estos **patrones** al nuevo dominio. Cada fila enlaza a la sección donde se explica. Si queremos LIBRO, entonce el cuerpo de `LibroForm` (lo que el apunte 13 enseña en piezas: §13.4 la `interface`, §13.6.2 las conversiones, §13.7 los eventos).
+Este esqueleto se puede adaptar a **otro dominio** (libros, tareas, alumnos…). Se trata de ADAPTAR lo visto aquí aplicando estos **patrones** al nuevo dominio. Cada fila enlaza a la sección donde se explica. Si queremos LIBRO, entonce el cuerpo de `LibroForm` (lo que los apuntes 13 se enseña en piezas: §13.4 la `interface`, §13.6.2 las conversiones, §13.7 los eventos).
 
 | # | Patrón | Esqueleto (dominio `Libro`) | § |
 |---|---|---|---|
