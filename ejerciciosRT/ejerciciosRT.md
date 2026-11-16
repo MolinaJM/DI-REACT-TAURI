@@ -6,7 +6,7 @@
 
 > ✅ **Soluciones.** Cada bloque tiene su solución resuelta en su subcarpeta: `tipos.ts` (las entidades), `ej1.tsx`–`ej3.tsx` (un supuesto por ejercicio) y `App.tsx`, que monta los tres para probarlos. Para ejecutar una solución: crea una app Vite, **sustituye el contenido de `src/` por el de la subcarpeta del bloque** (su `App.tsx` reemplaza al de la plantilla; un bloque por app) y `npm run dev`.
 
-> 📦 **Datos reales.** Los datos comunes están centralizados en **3 ficheros con wrapper**, reutilizables por varios bloques: [`ejerciciosRT/datos/peliculas.json`](datos/peliculas.json) (`{"peliculas": [...]}` — usado por 11, 13, 15 y 16), [`ejerciciosRT/datos/alumnos.json`](datos/alumnos.json) (`{"alumnos": [...]}` — usado por 12), [`ejerciciosRT/datos/libros.json`](datos/libros.json) (`{"libros": [...]}` — usado por 13). Todos sirven también para `json-server`. Desde los ejercicios se importan con rutas relativas `../datos/peliculas.json`, `../datos/alumnos.json` o `../datos/libros.json`. Si tu editor se queja del import del JSON, activa `"resolveJsonModule": true` en tu `tsconfig`.
+> 📦 **Datos reales.** Los datos comunes están centralizados en **4 ficheros con wrapper**, reutilizables por varios bloques: [`ejerciciosRT/datos/peliculas.json`](datos/peliculas.json) (`{"peliculas": [...]}` — usado por 11 y 13), [`ejerciciosRT/datos/alumnos.json`](datos/alumnos.json) (`{"alumnos": [...]}` — usado por 12), [`ejerciciosRT/datos/libros.json`](datos/libros.json) (`{"libros": [...]}` — usado por 13), [`ejerciciosRT/datos/motos.json`](datos/motos.json) (`{"motos": [...]}` — usado por 13, 15 y 16). Todos sirven también para `json-server`. Desde los ejercicios se importan con rutas relativas `../datos/peliculas.json`, `../datos/alumnos.json`, `../datos/libros.json` o `../datos/motos.json`. Si tu editor se queja del import del JSON, activa `"resolveJsonModule": true` en tu `tsconfig`.
 
 ## Bloques y apuntes
 
@@ -52,14 +52,19 @@
 <a id="bloque-13-tipado-en-react-props-generics-y-eventos"></a>
 ### 13 · Tipado en React: props, generics y eventos
 
-> 🧭 **Apunte:** [13 · TypeScript aplicado a React](../sesiones/apuntes/s04/13_Tipado_en_React_TS.md) · **Datos:** [datos/peliculas.json](datos/peliculas.json) — 6 películas reales de AppCine; [datos/libros.json](datos/libros.json) — 3 libros (`id`, `titulo`, `autor`, `anio`).
+> 🧭 **Apunte:** [13 · TypeScript aplicado a React](../sesiones/apuntes/s04/13_Tipado_en_React_TS.md) · **Datos:** [datos/peliculas.json](datos/peliculas.json) — 6 películas reales de AppCine; [datos/libros.json](datos/libros.json) — 3 libros (`id`, `titulo`, `autor`, `anio`); [datos/motos.json](datos/motos.json) — 6 motos (`id`, `marca`, `modelo`, `anio`, `cilindrada`, `tipo`, `extras`, `notas`).
 >
-> 🚧 **Solo lo visto (además de 11 y 12):** tipado de eventos (`React.ChangeEvent`, `SubmitEvent` — el antiguo `React.FormEvent` está deprecated en React 19), `useState<T>` explícito, utility types (`Record`, `Partial`, `Pick`, `Omit`), `Number.parseInt`/`parseFloat` y componentes genéricos `<T>`. Nada de `useReducer`, `localStorage` ni `children`.
+> 🚧 **Solo lo visto (además de 11 y 12):** tipado de eventos (`React.ChangeEvent`, `SubmitEvent` — el antiguo `React.FormEvent` está deprecated en React 19), `useState<T>` explícito, utility types (`Record`, `Partial`, `Pick`, `Omit`), `Number.parseInt`/`parseFloat`, componentes genéricos `<T>`, controles radio/checkbox/textarea (ver [`repos/02-react-componentes`](../repos/02-react-componentes/)) y buscador con estado derivado (`filter`, bloque 12). Nada de `useReducer`, `localStorage` ni `children`.
 
-1. AppCine colorea el badge del género. Define `COLORES_GENERO: Record<string, string>` con los seis géneros de `datos.json` (`accion`, `comedia`, `drama`, `terror`, `cienciaficcion`, `romantica`) y escribe `colorDeGenero(genero: string): string` que devuelva el color o un neutro con `??`. Crea `PeliculaBadge` (props tipadas con `PeliculaBadgeProps`) que pinte un `<span>` con `backgroundColor: colorDeGenero(pelicula.genero)` y renderiza la cartelera completa con `.map` + `key`.
-2. El formulario de alta de películas debe tipar sus eventos. Crea `NuevaPeliculaForm` con la prop `onGuardar: (datos: Omit<Pelicula, "id">) => void`: inputs controlados para `titulo` (`ChangeEvent<HTMLInputElement>`), `anio` (`Number.parseInt`) y `puntuacion` (`Number.parseFloat`, base decimal), y al `submit` (`SubmitEvent<HTMLFormElement>` + `preventDefault`; el antiguo `FormEvent` está deprecated) llama a `onGuardar` con la película construida y limpia el formulario.
-3. Quieres una misma fila de listado para películas y libros. Crea el componente genérico `Fila<T extends { id?: number; titulo: string }>` (props `FilaProps<T>`) que pinte el `titulo` en un `<li>`, y renderízalo dos veces desde `App`: una para `datos.peliculas` y otra para `datos.libros` (con `.map` + `key`). El mismo componente, dos entidades distintas.
-4. Estás montando la cola de trabajos pendientes de un equipo de desarrollo. Siguiendo el patrón del §13.8 (gestor de tareas), crea `ColaPendientes` con `useState<Tarea[]>` (`Tarea { id: number; texto: string; completada: boolean }`) que empiece vacío, un formulario con input controlado y botón submit (`onSubmit` tipado como `SubmitEvent<HTMLFormElement>` + `preventDefault`) para añadir tareas (id con `Date.now()`, spread para añadir sin mutar), clic en una tarea para marcarla completada (`map`) y un botón por tarea para borrarla (`filter`).
+1. Quieres una misma fila de listado para películas y libros. Crea el componente genérico `Fila<T extends { id?: number; titulo: string }>` (props `FilaProps<T>`) que pinte el `titulo` en un `<li>`, y renderízalo dos veces desde `App`: una para `datos.peliculas` y otra para `datos.libros` (con `.map` + `key`). El mismo componente, dos entidades distintas.
+2. Reconstruye el patrón del apunte 13 en otro dominio: un **CRUD de motos** sobre `datos/motos.json`. Define el modelo `Moto` (`id?`, `marca`, `modelo`, `anio`, `cilindrada`, `tipo`, `extras: string[]`, `notas`) y `NuevaMoto = Omit<Moto, "id">`. Crea `GestorMotos` con:
+   - `useState<Moto[]>` inicializado con los datos del JSON.
+   - **Buscador**: input controlado que filtre por marca o modelo (estado derivado, `filter` — bloque 12).
+   - **Formulario** `MotoForm` (crear/editar) con: inputs de texto (`marca`, `modelo`), numéricos (`anio`, `cilindrada` → `Number.parseInt`), **radio buttons** para `tipo` (deportiva/trail/urbana/custom), **checkboxes** para `extras` (ABS/Cruise control/Maletas/GPS — estado `string[]`, handler aparte con `checked`) y **textarea** para `notas`. Un `handleChange` por `name` para los controles de valor y un `handleCheck` para los checkboxes.
+   - **Tabla** `MotoRow` con props tipadas, color por tipo (`Record<string, string>` + `??` neutro), botones editar/borrar.
+   - **CRUD**: `añadir` (`Date.now()` + spread), `editar` (`map` + spread), `borrar` (`filter`), `enEdicion` + `motoEnEdicion` derivado, `key={enEdicion ?? "nueva"}`.
+
+   💡 Para el patrón de radio/checkbox/buscador, revisa [`repos/02-react-componentes`](../repos/02-react-componentes/): `RadioGroup.tsx` (name compartido), `Checkbox.tsx` (estado array + alternar) y `SearchBox.tsx` (input controlado + botón limpiar).
 
 ---
 
@@ -68,13 +73,15 @@
 <a id="bloque-15-gestión-de-estado-y-formularios"></a>
 ### 15 · Gestión de estado y formularios
 
-> 🧭 **Apunte:** [15 · React: gestión de estado y tipado de formularios](../sesiones/apuntes/s05/15_React_Gestion_Estado_y_Formularios.md) · **Datos:** [datos/peliculas.json](datos/peliculas.json) — las 6 películas de AppCine, servidas por `json-server` en `http://localhost:3000/peliculas` (ver [FAKEAPI](#montar-la-api-local-con-fakeapi)).
+> 🧭 **Apunte:** [15 · React: gestión de estado y tipado de formularios](../sesiones/apuntes/s05/15_React_Gestion_Estado_y_Formularios.md) · **Datos:** [datos/motos.json](datos/motos.json) — las 6 motos del bloque 13, servidas por `json-server` en `http://localhost:3000/motos` (ver [FAKEAPI](#montar-la-api-local-con-fakeapi)).
 >
-> 🚧 **Solo lo visto (además de 11–13):** lifting state up, eventos por props (`onEditar`/`onDelete`/`onGuardar`), patrón modal, formulario crear/editar, `useReducer` con acciones tipadas, `localStorage` como patrón de persistencia y patrones de estado con funciones puras. Nada de `children`, componentes genéricos de tabla ni `ButtonHTMLAttributes` (eso es S06).
+> 🚧 **Solo lo visto (además de 11–13):** lifting state up, eventos por props (`onEditar`/`onBorrar`/`onGuardar`), patrón modal, formulario crear/editar, `useReducer` con acciones tipadas, `localStorage` como patrón de persistencia y patrones de estado con funciones puras. Nada de `children`, componentes genéricos de tabla ni `ButtonHTMLAttributes` (eso es S06).
+>
+> 💡 **Mismo dominio que el bloque 13.** Ya tienes `GestorMotos` (CRUD en memoria). Aquí lo amplías con lo nuevo de la sesión: carga por `fetch`, modal, `useReducer` y `localStorage`.
 
-1. Estás montando el CRUD de AppCine. En `App` (fuente de la verdad): `useState<Pelicula[]>` con las películas de `http://localhost:3000/peliculas` cargadas en un `useEffect`, una tabla/lista con `onEditar`/`onDelete` por película (eventos por props) y un formulario **en un modal** que sirva para crear y editar (`inicial?: Partial<Pelicula>`, `modo: "crear" | "editar"`, `onGuardar: (datos: Omit<Pelicula, "id">) => void`): el modal se abre desde "Nueva" y desde el lápiz de editar, y `App` actualiza la lista sin mutar.
-2. La videoteca cambia por acciones, no por setters. Reimplementa la lista de películas con `useReducer`: `Accion` como unión discriminada (`{ type: "AÑADIR"; pelicula: Pelicula } | { type: "BORRAR"; id: number } | { type: "ORDENAR_PUNTUACION" }`), el `reducer` puro (switch que devuelve estado nuevo, nunca muta) y despacha desde botones: añade una película, borra por id y ordena por puntuación con `toSorted` (sin mutar).
-3. Los favoritos de AppCine deben sobrevivir al refresco. Con el patrón de persistencia de `localStorage`, escribe `cargarFavoritos(): number[]` (lee la clave `"appcine-favoritos"`, `string | null`, `JSON.parse` con valor por defecto) y `guardarFavoritos(ids: number[]): void` (`JSON.stringify`). En `App`, mantén los ids favoritos en `useState` (partiendo de `cargarFavoritos()`), guarda en cada cambio y pinta un corazón (o similar) por película para alternar el favorito sin mutar el array.
+1. El gestor de motos ahora carga de la API. En `App` (fuente de la verdad): `useState<Moto[]>` con las motos de `http://localhost:3000/motos` cargadas en un `useEffect` (con `AbortController`), una lista con `onEditar`/`onBorrar` por moto (eventos por props) y un formulario **en un modal** que sirva para crear y editar (`inicial?: Partial<Moto>`, `modo: "crear" | "editar"`, `onGuardar: (datos: Omit<Moto, "id">) => void`): el modal se abre desde "Nueva" y desde el botón de editar, y `App` actualiza la lista sin mutar.
+2. El gestor cambia por acciones, no por setters. Reimplementa la lista de motos con `useReducer`: `Accion` como unión discriminada (`{ type: "AÑADIR"; moto: Moto } | { type: "BORRAR"; id: number } | { type: "ORDENAR_ANIO" }`), el `reducer` puro (switch que devuelve estado nuevo, nunca muta) y despacha desde botones: añade una moto, borra por id y ordena por año con `toSorted` (sin mutar).
+3. Los favoritos de motos deben sobrevivir al refresco. Con el patrón de persistencia de `localStorage`, escribe `cargarFavoritos(): number[]` (lee la clave `"motos-favoritos"`, `string | null`, `JSON.parse` con valor por defecto) y `guardarFavoritos(ids: number[]): void` (`JSON.stringify`). En `App`, mantén los ids favoritos en `useState` (partiendo de `cargarFavoritos()`), guarda en cada cambio y pinta un corazón (o similar) por moto para alternar el favorito sin mutar el array.
 
 ---
 
@@ -83,13 +90,15 @@
 <a id="bloque-16-componentes-personalizados"></a>
 ### 16 · Componentes personalizados
 
-> 🧭 **Apunte:** [16 · React: creación de componentes personalizados](../sesiones/apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) · **Datos:** [datos/peliculas.json](datos/peliculas.json) — las 6 películas de AppCine.
+> 🧭 **Apunte:** [16 · React: creación de componentes personalizados](../sesiones/apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) · **Datos:** [datos/motos.json](datos/motos.json) — las 6 motos del bloque 13.
 >
 > 🚧 **Solo lo visto (además de 11–15):** `children` y composición, render condicional, `Boton` con `extends ButtonHTMLAttributes` y `Record` de variantes, `Modal` con overlay + `useEffect` de limpieza, y tabla genérica `Tabla<T>` con `Columna<T>`, `keyExtractor` y `render`.
+>
+> 💡 **Mismo dominio que el bloque 13.** Aquí el énfasis está en los **componentes personalizados** (`Boton`, `Tabla<T>`, `Modal`), aplicados a las motos.
 
-1. AppCine necesita su botón corporativo. Crea `Boton` con `BotonProps extends ButtonHTMLAttributes<HTMLButtonElement>` más `variante?: "primary" | "secondary" | "danger" | "ghost"`, `tamano?: "sm" | "md" | "lg"`, `icono?` y `cargando?`: las variantes y tamaños se asocian a clases con `Record<Variante, string>` y `Record<Tamano, string>`, `disabled` se combina con `cargando`, y el `...props` repesca los atributos nativos. Úsalo en una barra con las cuatro variantes y un botón en estado `cargando`.
-2. La tabla de películas debe servir para cualquier entidad. Crea `Tabla<T>` genérica (`TablaProps<T>` con `datos: T[]`, `columnas: Columna<T>[]` y `keyExtractor`), con estado vacío ("No hay datos disponibles") y `render?` por columna; montala con las películas de `datos.json` (columnas título, año y director) y usa el `render` de una columna para pintar el badge de género con `colorDeGenero` (bloque 13).
-3. El detalle de película se abre en un modal reutilizable. Crea `Modal` (`abierto: boolean`, `onCerrar: () => void`, `titulo: string`, `children: ReactNode`) con overlay, cierre por click fuera y `useEffect` que bloquee el scroll del body mientras está abierto (con limpieza al desmontar). Crea `PeliculaDetalle` que reciba una `Pelicula` y use el `Modal` pasándole la ficha completa por `children`; en `App`, un botón "Ver detalle" por película (con `onClick` + `stopPropagation` si va dentro de la fila) abre el modal de la película seleccionada.
+1. El gestor de motos necesita su botón corporativo. Crea `Boton` con `BotonProps extends ButtonHTMLAttributes<HTMLButtonElement>` más `variante?: "primary" | "secondary" | "danger" | "ghost"`, `tamano?: "sm" | "md" | "lg"`, `icono?` y `cargando?`: las variantes y tamaños se asocian a clases con `Record<Variante, string>` y `Record<Tamano, string>`, `disabled` se combina con `cargando`, y el `...props` repesca los atributos nativos. Úsalo en una barra con las cuatro variantes y un botón en estado `cargando`.
+2. La tabla de motos debe servir para cualquier entidad. Crea `Tabla<T>` genérica (`TablaProps<T>` con `datos: T[]`, `columnas: Columna<T>[]` y `keyExtractor`), con estado vacío ("No hay datos disponibles") y `render?` por columna; montala con las motos de `datos.json` (columnas marca, modelo, año, cilindrada y tipo) y usa el `render` de una columna para pintar el badge de tipo con `colorDeTipo` (bloque 13).
+3. El detalle de moto se abre en un modal reutilizable. Crea `Modal` (`abierto: boolean`, `onCerrar: () => void`, `titulo: string`, `children: ReactNode`) con overlay, cierre por click fuera y `useEffect` que bloquee el scroll del body mientras está abierto (con limpieza al desmontar). Crea `MotoDetalle` que reciba una `Moto` y use el `Modal` pasándole la ficha completa por `children`; en `App`, un botón "Ver detalle" por moto (con `onClick` + `stopPropagation` si va dentro de la fila) abre el modal de la moto seleccionada.
 
 ---
 
@@ -102,18 +111,18 @@ Los bloques **12** y **15** hacen `fetch` real contra una API local montada con 
 # Bloque 12 (alumnos)
 cd bancop && npx json-server ../ejerciciosRT/datos/alumnos.json --port 3000
 
-# Bloque 15 (películas)
-cd bancop && npx json-server ../ejerciciosRT/datos/peliculas.json --port 3000
+# Bloque 15 (motos)
+cd bancop && npx json-server ../ejerciciosRT/datos/motos.json --port 3000
 ```
 
 Esto deja la API consultable en el puerto **3000**:
 
 ```
 http://localhost:3000/alumnos
-http://localhost:3000/peliculas
+http://localhost:3000/motos
 ```
 
-`json-server` crea **un endpoint por cada clave de primer nivel** del JSON (el *wrapper*): `alumnos.json` empieza por `{ "alumnos": [...] }` y produce `/alumnos`; `peliculas.json` empieza por `{ "peliculas": [...] }` y produce `/peliculas`. Un endpoint inexistente (p. ej. `http://localhost:3000/noexiste`) responde `404`: es el caso de error que debe pintar tu `catch`.
+`json-server` crea **un endpoint por cada clave de primer nivel** del JSON (el *wrapper*): `alumnos.json` empieza por `{ "alumnos": [...] }` y produce `/alumnos`; `motos.json` empieza por `{ "motos": [...] }` y produce `/motos`. Un endpoint inexistente (p. ej. `http://localhost:3000/noexiste`) responde `404`: es el caso de error que debe pintar tu `catch`.
 
 > [!IMPORTANT]
 > En tus `fetch`, usa la URL local tal cual (`http://localhost:3000/alumnos`). Ojo: se podría filtrar la respuesta variando la URL pero eso **NO SE PERMITE** (p. ej. `?_limit=1`, `?_start=1&_end=2` o condiciones como `?curso=2º%20DAM`): la app debe traer el endpoint completo y filtrar en el cliente.
