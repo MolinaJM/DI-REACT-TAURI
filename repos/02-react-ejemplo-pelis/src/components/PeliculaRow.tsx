@@ -13,6 +13,7 @@ export function PeliculaRow({ pelicula, indice, onEditar, onBorrar }: PeliculaRo
   const id = pelicula.id; 
   // Si id no es undefined es porque estamos en EDICIÓN
   // El "indice+1" es importante para que la peli 0 no aparezca en el índice como 0, sino 1
+  // No confundir id con indice
   return (
     <tr>
       <td>{indice + 1}</td>
