@@ -4,17 +4,17 @@
 ![Framework](https://img.shields.io/badge/Framework-Vite-646CFF?logo=vite&logoColor=white)
 ![Curso](https://img.shields.io/badge/Curso-DI--RT-FF6B35)
 
-Proyecto Vite + React que implementa el **ejemplo corriendo** del apunte [13 · TypeScript aplicado a React](../../sesiones/apuntes/s04/13_Tipado_en_React_TS.md): una app de películas (AppCine) con **formulario** para crear/editar y **tabla** para listar, filtrar y borrar.
+Proyecto Vite + React que implementa el **ejemplo corriendo** del apunte [13 · TypeScript aplicado a React](../../sesiones/apuntes/s04/13_Tipado_en_React_TS.md): una app de películas (AppCine) con **formulario** para crear/editar y **tabla** para listar, editar y borrar.
 
 ## Qué demuestra
 
 - **Modelo de datos** con `interface Pelicula` y tipos derivados (`Omit`, `Pick`, `Partial`) — §13.1 y §13.3.2.
 - **`Record<string, string>`** para los colores por género — §13.3.1.
 - **Props tipadas** con `interface XProps` en cada componente — §13.2.
-- **`useState<Pelicula[]>`** para el estado de la lista y **`useRef<HTMLInputElement>`** para el buscador — §13.5.
+- **`useState<Pelicula[]>`** para la lista y **`useState<number | null>`** (`enEdicion`) con estado derivado `peliculaEnEdicion` — §13.5.
 - **Conversiones** de texto a número con `Number.parseInt`/`Number.parseFloat` — §13.6.2.
-- **Eventos tipados** (`SubmitEvent`, `ChangeEvent`, `MouseEvent`) — §13.7.
-- **CRUD** con inmutabilidad: `añadir`/`editar`/`borrar` y estado derivado (`filtradas`) — §13.8.
+- **Eventos tipados** (`SubmitEvent`, `ChangeEvent` por `name`) — §13.7 (los clicks van inline: React infiere el evento).
+- **CRUD** con inmutabilidad: `añadir`/`editar`/`borrar`, estado derivado (`peliculaEnEdicion`) y `key` del formulario para reinicializarlo al editar — §13.8.
 
 ## Estructura
 
@@ -22,8 +22,8 @@ Proyecto Vite + React que implementa el **ejemplo corriendo** del apunte [13 · 
 ├── src/
 │   ├── components/
 │   │   ├── PeliculaRow.tsx    Fila de la tabla (color de género + botones editar/borrar)
-│   │   └── PeliculaForm.tsx   Formulario crear/editar (inputs controlados + handlers tipados)
-│   ├── App.tsx                Estado, buscador, CRUD y composición (formulario + tabla)
+│   │   └── PeliculaForm.tsx   Formulario crear/editar (objeto `valores` + `handleChange` por `name`)
+│   ├── App.tsx                Estado (`enEdicion`), CRUD y composición (formulario + tabla)
 │   ├── tipos.ts               Pelicula, NuevaPelicula, FilaMinima, Cambios
 │   ├── colorGenero.ts         Record<string,string> + colorDeGenero()
 │   └── main.tsx               Punto de entrada (lo crea Vite)
@@ -59,7 +59,7 @@ Cada bloque **🔧 Lo añadimos al ejemplo** del apunte [13 · TypeScript aplica
 | §13.3.1 `Record` colores | `colorGenero.ts` |
 | §13.3.2 `Omit`/`Pick`/`Partial` | `tipos.ts` |
 | §13.4 Props opcionales | `components/PeliculaForm.tsx` |
-| §13.5 `useState`/`useRef` | `App.tsx` |
+| §13.5 `useState<T>` | `App.tsx` |
 | §13.6.2 `parseInt`/`parseFloat` | `components/PeliculaForm.tsx` |
 | §13.7 Eventos tipados | `components/PeliculaForm.tsx` |
 | §13.8 App completa | `App.tsx` |
