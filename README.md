@@ -92,8 +92,8 @@ flowchart TD
     TS["✅ S02–S03 · Aprender TypeScript<br/>(tipos · generics · uniones · módulos · async)"]
     REACT["⚛️ S04–S05 · Componentes React<br/>(FC · props · estado · formularios)"]
     CUSTOM["🧩 S06 · Componentes personalizados<br/>(Botones · Modales · Tabla genérica · etc)"]
-    TAURI["🪟 S07 / S01-S · App de escritorio Tauri<br/>(IPC React ↔ Rust · sistema de archivos)"]
-    GLOBAL["🗃️ S08 · Estado global y enrutado<br/>(Context · Zustand · React Router)"]
+    TAURI["🪟 S08 · App de escritorio Tauri<br/>(IPC React ↔ Rust · sistema de archivos)"]
+    GLOBAL["🗃️ S07 · Estado global y enrutado<br/>(Context · Zustand · React Router)"]
     CRUD["🗄️ S09 · Datos con CRUD via invoke<br/>(comandos Rust · validación tipada)"]
     STYLE["🎨 S10 · Estilización avanzada<br/>(Tailwind · responsive)"]
     PDF["📄 S11 · Informes PDF<br/>(@react-pdf — beben de los datos)"]
@@ -103,10 +103,11 @@ flowchart TD
     ENV --> TS
     TS --> REACT
     REACT --> CUSTOM
-    CUSTOM --> TAURI
-    TAURI --> GLOBAL
-    GLOBAL --> CRUD
-    CRUD --> STYLE
+    CUSTOM --> STYLE
+    CUSTOM --> GLOBAL
+    STYLE --> GLOBAL
+    GLOBAL --> TAURI
+    TAURI --> CRUD
     CRUD --> PDF
     STYLE --> PDF
     PDF --> TEST
@@ -151,12 +152,12 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 | 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
 | 6 | RA3 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Tabla genérica, Modal, composición |
 
-#### TAURI (S7–S13)
+#### PROYECTO: ESTADO GLOBAL, TAURI Y PUBLICACIÓN (S7–S13)
 
 | # | RA | Sesion | Titulo | Contenido |
 |---|----|--------|--------|-----------|
-| 7 | RA1 | [S07](sesiones/sesion07.md) | El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), std::fs, CRUD con invoke |
-| 8 | RA1 | [S08](sesiones/sesion08.md) | Persistencia de Estado Global y Enrutado | Context API, Zustand, persist, React Router v7 |
+| 7 | RA1 | [S07](sesiones/sesion07.md) | Persistencia de Estado Global y Enrutado | Context API, Zustand, persist, React Router v7 |
+| 8 | RA1 | [S08](sesiones/sesion08.md) | El Puente de Comunicación (Tauri IPC) y Sistema de Archivos | Comandos Rust, invoke(), std::fs, CRUD con invoke |
 | 9 | RA1 | [S09](sesiones/sesion09.md) | Formulario CRUD con invoke (Tauri) | ApiService generica sobre invoke, comandos listar/crear/actualizar/borrar, validacion tipada |
 | 10 | RA4 | 🤖 [S10](sesiones/sesion10.md) | Usabilidad. Estilización Avanzada y Diseño de Interfaces con Tailwind CSS | Responsive, grid, hamburger menu, animaciones |
 | 11 | RA5 | 🤖 [S11](sesiones/sesion11.md) | Creación de Informes en PDF con React | @react-pdf/renderer, Document/Page/Text, PDFViewer |

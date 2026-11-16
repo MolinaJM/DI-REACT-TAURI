@@ -536,7 +536,7 @@ export interface ContadorContextType {
 
 //2. FICHERO: ContadorContext.tsx
 import { createContext, useContext, useState, ReactNode } from "react";
-import type { ContadorContextType } from "./tipos";
+import type { ContadorContextType } from "./tipos.ts";
 
 const ContadorContext = createContext<ContadorContextType | undefined>(undefined);
 

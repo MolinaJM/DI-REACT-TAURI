@@ -7,8 +7,9 @@
  *   2. .then(r => r.json()) → parsea la respuesta (tipada con SwapiList).
  *   3. setPeliculas(data.results) → el estado se actualiza y la lista se pinta.
  *   4. Estados de CARGANDO y ERROR → la UI refleja qué está pasando.
- * La limpieza (flag cancelado) evita "fugas" si cambias de página rápido:
- * si la respuesta llega tarde, ya no toca el estado.
+ * La limpieza con AbortController evita "fugas" si cambias de página rápido:
+ * si el efecto se re-ejecuta o el componente se desmonta, la petición en vuelo
+ * se aborta y ya no toca el estado.
  */
 import { useEffect, useState } from 'react';
 import SearchBox from '../components/SearchBox';
@@ -26,26 +27,25 @@ function Swapi() {
     const [busqueda, setBusqueda] = useState('');
 
     useEffect(() => {
-        let cancelado = false;
+        const controller = new AbortController();
         setCargando(true);
         setError('');
-        fetch(`${API}?page=${pagina}`)
+        fetch(`${API}?page=${pagina}`, { signal: controller.signal })
             .then(r => {
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 return r.json();
             })
             .then((data: SwapiList<SwapiFilm>) => {
-                if (cancelado) return;
                 setPeliculas(data.results);
                 setTotal(data.count);
             })
             .catch((e: Error) => {
-                if (!cancelado) setError(e.message);
+                if (e.name !== 'AbortError') setError(e.message);
             })
             .finally(() => {
-                if (!cancelado) setCargando(false);
+                setCargando(false);
             });
-        return () => { cancelado = true; };
+        return () => controller.abort();
     }, [pagina]);
 
     const filtradas = busqueda

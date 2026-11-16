@@ -334,7 +334,7 @@ export interface Cancion {
 
 ```typescript
 // cancion.ts — el consumo: solo se importa el tipo
-import type { Cancion } from "./types";
+import type { Cancion } from "./types.ts";
 
 function reproducir(c: Cancion): void {
   console.log(`Reproduciendo ${c.titulo}...`);

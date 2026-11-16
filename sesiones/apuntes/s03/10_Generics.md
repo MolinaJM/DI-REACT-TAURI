@@ -108,7 +108,7 @@ valorDeProp(props, "puntuacion"); // number
 
 > 🔜 **Dónde se usa esto.** Esta misma línea `K extends keyof T` es la que sostiene los dos patrones que verás en React:
 > - La **tabla genérica** `TablaGenerica<T>`, donde cada columna declara a qué campo apunta: `interface Columna<T> { key: keyof T | string; … }` (`sesion06.md`, S04 · `repos/02-react-componentes/src/components/TablaGenerica.tsx`).
-> - El **hook de formulario** `useForm<T>`, cuyo mapa de errores es `Partial<Record<keyof T, string>>`: una clave por cada campo del formulario, todas opcionales (S04 · `repos/02-react-componentes/src/hooks/useForm.ts`, y los utility types en `s04/13_Tipado_en_React_TS.md` §13.5.2).
+> - El **hook de formulario** `useForm<T>`, cuyo mapa de errores es `Partial<Record<keyof T, string>>`: una clave por cada campo del formulario, todas opcionales (S04 · `repos/02-react-componentes/src/hooks/useForm.ts`, y los utility types en `s04/13_Tipado_en_React_TS.md` §13.3.2).
 >
 > En ambos casos la clave no se escribe a mano, la **hereda** de `keyof T`. Por eso `keyof` no es un Keyword de adorno: es lo que impide que una columna apunte a un campo inexistente o que un error de validación se registre bajo una clave que no existe en el formulario.
 
