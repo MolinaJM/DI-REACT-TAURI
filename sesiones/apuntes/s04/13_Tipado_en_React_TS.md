@@ -150,9 +150,8 @@ export default App;
 interface PeliculaRowProps {
   pelicula: Pelicula;
   indice: number;
-  onEditar: (id: number) => void;
-  onBorrar: (id: 
-  //Añadimos:number) => void;
+   onEditar: (id: number) => void;
+   onBorrar: (id: number) => void;
 }
 
 export function PeliculaRow({ pelicula, indice, onEditar, onBorrar }: PeliculaRowProps) {
@@ -162,7 +161,7 @@ export function PeliculaRow({ pelicula, indice, onEditar, onBorrar }: PeliculaRo
     <tr>
       {/* ... */}
       <td>
-        {idTODO LO QUE HAY EN EL ANTERIOR EJEMPLO == undefined && (
+        {id !== undefined && (
           <>
             <button onClick={() => onEditar(id)}>Editar</button>{" "}
             <button onClick={() => onBorrar(id)}>Borrar</button>
@@ -208,7 +207,7 @@ export function colorDeGenero(genero: string): string {
 >
 > 📦 **Código en:** [`src/components/PeliculaRow.tsx`](../../../repos/02-react-ejemplo-pelis/src/components/PeliculaRow.tsx) (celda de género con `colorDeGenero()`) y [`src/colorGenero.ts`](../../../repos/02-react-ejemplo-pelis/src/colorGenero.ts) (`Record<string, string>`).
 
-```tsxe código está
+```tsx
 import { colorDeGenero } from "./colorGenero.ts";
 
 // dentro de PeliculaRow, la celda de género:
@@ -219,10 +218,9 @@ import { colorDeGenero } from "./colorGenero.ts";
 
 ### 13.3.2 `Partial`, `Pick` y `Omit`
 
-No perder de vista algu SUPER IMPORTANTE, TypeScript solo define REGLAS para el editor, pero luego, JavaScript sigue usando los datos que tiene en memoria. Ya utilizamos ampliaciones de tipos con &.
+No perder de vista algo SUPER IMPORTANTE: TypeScript solo define REGLAS para el editor, pero luego JavaScript sigue usando los datos que tiene en memoria. Ya utilizamos ampliaciones de tipos con `&`.
 
-Los Utility Types `Partial`, `Pick` y `Omit` redefinen tipos a partir de "partes" de un tipo base. Veamos ejemplos:Esto ya lo vimos y practivamecamos medaiiante/reducciones y/o 
-o****. Darse cuenta que se ponen comillas en las acciones porque realmente NO LO HACE, solo lo tipoaa
+Los Utility Types `Partial`, `Pick` y `Omit` redefinen tipos a partir de "partes" de un tipo base. Veamos ejemplos:
 | Utility type | ¿Qué hace? | Ejemplo |
 | --- | --- | --- |
 | `Partial<T>` | "Convierte" todas las propiedades en opcionales | `Partial<Pelicula>` para el formulario de edición |
@@ -235,35 +233,25 @@ o****. Darse cuenta que se ponen comillas en las acciones porque realmente NO LO
 >
 > 📦 **Código en:** [`src/tipos.ts`](../../../repos/02-react-ejemplo-pelis/src/tipos.ts) (`NuevaPelicula`, `FilaMinima` y `Cambios`).
 
-```typescript 
+```typescript
 // tipos.ts
 export type NuevaPelicula = Omit<Pelicula, "id">;                    // al crear: sin id
-//Fichero EXPERIMENTO
+export type FilaMinima = Pick<Pelicula, "titulo" | "anio">;          // listado corto
+export type Cambios = Partial<Pelicula>;                            // edición: solo lo que cambia
 
+// EXPERIMENTO (en App.tsx): un tipo que "quita" la puntuación
+export type PeliculaSinPuntos = Omit<Pelicula, "puntuacion">;
 
-// App.tsx
-//Ahora, si creamos una nueva pelicula sin puntuacion, realmente crea el tipo pero
-//no impide que se saque la peli entera, pero ... por qué?? 
-const p1: PeliculaSinPuntos = pelis[0]!
-console.log(JSON.stringify(p1))
-//Cuestión 1: Entonces, para qué valen los Utility Types?
+// Cuestión 1: si tipamos una película entera como PeliculaSinPuntos, ¿qué pasa?
+const p1: PeliculaSinPuntos = pelis[0]!;
+console.log(JSON.stringify(p1));
+// El objeto sigue teniendo puntuacion en memoria: el tipo solo "esconde" el campo al editor.
 
-console.log(p1.puntuacion)//Esto avisa del error, pero Vite lo saca
+// Cuestión 2: ¿cómo quitamos la puntuación "físicamente" del objeto?
+const { puntuacion, ...p1SinPuntuacion } = pelis[0]!;
+console.log(JSON.stringify(p1SinPuntuacion));
 
-//Quitar "físicamente"
-const { puntuacion, ...p1SinPuntuacion } = pelis[0]!
-console.log(JSON.stringify(p1SinPuntuacion))
-//Cuestión 2: Alguien sabe por qué sale el mensaje 2 veces???
-
-//Cuestión 3: Cual sería el paso correcto? npx tsc --noEmit
-
-//Aplicar este ejemplo en App
-export type FilaMinima = Pick<Pelicula, "titulo" | "anio">; // listado corto
-//Cuestión 4: Cómo podría crear un tipo "físico" para soportar este tipo?
-
-export type Cambios = Partial<Pelicula>;                 // edición: solo lo que cambia
-//Probar a crear una pelicula que tome lista y le cambie algo (ej: título)
-
+// Cuestión 3: ¿cuál es el paso correcto para comprobarlo? npx tsc --noEmit
 ```
 
 > Son tipos, no código que se ejecuta: se "prueban" tipando algo y viendo que `tsc` acepta o rechaza.

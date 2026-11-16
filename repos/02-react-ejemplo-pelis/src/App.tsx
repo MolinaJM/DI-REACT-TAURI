@@ -14,7 +14,7 @@ function App() {
   //enEdicion controla: 1) lo que estamos haciendo y 2) lo que estamos viendo
   const [enEdicion, setEnEdicion] = useState<number | null>(null);
 
-  //Estado "derivado"
+  //Estado Pelicula "derivado" (es el objeto peli que se está editando)
   const peliculaEnEdicion =
     enEdicion !== null ? peliculas.find((p) => p.id === enEdicion) : undefined;
   console.log("En edición vale..."+enEdicion)
@@ -41,9 +41,10 @@ function App() {
       <h1>Gestor de películas - 2DAM</h1>
 
       <PeliculaForm
-        key={enEdicion ?? "nueva"}
-        inicial={peliculaEnEdicion}
+        key={enEdicion ?? "nueva"} //key es o el 'id' de peli o vale "nueva"
+        inicial={peliculaEnEdicion}//inicial está vacía o es la peli en edición
         modo={enEdicion !== null ? "editar" : "crear"}
+        //Cambia comportamiento de onGuardar según enEdicion
         onGuardar={(datos) => (enEdicion !== null ? editar(enEdicion, datos) : añadir(datos))}
         onCancelar={() => setEnEdicion(null)}
       />

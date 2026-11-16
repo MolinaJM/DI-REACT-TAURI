@@ -3,14 +3,15 @@ import type { ChangeEvent, SubmitEvent } from "react";
 import type { Pelicula, NuevaPelicula } from "../tipos.ts";
 
 interface PeliculaFormProps {
-  inicial?: Partial<Pelicula>;
-  modo: "crear" | "editar";
+  inicial?: Partial<Pelicula>;//Valores iniciales de formulario
+  modo: "crear" | "editar"; //Influye en botones mostrados
   onGuardar: (datos: NuevaPelicula) => void;
   onCancelar: () => void;
 }
 
-// El estado del formulario es un objeto: los campos numéricos se guardan como
-// string (para poder escribir en el input) y se convierten al enviar.
+// El estado del formulario es un objeto, copia de Pelicula "modificada": 
+// los campos numéricos se guardan como string (para poder escribir en el input) 
+// y se convierten al enviar.
 type PeliculaFormValores = {
   titulo: string;
   genero: string;
@@ -66,7 +67,10 @@ export function PeliculaForm({ inicial, modo, onGuardar, onCancelar }: PeliculaF
       <input name="anio" value={valores.anio} onChange={handleChange} placeholder="Año" style={{ width: "5rem" }} />
       <input name="director" value={valores.director} onChange={handleChange} placeholder="Director" />
       <input name="puntuacion" value={valores.puntuacion} onChange={handleChange} placeholder="Puntuación" style={{ width: "6rem" }} />
-      <button type="submit">{modo === "crear" ? "Añadir" : "Guardar"}</button>  
+      
+      <button type="submit">
+      {modo === "crear" ? "Añadir" : "Guardar"}</button>  
+      
       {modo === "editar" && <button type="button" onClick={onCancelar}>Cancelar</button>}
     </form>
   );
