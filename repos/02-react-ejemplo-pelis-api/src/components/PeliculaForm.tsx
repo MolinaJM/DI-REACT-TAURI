@@ -53,9 +53,10 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
     if (!v.titulo.trim()) nuevosErrores.titulo = "El título es obligatorio";
     const anio = Number(v.anio);
     if (!v.anio.trim() || Number.isNaN(anio) || anio < 1888) nuevosErrores.anio = "Año no válido o es menor que 1888";
-    const puntuacion = Number(v.puntuacion);
-    if (!v.puntuacion.trim() || puntuacion < 0 || puntuacion > 10) nuevosErrores.puntuacion = "Valores váidos: Entre 0 y 10";
     if (!v.director.trim()) nuevosErrores.director = "El director es obligatorio";
+    const puntuacion = Number(v.puntuacion);
+    const nonumero = isNaN(Number(v.puntuacion))
+    if (!v.puntuacion.trim() || puntuacion < 0 || puntuacion > 10 || nonumero ) nuevosErrores.puntuacion = "Valores váidos: Entre 0 y 10";
     return nuevosErrores;
   }
   //JMM: FIN de lo nuevo

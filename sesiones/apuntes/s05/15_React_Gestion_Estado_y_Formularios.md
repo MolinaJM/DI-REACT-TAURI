@@ -454,8 +454,8 @@ const filtradas = useMemo(
 
 > [!NOTE]
 > **`useMemo`** guarda en caché el resultado de un cálculo entre renders y **solo lo repite si cambia algo de su array de dependencias** (la misma mecánica que las dependencias de `useEffect`). Aquí importa dos veces:
-> 1. **El concepto clave es el estado derivado**: `filtradas` se calcula en el render a partir de `peliculas` + `busquedaDebounced` y **nunca se guarda en `useState`** (no hay sincronización que mantener, ni puede quedar desfasado).
-> 2. **`useMemo` es la optimización**: cada pulsación de tecla cambia `busqueda` y dispara un re-render; como `busqueda` **no** está en las dependencias, el filtrado de N películas **no se repite** en cada pulsación — solo se recalcula cuando llegan datos nuevos o pasa el debounce.
+> 1. **El concepto clave es el estado derivado**: `filtradas` se calcula en el render a partir de `peliculas` + `busquedaDebounced` y **nunca se guarda en `useState`** ( es más rápido porque se ahorra un renderizado de useState!. En caso contrario, cambia setPeliculas->peliculas->useEffect->filter peliculas).
+> 2. **`useMemo` es la optimización**: cada pulsación de tecla cambia `busqueda` y dispara un re-render; como `busqueda` **no** está en las dependencias de useMemo, el filtrado de N películas **no se repite** en cada pulsación — solo se recalcula cuando llegan datos nuevos o pasa el debounce.
 >
 > Sin `useMemo` el código seguiría funcionando (React no exige memorizar), pero repetiría el `filter` en cada render. Regla práctica: cálculo barato → filter inline; cálculo sobre una lista completa → `useMemo`.
 
