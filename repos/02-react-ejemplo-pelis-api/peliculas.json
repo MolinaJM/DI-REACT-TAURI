@@ -1,0 +1,28 @@
+{
+  "peliculas": [
+    {
+      "id": 1,
+      "titulo": "El Padrino",
+      "genero": "Drama",
+      "anio": 1972,
+      "director": "Coppola",
+      "puntuacion": 9.2
+    },
+    {
+      "id": 2,
+      "titulo": "El Padrino II",
+      "genero": "Drama",
+      "anio": 1974,
+      "director": "Coppola",
+      "puntuacion": 9.0
+    },
+    {
+      "id": 3,
+      "titulo": "Alien",
+      "genero": "Terror",
+      "anio": 1979,
+      "director": "Scott",
+      "puntuacion": 8.4
+    }
+  ]
+}

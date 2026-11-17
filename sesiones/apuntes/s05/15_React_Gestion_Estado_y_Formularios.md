@@ -59,13 +59,17 @@ En un hipotético examen esto se daría hecho.
 const URL_PELICULAS = "http://localhost:3000/peliculas";
 
 // Un único helper genérico <T>: el fetch, los headers y el check de res.ok se escriben una vez
+//-los headers indican el formato en el que viajan los datos (ej: JSON)
+//-RequestInit se usa para tipar el objeto de configuración
+//que se le suele pasar a fetch. Contiene: method (POST, PUT, GET...), headers, body, etc
+
 async function peticion<T>(url: string, opciones?: RequestInit): Promise<T> {
   const res = await fetch(url, {
     headers: { "Content-Type": "application/json" },
     ...opciones, // method / body / signal los aporta cada llamada
   });
   if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
-  if (res.status === 204) return undefined as T; // DELETE no devuelve body
+  if (res.status === 204) return undefined as T; // 204 == No Content. DELETE por ejemplo no devuelve body. 
   return (await res.json()) as T;
 }
 
@@ -170,7 +174,7 @@ const cerrarModal = () => {
 };
 
 const guardar = async (datos: NuevaPelicula) => {
-  setGuardando(true);
+  setGuardando(true);//DESACTIVA BOTONES Aceptar/Cancelar de Form (Previene errores)
   setError(null);
   try {
     if (enEdicion) {
@@ -183,7 +187,7 @@ const guardar = async (datos: NuevaPelicula) => {
   } catch (err) {
     setError((err as Error).message);
   } finally {
-    setGuardando(false);
+    setGuardando(false);//VUELVE A ACTIVAR BOTONES (Previene errores)
   }
 };
 ```
@@ -329,7 +333,7 @@ Este ejemplo recorre **todos los controles básicos**:
 
 - `FormData` modela `edad` como `number | string` (el input empieza vacío) y `plan` como **unión de literales**. 
 - Los `label` se asocian a su control mediante un `htmlFor` + `id`.   
-- `ErroresForm` es `Partial<Record<keyof FormData, string>>`: como mucho un mensaje por campo.
+- `ErroresForm` es `Partial<Record<keyof FormData, string>>` ¿por qué ? Necesito guardar 1 único mensaje de error por campo. `keyof` me da cada campo, creo un Record con campo-mensaje, y por último lo tipo como Partial dado que, en el mejor de los casos todos los campos serán opcionales (formulario válido.)
 
 > 📦 **Fichero del repo (versión con `useForm`):** [`repos/02-react-componentes/src/state/FormularioRegistro.tsx`](../../../repos/02-react-componentes/src/state/FormularioRegistro.tsx). 
 
