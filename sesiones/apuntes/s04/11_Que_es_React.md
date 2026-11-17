@@ -179,7 +179,7 @@ console.log(contar());// 3
 |:---|:---|
 | Función que recibe datos y devuelve un valor | Componente (`function Componente(props)`) que devuelve JSX |
 | `interface` para tipar parámetros | Props tipadas mediante `interface` |
-| Variables con tipos (`T \| null`) | `useState<T>()` / `useReducer`("useState avanzado" ej: ej: formulario con campos interconectados) |
+| Variables con tipos (`T \| null`) | `useState<T>()` (estados compuestos, ej: formulario con campos interconectados) |
 | `fetch` + `try/catch` + `async/await` | `useEffect` + `fetch` (mismos estados ya vistos... cargando/error/listo) |
 | `map()` / `filter()` sin mutar | Listas con `{items.map(i => <Item key={i.id} />)}`  
 | `if/else`, ternario | Render condicional / cortocirtuito (`&&`, ternario) |

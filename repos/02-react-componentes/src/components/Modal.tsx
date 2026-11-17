@@ -1,6 +1,6 @@
 /**
  * Modal.tsx - Componente Modal
- * Fuente: Sesión 07 - Creación de Componentes Personalizados
+ * Fuente: Sesión 06 - Creación de Componentes Personalizados
  * Modal con abierto/onCerrar/titulo/children
  *
  * ⚠️ ANTI-PATRÓN (a propósito): el `useEffect` toca el DOM real con
@@ -10,7 +10,7 @@
  * mostrar qué NO hacer; la composición con children sí es el patrón correcto.
  */
 import type { ReactNode } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface ModalProps {
     abierto: boolean;
@@ -21,17 +21,36 @@ interface ModalProps {
 }
 
 function Modal({ abierto, onCerrar, titulo, children, tamano: _tamano = "md" }: ModalProps) {
+    const overlayRef = useRef<HTMLDivElement | null>(null);
+
     useEffect(() => {
         if (abierto) document.body.style.overflow = "hidden";
         else document.body.style.overflow = "";
         return () => { document.body.style.overflow = ""; };
     }, [abierto]);
 
+    // Escape (§15.2 del apunte 15): suscripción con limpieza
+    useEffect(() => {
+        if (!abierto) return;
+        function teclaEsc(e: KeyboardEvent) {
+            if (e.key === "Escape") onCerrar();
+        }
+        window.addEventListener("keydown", teclaEsc);
+        return () => window.removeEventListener("keydown", teclaEsc);
+    }, [abierto, onCerrar]);
+
     if (!abierto) return null;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="fixed inset-0 bg-black/50" onClick={onCerrar}></div>
+            {/* overlayRef: solo cierra si el clic cae sobre el overlay, no sobre el panel */}
+            <div
+                className="fixed inset-0 bg-black/50"
+                ref={overlayRef}
+                onClick={(e) => {
+                    if (e.target === overlayRef.current) onCerrar();
+                }}
+            ></div>
             <div className={`relative bg-white rounded-xl shadow-2xl w-full max-w-lg mx-4 p-6`}>
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-xl font-semibold">{titulo}</h2>

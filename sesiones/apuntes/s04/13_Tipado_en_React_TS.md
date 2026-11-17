@@ -7,7 +7,7 @@
   - [13.1. El modelo de datos con interfaces](#131-el-modelo-de-datos-con-interfaces)
   - [13.2. Tipado de props: una interfaz por componente](#132-tipado-de-props-una-interfaz-por-componente)
   - [13.3. Utility types](#133-utility-types)
-    - [13.3.1 `Record<string, string>`: colores por género](#1331-record-colores-por-género)
+    - [13.3.1 `Record<string, string>`: colores por género](#1331-recordstring-string-colores-por-género)
     - [13.3.2 `Partial`, `Pick` y `Omit`](#1332-partial-pick-y-omit)
   - [13.4. Propiedades opcionales (`?`) y obligatorias](#134-propiedades-opcionales-y-obligatorias)
   - [13.5. Generics en React: `useState<T>`](#135-generics-en-react-usestate)
@@ -30,7 +30,7 @@ Esta unidad completa los conocimientos de TypeScript que faltan para llegar a Re
  🧱 Todo el ejemplo gira alrededor de un hipotético proyecto **AppCine**: la interfaz `Pelicula` y sus listados, tablas y formularios.
  Estos apuntes no son una colección de ejemplos sueltos. Partimos de la tabla de películas, apartado a apartado, le vamos añadiendo capas (colores, formulario, estado, eventos…) hasta terminar con una app de películas completa en §13.8. Cada apartado incluye un bloque **🔧 Lo añadimos al ejemplo** con el trozo exacto que hay que copiar y pegar.
 >
-> ℹ️ **Versión básica, luego ampliable.** La app que se construye aquí es la versión **básica** del CRUD con formulario: funciona **en memoria** (sin servidor, sin `useEffect`, sin modal y sin buscador). La progresión continúa en los apuntes siguientes: en el **apunte 15** se amplía con **backend real** — cliente `api` con `fetch`, carga con `useEffect` y estados de carga/error, formulario dentro de un `Modal`, debounce en la búsqueda y `useCallback` — y en el **apunte 16** se lleva hasta la **versión final** reconstruyéndola con **componentes personalizados**: `Buscador`, `PeliculaTable`, `Boton`, `Modal`, `Spinner` y `TablaGenerica<T>`. En el arranque de cada uno de esos apuntes hay una tabla que detalla exactamente qué se añade, qué se sustituye y qué se mantiene.
+> ℹ️ **Versión básica, luego ampliable.** La app que se construye aquí es la versión **básica** del CRUD con formulario: funciona **en memoria** (sin servidor, sin `useEffect`, sin modal y sin buscador). La progresión continúa en los apuntes siguientes: en el **apunte 15** se amplía con **backend real** — cliente `api` con `fetch`, carga con `useEffect` y estados de carga/error, formulario dentro de un `Modal` y debounce en la búsqueda — y en el **apunte 16** se lleva hasta la **versión final** reconstruyéndola con **componentes personalizados**: `Buscador`, `PeliculaTable`, `Boton`, `Modal`, `Spinner` y `TablaGenerica<T>`. En el arranque de cada uno de esos apuntes hay una tabla que detalla exactamente qué se añade, qué se sustituye y qué se mantiene.
 >
 > 📝 **El examen usará otro dominio** (libros, tareas, alumnos…): no copies el código de `Pelicula`, aplica los **patrones** de §13.11 al nuevo dominio.
 
@@ -65,7 +65,7 @@ Modelamos Pelicula para usarla en toda la APP:
 ```typescript
 //tipos.ts
 export interface Pelicula {
-  id?: number; // opcional: en "crear" todavía no existe
+  id: number; // lo asigna la app (Date.now()) o la base de datos
   titulo: string;
   genero: string;
   anio: number;
@@ -75,7 +75,7 @@ export interface Pelicula {
 ```
 
 > [!IMPORTANT]
-> `id?` es opcional porque el id lo asigna la base de datos. Como veremos más adelante, en modo **crear** se usa `Omit<Pelicula, "id">`; en modo **editar** todas las propiedades son obligatorias.
+> `id` es obligatorio: toda película guardada lo tiene, asignado por la app (`Date.now()`) o por la base de datos. Lo que todavía no existe es el id **al crear**: para eso, como veremos más adelante, se usa `Omit<Pelicula, "id">` (`NuevaPelicula`); en modo **editar** todas las propiedades son obligatorias.
 
 ---
 
@@ -122,7 +122,7 @@ import { PeliculaRow } from "./components/PeliculaRow";
 import type { Pelicula } from "./components/tipos.ts";
 
 function App() {
-  const pelis: Pelicula[] = [{ titulo: "El Padrino", genero: "Drama", anio: 1972, director: "Coppola", puntuacion: 9.2, }]
+  const pelis: Pelicula[] = [{ id: 1, titulo: "El Padrino", genero: "Drama", anio: 1972, director: "Coppola", puntuacion: 9.2, }]
   //Ponemos un estilo mínimo a la tabla en etiqueta <table>. En la nota inferior se explica el "{{}}"
   return (
     <div>
@@ -130,7 +130,7 @@ function App() {
         {
           pelis.map((pelicula, indice) => (
             <PeliculaRow
-              key={pelicula.titulo}
+              key={pelicula.id}
               pelicula={pelicula} indice={indice} />
           ))
         }
@@ -150,30 +150,28 @@ export default App;
 interface PeliculaRowProps {
   pelicula: Pelicula;
   indice: number;
-   onEditar: (id: number) => void;
-   onBorrar: (id: number) => void;
+  onEditar: (id: number) => void;
+  onBorrar: (id: number) => void;
 }
 
 export function PeliculaRow({ pelicula, indice, onEditar, onBorrar }: PeliculaRowProps) {
-  const id = pelicula.id; // const: TypeScript mantiene el narrowing dentro de los closures
   // ...celdas de título, género, año...
   return (
     <tr>
       {/* ... */}
       <td>
-        {id !== undefined && (
-          <>
-            <button onClick={() => onEditar(id)}>Editar</button>{" "}
-            <button onClick={() => onBorrar(id)}>Borrar</button>
-          </>
-        )}
+        <button onClick={() => onEditar(pelicula.id)}>Editar</button>{" "}
+        <button onClick={() => onBorrar(pelicula.id)}>Borrar</button>
       </td>
     </tr>
   );
 }
 ```
+
+> [!NOTE]
+> Como `id` es obligatorio en `Pelicula`, no hay que estrechar nada: `pelicula.id` es directamente un `number`. El narrowing aparecerá con las propiedades **opcionales**, como la `inicial?` del formulario (§13.4).
 ---
-##13.3. Utility types
+## 13.3. Utility types
 
 TypeScript trae tipos genéricos listos que React usa a diario.
 
@@ -708,10 +706,10 @@ Este esqueleto se puede adaptar a **otro dominio** (libros, tareas, alumnos…).
 
 | # | Patrón | Esqueleto (dominio `Libro`) | § |
 |---|---|---|---|
-| 1 | **Modelo de datos** | `interface Libro { id?: number; titulo: string; genero: string; anio: number; paginas: number }` | §13.1 |
+| 1 | **Modelo de datos** | `interface Libro { id: number; titulo: string; genero: string; anio: number; paginas: number }` | §13.1 |
 | 2 | **Utility types** | `NuevoLibro = Omit<Libro, "id">` · `FilaMinimaLibro = Pick<Libro, "titulo" \| "anio">` · `CambiosLibro = Partial<Libro>` | §13.3.2 |
 | 3 | **Props por componente** | `interface LibroRowProps { libro: Libro; indice: number; onEditar: (id: number) => void; onBorrar: (id: number) => void }` | §13.2 |
-| 4 | **Fila + narrowing** | `const id = libro.id;` → `{id !== undefined && <button onClick={() => onEditar(id)}>Editar</button>}` | §13.2 |
+| 4 | **Botones de fila** | `<button onClick={() => onEditar(libro.id)}>Editar</button>` (id obligatorio: sin narrowing) | §13.2 |
 | 5 | **Formulario** | `inicial?: Partial<Libro>` · `modo: "crear" \| "editar"` · `onGuardar: (d: NuevoLibro) => void`; un objeto `valores` + un `handleChange` por `name`; `guardar(e: SubmitEvent)` con `Number.parseInt`/`parseFloat` | §13.4/§13.6.2/§13.7 |
 | 6 | **Estado + CRUD** | `useState<Libro[]>(…)`; `añadir` = `{ ...datos, id: Date.now() }` + `[...libros, nuevo]`; `editar` = `map` + spread; `borrar` = `filter`; `enEdicion` + `libroEnEdicion` derivado; `key={enEdicion ?? "nueva"}` | §13.5.1/§13.8 |
 | 7 | **Eventos** | `SubmitEvent` (submit) · `ChangeEvent` (input/select) · `MouseEvent` (botón) | §13.7 |

@@ -1,11 +1,11 @@
 /**
  * Boton.tsx - Componente Botón personalizado
- * Fuente: Sesión 07 - Creación de Componentes Personalizados
+ * Fuente: Sesión 06 - Creación de Componentes Personalizados
  * BotonProps extendiendo ButtonHTMLAttributes, variantes, tamaños, loading
  */
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-type Variante = "primary" | "secondary" | "danger" | "ghost";
+type Variante = "primary" | "secondary" | "danger" | "exito" | "ghost";
 type Tamano = "sm" | "md" | "lg";
 
 interface BotonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,6 +20,7 @@ const VARIANTES: Record<Variante, string> = {
     primary: "bg-blue-600 text-white hover:bg-blue-700",
     secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
     danger: "bg-red-600 text-white hover:bg-red-700",
+    exito: "bg-green-600 text-white hover:bg-green-700",
     ghost: "bg-transparent text-gray-600 hover:bg-gray-100",
 };
 

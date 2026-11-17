@@ -21,7 +21,7 @@ const NAV: { id: Pagina; texto: string }[] = [
     { id: 'hooks', texto: 'Hooks' },
     { id: 'extras', texto: 'Extras' },
     { id: 'personalizados', texto: 'Personalizados' },
-    { id: 'estado', texto: 'Estado' },
+    { id: 'estado', texto: 'Validación Formulario' },
     { id: 'swapi', texto: 'SWAPI' },
     { id: 'cards', texto: 'Cards' },
 ];

@@ -366,7 +366,7 @@ Cuando un hijo (como un botón dentro de un formulario) ejecuta esa función rec
 
 
 > [!NOTE]
->En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados.
+>En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState o useEffect recuerdan la información entre renderizados.
 <a id="7-otros-tipos-de-función-callbacks"></a>
 > 
 Ejemplo:

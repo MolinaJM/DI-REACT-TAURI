@@ -73,7 +73,7 @@ Los genéricos son el puente entre TypeScript y los patrones de React/Tauri:
 ```
 
 > [!NOTE]
-> En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState, useEffect o useCallback recuerdan la información entre renderizados. Los genéricos son la razón por la que `useState<T>` mantiene el tipo correcto.
+> En React, cada renderizado de un componente es una llamada a una función. Los closures son la razón por la que Hooks como useState o useEffect recuerdan la información entre renderizados. Los genéricos son la razón por la que `useState<T>` mantiene el tipo correcto.
 
 
 

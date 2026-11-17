@@ -1,6 +1,6 @@
 // Tipos compartidos de la app de películas (AppCine) — §13.1 y §13.3.2
 export interface Pelicula {
-  id?: number; // opcional: en "crear" todavía no existe
+  id: number; // lo asigna la app (Date.now()) o la base de datos
   titulo: string;
   genero: string;
   anio: number;
@@ -8,7 +8,8 @@ export interface Pelicula {
   puntuacion: number; //0-10
 }
 
-// Al crear todavía no hay id: lo asigna la app (Date.now()) o la base de datos
+// Al crear todavía no hay id: lo asigna la app (Date.now()) o la base de datos.
+// Por eso el formulario trabaja con Pelicula sin id (NuevaPelicula), no con Pelicula
 export type NuevaPelicula = Omit<Pelicula, "id">;
 
 // Listado corto: solo título y año

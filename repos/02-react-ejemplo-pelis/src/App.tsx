@@ -67,8 +67,9 @@ function App() {
               key={pelicula.id}
               pelicula={pelicula}
               indice={indice}
-              onEditar={(id) => setEnEdicion(id)}
-              onBorrar={borrar}
+              onEditar={(id) => setEnEdicion(id)}//Se podría poner
+              onBorrar={borrar}//Infiere la firma en el Props
+              //Equivalente: onBorrar={(id) => borrar(id)}
             />
           ))}
         </tbody>

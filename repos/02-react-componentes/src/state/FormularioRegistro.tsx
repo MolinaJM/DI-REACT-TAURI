@@ -31,7 +31,7 @@ const VALORES_INICIALES: FormData = {
 };
 
 function FormularioRegistro() {
-    const validar = (valores: FormData): ErroresForm => {
+    function validar (valores: FormData): ErroresForm  {
         const nuevosErrores: ErroresForm = {};
         if (!valores.nombre.trim()) {
             nuevosErrores.nombre = "El nombre es obligatorio";
