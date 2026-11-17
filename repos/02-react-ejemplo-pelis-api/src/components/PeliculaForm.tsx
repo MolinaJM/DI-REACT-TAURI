@@ -52,18 +52,23 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
     const nuevosErrores: ErroresForm = {};
     if (!v.titulo.trim()) nuevosErrores.titulo = "El título es obligatorio";
     const anio = Number(v.anio);
-    if (!v.anio.trim() || Number.isNaN(anio) || anio < 1888) nuevosErrores.anio = "Año no válido";
+    if (!v.anio.trim() || Number.isNaN(anio) || anio < 1888) nuevosErrores.anio = "Año no válido o es menor que 1888";
     const puntuacion = Number(v.puntuacion);
-    if (!v.puntuacion.trim() || puntuacion < 0 || puntuacion > 10) nuevosErrores.puntuacion = "Entre 0 y 10";
+    if (!v.puntuacion.trim() || puntuacion < 0 || puntuacion > 10) nuevosErrores.puntuacion = "Valores váidos: Entre 0 y 10";
+    if (!v.director.trim()) nuevosErrores.director = "El director es obligatorio";
     return nuevosErrores;
   }
   //JMM: FIN de lo nuevo
 
   function guardar(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+    
+    //JMM: Nuevo respecto a 13 - Validación
     const errs = validar(valores);
     setErrores(errs);
-    if (Object.keys(errs).length > 0) return; //JMM: NUEVO respecto a 13
+    if (Object.keys(errs).length > 0) return; 
+    //JMM: FIN DE LO NUEVO
+    
     const datos: NuevaPelicula = {
       titulo: valores.titulo.trim(),
       genero: valores.genero,
@@ -72,6 +77,8 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
       puntuacion: Number.parseFloat(valores.puntuacion),
     };
     onGuardar(datos);
+    //Un detalle: en la anterior versión limpiábamos Formulario. Aquí no es necesario dado 
+    //que el Form ya estará cerrado.
   }
 
   return (
@@ -92,6 +99,7 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
       <input name="anio" value={valores.anio} onChange={handleChange} placeholder="Año" />
       {errores.anio && <p style={{ color: "red", margin: 0 }}>{errores.anio}</p>}
       <input name="director" value={valores.director} onChange={handleChange} placeholder="Director" />
+      {errores.director && <p style={{ color: "red", margin: 0 }}>{errores.director}</p>}
       <input name="puntuacion" value={valores.puntuacion} onChange={handleChange} placeholder="Puntuación (0-10)" />
       {errores.puntuacion && <p style={{ color: "red", margin: 0 }}>{errores.puntuacion}</p>}
       <div style={{ display: "flex", gap: "0.5rem", justifyContent: "flex-end" }}>
