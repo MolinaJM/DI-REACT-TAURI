@@ -149,7 +149,7 @@ Cada sesión empleará aproximadamente **3 horas** de clase, dedicando el resto 
 | # | RA | Sesion | Titulo | Contenido |
 |---|----|--------|--------|-----------|
 | 4 | RA1 | [S04](sesiones/sesion04.md) | Anatomía de Componentes y Funciones con TypeScript | Componentes FC, props, useState, useEffect, closures, composición |
-| 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | useReducer, formularios, validacion, localStorage, patrones de estado |
+| 5 | RA1 | [S05](sesiones/sesion05.md) | Gestión de Estado Básico y Tipado de Formularios | Formularios, validacion, localStorage, patrones de estado |
 | 6 | RA3 | [S06](sesiones/sesion06.md) | Creación de Componentes Personalizados | ButtonHTMLAttributes, Tabla genérica, Modal, composición |
 
 #### PROYECTO: ESTADO GLOBAL, TAURI Y PUBLICACIÓN (S7–S13)
