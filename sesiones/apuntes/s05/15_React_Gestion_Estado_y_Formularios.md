@@ -226,7 +226,7 @@ La comunicación hijo → padre se hace con **funciones pasadas como props**. Ca
 | `onGuardar` | `(d: Omit<Pelicula, "id">) => void` | Formulario |
 | `onCancelar` | `() => void` | Formulario |
 | `onCerrar` | `() => void` | Modal (×, overlay, Escape) |
-| `onBuscar` | `(texto: string) => void` | Buscador — en 15 va inline; como prop llega con el `Buscador` de §16.1.1 |
+| `onBuscar` | `(texto: string) => void` | Buscador — en 15 va inline; como prop llega con el `Buscador` de §16.3.1 |
 
 Ejemplo real de la fila (§13.2): los botones llaman a la callback por `id`, inline y sin evento intermedio:
 
