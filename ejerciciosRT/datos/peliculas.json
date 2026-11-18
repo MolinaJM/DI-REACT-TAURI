@@ -1,12 +1,12 @@
 {
   "peliculas": [
     {
-      "id": 1,
       "titulo": "El Padrino",
       "genero": "Drama",
       "anio": 1972,
       "director": "Francis Ford Coppola",
-      "puntuacion": 9.2
+      "puntuacion": 9.2,
+      "id": 1
     },
     {
       "id": 2,
@@ -17,12 +17,12 @@
       "puntuacion": 8.1
     },
     {
-      "id": 3,
       "titulo": "Aterriza como puedas",
       "genero": "Comedia",
       "anio": 1980,
       "director": "Zucker, Abrahams y Zucker",
-      "puntuacion": 7.8
+      "puntuacion": 7.8,
+      "id": 3
     },
     {
       "id": 4,

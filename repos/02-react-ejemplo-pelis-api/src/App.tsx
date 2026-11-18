@@ -37,17 +37,17 @@ function App() {
     const controller = new AbortController();
 
     async function cargar() {
-      setCargando(true);
-      setError(null);
+      setCargando(true);//Estado de carga. Solo lo veremos si la API tarda
+      setError(null);//Estado de carga
       try {
         const datos = await api.listar(controller.signal);
         setPeliculas(datos);
       } catch (err) {
         if (err instanceof Error && err.name !== "AbortError") {
-          setError(err.message);
+          setError(err.message);//Estado de carga
         }
       } finally {
-        setCargando(false);
+        setCargando(false);//Estado de carga
       }
     }
 
@@ -84,8 +84,7 @@ function App() {
 
 
   //JMM: NUEVO respecto a 13
-  //CALLBACKs MODAL 
-
+  //FUNCIONES control del MODAL 
   const abrirCrear = () => {
     setEnEdicion(null);
     setModalAbierto(true);
@@ -190,7 +189,7 @@ function App() {
         onCerrar={cerrarModal}
       >
         <PeliculaForm
-          key={enEdicion?.id ?? "nueva"}
+         // key={enEdicion?.id ?? "nueva"}. Es la versión anterior era vital, ahora no porque está en otro componente 
           inicial={enEdicion ?? undefined}
           modo={enEdicion ? "editar" : "crear"}
           guardando={guardando}

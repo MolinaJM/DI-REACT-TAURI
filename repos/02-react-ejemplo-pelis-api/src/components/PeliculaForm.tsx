@@ -6,7 +6,8 @@ interface PeliculaFormProps {
   inicial?: Partial<Pelicula>;
   modo: "crear" | "editar";
   //JMM: NUEVO respecto a 13
-  guardando?: boolean; //Controla el estado de carga (loading) mientras se está procesando y guardando la información en el servidor
+  guardando?: boolean; //Controla la aparición de los botones mientras se guarda info en el servidor
+  //Así evitamos errores devirados de tocar los botones por error.
   //JMM: FIN de lo nuevo
   onGuardar: (datos: NuevaPelicula) => void;
   onCancelar: () => void;
@@ -32,7 +33,7 @@ type ErroresForm = Partial<Record<keyof PeliculaFormValores, string>>;
 export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCancelar }: PeliculaFormProps) {
   const [valores, setValores] = useState<PeliculaFormValores>(() => ({
     titulo: inicial?.titulo ?? "",
-    genero: inicial?.genero ?? "Drama",
+    genero: inicial?.genero ?? "", //JMM: NUEVO respecto a 13 — arranca vacío: el select muestra «Selecciona un género…»
     anio: inicial?.anio?.toString() ?? "",
     director: inicial?.director ?? "",
     puntuacion: inicial?.puntuacion?.toString() ?? "",
@@ -51,8 +52,9 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
   function validar(v: PeliculaFormValores): ErroresForm {
     const nuevosErrores: ErroresForm = {};
     if (!v.titulo.trim()) nuevosErrores.titulo = "El título es obligatorio";
+    if (!v.genero.trim()) nuevosErrores.genero = "No has seleccionado género";
     const anio = Number(v.anio);
-    if (!v.anio.trim() || Number.isNaN(anio) || anio < 1888) nuevosErrores.anio = "Año no válido o es menor que 1888";
+    if (!v.anio.trim() || Number.isNaN(anio) || anio < 1888) nuevosErrores.anio = "Año no válido (número>1888)";
     if (!v.director.trim()) nuevosErrores.director = "El director es obligatorio";
     const puntuacion = Number(v.puntuacion);
     const nonumero = isNaN(Number(v.puntuacion))
@@ -67,7 +69,7 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
     //JMM: Nuevo respecto a 13 - Validación
     const errs = validar(valores);
     setErrores(errs);
-    if (Object.keys(errs).length > 0) return; 
+    if (Object.keys(errs).length > 0) return; //Aborta envío si hay algún error
     //JMM: FIN DE LO NUEVO
     
     const datos: NuevaPelicula = {
@@ -91,6 +93,7 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
       {/* JMM: Fin de lo nuevo. Este patrón de errores se repite en cada campo... */}
 
       <select name="genero" value={valores.genero} onChange={handleChange}>
+        {/* JMM: NUEVO respecto a 13 — opción vacía: sin ella el navegador pinta la 1ª opción y el estado sigue vacío */}
         <option value="">Selecciona un género…</option>
         {GENEROS.map((g) => (
           <option key={g} value={g}>
@@ -98,6 +101,7 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
           </option>
         ))}
       </select>
+      {errores.genero && <p style={{ color: "red", margin: 0 }}>{errores.genero}</p>}
       <input name="anio" value={valores.anio} onChange={handleChange} placeholder="Año" />
       {errores.anio && <p style={{ color: "red", margin: 0 }}>{errores.anio}</p>}
       <input name="director" value={valores.director} onChange={handleChange} placeholder="Director" />

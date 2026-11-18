@@ -28,7 +28,7 @@ export function PeliculaForm({ inicial, modo, onGuardar, onCancelar }: PeliculaF
     //Al ser un Partial hay que utilizar optional chaining
     //Si tiene valor lo carga, si no, lo inicializa por defecto
     titulo: inicial?.titulo ?? "",
-    genero: inicial?.genero ?? "Drama",
+    genero: inicial?.genero ?? "",
     anio: inicial?.anio?.toString() ?? "",
     director: inicial?.director ?? "",
     puntuacion: inicial?.puntuacion?.toString() ?? "",
@@ -51,7 +51,7 @@ export function PeliculaForm({ inicial, modo, onGuardar, onCancelar }: PeliculaF
       puntuacion: Number.parseFloat(valores.puntuacion),
     };
     onGuardar(datos);//Llamamos al closuer del padre
-    setValores({ titulo: "", genero: "Drama", anio: "", director: "", puntuacion: "" });//Limpiamos
+    setValores({ titulo: "", genero: "", anio: "", director: "", puntuacion: "" });//Limpiamos
   }
 
   return (

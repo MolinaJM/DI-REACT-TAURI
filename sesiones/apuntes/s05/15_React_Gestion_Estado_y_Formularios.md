@@ -156,7 +156,8 @@ La estructura de `App` (estado + tabla + JSX) ya se montó en los apuntes **§13
 //App.tsx
 
 // Delta sobre §13.8: handlers async + estado del modal
-const abrirCrear = () => {
+// Mezclamos function con const => por variar...
+function abrirCrear() {
   setEnEdicion(null);
   setModalAbierto(true);
 };
@@ -195,7 +196,7 @@ En el JSX **la tabla siempre se pinta** (con sus `PeliculaRow`); el `Modal` se c
 ```tsx
 // JSX: el formulario ya no va incrustado, va dentro del Modal
 <Modal
-  abierto={modalAbierto}
+  abierto={modalAbierto}//controla visibilidad
   titulo={enEdicion ? "Editar película" : "Nueva película"}
   onCerrar={cerrarModal}
 >
@@ -260,7 +261,7 @@ import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 interface ModalProps {
-  abierto: boolean;
+  abierto: boolean;//controla visibilidad
   onCerrar: () => void;
   children: ReactNode;
 }
@@ -624,13 +625,13 @@ La app completa está en [`repos/02-react-ejemplo-pelis-api`](../../../repos/02-
 
 **Qué mirar:**
 - **Carga con `useEffect`** y tres estados separados: `peliculas`, `cargando` y `error` (§15.2); el contador `recargar` como dependencia.
-- **Persistencia**: la búsqueda vive en `localStorage` con init perezoso y `setItem` en cada cambio (§15.8).
+- **Persistencia**: la última búsqueda está en `localStorage` con init perezoso y `setItem` en cada cambio (§15.8).
 - **App como fuente de la verdad**: `enEdicion` decide crear/editar y los hijos avisan por props (§15.3/§15.4).
 - **Handlers async** (`guardar`, `borrar`) que llaman a `api` y después recargan; sus `catch` despachan `ERROR` (§15.3/§15.3).
 - **Debounce** del buscador con `useRef` + `setTimeout` (§15.7).
 - **Modal** con `abierto`/`onCerrar` envolviendo al formulario (§15.5).
 
-#### Demos sueltas: `repos/02-react-componentes`
+#### Más ejemplos. Demos sueltas: `repos/02-react-componentes`
 
 Los siguientes ficheros del repo de componentes repiten el **mismo patrón** que ya viste en la app de AppCine; el dominio cambia, el código aplicado a pelis es el de los enlaces 📦 de cada sección:
 

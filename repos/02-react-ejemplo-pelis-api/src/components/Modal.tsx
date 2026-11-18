@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
 interface ModalProps {
-  abierto: boolean;
+  abierto: boolean; //controla la visibilidad
   titulo: string;
   onCerrar: () => void;
   children: ReactNode;
@@ -35,7 +35,7 @@ export function Modal({ abierto, titulo, onCerrar, children }: ModalProps) {
     return () => window.removeEventListener("keydown", teclaEsc);
   }, [abierto, onCerrar]);
 
-  if (!abierto) return null;
+  if (!abierto) return null; //Si cerrado nunca mostrará nada!!
 
   return (
     //Div exterior - capa fija (fixed), situada por encima de todo (zIndex)
