@@ -106,7 +106,7 @@
 ---
 
 
-## Práctica de REPASO y TAREA PREVIA a SESIÓN 10:
+## 🤔Práctica de REPASO y TAREA PREVIA a SESIÓN 10:
 
 Esta práctica tiene dos finalidades, por una parte, practicar todo lo visto en la parte de React y por otra, realizar la tarea previa obligatoria previa a las sesión 10. Esta tarea se entregará una semana después de impartir dicha sesión.
 
