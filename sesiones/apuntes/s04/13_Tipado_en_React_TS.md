@@ -606,7 +606,7 @@ return (
 
     <PeliculaForm
       key={enEdicion ?? "nueva"} //MUY IMPORTANTE
-/*    El re-renderizado del formulario no lo provoca la key, sino cualquier 
+/*    El re-renderizado del formulario no solo lo provoca esta key, sino cualquier 
       cambio de estado en el componente padre (App) que lo obligue a re-ejecutarse:
         
       - Caso A (Montaje inicial): App se ejecuta por primera vez en la pantalla.
@@ -615,7 +615,7 @@ return (
           y vuelva a montar el formulario desde cero para limpiar su estado interno.
       - Caso C (Insertar/Borrar): Cambia el estado 'peliculas', lo que re-renderiza App 
           y obliga al hijo a re-renderizarse, aunque en este caso la 'key' NO cambia 
-          (sigue siendo "nueva"), por lo que el formulario solo se actualiza, no se destruye.
+          (sigue siendo "nueva"), por lo que el formulario solo se actualiza a vacío, no se destruye.
       */
 
       inicial={peliculaEnEdicion}
