@@ -605,7 +605,19 @@ return (
     <h1>Gestor de películas</h1>
 
     <PeliculaForm
-      key={enEdicion ?? "nueva"}
+      key={enEdicion ?? "nueva"} //MUY IMPORTANTE
+/*    El re-renderizado del formulario no lo provoca la key, sino cualquier 
+      cambio de estado en el componente padre (App) que lo obligue a re-ejecutarse:
+        
+      - Caso A (Montaje inicial): App se ejecuta por primera vez en la pantalla.
+      - Caso B (Editar/Cancelar): Cambia el estado 'enEdicion', lo que re-renderiza App 
+          y además CAMBIA la 'key' (de "nueva" a un ID), provocando que React desmonte 
+          y vuelva a montar el formulario desde cero para limpiar su estado interno.
+      - Caso C (Insertar/Borrar): Cambia el estado 'peliculas', lo que re-renderiza App 
+          y obliga al hijo a re-renderizarse, aunque en este caso la 'key' NO cambia 
+          (sigue siendo "nueva"), por lo que el formulario solo se actualiza, no se destruye.
+      */
+
       inicial={peliculaEnEdicion}
       modo={enEdicion !== null ? "editar" : "crear"}
       onGuardar={(datos) => (enEdicion !== null ? editar(enEdicion, datos) : añadir(datos))}
