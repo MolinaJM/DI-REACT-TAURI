@@ -110,7 +110,7 @@
 
 La sesión 10 se puede desacoplar e impartir antes de las sesiones de 7 (estado global), 8 (Tauri) y 9 (CRUD con Tauri).
 
-Esta práctica tiene dos finalidades, por una parte, practicar todo lo visto en la parte de React y por otra, realizar la tarea previa obligatoria previa a las sesión 10. Esta tarea se entregará una semana después de impartir dicha sesión.
+Esta práctica tiene dos finalidades: 1) practicar todo lo visto en la parte de React y 2), realizar la tarea previa obligatoria previa a las sesión 10. Esta tarea se entregará una semana después de impartir dicha sesión.
 
 A partir de los apuntes de las sesiones 5 y 6 (los apuntes donde se enseñaba el patrón de diseño de un CRUD con acceso a API, buscador y personalización de componentes), vamos a :
 - Escoger un tema **libre** asociado a un dominio : videojuegos, pizzería, recetas de cocina, cursos, etc...
