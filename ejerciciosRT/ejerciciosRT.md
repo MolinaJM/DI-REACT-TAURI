@@ -108,13 +108,15 @@
 
 ## 🤔Práctica de REPASO y TAREA PREVIA a SESIÓN 10:
 
+La sesión 10 se puede desacoplar e impartir antes de las sesiones de 7 (estado global), 8 (Tauri) y 9 (CRUD con Tauri).
+
 Esta práctica tiene dos finalidades, por una parte, practicar todo lo visto en la parte de React y por otra, realizar la tarea previa obligatoria previa a las sesión 10. Esta tarea se entregará una semana después de impartir dicha sesión.
 
 A partir de los apuntes de las sesiones 5 y 6 (los apuntes donde se enseñaba el patrón de diseño de un CRUD con acceso a API, buscador y personalización de componentes), vamos a :
 - Escoger un tema **libre** asociado a un dominio : videojuegos, pizzería, recetas de cocina, cursos, etc...
-- Crear un **SPA con CRUD** con formulario (validación), listado y buscador.
+- Crear un **SPA con CRUD** con formulario (validación), listado y buscador, similar a la vista en estas sesiones.
 - Generar un **.json con datos de iniciales** para ser utilizado con json-server (la idea es que el backend de dicha API se pueda crear realmente con la asignatura de Acceso a Datos.)  
-- Generar el objeto de **gestión de API**: api.ts adaptado a realizar el CRUD.
+- Generar el objeto de **gestión de API**: api.ts adaptado a realizar el CRUD con los datos del dominio escogido.
 - Este proyecto **NO HA DE TENER NADA DE DISEÑO: NI CSS BÁSICO NI TAILWIND!!**
 
 <a id="montar-la-api-local-con-fakeapi"></a>
