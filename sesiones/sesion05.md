@@ -20,7 +20,7 @@ La app completa de la sesión es la AppCine con backend en [`repos/02-react-ejem
 - CRUD async vía el cliente `api` (`src/api.ts`), formulario en `Modal` y buscador con debounce (`useRef`).
 - `PeliculaForm` con validación (`ErroresForm` + `validar`) y búsqueda persistida en `localStorage`.
 
-Ejecución (2 terminales): `npm run api` (json-server en el puerto 3001) + `npm run dev`. Todo lo nuevo respecto al apunte 13 está marcado en el código con comentarios `//JMM:`.
+Ejecución (2 terminales): `npm run api` (json-server en el puerto 3000) + `npm run dev`. Todo lo nuevo respecto al apunte 13 está marcado en el código con comentarios `//JMM:`.
 
 Complementos (demos sueltas) en [`repos/02-react-componentes`](../repos/02-react-componentes/):
 

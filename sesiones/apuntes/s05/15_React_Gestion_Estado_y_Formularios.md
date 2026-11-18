@@ -1,8 +1,6 @@
 <a id="15-react-gestión-de-estado-y-tipado-de-formularios"></a>
 # 15. React: gestión de estado y tipado de formularios 📝 🖥️
 
-> 🧭 **Sesiones donde se aplica:** Se usa en las sesiones S05 (estado, formularios y lifting state up) y S06 (eventos, modal y debounce).
-
 - [15. React: gestión de estado y tipado de formularios 📝 🖥️](#15-react-gestión-de-estado-y-tipado-de-formularios)
   - [15.1. Peticiones asíncronas con `fetch` + `async/await`](#151-peticiones-asíncronas-con-fetch-asyncawait)
     - [15.1.1 Cliente `api`: GET, POST, PUT y DELETE](#1511-cliente-api-get-post-put-y-delete)
@@ -227,7 +225,7 @@ La comunicación hijo → padre se hace con **funciones pasadas como props**. Ca
 | `onGuardar` | `(d: Omit<Pelicula, "id">) => void` | Formulario |
 | `onCancelar` | `() => void` | Formulario |
 | `onCerrar` | `() => void` | Modal (×, overlay, Escape) |
-| `onBuscar` | `(texto: string) => void` | Buscador — en 15 va inline; como prop llega con el `Buscador` de §16.6.1 |
+| `onBuscar` | `(texto: string) => void` | Buscador — en 15 va inline; como prop llega con el `Buscador` de §16.1.1 |
 
 Ejemplo real de la fila (§13.2): los botones llaman a la callback por `id`, inline y sin evento intermedio:
 

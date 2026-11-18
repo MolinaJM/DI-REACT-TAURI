@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "api": "json-server --port 3001 --watch peliculas.json",
+    "api": "json-server --port 3000 --watch peliculas.json",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview"

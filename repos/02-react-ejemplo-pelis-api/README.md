@@ -46,7 +46,7 @@ Hacen falta **dos terminales**:
 ```bash
 npm install
 
-# terminal 1: backend en http://localhost:3001/peliculas
+# terminal 1: backend en http://localhost:3000/peliculas
 npm run api
 
 # terminal 2: app en http://localhost:5174

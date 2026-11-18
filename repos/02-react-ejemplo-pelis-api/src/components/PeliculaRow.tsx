@@ -14,7 +14,7 @@ export function PeliculaRow({ pelicula, indice, onEditar, onBorrar }: PeliculaRo
     <tr>
       <td>{indice + 1}</td>
       <td>{pelicula.titulo}</td>
-      <td style={{ color: colorDeGenero(pelicula.genero.toLowerCase()) }}>{pelicula.genero}</td>
+      <td style={{ color: colorDeGenero(pelicula.genero.toLowerCase()), textTransform: "uppercase" }}>{pelicula.genero}</td>
       <td>{pelicula.anio}</td>
       <td>{pelicula.director}</td>
       <td>{pelicula.puntuacion}</td>

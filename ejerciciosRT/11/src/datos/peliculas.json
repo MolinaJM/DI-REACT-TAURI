@@ -3,7 +3,7 @@
     {
       "id": 1,
       "titulo": "El Padrino",
-      "genero": "drama",
+      "genero": "Drama",
       "anio": 1972,
       "director": "Francis Ford Coppola",
       "puntuacion": 9.2
@@ -11,7 +11,7 @@
     {
       "id": 2,
       "titulo": "Mad Max: Furia en la carretera",
-      "genero": "accion",
+      "genero": "Acción",
       "anio": 2015,
       "director": "George Miller",
       "puntuacion": 8.1
@@ -19,7 +19,7 @@
     {
       "id": 3,
       "titulo": "Aterriza como puedas",
-      "genero": "comedia",
+      "genero": "Comedia",
       "anio": 1980,
       "director": "Zucker, Abrahams y Zucker",
       "puntuacion": 7.8
@@ -27,7 +27,7 @@
     {
       "id": 4,
       "titulo": "Psicosis",
-      "genero": "terror",
+      "genero": "Terror",
       "anio": 1960,
       "director": "Alfred Hitchcock",
       "puntuacion": 8.5
@@ -35,7 +35,7 @@
     {
       "id": 5,
       "titulo": "Blade Runner",
-      "genero": "cienciaficcion",
+      "genero": "Ciencia-ficción",
       "anio": 1982,
       "director": "Ridley Scott",
       "puntuacion": 8.1
@@ -43,7 +43,7 @@
     {
       "id": 6,
       "titulo": "Antes del amanecer",
-      "genero": "romantica",
+      "genero": "Romántica",
       "anio": 1995,
       "director": "Richard Linklater",
       "puntuacion": 8.1

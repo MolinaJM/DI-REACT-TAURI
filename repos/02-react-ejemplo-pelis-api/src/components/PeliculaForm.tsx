@@ -22,7 +22,7 @@ type PeliculaFormValores = {
   puntuacion: string;
 };
 
-const GENEROS = ["Accion", "Comedia", "Drama", "Terror", "CienciaFiccion", "Romantica"];
+const GENEROS = ["Acción", "Comedia", "Drama", "Terror", "Ciencia-ficción", "Romántica"];
 
 //JMM: NUEVO respecto a 13
 type ErroresForm = Partial<Record<keyof PeliculaFormValores, string>>;
@@ -91,9 +91,10 @@ export function PeliculaForm({ inicial, modo, guardando = false, onGuardar, onCa
       {/* JMM: Fin de lo nuevo. Este patrón de errores se repite en cada campo... */}
 
       <select name="genero" value={valores.genero} onChange={handleChange}>
+        <option value="">Selecciona un género…</option>
         {GENEROS.map((g) => (
           <option key={g} value={g}>
-            {g}
+            {g.toUpperCase()}
           </option>
         ))}
       </select>

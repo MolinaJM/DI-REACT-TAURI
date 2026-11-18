@@ -1,8 +1,6 @@
 <a id="13-typescript-aplicado-a-react-props-eventos-y-generics"></a>
 # 13. TypeScript aplicado a React: props, eventos y generics 📝 🖥️
 
-> 🧭 **Sesiones donde se aplica:** Se usa en las sesiones S04 · S05 · S06 (tipado de props, eventos y formularios).
-
 - [13. TypeScript aplicado a React: props, eventos y generics 📝 🖥️](#13-typescript-aplicado-a-react-props-eventos-y-generics)
   - [13.1. El modelo de datos con interfaces](#131-el-modelo-de-datos-con-interfaces)
   - [13.2. Tipado de props: una interfaz por componente](#132-tipado-de-props-una-interfaz-por-componente)
@@ -40,7 +38,7 @@ El objetivo final, que se complementa con los apuntes 15 y 16 será aprender un 
 |---|---|---|
 | 13 | Básica: CRUD + formulario **en memoria** (sin búsqueda). Sin Buscador (por simplificar, aunque en ejercicios anteriores ya se haya resuelto). No se comprueban campos. | [`repos/02-react-ejemplo-pelis`](../../../repos/02-react-ejemplo-pelis/) |
 | 15 | Ampliada: backend real (`fetch`, `useEffect`, `Modal`, debounce) | [`repos/02-react-ejemplo-pelis-api`](../../../repos/02-react-ejemplo-pelis-api/) |
-| 16 | Final: componentes personalizados (`Buscador`, `PeliculaTable`, `Boton`, `Modal`, `Spinner`, `TablaGenerica<T>`) | [`repos/02-react-ejemplo-pelis-ui`](../../../repos/02-react-ejemplo-pelis-ui/) |
+| 16 | Final: componentes personalizados (`Buscador`, `PeliculaTable`, `Boton`, `Modal`, `Spinner`, `TablaGenerica<T>`) | [`repos/02-react-ejemplo-pelis-componentes`](../../../repos/02-react-ejemplo-pelis-componentes/) |
 
 Lanzamos `proyecto 02-react-ejemplo-pelis` con `npm run dev` y vamos referenciando partes aquí:
 
@@ -186,17 +184,17 @@ AppCine pinta un *badge* (insignia/distintivo/etiqueta) del color según el gén
 ```typescript
 //colorGenero.ts
 export const COLORES_GENERO: Record<string, string> = {
-  accion: "#d9534f",
+  acción: "#d9534f",
   comedia: "#f0ad4e",
   drama: "#5bc0de",
   terror: "#6f42c1",
-  cienciaficcion: "#20c997",
-  romantica: "#e83e8c",
+  "ciencia-ficción": "#20c997",
+  romántica: "#e83e8c",
 };
 
 //Un getter de colores
 export function colorDeGenero(genero: string): string {
-  return COLORES_GENERO[genero] ?? "#6c757d"; //Valor por defecto 
+  return COLORES_GENERO[genero.toLowerCase()] ?? "#6c757d"; //Valor por defecto 
 }
 ```
 

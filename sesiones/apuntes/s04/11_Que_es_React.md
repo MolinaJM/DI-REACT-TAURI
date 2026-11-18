@@ -1,7 +1,5 @@
 # 11. React de cero: qué es y cómo se usa
 
-> 🧭 **Sesiones donde se aplica:** S04 · S05 · S06 (y base para S07–S13). Esto apuntes son una **teoría de partida**: responde *qué es* React antes de escribir el primer componente. El repo completo `02-react-componentes` es el ejemplo de referencia con todo lo de estas sesiones.
-
 > ⚠️ **Atención:** para seguir esta parte de apuntes de forma más sencilla, abre el **proyecto mínimo** [`repos/02-react-ejemplo-minimo`](../../../repos/02-react-ejemplo-minimo/)  (`npm install` más `npm run dev`)— una app React reducida a una caja de texto y un botón con dos componentes. Toda la teoría que verás aquí (props, estado, callbacks) se puede probar ahí al momento. 
 
 > No perder de vista que VITE, realmente no compila de la misma forma que TypeScript. Vite *transpila* con `esbuild` eliminando tipos sin hacer verificaciones. De ahí que vaya tan rápido, pero también puede implicar estar mostrando resultado que no cuadra con los tipos que tenemos programados. Lo realmente correcto sería compilar siempre con `npx tsc --noEmit` y si no da error, entonces lanzar Vite con `npm run dev`. 

@@ -20,7 +20,7 @@ type PeliculaFormValores = {
   puntuacion: string;
 };
 
-const GENEROS = ["Accion", "Comedia", "Drama", "Terror", "CienciaFiccion", "Romantica"];
+const GENEROS = ["Acción", "Comedia", "Drama", "Terror", "Ciencia-ficción", "Romántica"];
 
 // Formulario crear/editar — §13.4, §13.6.2 y §13.7
 export function PeliculaForm({ inicial, modo, onGuardar, onCancelar }: PeliculaFormProps) {
@@ -58,9 +58,10 @@ export function PeliculaForm({ inicial, modo, onGuardar, onCancelar }: PeliculaF
     <form onSubmit={guardar} style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem", flexWrap: "wrap" }}>
       <input name="titulo" value={valores.titulo} onChange={handleChange} placeholder="Título" />
       <select name="genero" value={valores.genero} onChange={handleChange}>
+        <option value="">Selecciona un género…</option>
         {GENEROS.map((g) => (
           <option key={g} value={g}>
-            {g}
+            {g.toUpperCase()}
           </option>
         ))}
       </select>
