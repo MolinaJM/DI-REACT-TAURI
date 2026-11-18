@@ -489,7 +489,9 @@ Y si no hay coincidencias, se avisa al usuario en lugar de renderizar una tabla 
 )}
 ```
 
-Dónde está el Debounce aquí??  **Debounce.** Filtrar en cada tecla dispara un render por pulsación (y contra una API, una petición). El *debounce* espera 300 ms desde la última pulsación: `busqueda` guarda lo que el usuario escribe y `busquedaDebounced` (el que realmente filtra) se actualiza 300 ms después de que el primero deje de cambiar.
+Dónde está el retardo(Debounce) aquí??  
+
+**Debounce.** Filtrar en cada tecla dispara un render por pulsación (y contra una API, una petición). El *debounce* espera 300 ms desde la última pulsación: `busqueda` guarda lo que el usuario escribe y `busquedaDebounced` (el que realmente filtra) se actualiza 300 ms después de que el primero deje de cambiar.
 
 > 💡 **¿Cómo haríamos para...?** actualizar `busquedaDebounced` solo 300 ms después de la última pulsación, cancelando el temporizador anterior si el usuario sigue escribiendo?
 

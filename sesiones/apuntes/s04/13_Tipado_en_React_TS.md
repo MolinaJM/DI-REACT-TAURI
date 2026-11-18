@@ -27,6 +27,8 @@
 
 Esta unidad completa los conocimientos de TypeScript que faltan para llegar a React con seguridad: tipar las **props** de cada componente, usar **genéricos** con los hooks, aprovechar los **utility types** (sobre todo para derivar tipos en formularios y mapeos) y tipar los **eventos** de React.
 
+El objetivo final, que se complementa con los apuntes 15 y 16 será aprender un **PATRÓN DE DISEÑO**: Una SPA con un CRUD básico.
+
  🧱 Todo el ejemplo gira alrededor de un hipotético proyecto **AppCine**: la interfaz `Pelicula` y sus listados, tablas y formularios.
  Estos apuntes no son una colección de ejemplos sueltos. Partimos de la tabla de películas, apartado a apartado, le vamos añadiendo capas (colores, formulario, estado, eventos…) hasta terminar con una app de películas completa en §13.8. Cada apartado incluye un bloque **🔧 Lo añadimos al ejemplo** con el trozo exacto que hay que copiar y pegar.
 >
