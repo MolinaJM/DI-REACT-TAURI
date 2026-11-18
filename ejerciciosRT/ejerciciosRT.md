@@ -76,7 +76,7 @@
 <a id="bloque-15-gestión-de-estado-y-formularios"></a>
 ### 15 · Gestión de estado y formularios
 
-> 🧭 **Apunte:** [15 · React: gestión de estado y tipado de formularios](../sesiones/apuntes/s05/15_React_Gestion_Estado_y_Formularios.md) · **Datos:** [datos/motos.json](datos/motos.json) — las 6 motos del bloque 13, servidas por `json-server` en `http://localhost:3000/motos` (ver [FAKEAPI](#montar-la-api-local-con-fakeapi)).
+> 🧭 **Apuntes:** [15 · React: gestión de estado y tipado de formularios](../sesiones/apuntes/s05/15_React_Gestion_Estado_y_Formularios.md) · **Datos:** [datos/motos.json](datos/motos.json) — las 6 motos del bloque 13, servidas por `json-server` en `http://localhost:3000/motos` (ver [FAKEAPI](#montar-la-api-local-con-fakeapi)).
 >
 > 🚧 **Solo lo visto (además de 11–13):** lifting state up, eventos por props (`onEditar`/`onBorrar`/`onGuardar`), patrón modal, formulario crear/editar, buscador con debounce (`useRef` + `setTimeout`), filtro derivado con `useMemo` y `localStorage` como patrón de persistencia. Nada de `children`, componentes genéricos de tabla ni `ButtonHTMLAttributes` (eso es S06).
 >
@@ -93,7 +93,7 @@
 <a id="bloque-16-componentes-personalizados"></a>
 ### 16 · Componentes personalizados
 
-> 🧭 **Apunte:** [16 · React: creación de componentes personalizados](../sesiones/apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) · **Datos:** [datos/motos.json](datos/motos.json) — las 6 motos del bloque 13.
+> 🧭 **Apuntes:** [16 · React: creación de componentes personalizados](../sesiones/apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) · **Datos:** [datos/motos.json](datos/motos.json) — las 6 motos del bloque 13.
 >
 > 🚧 **Solo lo visto (además de 11–15):** `children` y composición, render condicional, `Boton` con `extends ButtonHTMLAttributes` y `Record` de variantes, `Modal` con overlay + `useEffect` de limpieza, y tabla genérica `Tabla<T>` con `Columna<T>`, `keyExtractor` y `render`.
 >
@@ -104,6 +104,18 @@
 3. El detalle de moto se abre en un modal reutilizable. Crea `Modal` (`abierto: boolean`, `onCerrar: () => void`, `titulo: string`, `children: ReactNode`) con overlay, cierre por click fuera y `useEffect` que bloquee el scroll del body mientras está abierto (con limpieza al desmontar). Crea `MotoDetalle` que reciba una `Moto` y use el `Modal` pasándole la ficha completa por `children`; en `App`, un botón "Ver detalle" por moto (con `onClick` + `stopPropagation` si va dentro de la fila) abre el modal de la moto seleccionada.
 
 ---
+
+
+## Práctica de REPASO y TAREA PREVIA a SESIÓN 10:
+
+Esta práctica tiene dos finalidades, por una parte, practicar todo lo visto en la parte de React y por otra, realizar la tarea previa obligatoria previa a las sesión 10. Esta tarea se entregará una semana después de impartir dicha sesión.
+
+A partir de los apuntes de las sesiones 5 y 6 (los apuntes donde se enseñaba el patrón de diseño de un CRUD con acceso a API, buscador y personalización de componentes), vamos a :
+- Escoger un tema **libre** asociado a un dominio : videojuegos, pizzería, recetas de cocina, cursos, etc...
+- Crear un **SPA con CRUD** con formulario (validación), listado y buscador.
+- Generar un **.json con datos de iniciales** para ser utilizado con json-server (la idea es que el backend de dicha API se pueda crear realmente con la asignatura de Acceso a Datos.)  
+- Generar el objeto de **gestión de API**: api.ts adaptado a realizar el CRUD.
+- Este proyecto **NO HA DE TENER NADA DE DISEÑO: NI CSS BÁSICO NI TAILWIND!!**
 
 <a id="montar-la-api-local-con-fakeapi"></a>
 ## Montar la API local con FAKEAPI
