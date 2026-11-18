@@ -122,7 +122,7 @@ A partir de los apuntes de las sesiones 5 y 6 (los apuntes donde se enseñaba el
 <a id="montar-la-api-local-con-fakeapi"></a>
 ## Montar la API local con FAKEAPI
 
-Los bloques **12** y **15** hacen `fetch` real contra una API local montada con [`json-server`](https://github.com/typicode/json-server) (versión `0.17.4`, ya instalada en [`bancop`](../bancop/)). Usa directamente uno de los ficheros reutilizables con *wrapper*:
+Los bloques **12** y **15** hacen `fetch` real contra una API local montada con [`json-server`](https://github.com/typicode/json-server) (versión `0.17.4`, ya instalada en [`bancop`](../bancop/)). Usa directamente uno de los ficheros reutilizables con *wrapper*. El puerto por defecto es 3000 pero podría cambiarse mediante `--port`:
 
 ```bash
 # Bloque 12 (alumnos)
