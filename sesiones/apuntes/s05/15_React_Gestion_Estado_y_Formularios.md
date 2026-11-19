@@ -462,7 +462,7 @@ useEffect(() => {
 > [!NOTE]
 > **`useMemo`** guarda en caché el resultado de un cálculo y lo hace en el mismo render (cuando cambia peliculas). Además, **solo lo repite si cambia algo de su array de dependencias**. Sigue la misma mecánica que las dependencias de `useEffect`). Aquí importa dos veces:
 > 1. **El concepto clave es el estado derivado**: `filtradas` se calcula en el mismo render a partir de `peliculas` + `busquedaDebounced` y **nunca se guarda en otro `useState` adicional**. Lo más IMPORTANTE es que, es más rápido porque se ahorra un renderizado extra. En caso contrario (anti-patrón): cambia setPeliculas->peliculas->useEffect->filter peliculas).
-> 2. **`useMemo` está configurado (en este ejemplo) con la búsqueda Debounced**: cada pulsación de tecla cambia `busqueda` y dispara un re-render; como `busqueda` **no** está en las dependencias de useMemo, el filtrado de N películas **no se repite** en cada pulsación — solo se recalcula cuando llegan datos nuevos o pasa el debounce.
+> 2. **`useMemo` está configurado (en este ejemplo) con la búsqueda Debounced**: cada pulsación de tecla cambia `busqueda` y dispara un re-render; como `busqueda` **no** está en las dependencias de useMemo, el filtrado de N películas **no se repite** en cada pulsación, solo se recalcula cuando llegan datos nuevos o pasa el debounce.
 
 > 💡 En los apuntes 16 reaparece: la `TablaGenerica` se alimenta con un `resumen` por género que también se calcula con `useMemo` sobre `peliculas`.
 

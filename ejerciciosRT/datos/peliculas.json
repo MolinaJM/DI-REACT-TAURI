@@ -25,12 +25,12 @@
       "id": 3
     },
     {
-      "id": 4,
       "titulo": "Psicosis",
       "genero": "Terror",
       "anio": 1960,
       "director": "Alfred Hitchcock",
-      "puntuacion": 8.5
+      "puntuacion": 8.5,
+      "id": 4
     },
     {
       "id": 5,
@@ -41,12 +41,20 @@
       "puntuacion": 8.1
     },
     {
-      "id": 6,
-      "titulo": "Antes del amanecer",
+      "titulo": "Antes del amanecer2",
       "genero": "Romántica",
       "anio": 1995,
       "director": "Richard Linklater",
-      "puntuacion": 8.1
+      "puntuacion": 8.1,
+      "id": 6
+    },
+    {
+      "titulo": "333",
+      "genero": "Acción",
+      "anio": 3333,
+      "director": "333",
+      "puntuacion": 3,
+      "id": 7
     }
   ]
 }
