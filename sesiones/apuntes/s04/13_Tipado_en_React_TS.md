@@ -499,6 +499,7 @@ import type { ChangeEvent } from "react";
 // disparan un evento onChange con las propiedades name y value, el tercero sería HTMLInputTextArea
 function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
   const { name, value } = e.target; // Desestructura. `name` identifica el campo, `value` es string
+  //[name]: significa "usa el valor que contiene la variable name como nombre de clave del objeto"
   setValores(v => ({ ...v, [name]: value }));
 }
 ```

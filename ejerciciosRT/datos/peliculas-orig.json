@@ -1,0 +1,52 @@
+{
+  "peliculas": [
+    {
+      "titulo": "El Padrino",
+      "genero": "Drama",
+      "anio": 1972,
+      "director": "Francis Ford Coppola",
+      "puntuacion": 9.2,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "titulo": "Mad Max: Furia en la carretera",
+      "genero": "Acción",
+      "anio": 2015,
+      "director": "George Miller",
+      "puntuacion": 8.1
+    },
+    {
+      "titulo": "Aterriza como puedas",
+      "genero": "Comedia",
+      "anio": 1980,
+      "director": "Zucker, Abrahams y Zucker",
+      "puntuacion": 7.8,
+      "id": 3
+    },
+    {
+      "id": 4,
+      "titulo": "Psicosis",
+      "genero": "Terror",
+      "anio": 1960,
+      "director": "Alfred Hitchcock",
+      "puntuacion": 8.5
+    },
+    {
+      "id": 5,
+      "titulo": "Blade Runner",
+      "genero": "Ciencia-ficción",
+      "anio": 1982,
+      "director": "Ridley Scott",
+      "puntuacion": 8.1
+    },
+    {
+      "id": 6,
+      "titulo": "Antes del amanecer",
+      "genero": "Romántica",
+      "anio": 1995,
+      "director": "Richard Linklater",
+      "puntuacion": 8.1
+    }
+  ]
+}
