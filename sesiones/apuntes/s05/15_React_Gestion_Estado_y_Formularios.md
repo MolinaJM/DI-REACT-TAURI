@@ -201,7 +201,8 @@ En el JSX **la tabla siempre se pinta** (con sus `PeliculaRow`); el `Modal` se c
   onCerrar={cerrarModal}
 >
   <PeliculaForm
-    key={enEdicion?.id ?? "nueva"}
+    // key={enEdicion?.id ?? "nueva"}. Es la versión anterior era vital, 
+    // ahora no porque al estar en otro componente sea actualiza de distinta forma
     inicial={enEdicion ?? undefined}
     modo={enEdicion ? "editar" : "crear"}
     guardando={guardando}
@@ -221,8 +222,8 @@ La comunicación hijo → padre se hace con **funciones pasadas como props**. Ca
 
 | Prop | Tipo | Disparada desde |
 | --- | --- | --- |
-| `onEditar` | `(id: number) => void` | Fila de la tabla (lápiz) — §13.2 |
-| `onBorrar` | `(id: number) => void` | Fila de la tabla (papelera) — §13.2 |
+| `onEditar` | `(id: number) => void` | Fila de la tabla — §13.2 |
+| `onBorrar` | `(id: number) => void` | Fila de la tabla — §13.2 |
 | `onGuardar` | `(d: Omit<Pelicula, "id">) => void` | Formulario |
 | `onCancelar` | `() => void` | Formulario |
 | `onCerrar` | `() => void` | Modal (×, overlay, Escape) |
