@@ -410,6 +410,10 @@ function FormularioRegistro() {
 
 ```tsx
 <input type="text" name="nombre" value={valores.nombre} onChange={handleChange} />
+ {/* Comprobación del error*/} 
+ {errores.nombre && <p className="text-red-500 text-sm">{errores.nombre}</p>}
+ {/* El resto serían similares...*/} 
+
 <input type="email" name="email" value={valores.email} onChange={handleChange} />
 <input type="password" name="password" value={valores.password} onChange={handleChange} />
 <input type="number" name="edad" value={valores.edad} onChange={handleChange} />

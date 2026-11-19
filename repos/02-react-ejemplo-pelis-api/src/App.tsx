@@ -189,7 +189,8 @@ function App() {
         onCerrar={cerrarModal}
       >
         <PeliculaForm
-         // key={enEdicion?.id ?? "nueva"}. Es la versión anterior era vital, ahora no porque está en otro componente 
+         // key={enEdicion?.id ?? "nueva"}. Es la versión anterior era vital, 
+         // ahora no porque al estar en otro componente sea actualiza de distinta forma 
           inicial={enEdicion ?? undefined}
           modo={enEdicion ? "editar" : "crear"}
           guardando={guardando}
