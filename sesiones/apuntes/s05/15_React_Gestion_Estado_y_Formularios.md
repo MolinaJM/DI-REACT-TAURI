@@ -99,7 +99,7 @@ En el componente, el estado registra los 3 estados visuales (`cargando`/`error`/
 > En Tauri este `fetch` se sustituye por `invoke("listar_peliculas")`, que también devuelve una `Promise`. Todo lo aprendido de estados y errores se mantiene igual.
 
 > [!TIP]
-> **Ejemplo corriendo:** el cliente `api` de este apartado está en [`repos/02-react-ejemplo-pelis-api/src/api.ts`](../../../repos/02-react-ejemplo-pelis-api/src/api.ts), usado por `App` con `useEffect` y el patrón modal (§15.5). Es la evolución de la app del apunte 13; ver la tabla del inicio del capítulo.
+> **Ejemplo corriendo:** el cliente `api` de este apartado está en [`repos/02-react-ejemplo-pelis-api/src/api.ts`](../../../repos/02-react-ejemplo-pelis-api/src/api.ts), usado por `App` con `useEffect` y el patrón modal (§15.5). Es la evolución de la app dlos apuntes 13; ver la tabla del inicio del capítulo.
 
 ---
 
@@ -113,7 +113,7 @@ Como ya sabemos, el efecto permite ejecutar código "después del render" y  (`d
 
 El patrón de carga —`useEffect` + `AbortController` + estados `cargando`/`error` + cleanup— es el mismo que el **§12.1.3** (`ListaAlumnos`); aquí solo cambia que la petición va por el cliente `api.listar(signal)` (§15.1.1) en vez de `fetch` directo.
 
-El resto de estados de UI nacen con cada patrón: la carga y su error en §15.2, el estado del modal en §15.5 y el del buscador en §15.6 (los del formulario ya se explicaron en el apunte 13).
+El resto de estados de UI nacen con cada patrón: la carga y su error en §15.2, el estado del modal en §15.5 y el del buscador en §15.6 (los del formulario ya se explicaron en los apuntes 13).
 
 > 💡 El cliente `api` (con `listar`, `crear`, `actualizar` y `eliminar`) se define en §15.2.1.
 
@@ -447,18 +447,24 @@ const [busquedaDebounced, setBusquedaDebounced] = useState("");//En el repo se a
 // Estado derivado: peliculas + busquedaDebounced (no se guarda en useState)
 const filtradas = useMemo(
   () => peliculas.filter((p) => p.titulo.toLowerCase().includes(busquedaDebounced.toLowerCase())),
-  [peliculas, busquedaDebounced]
-);
+  [peliculas, busquedaDebounced]);
+
+//Anti-patrón
+const [peliculas, setPeliculas] = useState([]);//NECESARIO
+const [filtradas, setFiltradas] = useState([]);//SUPERFLUO!!!
+
+// Ineficiente y propenso a bugs: dispara un render extra
+useEffect(() => {
+  setFiltradas(peliculas.filter((p) => p.titulo.toLowerCase().includes(busquedaDebounced.toLowerCase()))),
+},[peliculas, busquedaDebounced]);
 ```
 
 > [!NOTE]
-> **`useMemo`** guarda en caché el resultado de un cálculo entre renders y **solo lo repite si cambia algo de su array de dependencias** (la misma mecánica que las dependencias de `useEffect`). Aquí importa dos veces:
-> 1. **El concepto clave es el estado derivado**: `filtradas` se calcula en el render a partir de `peliculas` + `busquedaDebounced` y **nunca se guarda en `useState`** ( es más rápido porque se ahorra un renderizado de useState!. En caso contrario, cambia setPeliculas->peliculas->useEffect->filter peliculas).
-> 2. **`useMemo` es la optimización**: cada pulsación de tecla cambia `busqueda` y dispara un re-render; como `busqueda` **no** está en las dependencias de useMemo, el filtrado de N películas **no se repite** en cada pulsación — solo se recalcula cuando llegan datos nuevos o pasa el debounce.
->
-> Sin `useMemo` el código seguiría funcionando (React no exige memorizar), pero repetiría el `filter` en cada render. Regla práctica: cálculo barato → filter inline; cálculo sobre una lista completa → `useMemo`.
+> **`useMemo`** guarda en caché el resultado de un cálculo y lo hace en el mismo render (cuando cambia peliculas). Además, **solo lo repite si cambia algo de su array de dependencias**. Sigue la misma mecánica que las dependencias de `useEffect`). Aquí importa dos veces:
+> 1. **El concepto clave es el estado derivado**: `filtradas` se calcula en el mismo render a partir de `peliculas` + `busquedaDebounced` y **nunca se guarda en otro `useState` adicional**. Lo más IMPORTANTE es que, es más rápido porque se ahorra un renderizado extra. En caso contrario (anti-patrón): cambia setPeliculas->peliculas->useEffect->filter peliculas).
+> 2. **`useMemo` está configurado (en este ejemplo) con la búsqueda Debounced**: cada pulsación de tecla cambia `busqueda` y dispara un re-render; como `busqueda` **no** está en las dependencias de useMemo, el filtrado de N películas **no se repite** en cada pulsación — solo se recalcula cuando llegan datos nuevos o pasa el debounce.
 
-> 💡 En el apunte 16 reaparece: la `TablaGenerica` se alimenta con un `resumen` por género que también se calcula con `useMemo` sobre `peliculas`.
+> 💡 En los apuntes 16 reaparece: la `TablaGenerica` se alimenta con un `resumen` por género que también se calcula con `useMemo` sobre `peliculas`.
 
 El input, junto a los botones de la barra superior:
 
