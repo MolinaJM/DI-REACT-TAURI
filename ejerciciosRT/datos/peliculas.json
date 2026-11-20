@@ -1,14 +1,6 @@
 {
   "peliculas": [
     {
-      "titulo": "El Padrino",
-      "genero": "Drama",
-      "anio": 1972,
-      "director": "Francis Ford Coppola",
-      "puntuacion": 9.2,
-      "id": 1
-    },
-    {
       "id": 2,
       "titulo": "Mad Max: Furia en la carretera",
       "genero": "Acción",

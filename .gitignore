@@ -115,6 +115,7 @@ sesiones/apuntes/s04/*
 # 02-react-ejemplo-pelis: ejemplo corriendo del apunte 13, NO se sube al repo
 !/repos/02-react-ejemplo-pelis/
 !/repos/02-react-ejemplo-pelis-api/
+!/repos/02-react-ejemplo-pelis-componentes/
 
 !sesiones/apuntes/s04/13_Tipado_en_React_TS.md
 !sesiones/apuntes/s04/14_React_TS_Cheatsheet.md
@@ -129,8 +130,9 @@ sesiones/apuntes/s04/*
 # ===========================================================================
 #  >>> SESIÓN 06 <<
 # ===========================================================================
-# !sesiones/sesion06.md
-# !sesiones/apuntes/s06/
+!sesiones/sesion06.md
+!sesiones/apuntes/s06/
+!sesiones/apuntes/s06/*
 # !repos/02-react-componentes/
 
 # ===========================================================================
