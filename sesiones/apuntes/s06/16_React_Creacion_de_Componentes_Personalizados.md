@@ -441,6 +441,12 @@ export default Tabla;
 
 > 📦 **En el proyecto:** [`TablaGenerica.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/components/TablaGenerica.tsx) define `Columna<T>` y `keyExtractor`, y [`App.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/App.tsx) lo reutiliza con `Pelicula` y con `ResumenGenero` (el tipo `T` se infiere de `datos`/`columnas`).
 
+Ahora bien, ¿de qué datos se alimenta la tabla y cómo se llama? Habrá que hacer una estructura con:
+   - Si los datos son derivados y los toma de otro sitio (un array existente), habrá que hacer un **Memo** que calcule los datos de la nueva tabla. Ej: Memo **resumen**. Si los datos no son derivados, pues se le pasa el array original o el filtrado.
+   - Un Prop con las columnas y sus renders. Ej: COLUMNAS_RESUMEN
+   - La key para cada fila. Ej: fila.genero.
+   - Finalmente se hace la llamada: ` <TablaGenerica datos={resumen} columnas={COLUMNAS_RESUMEN} keyExtractor={(fila) => fila.genero} />`
+
 ---
 
 <a id="168-vista-de-tarjetas-peliculacard"></a>

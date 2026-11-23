@@ -21,7 +21,7 @@
       "genero": "Terror",
       "anio": 1960,
       "director": "Alfred Hitchcock",
-      "puntuacion": 8.5,
+      "puntuacion": 10,
       "id": 4
     },
     {
@@ -39,14 +39,6 @@
       "director": "Richard Linklater",
       "puntuacion": 8.1,
       "id": 6
-    },
-    {
-      "titulo": "333",
-      "genero": "Acción",
-      "anio": 3333,
-      "director": "333",
-      "puntuacion": 3,
-      "id": 7
     }
   ]
 }

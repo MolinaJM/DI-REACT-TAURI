@@ -16,14 +16,14 @@ import { api } from "./api.ts";
 import type { Pelicula, NuevaPelicula } from "./tipos.ts";
 
 //JMM - Inicio Nuevo con respecto a 15--------------------------------------
-interface ResumenGenero {
+interface ResumenGenero { //Definimos la FILA
   genero: string;
   total: number;
   media: number;
 }
 const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se pinta una celda. Probar a cambiar!
   { key: "genero", titulo: "Género", render: (fila) => fila.genero.toUpperCase() },
-  { key: "total", titulo: "Películas" },
+  { key: "total", titulo: "Núm.Pelis" },
   { key: "media", titulo: "Puntuación media", render: (fila) => fila.media > 9 ? (
         <span style={{ color: "green" , fontWeight: "bold" }}>{fila.media.toFixed(2)}</span>
       ) : (
@@ -91,8 +91,8 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
 
     //JMM - Inicio Nuevo con respecto a 15--------------------------------------------------
     // Estado derivado: filtro por título o género (Buscador avisa con onBuscar)
-    const visibles = useMemo(
-      () =>
+    // Ahora también busca por Género
+    const visibles = useMemo(() =>
         peliculas.filter((p) => {
           const texto = busquedaDebounced.toLowerCase();
           return p.titulo.toLowerCase().includes(texto) || p.genero.toLowerCase().includes(texto);
@@ -102,6 +102,8 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
     //JMM - Fin Nuevo con respecto a 15--------------------------------------------------
 
     //JMM - Inicio Nuevo con respecto a 15--------------------------------------------------
+    // Usamos un Memo para guardar un Map de peliculas por género, y calcular, para cada uno,
+    //  el total de películas y la puntuación media 
     const resumen = useMemo<ResumenGenero[]>(() => {
       const porGenero = new Map<string, number[]>();
       for (const p of peliculas) {
@@ -109,9 +111,8 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
         notas.push(p.puntuacion);
         porGenero.set(p.genero, notas);
       }
-      return [...porGenero.entries()].map(([genero, notas]) => ({
-        genero,
-        total: notas.length,
+      //Expandimos/Dispersamos/Separamos con spread, y recorremos con map.
+      return [...porGenero.entries()].map(([genero, notas]) => ({genero,total: notas.length, 
         media: notas.reduce((a, b) => a + b, 0) / notas.length,
       }));
     }, [peliculas]);
@@ -161,7 +162,10 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
       <main style={{ fontFamily: "sans-serif", padding: "1rem" }}>
         <h1>AppCine</h1>
         <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap" }}>
-          {/* JMM - Inicio Nuevo con respecto a 15 ------------------------------------------*/}
+          {/* JMM - Inicio Nuevo con respecto a 15 ------------------------------------------
+          Al Buscador se le pasa setBusqueda
+          Botones se instancian con tipo, icono y función.
+          */}
           <Buscador onBuscar={setBusqueda} />
           <Boton variante="primary" icono="➕" onClick={abrirCrear}>
             Nueva película

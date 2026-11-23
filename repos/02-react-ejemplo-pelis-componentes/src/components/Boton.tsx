@@ -27,17 +27,7 @@ const TAMANOS: Record<Tamano, CSSProperties> = {
 };
 
 // Botón personalizado: extends ButtonHTMLAttributes — §16.3
-export function Boton({
-  children,
-  variante = "primary",
-  tamano = "md",
-  icono,
-  cargando = false,
-  disabled,
-  type = "button",
-  style,
-  ...props
-}: BotonProps) {
+export function Boton({children, variante = "primary", tamano = "md", icono, cargando = false, disabled, type = "button", style, ...props}: BotonProps) {
   return (
     <button
       type={type}
