@@ -518,13 +518,15 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
  const resumen = useMemo<ResumenGenero[]>(() => {
       const porGenero = new Map<string, number[]>();
       for (const p of peliculas) {
-        const notas = porGenero.get(p.genero) ?? [];
+        const notas = porGenero.get(p.genero) ?? [];//Si está vacía inicializa
         notas.push(p.puntuacion);
         porGenero.set(p.genero, notas);
       }
       //Expandimos/Dispersamos/Separamos con spread, y recorremos con map.
-      return [...porGenero.entries()].map(([genero, notas]) => ({genero,total: notas.length, 
-        media: notas.reduce((a, b) => a + b, 0) / notas.length,
+      //Devolvemos tantas filas como tenga la tabla Genérica
+      //Donde cada fila tiene genero, total y media.
+      return [...porGenero.entries()].map(([genero, notas]) => 
+      ({genero, total: notas.length, media: notas.reduce((a, b) => a + b, 0) / notas.length,
       }));
     }, [peliculas]);
 
