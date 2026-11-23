@@ -51,9 +51,6 @@ La LÓGICA DE NEGOCIO no cambia; cambia cómo se COMPONE LA GUI. Cada apartado d
 
 ---
 >💡EN 15 ESTUDIAMOS UNA NUEVA LÓGICA para hacer la APP con respecto a 13, por tanto, primero VIMOS TODA LA TEORÍA y LUEGO, vimos todo FUNCIONANDO EN CONJUNTO.
-
----
-
 >💡 PERO, DADO QUE 16 ES UNA VERSIÓN MEJORADA DE DISEÑO (NO DE FUNCIONAMIENTO INTERNO), ahora SÍ VAMOS A IR VIENDO COMPONENTE POR COMPONENTE funcionando de forma INDEPENDIENTE</h3>
 
 ---
