@@ -3,14 +3,15 @@ import type { ChangeEvent, SubmitEvent } from "react";
 import type { Pelicula } from "../tipos.ts";
 import { Boton } from "./Boton.tsx";
 
-//JMM - Inicio Nuevo con respecto a 15 — ya sin modo: el padre decide (botón siempre "Guardar")
 interface PeliculaFormProps {
   inicial?: Partial<Pelicula>;
+//JMM - Nuevo con respecto a 15 — ya sin modo: el padre decide (botón siempre "Guardar")
+  //modo: "crear" | "editar";
+//JMM - Fin Nuevo con respecto a 15 ------------------------------------------------------
   guardando?: boolean;
   onCancelar: () => void;
   onGuardar: (datos: Omit<Pelicula, "id">) => void;
 }
-//JMM - Fin Nuevo con respecto a 15 ------------------------------------------------------
 
 // El estado del formulario es un objeto: los campos numéricos se guardan como
 // string (para poder escribir en el input) y se convierten al enviar.
@@ -31,7 +32,7 @@ export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCan
   const [valores, setValores] = useState<PeliculaFormValores>(() => ({
     titulo: inicial.titulo ?? "",
 
-    //JMM - Inicio Nuevo con respecto a 15 — normaliza el género guardado a las opciones del select
+    //JMM - Nuevo con respecto a 15 — normaliza el género guardado a las opciones del select
    //"búscalo en la lista sin obviando si tiene mayúsculas; si no aparece, déjalo como estaba o ponlo vacío (si no entra nada o vacío)"
     genero: GENEROS.find((g) => g.toLowerCase() === (inicial.genero ?? "").toLowerCase()) ?? (inicial.genero ?? ""),
     //JMM - Fin Nuevo con respecto a 15
@@ -74,7 +75,7 @@ export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCan
       puntuacion: Number.parseFloat(valores.puntuacion),
     });
 
-    //JMM - Inicio Nuevo con respecto a 15 — reinicio del formulario al enviar
+    //JMM - Nuevo con respecto a 15 — reinicio del formulario al enviar
     setValores({ titulo: "", genero: "", anio: "", director: "", puntuacion: "" });
     setErrores({});
     //JMM - Fin Nuevo con respecto a 15----------------------------------------
@@ -91,8 +92,8 @@ export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCan
         Género
         <select name="genero" value={valores.genero} onChange={handleChange}>
           
-          {/* JMM - Inicio Nuevo con respecto a 15 — opción vacía: sin ella el navegador muestra la 1ª opción y el estado sigue vacío */}
-          <option value="">Selecciona un género…</option>
+          {/* JMM - Nuevo con respecto a 15 — opción vacía*/}
+          <option value="">Selecciona un género...</option>
           {/* JMM - Fin Nuevo con respecto a 15 */}
           
           {GENEROS.map((g) => (

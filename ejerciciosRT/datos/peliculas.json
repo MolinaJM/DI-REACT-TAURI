@@ -1,12 +1,12 @@
 {
   "peliculas": [
     {
-      "id": 2,
       "titulo": "Mad Max: Furia en la carretera",
       "genero": "Acción",
       "anio": 2015,
       "director": "George Miller",
-      "puntuacion": 8.1
+      "puntuacion": 8.1,
+      "id": 2
     },
     {
       "titulo": "Aterriza como puedas",

@@ -60,7 +60,7 @@ La LÓGICA DE NEGOCIO no cambia; cambia cómo se COMPONE LA GUI. Cada apartado d
 
 En 15, el input del buscador y la tabla vivían **inline en el JSX de `App.tsx`**, y `PeliculaForm` era un componente que solo funcionaba pegado a su `Modal`. 
 
-El **delta** de esta sesión es dar a esas piezas **fichero propio con su `interface` de props como contrato**, comunicándose con el padre por callbacks: el `Buscador` (§16.3.1, formulario controlado de un campo), el `PeliculaForm` (§16.3.2, formulario controlado multi-campo) y la `PeliculaTable` (§16.3.3, la tabla que delega cada fila en `PeliculaRow`).
+El **delta** de esta sesión es dar a esas piezas un **fichero propio con su `interface` de props como contrato**, comunicándose con el padre por callbacks: el `Buscador`, el `PeliculaForm` y la `PeliculaTable` (la tabla que delega cada fila en `PeliculaRow`).
 
 <a id="1631-buscador-con-input-controlado"></a>
 ### 16.3.1 `Buscador` con input controlado
@@ -106,6 +106,13 @@ export function Buscador({ onBuscar }: BuscadorProps) {
 El esqueleto base es el de **§13.11** (estado `valores` + `handleChange` + conversión a número, ya visto en §15.6). El **delta** de 16 trata sobre COMPOSICIÓN; los 6 deltas de la tabla «Antes/Ahora» están marcados con `// delta` en el código de abajo.
 
 ```tsx
+interface PeliculaFormProps {
+  inicial?: Partial<Pelicula>;
+  guardando?: boolean;
+  onCancelar: () => void;
+  onGuardar: (datos: Omit<Pelicula, "id">) => void;
+}
+
 type PeliculaFormValores = {
   titulo: string; 
   genero: string; 
@@ -117,7 +124,7 @@ type PeliculaFormValores = {
 const GENEROS = ["Acción", "Comedia", "Drama", "Terror", "Ciencia-ficción", "Romántica"];
 
 // delta: sin prop `modo` (el padre decide) y `inicial = {}` por defecto
-export function PeliculaForm({ inicial = {}, onGuardar, onCancelar }: PeliculaFormProps) {
+export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCancelar }: PeliculaFormProps) {
   const [valores, setValores] = useState<PeliculaFormValores>(() => ({
     titulo: inicial.titulo ?? "",
     // delta: normaliza el género guardado a las opciones de GENEROS
@@ -145,7 +152,13 @@ export function PeliculaForm({ inicial = {}, onGuardar, onCancelar }: PeliculaFo
   return (
     <form onSubmit={enviar}>
       
-      {/* delta: cada campo en <label> (en 15 eran inputs sueltos con placeholder) */}
+      {/* delta: cada campo en <label> (en 15 eran inputs sueltos con placeholder) 
+
+      El estilo flex es muy socorrido, coloca de forma automática elementos en una dirección.
+
+      display: "flex", flexDirection: "column", gap: "0.25rem" (1 rem = 16px)
+
+      */}
 
       <label style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
         Título
