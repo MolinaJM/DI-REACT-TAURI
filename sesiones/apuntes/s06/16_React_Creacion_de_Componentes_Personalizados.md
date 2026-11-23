@@ -341,7 +341,9 @@ Un **Modal** es una capa superpuesta que bloquea la pantalla. Controla su visibi
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 
+ //JMM - Inicio Nuevo con respecto a 15
 type Tamano = "sm" | "md" | "lg";
+ //JMM - Fin Nuevo con respecto a 15
 
 interface ModalProps {
   abierto: boolean;
