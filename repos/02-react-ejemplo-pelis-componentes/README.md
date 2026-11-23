@@ -10,14 +10,14 @@ Proyecto Vite + React que es la **evolución de la app del apunte [15 · Gestió
 
 | Qué cambia | Antes (15 · `02-react-ejemplo-pelis-api`) | Ahora (16 · este repo) |
 |---|---|---|
-| **Tabla** | JSX plano + `PeliculaRow` | `PeliculaTable` (listas con `key`) — §13.8 y §16.4 |
-| **Botones** | `<button>` nativo | `Boton extends ButtonHTMLAttributes` — §16.6 |
+| **Tabla** | JSX plano + `PeliculaRow` | `PeliculaTable` (listas con `key`) — §13.8 y §16.3.3 |
+| **Botones** | `<button>` nativo | `Boton extends ButtonHTMLAttributes` — §16.5 |
 | **Buscador** | `<input>` inline en `App` | Componente `Buscador` controlado con `onBuscar` — §16.3.1 |
 | **Carga/estados** | Texto `Cargando…` | `Spinner` + renderizado condicional — §12.1.3 |
 | **Formulario** | `PeliculaForm` con `modo` y `onCancelar` | `PeliculaForm` controlado con `inicial` — §16.3.2 |
-| **Modal** | Overlay + panel | Añade botón `×` y prop `tamano` — §16.7 |
-| **Pantalla** | `App` monolítica | Composición de piezas — §16.5 |
-| **Extra** | — | `TablaGenerica<T>` con otro tipo (`ResumenGenero`) — §16.8 |
+| **Modal** | Overlay + panel | Añade botón `×` y prop `tamano` — §16.6 |
+| **Pantalla** | `App` monolítica | Composición de piezas — §16.4 |
+| **Extra** | — | `TablaGenerica<T>` con otro tipo (`ResumenGenero`) — §16.7 |
 
 Se mantienen de 15: `api.ts` (§15.1.1), la carga con `useEffect` y tres estados (§15.2), la búsqueda persistida en `localStorage` (§15.8), el patrón modal (§15.5) y los handlers async.
 
@@ -28,15 +28,15 @@ Se mantienen de 15: `api.ts` (§15.1.1), la carga con `useEffect` y tres estados
 ├── src/
 │   ├── api.ts                    Cliente fetch: GET, POST, PUT y DELETE — §15.1.1
 │   ├── components/
-│   │   ├── Boton.tsx             extends ButtonHTMLAttributes — §16.6
+│   │   ├── Boton.tsx             extends ButtonHTMLAttributes — §16.5
 │   │   ├── Buscador.tsx          Input controlado + onBuscar — §16.3.1
-│   │   ├── Modal.tsx             Overlay + children + cleanup — §16.7
+│   │   ├── Modal.tsx             Overlay + children + cleanup — §16.6
 │   │   ├── PeliculaForm.tsx      Formulario controlado — §16.3.2
 │   │   ├── PeliculaRow.tsx       Fila de la tabla — §13.8
-│   │   ├── PeliculaTable.tsx     Listas con key — §13.8 y §16.4
+│   │   ├── PeliculaTable.tsx     Listas con key — §13.8 y §16.3.3
 │   │   ├── Spinner.tsx           Renderizado condicional (loading) — §12.1.3
-│   │   └── TablaGenerica.tsx     Componente genérico <T> — §16.8
-│   ├── App.tsx                   Composición de la pantalla — §16.5
+│   │   └── TablaGenerica.tsx     Componente genérico <T> — §16.7
+│   ├── App.tsx                   Composición de la pantalla — §16.4
 │   ├── colorGenero.ts            Record<string, string> + colorDeGenero() — §13.3.1
 │   ├── tipos.ts                  Pelicula, NuevaPelicula, FilaMinima, Cambios — §13.1
 │   └── main.tsx                  Punto de entrada (lo crea Vite)

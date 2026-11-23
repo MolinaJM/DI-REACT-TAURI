@@ -4,16 +4,16 @@
 - [16. React: creación de componentes personalizados 📝 🖥️](#16-react-creacion-de-componentes-personalizados)
   - [16.1. ¿Por qué componentes personalizados?](#161-por-qué-componentes-personalizados)
   - [16.2. Monolítico vs no monolítico](#162-monolítico-vs-no-monolítico)
-  - [16.3. Formularios controlados como componentes: `Buscador` y `PeliculaForm`](#163-formularios-controlados-como-componentes-buscador-y-peliculaform)
+  - [16.3. Componentes en ficheros propios: `Buscador`, `PeliculaForm` y `PeliculaTable`](#163-componentes-en-ficheros-propios-buscador-peliculaform-y-peliculatable)
     - [16.3.1 `Buscador` con input controlado](#1631-buscador-con-input-controlado)
     - [16.3.2 `PeliculaForm` controlado](#1632-peliculaform-controlado)
-  - [16.4. La tabla de películas: `PeliculaTable`](#164-la-tabla-de-películas-peliculatable)
-  - [16.5. Composición de la pantalla principal](#165-composición-de-la-pantalla-principal)
-  - [16.6. Botón personalizado: `extends ButtonHTMLAttributes`](#166-botón-personalizado-extends-buttonhtmlattributes)
-  - [16.7. Modal: overlay, `children` y `useEffect` de limpieza](#167-modal-overlay-children-y-useeffect-de-limpieza)
-  - [16.8. Tabla genérica: componentes `<T>`](#168-tabla-genérica-componentes-t)
-  - [16.9. Vista de tarjetas: `PeliculaCard`](#169-vista-de-tarjetas-peliculacard)
-  - [16.10. Prácticas](#1610-prácticas)
+    - [16.3.3 La tabla de películas: `PeliculaTable`](#1633-la-tabla-de-películas-peliculatable)
+  - [16.4. Composición de la pantalla principal](#164-composición-de-la-pantalla-principal)
+  - [16.5. Botón personalizado: `extends ButtonHTMLAttributes`](#165-botón-personalizado-extends-buttonhtmlattributes)
+  - [16.6. Modal: overlay, `children` y `useEffect` de limpieza](#166-modal-overlay-children-y-useeffect-de-limpieza)
+  - [16.7. Tabla genérica: componentes `<T>`](#167-tabla-genérica-componentes-t)
+  - [16.8. Vista de tarjetas: `PeliculaCard`](#168-vista-de-tarjetas-peliculacard)
+  - [16.9. Prácticas](#169-prácticas)
 
 <a id="161-por-qué-componentes-personalizados"></a>
 ## 16.1. ¿Por qué componentes personalizados?
@@ -21,7 +21,7 @@
 La app de 15 funciona, pero se podría organizar mejor. Si se extrae por piezas  (buscador, botón, tabla, spinner, etc..)  se gana:
 
 - **Reutilización:** un solo `Boton` con variantes para toda la app, en vez de 5 `<button>` sueltos con el mismo estilo repetido.
-- **Generalidad:** `TablaGenerica<T>` vale para `Pelicula` hoy y para cualquier otra entidad mañana (se demuestra con `ResumenGenero`, §16.8).
+- **Generalidad:** `TablaGenerica<T>` vale para `Pelicula` hoy y para cualquier otra entidad mañana (se demuestra con `ResumenGenero`, §16.7).
 - **Lectura vertical:** cada fichero es una pieza autodescriptiva y testable, con su `interface` de props como contrato.
 - **UI como composición:** se demuestra que se puede montar o desmontar piezas en `App` sin tocar la lógica de datos (lógica de negocio).
 
@@ -39,15 +39,15 @@ La LÓGICA DE NEGOCIO no cambia; cambia cómo se COMPONE LA GUI. Cada apartado d
 
 | Qué cambia en 16 | Antes (15 · `02-react-ejemplo-pelis-api`) | Ahora (16 · `02-react-ejemplo-pelis-componentes`) |
 |---|---|---|
-| **Tabla** | JSX plano (`<table>` + `PeliculaRow`) | Componente `PeliculaTable` (listas con `key`) — §13.8 y §16.4 |
-| **Botones** | `<button>` nativo | Componente `Boton extends ButtonHTMLAttributes` — §16.6 |
+| **Tabla** | JSX plano (`<table>` + `PeliculaRow`) | Componente `PeliculaTable` (listas con `key`) — §13.8 y §16.3.3 |
+| **Botones** | `<button>` nativo | Componente `Boton extends ButtonHTMLAttributes` — §16.5 |
 | **Buscador** | `<input>` inline en `App` | Componente `Buscador` con `onBuscar` — §16.3.1 |
 | **Buscador (debounce)** | §15.7: `timerRef` + `setTimeout` en `App` | Se conserva: `Buscador` avisa con `onBuscar` y `App` sigue aplicando el debounce — §15.7 |
 | **Carga/estados** | Texto `Cargando…` | `Spinner` (gráfico de loading)+ renderizado condicional — §12.1.3 |
 | **Formulario** | `PeliculaForm` con `modo`, sin reinicio, `<button>` nativos | `PeliculaForm` sin `modo`, auto-reinicio, `Boton` y `<label>` — §16.3.2 |
-| **Modal** | Overlay + panel (sin `×` ni `tamano`) | Añade botón `×` y prop `tamano` — §16.7 |
-| **Pantalla** | `App` monolítica: input, `<table>` y botones inline | `App` no monolítica: compone piezas — §16.5 |
-| **Extra** | — | `TablaGenerica<T>` con otro tipo (`ResumenGenero`) — §16.8. `PeliculaCard` |
+| **Modal** | Overlay + panel (sin `×` ni `tamano`) | Añade botón `×` y prop `tamano` — §16.6 |
+| **Pantalla** | `App` monolítica: input, `<table>` y botones inline | `App` no monolítica: compone piezas — §16.4 |
+| **Extra** | — | `TablaGenerica<T>` con otro tipo (`ResumenGenero`) — §16.7. `PeliculaCard` |
 
 ---
 >💡EN 15 ESTUDIAMOS UNA NUEVA LÓGICA para hacer la APP con respecto a 13, por tanto, primero VIMOS TODA LA TEORÍA y LUEGO, vimos todo FUNCIONANDO EN CONJUNTO.
@@ -55,10 +55,10 @@ La LÓGICA DE NEGOCIO no cambia; cambia cómo se COMPONE LA GUI. Cada apartado d
 
 ---
 
-<a id="163-formularios-controlados-como-componentes-buscador-y-peliculaform"></a>
-## 16.3. Formularios controlados como componentes: `Buscador` y `PeliculaForm`
+<a id="163-componentes-en-ficheros-propios-buscador-peliculaform-y-peliculatable"></a>
+## 16.3. Componentes en ficheros propios: `Buscador`, `PeliculaForm` y `PeliculaTable`
 
-El patrón de formulario controlado ya está montado: input controlado con `value` + `onChange` tipado (§13.7.2) y formulario multi-campo con objeto `valores` + `handleChange` por `name` (§13.11). El **delta** de esta sesión es convertir esos controles en **componentes reutilizables** que comunican con el padre por props.
+En 15, el input del buscador y la tabla vivían **inline en el JSX de `App.tsx`**, y `PeliculaForm` era un componente que solo funcionaba pegado a su `Modal`. El **delta** de esta sesión es dar a esas piezas **fichero propio con su `interface` de props como contrato**, comunicándose con el padre por callbacks: el `Buscador` (§16.3.1, formulario controlado de un campo), el `PeliculaForm` (§16.3.2, formulario controlado multi-campo) y la `PeliculaTable` (§16.3.3, la tabla que delega cada fila en `PeliculaRow`).
 
 <a id="1631-buscador-con-input-controlado"></a>
 ### 16.3.1 `Buscador` con input controlado
@@ -174,14 +174,12 @@ export function PeliculaForm({ inicial = {}, onGuardar, onCancelar }: PeliculaFo
 > | `inicial?.x ?? ""` (opcional) | `inicial = {}` por defecto |
 > | `inicial?.genero ?? ""` | Normaliza a `GENEROS` (`GENEROS.find`) |
 >
-> El esqueleto de arriba omite a propósito la validación (`errores`/`validar`, §15.6) y `guardando`/`cargando` (§16.6) para centrarse en el form controlado; los 6 deltas de la tabla están marcados con `// delta`.
+> El esqueleto de arriba omite a propósito la validación (`errores`/`validar`, §15.6) y `guardando`/`cargando` (§16.5) para centrarse en el form controlado; los 6 deltas de la tabla están marcados con `// delta`.
 
-> 📦 **En el proyecto:** [`PeliculaForm.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/components/PeliculaForm.tsx) usa un objeto `valores` + un `handleChange` por `name` y convierte a número al enviar; recibe `inicial`, `guardando`, `onGuardar` y `onCancelar` (ya sin `modo`: el padre decide), y sus botones son `Boton` (`exito` para guardar, `secondary` para cancelar — §16.6).
+> 📦 **En el proyecto:** [`PeliculaForm.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/components/PeliculaForm.tsx) usa un objeto `valores` + un `handleChange` por `name` y convierte a número al enviar; recibe `inicial`, `guardando`, `onGuardar` y `onCancelar` (ya sin `modo`: el padre decide), y sus botones son `Boton` (`exito` para guardar, `secondary` para cancelar — §16.5).
 
----
-
-<a id="164-la-tabla-de-películas-peliculatable"></a>
-## 16.4. La tabla de películas: `PeliculaTable`
+<a id="1633-la-tabla-de-películas-peliculatable"></a>
+### 16.3.3 La tabla de películas: `PeliculaTable`
 
 > 💡 **¿Cómo haríamos para...?** extraer la tabla de películas a su propio componente sin duplicar el `.map` ni las cabeceras?
 
@@ -197,7 +195,7 @@ Es decir, `PeliculaTable` solo aporta **el esqueleto de la tabla** (`<table>`, `
 
 Un detalle de alineación: las cabeceras se pintan con una constante `TH` de tipo `CSSProperties` con `textAlign: "left"`, porque `<th>` va **centrado por defecto** y, sin ese ajuste, la cabecera descuadra respecto a las celdas (`<td>`), que en `PeliculaRow` van alineadas a la izquierda con su propia constante `TD`. Mismo patrón "estilos compartidos como constantes fuera del componente" que en `PeliculaRow`.
 
-No confundir con la tabla genérica: `PeliculaTable` es un componente **específico** (conoce el dominio `Pelicula` y reutiliza `PeliculaRow`); `TablaGenerica<T>` (§16.8) es la versión **genérica** sin dominio, configurada por `datos`/`columnas`/`keyExtractor`, que en AppCine se usa para el resumen por género. 
+No confundir con la tabla genérica: `PeliculaTable` es un componente **específico** (conoce el dominio `Pelicula` y reutiliza `PeliculaRow`); `TablaGenerica<T>` (§16.7) es la versión **genérica** sin dominio, configurada por `datos`/`columnas`/`keyExtractor`, que en AppCine se usa para el resumen por género. 
 
 **Dos puntos de vista de la misma idea**: si la tabla de películas necesitara configuración por columna (renders personalizados, columnas calculadas), podría reimplementarse sobre `TablaGenerica<Pelicula>` definiendo sus `Columna<Pelicula>`.
 
@@ -205,8 +203,8 @@ No confundir con la tabla genérica: `PeliculaTable` es un componente **específ
 
 ---
 
-<a id="165-composición-de-la-pantalla-principal"></a>
-## 16.5. Composición de la pantalla principal - El LAYOUT
+<a id="164-composición-de-la-pantalla-principal"></a>
+## 16.4. Composición de la pantalla principal - El LAYOUT
 
 Con estas piezas se compone el LAYOUT principal, la pantalla de AppCine:
 
@@ -223,7 +221,7 @@ Con estas piezas se compone el LAYOUT principal, la pantalla de AppCine:
 ```
 
 - `Buscador`: entrada controlada.
-- `PeliculaTable`: listas + `key` (§16.4).
+- `PeliculaTable`: listas + `key` (§16.3.3).
 - `PeliculaForm`: formulario controlado.
 - `cargando`: render condicional.
 
@@ -239,8 +237,8 @@ Con estas piezas se compone el LAYOUT principal, la pantalla de AppCine:
 
 ---
 
-<a id="166-botón-personalizado-extends-buttonhtmlattributes"></a>
-## 16.6. Botón personalizado: `extends ButtonHTMLAttributes`
+<a id="165-botón-personalizado-extends-buttonhtmlattributes"></a>
+## 16.5. Botón personalizado: `extends ButtonHTMLAttributes`
 
 Para obtener un **botón reutilizable** con variantes visuales, la clave está en que su interfaz `BotonProps` **herede de `ButtonHTMLAttributes<HTMLButtonElement>`** (los atributos nativos del `<button>`, como `disabled`, `onClick`...) y añade props propias (`variante`, `tamano`, `icono`, `cargando`). La herencia se marca con **`extend`**.
 
@@ -310,8 +308,8 @@ En la `sesion10.md` veremos que también podemos personalizar mediante el uso de
 
 ---
 
-<a id="167-modal-overlay-children-y-useeffect-de-limpieza"></a>
-## 16.7. Modal: overlay, `children` y `useEffect` de limpieza
+<a id="166-modal-overlay-children-y-useeffect-de-limpieza"></a>
+## 16.6. Modal: overlay, `children` y `useEffect` de limpieza
 
 Un **Modal** es una capa superpuesta que bloquea la pantalla. Controla su visibilidad con la prop `abierto`: si es `false` devuelve `null` (no se pinta nada); si es `true` muestra el overlay oscuro y el panel. El `useEffect` gira en torno a `abierto`: al abrir **bloquea el scroll** (`document.body.style.overflow = "hidden"`) y la función de limpieza (el `return`) lo restaura al cerrar o desmontar. Destacan `onCerrar` (callback que sube el "cerrar" al padre) y `children` (el contenido de la tarjeta).
 
@@ -382,8 +380,8 @@ return (
 
 ---
 
-<a id="168-tabla-genérica-componentes-t"></a>
-## 16.8. Tabla genérica: componentes `<T>`
+<a id="167-tabla-genérica-componentes-t"></a>
+## 16.7. Tabla genérica: componentes `<T>`
 
 Este componente es **genérico** y personalizable funcionando con cualquier tipo `T` (como por ejemplo Pelicula). Se puede personalizar TABLA y COLUMNAS.
 
@@ -511,12 +509,12 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
 
 ---
 
-<a id="169-vista-de-tarjetas-peliculacard"></a>
-## 16.9. Vista de tarjetas: `PeliculaCard`
+<a id="168-vista-de-tarjetas-peliculacard"></a>
+## 16.8. Vista de tarjetas: `PeliculaCard`
 
 El listado no tiene por qué ser siempre una tabla: `PeliculaCard` presenta la misma película (en cuanto a funcionamiento, no a diseño) como **ficha**.  Dicho de otra forma, es una variante de `PeliculaRow` (comparar Props)
 
-El componente **o añade lógica, solo layout**: reutiliza `colorDeGenero` (§13.3.1) para el badge de género y `Boton` (§16.6) para las acciones, y recibe las mismas callbacks que ya maneja `App` (`onEditar` con la `pelicula` entera y `onBorrar` con el `id`), así que se le pasan `abrirEditar` y `borrar` directamente.
+El componente **o añade lógica, solo layout**: reutiliza `colorDeGenero` (§13.3.1) para el badge de género y `Boton` (§16.5) para las acciones, y recibe las mismas callbacks que ya maneja `App` (`onEditar` con la `pelicula` entera y `onBorrar` con el `id`), así que se le pasan `abrirEditar` y `borrar` directamente.
 
 Usamos `<article>` dado que el Card representa en sí un bloque autónomo con sentido, no una división o contenedor de diseño (div). Queda más legible (representa un ítem) y además, los lectores de pantalla identifican **article** como un ítem independiente.
 
@@ -622,12 +620,12 @@ Y el render condicional: la tabla de §13.8, o una **rejilla CSS** de tarjetas c
 )}
 ```
 
-El `.map` con `key` es el mismo de `PeliculaTable` (§13.8 y §16.4): cambia el contenedor, no el patrón. En la versión Tailwind (`repos/02-react-ejemplo-pelis-tailwind`) la única diferencia es el estilo: caja con `rounded-lg border p-4 shadow-sm`, badge con `claseDeGenero` y rejilla con `grid gap-4 sm:grid-cols-2 lg:grid-cols-3`.
+El `.map` con `key` es el mismo de `PeliculaTable` (§13.8 y §16.3.3): cambia el contenedor, no el patrón. En la versión Tailwind (`repos/02-react-ejemplo-pelis-tailwind`) la única diferencia es el estilo: caja con `rounded-lg border p-4 shadow-sm`, badge con `claseDeGenero` y rejilla con `grid gap-4 sm:grid-cols-2 lg:grid-cols-3`.
 
 ---
 
-<a id="1610-prácticas"></a>
-## 16.10. Prácticas
+<a id="169-prácticas"></a>
+## 16.9. Prácticas
 
 La app completa de esta sesión está en [`repos/02-react-ejemplo-pelis-componentes`](../../../repos/02-react-ejemplo-pelis-componentes/): es la AppCine del apunte 15 refactorizada con componentes personalizados. Aquí tienes el extracto clave y **qué mirar**; el extracto es autosuficiente para el examen, y el archivo enlazado solo añade imports, JSX y estilos.
 
@@ -636,10 +634,10 @@ La app completa de esta sesión está en [`repos/02-react-ejemplo-pelis-componen
 📦 [`repos/02-react-ejemplo-pelis-componentes/src/App.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/App.tsx)
 
 **Qué mirar:**
-- **Composición**: `Buscador`, `PeliculaTable` y `PeliculaForm` se combinan en una sola pantalla (§16.5).
-- **`TablaGenerica<T>`** reutilizada para películas y para el resumen por género (§16.8).
-- **`Boton`** con variantes y `cargando` sustituye a los `<button>` sueltos (§16.6).
-- **Vista conmutable**: el estado `vista` alterna `PeliculaTable` (§16.4) y las tarjetas de `PeliculaCard` en una rejilla CSS (§16.9).
+- **Composición**: `Buscador`, `PeliculaTable` y `PeliculaForm` se combinan en una sola pantalla (§16.4).
+- **`TablaGenerica<T>`** reutilizada para películas y para el resumen por género (§16.7).
+- **`Boton`** con variantes y `cargando` sustituye a los `<button>` sueltos (§16.5).
+- **Vista conmutable**: el estado `vista` alterna `PeliculaTable` (§16.3.3) y las tarjetas de `PeliculaCard` en una rejilla CSS (§16.8).
 - Los hijos siguen avisando por props (`onBuscar`, `onGuardar`, `onEditar`, `onBorrar`); la fuente de la verdad sigue en `App`.
 - **No monolítico**: compara con el `App.tsx` de 15, donde buscador, tabla y botones eran JSX inline.
 
@@ -648,7 +646,7 @@ La app completa de esta sesión está en [`repos/02-react-ejemplo-pelis-componen
 Los siguientes ficheros del sandbox repiten patrones ya vistos; el código aplicado a pelis son los enlaces 📦 de cada sección:
 
 - [`Saludo.tsx`](../../../repos/02-react-componentes/src/components/Saludo.tsx) — `FC<Props>` y prop opcional; AppCine usa la alternativa preferida: función plana con `interface ...Props` (§16.3).
-- [`Card.tsx`](../../../repos/02-react-componentes/src/components/Card.tsx) — envoltorio con `children: ReactNode`, el mismo patrón del `Modal` (§16.7).
+- [`Card.tsx`](../../../repos/02-react-componentes/src/components/Card.tsx) — envoltorio con `children: ReactNode`, el mismo patrón del `Modal` (§16.6).
 - [`ListaTareas.tsx`](../../../repos/02-react-componentes/src/components/ListaTareas.tsx) — actualizaciones inmutables con `useState<Tarea[]>` (§13).
 - [`FormularioRegistro.tsx`](../../../repos/02-react-componentes/src/state/FormularioRegistro.tsx) — validación con `ErroresForm = Partial<Record<...>>`; el mismo mecanismo, autocontenido con `useState`, está en `PeliculaForm` (§15.6 y §16.3).
 - [`App.tsx`](../../../repos/02-react-componentes/src/App.tsx) — navegación por pestañas: `NAV.map` + `key` + renderizado condicional (§12.1.3).
@@ -670,14 +668,14 @@ El proyecto [`repos/02-react-ejemplo-pelis-componentes`](../../../repos/02-react
 
 | Archivo | Qué demuestra |
 |---|---|
-| `src/components/PeliculaTable.tsx` | Listas con `key` — §13.8 y §16.4 |
-| `src/components/PeliculaCard.tsx` | Tarjetas + conmutador de vista — §16.9 |
+| `src/components/PeliculaTable.tsx` | Listas con `key` — §13.8 y §16.3.3 |
+| `src/components/PeliculaCard.tsx` | Tarjetas + conmutador de vista — §16.8 |
 | `src/components/Buscador.tsx` | Input controlado + `onBuscar` — §16.3.1 |
 | `src/components/PeliculaForm.tsx` | Formulario controlado con los 5 campos — §16.3.2 |
-| `src/components/Boton.tsx` | `extends ButtonHTMLAttributes` — §16.6 |
-| `src/components/Modal.tsx` | Overlay, `children` y cleanup — §16.7 |
-| `src/components/TablaGenerica.tsx` | Componente genérico `<T>` — §16.8 |
-| `src/App.tsx` | Composición de la pantalla — §16.5 |
+| `src/components/Boton.tsx` | `extends ButtonHTMLAttributes` — §16.5 |
+| `src/components/Modal.tsx` | Overlay, `children` y cleanup — §16.6 |
+| `src/components/TablaGenerica.tsx` | Componente genérico `<T>` — §16.7 |
+| `src/App.tsx` | Composición de la pantalla — §16.4 |
 
 ---
 

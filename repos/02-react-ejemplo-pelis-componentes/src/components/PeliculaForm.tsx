@@ -32,6 +32,7 @@ export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCan
     titulo: inicial.titulo ?? "",
 
     //JMM - Inicio Nuevo con respecto a 15 — normaliza el género guardado a las opciones del select
+   //"búscalo en la lista sin obviando si tiene mayúsculas; si no aparece, déjalo como estaba o ponlo vacío (si no entra nada o vacío)"
     genero: GENEROS.find((g) => g.toLowerCase() === (inicial.genero ?? "").toLowerCase()) ?? (inicial.genero ?? ""),
     //JMM - Fin Nuevo con respecto a 15
     

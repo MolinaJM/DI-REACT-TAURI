@@ -10,7 +10,7 @@ Componentes reutilizables, props, composición y slots
 
 ## Índice de apuntes (orden recomendado)
 
-- [16 · React: creación de componentes personalizados](apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) — composición y `children`, la tabla de películas con `PeliculaTable` (16.4), composición de la pantalla principal (16.5), botón personalizado con `extends ButtonHTMLAttributes` (16.6), Modal con overlay + `useEffect` de limpieza (16.7) y tabla genérica con componentes `<T>` (16.8).
+- [16 · React: creación de componentes personalizados](apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) — composición y `children`, componentes en ficheros propios: `Buscador` y `PeliculaForm` (16.3.1–16.3.2) y la tabla de películas con `PeliculaTable` (16.3.3), composición de la pantalla principal (16.4), botón personalizado con `extends ButtonHTMLAttributes` (16.5), Modal con overlay + `useEffect` de limpieza (16.6) y tabla genérica con componentes `<T>` (16.7).
 - [13 · TypeScript aplicado a React](apuntes/s04/13_Tipado_en_React_TS.md) — repaso del tipado avanzado que sostiene estos componentes: `keyof T`, componentes genéricos `<T>` y utility types.
 
 ## Práctica
