@@ -58,12 +58,12 @@ La LÓGICA DE NEGOCIO no cambia; cambia cómo se COMPONE LA GUI. Cada apartado d
 <a id="163-componentes-en-ficheros-propios-buscador-peliculaform-y-peliculatable"></a>
 ## 16.3. Componentes en ficheros propios: `Buscador`, `PeliculaForm` y `PeliculaTable`
 
-En 15, el input del buscador y la tabla vivían **inline en el JSX de `App.tsx`**, y `PeliculaForm` era un componente que solo funcionaba pegado a su `Modal`. El **delta** de esta sesión es dar a esas piezas **fichero propio con su `interface` de props como contrato**, comunicándose con el padre por callbacks: el `Buscador` (§16.3.1, formulario controlado de un campo), el `PeliculaForm` (§16.3.2, formulario controlado multi-campo) y la `PeliculaTable` (§16.3.3, la tabla que delega cada fila en `PeliculaRow`).
+En 15, el input del buscador y la tabla vivían **inline en el JSX de `App.tsx`**, y `PeliculaForm` era un componente que solo funcionaba pegado a su `Modal`. 
+
+El **delta** de esta sesión es dar a esas piezas **fichero propio con su `interface` de props como contrato**, comunicándose con el padre por callbacks: el `Buscador` (§16.3.1, formulario controlado de un campo), el `PeliculaForm` (§16.3.2, formulario controlado multi-campo) y la `PeliculaTable` (§16.3.3, la tabla que delega cada fila en `PeliculaRow`).
 
 <a id="1631-buscador-con-input-controlado"></a>
 ### 16.3.1 `Buscador` con input controlado
-
-> 💡 **¿Cómo haríamos para...?** un buscador que refleje en el estado cada tecla que escribe el usuario y avise al padre de lo que se busca?
 
 El input controlado (`value` + `onChange` tipado con `ChangeEvent<HTMLInputElement>`) ya se vió en  **§13.7.2**; el **delta** es que el buscador es un componente que sube el texto al padre con la prop `onBuscar`:
 
