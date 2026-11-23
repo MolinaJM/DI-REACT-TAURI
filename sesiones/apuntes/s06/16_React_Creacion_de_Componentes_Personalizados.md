@@ -254,7 +254,9 @@ Con estas piezas se compone el LAYOUT principal, la pantalla de AppCine:
 <a id="165-botón-personalizado-extends-buttonhtmlattributes"></a>
 ## 16.5. Botón personalizado: `extends ButtonHTMLAttributes`
 
-Para obtener un **botón reutilizable** con variantes visuales, la clave está en que su interfaz `BotonProps` **herede de `ButtonHTMLAttributes<HTMLButtonElement>`** (los atributos nativos del `<button>`, como `disabled`, `onClick`...) y añade props propias (`variante`, `tamano`, `icono`, `cargando`). La herencia se marca con **`extend`**.
+Para obtener un **botón reutilizable** con variantes visuales, la clave está en que su interfaz `BotonProps` **herede de `ButtonHTMLAttributes<HTMLButtonElement>`** (los atributos nativos del `<button>`, como `disabled`, `style`, `onClick`...) y añade props propias (`variante`, `tamano`, `icono`, `cargando`). La herencia se marca con **`extend`**.
+
+Esto se puede hacer con casi cualquier etiqueta HTML. Y aunque **herencia** es algo que conocemos, en React a esto se le denomina **composición/envoltura** (wrapping), más que **herencia**. 
 
 Los valores posibles se modelan con **uniones de literales** y se asocian a clases mediante `Record<Variante, string>`. 
 
@@ -292,6 +294,7 @@ const TAMANOS: Record<Tamano, string> = {
     lg: "px-6 py-3 text-lg",
 };
 
+//Hay que pasar todos los props, pero detallamos los nuevos y lo obligatorios: disabled, style, type, ...props
 function Boton({children, variante = "primary", tamano = "md", icono, cargando = false, disabled, type = "button", style, ...props}: BotonProps) {
   return (
     <button
