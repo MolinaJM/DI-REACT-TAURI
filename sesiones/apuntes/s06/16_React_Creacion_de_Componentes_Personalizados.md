@@ -50,9 +50,11 @@ La LÓGICA DE NEGOCIO no cambia; cambia cómo se COMPONE LA GUI. Cada apartado d
 | **Extra** | — | `TablaGenerica<T>` con otro tipo (`ResumenGenero`) — §16.8. `PeliculaCard` |
 
 ---
-<h3> EN 15 ESTUDIAMOS UNA NUEVA LÓGICA para hacer la APP con respecto a 13, por tanto, PRIMERO VIMOS TODA LA TEORÍA y LUEGO LA VIMOS FUNCIONANDO EN CONJUNTO.
+<h3> 💡EN 15 ESTUDIAMOS UNA NUEVA LÓGICA para hacer la APP con respecto a 13, por tanto, primero VIMOS TODA LA TEORÍA y LUEGO, vimos todo FUNCIONANDO EN CONJUNTO.</h3></br></br>
 
-PERO, DADO QUE 16 ES UNA VERSIÓN MEJORADA DE DISEÑO (NO DE FUNCIONAMIENTO INTERNO), ahora SÍ VAMOS A IR VIENDO COMPONENTE POR COMPONENTE funcionando de forma INDEPENDIENTE</h3>
+---
+<h3></br>
+💡 PERO, DADO QUE 16 ES UNA VERSIÓN MEJORADA DE DISEÑO (NO DE FUNCIONAMIENTO INTERNO), ahora SÍ VAMOS A IR VIENDO COMPONENTE POR COMPONENTE funcionando de forma INDEPENDIENTE</h3>
 
 ---
 
