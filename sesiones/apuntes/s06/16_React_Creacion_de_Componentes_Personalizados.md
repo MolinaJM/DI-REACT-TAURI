@@ -123,7 +123,8 @@ type PeliculaFormValores = {
 
 const GENEROS = ["Acción", "Comedia", "Drama", "Terror", "Ciencia-ficción", "Romántica"];
 
-// delta: sin prop `modo` (el padre decide) y `inicial = {}` por defecto
+// delta: sin prop `modo` (el padre decide, según lo que pase, si pasa vacío, será porque
+// queremos insertar. Si paso un objeto es porque estamos editando) y `inicial = {}` por defecto
 export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCancelar }: PeliculaFormProps) {
   const [valores, setValores] = useState<PeliculaFormValores>(() => ({
     titulo: inicial.titulo ?? "",
@@ -154,7 +155,7 @@ export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCan
       
       {/* delta: cada campo en <label> (en 15 eran inputs sueltos con placeholder) 
 
-      El estilo flex es muy socorrido, coloca de forma automática elementos en una dirección.
+      El estilo flex es muy socorrido, coloca de forma automática elementos en una dirección (column/row).
 
       display: "flex", flexDirection: "column", gap: "0.25rem" (1 rem = 16px)
 
@@ -187,7 +188,7 @@ export function PeliculaForm({ inicial = {}, guardando = false, onGuardar, onCan
 > | `inicial?.x ?? ""` (opcional) | `inicial = {}` por defecto |
 > | `inicial?.genero ?? ""` | Normaliza a `GENEROS` (`GENEROS.find`) |
 >
-> El esqueleto de arriba omite a propósito la validación (`errores`/`validar`, §15.6) y `guardando`/`cargando` (§16.5) para centrarse en el form controlado; los 6 deltas de la tabla están marcados con `// delta`.
+> El esqueleto de arriba omite a propósito la validación para centrarnos en el form controlado; los 6 deltas de la tabla están marcados con `// delta`.
 
 > 📦 **En el proyecto:** [`PeliculaForm.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/components/PeliculaForm.tsx) usa un objeto `valores` + un `handleChange` por `name` y convierte a número al enviar; recibe `inicial`, `guardando`, `onGuardar` y `onCancelar` (ya sin `modo`: el padre decide), y sus botones son `Boton` (`exito` para guardar, `secondary` para cancelar — §16.5).
 
