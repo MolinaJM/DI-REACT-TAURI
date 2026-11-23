@@ -114,7 +114,7 @@ Esta práctica tiene dos finalidades: 1) practicar todo lo visto en la parte de 
 
 A partir de los apuntes de las sesiones 5 y 6 (los apuntes donde se enseñaba el patrón de diseño de un CRUD con acceso a API, buscador y personalización de componentes), vamos a :
 - Escoger un tema **libre** asociado a un dominio : videojuegos, pizzería, recetas de cocina, cursos, etc...
-- Entre 6 y 8 campos, incluyendo tipos en origen (texto, booleano, numérico) y controles variados (input, select, radio, checkbox, textarea) 
+- Entre 6 y 8 campos, incluyendo tipos en origen (texto, booleano, numérico) y controles variados (input, select, radio, checkbox, textarea). 
 - Crear un **SPA con CRUD** con formulario (validación), listado, cards y buscador, similar a la vista en la última sesión.
 - Generar un **.json con datos de iniciales** para ser utilizado con json-server (la idea es que el backend de dicha API se pueda crear realmente con la asignatura de Acceso a Datos.)  
 - Generar el objeto de **gestión de API**: api.ts adaptado a realizar el CRUD con los datos del dominio escogido.
