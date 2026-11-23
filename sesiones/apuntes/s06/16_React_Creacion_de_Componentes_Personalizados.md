@@ -271,7 +271,7 @@ type Variante = "primary" | "secondary" | "danger" | "exito" | "ghost";
 type Tamano = "sm" | "md" | "lg";
 
 interface BotonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactNode;
+    children: ReactNode;//Podría contener hijos
     variante?: Variante;
     tamano?: Tamano;
     icono?: ReactNode;
@@ -292,22 +292,25 @@ const TAMANOS: Record<Tamano, string> = {
     lg: "px-6 py-3 text-lg",
 };
 
-function Boton({ children, variante = "primary", tamano = "md",
-    icono, cargando, disabled, type = "button", className = "", ...props }: BotonProps) {
-    return (
-        <button
-            type={type}
-            className={`inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors
-                ${VARIANTES[variante]} ${TAMANOS[tamano]}
-                ${(disabled || cargando) ? "opacity-50 cursor-not-allowed" : ""}
-                ${className}`}
-            disabled={disabled || cargando} {...props}>
-            {cargando ? (
-                <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
-            ) : icono}
-            {children}
-        </button>
-    );
+function Boton({children, variante = "primary", tamano = "md", icono, cargando = false, disabled, type = "button", style, ...props}: BotonProps) {
+  return (
+    <button
+      type={type}
+      disabled={disabled || cargando}
+      style={{
+        ...VARIANTES[variante],
+        ...TAMANOS[tamano],
+        borderRadius: "0.375rem",
+        cursor: disabled || cargando ? "not-allowed" : "pointer",
+        opacity: disabled || cargando ? 0.6 : 1,
+        ...style,
+      }}
+      {...props}
+    >
+      {cargando ? "Cargando…" : icono}
+      {children}
+    </button>
+  );
 }
 
 export default Boton;
