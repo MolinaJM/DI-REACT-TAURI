@@ -57,7 +57,9 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
       const controller = new AbortController();
 
       async function cargar() {
-        setCargando(true);
+         //JMM - Inicio Nuevo con respecto a 15--------------------------------------------------
+        setCargando(true); //Si comentamos vemos el Spinner. O si reestructuramos esta función, dado que se ha decidido que funcione dando Error si no puede ver los datos
+         //JMM - Inicio Nuevo con respecto a 15--------------------------------------------------
         setError(null);
         try {
           const datos = await api.listar(controller.signal);

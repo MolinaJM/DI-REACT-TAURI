@@ -353,15 +353,17 @@ return (
 <a id="167-tabla-genérica-componentes-t"></a>
 ## 16.7. Tabla genérica: componentes `<T>`
 
-Este componente es **genérico**: funciona con cualquier tipo `T` (como por ejemplo Pelicula). La interfaz `TablaProps<T>` recibe `datos: T[]` ( ej: Pelicula[]) y `columnas`, donde cada columna define su `key` (un campo de `T` o un string), un `titulo` y opcionalmente un `render` que devuelve `ReactNode` (útil para botones o badges). `keyExtractor` da la `key` única de cada fila. Es el patrón `T extends Record<string, any>` que reutilizarás para cualquier dominio.
+Este componente es **genérico** y personalizable funcionando con cualquier tipo `T` (como por ejemplo Pelicula). Se puede personalizar TABLA y COLUMNAS.
+
+La interfaz `TablaProps<T>` recibe `datos: T[]` ( ej: Pelicula[]) y `columnas`, donde cada columna define 3 cosas básicas: 1) su `key` (un campo de `T` o un string), 2) un `titulo` y 3) opcionalmente un `render` que devuelve `ReactNode` (útil para botones o badges). `keyExtractor` da la `key` única de cada fila. Es el patrón `T extends Record<string, any>` que reutilizaremos para cualquier dominio.
 
 En el componente Tabla marcado como /* modificable */, estos son los ajustes principales que puedes hacer:
 - En Columna<T>: Añadir propiedades extra por columna (como align o className).
 - En TablaProps<T>: Añadir props nuevas para el componente (como mensajeVacio o onFilaClick).
-- En la restricción genérica: Cambiar `<T extends Record<string, any>>` por algo más flexible con interfaces, como `<T extends object>`.
-- En el estado vacío: Personalizar los estilos del contenedor o hacer dinámico el texto/elemento que se muestra cuando datos está vacío.
+- En la restricción genérica: Cambiar `<T extends Record<string, any>>` por algo más flexible con interfaces, como `<T extends object>`. Esa restricción indica que "tiene que encajar con este molde", puede ser más estricto utilizando Record o más laxo, utilizando un objeto. De todas formas, la primera opción es la más válida en este caso dado que, de forma normal, tendremos un array de objetos indexables (con campos clave-valor).
+- En el estado vacío del ARRAY. (es decir, no hay datos en el array principal): Personalizar los estilos del contenedor o hacer dinámico el texto/elemento que se muestra cuando datos está vacío. 
 - En `<table>, <thead>, <tr>, <th> `y `<td>`: Añadir clases CSS (por ejemplo, bordes, fondos, paddings, hover o alineación) y eventos de fila como onClick.
-- En el valor por defecto de celda: Cambiar qué se muestra cuando no hay función render y el valor es nulo/vacío (por ejemplo, mostrar "—" en vez de ""). Si hay render, indica cómo se pinta ( todo a mayúsculas, número de decimales, etc..)
+- En el valor por defecto de CELDA: Cambiar qué se muestra cuando **no hay función render** y el valor es nulo/vacío (por ejemplo, mostrar "—" en vez de ""). Aunque lo más potente es usar un **render**, indica cómo se pinta ( todo a mayúsculas, número de decimales, etc..). Ejemplo de render llamado desde el padre: ` { key: "genero", titulo: "Género", render: (fila) => fila.genero.toUpperCase() },`
 
 > 📦 **Fichero del repo:** [`repos/02-react-componentes/src/components/TablaGenerica.tsx`](../../../repos/02-react-componentes/src/components/TablaGenerica.tsx)
 
@@ -373,9 +375,10 @@ interface Columna<T> {
     key: keyof T | string;
     titulo: string;
     render?: (item: T) => ReactNode; //render determina CÓMO se pinta una columna.
-    /* modificable: 
-    
+    /* el render es modificable      
     render: (fila) => fila.genero.toUpperCase()
+
+    La tabla también es ampliable:
     p. ej. align?: 'left' | 'center' | 'right'; className?: string; 
          
     */
@@ -384,20 +387,18 @@ interface Columna<T> {
 interface TablaProps<T> {
     datos: T[];
     columnas: Columna<T>[];
-    keyExtractor: (item: T) => string | number;
-    /* modificable: 
-    p. ej. mensajeVacio?: ReactNode; onFilaClick?: (item: T) => void; 
+    keyExtractor: (item: T) => string | number; //Extractor de propiedades
+    /* modificable: p. ejempls 
+    mensajeVacio?: ReactNode; 
+    onFilaClick?: (item: T) => void; 
     */
 }
 
 function Tabla<T extends Record<string, any>>({datos, columnas, keyExtractor }: TablaProps<T>) {
     if (datos.length === 0) {
-        return <div /* modificable: p. ej. className="text-center py-8 text-gray-500" */ >
-                     No hay datos disponibles 
-                    /* modificable:p. ej. {mensajeVacio ?? "No hay datos disponibles"} */ 
-        </div>;
+      return <div >No hay datos disponibles</div>; {/*DIV modificable mediante CSS o con TSX*/}
     }
-
+  /*Cualquier etiqueta es Modificable en la tabla genérica, mediante style directo/ClassName o TSX*/
     return (
         <table /* modificable: p. ej. className="w-full border-collapse" */ >
             <thead>
@@ -442,7 +443,16 @@ export default Tabla;
 <a id="168-vista-de-tarjetas-peliculacard"></a>
 ## 16.8. Vista de tarjetas: `PeliculaCard`
 
-El listado no tiene por qué ser siempre una tabla: `PeliculaCard` presenta la misma película como **ficha**. El componente no añade lógica, solo layout: reutiliza `colorDeGenero` (§13.3.1) para el badge de género y `Boton` (§16.5) para las acciones, y recibe las mismas callbacks que ya maneja `App` (`onEditar` con la `pelicula` entera y `onBorrar` con el `id`), así que se le pasan `abrirEditar` y `borrar` directamente.
+El listado no tiene por qué ser siempre una tabla: `PeliculaCard` presenta la misma película (en cuanto a funcionamiento, no a diseño) como **ficha**.  Dicho de otra forma, es una variante de `PeliculaRow` (comparar Props)
+
+El componente **o añade lógica, solo layout**: reutiliza `colorDeGenero` (§13.3.1) para el badge de género y `Boton` (§16.5) para las acciones, y recibe las mismas callbacks que ya maneja `App` (`onEditar` con la `pelicula` entera y `onBorrar` con el `id`), así que se le pasan `abrirEditar` y `borrar` directamente.
+
+Usamos `<article>` dado que el Card representa en sí un bloque autónomo con sentido, no una división o contenedor de diseño (div). Queda más legible (representa un ítem) y además, los lectores de pantalla identifican **article** como un ítem independiente.
+
+Regla exprés para diseño de bloques:
+- ¿Es un trocito dentro de una frase? $\rightarrow$  `<span>`
+- ¿Es solo un envoltorio visual/de diseño? $\rightarrow$ `<div>` 
+- ¿Es una unidad de contenido independiente (como una tarjeta o entrada)? $\rightarrow$ `<article>`
 
 > [!TIP]
 > **Antes (15 · `pelis-api`) → Ahora (16 · `componentes`)**
@@ -464,7 +474,7 @@ const CAJA: CSSProperties = {
   border: "1px solid #d1d5db",
   borderRadius: "8px",
   padding: "0.75rem 1rem",
-  display: "flex",
+  display: "flex", 
   flexDirection: "column",
   gap: "0.35rem",
 };
@@ -507,10 +517,10 @@ export function PeliculaCard({ pelicula, onEditar, onBorrar }: PeliculaCardProps
 
 Anatomía de la tarjeta:
 
-- **Contenedor `<article>`** apilado en columna (`flexDirection: "column"` + `gap`): el layout vertical ordena los campos sin calcular alturas.
+- **Contenedor `<article>`**, sigue CSS: apilado en columna (`flexDirection: "column"` + `gap`): el layout vertical ordena los campos sin calcular alturas.
 - **Badge de género** con `colorDeGenero` y `textTransform: "uppercase"` — el mismo tratamiento que en `PeliculaRow`.
 - **`marginTop: "auto"`** en el pie de acciones: empuja los botones al fondo de la tarjeta, de modo que en una rejilla con alturas distintas las acciones quedan alineadas.
-- **`interface PeliculaCardProps`**: el contrato de props es igual de explícito que en los demás componentes (§16.3).
+- **`interface PeliculaCardProps`**: el contrato de props es similar al del resto de componentes, sobre todo a su "hermano" `PeliculaRow`.
 
 ### El conmutador de vista en `App`
 
@@ -547,16 +557,6 @@ El `.map` con `key` es el mismo de `PeliculaTable` (§13.8): cambia el contenedo
 
 <a id="169-prácticas"></a>
 ## 16.9. Prácticas
-
-- **P1.** `Boton` con `extends ButtonHTMLAttributes`: variantes y tamaños con `Record`, prop `cargando` que deshabilita el botón.
-- **P2.** `Modal` con `children` y `useEffect` de limpieza: bloqueo del scroll, cierre con `Escape` y click-outside con `overlayRef`.
-- **P3.** `TablaGenerica<T>` para un tipo propio (p. ej. `ResumenGenero`): `Columna<T>`, `keyExtractor` y un `render` de columna.
-- **P4.** Refactorizar un componente sin tipos a uno totalmente tipado con `interface XProps`.
-- **P5.** `PeliculaCard` + conmutador de vista: ficha en columna con `colorDeGenero` y `Boton`, estado `vista` (`"tabla" | "tarjetas"`) y rejilla CSS con `repeat(auto-fill, minmax(...))`.
-
----
-
-### 📦 Lectura guiada del repositorio
 
 La app completa de esta sesión está en [`repos/02-react-ejemplo-pelis-componentes`](../../../repos/02-react-ejemplo-pelis-componentes/): es la AppCine del apunte 15 refactorizada con componentes personalizados. Aquí tienes el extracto clave y **qué mirar**; el extracto es autosuficiente para el examen, y el archivo enlazado solo añade imports, JSX y estilos.
 
