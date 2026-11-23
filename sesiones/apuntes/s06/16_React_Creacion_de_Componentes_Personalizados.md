@@ -98,7 +98,7 @@ export function Buscador({ onBuscar }: BuscadorProps) {
 <a id="1632-peliculaform-controlado"></a>
 ### 16.3.2 `PeliculaForm` controlado
 
-El esqueleto base es el de **§13.11** (estado `valores` + `handleChange` + conversión a número, ya visto en §15.6). El **delta** de 16 es composicional; los 6 deltas de la tabla «Antes/Ahora» están marcados con `// delta` en el código de abajo.
+El esqueleto base es el de **§13.11** (estado `valores` + `handleChange` + conversión a número, ya visto en §15.6). El **delta** de 16 trata sobre COMPOSICIÓN; los 6 deltas de la tabla «Antes/Ahora» están marcados con `// delta` en el código de abajo.
 
 ```tsx
 type PeliculaFormValores = {
@@ -176,9 +176,9 @@ export function PeliculaForm({ inicial = {}, onGuardar, onCancelar }: PeliculaFo
 ---
 
 <a id="164-composición-de-la-pantalla-principal"></a>
-## 16.4. Composición de la pantalla principal
+## 16.4. Composición de la pantalla principal - El LAYOUT
 
-Con estas piezas se compone la pantalla de AppCine:
+Con estas piezas se compone el LAYOUT principal, la pantalla de AppCine:
 
 > 💡 **¿Cómo haríamos para...?** montar todas las piezas (buscador, tabla, formulario) en una sola pantalla, combinando listas, condicionales y state?
 
