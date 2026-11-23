@@ -256,7 +256,9 @@ Con estas piezas se compone el LAYOUT principal, la pantalla de AppCine:
 
 Para obtener un **botón reutilizable** con variantes visuales, la clave está en que su interfaz `BotonProps` **herede de `ButtonHTMLAttributes<HTMLButtonElement>`** (los atributos nativos del `<button>`, como `disabled`, `onClick`...) y añade props propias (`variante`, `tamano`, `icono`, `cargando`). La herencia se marca con **`extend`**.
 
-Los valores posibles se modelan con **uniones de literales** y se asocian a clases mediante `Record<Variante, string>`. El `...props` final repesca las props heredadas no desestructuradas, así el botón sigue aceptando todo lo de un `<button>` normal.
+Los valores posibles se modelan con **uniones de literales** y se asocian a clases mediante `Record<Variante, string>`. 
+
+Y para que el invento no pete, el `...props` final repesca las props heredadas no desestructuradas, así el botón sigue aceptando todo lo de un `<button>` normal.
 
 > 📦 **Fichero del repo:** [`repos/02-react-componentes/src/components/Boton.tsx`](../../../repos/02-react-componentes/src/components/Boton.tsx)
 

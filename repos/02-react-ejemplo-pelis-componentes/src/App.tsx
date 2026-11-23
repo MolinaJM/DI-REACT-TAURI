@@ -163,14 +163,14 @@ const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se
         <h1>AppCine</h1>
         <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap" }}>
           {/* JMM - Inicio Nuevo con respecto a 15 ------------------------------------------
-          Al Buscador se le pasa setBusqueda
-          Botones se instancian con tipo, icono y función.
+          -Al Buscador se le pasa setBusqueda
+          -Los Botones se instancian con tipo, icono y función.
           */}
           <Buscador onBuscar={setBusqueda} />
           <Boton variante="primary" icono="➕" onClick={abrirCrear}>
             Nueva película
           </Boton>
-          <Boton variante="secondary" onClick={() => setRecargar((n) => n + 1)} disabled={cargando}>
+          <Boton variante="secondary" onClick={() => setRecargar((n) => n+1)} disabled={cargando}>
             Recargar
           </Boton>
           <Boton variante={vista === "tabla" ? "primary" : "ghost"} icono="☰" onClick={() => setVista("tabla")}>
