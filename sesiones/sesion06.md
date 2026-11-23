@@ -10,7 +10,7 @@ Componentes reutilizables, props, composición y slots
 
 ## Índice de apuntes (orden recomendado)
 
-- [16 · React: creación de componentes personalizados](apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) — composición y `children`, renderizado de listas con `key` (16.4), botón personalizado con `extends ButtonHTMLAttributes` (16.8), Modal con overlay + `useEffect` de limpieza (16.9) y tabla genérica con componentes `<T>` (16.10).
+- [16 · React: creación de componentes personalizados](apuntes/s06/16_React_Creacion_de_Componentes_Personalizados.md) — composición y `children`, la tabla de películas con `PeliculaTable` (16.4), composición de la pantalla principal (16.5), botón personalizado con `extends ButtonHTMLAttributes` (16.6), Modal con overlay + `useEffect` de limpieza (16.7) y tabla genérica con componentes `<T>` (16.8).
 - [13 · TypeScript aplicado a React](apuntes/s04/13_Tipado_en_React_TS.md) — repaso del tipado avanzado que sostiene estos componentes: `keyof T`, componentes genéricos `<T>` y utility types.
 
 ## Práctica
@@ -23,7 +23,7 @@ La app completa de la sesión es [`repos/02-react-ejemplo-pelis-componentes`](..
 - `src/components/Modal.tsx` — overlay, `children`, bloqueo de scroll, cierre con `Escape` y click-outside.
 - `src/components/PeliculaTable.tsx` y `src/components/TablaGenerica.tsx` — listas con `key` y tabla genérica `<T>` con `Columna<T>`/`keyExtractor` (reutilizada con `Pelicula` y `ResumenGenero`).
 
-Ejecución (2 terminales): `npm run api` (json-server en el puerto 3000) + `npm run dev`. Todo lo nuevo respecto al apunte 15 está marcado en el código con comentarios `//JMM:`.
+Ejecución (2 terminales): `npm run api` (json-server en el puerto 3000) + `npm run dev`. Todo lo nuevo respecto al apunte 15 está marcado en el código con los pares de comentarios `//JMM - Inicio Nuevo con respecto a 15` / `//JMM - Fin Nuevo con respecto a 15`.
 
 Complementos (demos sueltas) en [`repos/02-react-componentes`](../repos/02-react-componentes/):
 
