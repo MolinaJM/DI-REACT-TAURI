@@ -49,6 +49,9 @@ La lógica de datos no cambia; cambia cómo se organiza la UI. Cada apartado de 
 | **Extra** | — | `TablaGenerica<T>` con otro tipo (`ResumenGenero`) — §16.7. `PeliculaCard` |
 
 ---
+<h3> AL CONTRARIO DE LO QUE HICIMOS EN 15, Y DADO QUE 16 ES UNA VERSIÓN MEJORADA DE DISEÑO (NO DE FUNCIONAMIENTO INTERNO). AHORA SÍ VAMOS VIENDO COMPONENTE POR COMPONENTE FUNCIONANDO EN EL CÓDIGO</h3>
+
+---
 
 <a id="163-formularios-controlados-como-componentes-buscador-y-peliculaform"></a>
 ## 16.3. Formularios controlados como componentes: `Buscador` y `PeliculaForm`
