@@ -441,11 +441,44 @@ export default Tabla;
 
 > 📦 **En el proyecto:** [`TablaGenerica.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/components/TablaGenerica.tsx) define `Columna<T>` y `keyExtractor`, y [`App.tsx`](../../../repos/02-react-ejemplo-pelis-componentes/src/App.tsx) lo reutiliza con `Pelicula` y con `ResumenGenero` (el tipo `T` se infiere de `datos`/`columnas`).
 
-Ahora bien, ¿de qué datos se alimenta la tabla y cómo se llama? Habrá que hacer una estructura con:
-   - Si los datos son derivados y los toma de otro sitio (un array existente), habrá que hacer un **Memo** que calcule los datos de la nueva tabla. Ej: Memo **resumen**. Si los datos no son derivados, pues se le pasa el array original o el filtrado.
-   - Un Prop con las columnas y sus renders. Ej: COLUMNAS_RESUMEN
-   - La key para cada fila. Ej: fila.genero.
-   - Finalmente se hace la llamada: ` <TablaGenerica datos={resumen} columnas={COLUMNAS_RESUMEN} keyExtractor={(fila) => fila.genero} />`
+Ahora bien, ¿cómo se configura la tabla, de qué datos se alimenta la tabla y cómo se llama al componente? Habrá que hacer una estructura con:
+- 1) Primero se definen las Columnas.
+ ```tsx
+interface ResumenGenero { //Definimos la FILA
+  genero: string;
+  total: number;
+  media: number;
+}
+const COLUMNAS_RESUMEN: Columna<ResumenGenero>[] = [ //render determina CÓMO se pinta una celda. Probar a cambiar!
+  { key: "genero", titulo: "Género", render: (fila) => fila.genero.toUpperCase() },
+  { key: "total", titulo: "Núm.Pelis" },
+  { key: "media", titulo: "Puntuación media", render: (fila) => fila.media > 9 ? (
+        <span style={{ color: "green" , fontWeight: "bold" }}>{fila.media.toFixed(2)}</span>
+      ) : (
+        fila.media.toFixed(1)
+      )}];
+
+   ```  
+
+   - 2) Si los datos son derivados y los toma de otro sitio (un array existente), habrá que hacer un **Memo** que calcule los datos de la nueva tabla. Ej: Memo **resumen**. Si los datos no son derivados, pues se le pasa el array original o el filtrado.
+
+   ```tsx
+
+ const resumen = useMemo<ResumenGenero[]>(() => {
+      const porGenero = new Map<string, number[]>();
+      for (const p of peliculas) {
+        const notas = porGenero.get(p.genero) ?? [];
+        notas.push(p.puntuacion);
+        porGenero.set(p.genero, notas);
+      }
+      //Expandimos/Dispersamos/Separamos con spread, y recorremos con map.
+      return [...porGenero.entries()].map(([genero, notas]) => ({genero,total: notas.length, 
+        media: notas.reduce((a, b) => a + b, 0) / notas.length,
+      }));
+    }, [peliculas]);
+
+   ```  
+   - Finalmente se hace la llamada: ` <TablaGenerica datos={resumen} columnas={COLUMNAS_RESUMEN} keyExtractor={(fila) => fila.genero} />`. El último parámetro es la key de la fila que hay que intentar que no se repita, en este caso, al agrupar por género, lo más lógico es usarlo como key.
 
 ---
 
