@@ -100,7 +100,7 @@ function MotoForm({ inicial, modo, onGuardar, onCancelar }: MotoFormProps) {
   function handleCheck(e: ChangeEvent<HTMLInputElement>) {
     const { name, checked } = e.target;
     setValores(v => ({
-      ...v,
+      ...v,  /* Si está check, lo guarda. Si no, se queda con el resto (al filtrar) */
       extras: checked ? [...v.extras, name] : v.extras.filter(x => x !== name),
     }));
   }
