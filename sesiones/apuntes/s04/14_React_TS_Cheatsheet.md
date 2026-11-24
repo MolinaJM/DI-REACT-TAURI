@@ -1,13 +1,13 @@
 # 14. React & TypeScript Cheatsheet: Decálogo
 
-> Cheatsheet de las **10 reglas de oro** de React con TypeScript. Cada número resume un concepto del apunte y cómo aplicarlo en los proyectos del curso.
+> Cheatsheet de las **10 reglas de oro** de React con TypeScript. Cada número **resume un concepto** de los apuntes y **cómo aplicarlo** en los proyectos del curso.
 
 ---
 
 ## 1. Componentes y props
 
 - Las props son los parámetros de **entrada** que un padre le pasa a un hijo (**de solo lectura**).
-- El padre elige el nombre de la prop (ej. `onEnviar`) y el hijo **debe** usar exactamente ese mismo nombre.
+- Padre e hijo han de **compartir el MISMO** nombre de la prop (ej. `onEnviar`).
 - Las props fluyen únicamente de **arriba hacia abajo** (Padre → Hijo).
 
 ```tsx
@@ -26,7 +26,7 @@ function FormularioNombre({ onEnviar }: { onEnviar: (texto: string) => void }) {
 
 ## 2. El estado (`useState`) y hooks
 
-- Usar `useState` es usar un **Hook** (todas las funciones que empiezan con `use` son Hooks).
+- Usar `useState` es usar un **Hook** (ya sabemos que todas las funciones que empiezan con `use` son Hooks).
 - Un **Hook** es la **memoria interna** del componente: cuando cambia, React **re-renderiza** el componente automáticamente.
 - **Regla:** si un componente solo muestra datos que vienen de fuera y no necesita guardar ni comunicar nada (como `Saludo`), **no necesita estado**; solo props.
 - **Componentes controlados:** los inputs necesitan estado propio para no quedarse congelados y almacenar lo que el usuario escribe letra a letra.
@@ -40,7 +40,7 @@ function FormularioNombre({ onEnviar }: { onEnviar: (texto: string) => void }) {
 
 - Llamarlos **solo en el nivel superior** del componente (**nunca** dentro de `if`, bucles `for` o funciones internas).
 - Llamarlos **solo** desde componentes de función de React o **Custom Hooks**: funciones que empiezan por use... y permiten ser reutilizados. Ej: me creo un componente *contador* con useState, pero ahora quiero reutilizar ese "componente" en muchos más sitios. En vez de copiar/pegar código me creo un **Custom Hook** useContador y lo llamo desde donde quiera. 
-- No confundir **Custom Hook** con un componente. El componente devuelve JSX, el otro no, solo sirve para manejar lógica, te puede devolver por ejemplo un booleano.
+- No confundir, un **Custom Hook NO es un componente**. El componente devuelve JSX, el otro no, solo sirve para manejar lógica, puede llamar a otros Hooks o te puede devolver por ejemplo un booleano.
 
 > 📦 **Dónde se ve en el proyecto:** [`App.tsx`](../../../repos/02-react-ejemplo-pelis/src/App.tsx) y [`PeliculaForm.tsx`](../../../repos/02-react-ejemplo-pelis/src/components/PeliculaForm.tsx): todos los hooks se llaman en el nivel superior del componente, nunca dentro de un `if` o un bucle.
 
@@ -68,7 +68,7 @@ function FormularioNombre({ onEnviar }: { onEnviar: (texto: string) => void }) {
 ## 6. Elevación del estado (Lifting State Up)
 
 - Si dos componentes **hermanos** necesitan compartir datos, el estado se **sube al padre común más cercano**, que lo reparte después por props.
-- Si los componentes están separados en la jerarquía convendría emplear `useContext`. 
+- Si los componentes están separados en la jerarquía convendría emplear `useContext` o incluso librerías externas como `Zustang`. 
 
 > 📦 **Dónde se ve en el proyecto:** [`App.tsx`](../../../repos/02-react-ejemplo-pelis/src/App.tsx) es la fuente de la verdad (`peliculas`, `enEdicion`) y reparte datos y callbacks por props a `PeliculaRow` y `PeliculaForm`.
 
@@ -76,8 +76,8 @@ function FormularioNombre({ onEnviar }: { onEnviar: (texto: string) => void }) {
 
 ## 7. Comunicación hijo → padre (callbacks)
 
-- Para enviar datos hacia arriba, el padre le pasa al hijo una **función (o el setter del estado)** como prop.
-- Al ejecutarse dentro del hijo, la función le **devuelve los datos al padre**.
+- Para enviar datos hacia arriba, el padre le pasa al hijo una **función (o incluso un setter de estado)** como prop.
+- Al ejecutarse dentro del hijo, la función le **da los datos al padre** (ejecuta algo en el padre).
 - **Regla de oro de interactividad:** ¿el usuario hace una acción que cambia algo fuera del componente? → **Sí:** pásale una prop de función. **No:** solo datos estáticos (props).
 
 > 📦 **Dónde se ve en el proyecto:** [`PeliculaForm.tsx`](../../../repos/02-react-ejemplo-pelis/src/components/PeliculaForm.tsx) llama a `onGuardar(datos)` y [`PeliculaRow.tsx`](../../../repos/02-react-ejemplo-pelis/src/components/PeliculaRow.tsx) llama a `onEditar(id)`/`onBorrar(id)`.
@@ -101,9 +101,9 @@ const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setNombre(e.target.
 
 ## 9. Datos asíncronos y estados de la UI
 
-- **Toda conexión con el exterior pasa por `useEffect`:** llamadas a APIs (`fetch`), listeners, timers. Se ejecuta tras el render y, si el efecto crea recursos (listeners, subscriptions), la función de limpieza (el `return`) los **elimina al desmontar**.
+- **Toda conexión con el exterior pasa por `useEffect`:** llamadas a APIs (`fetch`), listeners, timers. Se ejecuta tras el render y, si el efecto crea recursos (listeners, subscriptions), la función de limpieza (el `return`) los **elimina al desmontar (cleanup)**.
 - **La UI pinta según el estado:** `cargando` / `error` / `vacio` / datos, con **ternarios** y renderizado condicional. Así la app nunca "se congela" mientras llegan los datos.
-- **Aviso con `&&` en JSX:** `{0 && ...}` pinta un `0` literal en pantalla (falsy, pero JSX lo renderiza). Usa `> 0 &&` o un ternario.
+- **Aviso con `&&` en JSX:** `{0 && ...}` pinta un `0` literal en pantalla (porque aunque es falsy, JSX lo renderiza). Usa `> 0 &&` o un ternario. Quien dice 0 dice una variable que vale 0.
 
 ```tsx
 const [lista, setLista] = useState<Pelicula[]>([]);
@@ -111,11 +111,19 @@ const [cargando, setCargando] = useState(true);
 const [error, setError] = useState<string | null>(null);
 
 useEffect(() => {
-  fetch("/peliculas") // conexión con el exterior: SIEMPRE en useEffect
-    .then((respuesta) => respuesta.json())
-    .then(setLista)
-    .catch((e: unknown) => setError(String(e)))
-    .finally(() => setCargando(false));
+  const cargarPeliculas = async () => {
+    try {
+      const respuesta = await fetch("http://localhost:3000/peliculas"); // conexión con el exterior: SIEMPRE en useEffect
+      const datos = await respuesta.json();
+      setLista(datos);
+    } catch (e: unknown) {
+      setError(String(e));
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  cargarPeliculas();
 }, []);
 
 // La UI se decide con ternarios (encadenados o anidados)
@@ -167,7 +175,7 @@ Posibles temas:
 - Revisar y entender todos los apuntes y ejemplos
 - Revisar y entender todos los ejercicios (ejerciciosRT.md) y soluciones.
 - Revisar y entender todo el código de apoyo que hay en los repositorios.
-- Practicar: lo más eficiente sería "Dame el scafolding y solución de un examen de React que cumpla con el dominio "X", siguiendo los apuntes de https://github.com/MolinaJM/DI-REACT-TAURI/ hasta la sesion06.md. Ten en cuenta esto (copia/pega "Esqueleto de Examen" ) 
+- Practicar: lo más eficiente sería mediante ayuda "automática" indicar "Dame el scafolding y además, la solución de un examen de React que cumpla con el dominio "X", siguiendo los apuntes de https://github.com/MolinaJM/DI-REACT-TAURI/ hasta la sesion06.md. Ten en cuenta esto (copia/pega "Esqueleto de Examen" ) 
 
 
 [← Volver a 11 · React de cero](11_Que_es_React.md)
