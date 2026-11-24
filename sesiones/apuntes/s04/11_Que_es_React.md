@@ -38,7 +38,7 @@
 >
 > 🔎 **Idea clave:** el mensaje sube (callback `onEnviar`), el padre actualiza su estado (`setNombre`), y el dato baja repintado (prop `nombre`).  Este "mecanismo" se llama `lifting state up` y se suele usar en casos simples. En casos más complejos habrá que echar mano del `useContext` o incluso **Zustang**.
 
-> 📌 **React & TypeScript Cheatsheet (Decálogo):** las **10 reglas de oro** de React con TS y Tauri (props, estado, hooks, callbacks, `invoke`...) en un solo documento de consulta rápida → [**React & TypeScript Cheatsheet**](14_React_TS_Cheatsheet.md).
+> 📌 **React & TypeScript Cheatsheet (Decálogo):** las **10 reglas de oro** de React con TS (props, estado, hooks, callbacks, `useEffect`...) en un solo documento de consulta rápida → [**React & TypeScript Cheatsheet**](14_React_TS_Cheatsheet.md).
 
 - [11. React de cero: qué es, cómo se usa y por qué TypeScript](#11-react-de-cero-qué-es-cómo-se-usa-y-por-qué-typescript)
   - [11.0. Repaso de TypeScript previo (el puente)](#110-repaso-de-typescript-previo-el-puente)
