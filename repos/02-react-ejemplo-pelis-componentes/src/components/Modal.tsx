@@ -71,7 +71,9 @@ export function Modal({ abierto, titulo, onCerrar, children, tamano = "md" }: Mo
           background: "white",
           padding: "1.5rem",
           borderRadius: "0.75rem",
+          //Cambio con respecto a 15
           width: ANCHOS[tamano],
+          //Cambio con respecto a 15
           maxWidth: "90vw",
         }}
       >
