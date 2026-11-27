@@ -1,0 +1,64 @@
+{
+  "motos": [
+    {
+      "id": 1,
+      "marca": "Yamaha",
+      "modelo": "R1",
+      "anio": 2023,
+      "cilindrada": 1000,
+      "tipo": "deportiva",
+      "extras": ["ABS", "Cruise control"],
+      "notas": "Superdeportiva de referencia. Electrónica de última generación."
+    },
+    {
+      "id": 2,
+      "marca": "BMW",
+      "modelo": "R 1250 GS",
+      "anio": 2022,
+      "cilindrada": 1250,
+      "tipo": "trail",
+      "extras": ["ABS", "Maletas", "GPS"],
+      "notas": "La trail por excelencia. Lista para viajar desde el primer día."
+    },
+    {
+      "id": 3,
+      "marca": "Honda",
+      "modelo": "CB500F",
+      "anio": 2021,
+      "cilindrada": 471,
+      "tipo": "urbana",
+      "extras": ["ABS"],
+      "notas": "Naked polivalente, ideal para ciudad y carretera."
+    },
+    {
+      "id": 4,
+      "marca": "Harley-Davidson",
+      "modelo": "Fat Boy",
+      "anio": 2020,
+      "cilindrada": 1868,
+      "tipo": "custom",
+      "extras": ["Maletas"],
+      "notas": "Custom americana con motor Milwaukee-Eight."
+    },
+    {
+      "id": 5,
+      "marca": "Kawasaki",
+      "modelo": "Ninja ZX-6R",
+      "anio": 2024,
+      "cilindrada": 636,
+      "tipo": "deportiva",
+      "extras": ["ABS"],
+      "notas": "Media deportiva ágil, perfecta para circuito."
+    },
+    {
+      "id": 6,
+      "marca": "KTM",
+      "modelo": "790 Adventure",
+      "anio": 2023,
+      "cilindrada": 799,
+      "tipo": "trail",
+      "extras": ["Cruise control", "GPS"],
+      "notas": "Trail ligera con mucho equipamiento de serie."
+    }
+  ]
+}
